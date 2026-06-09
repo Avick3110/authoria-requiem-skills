@@ -1,0 +1,4 @@
+# Pin the generated reference index files to LF (matches how they're written and
+# stops autocrlf from flagging them modified on every checkout). Markdown and other
+# source keep git's normal handling — no global renormalize.
+*.jsonl text eol=lf
