@@ -1,0 +1,33 @@
+{"topic":"live playable race standard authority Master Patch winner, Races.md doc drifts attributes diverge live wins","file":"playable-races.md","section":"Live > Races.md — the doc drifts"}
+{"topic":"playable race starting stats health magicka stamina carry weight unarmed damage regen per race live table","file":"playable-races.md","section":"Starting stats, regen, carry, unarmed (live)"}
+{"topic":"playable race skill bonuses boosts per race SkillBoost0-6 nord orc khajiit altmer breton","file":"playable-races.md","section":"Skill bonuses"}
+{"topic":"playable ability spell bundle ActorEffect Heritage Blood Physique Cuisine NoHealthRegeneration MassEffect FormIDs","file":"playable-races.md","section":"The ability-spell bundle (ActorEffect)"}
+{"topic":"playable race keywords ActorTypeNPC DropsBlood IsBeastRace knockdown unperked-skills diet FormIDs","file":"playable-races.md","section":"Race keywords (playable)"}
+{"topic":"playable race flags Playable RegenHpInCombat NoHealthRegeneration profile","file":"playable-races.md","section":"Flags"}
+{"topic":"playable race perk RFTI_All_PlayableRace GetIsRace gated new race won't match caveat","file":"playable-races.md","section":"The playable-race perk caveat"}
+{"topic":"vampire race variants REQ_Trait_Vampire per race, vampire state trait perk keyword","file":"playable-races.md","section":"Vampire variants"}
+{"topic":"creature trait spell families Resist Armor Healing FX Cloak UnarmedDamage Layer A ActorEffect, which to add","file":"creature-traits.md","section":"Trait-spell families (Layer A)"}
+{"topic":"creature incoming damage modifier perk base Requiem per-category skeleton draugr atronach dragon werewolf FormIDs race lists","file":"creature-traits.md","section":"Layer-B perks — base Requiem per-category"}
+{"topic":"Resist and Regen Tweak physique supernatural perk taxonomy fur metal chitin stone zombie 000800-00080E race lists","file":"creature-traits.md","section":"Layer-B perks — Resist and Regen Tweak (physique / supernatural)"}
+{"topic":"doNotInheritTraits keyword AD3A4F opt out of trait pass","file":"creature-traits.md","section":"doNotInheritTraits"}
+{"topic":"creature rules add Armor keep own Ab resistances never add FX healing needs RegenHpInCombat flag don't duplicate spits Layer B per NPC","file":"creature-traits.md","section":"The rules (what to add, what to keep, what to never touch)"}
+{"topic":"troll classification example ActorEffect Resist Armor Healing keywords fur perk","file":"creature-traits.md","section":"Worked classification: the troll"}
+{"topic":"source carried on RACE vs Reqtificator assigned to NPC split trait spells inherited perk assigned","file":"keywords.md","section":"The split: carried-on-RACE vs Reqtificator-assigned-to-NPC"}
+{"topic":"ActorType keywords NPC Creature Animal Troll Undead Daedra Dwarven Dragon Giant Ghost Familiar FormIDs classify","file":"keywords.md","section":"ActorType (classification)"}
+{"topic":"Requiem race keywords DropsBlood MinorKnockdownImmunity IsBeastRace doNotInheritTraits FormIDs","file":"keywords.md","section":"Requiem race keywords"}
+{"topic":"playable unperked skills keywords RacialSkills Sneak CreatePotions Recharge Pickpocket Lockpick FormIDs","file":"keywords.md","section":"Playable racial-skill (unperked) keywords"}
+{"topic":"knockdown immunity ImmuneStrongUnrelentingForce Orc MinorKnockdownImmunity troll attack-data, knockdown tweak superseded","file":"keywords.md","section":"Knockdown"}
+{"topic":"diet cuisine keyword Apo_StrongStomach Food and Beverages Redone cuisine races","file":"keywords.md","section":"Diet (Food & Beverages Redone)"}
+{"topic":"attack data Attacks AttackData Spell Stagger Knockdown AttackEvent knockdown poison spit, preserve don't duplicate","file":"keywords.md","section":"Attack data (knockdown / poison / spit)"}
+{"topic":"houseCARL rebalance modded race bulk_apply Starting Regen dict set key BaseCarryWeight UnarmedDamage","file":"housecarl-recipes.md","section":"A — Re-balance an existing modded race (the common case)"}
+{"topic":"houseCARL skill boosts SkillBoost Skill Boost substruct playable","file":"housecarl-recipes.md","section":"B — Skill boosts (playable)"}
+{"topic":"houseCARL ActorEffect spells Add ReplaceAll ability bundle","file":"housecarl-recipes.md","section":"C — Ability spells (ActorEffect)"}
+{"topic":"houseCARL creature add Armor Healing trait set RegenHpInCombat flag keywords","file":"housecarl-recipes.md","section":"D — Creature: add traits + the RegenHpInCombat flag"}
+{"topic":"houseCARL playable keywords ARMA race add ArmorRace delegation AdditionalRaces","file":"housecarl-recipes.md","section":"E — Playable: keywords + ARMA race-add"}
+{"topic":"houseCARL create new race record net-new","file":"housecarl-recipes.md","section":"F — Net-new race record"}
+{"topic":"houseCARL per-NPC trait perk Perks PerkPlacement compose template onto race NPC phase bridge","file":"housecarl-recipes.md","section":"G — Per-NPC trait perk (the `requiem-npc-patching` skill bridge)"}
+{"topic":"masters Requiem.esp Resist and Regen Tweak auto-added when trait spell keyword referenced","file":"housecarl-recipes.md","section":"Masters"}
+{"topic":"worked example modded creature Wendigo Troll new race not recognized classify troll keep own Ab ability add armor healing","file":"worked-examples.md","section":"1 — Modded creature race the Reqtificator can't see: Wendigo Troll"}
+{"topic":"worked example creature round trip Frost Troll from Troll shared armor variant resist healing","file":"worked-examples.md","section":"2 — Creature round-trip (exact): Frost Troll from Troll"}
+{"topic":"worked example playable round trip Redguard ability bundle exact attributes live over doc","file":"worked-examples.md","section":"3 — Playable round-trip: Redguard"}
+{"topic":"identification humanoid vs creature which vanilla analogue new-race-not-recognized strategies preserve author intent ask when ambiguous","file":"../SKILL.md","section":"Judgment"}

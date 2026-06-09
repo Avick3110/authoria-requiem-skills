@@ -1,0 +1,18 @@
+{
+  "date": "2026-06-09",
+  "skill": "requiem-script-patching",
+  "trigger_eval": {
+    "method": "manual prediction (HOUSECARL_SKILL_AUTHORING.md §6.5 fallback; empirical run_loop needs a non-Windows host, session is Windows 11)",
+    "should_trigger_count": 10,
+    "should_not_trigger_count": 10,
+    "predicted_recall": 1.0,
+    "predicted_specificity": 0.9,
+    "thresholds": {"recall_min": 0.8, "specificity_min": 0.5},
+    "pass": true,
+    "followup": "Flagged for empirical run_loop re-validation on a non-Windows host + one independent peer prediction check (HOUSECARL_SKILL_AUTHORING.md §6.5 items 3-4). Tracked in STATE.md."
+  },
+  "round_trip": {
+    "status": "pending live verification",
+    "note": "The script-layer write round-trips - a live VMAD-adapter attach + property set, and the housecarl_compile_script .psc->.pex path - are tracked as a live-verification follow-up (STATE.md, Phase 8/9). The skill's record-side guidance (reuse Nox_*/REQ_* runtime, VMAD read-back verification, follower-registration shape) is validated against live reads; the write/compile round-trip is the open item."
+  }
+}

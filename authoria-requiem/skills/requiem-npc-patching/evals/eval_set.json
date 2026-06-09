@@ -1,0 +1,111 @@
+[
+  {
+    "query": "this dungeon mod's boss is a damage sponge that ignores my hits — he feels nothing like a Requiem boss. can you make him properly strong for Requiem?",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "balance a modded boss for Requiem -> core trigger (boss patch-class)"
+  },
+  {
+    "query": "the bandits this mod adds die in one hit and barely scratch me. bring their level, class and perks in line with Requiem bandits",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "enemy too weak + set level/class/perks -> core NPC trigger"
+  },
+  {
+    "query": "I added a custom follower NPC and Requiem doesn't treat her right — set up her factions, class, combat style and level so she fits the follower system",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "register/balance a follower (record-side) -> core trigger"
+  },
+  {
+    "query": "patch this modded draugr-type enemy for Requiem — it's on a custom undead race and takes the wrong damage, no Requiem toughness",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "custom creature wrong damage + new-race trait bridge -> core trigger"
+  },
+  {
+    "query": "these enemies still scale with my character level and become trivial at level 40. de-level them the way Requiem does",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "remove PCLevelMult / fixed level -> core trigger"
+  },
+  {
+    "query": "set the right Requiem class, combat style and factions on this custom warlord NPC so he fights like a Requiem actor",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "set Requiem class/combat style/factions on an NPC -> core trigger"
+  },
+  {
+    "query": "this enemy pack mod adds BanditA01 through BanditA05 that are identical except the number and feed a leveled list. make them Requiem-consistent",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "numbered leveling-copies -> collapse to one de-leveled Requiem tier -> trigger"
+  },
+  {
+    "query": "my modded forsworn mage hits like a wet noodle in Requiem — give him the perks and balance a Requiem caster of his level would have",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "balance a modded caster NPC (perks/level) -> trigger; spell DESIGN would route to magic, but this is the actor's balance"
+  },
+  {
+    "query": "the custom creatures from this beast mod are recognized as a brand new race so Requiem gives their actors no trait perk and they melt to arrows. fix the NPCs",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "new-race creature NPCs missing the trait perk -> the Phase-4->5 bridge -> trigger"
+  },
+
+  {
+    "query": "balance my custom playable High Elf offshoot race for Requiem — its starting health/magicka/stamina and skill bonuses are way off",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: RACE record stats/skill bonuses -> requiem-race-patching (Phase 4). Riskiest false — shares 'balance ... for Requiem' but it's the RACE, not an NPC actor."
+  },
+  {
+    "query": "this follower NPC has a dark face / neck seam after I installed an appearance mod — fix her facegen and head parts",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: NPC appearance/visual edit (facegen/headparts) -> the visual winner, not balance. Explicitly out of scope (appearance is left to the merge)."
+  },
+  {
+    "query": "this modded enemy drops vanilla gold instead of Requiem-appropriate loot — fix what's inside its death-item leveled list",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: the CONTENTS of a death-item leveled list -> leveled-list phase. NPC skill links the list but doesn't author its contents."
+  },
+  {
+    "query": "the fireball this custom mage casts does the wrong damage for Requiem — retune the spell's magnitude and effect",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: spell/MGEF effect DESIGN -> magic phase. The NPC skill links a Requiem spell, it doesn't design one."
+  },
+  {
+    "query": "my custom follower won't actually follow me and has no recruitment dialogue — fix her follower quest and dialogue conditions",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: follower DIALOGUE/QUEST wiring -> script/quest phase. Record-side factions are in scope but this is the runtime quest, not a record balance."
+  },
+  {
+    "query": "install a combat AI overhaul so enemies flee at low health, flank, and use potions more intelligently",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: NPC combat AI behavior (a non-Requiem AI mod) -> not a Requiem balance override; AIData is explicitly out of scope."
+  },
+  {
+    "query": "balance this modded steel greatsword for Requiem, its damage and value are too high",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: 'balance ... for Requiem' but a WEAPON record -> requiem-weapon-patching."
+  },
+  {
+    "query": "write a SkyPatcher ini to give every bandit +100 health",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "tricky near-miss: NPC stat change (bandit health) but explicitly SkyPatcher -> skypatcher-authoring; this project uses direct ESP overrides, and a flat health bump isn't the Requiem-balance method anyway."
+  },
+  {
+    "query": "what's the best enemy type to grind for combat XP early in a Requiem playthrough?",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: gameplay advice about Requiem enemies, not authoring an NPC patch."
+  }
+]

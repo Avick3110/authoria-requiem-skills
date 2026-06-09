@@ -1,0 +1,111 @@
+[
+  {
+    "query": "I made a custom steel-tier sword and patched its stats for Requiem, but it never shows up in dungeons or on enemies. how do I get it into the loot the way Requiem distributes weapons?",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "place an already-statted item into Requiem loot lists -> core trigger (the 'gear never shows up' symptom)"
+  },
+  {
+    "query": "add this modded greatsword to the right Requiem leveled lists so it can drop and be sold by blacksmiths, at a level that fits its tier",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "add an item to Requiem leveled lists + tier it -> core trigger"
+  },
+  {
+    "query": "this beast mod's new creature is balanced for Requiem now but it never spawns anywhere. how do I distribute it into the wolf/predator spawns?",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "distribute a new creature into LeveledNpc spawn lists -> core trigger"
+  },
+  {
+    "query": "the boss chest in this dungeon mod is stuffed with vanilla gold and random gear — make its contents match how Requiem fills a boss container",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "fill/curate a container the Requiem way -> core trigger"
+  },
+  {
+    "query": "I added a new set of armor and want it to appear in bandit loot and town vendors at the correct rarity for its material. set up the distribution.",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "place armor into loot + town lists at the right tier/rarity -> core trigger"
+  },
+  {
+    "query": "my custom weapon drops at level 1 as if it were iron even though it's daedric — how does Requiem control how rare a tier is in its lists?",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "tiering by repetition/list-choice not Level field -> the de-leveling model -> trigger (note: Level 1 IS correct in Requiem; the fix is repetition/list)"
+  },
+  {
+    "query": "when I add my item to a Requiem leveled list and run the Reqtificator, sometimes my entry vanishes or wipes out the rest of the list. what's the right way to add to a merged leveled list?",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "additive merge behavior + master-Requiem + build-on-winner -> core trigger (the merge gotcha symptom)"
+  },
+  {
+    "query": "this new mod adds a dungeon whose encounter zone is set to a high min level so everything scales — does that need de-leveling for Requiem, and how?",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "encounter-zone handling for a new area -> in scope (answer is usually 'leave it' + why) -> trigger"
+  },
+  {
+    "query": "make my modded enemy appear in the bandit spawn rotation at the same tier as Requiem's mid bandits",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "distribute an NPC into a spawn tier (LVLN) -> core trigger"
+  },
+
+  {
+    "query": "balance this modded steel greatsword for Requiem — its damage, crit and gold value are way too high",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: the item's STATS -> requiem-weapon-patching. This skill places an already-statted item; it doesn't set damage/value. Riskiest false (shares 'modded weapon for Requiem')."
+  },
+  {
+    "query": "this modded boss is a damage sponge that dies to one arrow — set his level, class, perks and toughness so he fights like a Requiem boss",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: the NPC's own balance (level/class/perks) -> requiem-npc-patching. Placement skill distributes actors into spawn lists, it doesn't stat them."
+  },
+  {
+    "query": "write a SPID _DISTR.ini to hand out my new amulet to all bandit chiefs at runtime",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "tricky near-miss: 'distribute to NPCs' but a runtime SPID distribution -> spid-authoring. This project uses direct ESP leveled-list overrides the Reqtificator sees, not SPID."
+  },
+  {
+    "query": "use a KID ini to add a keyword to every iron weapon in my load order",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: runtime KID keyword distribution onto items -> kid-authoring. Not leveled-list placement."
+  },
+  {
+    "query": "the quest reward for this mod's questline hands you a unique blade through a script — make sure that hand-placed reward is Requiem-appropriate",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: a hand-placed/scripted quest reward, not a leveled-list placement. (If they wanted it in a reward LEVELED list it would trigger; a scripted single handover is the item/script phase.)"
+  },
+  {
+    "query": "this merchant never has enough gold to buy my loot — bump vendor gold and barter rates for Requiem",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: merchant gold / barter economy (a trade & barter style tweak), not placing an item into a vendor's leveled stock list."
+  },
+  {
+    "query": "install Legacy of the Dragonborn's loot overhaul and resolve its conflicts with my other loot mods",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: a non-Requiem loot-overhaul mod + generic conflict resolution, not authoring a Requiem-consistent leveled-list placement patch."
+  },
+  {
+    "query": "retune the magnitude of the fire enchantment on this modded sword so it matches Requiem's fire damage",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: enchantment/MGEF effect DESIGN -> magic phase. Placement neither stats nor designs effects."
+  },
+  {
+    "query": "what dungeons have the best loot for an early Requiem playthrough?",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: gameplay advice about Requiem loot, not authoring a leveled-list/container patch."
+  }
+]

@@ -1,0 +1,111 @@
+[
+  {
+    "query": "I installed an armor mod and its steel cuirass has like 400 armor, way too tanky for Requiem. can you bring it in line?",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "explicit: armor rating too high for Requiem -> core trigger"
+  },
+  {
+    "query": "patch this glass shield from my follower mod so it fits Requiem's balance",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "patch a shield for Requiem -> core trigger (shields in scope)"
+  },
+  {
+    "query": "the modded dragonscale gauntlets I added aren't on Requiem's tiers, fix their armor rating and keywords",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "set Requiem armor keywords + tiers -> trigger"
+  },
+  {
+    "query": "make my custom ebony helmet craftable at the forge with the right perk gate and a Requiem-appropriate armor rating",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "add craftable armor + Requiem AR -> trigger"
+  },
+  {
+    "query": "what keywords does a heavy daedric cuirass need so Requiem and the Reqtificator give it the right ranged resistance and tempering?",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "set Requiem armor keywords (resist/tempering split) -> trigger"
+  },
+  {
+    "query": "balance a modded light leather armor set for my Requiem Reforged playthrough",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "balance modded armor set, light vs heavy tier -> core trigger (casual)"
+  },
+  {
+    "query": "my new heavy gauntlets don't boost unarmed damage like vanilla ones do, set them up for Requiem",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "heavy gauntlet fist-perk keyword is an armor-frame concern -> trigger"
+  },
+  {
+    "query": "add an orcish boots and helmet that match Requiem's heavy tier and have tempering recipes",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "add craftable/temperable armor at the right tier -> trigger"
+  },
+  {
+    "query": "this modded nightingale-style cuirass has a weird armor value and gold price, normalize it for Requiem",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "balance a modded cuirass + value for Requiem (faction/unique case) -> trigger"
+  },
+
+  {
+    "query": "patch this modded steel longsword so its damage fits Requiem",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: Requiem patching but a WEAPON -> requiem-weapon-patching. Description is armor-specific."
+  },
+  {
+    "query": "balance these modded steel arrows for Requiem, they do too much damage",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: ammo, not armor -> requiem-ammo-patching."
+  },
+  {
+    "query": "create a new fortify-heavy-armor enchantment effect and tune its magnitude for Requiem",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: mentions armor but the task is ENCH/MGEF effect design (magic phase); this skill only links an effect, doesn't design one."
+  },
+  {
+    "query": "my cuirass mod's mesh clips through the character's shoulders, can you fix the NIF weighting",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: mentions cuirass but it's a mesh/NIF problem, not record balance."
+  },
+  {
+    "query": "this armor only shows up on humans, I need it to fit on Argonians and Khajiit too",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: ARMA race-model / body-slot coverage (races phase), not the ARMO balance frame."
+  },
+  {
+    "query": "patch this follower NPC's combat stats, perks and outfit for Requiem",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: NPC patching (npc phase), shares 'patch ... for Requiem' phrasing."
+  },
+  {
+    "query": "write a SkyPatcher ini to set all iron armor's rating to 25",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "tricky near-miss: armor + rating, but explicitly SkyPatcher -> skypatcher-authoring; this project uses ESP overrides. Riskiest negative."
+  },
+  {
+    "query": "how do I install this armor mod with Mod Organizer so it loads after Requiem?",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: armor mod install/load-order housekeeping, not record balance."
+  },
+  {
+    "query": "what's the best heavy armor set to wear in my Requiem run for the dragon fights?",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: gameplay advice about Requiem armor, not authoring a patch."
+  }
+]

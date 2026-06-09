@@ -1,0 +1,54 @@
+{
+  "skill": "requiem-patching",
+  "date": "2026-06-09",
+  "verification": "end-to-end integration dry-run on a real multi-record plugin already in the load order, per the Phase-8 handoff. Enumerated, routed every balance-relevant type, named the gap mechanics, produced the integration plan, and checked it against what the live Authoria/Requiem setup actually did.",
+  "target_plugin": "Lucien.esp",
+  "target_description": "A large fully-voiced follower mod + questline/dungeon that also bundles a Mihail creature pack. 18,969 records touched (cross_plugin_query plugins=[\"Lucien.esp\"]). Spans follower NPC, creature NPCs/races, follower + creature magic, a few weapons, creature skins, containers, and a large cosmetic layer.",
+  "enumeration_by_type": {
+    "NPC_": 52,
+    "RACE": "~12 (JRmihailimp* fire/shock/boss, hunger, grievous, harvester; aaaLucDwemer* gargoyle/chaurus/werewolf/warrior/overseer)",
+    "MagicEffect/Spell": "dozens (follower utility: HealingHands, Courage, Candlelight, SummonHorse; creature abilities; a 'blue fire' destruction line; a self-contained Teleport mechanic JRMihailTELEPAbTeleportation + JRmihailTELEPdefAbTeleportationScriptEffect)",
+    "WEAP": 3,
+    "ARMO": "creature skins (JRmihail*skin, aaaLucDwemer* skins) + follower gear",
+    "CONT": 6,
+    "BOOK": 2,
+    "LVLI": 0,
+    "cosmetic_skip": "Static, Light, TextureSet, Door, Activator, GlobalShort/Float, Class, Faction, Keyword, MiscItem spell-flags, Quest/dialogue"
+  },
+  "routing_plan": [
+    {"type": "NPC_ (the follower Lucien + companion placeholders)", "route": "requiem-npc-patching", "action": "follower patch-class: set Requiem follower factions (CurrentFollower 05C84D rank 0, PotentialFollower 05C84E rank -1), Requiem follower class/outfit, KEEP PcLevelMult; balance level/perks as a follower not a generic combatant", "gap": "follower runtime registration → requiem-script-patching"},
+    {"type": "NPC_ (Mihail creature enemies: imps charged fire/shock, hunger, grievous, harvester)", "route": "requiem-npc-patching", "action": "creature patch-class: fixed level + explicit offsets (no AutoCalc), classify by Name+Keywords; carry the creature race so the trait is assigned", "gap": "unrecognized creature race → trait bridge"},
+    {"type": "NPC_ (imp BOSS fire/shock variants)", "route": "requiem-npc-patching", "action": "boss patch-class: high fixed level, large stat offset, strong class, rich perks, a REQ_Trait_* or bespoke; never template onto a generic base"},
+    {"type": "RACE (custom Mihail/Dwemer creature races)", "route": "requiem-race-patching", "action": "replicate the closest Requiem creature analogue (Starting H/M/S, Regen, UnarmedDamage, skills, Requiem keywords, AttackRace=analogue) + add REQ_Trait_Armor (+Healing if RegenHpInCombat), keep the race's own Ab* resists; these are Reqtificator-UNRECOGNIZED → the NPC trait perk comes via the bridge"},
+    {"type": "MagicEffect/Spell (follower utility + creature abilities)", "route": "requiem-magic-patching", "action": "design/rescale cost+magnitude+tier off the Requiem comparable; NPC-only creature abilities don't need player cost; preserve modded spells the follower/creatures actually use, replace vanilla ones with Requiem analogues"},
+    {"type": "Spell (Teleport mechanic JRMihailTELEPAbTeleportation)", "route": "requiem-script-patching", "action": "SPECIAL MECHANIC — but it already ships its own teleport script (JRmihailTELEPdefAbTeleportationScriptEffect). PRESERVE the modded script (don't bolt on Nox_Conjuration_Teleport); rebalance only the record-side numbers via requiem-magic-patching"},
+    {"type": "WEAP (jailer battleaxe, dwarven control staff, creature hungerstrike)", "route": "requiem-weapon-patching", "action": "battleaxe → material+type keywords + damage/value off comparable; control staff → staff frame; creature 'hungerstrike' invisible weapon → NonPlayable creature attack, minimal/skip"},
+    {"type": "ARMO (creature skins)", "route": "requiem-armor-patching", "action": "creature body skins are cosmetic (ArmorType skin/clothing, AR 0) → carry no protection, skip; only the follower's real wearable gear gets the armor ladder"},
+    {"type": "CONT (dwarven chests/dresser)", "route": "requiem-leveled-list-patching", "action": "if they hold gear, curate to Requiem loot lists; build on the winner (CONT is not merged)"},
+    {"type": "BOOK / MiscItem / cosmetic", "route": "skip", "action": "quest letters, spell-flag bookkeeping tokens, statics/lights/textures/doors/dialogue → not balance; the visual auto-merge handles appearance"}
+  ],
+  "gap_mechanics_touched": [
+    "Follower registration — Lucien is a major custom follower → add his alias to Authoria's follower-registration quest so REQ_FollowerControl.RegisterFollowerAlias picks him up (requiem-script-patching / follower-registration.md).",
+    "Creature-race trait bridge — the Mihail creature races are not Reqtificator-recognized → replicate an analogue + hand-route the per-NPC trait perk (requiem-race-patching trait bridge → requiem-npc-patching).",
+    "Special-mechanic spell — the teleport ability is already scripted by the mod; preserve it, rebalance record-side (requiem-script-patching judgment: don't replace a working modded script).",
+    "Anti-undead magic — a 'VampiresBane' spell flag implies turn/anti-vampire magic → routes to requiem-magic-patching (vampirism-lycanthropy.md context)."
+  ],
+  "final_checklist": [
+    "Masters: when patched, the records reference Requiem keywords/factions (follower factions, REQ_Trait_*) → Requiem.esp auto-masters; verify masters: read-back load-order-sorted.",
+    "No REQ_NULL_* introduced; strip any encountered in templated/copied references.",
+    "Reqtificator-vs-manual: CARRY creature race + follower factions + weapon type/material keywords; DO NOT hand-stamp the trait/incoming-damage perks, the damage-type keyword, or the game-mechanics perks — the build assigns them.",
+    "End with: run the patch through the Reqtificator."
+  ],
+  "cross_check_against_reality": {
+    "follower_registration": "PASS — Lucien appears by name in the live Authoria follower bridge's alias list (_Authoria_REQ_MajorFollowerBridge: Inigo, Kaidan, Auri, Xelzaz, Mrissi, Sahara, Thogra, Yoana, Remiel, Lucien). The router's 'follower → add to Authoria's registration quest' route is exactly what Authoria did.",
+    "creature_handling": "PASS — routing the Mihail creature pack to requiem-race-patching (replicate analogue + AttackRace + trait spells) and the per-NPC trait via the bridge matches the Phase-4 method proven on DAc0da's 47 creatures.",
+    "scripted_mechanic": "PASS — recognizing the teleport ability as a special mechanic that already has its own script (preserve, don't replace) matches requiem-script-patching's 'preserve a mod's working script' judgment.",
+    "cosmetic_split": "PASS — skipping the large Static/Light/TextureSet/skin layer and patching only balance fields matches the visual-vs-balance discipline (Phase 5) and the routing table's skip list."
+  },
+  "scripts_skill_verification": {
+    "plain_effect_no_script_mechanic": "CONFIRMED — bound-weapon damage effects (01CE9F, 005DE7) carry no VMAD; the reused-vanilla Firebolt effect 012F03 carries only an incidental vanilla FX script (MG01FireEffectScript) and keeps PowerAffectsMagnitude — magnitude is not script-driven. A plain new spell needs no script of yours.",
+    "real_nox_attachment_end_to_end": "CONFIRMED — REQ_Effect_Conjuration4_Teleport_RitualSelf 02CBCE:Requiem.esp (winner Magic Redone) → VMAD Scripts[0]=Nox_Conjuration_Teleport (Flags=Local, Version 5, ObjectFormat 2), 4 ScriptObjectProperties: Mark=02CBC8, Park=02CBCF, XarrianCell=02900B, SummonFX=07CD55:Skyrim.esm. Cloning this VMAD + repointing the markers is the reuse recipe.",
+    "compile_path": "Not exercised (optional); housecarl_compile_script path documented in vmad-and-compile.md."
+  },
+  "result": "PASS — the router enumerated, routed every balance-relevant record type to the correct domain skill, identified all four gap mechanics the plugin touches, and the routing cross-checks against what the live Authoria/Requiem setup actually did (esp. Lucien's presence in the real follower-registration bridge)."
+}

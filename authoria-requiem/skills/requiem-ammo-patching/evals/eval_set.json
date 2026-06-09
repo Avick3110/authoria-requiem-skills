@@ -1,0 +1,111 @@
+[
+  {
+    "query": "I added an arrow mod and its 'dragon arrows' do like 25 damage, way under Requiem's arrows. bring them in line",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "explicit: modded arrow damage too low for Requiem -> core trigger"
+  },
+  {
+    "query": "patch these modded steel crossbow bolts so they fit Requiem's balance",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "patch bolts for Requiem -> core trigger (bolts in scope)"
+  },
+  {
+    "query": "my new glass arrows aren't on Requiem's tiers - fix their damage, value and keywords",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "set Requiem ammo keywords + tiers -> trigger"
+  },
+  {
+    "query": "make my custom ebony arrows craftable at the forge with the right perk gate and Requiem-appropriate damage",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "add craftable arrows + Requiem damage -> trigger"
+  },
+  {
+    "query": "what keywords does a daedric arrow need in Requiem so it gets the right armor penetration and weight class?",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "set Requiem ammo keywords (armor-piercing tier + ammo-weight split) -> trigger"
+  },
+  {
+    "query": "balance a whole modded quiver of orcish and elven arrows for my Requiem Reforged playthrough",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "balance modded ammo set at the right tier -> core trigger (casual)"
+  },
+  {
+    "query": "these modded arrows weigh 0.5 each and cost 30 gold, doesn't feel like Requiem ammo. normalize them",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "fix weightless/overpriced ammo -> trigger (weight 0, value on tier)"
+  },
+  {
+    "query": "my modded fire arrows fly supersonic and the flame is baked into the arrow damage, set them up the Requiem way",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "elemental ammo frame + projectile profile (effect on PROJ) -> trigger; effect design routes to magic"
+  },
+  {
+    "query": "add a tier of stalhrim bolts that match Requiem and have a forge recipe",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "add craftable bolts at the right tier -> trigger"
+  },
+
+  {
+    "query": "patch this modded dwarven crossbow so its damage fits Requiem",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: a CROSSBOW (the bow frame) -> requiem-weapon-patching, not the ammo it fires."
+  },
+  {
+    "query": "balance these modded glass throwing knives for Requiem, they do too much damage",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: throwing knives are WEAP (melee/thrown), not AMMO -> requiem-weapon-patching."
+  },
+  {
+    "query": "design a new explosion effect for my poison arrows and tune its magnitude for Requiem",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: mentions arrows but the task is the MGEF/explosion effect DESIGN (magic phase); this skill only links an effect."
+  },
+  {
+    "query": "my arrow mod's fletching mesh looks wrong in first person, can you fix the NIF",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: mentions arrow but it's a mesh/NIF problem, not record balance."
+  },
+  {
+    "query": "patch this modded ebony cuirass and gauntlets so they fit Requiem's armor tiers",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: armor patching (armor phase), shares 'patch ... for Requiem tiers' phrasing."
+  },
+  {
+    "query": "this arrow retexture from nexus just changes the diffuse, repackage it for my load order",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: an arrow texture/packaging task, no record balance and not Requiem-specific."
+  },
+  {
+    "query": "write a SkyPatcher ini to set all iron arrows to 40 damage",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "tricky near-miss: arrows + damage, but explicitly SkyPatcher -> skypatcher-authoring; this project uses ESP overrides. Riskiest negative."
+  },
+  {
+    "query": "how do I fletch arrows in Requiem - what station and perk do I need in-game?",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: gameplay/crafting advice about Requiem arrows, not authoring a patch."
+  },
+  {
+    "query": "my follower's bow won't let NPCs fire arrows, fix the weapon flags for Requiem",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: the NPCsUseAmmo flag is on the BOW (weapon frame) -> requiem-weapon-patching, not the ammo record."
+  }
+]

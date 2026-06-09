@@ -1,0 +1,111 @@
+[
+  {
+    "query": "I installed a custom playable race mod (some High Elf offshoot) and its starting health/magicka/stamina and skill bonuses are way off for Requiem. can you bring it in line?",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "balance a custom playable race + set skill bonuses/stats -> core trigger"
+  },
+  {
+    "query": "this modded frost troll variant takes way too much damage in my Requiem game and has no natural armor, fix it",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "modded creature takes the wrong damage / no Requiem traits -> core trigger"
+  },
+  {
+    "query": "patch the Wendigo race from Glenmoril so it behaves like a Requiem troll",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "patch a race for Requiem, classify a modded creature to a vanilla analogue -> core trigger"
+  },
+  {
+    "query": "my follower mod adds a new Argonian-like race but Requiem gives it no racial abilities or resistances. set them up so it fits",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "race not recognized by the Reqtificator + set racial abilities/resistances -> trigger"
+  },
+  {
+    "query": "make this custom orc-blooded race a proper Requiem race with the right carry weight, unarmed damage and heritage powers",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "racial stats + abilities for a custom playable race -> trigger"
+  },
+  {
+    "query": "the modded draugr-type enemies from this dungeon mod aren't recognized by Requiem and die instantly to arrows. give them the undead traits",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "creature trait classification, new race the Reqtificator can't see -> trigger"
+  },
+  {
+    "query": "set racial skill bonuses and starting attributes for my new cat-folk playable race to match Requiem's Khajiit",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "set racial skill bonuses + replicate a vanilla analogue (casual) -> trigger"
+  },
+  {
+    "query": "this beast race I added doesn't regenerate health in combat like Requiem's trolls do, sort out its healing trait",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "give a creature combat healing (healing trait + RegenHpInCombat flag) -> trigger"
+  },
+  {
+    "query": "I want my custom vampire-elf race to fit Requiem, its blood resistances and heritage abilities are missing",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "balance a custom playable race + set racial resistances/abilities (vampire variant) -> trigger"
+  },
+
+  {
+    "query": "patch this follower NPC's combat stats, perks, faction membership and default outfit for Requiem",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: NPC patching (npc phase). Shares 'patch ... for Requiem' but the content is per-NPC ACBS/factions/outfit, not the RACE record. Riskiest false."
+  },
+  {
+    "query": "this modded creature drops vanilla gold instead of Requiem-appropriate loot, fix its death item and leveled list",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: loot / leveled-list phase, mentions a creature but not its race balance."
+  },
+  {
+    "query": "my custom race's body mesh clips through armor and the bodyslide preset is broken, can you fix the NIF weighting",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: mentions 'race' but it's a mesh/NIF/bodyslide problem, not record balance."
+  },
+  {
+    "query": "design a new racial power spell that drains 30 stamina on hit and tune its magnitude for Requiem",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "tricky near-miss: 'racial power' overlaps, but this is MGEF/spell effect design (magic phase); the race skill only links spells, doesn't design them."
+  },
+  {
+    "query": "the werewolf transformation feels weak in Requiem, retune the beast form's unarmed damage and the duration of the power",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: werewolf is race-adjacent, but retuning a power's damage/duration is spell/effect design (magic phase)."
+  },
+  {
+    "query": "create a RaceMenu character preset for a Nord that looks like my old playthrough's character",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: 'race'/'Nord' present but it's a cosmetic RaceMenu preset, not a RACE record patch."
+  },
+  {
+    "query": "write a SkyPatcher ini to give all Nords +50 carry weight",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "tricky near-miss: racial (Nord carry weight) but explicitly SkyPatcher -> skypatcher-authoring; this project uses direct ESP overrides."
+  },
+  {
+    "query": "balance this modded steel cuirass for Requiem, its armor rating is too high",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: 'balance ... for Requiem' but an ARMOR record -> requiem-armor-patching."
+  },
+  {
+    "query": "what's the best race to pick for a stealth archer build in Requiem?",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: gameplay advice about Requiem races, not authoring a patch."
+  }
+]

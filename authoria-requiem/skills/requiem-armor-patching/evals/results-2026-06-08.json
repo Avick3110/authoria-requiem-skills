@@ -1,0 +1,50 @@
+{
+  "date": "2026-06-08",
+  "skill": "requiem-armor-patching",
+  "trigger_eval": {
+    "method": "manual prediction (HOUSECARL_SKILL_AUTHORING.md §6.5 fallback; empirical run_loop needs a non-Windows host, session is Windows 11)",
+    "should_trigger_count": 9,
+    "should_not_trigger_count": 9,
+    "predicted_recall": 1.0,
+    "predicted_specificity": 1.0,
+    "thresholds": {"recall_min": 0.8, "specificity_min": 0.5},
+    "pass": true,
+    "followup": "Flagged for empirical run_loop re-validation on a non-Windows host + one independent peer prediction check (§6.5 items 3-4). Tracked in STATE.md Phase-2 notes."
+  },
+  "round_trip": [
+    {
+      "method": "Blind live-analogy derivation: predict REQ_Heavy_Ebony_Hands (013962) from comparables ONLY (Ebony Cuirass 013961 for the material spine + the per-part gauntlet ratio 0.30 + the heavy-gauntlet fist-perk rule), without reading the target first; then diff against the houseCARL winner.",
+      "target": "REQ_Heavy_Ebony_Hands (013962:Skyrim.esm), winner Requiem.esp",
+      "predicted": {
+        "ArmorRating": 150, "Value": 1500, "Weight": 12,
+        "Keywords": ["armorType.heavy 06BBD2", "armorSet.ebony 06BBD8", "armorPart.gauntlets 06C0EF", "VendorItemArmor 08F959", "PerkFistsEbony (present, FormID from comparable)"],
+        "resist_tempering": "none in source (Reqtificator assigns ebonySmithing tempering; no ranged-resist, gauntlets are not the cuirass)"
+      },
+      "actual": {
+        "ArmorRating": 150, "Value": 1500, "Weight": 12,
+        "Keywords": ["02C178 (PerkFistsEbony)", "06BBD2 (heavy)", "06BBD8 (ebony set)", "06C0EF (gauntlets)", "08F959 (VendorItemArmor)"],
+        "resist_tempering": "absent in source winner; chain Skyrim.esm -> Requiem.esp"
+      },
+      "field_matches": {"ArmorRating": true, "Value": true, "Weight": true, "Keywords": true, "fist_perk_present": true},
+      "pass": true,
+      "notes": "Exact match on AR/Value/Weight and the full keyword set. The per-part ratio (0.30 on AR, value, AND weight off the cuirass) reproduced all three exactly (500->150, 5000->1500, 40->12). The heavy-gauntlet fist-perk prediction was correct (PerkFistsEbony 02C178 present)."
+    },
+    {
+      "method": "Blind live-analogy derivation: predict REQ_Light_Dragonscale_Hands (01393F) from the Dragonscale Cuirass 01393E + the gauntlet ratio 0.30 + the light-gauntlet rule (no fist perk), then diff against the winner. Chosen to contrast the heavy/light fist-perk split.",
+      "target": "REQ_Light_Dragonscale_Hands (01393F:Skyrim.esm), winner Requiem.esp",
+      "predicted": {
+        "ArmorRating": 90, "Value": 2400, "Weight": 4.5,
+        "Keywords": ["armorType.light 06BBD3", "armorSet.dragonscale 06BBD6", "armorPart.gauntlets 06C0EF", "VendorItemArmor 08F959"],
+        "fist_perk": "none (light gauntlets carry no PerkFists keyword)"
+      },
+      "actual": {
+        "ArmorRating": 90, "Value": 2400, "Weight": 4.5,
+        "Keywords": ["06BBD3 (light)", "06BBD6 (dragonscale set)", "06C0EF (gauntlets)", "08F959 (VendorItemArmor)", "002ED9 (Survival_ArmorWarm, incidental)"],
+        "fist_perk": "absent (no PerkFists)"
+      },
+      "field_matches": {"ArmorRating": true, "Value": true, "Weight": true, "Keywords": true, "no_fist_perk": true},
+      "pass": true,
+      "notes": "Exact match on AR/Value/Weight (300->90, 8000->2400, 15->4.5 at ratio 0.30) and the core keyword set; the only delta is the incidental Survival_ArmorWarm climate tag (copy from comparable, not balance-relevant). Confirms light gauntlets get NO fist perk -- the case that proves the heavy-only fist-perk rule."
+    }
+  ]
+}

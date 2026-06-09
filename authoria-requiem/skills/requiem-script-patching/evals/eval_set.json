@@ -1,0 +1,30 @@
+{
+  "skill_name": "requiem-script-patching",
+  "validation": "manual fallback per HOUSECARL_SKILL_AUTHORING.md §6.5 (run_loop blocked on Windows, §6.4); manual_predicted_trigger recorded per query; flagged for empirical re-validation + peer prediction check.",
+  "thresholds": {"recall_min": 0.80, "specificity_min": 0.50},
+  "predicted": {"recall": 1.0, "specificity": 0.9},
+  "should_trigger": [
+    {"query": "I added a bound sword spell to my mod and patched its cost for Requiem, but when I cast it nothing gets summoned. What did I miss?", "should_trigger": true, "manual_predicted_trigger": true},
+    {"query": "How do I make a custom teleport/recall spell actually teleport under Requiem Magic Redone? The damage version works but the teleport does nothing.", "should_trigger": true, "manual_predicted_trigger": true},
+    {"query": "I want a single spell tome that teaches three spells at once, like Requiem's multi-spell tomes. How do I wire that up?", "should_trigger": true, "manual_predicted_trigger": true},
+    {"query": "Need to register Inigo as a follower so Requiem's follower features (lockpicking, etc.) recognize him. He's already in the follower factions.", "should_trigger": true, "manual_predicted_trigger": true},
+    {"query": "Does this new firebolt-style spell need a Papyrus script for Requiem, or will the magnitude just scale on its own?", "should_trigger": true, "manual_predicted_trigger": true},
+    {"query": "How do I attach Nox_Conjuration_Teleport to my magic effect and set its Mark/Park properties with houseCARL?", "should_trigger": true, "manual_predicted_trigger": true},
+    {"query": "I wrote a custom .psc for a new charm effect — how do I compile it to a pex and attach it for a Requiem patch?", "should_trigger": true, "manual_predicted_trigger": true},
+    {"query": "My modded follower Kaidan isn't being tracked by Requiem's follower system even though he can be recruited. How do I register his alias?", "should_trigger": true, "manual_predicted_trigger": true},
+    {"query": "What's the marker keyword or script a new mind-control / command spell needs to be picked up by Requiem's runtime?", "should_trigger": true, "manual_predicted_trigger": true},
+    {"query": "I'm patching a control-weather spell pack for Requiem and the weather menu never shows. What script does Requiem use for that and how do I clone it?", "should_trigger": true, "manual_predicted_trigger": true}
+  ],
+  "should_not_trigger": [
+    {"query": "Balance this modded greatsword's damage and value for Requiem's material tiers.", "should_trigger": false, "manual_predicted_trigger": false},
+    {"query": "Set the magicka cost and magnitude of my new frost spell to match Requiem's tier-2 destruction spells.", "should_trigger": false, "manual_predicted_trigger": false},
+    {"query": "My follower is too weak in Requiem — give her the right class, level and perks.", "should_trigger": false, "manual_predicted_trigger": false},
+    {"query": "Add my new staff to Requiem with the right charge pool and staff keyword.", "should_trigger": false, "manual_predicted_trigger": false},
+    {"query": "Why is my Papyrus cloak script causing stack dumps and script lag? Can you optimize it?", "should_trigger": false, "manual_predicted_trigger": false},
+    {"query": "What does the SKSE function GetEquippedObject return and what parameters does it take?", "should_trigger": false, "manual_predicted_trigger": false},
+    {"query": "Distribute my new enchanted dagger into Requiem's bandit loot lists so it shows up in the world.", "should_trigger": false, "manual_predicted_trigger": false},
+    {"query": "Patch this custom race so the Reqtificator gives its NPCs the right creature traits.", "should_trigger": false, "manual_predicted_trigger": false},
+    {"query": "Set up a SkyPatcher ini to add a keyword to all iron weapons.", "should_trigger": false, "manual_predicted_trigger": false},
+    {"query": "My armor rating is too high after the Reqtificator — fix the cuirass for the heavy armor cap.", "should_trigger": false, "manual_predicted_trigger": false}
+  ]
+}

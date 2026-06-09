@@ -1,0 +1,27 @@
+{"topic":"per-part ratio body head hands feet shield, AR value weight scaling off cuirass, shield AR 0.6 value/weight 0.5","file":"ar-ladder.md","section":"Per-part ratio (off the cuirass)"}
+{"topic":"heavy armor rating ladder cuirass iron steel dwarven orcish ebony dragonplate daedric, value weight","file":"ar-ladder.md","section":"Heavy material spine (cuirass)"}
+{"topic":"light armor rating ladder cuirass fur hide leather scale elven glass dragonscale stalhrim chitin","file":"ar-ladder.md","section":"Light material spine (cuirass)"}
+{"topic":"armor rating cap Reqtificator armorRatingThresholds, record stored 10x vanilla scale, heavy body 74 light 62","file":"ar-ladder.md","section":"The armor-rating cap (Reqtificator)"}
+{"topic":"how to derive a missing armor stat, interpolate part/material, borrow nearest set keyword","file":"ar-ladder.md","section":"How to derive a stat the table doesn't list"}
+{"topic":"source-carried vs Reqtificator-assigned keywords, ranged resistance and tempering are outputs do not stamp","file":"keywords.md","section":"The split: source-carried vs Reqtificator-assigned"}
+{"topic":"standard armor keyword sets by part cuirass helmet gauntlets boots shield, Survival climate tags","file":"keywords.md","section":"Standard keyword sets by part"}
+{"topic":"armor-type heavy light and armor-part cuirass helmet gauntlets boots shield keyword FormIDs","file":"keywords.md","section":"Armor-type and armor-part keywords"}
+{"topic":"armor-set material keyword FormIDs iron steel ebony daedric elven glass dragonscale chitin stalhrim faction sets","file":"keywords.md","section":"Armor-set / material keywords"}
+{"topic":"ranged-resistance tiers tier1-tier5 FormIDs, light low/mid/high faction leader, heavy tier5, assigned not stamped","file":"keywords.md","section":"Ranged-resistance tiers (assigned, do not stamp)"}
+{"topic":"tempering perks craftsmanship advancedBlacksmithing dwarven elven orcish glass ebony daedric draconic legendary, set map, assigned","file":"keywords.md","section":"Tempering perks (assigned, do not stamp)"}
+{"topic":"fist-damage perk heavy gauntlets PerkFists Iron Steel Ebony Daedric FormIDs, light gauntlets none","file":"keywords.md","section":"Fist-damage perks (heavy gauntlets)"}
+{"topic":"clothing and jewelry frames AR 0, ArmorClothing ArmorJewelry VendorItemClothing/Jewelry ClothingBody Ring, value tracks material","file":"keywords.md","section":"Clothing & jewelry frames"}
+{"topic":"armor sounds, shield BashImpactDataSet AlternateBlockMaterial, jewelry clothing ISC pickup putdown","file":"keywords.md","section":"Sounds"}
+{"topic":"crafting recipe COBJ forge temper smelter, armor workbench 0ADB78 not grindstone, WorkbenchKeyword FormIDs","file":"crafting.md","section":"The three recipe kinds"}
+{"topic":"perk gate HasPerk condition form-index unreadable, clone Conditions verbatim, tempering perk map","file":"crafting.md","section":"The perk gate is a HasPerk condition"}
+{"topic":"houseCARL bulk_apply rebalance existing modded armor, set AR value weight keywords, write gotchas inactive patch","file":"housecarl-recipes.md","section":"A — Re-balance an existing modded armor"}
+{"topic":"houseCARL create_record net-new armor, BodyTemplate ArmorType keywords","file":"housecarl-recipes.md","section":"B — Author a net-new armor record"}
+{"topic":"houseCARL heavy gauntlet PerkFists keyword set","file":"housecarl-recipes.md","section":"C — Heavy gauntlet (fist perk)"}
+{"topic":"houseCARL shield BashImpactDataSet AlternateBlockMaterial block bash links keywords","file":"housecarl-recipes.md","section":"D — Shield (block / bash links)"}
+{"topic":"houseCARL create armor COBJ crafting recipe compose ContainerEntry items, temper at armor workbench","file":"housecarl-recipes.md","section":"E — Crafting + tempering recipes (COBJ)"}
+{"topic":"masters Requiem.esp auto-added when keyword referenced, manual master add for vanilla-only","file":"housecarl-recipes.md","section":"Masters"}
+{"topic":"worked example heavy ebony gauntlets derivation per-part ratio fist perk, verification","file":"worked-examples.md","section":"1 — Heavy set piece: Ebony Gauntlets"}
+{"topic":"worked example light dragonscale gauntlets, no fist perk, light vs heavy contrast","file":"worked-examples.md","section":"2 — Light set piece: Dragonscale Gauntlets"}
+{"topic":"worked example daedric shield, shield ratio 0.6 AR / 0.5 value weight, block bash links","file":"worked-examples.md","section":"3 — Shield: Daedric Shield"}
+{"topic":"worked example unique faction armor artifact, acquisition trace, bespoke value, borrow set keyword","file":"worked-examples.md","section":"4 — Unique / faction armor (the deviation case)"}
+{"topic":"is it an artifact, identification priority ladder, reverse-reference COBJ/LeveledItem, AR cap interaction, light vs heavy, novel material","file":"../SKILL.md","section":"Judgment"}

@@ -1,0 +1,82 @@
+{
+  "date": "2026-06-09",
+  "skill": "requiem-magic-patching",
+  "trigger_eval": {
+    "method": "manual prediction (HOUSECARL_SKILL_AUTHORING.md §6.5 fallback; empirical run_loop needs a non-Windows host, session is Windows 11)",
+    "should_trigger_count": 10,
+    "should_not_trigger_count": 9,
+    "predicted_recall": 1.0,
+    "predicted_specificity": 1.0,
+    "thresholds": {"recall_min": 0.8, "specificity_min": 0.5},
+    "pass": true,
+    "followup": "Flagged for empirical run_loop re-validation on a non-Windows host + one independent peer prediction check (§6.5 items 3-4). Riskiest true: 'set the spell-tome value' (the magic skill sets tome Value/tier; placement is the leveled-list skill). Riskiest false: 'draugr lost its frost resistance after Requiem nulled the vanilla effect' (the REQ_NULL replacement lives in the race/NPC skills, not magic-effect design) and 'staff item damage/weight/craftable' (the staff FRAME is the weapon skill, the effect is here)."
+  },
+  "mechanic_verification": [
+    {
+      "claim": "Spell cost is EXPLICIT, not computed — SPEL carries Flags=ManualCostCalc and BaseCost is the literal cost; there is no magicka-cost formula",
+      "source": "live reads: REQ_Destruction1_Fire_ConcAimed 012FCD (BaseCost 40, ManualCostCalc), REQ_Destruction2_Fire_Aimed 012FD0 (90), REQ_Destruction3_Fire_AimedExp 01C789 (240), REQ_Destruction4_Fire_ConcAimedHazard 035D7F (495); +15 spells across all 5 schools all ManualCostCalc; no cost formula in Reqtificator.conf / Data/*.conf / documentation/",
+      "result": "Confirmed: read BaseCost from the same-school/same-delivery/same-tier comparable; do not compute it.",
+      "pass": true
+    },
+    {
+      "claim": "HalfCostPerk is the school+tier classifier (REQ_<School>_Mastery_<NNN>); the MR-patch addons re-point it to reclassify a spell's school+tier",
+      "source": "live Mastery matrix (Destruction 0F2CA8/0C44BF/0C44C0/0C44C1/0C44C2; Restoration 0F2CAA/0C44C7/0C44C8/0C44C9/0C44CA; Conjuration 0F2CA7/0C44BB..BE; Alteration 0F2CA6/0C44B7..BA; Illusion 0F2CA9/0C44C3..C6) + addon deltas",
+      "result": "Confirmed: Supernova re-pointed Master-Destruction 0C44C2 -> Master-Restoration 0C44CA; Resona App-Destruction 0C44BF -> App-Alteration 0C44B7; Reverbra Adept-Destruction 0C44C0 -> Adept-Alteration 0C44B8. The classifier sets school, tier, learn-gate, half-cost.",
+      "pass": true
+    },
+    {
+      "claim": "ChargeTime ladder is clean: T1 conc 0 / T1 FaF 0.25 / T2 0.5 / T3 0.75 / T4 1.0; rituals 3+",
+      "source": "live across schools (Flames conc 0, Firebolt 0.5, Fireball 0.75, FireWall 0.5(conc); Bound Sword 0.25, FlameAtronach 0.75, Reanimate 1.0; Candlelight 0.25, Telekinesis 0(conc); Supernova ritual set to 6)",
+      "result": "Confirmed. Requiem uses ChargeTime as the anti-spam lever on big spells.",
+      "pass": true
+    },
+    {
+      "claim": "Spells are multi-effect: a primary damage/heal effect (MR reuses the VANILLA MGEF FormID, overridden) + secondary + taper/grandmaster (MR-defined, dummy ActorValue Fame + HideInUI)",
+      "source": "live: Flames 012FCD = 013CA9(vanilla,mag16) + 005AA8:MR Cremation + 005AF5:MR Fire_Taper; Firebolt 012FD0 = 012F03 mag30 + 005AA9:MR + 0153D3; Ice Spike 02B96C = 01CEA2 mag30 + 0B729F(slow) + 005AA4:MR; MGEF 005AF5 archetype ActorValue=Fame + HideInUI",
+      "result": "Confirmed. The primary effect is a vanilla MGEF MR overrides to set school/resist/keywords/flags; mechanic-only effects use a dummy AV + HideInUI.",
+      "pass": true
+    },
+    {
+      "claim": "Three-layer split: (1) record-side authored; (2) RFTI_All_* rescaling perks Reqtificator-assigned (don't stamp); (3) Nox_* scripts cover only special mechanics, base scaling is the engine PowerAffectsMagnitude flag",
+      "source": "live perks RFTI_All_AbsorbRescaling 962799, RFTI_All_PoisonRescaling 962798, RFTI_All_Magic_WardDamageReduction 682FB5, RFTI_NPC_PersistentSpellRescaling AD3977; MGEF flag PowerAffectsMagnitude on damage effects; Glob of Nox_*.psc/.pex in 'Requiem - Magic Redone - rerun\\scripts'",
+      "result": "Confirmed: the ~50 Nox magic scripts are special mechanics (bound, teleport, mind-control, weather, scroll-craft, multi-spell tome, weakness/rune); the core damage MGEF (e.g. 013CA9, 005AA8) carry NO VirtualMachineAdapter — they scale via PowerAffectsMagnitude. RFTI_ prefix = the assigned family (incl. RFTI_Trait_* creature traits).",
+      "pass": true
+    },
+    {
+      "claim": "Spell-tome value tracks the spell's tier (Novice 100 / Apprentice ~300-400 / Adept 600 / Expert 800 / Master 2000), identical across every MR-patch addon; tome has no learn-gate field",
+      "source": "live BOOK scan across Constellation/Sonic/Obscure/Dark Hierophant/Holy Templar/Wildwaker (128 spell-tome matches): Supernova 00081F 4975->2000, Sonic Amplifier 100/Resona 400/Reverbra 600/Novasphere 800/MegaReverbra 2000; Type=BookOrTome, Teaches=BookSpell, Weight 1",
+      "result": "Confirmed. The patch normalizes tome Value to the tier; learning is gated by the spell's HalfCostPerk, not a tome field; placement -> leveled-list phase.",
+      "pass": true
+    },
+    {
+      "claim": "REQ_NULL effects are retired vanilla abilities/powers; on creatures/NPCs a NULLed resistance/power was replaced by a Requiem trait (route to race/npc), strip only on player-side spells/items",
+      "source": "live: 274 REQ_NULL MagicEffect (REQ_NULL_AbResistFire 024314 'Resist Fire', REQ_NULL_RaceOrcBerserkEffect, REQ_NULL_RaceNordBattleCryEffect, REQ_NULL_Perk*); 024314 archetype intact, MagicSkill None",
+      "result": "Confirmed nuance: a modded creature referencing a now-NULLed vanilla resist needs the Requiem race trait spell (requiem-race-patching), not a bare strip.",
+      "pass": true
+    }
+  ],
+  "round_trip": [
+    {
+      "method": "Cross-element reproduction (read + write): take the tier-2 fire bolt as comparable, derive and build the tier-2 frost bolt from scratch, diff against the houseCARL winner.",
+      "comparable": "REQ_Destruction2_Fire_Aimed (Firebolt) 012FD0: BaseCost 90, FaF/Aimed, ChargeTime 0.5, HalfCostPerk 0C44BF, effects 012F03(mag30)+005AA9:MR(mag3)+0153D3(mag0.25)",
+      "target": "REQ_Destruction2_Frost_Aimed (Ice Spike) 02B96C",
+      "predicted": "cost 90, FaF/Aimed, charge 0.5, HalfCostPerk 0C44BF, ManualCostCalc; 3 effects = frost primary mag 30 + frost secondary(slow) + frost taper; element keyword MagicDamageFire->MagicDamageFrost, ResistFire->ResistFrost",
+      "live_winner": "BaseCost 90, FaF/Aimed, ChargeTime 0.5, HalfCostPerk 0C44BF, ManualCostCalc; effects 01CEA2(mag30)+0B729F(mag5,dur2)+005AA4:MR(dur1)",
+      "result": "Exact match on cost/charge/tier-perk/flags/effect-shape; only the element-specific MGEFs and secondary differ, as predicted.",
+      "pass": true
+    },
+    {
+      "method": "Live write check: author the reproduction from scratch via create_record into an active patch and verify the read-back + masters + no REQ_NULL.",
+      "target": "Spell 000800:Requiem magic patching.esp REQ_RT_Destruction2_Frost_Aimed (patch 'Requiem magic patching.esp')",
+      "predicted": "all 9 balance fields + 3 composed effects set; masters include Requiem - Magic Redone.esp (pulled by the 005AA4:MR effect reference); no REQ_NULL",
+      "actual": "create_record wrote 414 bytes; read-back set Name/BaseCost 90/CastType FireAndForget/TargetType Aimed/ChargeTime 0.5/Type Spell/Flags ManualCostCalc/EquipmentType 013F44/HalfCostPerk 0C44BF all exact; Effects -> 3 items; masters: 'Skyrim.esm, Update.esm, Requiem - Magic Redone.esp'; no REQ_NULL reference",
+      "pass": true,
+      "notes": "Validates create_record Spell, the Effects compose shape (type=Effect with BaseEffect + Data.Magnitude/Area/Duration), and automatic master derivation (MR mastered via a single MR-defined effect reference). Brand-new patch not yet enabled in MO2; the per-op read-back is the verification (the 1.2.x not-in-registry-until-refresh gotcha)."
+    }
+  ],
+  "checklist_8": {
+    "hard_items_1_15_and_19": "pass (19 N/A — skills auto-discover by directory; no build-script registry in this repo)",
+    "item_16": "pass (10 should-trigger + 9 near-miss, all plausible utterances; near-misses are genuine adjacent-domain traps: staff item frame, tome placement, NPC spell-list assignment, Nox script runtime, VFX retexture, weapon record, creature NULL-resist replacement, SkyPatcher blanket nerf, gameplay advice)",
+    "items_17_18": "manual §6.5 fallback (Windows blocks run_loop); predicted recall 1.0 / specificity 1.0; flagged for empirical re-validation + peer prediction check"
+  }
+}

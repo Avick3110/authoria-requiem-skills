@@ -1,0 +1,123 @@
+[
+  {
+    "query": "I installed a weapon mod and its steel longsword does like 60 damage, way too much for Requiem. can you bring it in line?",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "explicit: weapon damage too high for Requiem -> core trigger"
+  },
+  {
+    "query": "patch this ebony dagger from my follower mod so it fits Requiem's balance",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "patch a weapon for Requiem -> core trigger"
+  },
+  {
+    "query": "the modded dwarven crossbow I added isn't on Requiem's damage tiers, fix its stats and keywords",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "set Requiem weapon keywords + tiers -> trigger (bow/crossbow frame in scope)"
+  },
+  {
+    "query": "make my custom katana craftable at the forge with the right perk gate and Requiem-appropriate damage",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "add a craftable weapon + Requiem damage -> trigger"
+  },
+  {
+    "query": "what keywords does a glass war axe need so Requiem and the Reqtificator handle it correctly?",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "set Requiem weapon keywords -> trigger"
+  },
+  {
+    "query": "I want to add a staff of firebolt balanced like Requiem's staves, what value and charge should it have?",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "staff frame balance is in scope this phase -> trigger"
+  },
+  {
+    "query": "this enchanted mace from Immersive Weapons has a weird charge and gold value, normalize it for Requiem",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "balance a modded mace + enchanted weapon for Requiem -> trigger"
+  },
+  {
+    "query": "balance a modded greatsword for my Requiem Reforged playthrough",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "balance a modded sword for Requiem -> core trigger (casual phrasing)"
+  },
+  {
+    "query": "my new bow does vanilla damage and NPCs won't shoot it, set it up for Requiem",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "bow frame + NPCsUseAmmo + Requiem damage -> trigger"
+  },
+  {
+    "query": "add a daedric warhammer that matches Requiem's tier and has a tempering recipe",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "add a craftable/temperable weapon at the right tier -> trigger"
+  },
+
+  {
+    "query": "patch this modded steel cuirass so its armor rating fits Requiem",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: Requiem patching but ARMOR -> armor-patching skill. Description is weapon-specific."
+  },
+  {
+    "query": "balance these modded steel arrows for Requiem, they do too much damage",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: ammo, not a weapon. SKILL.md and description route ammo to requiem-ammo-patching."
+  },
+  {
+    "query": "I'm designing a new destruction spell, set its magic effect magnitude and cost for Requiem",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: spell/MGEF design (magic phase), not a staff frame or weapon record."
+  },
+  {
+    "query": "my sword mod's first-person mesh floats in the hand, can you fix the NIF",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: mentions 'sword' but it's a mesh/NIF problem, not record balance."
+  },
+  {
+    "query": "create a new absorb-health enchantment effect and tune its magnitude for Requiem",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: ENCH/MGEF authoring (magic phase). This skill links an existing enchantment, it doesn't design one."
+  },
+  {
+    "query": "patch this follower NPC's combat stats, perks and outfit for Requiem",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: NPC patching (npc phase), shares 'patch ... for Requiem' phrasing."
+  },
+  {
+    "query": "merge my leveled lists so the new bandit weapons appear in Requiem's loot tables",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: mentions weapons but the task is a LVLI merge (leveled-list phase)."
+  },
+  {
+    "query": "what's the strongest one-handed weapon to use in my Requiem playthrough?",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: gameplay advice about Requiem weapons, not authoring a patch."
+  },
+  {
+    "query": "write a SkyPatcher ini to buff all iron weapons' damage by 5",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "tricky near-miss: weapons + damage, but explicitly SkyPatcher -> skypatcher-authoring skill; this project uses ESP overrides. Riskiest negative."
+  },
+  {
+    "query": "flag my weapon mod's ESP as ESL so it doesn't eat a load order slot",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: weapon mod plugin housekeeping (ESL flag), not weapon balance."
+  }
+]

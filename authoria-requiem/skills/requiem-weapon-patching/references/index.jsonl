@@ -1,0 +1,26 @@
+{"topic":"damage ladder, 1H sword material tiers, crit = floor(dmg/2)","file":"damage-ladder.md","section":"One-handed sword material ladder"}
+{"topic":"per-type damage/value/speed/reach at steel tier, dagger bow crossbow greatsword warhammer","file":"damage-ladder.md","section":"Per-type shape at the Steel tier"}
+{"topic":"value ladder, material gold value, economy tiers","file":"damage-ladder.md","section":"Material value ladder"}
+{"topic":"how to derive a missing stat, interpolate type/material","file":"damage-ladder.md","section":"How to derive a stat the table doesn't list"}
+{"topic":"damage-type keyword is a Reqtificator output, slash pierce blunt ranged FormIDs AD3954-AD3957, feature_DamageType","file":"keywords.md","section":"The damage-type keywords are a Reqtificator OUTPUT"}
+{"topic":"weapon-type keyword FormIDs, WeapTypeSword/Bow/Staff/Quarterstaff","file":"keywords.md","section":"Weapon-type keywords"}
+{"topic":"material keyword FormIDs, WeapMaterialIron/Steel/Silver","file":"keywords.md","section":"Material keywords"}
+{"topic":"standard keyword sets melee/bow/staff/artifact, RFTI exclusions, NPCsUseAmmo","file":"keywords.md","section":"Standard keyword sets by class"}
+{"topic":"crafting recipe COBJ forge/temper/smelter, WorkbenchKeyword, perk gate HasPerk, ingot inputs","file":"crafting.md","section":"The three recipe kinds"}
+{"topic":"perk gate is a form-index, clone Conditions verbatim, smithing perk tree","file":"crafting.md","section":"The perk gate is a HasPerk condition"}
+{"topic":"enchanted weapon Template/CNAM base variant, ObjectEffect, EnchantmentAmount charge pool 500xtier","file":"enchanted-and-staves.md","section":"Enchanted weapons"}
+{"topic":"enchantment charge rule, EnchantmentAmount vs ENCH EnchantmentCost, casts","file":"enchanted-and-staves.md","section":"The charge-pool rule"}
+{"topic":"staff keywords enchantment-driven, WeapTypeStaff VendorItemStaff Nox_KW_Staff school tier, damage 1","file":"enchanted-and-staves.md","section":"Staves"}
+{"topic":"sound and impact links, ImpactDataSet EquipSound, ISC sound override at SNDR level","file":"sounds-and-misc.md","section":"Sound and impact fields are FormID links"}
+{"topic":"USSEP inherited misc data, conflict chain, read the winner","file":"sounds-and-misc.md","section":"USSEP misc data Requiem inherits"}
+{"topic":"bow Data fields, NPCsUseAmmo, Skill Archery, RangeMin/Max","file":"sounds-and-misc.md","section":"Bow-specific Data fields"}
+{"topic":"houseCARL bulk_apply rebalance existing modded weapon, set stats keywords","file":"housecarl-recipes.md","section":"A — Re-balance an existing modded weapon"}
+{"topic":"houseCARL create_record net-new weapon","file":"housecarl-recipes.md","section":"B — Author a net-new weapon record"}
+{"topic":"houseCARL enchanted variant Template ObjectEffect EnchantmentAmount","file":"housecarl-recipes.md","section":"C — Enchanted variant"}
+{"topic":"houseCARL bow frame keywords + NPCsUseAmmo","file":"housecarl-recipes.md","section":"D — Bow frame extras"}
+{"topic":"houseCARL create COBJ crafting recipe, compose ContainerEntry items","file":"housecarl-recipes.md","section":"E — Crafting recipe (COBJ)"}
+{"topic":"worked example plain melee steel greatsword derivation + verification","file":"worked-examples.md","section":"1 — Plain melee: Steel Greatsword"}
+{"topic":"worked example enchanted Steel Sword of Burning Fire2 charge","file":"worked-examples.md","section":"2 — Enchanted: Steel Sword of Burning"}
+{"topic":"worked example unique artifact Dawnbreaker deviation, bespoke value, REQ_Tempering keyword","file":"worked-examples.md","section":"3 — Unique artifact: Dawnbreaker"}
+{"topic":"how to identify an artifact, acquisition trace, craftable vs leveled-list, MagicDisallowEnchanting is not enough, Moonblade negative example","file":"worked-examples.md","section":"4 — Identifying an artifact (a negative): Moonblade"}
+{"topic":"is it an artifact, identification priority ladder, reverse-reference COBJ/LeveledItem, artifact vs custom gear, ask when ambiguous","file":"../SKILL.md","section":"Judgment / Is it an artifact?"}

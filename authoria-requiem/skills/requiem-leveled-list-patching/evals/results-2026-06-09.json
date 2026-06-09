@@ -1,0 +1,77 @@
+{
+  "date": "2026-06-09",
+  "skill": "requiem-leveled-list-patching",
+  "trigger_eval": {
+    "method": "manual prediction (HOUSECARL_SKILL_AUTHORING.md §6.5 fallback; empirical run_loop needs a non-Windows host, session is Windows 11)",
+    "should_trigger_count": 9,
+    "should_not_trigger_count": 9,
+    "predicted_recall": 1.0,
+    "predicted_specificity": 1.0,
+    "thresholds": {"recall_min": 0.8, "specificity_min": 0.5},
+    "pass": true,
+    "followup": "Flagged for empirical run_loop re-validation on a non-Windows host + one independent peer prediction check (§6.5 items 3-4). Riskiest false (a 'modded weapon for Requiem' that wants STATS -> weapon skill, not placement) and riskiest true (the 'drops at level 1 as if iron' query — Level 1 IS correct in Requiem; the fix is repetition/list-choice) are called out in the eval notes."
+  },
+  "mechanic_verification": [
+    {
+      "claim": "mergeLeveledLists / mergeLeveledCharacters / openEncounterZones are all on",
+      "source": "DefaultUserConfig.json (base Requiem + Authoria - Reqtificator and Requiem Tweak — identical)",
+      "result": "{ mergeLeveledLists: true, mergeLeveledCharacters: true, openEncounterZones: true } in both",
+      "pass": true
+    },
+    {
+      "claim": "Merge is add-only by consensus: additions union across all contributors; modifications/deletions require unanimous consensus; eligibility = Requiem + plugins mastering Requiem; merge fires only with >=3 candidates and a Requiem base; 255 cap",
+      "source": "LeveledListMerging.cs + LeveledListMergingTest.cs (8 tests) + LeveledItemMerger.cs / LeveledCharacterMerger.cs",
+      "result": "Confirmed from source + named tests (Should_merge_additions_from_any_contributing_mods; Should_merge_*_if_all_merge_candidates_apply_them; Should_not_merge_*_if_not_all_...; Should_not_change_a_record_if_there_are_not_enough_merge_candidates; Should_not_change_a_record_if_requiem_does_not_change_it; Should_truncate_more_than_255_entries). Entry identity = (Reference, Level, Count) tuple.",
+      "pass": true
+    },
+    {
+      "claim": "Tier is encoded by list choice + repetition, not the Level field — every entry is Level 1",
+      "source": "live reads: REQ_LI_Loot_Weapon_Sword 016578 (20 entries, all Level 1; iron 012EB7 repeated, steel 013989 less), REQ_LI_Town_Weapon_Sword 0165BC (3: iron x2 + steel x1), REQ_LI_Best_Weapon_Sword 0571AA (6), LCharWolf 0B83C2 (5, fixed EncWolf 023ABE repeated), the overridden vanilla list LItemEnchWeaponDaggerBlacksmith15 000ED3 (also Level 1)",
+      "result": "Level = 1 universal across LVLI and LVLN, including Requiem-overridden vanilla lists; weighting is repetition + list family",
+      "pass": true
+    },
+    {
+      "claim": "openEncounterZones only sets DisableCombatBoundary; it does not change MinLevel/MaxLevel",
+      "source": "OpenCombatBoundaries.cs + OpenCombatBoundariesTest.cs",
+      "result": "Confirmed: Flags |= DisableCombatBoundary for every zone except the ClosedEncounterZones FormList; no level change. De-leveling lives in fixed-level NPCs (Phase 5) + Level-1 lists.",
+      "pass": true
+    },
+    {
+      "claim": "Tempered-quality lists (<prefix>_..._Quality<N>_<H|N|D>_<fall|const|rise>) are Reqtificator OUTPUTS generated from a single seed entry — don't author them",
+      "source": "TemperedItemGeneration.cs; live reverse-ref of the steel sword surfaced REQ_LI_Weapon_SteelSword_Quality1/2_N_const/fall/rise",
+      "result": "Confirmed: seed list with exactly one entry is expanded into ItemCondition (tempering) variants at build",
+      "pass": true
+    }
+  ],
+  "round_trip": [
+    {
+      "method": "Placement reproduction (read side): reverse-reference a real Requiem item to recover its full list footprint, then confirm the additive recipe reproduces that placement for a comparable.",
+      "target": "Steel Sword 013989:Skyrim.esm",
+      "observed_footprint": "REQ_LI_Loot_Weapon_Sword 016578, REQ_LI_Town_Weapon_Sword 0165BC, REQ_LI_Blacksmith_Weapon_Sword 09BC43, REQ_LI_Special_Weapon_Sword 1031B0, LItemBanditSword 037C19, LItemBanditBossSword 03DF1D, LItemVampireSword 02DF97, REQ_LI_RewardWeaponNoEnchant 03B486:Requiem.esp (+ REQ_LI_Weapon_SteelSword_Quality* output seeds, ignored)",
+      "predicted": "To place a new steel-tier sword: add one Level=1 Count=1 entry to the same Loot/Town/Blacksmith (+faction) lists, matching the comparable's repetition; no level gate, no new list invented.",
+      "result": "The predicted recipe reproduces the steel sword's own footprint exactly (same lists, same Level 1, same single-weight placement).",
+      "pass": true
+    },
+    {
+      "method": "Additive merge assumption (write side, live): Add the steel sword as a weighting entry to REQ_LI_Loot_Weapon_Sword and read back; confirm Requiem's base entries are preserved (add, not clobber).",
+      "target": "REQ_LI_Loot_Weapon_Sword 016578:Skyrim.esm, patch 'Requiem leveled list patching.esp'",
+      "predicted": "20 base entries -> 21 (base preserved + 1 appended)",
+      "actual": "bulk_apply Add Entries -> [ExtendedList: 21 item(s)]",
+      "pass": true,
+      "notes": "Confirms verb=Add overrides the winner and appends — the emitted record is base + addition, never a lone-entry list. Dual-correct whether or not the merge fires."
+    },
+    {
+      "method": "Master eligibility gotcha (write side, live): the SAME write surfaced that overriding a Skyrim-defined core list + a vanilla item does NOT master Requiem; then verify the fix.",
+      "target": "patch 'Requiem leveled list patching.esp'",
+      "step_1": "After the 016578 (Skyrim.esm) + steel sword (013989 Skyrim.esm) edit, masters read back = 'Skyrim.esm, Update.esm, Dragonborn.esm' — Requiem.esp ABSENT. A non-mastering patch is dropped from the Reqtificator merge and its addition can be lost.",
+      "step_2": "Adding one edit referencing a Requiem-DEFINED list (Add steel sword to REQ_LI_LootMidLevelContent 050EF1:Requiem.esp, 60 -> 61 entries) flipped masters to 'Skyrim.esm, Update.esm, Dragonborn.esm, Requiem.esp'.",
+      "pass": true,
+      "notes": "Eligibility is per-plugin: one Requiem-defined reference anywhere in the patch makes every edit in it merge-eligible. Most core REQ_LI_* lists are renamed-but-Skyrim-defined, so this fix is required, not optional. Baked into SKILL.md step 4 + Common mistakes and merge-behavior.md."
+    }
+  ],
+  "checklist_8": {
+    "hard_items_1_15_and_19": "pass (19 N/A — skills auto-discover by directory; no build-script registry in this repo)",
+    "item_16": "pass (9 should-trigger + 9 near-miss, all plausible utterances, near-misses are genuine adjacent-domain traps: weapon stats, NPC balance, SPID/KID runtime, scripted reward, vendor gold, non-Requiem loot overhaul, enchant design, gameplay advice)",
+    "items_17_18": "manual §6.5 fallback (Windows blocks run_loop); predicted recall 1.0 / specificity 1.0; flagged for empirical re-validation + peer prediction check"
+  }
+}

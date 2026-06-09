@@ -1,0 +1,31 @@
+{
+  "skill_name": "requiem-patching",
+  "validation": "manual fallback per HOUSECARL_SKILL_AUTHORING.md §6.5 (run_loop blocked on Windows, §6.4); manual_predicted_trigger recorded per query; flagged for empirical re-validation + peer prediction check.",
+  "thresholds": {"recall_min": 0.80, "specificity_min": 0.50},
+  "predicted": {"recall": 1.0, "specificity": 0.8},
+  "note": "should_not_trigger here are mostly SINGLE-record-type jobs that should go straight to a DOMAIN skill, not the router. The router is for whole-mod integration and the gap mechanics.",
+  "should_trigger": [
+    {"query": "I just installed a big follower mod (Lucien) and I want to make it fully compatible with Requiem — what does it all need?", "should_trigger": true, "manual_predicted_trigger": true},
+    {"query": "Patch this whole armor-and-weapon mod for Requiem please, it adds like 40 records of different types.", "should_trigger": true, "manual_predicted_trigger": true},
+    {"query": "How do I make my new quest mod play flawlessly with Requiem? It adds NPCs, a custom creature, some loot, and a couple spells.", "should_trigger": true, "manual_predicted_trigger": true},
+    {"query": "What does MyNewMod.esp need to be Requiem-consistent? Can you go through it record by record?", "should_trigger": true, "manual_predicted_trigger": true},
+    {"query": "I added a vampire-themed follower and some vampiric powers — how do I integrate the vampirism side with Requiem?", "should_trigger": true, "manual_predicted_trigger": true},
+    {"query": "My mod adds a new disease and a custom ingredient. How do these fit into Requiem's disease and alchemy systems?", "should_trigger": true, "manual_predicted_trigger": true},
+    {"query": "Setting up a new merchant NPC with a shop — how do I make the vendor and pricing work under Requiem's economy?", "should_trigger": true, "manual_predicted_trigger": true},
+    {"query": "Where do I even start patching a creature-overhaul mod for Requiem? I don't know which records matter.", "should_trigger": true, "manual_predicted_trigger": true},
+    {"query": "I want a checklist for making any mod Requiem-ready — masters, the keywords the Reqtificator needs, what not to hand-edit.", "should_trigger": true, "manual_predicted_trigger": true},
+    {"query": "My mod adds a new standing stone and a shout. How do those slot into Requiem?", "should_trigger": true, "manual_predicted_trigger": true}
+  ],
+  "should_not_trigger": [
+    {"query": "Set the damage and keywords on this one modded sword for Requiem.", "should_trigger": false, "manual_predicted_trigger": false},
+    {"query": "Fix this cuirass's armor rating for Requiem's heavy armor cap.", "should_trigger": false, "manual_predicted_trigger": false},
+    {"query": "Balance the magicka cost of my new firebolt variant for Requiem.", "should_trigger": false, "manual_predicted_trigger": false},
+    {"query": "Add these arrows to Requiem with the right damage and armor-piercing tier.", "should_trigger": false, "manual_predicted_trigger": false},
+    {"query": "My bound-weapon spell summons nothing in game — what script does it need?", "should_trigger": false, "manual_predicted_trigger": false},
+    {"query": "Add my steel dagger to the bandit loot lists so it spawns in dungeons.", "should_trigger": false, "manual_predicted_trigger": false},
+    {"query": "How do I write a SkyPatcher ini to buff all iron weapons?", "should_trigger": false, "manual_predicted_trigger": false},
+    {"query": "Why is this Papyrus cloak script tanking my framerate?", "should_trigger": false, "manual_predicted_trigger": false},
+    {"query": "Just tell me Requiem's heavy armor body armor-rating cap.", "should_trigger": false, "manual_predicted_trigger": false},
+    {"query": "Give this one boss NPC a higher fixed level and stronger perks for Requiem.", "should_trigger": false, "manual_predicted_trigger": false}
+  ]
+}

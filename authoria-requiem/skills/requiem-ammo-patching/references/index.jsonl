@@ -1,0 +1,26 @@
+{"topic":"exhaustive arrow damage value weight ladder iron steel silver elven dwarven orcish glass ebony stalhrim dragonbone daedric quicksilver skyforge","file":"ammo-ladder.md","section":"Arrows (plain, tiered)"}
+{"topic":"exhaustive bolt damage value ladder, bolt = arrow x1.2, steel dwarven elven orcish glass ebony daedric quicksilver stalhrim skyforge","file":"ammo-ladder.md","section":"Bolts (plain, tiered)"}
+{"topic":"three independent ladders damage armor-piercing tier ammo-weight class, not derivable from each other, AP tier by material density","file":"ammo-ladder.md","section":"The three independent ladders"}
+{"topic":"special non-tiered ammo elemental quest bound creature falmer forsworn soulcairn bloodcursed sunhallowed damage value","file":"ammo-ladder.md","section":"Special / non-tiered ammo"}
+{"topic":"how to derive missing ammo stat, arrow to bolt x1.2, swap AP series, novel material pick tier","file":"ammo-ladder.md","section":"Deriving a stat the table doesn't list"}
+{"topic":"source-carried vs Reqtificator-assigned ammo split, no ammo keyword assignment rule, stamp all keywords, arrowRecovery perk only","file":"keywords.md","section":"The split: source-carried vs Reqtificator-assigned"}
+{"topic":"standard ammo keyword set arrow bolt material vendor ammo-weight armor-piercing RFTI exclusion","file":"keywords.md","section":"Standard keyword set (arrow or bolt)"}
+{"topic":"material keyword WeapMaterial FormIDs iron steel elven dwarven orcish glass ebony daedric silver dragonbone stalhrim quicksilver","file":"keywords.md","section":"Material keywords"}
+{"topic":"REQ_AmmoWeight Light Medium Heavy Massive FormIDs, bow-tier pairing, map by material density not damage","file":"keywords.md","section":"REQ_AmmoWeight_* — the bow-tier pairing"}
+{"topic":"REQ_ArmorPiercingArrow tier1-7 FormIDs by material, iron none, penetration tier","file":"keywords.md","section":"REQ_ArmorPiercingArrow_Tier<N> (arrows)"}
+{"topic":"REQ_ArmorPiercingBolt tier1-7 FormIDs by material, never cross arrow and bolt series","file":"keywords.md","section":"REQ_ArmorPiercingBolt_Tier<N> (bolts) — same tier number, different keyword"}
+{"topic":"silver daedric special weapon-type keyword REQ_WeaponType_SilverArrow DaedricArrow undead interaction","file":"keywords.md","section":"Special weapon-type keywords"}
+{"topic":"ammo flags arrow NonBolt bolt 0 creature NonPlayable","file":"keywords.md","section":"Flags (the Flags field, not keywords)"}
+{"topic":"forge recipe COBJ ingot firewood 30 ammo, no temper smelter, perk gate clone conditions, WorkbenchKeyword 088105","file":"crafting.md","section":"The forge recipe (uniform across all craftable ammo)"}
+{"topic":"projectile PROJ arrow speed 3600 bolt 5600 gravity 0.35 supersonic flag, Requiem standardizes physics overrides vanilla","file":"crafting.md","section":"Projectiles (PROJ)"}
+{"topic":"reuse vs patch modded projectile, fix supersonic and speed, arrow bolt only not spell","file":"crafting.md","section":"Two ways to give a new arrow a projectile"}
+{"topic":"elemental projectile explosion effect on PROJ not ammo damage, route MGEF design to requiem-magic-patching skill","file":"crafting.md","section":"Elemental projectiles"}
+{"topic":"houseCARL bulk_apply rebalance existing modded arrow, set damage value weight keywords, write gotchas inactive patch","file":"housecarl-recipes.md","section":"A — Re-balance an existing modded arrow"}
+{"topic":"houseCARL create_record net-new arrow ammunition, flags projectile keywords","file":"housecarl-recipes.md","section":"B — Author a net-new arrow record"}
+{"topic":"houseCARL patch modded projectile speed gravity flags supersonic to Requiem profile","file":"housecarl-recipes.md","section":"C — Patch a modded projectile onto Requiem's profile"}
+{"topic":"houseCARL ammo forge recipe COBJ compose ContainerEntry ingot firewood 30 perk gate","file":"housecarl-recipes.md","section":"D — Forge recipe (COBJ)"}
+{"topic":"masters Requiem.esp auto-added when ammo keyword referenced","file":"housecarl-recipes.md","section":"Masters"}
+{"topic":"worked example orcish bolt from orcish arrow x1.2 damage arrow-to-bolt AP swap weight class unchanged round-trip","file":"worked-examples.md","section":"1 — A plain tiered bolt from the same-material arrow (Orcish Bolt)"}
+{"topic":"worked example elemental steel arrow of fire base damage kept value bump effect on projectile route to magic","file":"worked-examples.md","section":"2 — Elemental ammo: Steel Arrow of Fire"}
+{"topic":"worked example modded heavy war arrow choose weight class fix projectile three ladders authorial intent","file":"worked-examples.md","section":"3 — A modded heavy war arrow"}
+{"topic":"is it special ammo, acquisition trace reverse-reference COBJ LeveledItem, elemental quest bound creature, bow-tier pairing, weight value sanity","file":"../SKILL.md","section":"Judgment"}

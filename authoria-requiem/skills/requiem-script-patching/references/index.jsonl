@@ -1,0 +1,24 @@
+{"topic": "script decision gate — when a patch needs Papyrus vs none", "file": "../SKILL.md", "section": "Workflow §1"}
+{"topic": "reuse path — attach Nox/REQ script via VMAD + marker keyword", "file": "../SKILL.md", "section": "Workflow §2"}
+{"topic": "follower registration overview (record-side + runtime)", "file": "../SKILL.md", "section": "Workflow §3"}
+{"topic": "authoring + compiling a new .psc (rare)", "file": "../SKILL.md", "section": "Workflow §4"}
+{"topic": "Nox script map: bound weapon/armor/throwing knives", "file": "nox-runtime-map.md", "section": "Conjuration"}
+{"topic": "Nox script map: teleport / blink / siphon corpse", "file": "nox-runtime-map.md", "section": "Conjuration"}
+{"topic": "Nox script map: command/charm/frenzy/sleep/vanish/shadow", "file": "nox-runtime-map.md", "section": "Illusion"}
+{"topic": "Nox script map: control weather / telekinetic disarm / enlarge", "file": "nox-runtime-map.md", "section": "Alteration"}
+{"topic": "Nox script map: dispel / purify / divine intervention", "file": "nox-runtime-map.md", "section": "Restoration / Dispel"}
+{"topic": "Nox script map: rune mastery / weakness", "file": "nox-runtime-map.md", "section": "Destruction"}
+{"topic": "Nox_TomeMultipleSpells — multi-spell tome (BOOK, OnEquipped, SpellsToLearn[])", "file": "nox-runtime-map.md", "section": "Enchanting / tomes / scrolls"}
+{"topic": "enchanting/scroll-craft furniture scripts", "file": "nox-runtime-map.md", "section": "Enchanting / tomes / scrolls"}
+{"topic": "live worked example — Nox_Conjuration_Teleport VMAD 02CBCE", "file": "nox-runtime-map.md", "section": "Live worked example"}
+{"topic": "staff scaling is NOT scripted; no Nox_KW_Staff consumer", "file": "nox-runtime-map.md", "section": "What is NOT scripted"}
+{"topic": "REQ_FollowerRegistration API — RegisterFollowerAlias, 30 slots, playerFollowerFaction", "file": "follower-registration.md", "section": "The API"}
+{"topic": "Authoria bridge quest reference implementation + inactive ESP state", "file": "follower-registration.md", "section": "The reference implementation"}
+{"topic": "patch recipe — add a follower to the registration quest", "file": "follower-registration.md", "section": "The patch recipe"}
+{"topic": "load-bearing REQ_* control scripts — what not to break", "file": "req-core-scripts.md", "section": "load-bearing control scripts"}
+{"topic": "how new content registers with a Requiem system (markers not edits)", "file": "req-core-scripts.md", "section": "How new content participates"}
+{"topic": "disease script pattern — staged MGEF under a Touch ability spell", "file": "req-core-scripts.md", "section": "Diseases"}
+{"topic": "VMAD field structure (Scripts/Properties/Version/ObjectFormat)", "file": "vmad-and-compile.md", "section": "The VirtualMachineAdapter"}
+{"topic": "housecarl_compile_script call shape + errors + CK compiler", "file": "vmad-and-compile.md", "section": "Compiling a new script"}
+{"topic": "papyrus style guardrails for authored scripts", "file": "vmad-and-compile.md", "section": "Style guardrails"}
+{"topic": "houseCARL recipes — read/clone VMAD, repoint, multi-tome, compile, masters/REQ_NULL", "file": "housecarl-recipes.md", "section": "all"}

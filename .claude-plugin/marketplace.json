@@ -1,0 +1,14 @@
+{
+  "name": "authoria-requiem-local",
+  "owner": {
+    "name": "Authoria Requiem Reforged team"
+  },
+  "description": "Requiem-patching skills for houseCARL — make newly-added mods Requiem-consistent by deriving stats, keywords, recipes, and placement live against Requiem's own records.",
+  "plugins": [
+    {
+      "name": "authoria-requiem",
+      "source": "./authoria-requiem",
+      "description": "Patch newly-added mods to be Requiem-consistent — comparing new content live against Requiem's own records via houseCARL. Private to the Authoria Requiem Reforged team; requires houseCARL."
+    }
+  ]
+}

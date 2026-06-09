@@ -1,0 +1,20 @@
+{"topic": "Requiem design vision / philosophy / the five pillars / why", "file": "requiem-vision.md", "section": "all"}
+{"topic": "core combat & resistance model, armor penetration FormIDs, the keyword chain", "file": "combat-resistance.md", "section": "all"}
+{"topic": "all-actor game-mechanics perks (armor pen, weight, arrow recovery, rescaling)", "file": "combat-resistance.md", "section": "all-actor combat perks"}
+{"topic": "magic resistance cap (60/race, x3), elemental resist, absorb, wards", "file": "combat-resistance.md", "section": "Magical resistance"}
+{"topic": "routing table — record signature → domain skill", "file": "routing-table.md", "section": "By record signature"}
+{"topic": "skip / cosmetic records (visual auto-merge)", "file": "routing-table.md", "section": "Skip / cosmetic"}
+{"topic": "final integration checklist + run-through-the-Reqtificator", "file": "integration-checklist.md", "section": "The final checklist"}
+{"topic": "Reqtificator-handles-this vs needs-manual matrix (carry inputs not outputs)", "file": "integration-checklist.md", "section": "matrix"}
+{"topic": "what is patchable vs DLL/config (lockpicking, pricing, appearance)", "file": "integration-checklist.md", "section": "Quick is-this-patchable notes"}
+{"topic": "vampirism & lycanthropy — trait perks, keyword, sun/holy weakness, integration", "file": "vampirism-lycanthropy.md", "section": "all"}
+{"topic": "vampire keyword 0A82BB + RFTI_Trait_Vampire AD3A44 / werewolf AD3A43", "file": "vampirism-lycanthropy.md", "section": "trait spine"}
+{"topic": "diseases — staged MGEF under a Touch ability spell, disease list FormIDs", "file": "diseases.md", "section": "all"}
+{"topic": "exhaustion & stress — stamina attacks, armored casting, controller spells", "file": "exhaustion-stress.md", "section": "all"}
+{"topic": "stealth — sneak perks player-exclusive, lockpicking SKSE DLL, traps", "file": "stealth.md", "section": "all"}
+{"topic": "alchemy — 4 ingredient effects must use REQ_Alch_* MGEFs, potions, poison rescaling", "file": "alchemy.md", "section": "all"}
+{"topic": "food & cooking — nutrition categories, stacking buffs, alcohol, economy", "file": "food.md", "section": "all"}
+{"topic": "shouts — SHOU = 3 words → 3 spells + recovery, owned by Requiem.esp", "file": "shouts.md", "section": "all"}
+{"topic": "standing stones / birthsigns — ConstantEffect ability spell, player-only", "file": "standing-stones.md", "section": "all"}
+{"topic": "perks/skills/leveling — hook existing trees, player-exclusive perk FormIDs", "file": "perks-skills.md", "section": "all"}
+{"topic": "economy — value ladders, round-to-5, record-driven vendor chests, no pricing config", "file": "economy.md", "section": "all"}

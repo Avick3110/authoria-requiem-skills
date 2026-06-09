@@ -1,0 +1,117 @@
+[
+  {
+    "query": "this spell mod adds a fireball that costs 30 magicka and one-shots dragons — bring it in line with Requiem's Magic Redone",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "patch a modded spell's cost+magnitude for Requiem -> core trigger"
+  },
+  {
+    "query": "what tier and magicka cost should this custom 'Frost Lance' destruction spell be in Requiem? right now it's auto-calc",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "set Magic Redone cost/tier (explicit ManualCostCalc) -> core trigger"
+  },
+  {
+    "query": "I installed Constellation Magic on my Requiem game and the spells feel unbalanced — set their cost, charge time and school the way the Magic Redone patch would",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "rebalance a new spell pack like an MR-patch addon (HalfCostPerk reclassify) -> core trigger"
+  },
+  {
+    "query": "balance this modded enchanted sword's fire enchantment for Requiem — the per-cast cost and damage are way off",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "weapon enchantment (charge-based ENCH) effect+cost -> core trigger"
+  },
+  {
+    "query": "my custom ring of fortify destruction is a constant-effect enchantment but its magnitude is huge for Requiem — fix it",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "apparel constant-effect enchantment magnitude -> core trigger"
+  },
+  {
+    "query": "this staff casts a master-level fireball but it's tier 1 in the keywords — design its effect to match a Requiem destruction staff",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "staff EFFECT design (the ObjectEffect the Nox_KW_Staff frame casts) -> in scope; the staff ITEM frame is the weapon skill"
+  },
+  {
+    "query": "the spell tome for this new conjuration spell sells for 5000 gold — what should a Requiem tome of that tier be worth?",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "set the spell-tome value to the Requiem tier ladder -> in scope (the magic skill sets tome Value; placement is the leveled-list skill)"
+  },
+  {
+    "query": "my modded fire arrow's explosion does the wrong damage — set up the elemental hit effect the way Requiem does it",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "elemental projectile EXPL->MGEF hit design -> in scope (the AMMO/PROJ link is the ammo skill)"
+  },
+  {
+    "query": "patch this Apocalypse spell for Requiem — it ignores the magic perk tiers and costs nothing to spam",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "set HalfCostPerk tier + cost for a new spell -> core trigger (Apocalypse compat is an MR-patch addon)"
+  },
+  {
+    "query": "this poison from an alchemy mod is absurdly strong for Requiem — retune its magic effect magnitude and duration",
+    "should_trigger": true,
+    "manual_predicted_trigger": true,
+    "note": "alchemy (poison MGEF) effect design -> in scope, folded into magic"
+  },
+
+  {
+    "query": "this modded staff has the wrong damage value and weight and isn't craftable in Requiem — fix the staff item",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: the staff WEAPON frame (damage/value/keywords/charge pool) -> requiem-weapon-patching. The staff EFFECT is here; the item is not."
+  },
+  {
+    "query": "the spell tomes from this magic mod never show up in any vendor's inventory — get them into the right Requiem merchant leveled lists",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: tome PLACEMENT into vendor/loot leveled lists -> requiem-leveled-list-patching. The magic skill sets the tome's value/tier, not where it's sold."
+  },
+  {
+    "query": "this enemy mage casts vanilla spells — give him the right Requiem spells and perks for his level so he fights like a Requiem caster",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: assigning an NPC's spell list / perks -> requiem-npc-patching. We design the spell; we don't assign it to an actor."
+  },
+  {
+    "query": "the Magic Redone bound-sword spell's Nox script isn't firing for my modded variant — why doesn't the runtime pick it up?",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: the Nox_* Papyrus RUNTIME (a special-mechanic script) -> requiem-script-patching. We carry the record-side marker; we don't author the script."
+  },
+  {
+    "query": "create a retexture / new VFX for the flames spell so the fire looks more orange",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: spell visual/art retexture (meshes/textures/shaders art) -> not a Requiem record balance; out of scope."
+  },
+  {
+    "query": "balance this modded steel battleaxe for Requiem, its damage and value are too high",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: a WEAPON record -> requiem-weapon-patching. Shares 'balance ... for Requiem' but no magic record."
+  },
+  {
+    "query": "my custom draugr enemy lost its frost resistance after I patched it — Requiem nulled the vanilla resist effect, what now?",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "tricky near-miss: a creature's NULLed racial resistance -> the replacement is a Requiem race TRAIT spell (requiem-race-patching), not a magic-effect design task. The magic skill flags the REQ_NULL nuance but the fix lives in the race/NPC skills."
+  },
+  {
+    "query": "write a SkyPatcher ini to halve the magicka cost of every destruction spell",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "tricky near-miss: a magicka-cost change but explicitly SkyPatcher + a blanket sweep -> skypatcher-authoring; this project emits direct ESP overrides per-record, not a global INI nerf."
+  },
+  {
+    "query": "what's the most magicka-efficient destruction spell to level up with in a Requiem playthrough?",
+    "should_trigger": false,
+    "manual_predicted_trigger": false,
+    "note": "near-miss: gameplay advice about Requiem spells, not authoring a magic patch."
+  }
+]
