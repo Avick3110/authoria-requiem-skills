@@ -58,7 +58,7 @@
     "query": "balance my custom playable High Elf offshoot race for Requiem — its starting health/magicka/stamina and skill bonuses are way off",
     "should_trigger": false,
     "manual_predicted_trigger": false,
-    "note": "near-miss: RACE record stats/skill bonuses -> requiem-race-patching (Phase 4). Riskiest false — shares 'balance ... for Requiem' but it's the RACE, not an NPC actor."
+    "note": "near-miss: RACE record stats/skill bonuses -> requiem-race-patching. Riskiest false — shares 'balance ... for Requiem' but it's the RACE, not an NPC actor."
   },
   {
     "query": "this follower NPC has a dark face / neck seam after I installed an appearance mod — fix her facegen and head parts",

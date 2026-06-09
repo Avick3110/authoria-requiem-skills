@@ -1,6 +1,6 @@
 # Damage & Value Ladders
 
-All numbers mined live from the conflict winners in the Authoria-dev load order (2026-06-07).
+All numbers mined live from the conflict winners in the Authoria load order (2026-06-07).
 They are a cross-check and a starting point — **a live read of the comparable is the authority.**
 Requiem touches ~4,340 WEAP; the canonical records are named `REQ_Weapon_<Material>_<Type>`.
 

@@ -43,7 +43,7 @@ Bring it onto Requiem's elemental-ammo model. Comparable: `REQ_Ench_Arrow_Steel_
 - Point `Projectile` at the elemental PROJ that carries the fire explosion.
 - **Route the effect design onward:** the magnitude/shape of the fire explosion (the `Explosion` +
   its `MGEF`) is the `requiem-magic-patching` skill's job. This skill sets the AMMO frame and links the projectile; it
-  does not design the explosion. Say so in the handoff.
+  does not design the explosion. Note it for the magic-patching pass.
 
 The mistake to avoid: folding the elemental bonus into `Damage` (90). In Requiem the arrow does its
 material damage and the element is a separate on-hit explosion — keep them separate.

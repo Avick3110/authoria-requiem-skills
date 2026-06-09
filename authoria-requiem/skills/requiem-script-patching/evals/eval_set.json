@@ -1,6 +1,6 @@
 {
   "skill_name": "requiem-script-patching",
-  "validation": "manual fallback per HOUSECARL_SKILL_AUTHORING.md §6.5 (run_loop blocked on Windows, §6.4); manual_predicted_trigger recorded per query; flagged for empirical re-validation + peer prediction check.",
+  "validation": "Trigger predictions recorded per query (manual prediction); empirical re-validation and an independent peer check remain a follow-up.",
   "thresholds": {"recall_min": 0.80, "specificity_min": 0.50},
   "predicted": {"recall": 1.0, "specificity": 0.9},
   "should_trigger": [

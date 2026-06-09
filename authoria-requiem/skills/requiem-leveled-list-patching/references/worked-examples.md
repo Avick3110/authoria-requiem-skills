@@ -1,6 +1,6 @@
 # Worked examples
 
-Three real placement cases plus a round-trip. FormIDs are live winners from the studied Authoria-dev
+Three real placement cases plus a round-trip. FormIDs are live winners from the studied Authoria
 load order (`:Skyrim.esm` unless noted) — re-read before relying on them.
 
 ## Example 1 — place a new steel-tier sword into loot, vendor, and faction lists

@@ -1,7 +1,7 @@
 # List structure — Requiem's leveled-list taxonomy and de-leveling model
 
 How Requiem organizes LVLI/LVLN and how it tiers items without level gates. All FormIDs are live winners
-(verify per record). Counts as of the studied Authoria-dev load order: Requiem touches ~3433 LeveledItem,
+(verify per record). Counts as of the studied Authoria load order: Requiem touches ~3433 LeveledItem,
 ~571 LeveledNpc, ~279 Container, 8 EncounterZone records.
 
 ## Contents

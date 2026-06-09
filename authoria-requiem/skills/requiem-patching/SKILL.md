@@ -121,7 +121,7 @@ reference's constraints. Example: a new ingredient is an `INGR` whose effects ar
 
 ## Notes
 
-- **Shape:** this is a router (per the standard's §5.2 router archetype — First step + routing table)
+- **Shape:** this is a router (First step + routing table)
   *combined with* the operational integration workflow the job needs. The body is kept tight and the
   deep "why" + the gap mechanics live in `references/`; that hybrid is deliberate and justified by the
   skill's dual role (dispatcher + owner of the cross-cutting systems).

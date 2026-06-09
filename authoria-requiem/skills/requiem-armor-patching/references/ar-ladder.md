@@ -1,6 +1,6 @@
 # Armor-Rating, Value & Weight Ladders
 
-All numbers mined live from the conflict winners in the Authoria-dev load order (2026-06-08).
+All numbers mined live from the conflict winners in the Authoria load order (2026-06-08).
 They are a cross-check and a starting point — **a live read of the comparable is the authority.**
 Requiem renames vanilla armor to `REQ_<Weight>_<Material>_<Part>` (cuirass = `Body`).
 

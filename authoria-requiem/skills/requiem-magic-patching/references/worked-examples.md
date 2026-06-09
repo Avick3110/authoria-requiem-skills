@@ -69,8 +69,7 @@ Every addon normalizes its tomes to the same tier ladder, regardless of the mod'
 
 ## Round-trip — reproduce Ice Spike (T2 frost) from the Firebolt comparable
 
-A same-tier cross-element reproduction, built from scratch and diffed against the live winner (recorded
-in `evals/results-2026-06-09.json`). Take the tier-2 fire bolt `REQ_Destruction2_Fire_Aimed` (Firebolt)
+A same-tier cross-element reproduction, built from scratch and diffed against the live winner. Take the tier-2 fire bolt `REQ_Destruction2_Fire_Aimed` (Firebolt)
 as the comparable and reproduce the tier-2 frost bolt `REQ_Destruction2_Frost_Aimed` (Ice Spike),
 changing only the element-specific pieces:
 
