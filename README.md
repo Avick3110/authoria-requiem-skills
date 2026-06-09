@@ -2,7 +2,7 @@
 
 A Claude Code skill plugin that patches newly-added mods to play flawlessly with **Requiem** — deriving every stat, keyword, recipe, perk, and placement by comparing new content **live** against Requiem's own records, and emitting a direct ESP override the **Reqtificator** integrates at build time.
 
-Built for the Authoria Requiem Reforged modlist. **Requires [houseCARL](https://github.com/Avick3110/houseCARL)** (the MCP that gives Claude data-layer access to the load order) pointed at the Authoria MO2 instance.
+Built for the Authoria Requiem Reforged modlist. **Requires [houseCARL](https://github.com/Avick3110/houseCARL)** (the MCP that gives Claude data-layer access to the load order) pointed at your Requiem MO2 instance.
 
 ## What it does
 
