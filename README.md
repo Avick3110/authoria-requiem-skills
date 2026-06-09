@@ -1,4 +1,4 @@
-# Authoria Requiem Patching Skills
+# houseCARL - Authoria Requiem Skills
 
 A Claude Code skill plugin that patches newly-added mods to play flawlessly with **Requiem** — deriving every stat, keyword, recipe, perk, and placement by comparing new content **live** against Requiem's own records, and emitting a direct ESP override the **Reqtificator** integrates at build time.
 
@@ -59,4 +59,10 @@ authoria-requiem/                 the plugin — drop this folder into ~/.claude
 
 **Feature-complete (v1.0.0)** — all nine skills authored and verified by round-trip against live Requiem records. Skill descriptions passed the skill-authoring standard's checks via its manual-prediction fallback (the empirical eval loop needs a non-Windows host); **empirical eval re-validation + a peer prediction check remain as a follow-up**, alongside a handful of live-verification items.
 
-Authored to the houseCARL skill-authoring standard.
+## Credits
+
+- **DrHeisen** — author of these skills.
+- **Requiem** (the Requiem team) and **Requiem: Magic Redone** (NoxCrab), and the **Reqtificator** these patches feed.
+- **[houseCARL](https://github.com/Avick3110/houseCARL)** — the required MCP that gives Claude data-layer access to your load order.
+
+Authored to the houseCARL skill-authoring standard. Licensed under [MIT](LICENSE).

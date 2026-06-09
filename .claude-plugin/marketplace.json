@@ -1,7 +1,7 @@
 {
   "name": "authoria-requiem-skills",
   "owner": {
-    "name": "Authoria Requiem Reforged team"
+    "name": "DrHeisen"
   },
   "description": "Requiem-patching skills for houseCARL — make newly-added mods Requiem-consistent by deriving stats, keywords, recipes, and placement live against Requiem's own records.",
   "plugins": [
