@@ -28,16 +28,19 @@ Load `requiem-patching` first for a whole-mod job; the domain skills also trigge
 
 Each skill bundles a `references/` library (live-mined ladders, keyword vocab, copy-ready houseCARL call shapes, worked examples) and an archived `evals/` set.
 
-## Install (for co-authors)
+## Install
 
-Requires houseCARL installed and configured first. Then, from a local clone:
+Requires **houseCARL** installed and configured first — these skills read your Skyrim SE load order through it.
 
-```
-/plugin marketplace add D:\Wabbajack\Authoria-requiem
-/plugin install authoria-requiem@authoria-requiem-local
-```
+**Easiest — drop it in (no terminal, just like a Skyrim mod):**
 
-Fully restart Claude after installing.
+1. Extract the download.
+2. Copy the `authoria-requiem` folder into your Claude Code skills folder. On Windows that's `C:\Users\<your-username>\.claude\skills\`.
+3. Fully restart Claude Code.
+
+The nine skills load automatically, namespaced as `/authoria-requiem:…`. That's it — no commands.
+
+**Alternative — Claude Code's plugin marketplace** (if you'd rather manage it in-app): in a Claude Code session run `/plugin marketplace add <repo-or-local-path>`, then `/plugin install authoria-requiem@authoria-requiem-skills`, and restart. These are in-app slash commands, not a terminal.
 
 ## Authority model
 
@@ -46,16 +49,14 @@ Authoritative = houseCARL's live conflict winner among the in-scope Requiem stac
 ## Layout
 
 ```
-.claude-plugin/marketplace.json   the local marketplace
-authoria-requiem/                 the plugin
+.claude-plugin/marketplace.json   marketplace manifest (for the optional plugin-install path)
+authoria-requiem/                 the plugin — drop this folder into ~/.claude/skills/
   .claude-plugin/plugin.json
   skills/<skill>/{SKILL.md, references/, evals/}
-docs/                             the Reqtificator rulebook + per-phase build handoffs (dev notes)
-STATE.md                          the build ledger (how every rule was derived)
 ```
 
 ## Status
 
-**Feature-complete (v1.0.0)** — all nine skills authored and verified by round-trip against live Requiem records. Skill descriptions passed the standard's checks on the §6.5 manual-prediction fallback (the empirical loop needs a non-Windows host); **empirical eval re-validation + a peer prediction check remain as a follow-up**. A handful of live-verification follow-ups are tracked in `STATE.md` (Phase 8/9 notes).
+**Feature-complete (v1.0.0)** — all nine skills authored and verified by round-trip against live Requiem records. Skill descriptions passed the skill-authoring standard's checks via its manual-prediction fallback (the empirical eval loop needs a non-Windows host); **empirical eval re-validation + a peer prediction check remain as a follow-up**, alongside a handful of live-verification items.
 
-Authored to the houseCARL skill-authoring standard. Not for public redistribution.
+Authored to the houseCARL skill-authoring standard.
