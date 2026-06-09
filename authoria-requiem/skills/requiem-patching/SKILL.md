@@ -30,7 +30,7 @@ Confirm houseCARL is fresh, then enumerate the plugin. These are the canonical o
 1. **Freshness probe.** Read Iron Sword `012EB7:Skyrim.esm` `conflict_tree=true` → winner must be
    `Requiem.esp`. If not, point houseCARL at your own Requiem MO2 instance with
    `housecarl_set_mo2_instance path="<your MO2 instance>"` and re-probe. (This plugin's reference data
-   was mined on the author's Authoria instance, `D:\Wabbajack\Authoria-dev`.)
+   was mined on the author's Authoria instance.)
 2. **Enumerate the plugin.** `cross_plugin_query plugins=["<NewMod>.esp"]` — this returns every record
    the plugin adds or overrides, with type and override depth. That list is your worklist. Group it
    by record type; the counts tell you the shape of the job (an armor pack vs a follower mod vs a

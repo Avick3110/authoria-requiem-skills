@@ -28,7 +28,7 @@ Confirm houseCARL resolves Requiem's live winners before reading any record. Rea
 `Requiem for the Indifferent.esp` or an `Authoria - *` plugin, the resolver is stale — point
 houseCARL at your Requiem MO2 instance with
 `housecarl_set_mo2_instance path="<your MO2 instance>"` and re-probe before continuing. (This
-skill's reference data was mined on the author's Authoria instance, `D:\Wabbajack\Authoria-dev`.)
+skill's reference data was mined on the author's Authoria instance.)
 
 Then **decide whether a script is even needed** (the gate below). Don't attach Papyrus reflexively.
 

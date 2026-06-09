@@ -55,7 +55,7 @@ Confirm authority is fresh, note the race-domain authority, then classify what y
    If it is `Requiem for the Indifferent.esp`, the resolver is stale — re-point houseCARL at your
    Requiem MO2 instance and re-probe:
    `housecarl_set_mo2_instance path="<your MO2 instance>"`. (This skill's reference data was mined on
-   the author's Authoria instance, `D:\Wabbajack\Authoria-dev`.)
+   the author's Authoria instance.)
 
 2. **Race-domain authority (important).** For `RACE` records the live winner is
    **`Authoria - Master Patch - Races Merge.esp`** — the consolidated, authoritative race merge

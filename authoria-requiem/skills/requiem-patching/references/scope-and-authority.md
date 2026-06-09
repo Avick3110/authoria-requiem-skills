@@ -4,7 +4,7 @@
 
 ## The MO2 instance
 
-- houseCARL must be pointed at **your Requiem MO2 instance** (the author's was `D:\Wabbajack\Authoria-dev`, profile *Authoria - Requiem Reforged - Main Profile*).
+- houseCARL must be pointed at **your Requiem MO2 instance** (the author's profile was *Authoria - Requiem Reforged - Main Profile*).
 - The study source is this live load order. (The reference corpus was mined on the author's Authoria instance.)
 - After pointing, houseCARL sees **~2841 active plugins** (not 3410). If you see ~3410 active, the resolver is stale — see "Refresh" below.
 
@@ -41,7 +41,7 @@ For any record, the live winner among these is the comparable to replicate.
 
 ## Refresh procedure (if the overlay reappears as winner)
 
-If houseCARL shows ~3410 active, or a record's winner is `Requiem for the Indifferent.esp` / an `Authoria - *` plugin, the resolver is stale. Re-point houseCARL at your own Requiem MO2 instance to refresh (the author's was `D:\Wabbajack\Authoria-dev`):
+If houseCARL shows ~3410 active, or a record's winner is `Requiem for the Indifferent.esp` / an `Authoria - *` plugin, the resolver is stale. Re-point houseCARL at your own Requiem MO2 instance to refresh:
 
 ```
 housecarl_set_mo2_instance  path="<your MO2 instance>"

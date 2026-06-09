@@ -45,7 +45,7 @@ Confirm authority is fresh, then identify what you're holding before you change 
    If it's `Requiem for the Indifferent.esp` or an `Authoria - *` plugin, the resolver is stale —
    point houseCARL at your Requiem MO2 instance and re-probe:
    `housecarl_set_mo2_instance path="<your MO2 instance>"`. (This skill's reference data was mined on
-   the author's Authoria instance, `D:\Wabbajack\Authoria-dev`.)
+   the author's Authoria instance.)
 
 2. **Read the modded NPC with its conflict tree** and separate the two winners:
 

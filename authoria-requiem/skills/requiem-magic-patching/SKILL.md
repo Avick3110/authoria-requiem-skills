@@ -53,7 +53,7 @@ Confirm houseCARL's authority is fresh, then identify what you are patching.
 
    The winner must be `Requiem.esp`. If it is `Requiem for the Indifferent.esp` or any `Authoria - *`
    plugin, the resolver is stale — re-point houseCARL at your own Requiem MO2 instance and re-probe
-   (this skill's reference data was mined on the author's Authoria instance, `D:\Wabbajack\Authoria-dev`):
+   (this skill's reference data was mined on the author's Authoria instance):
 
    ```
    housecarl_set_mo2_instance path="<your MO2 instance>"
