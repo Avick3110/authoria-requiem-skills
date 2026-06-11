@@ -36,18 +36,20 @@ route *design* to the `requiem-magic-patching` skill), author the **contents** o
 
 Confirm authority is fresh, then identify what you're holding before you change a field.
 
-1. **Freshness probe.** Read Iron Sword and confirm `Requiem.esp` is in the override chain:
+1. **Freshness probe.** Confirm houseCARL is reading the load order you are patching for — the
+   instance, not any record's winner, is what establishes authority. `housecarl_load_order_status`
+   must show your Requiem MO2 instance/profile; if it is the wrong instance, fix it with
+   `housecarl_set_mo2_instance path="<your MO2 instance>"`. Then sanity-check Requiem is present:
 
    ```
    housecarl_read_record formid="012EB7:Skyrim.esm" conflict_tree=true
    ```
 
-   The invariant is chain presence, not winner identity: on a live instance the winner is normally
-   `Requiem for the Indifferent.esp` (the Reqtificator's generated output, enabled on every
-   playable setup) or another patch loading after Requiem — healthy, not stale. Derive reference
-   values from the last hand-authored override in the chain, never from the generated output. Only
-   if `Requiem.esp` appears nowhere in the chain, point houseCARL at your Requiem MO2 instance and
-   re-probe: `housecarl_set_mo2_instance path="<your MO2 instance>"`.
+   `Requiem.esp` must appear in the override chain. Either winner is valid: `Requiem.esp`
+   (authoring-style profile, generated overlay disabled) or `Requiem for the Indifferent.esp` /
+   a later patch (live profile — the normal consumer state). The live winner is the authority to
+   derive from; **never** re-point houseCARL because the Reqtificator's output wins. Full
+   doctrine: the `requiem-patching` skill's `references/scope-and-authority.md`.
 
 2. **Read the modded NPC with its conflict tree** and separate the two winners:
 
@@ -273,14 +275,14 @@ Before finishing an NPC override, confirm:
 
 ## Notes
 
-- **Authority** = houseCARL's live conflict winner among the hand-authored plugins. The Reqtificator
-  merges actors heavily, so on a live instance `Requiem for the Indifferent.esp` (its generated
-  output) wins most NPCs — it is never authority; step past it in the chain. Beneath it, NPC
-  **balance** resolves to `Requiem.esp`, **`USMP - Requiem.esp`** (an in-scope Requiem compatibility
-  patch that carries Requiem's values forward — the hand-authored winner for many named actors), or
-  a Requiem addon (`Requiem - Minor Arcana - *`, `Requiem - Magic Redone.esp`,
-  `Requiem_VampireCollection.esp`, WAR). **Appearance** resolves to a separate visual winner. Read
-  the live chain per record — it tells you which source owns balance vs appearance.
+- **Authority** = houseCARL's live conflict winner. The Reqtificator merges actors heavily, so on
+  a live profile `Requiem for the Indifferent.esp` (its generated output) wins most NPCs and is the
+  winner to derive from — it folds the merge in. The hand-authored balance layers beneath it are
+  `Requiem.esp`, **`USMP - Requiem.esp`** (an in-scope Requiem compatibility patch that carries
+  Requiem's values forward — the hand-authored winner for many named actors), and Requiem addons
+  (`Requiem - Minor Arcana - *`, `Requiem - Magic Redone.esp`, `Requiem_VampireCollection.esp`,
+  WAR). **Appearance** resolves to a separate visual winner. Read the live chain per record — it
+  tells you which source owns balance vs appearance.
 - **houseCARL writes directly into active patches via `into=`** — author straight into
   `Requiem NPC patching`; verify a brand-new patch via the `bulk_apply` read-back until it's refreshed.
   The `where=` filter helps archetype scans (e.g. `where="Configuration.Level.Level >= 30"`).

@@ -22,15 +22,16 @@ own. Authoring a fresh `.psc` is the rare last resort.
 
 ## First step
 
-Confirm houseCARL resolves Requiem's live winners before reading any record. Read the Iron Sword
-`012EB7:Skyrim.esm` with `conflict_tree=true`; `Requiem.esp` must appear in the override chain
-(`Skyrim.esm → unofficial skyrim special edition patch.esp → Requiem.esp → …`). The invariant is
-chain presence, not winner identity — on a live instance the winner is normally
-`Requiem for the Indifferent.esp` (the Reqtificator's generated output) or another patch loading
-after Requiem, which is healthy; derive reference values from the last hand-authored override in
-the chain, never from the generated output. Only if `Requiem.esp` appears nowhere in the chain,
-point houseCARL at your Requiem MO2 instance with
-`housecarl_set_mo2_instance path="<your MO2 instance>"` and re-probe before continuing.
+Confirm houseCARL is reading the load order you are patching for — the instance, not any record's
+winner, is what establishes authority. `housecarl_load_order_status` must show your Requiem MO2
+instance/profile; if it is the wrong instance, fix it with
+`housecarl_set_mo2_instance path="<your MO2 instance>"`. Then sanity-check Requiem is present:
+read Iron Sword `012EB7:Skyrim.esm` with `conflict_tree=true`; `Requiem.esp` must appear in the
+override chain. Either winner is valid — `Requiem.esp` (authoring-style profile, generated overlay
+disabled) or `Requiem for the Indifferent.esp` / a later patch (live profile — the normal consumer
+state). The live winner is the authority to derive from; **never** re-point houseCARL because the
+Reqtificator's output wins. Full doctrine: the `requiem-patching` skill's
+`references/scope-and-authority.md`.
 
 Then **decide whether a script is even needed** (the gate below). Don't attach Papyrus reflexively.
 

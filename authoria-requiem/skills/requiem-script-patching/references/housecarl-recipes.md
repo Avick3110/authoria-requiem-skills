@@ -6,10 +6,13 @@ active patch); verify every write with a read-back.
 ## Freshness probe (always first)
 
 ```
+housecarl_load_order_status
+# must show YOUR Requiem MO2 instance/profile — the instance, not a record winner, establishes authority
 read_record formid="012EB7:Skyrim.esm" conflict_tree=true
-# Requiem.esp must appear in the override chain (chain presence, not winner identity).
-# Winner = Requiem for the Indifferent.esp (the Reqtificator's generated output) is healthy — derive from the last hand-authored override beneath it.
-# Only if Requiem.esp is nowhere in the chain: housecarl_set_mo2_instance path="<your MO2 instance>" and re-probe
+# sanity check: Requiem.esp must appear in the override chain. Winner = Requiem.esp (overlay disabled)
+# or Requiem for the Indifferent.esp / a later patch (live profile) are BOTH valid; the live winner is
+# the authority to derive from. Never set_mo2_instance because the Reqtificator's output wins — only
+# when houseCARL is reading the wrong instance: housecarl_set_mo2_instance path="<your MO2 instance>"
 ```
 
 ## Read a record's script attachment

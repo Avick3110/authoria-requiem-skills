@@ -45,23 +45,20 @@ scrolls in vendor and loot lists (`requiem-leveled-list-patching`); the **Nox sc
 
 Confirm houseCARL's authority is fresh, then identify what you are patching.
 
-1. **Freshness probe.** Read Iron Sword and confirm `Requiem.esp` is in the override chain:
+1. **Freshness probe.** Confirm houseCARL is reading the load order you are patching for — the
+   instance, not any record's winner, is what establishes authority. `housecarl_load_order_status`
+   must show your Requiem MO2 instance/profile; if it is the wrong instance, fix it with
+   `housecarl_set_mo2_instance path="<your MO2 instance>"`. Then sanity-check Requiem is present:
 
    ```
    housecarl_read_record formid="012EB7:Skyrim.esm" conflict_tree=true
    ```
 
-   The invariant is chain presence, not winner identity: `Requiem.esp` must appear in the chain.
-   On a live instance the winner is normally `Requiem for the Indifferent.esp` — the
-   Reqtificator's generated output, enabled on every playable Requiem setup — or another patch
-   loading after Requiem; that is healthy, not stale. Derive reference values from the last
-   hand-authored override in the chain, never from the generated output. Only if `Requiem.esp`
-   appears nowhere in the chain is houseCARL reading the wrong load order — point it at your
-   Requiem MO2 instance and re-probe:
-
-   ```
-   housecarl_set_mo2_instance path="<your MO2 instance>"
-   ```
+   `Requiem.esp` must appear in the override chain. Either winner is valid: `Requiem.esp`
+   (authoring-style profile, generated overlay disabled) or `Requiem for the Indifferent.esp` /
+   a later patch (live profile, Reqtificator output enabled — the normal consumer state). The live
+   winner is the authority to derive from; **never** re-point houseCARL because the Reqtificator's
+   output wins. Full doctrine: the `requiem-patching` skill's `references/scope-and-authority.md`.
 
    Then confirm a magic record's chain contains MR (e.g. `012FCD:Skyrim.esm` Flames →
    `Requiem - Magic Redone.esp`).
@@ -126,10 +123,10 @@ housecarl_batch_record_detail formids=["012FD0:Skyrim.esm"] \
   fields=["Name","BaseCost","CastType","TargetType","ChargeTime","Flags","HalfCostPerk","Effects"] depth=3
 ```
 
-Read the **last hand-authored override** in the chain (MR folds over base Requiem) — when
-`Requiem for the Indifferent.esp` (the Reqtificator's generated output) is the winner, step one
-down. Read its `Effects[i].BaseEffect` MGEF and `Effects[i].Data` (Magnitude/Area/Duration) too —
-that is the shape to mirror.
+Read the **winner** (MR folds over base Requiem; on a live profile the winner may be
+`Requiem for the Indifferent.esp` — still the authority to derive from). Read its
+`Effects[i].BaseEffect` MGEF and `Effects[i].Data` (Magnitude/Area/Duration) too — that is the
+shape to mirror.
 
 ### 4 — Derive cost, charge, and magnitude
 
@@ -266,9 +263,10 @@ checked — rather than inventing a number.
 - **Bumping a spell tome's value freely.** Tome value tracks the spell's tier (100→2000), not the
   mod's original price.
 - **Deleting a creature's NULLed resistance.** On actors, replace with the Requiem trait, don't strip.
-- **Deriving from `Requiem for the Indifferent.esp`.** The Reqtificator's generated output
-  normally wins on a live instance; it is rebuilt every run and carries build-time assignments.
-  Read the last hand-authored override beneath it in the chain.
+- **Re-pointing because `Requiem for the Indifferent.esp` wins.** On a live profile the
+  Reqtificator's output winning is the healthy state and its values are the authority — never
+  `set_mo2_instance` to escape it; re-pointing away from the instance you're patching breaks
+  every subsequent read.
 
 ## Checklist
 
@@ -294,8 +292,8 @@ Before finishing a magic override, confirm:
   (`Requiem - Constellation/Obscure/Dark Hierophant/Holy Templar/Sonic Mage Magic - Magic Redone
   Patch.esp`, `Wildwaker Magic - Requiem Magic Redone Patch.esp`, Apocalypse compat) — the best worked
   examples of new magic patched for Requiem. Some spell perks resolve to `Requiem - MR Special Feats
-  Patch.esp` / `Requiem - MR WAR Resist and Regen Tweak Patch.esp`. `Requiem for the Indifferent.esp`
-  (the Reqtificator's generated output) is never authority — step past it in the chain when it wins.
+  Patch.esp` / `Requiem - MR WAR Resist and Regen Tweak Patch.esp`. On a live profile
+  `Requiem for the Indifferent.esp` folds the build pass over them and is the winner to derive from.
 - **Scrolls** (`REQ_Scroll_<School><Tier>_<Type>_<Delivery>`, Weight 0.5, tier-scaled value, charge =
   the spell's): a single-use cast of the spell at its tier; design the same MGEF, route value/placement
   to the `requiem-leveled-list-patching` skill.

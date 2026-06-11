@@ -27,15 +27,16 @@ better when you understand the system the patch has to fit into.
 
 Confirm houseCARL is fresh, then enumerate the plugin. These are the canonical opening moves:
 
-1. **Freshness probe.** Read Iron Sword `012EB7:Skyrim.esm` `conflict_tree=true` → `Requiem.esp`
-   must appear in the override chain. The invariant is chain presence, not winner identity: on a
-   live instance the winner is normally `Requiem for the Indifferent.esp` (the Reqtificator's
-   generated output, enabled on every playable setup) or another patch loading after Requiem —
-   healthy, not stale. Derive reference values from the last hand-authored override in the chain,
-   never from the generated output. Only if `Requiem.esp` appears nowhere in the chain, point
-   houseCARL at your own Requiem MO2 instance with
-   `housecarl_set_mo2_instance path="<your MO2 instance>"` and re-probe. (This plugin's reference
-   data was mined on the author's Authoria instance; see `references/scope-and-authority.md`.)
+1. **Freshness probe.** Confirm houseCARL is reading the load order you are patching for — the
+   instance, not any record's winner, is what establishes authority. `housecarl_load_order_status`
+   must show your Requiem MO2 instance/profile; if it is the wrong instance, fix it with
+   `housecarl_set_mo2_instance path="<your MO2 instance>"`. Then sanity-check Requiem is present:
+   read Iron Sword `012EB7:Skyrim.esm` `conflict_tree=true` → `Requiem.esp` must appear in the
+   override chain. Either winner is valid — `Requiem.esp` (authoring-style profile, generated
+   overlay disabled) or `Requiem for the Indifferent.esp` / a later patch (live profile — the
+   normal consumer state). The live winner is the authority to derive from; **never** re-point
+   houseCARL because the Reqtificator's output wins. Full doctrine:
+   `references/scope-and-authority.md`.
 2. **Enumerate the plugin.** `cross_plugin_query plugins=["<NewMod>.esp"]` — this returns every record
    the plugin adds or overrides, with type and override depth. That list is your worklist. Group it
    by record type; the counts tell you the shape of the job (an armor pack vs a follower mod vs a
@@ -130,10 +131,10 @@ reference's constraints. Example: a new ingredient is an `INGR` whose effects ar
   *combined with* the operational integration workflow the job needs. The body is kept tight and the
   deep "why" + the gap mechanics live in `references/`; that hybrid is deliberate and justified by the
   skill's dual role (dispatcher + owner of the cross-cutting systems).
-- **Authority** is the live houseCARL winner among the hand-authored in-scope Requiem stack —
-  never `Requiem for the Indifferent.esp`, the Reqtificator's generated output; step past it in
-  the chain (see `references/scope-and-authority.md`). Races legitimately resolve to a
-  hand-authored race merge where one exists.
+- **Authority** is the live houseCARL conflict winner — on a live profile that includes
+  `Requiem for the Indifferent.esp`, the Reqtificator's output, which folds the build pass over
+  the hand-authored Requiem stack (see `references/scope-and-authority.md`). Races legitimately
+  resolve to a hand-authored race merge where one exists.
 - **Boundary:** this skill plans and routes; the domain skills do the record work. When a gap can't be
   fully resolved live, document what you found and flag it — an explicit "I cannot" beats a confident
   wrong answer.
