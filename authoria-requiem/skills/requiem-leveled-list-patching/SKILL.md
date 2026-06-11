@@ -31,16 +31,20 @@ domains, and both come straight from the Reqtificator's source (`Transformers/Le
 
 Confirm authority is fresh, then identify what you are placing and where.
 
-1. **Freshness probe.** Read Iron Sword and confirm the winner is `Requiem.esp`:
+1. **Freshness probe.** Read Iron Sword and confirm `Requiem.esp` is in the override chain:
 
    ```
    housecarl_read_record formid="012EB7:Skyrim.esm" conflict_tree=true
    ```
 
-   The winner must be `Requiem.esp` (chain `Skyrim.esm → unofficial skyrim special edition patch.esp →
-   Requiem.esp`). If it is `Requiem for the Indifferent.esp` or an `Authoria - *` plugin, the resolver
-   is stale — re-point houseCARL at your own Requiem MO2 instance and re-probe (this skill's reference
-   data was mined on the author's Authoria instance):
+   The invariant is chain presence, not winner identity: `Requiem.esp` must appear in the chain
+   (`Skyrim.esm → unofficial skyrim special edition patch.esp → Requiem.esp → …`). On a live
+   instance the winner is normally `Requiem for the Indifferent.esp` — the Reqtificator's
+   generated output, enabled on every playable Requiem setup (and the plugin that carries its
+   leveled-list merges) — or another patch loading after Requiem; that is healthy, not stale.
+   Derive reference values from the last hand-authored override in the chain, never from the
+   generated output. Only if `Requiem.esp` appears nowhere in the chain is houseCARL reading the
+   wrong load order — point it at your Requiem MO2 instance and re-probe:
 
    ```
    housecarl_set_mo2_instance path="<your MO2 instance>"
@@ -205,12 +209,14 @@ Before finishing a placement, confirm:
 
 ## Notes
 
-- **Authority** = houseCARL's live conflict winner. Leveled-list winners are mostly `Requiem.esp` and
-  `Requiem - Weapons and Armor Redone.esp` (WAR), with Requiem addons (`Requiem - Minor Arcana - *`,
-  MR) winning their themed pools. Independent overhauls that do **not** master Requiem
-  (LegacyoftheDragonborn, trade & barter, Sons of Skyrim) win some lists by load order but are invisible
-  to the Reqtificator merge — read the live winner per record. No Authoria leveled-list master-merge is
-  active (unlike the race domain's Master Patch); verify, don't assume.
+- **Authority** = houseCARL's live conflict winner among the hand-authored plugins. The Reqtificator
+  merges leveled lists into `Requiem for the Indifferent.esp`, so on a live instance it wins most
+  lists — it is never authority; step past it in the chain. Beneath it, leveled-list winners are
+  mostly `Requiem.esp` and `Requiem - Weapons and Armor Redone.esp` (WAR), with Requiem addons
+  (`Requiem - Minor Arcana - *`, MR) winning their themed pools. Independent overhauls that do
+  **not** master Requiem (LegacyoftheDragonborn, trade & barter, Sons of Skyrim) win some lists by
+  load order but are invisible to the Reqtificator merge — read the live chain per record; verify,
+  don't assume.
 - **houseCARL writes directly into active patches via `into=`**; verify a brand-new patch via the
   `bulk_apply` read-back until a `housecarl_set_mo2_instance` refresh. The `where=` filter helps scans.
 - This skill places already-statted records. **Item stats** → `requiem-weapon-patching` /

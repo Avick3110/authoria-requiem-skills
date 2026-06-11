@@ -27,10 +27,15 @@ better when you understand the system the patch has to fit into.
 
 Confirm houseCARL is fresh, then enumerate the plugin. These are the canonical opening moves:
 
-1. **Freshness probe.** Read Iron Sword `012EB7:Skyrim.esm` `conflict_tree=true` → winner must be
-   `Requiem.esp`. If not, point houseCARL at your own Requiem MO2 instance with
-   `housecarl_set_mo2_instance path="<your MO2 instance>"` and re-probe. (This plugin's reference data
-   was mined on the author's Authoria instance.)
+1. **Freshness probe.** Read Iron Sword `012EB7:Skyrim.esm` `conflict_tree=true` → `Requiem.esp`
+   must appear in the override chain. The invariant is chain presence, not winner identity: on a
+   live instance the winner is normally `Requiem for the Indifferent.esp` (the Reqtificator's
+   generated output, enabled on every playable setup) or another patch loading after Requiem —
+   healthy, not stale. Derive reference values from the last hand-authored override in the chain,
+   never from the generated output. Only if `Requiem.esp` appears nowhere in the chain, point
+   houseCARL at your own Requiem MO2 instance with
+   `housecarl_set_mo2_instance path="<your MO2 instance>"` and re-probe. (This plugin's reference
+   data was mined on the author's Authoria instance; see `references/scope-and-authority.md`.)
 2. **Enumerate the plugin.** `cross_plugin_query plugins=["<NewMod>.esp"]` — this returns every record
    the plugin adds or overrides, with type and override depth. That list is your worklist. Group it
    by record type; the counts tell you the shape of the job (an armor pack vs a follower mod vs a
@@ -125,9 +130,10 @@ reference's constraints. Example: a new ingredient is an `INGR` whose effects ar
   *combined with* the operational integration workflow the job needs. The body is kept tight and the
   deep "why" + the gap mechanics live in `references/`; that hybrid is deliberate and justified by the
   skill's dual role (dispatcher + owner of the cross-cutting systems).
-- **Authority** is the live houseCARL winner among the in-scope Requiem stack (see
-  `references/scope-and-authority.md`); races legitimately resolve to `Authoria - Master Patch - Races
-  Merge.esp`.
+- **Authority** is the live houseCARL winner among the hand-authored in-scope Requiem stack —
+  never `Requiem for the Indifferent.esp`, the Reqtificator's generated output; step past it in
+  the chain (see `references/scope-and-authority.md`). Races legitimately resolve to a
+  hand-authored race merge where one exists.
 - **Boundary:** this skill plans and routes; the domain skills do the record work. When a gap can't be
   fully resolved live, document what you found and flag it — an explicit "I cannot" beats a confident
   wrong answer.

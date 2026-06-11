@@ -7,7 +7,9 @@ active patch); verify every write with a read-back.
 
 ```
 read_record formid="012EB7:Skyrim.esm" conflict_tree=true
-# winner must be Requiem.esp; else point houseCARL at your Requiem MO2 instance: housecarl_set_mo2_instance path="<your MO2 instance>" and re-probe
+# Requiem.esp must appear in the override chain (chain presence, not winner identity).
+# Winner = Requiem for the Indifferent.esp (the Reqtificator's generated output) is healthy — derive from the last hand-authored override beneath it.
+# Only if Requiem.esp is nowhere in the chain: housecarl_set_mo2_instance path="<your MO2 instance>" and re-probe
 ```
 
 ## Read a record's script attachment

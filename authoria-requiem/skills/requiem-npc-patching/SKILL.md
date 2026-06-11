@@ -36,16 +36,18 @@ route *design* to the `requiem-magic-patching` skill), author the **contents** o
 
 Confirm authority is fresh, then identify what you're holding before you change a field.
 
-1. **Freshness probe.** Read Iron Sword and confirm the winner is `Requiem.esp`:
+1. **Freshness probe.** Read Iron Sword and confirm `Requiem.esp` is in the override chain:
 
    ```
    housecarl_read_record formid="012EB7:Skyrim.esm" conflict_tree=true
    ```
 
-   If it's `Requiem for the Indifferent.esp` or an `Authoria - *` plugin, the resolver is stale —
-   point houseCARL at your Requiem MO2 instance and re-probe:
-   `housecarl_set_mo2_instance path="<your MO2 instance>"`. (This skill's reference data was mined on
-   the author's Authoria instance.)
+   The invariant is chain presence, not winner identity: on a live instance the winner is normally
+   `Requiem for the Indifferent.esp` (the Reqtificator's generated output, enabled on every
+   playable setup) or another patch loading after Requiem — healthy, not stale. Derive reference
+   values from the last hand-authored override in the chain, never from the generated output. Only
+   if `Requiem.esp` appears nowhere in the chain, point houseCARL at your Requiem MO2 instance and
+   re-probe: `housecarl_set_mo2_instance path="<your MO2 instance>"`.
 
 2. **Read the modded NPC with its conflict tree** and separate the two winners:
 
@@ -271,13 +273,14 @@ Before finishing an NPC override, confirm:
 
 ## Notes
 
-- **Authority** = houseCARL's live conflict winner. NPC **balance** resolves to `Requiem.esp`,
-  **`USMP - Requiem.esp`** (an in-scope Requiem compatibility patch that carries Requiem's values
-  forward — the winner for many named actors), or a Requiem addon (`Requiem - Minor Arcana - *`,
-  `Requiem - Magic Redone.esp`, `Requiem_VampireCollection.esp`, WAR). **Appearance** resolves to a
-  separate visual winner. There is **no** active Authoria NPC input-merge (`Authoria - NPC Merge` is
-  disabled) — unlike the race domain, do not expect an `Authoria - Master Patch` NPC winner. Read the
-  live winner per record and the conflict tree tells you which source owns balance vs appearance.
+- **Authority** = houseCARL's live conflict winner among the hand-authored plugins. The Reqtificator
+  merges actors heavily, so on a live instance `Requiem for the Indifferent.esp` (its generated
+  output) wins most NPCs — it is never authority; step past it in the chain. Beneath it, NPC
+  **balance** resolves to `Requiem.esp`, **`USMP - Requiem.esp`** (an in-scope Requiem compatibility
+  patch that carries Requiem's values forward — the hand-authored winner for many named actors), or
+  a Requiem addon (`Requiem - Minor Arcana - *`, `Requiem - Magic Redone.esp`,
+  `Requiem_VampireCollection.esp`, WAR). **Appearance** resolves to a separate visual winner. Read
+  the live chain per record — it tells you which source owns balance vs appearance.
 - **houseCARL writes directly into active patches via `into=`** — author straight into
   `Requiem NPC patching`; verify a brand-new patch via the `bulk_apply` read-back until it's refreshed.
   The `where=` filter helps archetype scans (e.g. `where="Configuration.Level.Level >= 30"`).

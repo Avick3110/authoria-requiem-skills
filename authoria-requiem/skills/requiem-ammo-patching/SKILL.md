@@ -38,17 +38,20 @@ AMMO frame, sets or patches its projectile, and routes effect authoring onward.
 
 Confirm houseCARL's authority is fresh, then identify what you are patching.
 
-1. **Freshness probe.** Read Iron Sword and confirm the winner is `Requiem.esp`:
+1. **Freshness probe.** Read Iron Sword and confirm `Requiem.esp` is in the override chain:
 
    ```
    housecarl_read_record formid="012EB7:Skyrim.esm" conflict_tree=true
    ```
 
-   The winner must be `Requiem.esp` (chain `Skyrim.esm → unofficial skyrim special edition
-   patch.esp → Requiem.esp`). If it is `Requiem for the Indifferent.esp` or any `Authoria - *`
-   plugin, the resolver is stale and pointed at the wrong overlay — re-point houseCARL at your
-   own Requiem MO2 instance and re-probe (this skill's reference data was mined on the author's
-   Authoria instance):
+   The invariant is chain presence, not winner identity: `Requiem.esp` must appear in the chain
+   (`Skyrim.esm → unofficial skyrim special edition patch.esp → Requiem.esp → …`). On a live
+   instance the winner is normally `Requiem for the Indifferent.esp` — the Reqtificator's
+   generated output, enabled on every playable Requiem setup — or another patch loading after
+   Requiem; that is healthy, not stale. Derive reference values from the last hand-authored
+   override in the chain, never from the generated output. Only if `Requiem.esp` appears nowhere
+   in the chain is houseCARL reading the wrong load order — point it at your Requiem MO2 instance
+   and re-probe:
 
    ```
    housecarl_set_mo2_instance path="<your MO2 instance>"
@@ -91,9 +94,10 @@ housecarl_batch_record_detail formids=["01397F:Skyrim.esm"] conflict_tree=true \
   fields=["Name","Damage","Value","Weight","Keywords","Projectile","Flags"]
 ```
 
-The winner is `Requiem - Weapons and Armor Redone.esp` (WAR) for essentially all ammo — it owns
-the whole ammo set over base `Requiem.esp`. That is exactly the value a patch must be consistent
-with; you never do manual exclusion math.
+The last hand-authored override is `Requiem - Weapons and Armor Redone.esp` (WAR) for essentially
+all ammo — it owns the whole ammo set over base `Requiem.esp`. Read that layer — when
+`Requiem for the Indifferent.esp` (the Reqtificator's generated output) is the winner, step one
+down. That is exactly the value a patch must be consistent with; no other exclusion math is needed.
 
 ### 3 — Derive stats
 
@@ -231,8 +235,9 @@ assumed — rather than emitting a confident guess.
   derive from a Requiem comparable.
 - **Leaving a modded projectile supersonic / at the wrong speed.** Patch the PROJ to arrow
   3600 / no-Supersonic or bolt 5600 / Supersonic, or point at a Requiem arrow/bolt projectile.
-- **Reading the wrong winner.** If the resolver is stale you may read the disabled Authoria overlay
-  (`Requiem for the Indifferent.esp`). Run the freshness probe first.
+- **Deriving from `Requiem for the Indifferent.esp`.** The Reqtificator's generated output
+  normally wins on a live instance; it is rebuilt every run and carries build-time assignments.
+  Read the last hand-authored override beneath it in the chain.
 - **Forgetting `RFTI_Exclusions_NoDamageRescale`** — without it the Reqtificator may rescale your
   hand-set damage.
 
@@ -261,10 +266,11 @@ Before finishing an ammo override, confirm:
 
 ## Notes
 
-- **Authority** = houseCARL's live conflict winner among the active plugins. Ammo winners come
-  almost entirely from `Requiem - Weapons and Armor Redone.esp` (WAR) over base `Requiem.esp`;
-  bound ammo from `Requiem - MR Weapons and Armor Redone Patch.esp`. The disabled Authoria overlay
-  is excluded automatically.
+- **Authority** = houseCARL's live conflict winner among the hand-authored plugins. Ammo winners
+  come almost entirely from `Requiem - Weapons and Armor Redone.esp` (WAR) over base `Requiem.esp`;
+  bound ammo from `Requiem - MR Weapons and Armor Redone Patch.esp`. `Requiem for the
+  Indifferent.esp` (the Reqtificator's generated output) is never authority — step past it in the
+  chain when it wins.
 - **Bows/crossbows** (the frames) → `requiem-weapon-patching`. **Magic-arrow effect design** (the
   explosion/MGEF/conjuration) → the `requiem-magic-patching` skill. This skill sets the AMMO frame and its projectile.
 - houseCARL writes go to a new patch plugin; the live load order is never modified. The patch is

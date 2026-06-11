@@ -46,25 +46,28 @@ perk). Set the RACE frame here; route those onward.
 
 Confirm authority is fresh, note the race-domain authority, then classify what you're patching.
 
-1. **Freshness probe.** Read Iron Sword and confirm the winner is `Requiem.esp`:
+1. **Freshness probe.** Read Iron Sword and confirm `Requiem.esp` is in the override chain:
 
    ```
    housecarl_read_record formid="012EB7:Skyrim.esm" conflict_tree=true
    ```
 
-   If it is `Requiem for the Indifferent.esp`, the resolver is stale — re-point houseCARL at your
-   Requiem MO2 instance and re-probe:
-   `housecarl_set_mo2_instance path="<your MO2 instance>"`. (This skill's reference data was mined on
-   the author's Authoria instance.)
+   The invariant is chain presence, not winner identity: on a live instance the winner is normally
+   `Requiem for the Indifferent.esp` (the Reqtificator's generated output, enabled on every
+   playable setup) or another patch loading after Requiem — healthy, not stale. Derive reference
+   values from the last hand-authored override in the chain, never from the generated output. Only
+   if `Requiem.esp` appears nowhere in the chain, point houseCARL at your Requiem MO2 instance and
+   re-probe: `housecarl_set_mo2_instance path="<your MO2 instance>"`.
 
-2. **Race-domain authority (important).** For `RACE` records the live winner is
-   **`Authoria - Master Patch - Races Merge.esp`** — the consolidated, authoritative race merge
-   (it folds in `Requiem - Races Redone.esp`, `Requiem - Food and Beverages Redone - Races Redone.esp`,
-   `Requiem - Resist and Regen Tweak.esp`, the knockdown attack-data, and USMP, carrying Requiem's
-   trait spells faithfully). A race whose winner is this `Authoria - *` plugin is **expected and
-   correct** — do *not* treat it as a stale overlay and do *not* re-point to escape it. Read the
-   Master Patch winner as the comparable. Never derive from the dated standalone knockdown tweak,
-   which drops some of Requiem's trait spells.
+2. **Race-domain authority (important).** For `RACE` records the comparable is the **last
+   hand-authored race winner** in the chain — typically `Requiem - Races Redone.esp` and its
+   patches (`Requiem - Food and Beverages Redone - Races Redone.esp`,
+   `Requiem - Resist and Regen Tweak.esp`, USMP), or a consolidated race merge if your setup has
+   one (the author's mining instance used `Authoria - Master Patch - Races Merge.esp`, which folds
+   all of those in while carrying Requiem's trait spells faithfully). A race whose hand-authored
+   winner is a merge/compatibility patch downstream of Races Redone is **expected and correct** —
+   do *not* re-point to escape it. Never derive from the dated standalone knockdown tweak, which
+   drops some of Requiem's trait spells.
 
 3. **Classify — humanoid vs creature.** Read the modded race and decide from, in order of reliability:
    - **Keywords** — `ActorTypeNPC 013794` → humanoid; `ActorTypeCreature 013795` /
@@ -270,9 +273,10 @@ winner is authority over `Races.md`** when they disagree.
 - **A Healing trait without `RegenHpInCombat`.** The flag is what fires the combat regen; the spell
   alone is inert.
 - **Replacing a creature's own `Ab*` resistances** instead of just adding `REQ_Trait_Armor_*`.
-- **Trusting `Races.md` over the live winner.** The doc drifts; read the Master-Patch record.
-- **Re-pointing because the winner is an `Authoria - *` plugin.** For races, `Authoria - Master Patch
-  - Races Merge.esp` *is* the authority — don't "fix" it.
+- **Trusting `Races.md` over the live winner.** The doc drifts; read the live hand-authored winner.
+- **Re-pointing because the race winner is a merge/compatibility patch.** A hand-authored merge
+  downstream of `Requiem - Races Redone.esp` *is* the authority — don't "fix" it. Only
+  `Requiem for the Indifferent.esp` (generated) is stepped past.
 - **Duplicating a spit/breath the modded race already has** instead of patching its own to match.
 - **Forgetting the ARMA race-add** — a new playable race then can't wear any armor.
 
@@ -298,10 +302,12 @@ Before finishing a race override, confirm:
 
 ## Notes
 
-- **Authority** = houseCARL's live conflict winner. For races that is
-  `Authoria - Master Patch - Races Merge.esp`, which consolidates `Requiem - Races Redone.esp`,
-  `Requiem - Food and Beverages Redone - Races Redone.esp`, `Requiem - Resist and Regen Tweak.esp`,
-  the knockdown attack-data, and USMP. Read the winner and you fold all of them in.
+- **Authority** = houseCARL's live conflict winner among the hand-authored plugins (step past
+  `Requiem for the Indifferent.esp`, the Reqtificator's generated output). For races that is
+  `Requiem - Races Redone.esp` plus `Requiem - Food and Beverages Redone - Races Redone.esp`,
+  `Requiem - Resist and Regen Tweak.esp`, the knockdown attack-data, and USMP — or a consolidated
+  merge of those if your setup has one (the author's mining instance used
+  `Authoria - Master Patch - Races Merge.esp`). Read the hand-authored winner and you fold them in.
 - **`Requiem - Resist and Regen Tweak.esp`** owns the live `Resist_`/`Armor_`/`Healing_` trait spells
   and the **physique/supernatural** Layer-B perk taxonomy — see `references/creature-traits.md`.
 - **Spell/MGEF effect design** → the `requiem-magic-patching` skill. **Per-NPC trait perks** → the

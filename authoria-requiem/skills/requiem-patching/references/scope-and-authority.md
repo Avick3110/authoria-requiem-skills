@@ -6,23 +6,21 @@
 
 - houseCARL must be pointed at **your Requiem MO2 instance** (the author's profile was *Authoria - Requiem Reforged - Main Profile*).
 - The study source is this live load order. (The reference corpus was mined on the author's Authoria instance.)
-- After pointing, houseCARL sees **~2841 active plugins** (not 3410). If you see ~3410 active, the resolver is stale — see "Refresh" below.
 
 ## The authority rule (the one rule)
 
-**Authoritative value of any record = houseCARL's live conflict winner among the active plugins.** Take the winner; that is what a patch must be consistent with. No manual exclusion math is needed — the out-of-scope overlay is already disabled in `plugins.txt`, so houseCARL excludes it once its resolver is fresh.
+**Authoritative value of any record = houseCARL's live conflict winner among the hand-authored plugins.** Generated build outputs — above all `Requiem for the Indifferent.esp`, the Reqtificator's output, which is enabled on every playable Requiem setup and wins many records — are **never** authority: when one is the raw winner, step down the chain to the last hand-authored override and take that. That hand-authored winner is what a patch must be consistent with; no other exclusion math is needed.
 
 Read with `housecarl_read_record ... conflict_tree=true` to see the full override chain and the winner-relative field deltas (incl. vs. vanilla). For type-wide scans use `housecarl_cross_plugin_query` scoped with `plugins=[...]`.
 
-## What is out of scope (and already disabled)
+## What is out of scope (never authoritative)
 
-The top **Authoria overlay** is disabled in `plugins.txt` (listed without the `*` active prefix) and must NOT be treated as authoritative:
+Generated / merged build outputs must NOT be treated as authoritative:
 
-- The Reqtificator's generated output (`Requiem for the Indifferent.esp`) and tool outputs: `Authoria - Synthesis Output`, `RFTI Output`, `CK Output`, `xEdit Output`, `NPC Merge`, `Pandora Output`.
-- The whole `Authoria - Reqtificated - <ModName>.esp` block and `Authoria - CC … Reqtificated.esp` block (begins ~`plugins.txt` line 2781, around load position ~2840 — this is the "priority 2840" boundary).
-- `Authoria - *` patch plugins generally.
+- The Reqtificator's generated output (`Requiem for the Indifferent.esp`) — on a live instance it is **enabled** and is usually the raw winner; step past it in the chain.
+- Other tool outputs if your setup has them (Synthesis output, Bashed/Smashed patches, CK/xEdit scratch outputs, merge outputs). On the author's mining instance these formed a disabled `Authoria - *` overlay; on a play instance they are enabled — exclude them by reading the chain, not by expecting them to be absent.
 
-These represent the *final patched/merged* state. We study the **inputs** (Requiem + its addons), not the Authoria overlay, because our deliverable patches are themselves run through the Reqtificator afterward.
+These represent the *final patched/merged* state. We study the **inputs** (Requiem + its addons + hand-authored patches), not the generated outputs, because our deliverable patches are themselves run through the Reqtificator afterward — deriving from its output would bake build-time assignments into source data.
 
 ## The in-scope Requiem stack (where winners come from)
 
@@ -35,18 +33,18 @@ Core `Requiem.esp` plus its addons, each authoritative where it overrides:
 
 For any record, the live winner among these is the comparable to replicate.
 
-## Scope exception — race records (Aaron-approved)
+## Scope note — hand-authored merges are in scope (Aaron-approved)
 
-`RACE` records legitimately resolve to **`Authoria - Master Patch - Races Merge.esp`** (the live winner for ~49 races: all playable + vampire variants + creatures). This is a **deliberate exception** to the "exclude `Authoria - *`" rule above. It is allowed because the Races Merge is a corrected/consolidated **input** merge — it faithfully carries Requiem's trait spells + knockdown `Attacks` data (superseding the dated `requiem_knockdown_tweak.esp`) plus a few Authoria tuning deltas — **not** the Reqtificated **output** (`Requiem for the Indifferent.esp`), which stays excluded. For the race domain, treat this Master Patch as authoritative; **do not re-point to escape it.** The Iron Sword probe still validates the weapon/item domains; races correctly resolve to the Master Patch. (Watch for the analogous case in other actor domains — verify the live winner per record rather than assuming an `Authoria - *` winner is always out of scope.)
+A hand-authored **input merge** is legitimate authority, unlike a generated output. The reference case: on the author's instance, `RACE` records resolve to `Authoria - Master Patch - Races Merge.esp` (the live winner for ~49 races) — a corrected/consolidated input merge that faithfully carries Requiem's trait spells + knockdown `Attacks` data (superseding the dated `requiem_knockdown_tweak.esp`). Treat such a merge as authoritative; **do not re-point to escape it.** On your instance the race winners are typically `Requiem - Races Redone.esp` and its patches, or your own merge if you have one. The rule generalizes: judge a winner by *what it is* (hand-authored input vs generated output), not by its name — verify the live chain per record.
 
-## Refresh procedure (if the overlay reappears as winner)
+## Wrong-instance procedure (if Requiem is missing from the chain)
 
-If houseCARL shows ~3410 active, or a record's winner is `Requiem for the Indifferent.esp` / an `Authoria - *` plugin, the resolver is stale. Re-point houseCARL at your own Requiem MO2 instance to refresh:
+The stale/wrong-instance signal is `Requiem.esp` **absent** from a vanilla record's override chain (or the record resolving with no Requiem stack at all) — it means houseCARL is reading a non-Requiem load order. Re-point houseCARL at your own Requiem MO2 instance to refresh:
 
 ```
 housecarl_set_mo2_instance  path="<your MO2 instance>"
 ```
 
-**Verification probe** (run after pointing): read Iron Sword `012EB7:Skyrim.esm` with `conflict_tree=true`. Correct state = winner is **`Requiem.esp`**, chain `Skyrim.esm → unofficial skyrim special edition patch.esp → Requiem.esp`. If the winner is `Requiem for the Indifferent.esp`, the resolver is still stale — do not proceed until it reads `Requiem.esp`.
+**Verification probe** (run after pointing): read Iron Sword `012EB7:Skyrim.esm` with `conflict_tree=true`. Correct state = **`Requiem.esp` appears in the chain** (`Skyrim.esm → unofficial skyrim special edition patch.esp → Requiem.esp → …`). The invariant is chain presence, not winner identity: the winner being `Requiem for the Indifferent.esp` or another later patch is the normal state of a playable instance — derive from the last hand-authored override beneath it (the authority rule above). Do not proceed only while `Requiem.esp` is missing from the chain.
 
-*(Verified: after pointing, Iron Sword winner = `Requiem.esp`, override_depth 3. ✅)*
+*(Verified on the author's mining instance — generated overlay disabled — Iron Sword winner = `Requiem.esp`, override_depth 3. On a playable instance with the Reqtificator output enabled, expect winner = `Requiem for the Indifferent.esp` with `Requiem.esp` in the chain.)*

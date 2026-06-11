@@ -31,17 +31,20 @@ those onward.
 
 Confirm houseCARL's authority is fresh, then identify what you are patching.
 
-1. **Freshness probe.** Read Iron Sword and confirm the winner is `Requiem.esp`:
+1. **Freshness probe.** Read Iron Sword and confirm `Requiem.esp` is in the override chain:
 
    ```
    housecarl_read_record formid="012EB7:Skyrim.esm" conflict_tree=true
    ```
 
-   The winner must be `Requiem.esp` (chain `Skyrim.esm → unofficial skyrim special edition
-   patch.esp → Requiem.esp`). If it is `Requiem for the Indifferent.esp` or any `Authoria - *`
-   plugin, the resolver is stale and pointed at the wrong overlay — re-point houseCARL at your
-   own Requiem MO2 instance and re-probe (this skill's reference data was mined on the author's
-   Authoria instance):
+   The invariant is chain presence, not winner identity: `Requiem.esp` must appear in the chain
+   (`Skyrim.esm → unofficial skyrim special edition patch.esp → Requiem.esp → …`). On a live
+   instance the winner is normally `Requiem for the Indifferent.esp` — the Reqtificator's
+   generated output, enabled on every playable Requiem setup — or another patch loading after
+   Requiem; that is healthy, not stale. Derive reference values from the last hand-authored
+   override in the chain, never from the generated output. Only if `Requiem.esp` appears nowhere
+   in the chain is houseCARL reading the wrong load order — point it at your Requiem MO2 instance
+   and re-probe:
 
    ```
    housecarl_set_mo2_instance path="<your MO2 instance>"
@@ -85,9 +88,11 @@ housecarl_batch_record_detail formids=["013952:Skyrim.esm"] conflict_tree=true \
   fields=["Name","ArmorRating","Value","Weight","Keywords","BodyTemplate","BashImpactDataSet","AlternateBlockMaterial"]
 ```
 
-Read the **winner**, which already folds in WAR (`Requiem - Weapons and Armor Redone.esp`, which
-owns shields/bucklers + cross-patches) over base `Requiem.esp`, plus USSEP fixes Requiem inherits.
-That is exactly the value a patch must be consistent with — you never do manual exclusion math.
+Read the **last hand-authored override** in the chain — when `Requiem for the Indifferent.esp`
+(the Reqtificator's generated output) is the winner, step one down. The hand-authored winner
+already folds in WAR (`Requiem - Weapons and Armor Redone.esp`, which owns shields/bucklers +
+cross-patches) over base `Requiem.esp`, plus USSEP fixes Requiem inherits. That is exactly the
+value a patch must be consistent with — no other exclusion math is needed.
 
 ### 3 — Derive armor rating, value, weight
 
@@ -261,8 +266,9 @@ assumed — rather than emitting a confident guess.
   a Requiem comparable.
 - **Deriving from a `REQ_NULL_*` or `REQ_Var_*` stub.** Those are NULLed dead records; use the
   canonical `REQ_<Weight>_<Material>_<Part>`.
-- **Reading the wrong winner.** If the resolver is stale you may read the disabled Authoria overlay
-  (`Requiem for the Indifferent.esp`). Run the freshness probe first.
+- **Deriving from `Requiem for the Indifferent.esp`.** The Reqtificator's generated output
+  normally wins on a live instance; it is rebuilt every run and carries build-time assignments.
+  Read the last hand-authored override beneath it in the chain.
 - **Leaving armor rating on a clothing/cosmetic piece.** Clothing must be `ArmorRating 0` in
   Requiem; a robe or towel with AR (or a cosmetic-cloth piece tagged with the cuirass keyword) gets
   treated as armor and assigned ranged resistance. See `## Judgment` → cosmetic cloth.
@@ -291,11 +297,11 @@ Before finishing an armor override, confirm:
 
 ## Notes
 
-- **Authority** = houseCARL's live conflict winner among the active plugins. Armor winners come
-  from `Requiem - Weapons and Armor Redone.esp` (WAR; shields, bucklers, cross-patches) over core
-  `Requiem.esp`, plus their patches (`Requiem - New Legion.esp`, `Requiem - Creation Club.esp`,
-  `Sons of Skyrim - Requiem Patch.esp`, …). The disabled Authoria overlay is excluded
-  automatically.
+- **Authority** = houseCARL's live conflict winner among the hand-authored plugins. Armor winners
+  come from `Requiem - Weapons and Armor Redone.esp` (WAR; shields, bucklers, cross-patches) over
+  core `Requiem.esp`, plus their patches (`Requiem - New Legion.esp`, `Requiem - Creation Club.esp`,
+  `Sons of Skyrim - Requiem Patch.esp`, …). `Requiem for the Indifferent.esp` (the Reqtificator's
+  generated output) is never authority — step past it in the chain when it wins.
 - **Enchantment-effect design** (the MGEF/ENCH on an enchanted piece) → the `requiem-magic-patching` skill.
   **Race/ARMA models** (which races can wear it) → the `requiem-race-patching` skill. This skill sets the ARMO frame
   and links an existing `ObjectEffect`.

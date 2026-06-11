@@ -23,12 +23,14 @@ own. Authoring a fresh `.psc` is the rare last resort.
 ## First step
 
 Confirm houseCARL resolves Requiem's live winners before reading any record. Read the Iron Sword
-`012EB7:Skyrim.esm` with `conflict_tree=true`; the winner must be `Requiem.esp` (chain
-`Skyrim.esm → unofficial skyrim special edition patch.esp → Requiem.esp`). If it resolves to
-`Requiem for the Indifferent.esp` or an `Authoria - *` plugin, the resolver is stale — point
-houseCARL at your Requiem MO2 instance with
-`housecarl_set_mo2_instance path="<your MO2 instance>"` and re-probe before continuing. (This
-skill's reference data was mined on the author's Authoria instance.)
+`012EB7:Skyrim.esm` with `conflict_tree=true`; `Requiem.esp` must appear in the override chain
+(`Skyrim.esm → unofficial skyrim special edition patch.esp → Requiem.esp → …`). The invariant is
+chain presence, not winner identity — on a live instance the winner is normally
+`Requiem for the Indifferent.esp` (the Reqtificator's generated output) or another patch loading
+after Requiem, which is healthy; derive reference values from the last hand-authored override in
+the chain, never from the generated output. Only if `Requiem.esp` appears nowhere in the chain,
+point houseCARL at your Requiem MO2 instance with
+`housecarl_set_mo2_instance path="<your MO2 instance>"` and re-probe before continuing.
 
 Then **decide whether a script is even needed** (the gate below). Don't attach Papyrus reflexively.
 
@@ -161,7 +163,7 @@ See `references/vmad-and-compile.md` for the `VirtualMachineAdapter` field struc
 
 ## Checklist
 
-- [ ] Ran the freshness probe (Iron Sword → `Requiem.esp`).
+- [ ] Ran the freshness probe (Iron Sword's chain contains `Requiem.esp`).
 - [ ] Confirmed a script is actually needed (special mechanic / follower) — not a plain effect.
 - [ ] Reused Requiem's `Nox_*`/`REQ_*` script + marker where one exists, before considering authoring.
 - [ ] Every VMAD object property repointed to the patch's own forms; read back and verified.

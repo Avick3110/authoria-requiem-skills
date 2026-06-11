@@ -2,6 +2,13 @@
 
 All notable changes to the Authoria Requiem Patching Skills plugin. Versioning is [semantic](https://semver.org); the `version` in `authoria-requiem/.claude-plugin/plugin.json` is bumped on each release.
 
+## 1.0.1 — 2026-06-11
+
+Bugfix: the freshness probe checked the wrong invariant.
+
+- **Freshness probe (all nine skills + `scope-and-authority.md`)** — the probe required Iron Sword's conflict *winner* to be `Requiem.esp` and called anything else a stale resolver. That invariant only held on the author's mining instance, where the Reqtificator's generated output was disabled; on every playable Requiem setup `Requiem for the Indifferent.esp` is enabled and legitimately wins, so the probe failed permanently and sent users into a futile `set_mo2_instance` re-point loop. The probe now checks **chain presence**: `Requiem.esp` must appear in the override chain; the winner being the Reqtificator output (or a later patch) is the documented healthy state, and only a chain with no `Requiem.esp` means houseCARL is reading the wrong load order.
+- **Authority rule, derivation steps, and gotchas updated to match** — reference values are derived from the last *hand-authored* override in the chain, stepping past `Requiem for the Indifferent.esp` (regenerated every Reqtificator run; carries build-time assignments a patch must not copy). The race-domain authority notes were genericized accordingly (a hand-authored race merge is valid authority where one exists; `Requiem - Races Redone.esp` and its patches otherwise).
+
 ## 1.0.0 — 2026-06-09
 
 First feature-complete release. Nine skills, each built by mining the live Authoria load order via houseCARL and authored to the houseCARL skill-authoring standard.
