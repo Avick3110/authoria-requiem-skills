@@ -24,7 +24,7 @@
 {"topic":"recipe fill extend container ContainerEntry Item.Item leveled list reference Item.Count build on winner not merged","file":"housecarl-recipes.md","section":"F — Fill / extend a container (CONT)"}
 {"topic":"recipe encounter zone rare MinLevel MaxLevel Flags NeverResets usually skip","file":"housecarl-recipes.md","section":"G — Encounter zone (rare — usually skip)"}
 {"topic":"recipe masters REQ_NULL hygiene reference a Requiem form to master Requiem never add to NULL list houseCARL Add Sort","file":"housecarl-recipes.md","section":"H — Masters & REQ_NULL hygiene"}
-{"topic":"recipe verify read-back masters Requiem present entry present re-read list plugin brand-new patch per-op read-back","file":"housecarl-recipes.md","section":"I — Verify the read-back"}
+{"topic":"recipe verify read-back masters Requiem present entry present full_readback pre-enable re-read list plugin enabled not in the load order","file":"housecarl-recipes.md","section":"I — Verify the read-back"}
 {"topic":"worked example place steel sword loot town blacksmith faction reverse reference footprint Level 1 single weight additive REQ_LI auto master","file":"worked-examples.md","section":"Example 1 — place a new steel-tier sword into loot, vendor, and faction lists"}
 {"topic":"worked example distribute creature wolf spawn LCharWolf EncWolf recognized race add at Level 1 single contributor winner used","file":"worked-examples.md","section":"Example 2 — distribute a new creature into wolf spawns"}
 {"topic":"worked example fill boss container reference Requiem themed pools REQ_LI_LootMidLevelContent REQ_LI_TreasureHunter gear from death item not chest","file":"worked-examples.md","section":"Example 3 — fill a new mod's boss container"}

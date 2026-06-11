@@ -65,6 +65,12 @@ read_record formid="<MyEffect>" fields=["VirtualMachineAdapter"] depth=3
 # every property Name present, every Object repointed to your forms, no REQ_NULL, masters correct
 ```
 
+This winner read sees your VMAD only once the patch is enabled + sorted in MO2. Before that, the
+write call is the verification: the per-op read-back, or `full_readback=true` (houseCARL 1.2.3+)
+for the ENTIRE written record re-read from the patch file on disk. A `read_record
+plugin="<patch>.esp"` against a not-yet-enabled patch fails with a named "not in the load order"
+error — if the write reported success the edits landed; never re-issue them.
+
 ## Multi-spell tome (BOOK + Nox_TomeMultipleSpells)
 
 ```

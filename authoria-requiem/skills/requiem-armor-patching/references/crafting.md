@@ -50,14 +50,14 @@ Smelter (`REQ_Smelter_Heavy_Steel_Body`, 3CB768:Requiem.esp): `WorkbenchKeyword 
 ## The perk gate is a HasPerk condition
 
 Both forge and temper recipes carry a single condition: `Function = HasPerk`,
-`CompareOperator = EqualTo`, `ComparisonValue = 1`, `RunOnType = Subject`. The perk is stored in
-`Conditions[0].Data.Perk` (a form-index) and **does not render as a readable FormID** through
-houseCARL (`(floi: form mode but no readable FormKey)`).
+`CompareOperator = EqualTo`, `ComparisonValue = 1`, `RunOnType = Subject`. The perk lives in
+`Conditions[0].Data.Perk`; houseCARL 1.2.2+ renders it as a readable FormID (older builds showed
+`(floi: form mode but no readable FormKey)`).
 
-**Author by cloning, not retyping.** Read the comparable recipe and copy its whole `Conditions`
-list onto the new recipe verbatim (a `bulk_apply` `Add`/`ReplaceAll` of the conditions), then swap
-only `CreatedObject` and `Items`. That reproduces the exact perk gate without resolving the FormID
-by hand.
+**Author by cloning, not guessing.** Read the comparable recipe's `Conditions` to get its perk,
+then compose the same gate onto the new recipe (the two-op compose grammar — `ConditionFloat`
+shell, then its `Data` arm — is in `housecarl-recipes.md` § E), and swap only `CreatedObject` and
+`Items`. That reproduces the exact perk gate without picking a perk by hand.
 
 Which perk a set maps to is the `tempering.*` map in `ArmorKeywordAssignments_Requiem.esp.conf`
 (see `keywords.md` § Tempering) — but you don't pick it manually for the recipe; you clone the

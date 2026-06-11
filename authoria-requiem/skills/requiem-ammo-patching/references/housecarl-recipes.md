@@ -5,12 +5,14 @@ plugin** (originals untouched); pass `into="<patch filename>"` to accumulate edi
 All-or-nothing: a malformed op refuses the whole call and writes nothing — so read first, then
 write.
 
-> **Write gotchas:** you cannot write into an **active** patch (Mutagen self-locks
-> it) — author into a fresh **inactive** patch, then move the `.esp` into place if consolidating. A
-> brand-new never-enabled patch isn't in houseCARL's registry, so even `read_record
-> plugin="<patch>.esp"` returns "does not touch" — the **`bulk_apply` per-op read-back is your only
-> verification** until the patch is enabled + `housecarl_set_mo2_instance` refresh. Don't re-issue a
-> Remove the active winner already applied; copy the winner and add only new deltas.
+> **Write gotchas:** a freshly written patch isn't auto-enabled, and houseCARL reads load-order
+> truth only — until you enable + sort it in MO2, the WRITE CALL is the verification: the per-op
+> read-back confirms each edit, and `full_readback=true` (houseCARL 1.2.3+) returns the entire
+> written record. A `read_record plugin="<patch>.esp"` against a not-yet-enabled patch fails with
+> a named "not in the load order" error — if the write reported success the edits DID land; never
+> re-issue them (re-running list Adds duplicates entries). Don't re-issue a Remove the active
+> winner already applied; copy the winner and add only new deltas. (Writing into a patch that is
+> already ACTIVE in the load order works — the old self-lock was fixed in houseCARL 1.2.1.)
 
 ## A — Re-balance an existing modded arrow (the common case)
 
@@ -73,9 +75,11 @@ housecarl_bulk_apply into="Authoria_Ammo" operations=[
 
 ## D — Forge recipe (COBJ)
 
-One ingot + one firewood → 30 ammo, gated by a cloned perk condition. Because the perk reference is
-a form-index that may not render as a readable FormID, the robust path is to read the comparable
-recipe and reproduce its `Conditions`; the skeleton is:
+One ingot + one firewood → 30 ammo, gated by a perk condition cloned from the comparable. Read the
+comparable recipe's `Conditions` first (houseCARL 1.2.2+ renders the perk parameter as a readable
+FormID) and reuse its perk. The condition grammar: add the `ConditionFloat` shell, then Set its
+polymorphic `Data` arm via compose — order matters, and a direct leaf set like
+`Conditions[0].Data.Perk` is refused by design (the whole `Data` arm must be composed):
 
 ```
 housecarl_create_record record_type="ConstructibleObject" \
@@ -86,8 +90,12 @@ housecarl_create_record record_type="ConstructibleObject" \
     {field_path:"Items", verb:"Add", compose:{type:"ContainerEntry",
        sets:[{path:"Item.Item", value:"05ACE5:Skyrim.esm"},{path:"Item.Count", value:"1"}]}},  # Steel Ingot
     {field_path:"Items", verb:"Add", compose:{type:"ContainerEntry",
-       sets:[{path:"Item.Item", value:"06F993:Skyrim.esm"},{path:"Item.Count", value:"1"}]}}   # Firewood
-    # then add the HasPerk condition cloned from the comparable recipe's Conditions[0]
+       sets:[{path:"Item.Item", value:"06F993:Skyrim.esm"},{path:"Item.Count", value:"1"}]}},  # Firewood
+    # the HasPerk gate, cloned from the comparable recipe's Conditions[0]:
+    {field_path:"Conditions", verb:"Add", compose:{type:"ConditionFloat",
+       fields:{CompareOperator:"EqualTo", ComparisonValue:"1"}}},
+    {field_path:"Conditions[0].Data", verb:"Set", compose:{type:"HasPerkConditionData",
+       sets:[{path:"Perk", value:"<the comparable's smithing perk, e.g. 0CB40D:Skyrim.esm>"}]}}
   ]
 ```
 
@@ -102,9 +110,17 @@ iron still carries the ammo-weight + RFTI keywords), add `Requiem.esp` as a mast
 
 ## Verify the write
 
+**Before the patch is enabled in MO2**, the write call itself is the verification: the per-op
+read-back confirms each edited value, and `full_readback=true` on the write call (houseCARL
+1.2.3+) returns the ENTIRE written record re-read from the patch file on disk — confirm the Items
+entries and the perk-gate condition there. A `read_record plugin="<patch>.esp"` does NOT work on a
+not-yet-enabled patch (named "not in the load order" error); if the write reported success the
+edits landed — never re-issue them.
+
+**After enabling + sorting in MO2:**
+
 ```
 housecarl_read_record formid="<ammo>" conflict_tree=true
 ```
 
-The new patch should appear last in the chain as the winner with your derived values. If the patch
-is inactive, read it explicitly with `plugin="<patch>.esp"` instead of trusting the winner read.
+The new patch should appear last in the chain as the winner with your derived values.

@@ -15,7 +15,7 @@
 {"topic":"projectile PROJ arrow speed 3600 bolt 5600 gravity 0.35 supersonic flag, Requiem standardizes physics overrides vanilla","file":"crafting.md","section":"Projectiles (PROJ)"}
 {"topic":"reuse vs patch modded projectile, fix supersonic and speed, arrow bolt only not spell","file":"crafting.md","section":"Two ways to give a new arrow a projectile"}
 {"topic":"elemental projectile explosion effect on PROJ not ammo damage, route MGEF design to requiem-magic-patching skill","file":"crafting.md","section":"Elemental projectiles"}
-{"topic":"houseCARL bulk_apply rebalance existing modded arrow, set damage value weight keywords, write gotchas inactive patch","file":"housecarl-recipes.md","section":"A — Re-balance an existing modded arrow"}
+{"topic":"houseCARL bulk_apply rebalance existing modded arrow, set damage value weight keywords, write gotchas pre-enable verification full_readback","file":"housecarl-recipes.md","section":"A — Re-balance an existing modded arrow"}
 {"topic":"houseCARL create_record net-new arrow ammunition, flags projectile keywords","file":"housecarl-recipes.md","section":"B — Author a net-new arrow record"}
 {"topic":"houseCARL patch modded projectile speed gravity flags supersonic to Requiem profile","file":"housecarl-recipes.md","section":"C — Patch a modded projectile onto Requiem's profile"}
 {"topic":"houseCARL ammo forge recipe COBJ compose ContainerEntry ingot firewood 30 perk gate","file":"housecarl-recipes.md","section":"D — Forge recipe (COBJ)"}

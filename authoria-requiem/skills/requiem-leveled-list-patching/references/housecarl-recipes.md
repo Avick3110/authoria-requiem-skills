@@ -127,11 +127,16 @@ housecarl_bulk_apply into="Requiem leveled list patching" operations=[
 ## I — Verify the read-back
 
 Every `bulk_apply` returns the patch path, `masters:`, and a per-op read-back. Confirm `Requiem.esp` is
-in `masters:` and your entry is present, then re-read the list to be sure:
+in `masters:` and your entry is present. For the full list content — every entry, not just the ones you
+added — pass `full_readback=true` on the write call (houseCARL 1.2.3+): it returns the ENTIRE written
+record re-read from the patch file on disk, before the patch is even enabled.
+
+Once the patch is enabled + sorted in MO2, you can also re-read it directly:
 
 ```
 housecarl_read_record formid="016578:Skyrim.esm" plugin="Requiem leveled list patching.esp" fields=["Entries"] depth=2
 ```
 
-(For a brand-new patch not yet in the registry, the per-op read-back is the verification until a
-`housecarl_set_mo2_instance` refresh.)
+(This `plugin=` read works only for a patch IN the load order; against a not-yet-enabled patch it
+fails with a named "not in the load order" error. If the write reported success the entries landed —
+never re-issue them: re-running list Adds duplicates entries.)

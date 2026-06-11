@@ -46,14 +46,14 @@ Items:
 ## The perk gate is a HasPerk condition
 
 Both forge and temper recipes carry a single condition: `Function = HasPerk`,
-`CompareOperator = EqualTo`, `ComparisonValue = 1`, `RunOnType = Subject`. The perk itself is
-stored in `Conditions[0].Data.Parameter1` as a form-index that **does not always render as a
-readable FormID** through houseCARL (`(floi: form mode but no readable FormKey)`).
+`CompareOperator = EqualTo`, `ComparisonValue = 1`, `RunOnType = Subject`. The perk lives in
+`Conditions[0].Data.Perk`; houseCARL 1.2.2+ renders it as a readable FormID (older builds showed
+`(floi: form mode but no readable FormKey)`).
 
-**Author by cloning, not retyping.** Read the comparable recipe and copy its whole `Conditions`
-list onto the new recipe verbatim (a `bulk_apply` `ReplaceAll`/`Add` of the conditions), then
-swap only `CreatedObject` and `Items`. That reproduces the exact perk gate without needing to
-resolve the FormID by hand.
+**Author by cloning, not guessing.** Read the comparable recipe's `Conditions` to get its perk,
+then compose the same gate onto the new recipe (the two-op compose grammar — `ConditionFloat`
+shell, then its `Data` arm — is in `housecarl-recipes.md` § E), and swap only `CreatedObject` and
+`Items`. That reproduces the exact perk gate without picking a perk by hand.
 
 Which perk a tier maps to follows Requiem's smithing tree (the `tempering.*` map in
 `ArmorKeywordAssignments_Requiem.esp.conf` is the armor analog): most basic weapons gate behind

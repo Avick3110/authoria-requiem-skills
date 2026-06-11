@@ -1,10 +1,11 @@
 # houseCARL Authoring Recipes — NPCs
 
 Copy-ready call shapes for emitting an NPC balance override. houseCARL writes **directly into
-an active patch** via `into=` (e.g. `into="Requiem NPC patching"`); a brand-new patch isn't in the
-registry until a `set_mo2_instance` refresh, so verify a fresh patch via the `bulk_apply` per-op
-read-back. Read first, then write — a malformed op refuses the whole call (all-or-nothing). Verify
-every FormID against the live comparable.
+an active patch** via `into=` (e.g. `into="Requiem NPC patching"`). A brand-new patch isn't in the
+load order until you enable + sort it in MO2, so verify a fresh patch via the write call itself:
+the `bulk_apply` per-op read-back, or `full_readback=true` (houseCARL 1.2.3+) for the entire
+written record. Read first, then write — a malformed op refuses the whole call (all-or-nothing).
+Verify every FormID against the live comparable.
 
 ## A — Re-balance a standalone combatant (replicate the analogue's fields)
 
@@ -135,5 +136,8 @@ housecarl_read_record formid="<npc>" conflict_tree=true \
 ```
 
 Your patch should appear last as the winner with your balance values — and the **appearance** winner
-should still own the face/body fields (confirm you didn't displace it). If the patch is inactive, read
-it explicitly with `plugin="<patch>.esp"` instead of trusting the winner.
+should still own the face/body fields (confirm you didn't displace it). This winner read only sees
+the patch once it's enabled + sorted in MO2; before that, the write call is the verification (per-op
+read-back, or `full_readback=true` on houseCARL 1.2.3+ for the entire written record). A `read_record
+plugin="<patch>.esp"` on a not-yet-enabled patch fails with a named "not in the load order" error —
+if the write reported success the edits landed; never re-issue them.

@@ -91,8 +91,17 @@ housecarl_bulk_apply into="Requiem magic patching" operations=[
 ]
 ```
 
-A per-effect perk gate is a `Conditions` entry on the effect (a `HasPerk` condition) — clone it from the
-comparable rather than retyping the perk form-index.
+A per-effect perk gate is a `Conditions` entry on the effect (a `HasPerk` condition) — read the
+comparable's condition (houseCARL 1.2.2+ renders the perk parameter as a readable FormID) and compose
+the same gate: add the `ConditionFloat` shell, then Set its polymorphic `Data` arm via compose (order
+matters; a direct leaf set like `Conditions[0].Data.Perk` is refused by design):
+
+```
+{field_path:"Effects[<i>].Conditions", verb:"Add", compose:{type:"ConditionFloat",
+   fields:{CompareOperator:"EqualTo", ComparisonValue:"1"}}},
+{field_path:"Effects[<i>].Conditions[0].Data", verb:"Set", compose:{type:"HasPerkConditionData",
+   sets:[{path:"Perk", value:"<the comparable's perk FormID>"}]}}
+```
 
 ## F — Create a new MGEF
 
@@ -159,12 +168,18 @@ housecarl_bulk_apply into="Requiem magic patching" operations=[
 ## J — Verify the read-back
 
 Every `bulk_apply`/`create_record` returns the patch path, `masters:`, and a per-op read-back. Confirm
-`Requiem.esp` / MR is in `masters:`, the values are set, and no `REQ_NULL_*` remains. Then re-read:
+`Requiem.esp` / MR is in `masters:`, the values are set, and no `REQ_NULL_*` remains. For the whole
+record — composed Effects, conditions, the fields you didn't touch — pass `full_readback=true` on the
+write call (houseCARL 1.2.3+): it returns the ENTIRE written record re-read from the patch file on
+disk, before the patch is even enabled.
+
+Once the patch is enabled + sorted in MO2, you can also re-read it directly:
 
 ```
 housecarl_read_record formid="<spell FormID>" plugin="Requiem magic patching.esp" \
   fields=["BaseCost","ChargeTime","HalfCostPerk","Effects"] depth=2
 ```
 
-(For a brand-new patch not yet in the registry, the per-op read-back is the verification until a
-`housecarl_set_mo2_instance` refresh.)
+(This `plugin=` read works only for a patch IN the load order; against a not-yet-enabled patch it
+fails with a named "not in the load order" error. If the write reported success the edits landed —
+never re-issue them.)

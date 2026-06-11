@@ -162,9 +162,10 @@ housecarl_cross_plugin_query type="ConstructibleObject" references="01397F:Skyri
 ```
 
 The pattern is uniform: **`WorkbenchKeyword = CraftingSmithingForge 088105`, one metal ingot + one
-firewood (`06F993`), `CreatedObjectCount = 30`**, gated by a `HasPerk` condition. Clone the
-comparable's `Conditions` **verbatim** — the perk reference is a form-index that does not render as
-a readable FormID, so reproduce it rather than retyping. Recipe shapes in `references/crafting.md`.
+firewood (`06F993`), `CreatedObjectCount = 30`**, gated by a `HasPerk` condition. Read the
+comparable's condition (houseCARL 1.2.2+ renders the perk parameter as a readable FormID) and
+compose the same gate — the grammar is in `references/housecarl-recipes.md` § D. Recipe shapes in
+`references/crafting.md`.
 
 ### 7 — Emit the override
 

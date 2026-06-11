@@ -88,9 +88,11 @@ housecarl_bulk_apply into="Authoria_Weapons" operations=[
 
 ## E — Crafting recipe (COBJ)
 
-Create the forge recipe, then clone the comparable's `Conditions` (perk gate) onto it. Because the
-perk reference is a form-index that may not render as a readable FormID, the robust path is to read
-the comparable recipe and reproduce its condition list; the skeleton is:
+Create the forge recipe with its perk gate composed in the same call. Read the comparable recipe's
+`Conditions` first (houseCARL 1.2.2+ renders the perk parameter as a readable FormID) and reuse its
+perk. The condition grammar: add the `ConditionFloat` shell, then Set its polymorphic `Data` arm via
+compose — order matters, and a direct leaf set like `Conditions[0].Data.Perk` is refused by design
+(the whole `Data` arm must be composed):
 
 ```
 housecarl_create_record record_type="ConstructibleObject" \
@@ -101,8 +103,12 @@ housecarl_create_record record_type="ConstructibleObject" \
     {field_path:"Items", verb:"Add", compose:{type:"ContainerEntry",
        sets:[{path:"Item.Item", value:"05ACE5:Skyrim.esm"},{path:"Item.Count", value:"2"}]}},
     {field_path:"Items", verb:"Add", compose:{type:"ContainerEntry",
-       sets:[{path:"Item.Item", value:"0800E4:Skyrim.esm"},{path:"Item.Count", value:"1"}]}}
-    # then add the HasPerk condition cloned from the comparable recipe's Conditions[0]
+       sets:[{path:"Item.Item", value:"0800E4:Skyrim.esm"},{path:"Item.Count", value:"1"}]}},
+    # the HasPerk gate, cloned from the comparable recipe's Conditions[0]:
+    {field_path:"Conditions", verb:"Add", compose:{type:"ConditionFloat",
+       fields:{CompareOperator:"EqualTo", ComparisonValue:"1"}}},
+    {field_path:"Conditions[0].Data", verb:"Set", compose:{type:"HasPerkConditionData",
+       sets:[{path:"Perk", value:"<the comparable's smithing perk, e.g. 0CB40D:Skyrim.esm>"}]}}
   ]
 ```
 
@@ -110,7 +116,14 @@ The tempering recipe is the same with `WorkbenchKeyword` = `088108:Skyrim.esm` a
 
 ## Verify the write
 
-Read the record back (the write tools also return a read-back). To confirm a full override:
+**Before the patch is enabled in MO2**, the write call itself is the verification: the per-op
+read-back confirms each edited value, and `full_readback=true` on the write call (houseCARL
+1.2.3+) returns the ENTIRE written record re-read from the patch file on disk — confirm composed
+structures (Items entries, the perk-gate condition) there. A `read_record plugin="<patch>.esp"`
+does NOT work on a not-yet-enabled patch (named "not in the load order" error); if the write
+reported success the edits landed — never re-issue them.
+
+**After enabling + sorting in MO2:**
 
 ```
 housecarl_read_record formid="<weapon>" conflict_tree=true

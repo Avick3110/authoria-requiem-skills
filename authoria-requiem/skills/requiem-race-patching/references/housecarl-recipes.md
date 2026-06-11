@@ -4,10 +4,13 @@ Copy-ready call shapes for emitting a race override. houseCARL writes to a **new
 (originals untouched); pass `into="<patch filename>"` to accumulate across calls. Read first, then
 write — a malformed op refuses the whole call (all-or-nothing).
 
-> **Write gotchas:** you can't write into an **active** patch (Mutagen self-locks it)
-> — author into a fresh **inactive** patch. A freshly written patch isn't in houseCARL's registry, so
-> verify via the `bulk_apply` per-op read-back (or `read_record plugin="<patch>.esp"`), **not** the
-> winner read, until it's enabled + refreshed. Don't re-issue a `Remove` the winner already applied.
+> **Write gotchas:** a freshly written patch isn't auto-enabled, and houseCARL reads load-order
+> truth only — until you enable + sort it in MO2, the WRITE CALL is the verification: the per-op
+> read-back confirms each edit, and `full_readback=true` (houseCARL 1.2.3+) returns the entire
+> written record. A `read_record plugin="<patch>.esp"` against a not-yet-enabled patch fails with
+> a named "not in the load order" error — if the write reported success the edits DID land; never
+> re-issue them. Don't re-issue a `Remove` the winner already applied. (Writing into a patch that
+> is already ACTIVE in the load order works — the old self-lock was fixed in houseCARL 1.2.1.)
 
 ## A — Re-balance an existing modded race (the common case)
 
@@ -127,9 +130,17 @@ manually so the Reqtificator resolves it.
 
 ## Verify the write
 
+**Before the patch is enabled in MO2**, the write call itself is the verification: the per-op
+read-back confirms each edited value, and `full_readback=true` on the write call (houseCARL
+1.2.3+) returns the ENTIRE written record re-read from the patch file on disk (confirm the
+`Starting`/`Regen` dictionary values there). A `read_record plugin="<patch>.esp"` does NOT work on
+a not-yet-enabled patch (named "not in the load order" error); if the write reported success the
+edits landed — never re-issue them.
+
+**After enabling + sorting in MO2:**
+
 ```
 housecarl_read_record formid="<race>" conflict_tree=true
 ```
 
-Your patch should appear last as the winner with your values. If it's inactive, read it explicitly
-with `plugin="<patch>.esp"` instead of trusting the winner.
+Your patch should appear last as the winner with your values.

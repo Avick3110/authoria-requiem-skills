@@ -28,7 +28,7 @@
 {"topic":"recipe patch enchantment ENCH weapon EnchantType CastType TargetType EnchantmentCost apparel ConstantEffect Self magnitude","file":"housecarl-recipes.md","section":"G — Patch an enchantment (ENCH)"}
 {"topic":"recipe patch spell tome BOOK Value Weight Teaches compose BookSpell placement leveled list","file":"housecarl-recipes.md","section":"H — Patch a spell tome (BOOK)"}
 {"topic":"recipe masters REQ_NULL hygiene reference Requiem form HalfCostPerk pull master strip NULL player items replace on creature route race patching","file":"housecarl-recipes.md","section":"I — Masters & REQ_NULL hygiene"}
-{"topic":"recipe verify read-back masters Requiem present values set no REQ_NULL re-read plugin","file":"housecarl-recipes.md","section":"J — Verify the read-back"}
+{"topic":"recipe verify read-back masters Requiem present values set no REQ_NULL full_readback pre-enable re-read plugin enabled","file":"housecarl-recipes.md","section":"J — Verify the read-back"}
 {"topic":"worked example Supernova Constellation master nuke cost 4900 4000 charge 0 6 HalfCostPerk Master Destruction Restoration reclassify tome 4975 2000","file":"worked-examples.md","section":"Example 1 — Supernova (Constellation Magic)"}
 {"topic":"worked example Resona Sonic Mage apprentice cost 42 40 charge 0 0.5 HalfCostPerk Destruction Alteration reclassify tome 400","file":"worked-examples.md","section":"Example 2 — Resona (Sonic Mage)"}
 {"topic":"worked example Reverbra Sonic Mage adept cost 120 200 raised charge 0.5 0.75 HalfCostPerk Destruction Alteration tome 600 cost can move up","file":"worked-examples.md","section":"Example 3 — Reverbra (Sonic Mage)"}

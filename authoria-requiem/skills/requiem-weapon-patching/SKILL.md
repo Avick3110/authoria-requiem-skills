@@ -145,9 +145,9 @@ housecarl_cross_plugin_query type="COBJ" references="013989:Skyrim.esm" conflict
 - **Smelter** (`WorkbenchKeyword` = `0A5CCE`): melts the weapon back to ingots (optional).
 
 Author the new recipes by cloning the comparable's `Conditions` and `Items` and swapping the
-`CreatedObject` to your weapon. Copy the `Conditions` list **verbatim** — the perk reference is
-stored as a form-index that does not always render as a readable FormID, so reproduce it from
-the comparable rather than retyping it. Recipe shapes in `references/crafting.md`.
+`CreatedObject` to your weapon. Read the comparable's condition (houseCARL 1.2.2+ renders the perk
+parameter as a readable FormID) and compose the same gate onto the new recipe — the condition
+grammar is in `references/housecarl-recipes.md` § E. Recipe shapes in `references/crafting.md`.
 
 ### 7 — Emit the override
 

@@ -9,8 +9,9 @@ shape — read live off `REQ_Forge_Arrow_Steel` (00B650) and `REQ_Forge_Bolt_Iro
 - **`Items`** = exactly two: **one metal ingot ×1** + **one firewood (`06F993:Skyrim.esm`) ×1**.
 - **`CreatedObjectCount = 30`** — one ingot + one log yields 30 arrows (or 30 bolts).
 - **`Conditions`** = one `HasPerk` condition (`ComparisonValue 1`, `EqualTo`) — the smithing-perk
-  gate. The perk renders as an unreadable form-index (`floi: form mode but no readable FormKey`),
-  so **clone the comparable recipe's `Conditions` verbatim** rather than retyping it.
+  gate. houseCARL 1.2.2+ renders the perk parameter as a readable FormID (older builds showed
+  `floi: form mode but no readable FormKey`) — **read the comparable recipe's perk and compose the
+  same gate** (grammar in `housecarl-recipes.md` § D) rather than picking a perk by hand.
 
 Common ingot FormIDs: Iron `05ACE4`, Steel `05ACE5`, Dwarven `0DB8A2`, Elven (refined moonstone)
 `05AD9F`, Orichalcum (orcish) `05AD99`, Glass (refined malachite) `05ADA1`, Ebony `05AD9D`, Gold
