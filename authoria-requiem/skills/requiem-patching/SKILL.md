@@ -119,7 +119,9 @@ reference's constraints. Example: a new ingredient is an `INGR` whose effects ar
 
 - [ ] Freshness probe passed; plugin enumerated with `cross_plugin_query plugins=[...]`.
 - [ ] Worklist grouped by record type; new content separated from cosmetic touches.
-- [ ] Every record type routed to its domain skill and patched there.
+- [ ] Every record type routed to its domain skill and patched there — and for **high-count types**
+      (`NPC_`, `ARMO`, `BOOK`, `CONT`, `LVLI`, …) every record dispositioned, not just a sample; counts
+      reconcile (per `references/integration-checklist.md` item 1).
 - [ ] Every gap mechanic the content implies handled per its reference (constraints applied).
 - [ ] `references/integration-checklist.md` run: masters correct + load-order-sorted; **no
       `REQ_NULL_*` anywhere**; Reqtificator-vs-manual matrix respected.

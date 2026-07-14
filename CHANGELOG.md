@@ -2,6 +2,14 @@
 
 All notable changes to the Authoria Requiem Patching Skills plugin. Versioning is [semantic](https://semver.org); the `version` in `authoria-requiem/.claude-plugin/plugin.json` is bumped on each release.
 
+## 1.0.2 — 2026-07-14
+
+Bugfix (HCBR-2026-07-14-03): a whole-plugin NPC pass gated coverage at record-**type** granularity, so per-record misses shipped silently.
+
+- **`requiem-npc-patching` — new *Bulk pass protocol* section.** A Gray Cowl of Nocturnal rebalance shipped with 7 of 144 NPCs unpatched: the pass read representative members of same-prefix EditorID families and extrapolated, so the non-uniform outliers (PC-scaling vendors, an over-tier summon, a level-10 Thalmor pair, a level-1 quest attacker) — the exact records a rebalance exists to catch — were never dispositioned. The skill now opens whole-plugin jobs with two one-call coverage sweeps: the PC-mult **de-levelling work list** (`where=["Configuration.Level.LevelMult >= 0"]` — a scalar compare on the union arm doubles as an arm-presence test, returning exactly the actors still on a multiplier) and a full-type **triage matrix**. The enumeration is the work queue: every FormID gets a disposition (patched, or skipped with a reason verified per record), the pass closes on a reconciliation count (patched + skipped = enumerated), and extrapolating across same-prefix EditorIDs is prohibited. The copy-ready sweep is mirrored in `references/housecarl-recipes.md` and a whole-plugin line was added to the skill's checklist.
+- **`requiem-patching` — coverage gate tightened from per-type to per-record.** `references/integration-checklist.md` item 1 and the skill's own checklist bullet no longer clear a high-count type (`NPC_`, `ARMO`, `BOOK`, `CONT`, `LVLI`, …) on a nonzero patch count; they require every record dispositioned with counts that reconcile, and cross-reference the NPC skill's *Bulk pass protocol*.
+- **No houseCARL defect.** The coverage primitive was confirmed working live on `Gray Fox Cowl.esm`; the report's optional houseCARL ergonomic (documenting the union-arm `where=` presence test) is tracked separately in that repo. Skill descriptions are unchanged, so no trigger re-validation is required.
+
 ## 1.0.1 — 2026-06-11
 
 Bugfix (HCBR-2026-06-11-03): the freshness probe tested a machine-specific fingerprint, not the real invariant.

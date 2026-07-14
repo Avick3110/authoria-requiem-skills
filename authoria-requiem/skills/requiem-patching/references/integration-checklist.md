@@ -5,8 +5,15 @@ single domain skill owns.
 
 ## The final checklist
 
-1. **Coverage.** Every record type from `cross_plugin_query plugins=["<NewMod>.esp"]` was either
-   routed to a domain skill and patched, or deliberately skipped as cosmetic. No type left unhandled.
+1. **Coverage — per record, not per type.** Every record type from
+   `cross_plugin_query plugins=["<NewMod>.esp"]` is routed to a domain skill or deliberately skipped as
+   cosmetic. But for **high-count types (`NPC_`, `ARMO`, `BOOK`, `CONT`, `LVLI`, …)** a nonzero patch
+   count does **not** clear the type: the enumeration is the work queue, so **every record gets a
+   disposition** (patched, or skipped with a reason), skips are verified per record rather than
+   inherited from a same-prefix neighbour, and the counts **reconcile** (patched + skipped =
+   enumerated). The outliers a rebalance exists to catch — the one hand-tweaked record hiding inside an
+   otherwise-uniform group — are exactly what sampling-and-extrapolating ships unpatched. The
+   `requiem-npc-patching` skill's *Bulk pass protocol* carries the one-call coverage finder for `NPC_`.
 2. **Gap mechanics.** Every system the content implies (vampire, disease, alchemy, economy, …) had its
    reference's constraints applied — not just the raw record.
 3. **Carry inputs, not outputs.** Verify against the matrix below that you carried the input keywords

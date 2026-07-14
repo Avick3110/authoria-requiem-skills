@@ -7,6 +7,27 @@ the `bulk_apply` per-op read-back, or `full_readback=true` (houseCARL 1.2.3+) fo
 written record. Read first, then write — a malformed op refuses the whole call (all-or-nothing).
 Verify every FormID against the live comparable.
 
+## Coverage audit (whole-plugin bulk pass)
+
+Before any per-record work on a whole-plugin job, sweep the type in two reads so the enumeration
+becomes your work queue (full doctrine: the skill body's *Bulk pass protocol*). Neither call writes.
+
+```
+# 1 — the de-levelling work list: every NPC still on a PC-level multiplier.
+#     The scalar compare on the union arm is an arm-presence test — fixed-level NPCs report
+#     no value on LevelMult and drop out, so what returns is exactly the de-levelling queue.
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="NPC_" \
+  where=["Configuration.Level.LevelMult >= 0"]
+
+# 2 — the triage matrix: the disposition fields for every NPC of the type in one table.
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="NPC_" \
+  fields=["Configuration.Level","Configuration.Flags","Configuration.TemplateFlags","AIData.Aggression","Class"]
+```
+
+Give every FormID from the enumeration a disposition (patched → which workflow below, or skipped →
+the reason), verified per record — never extrapolated across a same-prefix EditorID family. Close
+with a reconciliation count: patched + skipped = enumerated.
+
 ## A — Re-balance a standalone combatant (replicate the analogue's fields)
 
 `Configuration` sub-fields are addressed by path; `Configuration.Level.Level` is the fixed level.
