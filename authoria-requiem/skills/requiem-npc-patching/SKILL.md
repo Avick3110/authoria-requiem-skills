@@ -75,6 +75,52 @@ Confirm authority is fresh, then identify what you're holding before you change 
    cross-check combat style, gear, and perks (some modders slap a generic/Dremora class on
    everything). Mapping heuristic in `references/identification.md`.
 
+## Bulk pass protocol (whole-plugin jobs)
+
+When you're patching a whole plugin — routed here from the `requiem-patching` skill, or any job with
+more than a handful of NPCs — the enumeration **is the work queue**, not a sample of it. High-count NPC
+plugins hide their hard records inside uniform-looking groups: the PC-scaling vendor, the over-tier
+summon, the level-1 quest attacker sitting among a dozen near-identical guards. Those non-uniform
+outliers are exactly what a rebalance pass exists to catch — and the fastest way to ship them unpatched
+is to read one member of a same-prefix EditorID family and extrapolate to the rest.
+
+**Never extrapolate across same-prefix EditorIDs.** `AlikrEncBandit01..06`, a `Thalmor*` pair, a run of
+`…Guard##` *look* uniform, but a modder hand-tweaks individuals inside the family — the one carrying its
+own stats is the record that needs you. Reading the outlier costs one query; missing it ships a vendor
+that never got de-levelled, or a boss that dies to one arrow in someone else's game.
+
+Open with the two coverage queries — one call each, the whole plugin at once, and neither writes:
+
+1. **The de-levelling work list** — every NPC still on a player-level multiplier. A scalar comparison on
+   the union-arm field doubles as an **arm-presence test**: PC-scaling actors have a readable `LevelMult`
+   and match; fixed-level actors report no value on that arm and drop out. So this returns exactly the
+   actors that still need a fixed level + `PCLevelMult` removed:
+
+   ```
+   housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="NPC_" \
+     where=["Configuration.Level.LevelMult >= 0"]
+   ```
+
+   Every FormID it returns is on the de-levelling queue (Workflow C) — except followers, which keep the
+   multiplier (`references/followers.md`).
+
+2. **The triage matrix** — the disposition-driving fields for every record of the type, in one table:
+
+   ```
+   housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="NPC_" \
+     fields=["Configuration.Level","Configuration.Flags","Configuration.TemplateFlags","AIData.Aggression","Class"]
+   ```
+
+   Read `Class` + `AIData.Aggression` + `TemplateFlags` per row to disposition each NPC (which workflow,
+   or which skip category) instead of hand-picking batch reads.
+
+**Every FormID gets a disposition.** Walk the full enumeration: each record is **patched** (note which
+workflow) or **skipped** (note the reason — civilian / summon / already-templated / scene actor), and a
+skip is verified on *that* record, never inherited from a neighbour. Close the pass with a
+**reconciliation count — patched + skipped = enumerated.** If the two sides don't add up, a record fell
+through; find it before you call the type done. (This is the per-record coverage the `requiem-patching`
+skill's integration checklist gates on for high-count types.)
+
 ## Workflow
 
 Real call shapes below; the full copy-ready set is in `references/housecarl-recipes.md`, the field
@@ -251,6 +297,8 @@ The mechanics are easy; the judgment is **identification** — what the NPC is, 
 
 Before finishing an NPC override, confirm:
 
+- [ ] **Whole-plugin job:** every enumerated NPC dispositioned (patched, or skipped with a reason);
+      counts reconcile (patched + skipped = enumerated); no same-prefix EditorID extrapolation.
 - [ ] **Role identified** and it's a combatant (not a civilian/helper/summon).
 - [ ] **Level** fixed + `PCLevelMult` removed (followers: kept).
 - [ ] **Flags** correct (Respawn for generic spawns; Unique/Protected/Essential by role; AutoCalcStats
