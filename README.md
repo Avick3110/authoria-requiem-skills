@@ -57,7 +57,7 @@ authoria-requiem/                 the plugin — drop this folder into ~/.claude
 
 ## Status
 
-**Feature-complete (v1.0.0)** — all nine skills authored and verified by round-trip against live Requiem records. Skill descriptions passed the skill-authoring standard's checks via its manual-prediction fallback (the empirical eval loop needs a non-Windows host); **empirical eval re-validation + a peer prediction check remain as a follow-up**, alongside a handful of live-verification items.
+**Feature-complete and maintained** — all nine skills authored and verified by round-trip against live Requiem records; the current version lives in [CHANGELOG.md](CHANGELOG.md). Skill descriptions passed the skill-authoring standard's checks via manual prediction plus an independent peer-prediction check; an empirical trigger re-validation remains as a follow-up, alongside a handful of live-verification items.
 
 ## Credits
 
