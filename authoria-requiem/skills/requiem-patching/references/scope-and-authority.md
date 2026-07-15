@@ -37,7 +37,7 @@ Core `Requiem.esp` plus its addons, each owning its domain:
 
 On an authoring-style profile the winner comes from these directly; on a live profile the Reqtificator output folds the build pass over them. Either way the live winner is the comparable to replicate.
 
-## Scope note — merges and compatibility patches are in scope (Aaron-approved)
+## Scope note — merges and compatibility patches are in scope (author-approved)
 
 A hand-authored **merge** winning a record is legitimate authority, same as any other live winner. The reference case: on the author's instance, `RACE` records resolve to `Authoria - Master Patch - Races Merge.esp` (the live winner for ~49 races) — a corrected/consolidated input merge that faithfully carries Requiem's trait spells + knockdown `Attacks` data (superseding the dated `requiem_knockdown_tweak.esp`). Treat such a winner as authoritative; **do not re-point to escape it.** On other instances the race winners are typically `Requiem - Races Redone.esp` and its patches, the setup's own merge, or the Reqtificator output. The general rule stands: the live winner is the authority — verify the live chain per record rather than judging a plugin by its name.
 

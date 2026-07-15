@@ -17,7 +17,7 @@ UseAdvancedAvoidance` (no `RegenHpInCombat`); `Starting` H100/M0/S100, `Regen` H
 **Classify.** `ActorTypeTroll` + the name + the troll skeleton → the **troll** analogue, unambiguous.
 
 **Check its own ability first.** `ActorEffect[0] = 0079A5` is `zzzLrhAbBeastPos` ("Beast Pos
-Abilities", 6 effects) — an **`Ab`-prefixed ability bundle**, the mod's own resistances/buffs. Aaron's
+Abilities", 6 effects) — an **`Ab`-prefixed ability bundle**, the mod's own resistances/buffs. The author's
 rule: **keep it, don't replace.** So we add natural armor + healing but **not** `REQ_Trait_Resist_Troll`
 (the race already carries its own resistances).
 
@@ -41,7 +41,7 @@ the auto-pass — so either template their `Race` onto `TrollRace 013205`, or ha
 them. The race skill names it; the `requiem-npc-patching` skill applies it.
 
 **Why each piece:** Armor gives the troll its bulk; Healing + the flag give it the troll's combat
-regen (Aaron's flag↔healing rule); keeping `zzzLrhAbBeastPos` preserves the mod's own resistances; the
+regen (the author's flag↔healing rule); keeping `zzzLrhAbBeastPos` preserves the mod's own resistances; the
 keywords mark it as bleeding + knockdown-resistant like a Requiem troll. No `FX_` spell was added.
 
 ## 2 — Creature round-trip (exact): Frost Troll from Troll
