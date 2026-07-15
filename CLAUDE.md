@@ -48,11 +48,13 @@ authoria-requiem/                  THE PLUGIN — the shipped artifact
 standards/                         binding skill-authoring standards (synced from houseCARL — upstream;
                                    re-sync these copies if they change there)
 
-dev/   (local-only, gitignored — NOT in the public repo)
+dev/   (SHARED dev lane — tracked since 2026-07-15 so both maintainers + their agents see one state)
   session-handoffs/                rolling per-session handoffs — the "where are we" lane
   BACKLOG.md                       standing small follow-ups (the durable papercut ledger)
   plans/                           chartered work (one plan doc per undertaking)
   handoffs/phase-*.md              build-era phase handoffs (ARCHIVE — the deep "why" corpus)
+  corpus-*/                        mined derivation corpora (consumables, perks — ARCHIVE)
+  s4-graycowl-validation/          S4 empirical-close artifacts + FINDINGS ledger (ARCHIVE)
   STATE.md                         build-era cross-session ledger (ARCHIVE, frozen at ship)
   PUBLIC-RELEASE-PLAN.md           executed release plan (ARCHIVE)
   reqtificator-rules.md            the Reqtificator rulebook (LIVING reference)
@@ -68,8 +70,20 @@ dev/   (local-only, gitignored — NOT in the public repo)
 - **Lanes.** Live-session bug reports from Aaron → the external HCBR gap/bug store (fixes reference
   their `HCBR-<date>-<n>` id, as in CHANGELOG). Small dev-noticed follow-ups → `dev/BACKLOG.md`.
   Chartered work → `dev/plans/`. Session state → `dev/session-handoffs/` (write one at end of session).
-- **`dev/` is gitignored and must never be pushed.** Durable docs that must outlive a session go in
-  the MAIN checkout's `dev/`, not a worktree's (worktree removal deletes ignored files).
+- **`dev/` is the SHARED dev lane — tracked and pushed (since 2026-07-15; Heisen is a collaborator).**
+  Two maintainers + their agents work from one state, so:
+  - **Authorship stamps are mandatory.** Every new handoff, plan, and findings doc carries, directly
+    under its title: `*Author: <Aaron|Heisen> (+ Claude session) · YYYY-MM-DD*`. Every new BACKLOG
+    entry ends its trailing parenthetical with the author, e.g. `(2026-07-15, S4 session, Aaron)`.
+    Agents: stamp the human you operate for, never just the model. Docs predating 2026-07-15 are
+    Aaron-lineage unless stamped otherwise.
+  - **Read the latest handoff by DATE across BOTH authors** — "where are we" is now a merged lane;
+    check for a sibling handoff from the other maintainer before assuming yours is latest.
+  - `dev/` docs ride PRs like everything else: work-session docs ride the work's PR; doc-only
+    updates go in small `docs:` PRs. Write durable docs in your WORKTREE now (they're tracked;
+    the old main-checkout rule applied only while `dev/` was gitignored).
+  - **Publish hygiene:** `dev/` is in a public repo — no local machine paths (use `<home>` or
+    relative), no emails, no credentials. Scrub before commit.
 - **This repo is the source of truth; the live install is a copy.** After editing here, sync and
   restart Claude Code to load changes:
 

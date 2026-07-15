@@ -1,0 +1,42 @@
+{
+  "plugin": "S4 Validation - Gray Cowl.esp",
+  "mod_folder": "houseCARL - S4 Validation - Gray Cowl",
+  "masters": ["Skyrim.esm", "Update.esm", "Dawnguard.esm", "Gray Fox Cowl.esm", "Requiem.esp", "Requiem - Resist and Regen Tweak.esp"],
+  "activation_state": "written to disk, INACTIVE — houseCARL patch mod folder not enabled/sorted in the MO2 load order (matches requested INACTIVE preference; a houseCARL patch is never auto-added to the active order). Because it is not enabled, live read-back via read_record is unavailable; verification used each write call's own file read-back and a final full_readback spot-check.",
+  "method": "Blinding-safe override: every patched record was FIRST seeded with housecarl_forward_record from_plugin='Gray Fox Cowl.esm' (the ESM's OWN version), THEN edited with housecarl_bulk_apply into= the patch. This edits the patch's carried ESM-based version and NEVER reads the live winner. The live winner for ~half these records is 'Authoria - Patch - Gray Cowl of Nocturnal Requiem.esp' (the blinded oracle) — it was never read. Values applied verbatim from each record's fields_to_set; checklist prose not used to add fields.",
+  "written_per_lane": {"npc": 90, "weapons": 21, "armor": 23, "magic": 37, "consumables": 5, "perk-race": 5, "lists": 0},
+  "total_records_written": 181,
+  "total_field_writes": 843,
+  "resolved_placeholders": 5,
+  "resolved_placeholder_detail": [
+    "TemptedCenturion 01BDB4 Configuration.HealthOffset = 2600 (read live from EncDwarvenCenturion03 023A96:Skyrim.esm)",
+    "DraukiirTemplate 68945A Configuration.HealthOffset = 200 (read live from EncDraugr01Template 03B547:Skyrim.esm)",
+    "DraukiirGhost 68945B Configuration.HealthOffset = 200 (read live from EncDraugr01Template 03B547:Skyrim.esm)",
+    "SKELETON_SUPERSET perk list = 13 perks copied live from EncSkeleton01Melee1H 02D1DE:Skyrim.esm Perks (applied to 00465A/B/C + 03DB19)",
+    "DRAUGR_SUPERSET perk list = 10 perks copied live from EncDraugr01Template 03B547:Skyrim.esm Perks (applied to 68945A/B, plus undead physique 00080B)"
+  ],
+  "failures": [],
+  "deferred_placeholders": {
+    "reason": "These fields_to_set keys named their comparable only by tier/type (e.g. 'a Requiem L50 warrior comparable') or gave an approximate range (e.g. MagickaOffset '~150', '~1000-1300'), WITHOUT pinning a specific comparable FormID. The mechanical write layer cannot resolve them without making a derivation/comparable choice, which is out of scope — so they were left unwritten (default to the ESM base value) rather than invented. Every affected record still received all its other fields_to_set (level, flags, class, combatstyle, perks, actoreffect).",
+    "boss_PlayerSkills_explicit": ["002FAF", "002FB0", "002FB1", "002FB4", "01761D", "017620", "02D70B", "02E45B", "0356AA", "03A216", "000EB7", "03CFD7", "03CFDA", "03CFE1", "03CFE0"],
+    "boss_caster_offsets_MagickaOffset_or_HealthOffset": ["01761D", "02D70B", "02E45B", "0356AA", "03A216", "000EB7", "03CFD7", "03CFDA", "03CFE1", "03CFE0"],
+    "creature_HealthOffset_comparable_by_type_only": ["02B323 (chaurus)", "0301DF (giant frostbite spider)", "032E66 (sabre cat)", "60A316 (death hound)", "60A317 (death hound)", "61966F (dwarven spider)"],
+    "note": "NPC records with AutoCalc off but missing explicit PlayerSkills still carry the ESM's own baked PlayerSkills (verified on a sample: BladeGuardian 002798 shows OneHanded 61, HeavyArmor 61, etc.), so deferring the explicit-PlayerSkills placeholder does not zero these actors."
+  },
+  "checklist": {
+    "masters_sorted": true,
+    "masters_sorted_detail": "check_errors reports 0 missing masters; master list is in valid load order (ESMs Skyrim/Update/Dawnguard/Gray Fox Cowl before ESPs Requiem/Requiem-RRT). houseCARL cross-master merge pulled Dawnguard.esm (Draukiir/wormmouth Death Hound refs, Dawnguard weapon kw), Requiem.esp (perks/classes/traits/keywords), and Requiem - Resist and Regen Tweak.esp (creature physique perks) automatically.",
+    "req_null_clean": true,
+    "req_null_detail": "No REQ_NULL_* token appears in any applied value. (The only REQ_NULL in the derivation set — REQ_NULL_LootDwarvenArrows10 in the lists lane's LVLI 00F0F2 — was in a SKIPPED record and was never written.)",
+    "check_errors": "0 missing masters, 0 parse failures, 8 dangling references. The dangling refs are NOT write failures — they are lane-DERIVED FormIDs applied verbatim that do not resolve in the live load order: (1) 0D799A:Requiem.esp — a caster perk-set node in MAGE_DESTRUCTION_FIRE / FROST_EXPERT / CONJURER / BOSS_CASTER_DRAUGR, referenced by 7 caster NPCs (02D70B Imhotep, 02E45B ImhotepB, 0356AA Basil, 03CFD7 Arlowe, 03CFDA Guard03, 03CFE1 Guard07, 03CFE0 Adrian); (2) 01CE0E:Skyrim.esm — Imhotep's (02D70B) derived Class. Both are surfaced as lane-derivation findings, faithfully applied.",
+    "spot_verify": "5/5 ok — full_readback confirmed applied values on INGR 006A57 (NoAutoCalculation, Value/IngredientValue 12, VendorItemIngredient kw, 4 effects w/ corrected magnitudes+durations), Armor 0021D3 (AR 300, Value 250, Weight 25, steel-set keywords, NonPlayable preserved), Weapon 03A217 (Damage 60, Crit 7, Speed 0.3704, Flags NPCsUseAmmo, 7 keywords incl Requiem bow set, EnchAmount 5000), Spell 00302D (BaseCost 40, FireAndForget/Self, ChargeTime 0.5, HalfCostPerk 0C44B7), NPC 002798 (Level=NpcLevel 20, Flags Protected, Class 8A8BE2:Requiem.esp, CombatStyle 91AA67:Requiem.esp, ActorEffect +93AD8A, 16-perk MELEE_1H_LIGHT_T06 set)."
+  },
+  "notes": [
+    "FLAG SEMANTICS: Configuration.Flags and race/weapon/ammo Flags were applied as literal Set (replace) of the lane's token string — the faithful mechanical reading of 'apply verbatim'. For AutoCalc-derived NPCs the lane wrote Flags without listing AutoCalcStats; a literal Set therefore clears the AutoCalcStats bit. This is the lane's literal output and is preserved for the test to score; it was not 'fixed' to a union of flags.",
+    "COBJ recipes: the ESM already carried the temper structure (EPTemperingItemIsEnchanted OR + HasPerk + ingot). Only the HasPerk perk (and, where the ESM ingot differed, the ingot) needed updating to the Requiem-derived value. Umbra COBJ 014950 got CreatedObject/Count/WorkbenchKeyword but its perk-gate + ingot are intentionally PENDING per the flagged Umbra weapon 00334E (weapon itself is dispositioned 'flagged' -> not written).",
+    "Enum values that could have failed were isolated into their own small bulk_apply calls (weapon Data.Flags/ammo Flags/proj Flags+Type; race Flags) so a name mismatch would not void a large batch. All enum names the lanes wrote were accepted (NPCsUseAmmo, NonBolt, CanBePickedUp, Arrow, DoesNotBleed, the full race flag sets, TemplateFlags unprefixed names, NpcLevel arm).",
+    "Perks written as verb=ReplaceAll with one PerkPlacement(Rank=1) per FormID, per the derivation's write shape. Named sets taken from the npc lane perk_sets object verbatim; the two supersets resolved live from their pinned comparables.",
+    "flagged/skipped records were NOT written, per instructions: NPC flagged (6: Seviana, Luvien, ChampionOfCyrodiil, UrielSeptim, ChampionOfCyrodiilPrisoner, MolagBal), weapon flagged (Umbra 00334E), armor flagged (3: ImhotepCrown, BootsofSpringheelJak, DraukiirMask), magic flagged (6: 3 Stone abilities + 3 Fortify MGEFs), perk flagged (LuckyLantern), and the lists lane's 3 ECZN recommendations (all left unwritten).",
+    "The blinded oracle 'Authoria - Patch - Gray Cowl of Nocturnal Requiem.esp' was never read. Comparables were read only from Gray Fox Cowl.esm (own version) and Requiem live winners (EncDwarvenCenturion03, EncDraugr01Template, EncSkeleton01Melee1H)."
+  ]
+}

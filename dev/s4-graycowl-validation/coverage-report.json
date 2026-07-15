@@ -1,0 +1,761 @@
+﻿{
+    "summary":  {
+                    "oracle_total":  125,
+                    "lane_covered":  103,
+                    "router_covered":  19,
+                    "oracle_novel":  3,
+                    "MISSES":  0
+                },
+    "rows":  [
+                 {
+                     "formid":  "020119:Gray Fox Cowl.esm",
+                     "type":  "ObjectEffect",
+                     "editorid":  "manny_GF_Ench_GrayCowl",
+                     "status":  "lane [magic:patched]"
+                 },
+                 {
+                     "formid":  "018080:Gray Fox Cowl.esm",
+                     "type":  "ObjectEffect",
+                     "editorid":  "manny_GF_Ench_Umbra",
+                     "status":  "lane [magic:patched]"
+                 },
+                 {
+                     "formid":  "03A218:Gray Fox Cowl.esm",
+                     "type":  "ObjectEffect",
+                     "editorid":  "manny_GF_Ench_ForgottenChaosBow",
+                     "status":  "lane [magic:patched]"
+                 },
+                 {
+                     "formid":  "05F05F:Gray Fox Cowl.esm",
+                     "type":  "ObjectEffect",
+                     "editorid":  "manny_GF_Ench_BladeOfYokuda",
+                     "status":  "lane [magic:patched]"
+                 },
+                 {
+                     "formid":  "02299B:Gray Fox Cowl.esm",
+                     "type":  "ObjectEffect",
+                     "editorid":  "manny_GF_Ench_Ocato",
+                     "status":  "lane [magic:patched]"
+                 },
+                 {
+                     "formid":  "01FBFE:Gray Fox Cowl.esm",
+                     "type":  "ObjectEffect",
+                     "editorid":  "manny_GF_Ench_TheWithdrawal",
+                     "status":  "lane [magic:patched]"
+                 },
+                 {
+                     "formid":  "019612:Gray Fox Cowl.esm",
+                     "type":  "ObjectEffect",
+                     "editorid":  "manny_GF_Ench_BootsofSpringheelJak",
+                     "status":  "lane [magic:patched]"
+                 },
+                 {
+                     "formid":  "03A7E7:Gray Fox Cowl.esm",
+                     "type":  "Spell",
+                     "editorid":  "manny_GF_Spell_ConjureForgottenDraugr",
+                     "status":  "lane [magic:patched]"
+                 },
+                 {
+                     "formid":  "03A7EE:Gray Fox Cowl.esm",
+                     "type":  "Spell",
+                     "editorid":  "manny_GF_Spell_ConjureCorruptedRedguard",
+                     "status":  "lane [magic:patched]"
+                 },
+                 {
+                     "formid":  "020698:Gray Fox Cowl.esm",
+                     "type":  "Spell",
+                     "editorid":  "manny_GF_Spell_UnlockContainer",
+                     "status":  "lane [magic:patched]"
+                 },
+                 {
+                     "formid":  "047E52:Gray Fox Cowl.esm",
+                     "type":  "Spell",
+                     "editorid":  "manny_GF_Spell_Mark",
+                     "status":  "lane [magic:patched]"
+                 },
+                 {
+                     "formid":  "047E55:Gray Fox Cowl.esm",
+                     "type":  "Spell",
+                     "editorid":  "manny_GF_Spell_Recall",
+                     "status":  "lane [magic:patched]"
+                 },
+                 {
+                     "formid":  "04899C:Gray Fox Cowl.esm",
+                     "type":  "Spell",
+                     "editorid":  "manny_GF_Spell_ClearMark",
+                     "status":  "lane [magic:patched]"
+                 },
+                 {
+                     "formid":  "01A15A:Gray Fox Cowl.esm",
+                     "type":  "Spell",
+                     "editorid":  "manny_GF_Ability_StoneOfMagicka",
+                     "status":  "lane [magic:flagged]"
+                 },
+                 {
+                     "formid":  "01A15C:Gray Fox Cowl.esm",
+                     "type":  "Spell",
+                     "editorid":  "manny_GF_Ability_StoneOfHealth",
+                     "status":  "lane [magic:flagged]"
+                 },
+                 {
+                     "formid":  "01A157:Gray Fox Cowl.esm",
+                     "type":  "Spell",
+                     "editorid":  "manny_GF_Ability_StoneOfStamina",
+                     "status":  "lane [magic:flagged]"
+                 },
+                 {
+                     "formid":  "017AE5:Gray Fox Cowl.esm",
+                     "type":  "Armor",
+                     "editorid":  "manny_GF_Armor_GrayCowl",
+                     "status":  "lane [armor:patched]"
+                 },
+                 {
+                     "formid":  "0021D3:Gray Fox Cowl.esm",
+                     "type":  "Armor",
+                     "editorid":  "manny_GF_Armor_BladesCuirass",
+                     "status":  "lane [armor:patched]"
+                 },
+                 {
+                     "formid":  "0021D4:Gray Fox Cowl.esm",
+                     "type":  "Armor",
+                     "editorid":  "manny_GF_Armor_BladesGauntlets",
+                     "status":  "lane [armor:patched]"
+                 },
+                 {
+                     "formid":  "0021D2:Gray Fox Cowl.esm",
+                     "type":  "Armor",
+                     "editorid":  "manny_GF_Armor_BladesBoots",
+                     "status":  "lane [armor:patched]"
+                 },
+                 {
+                     "formid":  "0021D5:Gray Fox Cowl.esm",
+                     "type":  "Armor",
+                     "editorid":  "manny_GF_Armor_BladesHelmet",
+                     "status":  "lane [armor:patched]"
+                 },
+                 {
+                     "formid":  "0021D6:Gray Fox Cowl.esm",
+                     "type":  "Armor",
+                     "editorid":  "manny_GF_Armor_BladesShield",
+                     "status":  "lane [armor:patched]"
+                 },
+                 {
+                     "formid":  "041911:Gray Fox Cowl.esm",
+                     "type":  "Armor",
+                     "editorid":  "manny_GF_Armor_Yokuda",
+                     "status":  "lane [armor:patched]"
+                 },
+                 {
+                     "formid":  "042437:Gray Fox Cowl.esm",
+                     "type":  "Armor",
+                     "editorid":  "manny_GF_Armor_YokudaNonPlayable",
+                     "status":  "lane [armor:skipped]"
+                 },
+                 {
+                     "formid":  "02DCA1:Gray Fox Cowl.esm",
+                     "type":  "Armor",
+                     "editorid":  "manny_GF_Armor_ImhotepCrown",
+                     "status":  "lane [armor:flagged]"
+                 },
+                 {
+                     "formid":  "674F20:Gray Fox Cowl.esm",
+                     "type":  "Armor",
+                     "editorid":  "manny_GF_Armor_DraukiirMask",
+                     "status":  "lane [armor:flagged]"
+                 },
+                 {
+                     "formid":  "018B4B:Gray Fox Cowl.esm",
+                     "type":  "Armor",
+                     "editorid":  "manny_GF_Armor_BootsofSpringheelJak",
+                     "status":  "lane [armor:flagged]"
+                 },
+                 {
+                     "formid":  "03A7EA:Gray Fox Cowl.esm",
+                     "type":  "Book",
+                     "editorid":  "manny_GF_SpellTome_ConjureForgottenDraugr",
+                     "status":  "lane [magic:patched]"
+                 },
+                 {
+                     "formid":  "0021D7:Gray Fox Cowl.esm",
+                     "type":  "Weapon",
+                     "editorid":  "manny_GF_Weapon_BladesSword",
+                     "status":  "lane [weapons-ammo:patched]"
+                 },
+                 {
+                     "formid":  "00279A:Gray Fox Cowl.esm",
+                     "type":  "Weapon",
+                     "editorid":  "manny_GF_Weapon_BladesSwordGuardian",
+                     "status":  "lane [weapons-ammo:skipped]"
+                 },
+                 {
+                     "formid":  "00341D:Gray Fox Cowl.esm",
+                     "type":  "Weapon",
+                     "editorid":  "manny_GF_Weapon_ElvenClub",
+                     "status":  "lane [weapons-ammo:patched]"
+                 },
+                 {
+                     "formid":  "004D9F:Gray Fox Cowl.esm",
+                     "type":  "Weapon",
+                     "editorid":  "manny_GF_Weapon_AncientScimitar",
+                     "status":  "lane [weapons-ammo:patched]"
+                 },
+                 {
+                     "formid":  "006457:Gray Fox Cowl.esm",
+                     "type":  "Weapon",
+                     "editorid":  "manny_GF_Weapon_BenSala_Scimitar",
+                     "status":  "lane [weapons-ammo:skipped]"
+                 },
+                 {
+                     "formid":  "00334E:Gray Fox Cowl.esm",
+                     "type":  "Weapon",
+                     "editorid":  "manny_GF_Weapon_Umbra",
+                     "status":  "lane [weapons-ammo:flagged]"
+                 },
+                 {
+                     "formid":  "01761C:Gray Fox Cowl.esm",
+                     "type":  "Weapon",
+                     "editorid":  "manny_GF_Weapon_UmbraNonPlayable",
+                     "status":  "lane [weapons-ammo:skipped]"
+                 },
+                 {
+                     "formid":  "01FAEC:Gray Fox Cowl.esm",
+                     "type":  "Weapon",
+                     "editorid":  "manny_GF_Weapon_TheWithdrawal",
+                     "status":  "lane [weapons-ammo:patched]"
+                 },
+                 {
+                     "formid":  "02298B:Gray Fox Cowl.esm",
+                     "type":  "Weapon",
+                     "editorid":  "manny_GF_Weapon_Ocato",
+                     "status":  "lane [weapons-ammo:patched]"
+                 },
+                 {
+                     "formid":  "03A217:Gray Fox Cowl.esm",
+                     "type":  "Weapon",
+                     "editorid":  "manny_GF_Weapon_ForgottenChaosBow",
+                     "status":  "lane [weapons-ammo:patched]"
+                 },
+                 {
+                     "formid":  "02ACF9:Gray Fox Cowl.esm",
+                     "type":  "Weapon",
+                     "editorid":  "manny_GF_Weapon_ForgottenChaosBowNonPlayable",
+                     "status":  "lane [weapons-ammo:skipped]"
+                 },
+                 {
+                     "formid":  "02B7DC:Gray Fox Cowl.esm",
+                     "type":  "Weapon",
+                     "editorid":  "manny_GF_Weapon_GoldenScimitar",
+                     "status":  "lane [weapons-ammo:patched]"
+                 },
+                 {
+                     "formid":  "05F05D:Gray Fox Cowl.esm",
+                     "type":  "Weapon",
+                     "editorid":  "manny_GF_Weapon_BladeOfYokuda",
+                     "status":  "lane [weapons-ammo:patched]"
+                 },
+                 {
+                     "formid":  "60A32B:Gray Fox Cowl.esm",
+                     "type":  "Weapon",
+                     "editorid":  "manny_GF_Weapon_DraukiirTorch",
+                     "status":  "lane [weapons-ammo:skipped]"
+                 },
+                 {
+                     "formid":  "665AFD:Gray Fox Cowl.esm",
+                     "type":  "Weapon",
+                     "editorid":  "manny_GF_Weapon_DragonPriestStaff",
+                     "status":  "lane [weapons-ammo:patched]"
+                 },
+                 {
+                     "formid":  "7D317B:Gray Fox Cowl.esm",
+                     "type":  "Weapon",
+                     "editorid":  "manny_GF_Weapon_DawnOfMan",
+                     "status":  "lane [weapons-ammo:patched]"
+                 },
+                 {
+                     "formid":  "851D0A:Gray Fox Cowl.esm",
+                     "type":  "Weapon",
+                     "editorid":  "manny_GF_Weapon_ScorchOfTheUndead",
+                     "status":  "lane [weapons-ammo:patched]"
+                 },
+                 {
+                     "formid":  "0021E2:Gray Fox Cowl.esm",
+                     "type":  "Ammunition",
+                     "editorid":  "manny_GF_Ammo_ExtricationArrow",
+                     "status":  "lane [weapons-ammo:patched]"
+                 },
+                 {
+                     "formid":  "02D70B:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_Imhotep",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "02E45B:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_ImhotepB",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "000EB7:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_GuardianOfColdharbour",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "6B6E32:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_ColdharbourSentinel",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "60A2E1:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_Goron",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "004735:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_MummyBenSala",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "02D703:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_ImhotepDisciple01Melee",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "02D704:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_ImhotepDisciple01Missile",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "02D705:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_ImhotepDiscipleF01Melee",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "02D706:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_ImhotepDiscipleF01Missile",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "03A7E6:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_SadraakaDraugrSummonable",
+                     "status":  "lane [npc:skipped]"
+                 },
+                 {
+                     "formid":  "032E66:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_Animal_AncestralCheetah",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "02B323:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_Animal_Duneripper",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "0264A1:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_GhostMelee1HRedguardM01",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "0264A2:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_GhostMissileRedguardM01",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "0264A3:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_GhostMagicRedguardM",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "002798:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_BladeGuardian01",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "00279B:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_BladeGuardian02",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "00279C:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_BladeGuardian03",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "00279D:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_BladeGuardian04",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "600002:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_Mummy01Melee",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "600008:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_MummyF01Melee",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "003AA2:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_Mummy01Missile",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "003AA3:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_MummyF01Missile",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "030D08:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_Mummy01MeleeAmbush",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "030D09:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_Mummy01MissileAmbush",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "030D0A:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_MummyF01MeleeAmbush",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "030D0B:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_MummyF01MissileAmbush",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "60A317:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_WormMouthHorrid",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "60A316:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_WormMouth",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "01761D:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_Umbra",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "03A216:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_SadraakaDraugr",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "01BDB4:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_TemptedCenturion",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "61966F:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_DwarvenSpinner",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "60A318:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_DraukiirSword",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "60A319:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_DraukiirTorch",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "68945A:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_DraukiirTemplate",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "03DB19:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_CorruptedRedguard",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "03E10D:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_CorruptedRedguardSummonable",
+                     "status":  "lane [npc:skipped]"
+                 },
+                 {
+                     "formid":  "003399:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_ThalmorPatrolJail",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "00339E:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_ThalmorTorturer",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "017620:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_AnonymousOrc",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "000813:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "mihailgoronSUMMON",
+                     "status":  "lane [npc:skipped]"
+                 },
+                 {
+                     "formid":  "03CFD2:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_TelravBaenius",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "0167FE:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_IrlavBaenius",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "043B92:Gray Fox Cowl.esm",
+                     "type":  "Npc",
+                     "editorid":  "manny_GF_MetiliusAssistant",
+                     "status":  "lane [npc:patched]"
+                 },
+                 {
+                     "formid":  "014950:Gray Fox Cowl.esm",
+                     "type":  "ConstructibleObject",
+                     "editorid":  "manny_GF_CO_Umbra",
+                     "status":  "lane [weapons-ammo:patched + armor:skipped + consumables:skipped]"
+                 },
+                 {
+                     "formid":  "0340F3:Gray Fox Cowl.esm",
+                     "type":  "ConstructibleObject",
+                     "editorid":  "manny_GF_CO_GoldenScimitar",
+                     "status":  "lane [weapons-ammo:patched + armor:skipped + consumables:skipped]"
+                 },
+                 {
+                     "formid":  "004DA0:Gray Fox Cowl.esm",
+                     "type":  "ConstructibleObject",
+                     "editorid":  "manny_GF_CO_AncientScimitar",
+                     "status":  "lane [weapons-ammo:patched + armor:skipped + consumables:skipped]"
+                 },
+                 {
+                     "formid":  "014951:Gray Fox Cowl.esm",
+                     "type":  "ConstructibleObject",
+                     "editorid":  "manny_GF_CO_ElvenClub",
+                     "status":  "lane [weapons-ammo:patched + armor:skipped + consumables:skipped]"
+                 },
+                 {
+                     "formid":  "038585:Gray Fox Cowl.esm",
+                     "type":  "ConstructibleObject",
+                     "editorid":  "manny_GF_CO_BladeOfYokudaScimitar",
+                     "status":  "lane [weapons-ammo:patched + armor:skipped + consumables:skipped]"
+                 },
+                 {
+                     "formid":  "014953:Gray Fox Cowl.esm",
+                     "type":  "ConstructibleObject",
+                     "editorid":  "manny_GF_CO_ForgottenChaosBow",
+                     "status":  "lane [weapons-ammo:patched + armor:skipped + consumables:skipped]"
+                 },
+                 {
+                     "formid":  "866240:Gray Fox Cowl.esm",
+                     "type":  "ConstructibleObject",
+                     "editorid":  "manny_GF_CO_ScorchOfTheUndead",
+                     "status":  "lane [weapons-ammo:patched + armor:skipped + consumables:skipped]"
+                 },
+                 {
+                     "formid":  "014954:Gray Fox Cowl.esm",
+                     "type":  "ConstructibleObject",
+                     "editorid":  "manny_GF_CO_GrayCowl",
+                     "status":  "lane [weapons-ammo:skipped + armor:patched + consumables:skipped]"
+                 },
+                 {
+                     "formid":  "001A52:Gray Fox Cowl.esm",
+                     "type":  "Cell",
+                     "editorid":  "mannyGFInt01",
+                     "status":  "router [cosmetic-skip (world structure; cell-\u003eECZN linkage noted as open check)]"
+                 },
+                 {
+                     "formid":  "00236C:Gray Fox Cowl.esm",
+                     "type":  "Cell",
+                     "editorid":  "mannyGFInt03",
+                     "status":  "router [cosmetic-skip (world structure; cell-\u003eECZN linkage noted as open check)]"
+                 },
+                 {
+                     "formid":  "001B27:Gray Fox Cowl.esm",
+                     "type":  "Cell",
+                     "editorid":  "mannyGFInt02",
+                     "status":  "router [cosmetic-skip (world structure; cell-\u003eECZN linkage noted as open check)]"
+                 },
+                 {
+                     "formid":  "002A13:Gray Fox Cowl.esm",
+                     "type":  "Cell",
+                     "editorid":  "mannyGFInt03B",
+                     "status":  "router [cosmetic-skip (world structure; cell-\u003eECZN linkage noted as open check)]"
+                 },
+                 {
+                     "formid":  "00279E:Gray Fox Cowl.esm",
+                     "type":  "Cell",
+                     "editorid":  "mannyGFInt03A",
+                     "status":  "router [cosmetic-skip (world structure; cell-\u003eECZN linkage noted as open check)]"
+                 },
+                 {
+                     "formid":  "002B86:Gray Fox Cowl.esm",
+                     "type":  "Cell",
+                     "editorid":  "mannyGFInt03C",
+                     "status":  "router [cosmetic-skip (world structure; cell-\u003eECZN linkage noted as open check)]"
+                 },
+                 {
+                     "formid":  "0343A2:Gray Fox Cowl.esm",
+                     "type":  "Cell",
+                     "editorid":  "mannyGFIntBenEraiSewers",
+                     "status":  "router [cosmetic-skip (world structure; cell-\u003eECZN linkage noted as open check)]"
+                 },
+                 {
+                     "formid":  "002D4D:Gray Fox Cowl.esm",
+                     "type":  "Cell",
+                     "editorid":  "mannyGFInt03D",
+                     "status":  "router [cosmetic-skip (world structure; cell-\u003eECZN linkage noted as open check)]"
+                 },
+                 {
+                     "formid":  "000F7F:Gray Fox Cowl.esm",
+                     "type":  "Cell",
+                     "editorid":  "mannyGFIntHallsOfTheWest",
+                     "status":  "router [cosmetic-skip (world structure; cell-\u003eECZN linkage noted as open check)]"
+                 },
+                 {
+                     "formid":  "050CEB:Gray Fox Cowl.esm",
+                     "type":  "Cell",
+                     "editorid":  "mannyGFIntShantaFilibb02",
+                     "status":  "router [cosmetic-skip (world structure; cell-\u003eECZN linkage noted as open check)]"
+                 },
+                 {
+                     "formid":  "001F46:Gray Fox Cowl.esm",
+                     "type":  "Cell",
+                     "editorid":  "mannyGFIntMausoleum",
+                     "status":  "router [cosmetic-skip (world structure; cell-\u003eECZN linkage noted as open check)]"
+                 },
+                 {
+                     "formid":  "000F1A:Gray Fox Cowl.esm",
+                     "type":  "Cell",
+                     "editorid":  "mannyGFIntOblivionCave",
+                     "status":  "router [cosmetic-skip (world structure; cell-\u003eECZN linkage noted as open check)]"
+                 },
+                 {
+                     "formid":  "002F30:Gray Fox Cowl.esm",
+                     "type":  "Cell",
+                     "editorid":  "mannyGFIntImperialCityJail",
+                     "status":  "router [cosmetic-skip (world structure; cell-\u003eECZN linkage noted as open check)]"
+                 },
+                 {
+                     "formid":  "02BD7C:Gray Fox Cowl.esm",
+                     "type":  "Cell",
+                     "editorid":  "mannyGFIntHamunaptra",
+                     "status":  "router [cosmetic-skip (world structure; cell-\u003eECZN linkage noted as open check)]"
+                 },
+                 {
+                     "formid":  "042504:Gray Fox Cowl.esm",
+                     "type":  "Cell",
+                     "editorid":  "mannyGFIntUnknownGate",
+                     "status":  "router [cosmetic-skip (world structure; cell-\u003eECZN linkage noted as open check)]"
+                 },
+                 {
+                     "formid":  "01A117:Gray Fox Cowl.esm",
+                     "type":  "Cell",
+                     "editorid":  "mannyGFIntTemptedCenturions",
+                     "status":  "router [cosmetic-skip (world structure; cell-\u003eECZN linkage noted as open check)]"
+                 },
+                 {
+                     "formid":  "0455DD:Gray Fox Cowl.esm",
+                     "type":  "Cell",
+                     "editorid":  "mannyGFIntAnotherWorld",
+                     "status":  "router [cosmetic-skip (world structure; cell-\u003eECZN linkage noted as open check)]"
+                 },
+                 {
+                     "formid":  "65B4C5:Gray Fox Cowl.esm",
+                     "type":  "Cell",
+                     "editorid":  "mannyGFIntDraukiir",
+                     "status":  "router [cosmetic-skip (world structure; cell-\u003eECZN linkage noted as open check)]"
+                 },
+                 {
+                     "formid":  "0126F3:Gray Fox Cowl.esm",
+                     "type":  "EncounterZone",
+                     "editorid":  "manny_GF_EZ_Khenzedum",
+                     "status":  "lane [lists-zones:flagged]"
+                 },
+                 {
+                     "formid":  "0126F5:Gray Fox Cowl.esm",
+                     "type":  "EncounterZone",
+                     "editorid":  "manny_GF_EZ_AlShedim",
+                     "status":  "lane [lists-zones:flagged]"
+                 },
+                 {
+                     "formid":  "0126F4:Gray Fox Cowl.esm",
+                     "type":  "EncounterZone",
+                     "editorid":  "manny_GF_EZ_ForgottenDraugrTomb",
+                     "status":  "lane [lists-zones:flagged]"
+                 },
+                 {
+                     "formid":  "000800:Authoria - Patch - Gray Cowl of Nocturnal Requiem.esp",
+                     "type":  "EncounterZone",
+                     "editorid":  "Authoria_GCON_EZ_EarlyDungeons",
+                     "status":  "oracle-novel-record (patch-defined; no mod counterpart to disposition)"
+                 },
+                 {
+                     "formid":  "000801:Authoria - Patch - Gray Cowl of Nocturnal Requiem.esp",
+                     "type":  "EncounterZone",
+                     "editorid":  "Authoria_GCON_EZ_DesertSide",
+                     "status":  "oracle-novel-record (patch-defined; no mod counterpart to disposition)"
+                 },
+                 {
+                     "formid":  "000802:Authoria - Patch - Gray Cowl of Nocturnal Requiem.esp",
+                     "type":  "EncounterZone",
+                     "editorid":  "Authoria_GCON_EZ_DeepDungeons",
+                     "status":  "oracle-novel-record (patch-defined; no mod counterpart to disposition)"
+                 },
+                 {
+                     "formid":  "0236BC:Gray Fox Cowl.esm",
+                     "type":  "StoryManagerQuestNode",
+                     "editorid":  "manny_GF_Steal",
+                     "status":  "router [flagged no-owner (catch-all fired; quest-level-gate finding)]"
+                 }
+             ]
+}

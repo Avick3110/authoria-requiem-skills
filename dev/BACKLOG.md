@@ -1,0 +1,63 @@
+# authoria-requiem-skills — backlog (self-noticed follow-ups)
+
+*Standing LIVING doc, on the houseCARL model (see that repo's `dev/BACKLOG.md`). The durable home for
+**small, dev-noticed follow-ups** — skill papercuts, doc gaps, deferred checks — that would otherwise
+get lost in a superseded handoff. Sibling to `session-handoffs/`: handoffs are meant to be superseded;
+this list persists.*
+
+**Not** for: live-session bug reports from Aaron (→ the external HCBR store,
+`E:\Skyrim Modding\ARR Workspace\houseCARL Bug Reports`); chartered work (→ `dev/plans/`); in-flight PR
+state (→ latest handoff + `git log`).
+
+**How to use:** append when you notice one (enough context to act without the originating
+conversation); prune when done — delete or move under *Done* with the resolving commit. Keep it short.
+
+---
+
+## Open
+
+- **S4 findings ledger F1–F8 → fixes batch.** The Gray Cowl empirical close (2026-07-15) passed all
+  charter gates but surfaced 8 skill-body findings — summoned-actor ownership seam, NonPlayable
+  combat-gear skip taxonomy, unzoned-cell→ECZN, COBJ material recipes, flags-are-unions doctrine,
+  perk-superset double-stamp, FormID-resolve gate, router-table rows. Full ledger with fix
+  candidates: `dev/s4-graycowl-validation/FINDINGS.md`. Body-only edits expected (no §6.5
+  re-measure unless a description changes). `(2026-07-15, S4 session)`
+
+- **`requiem-perk-assignment` description tweak candidate (from the PR #6 review + eval Q8 miss).**
+  The trigger list covers "handle a mod's custom perk records" but not the *clash/overlap-with-a-
+  Requiem-gate* framing that `mod-perk-disposition.md` case 2 turns on — the Q8 eval query ("custom
+  perk giving 30% more smithing yield — does that clash with Requiem's crafting gates?") missed for
+  exactly that reason. If tightened, add that phrase — and note any description edit re-triggers the
+  full §6.5 fan-out re-measure, so it's a deliberate follow-up, not a quick tweak.
+  `(2026-07-15, S3 session; Aaron's review observation)`
+
+- **Root README "Authority model" section looks stale vs the 1.0.1 doctrine.** It still says the
+  Authoria overlay (`Requiem for the Indifferent.esp`, `Authoria - Reqtificated/*`) is "disabled …
+  excluded" — the authoring-era scope. Since 1.0.1 the shipped doctrine is mode-aware: the live
+  winner (RftI included) is the authority. Surface to Aaron and rewrite the paragraph to match
+  `scope-and-authority.md`; deliberately NOT folded into the 1.1.0 consumables PR (a public
+  doctrine statement needs his eyes). `(2026-07-15, S2 consumables session)`
+
+- **Empirical trigger re-validation of all 9 skill descriptions.** Descriptions shipped validated via
+  the §6.5 manual-prediction fallback + independent peer-prediction (empirical `run_loop` eval is
+  blocked on Windows, §6.4) and are flagged for empirical re-validation when a non-Windows host is
+  available. `(CLAUDE.md §Repo-specific deviations · standing since 1.0.0)`
+- **Simplify `requiem-script-patching`'s VMAD sweep if houseCARL grows a struct-presence filter.**
+  Sweep (a) of its Bulk pass protocol runs per-type (`fields=["VirtualMachineAdapter"]`, keep rows
+  reporting one) because `cross_plugin_query`'s union-arm `where=` presence test needs a scalar and
+  VMAD is a struct. If houseCARL adds a presence/has-field filter, collapse the per-type sweeps into
+  one call and drop the inline rationale. `(2026-07-15, S1 coverage batch)`
+  **Update 2026-07-15 (post-houseCARL-update probe):** still blocked — the new `has value` operator
+  is scalar-only (container fields are counted in its diagnostics but not matched). Gap report filed:
+  HCBR `2026-07-15_gap_struct-presence-filter-has-scalar-only.md` (+ 2 sibling gaps and a note from
+  the S4 run: batch plugin-scope, flag-bit verbs, PerkPlacement depth-2 identity). Re-probe on the
+  next houseCARL update.
+
+## Done
+
+- ~~"Aaron" named in three shipped reference files~~ — **fixed 2026-07-15** in `2e4a17e` (PR #4, the
+  1.0.3 batch): all three now read "the author" / "author-approved".
+
+- ~~Verify the live install is at 1.0.2~~ — **verified 2026-07-15**: `~/.claude/skills/authoria-requiem/.claude-plugin/plugin.json` reads 1.0.2. No sync needed.
+
+*(move resolved entries here with the resolving commit, or just delete them)*
