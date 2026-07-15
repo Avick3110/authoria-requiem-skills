@@ -3,7 +3,7 @@
 *Class: LIVING (the operating doc) — supersede, don't edit; keep it current, **updated in the same
 commit** as the change it describes. Per `standards/HOUSECARL_DOC_HYGIENE.md`.*
 
-Source repo for the **`authoria-requiem`** Claude Code skill plugin — nine skills that patch
+Source repo for the **`authoria-requiem`** Claude Code skill plugin — ten skills that patch
 newly-added Skyrim SE mods to play correctly with **Requiem** by *live-analogy*: derive every stat,
 keyword, recipe, perk, and placement by comparing new content against Requiem's own records (read live
 through **houseCARL**), then emit a direct ESP override the **Reqtificator** integrates at build time.

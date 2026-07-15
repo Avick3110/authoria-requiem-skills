@@ -1,0 +1,34 @@
+{"topic":"potion poison oil shape invariants weight 0.5 NoAutoCalc VendorItemPotion VendorItemPoison no addiction value hand-set","file":"potion-poison-ladders.md","section":"Shape invariants"}
+{"topic":"restore health magicka stamina potion ladder value 20-100 Complete 500 mag per second tier suffix Diluted Faint Fair Good Remarkable Surpassing","file":"potion-poison-ladders.md","section":"Potion ladders"}
+{"topic":"fortify skill potion two value classes per-skill magnitude magic school Magic Redone winner","file":"potion-poison-ladders.md","section":"Potion ladders"}
+{"topic":"duration-scaled potions waterbreathing invisibility paralysis silence magnitude 0","file":"potion-poison-ladders.md","section":"Potion ladders"}
+{"topic":"poison ladders damage lingering weakness fear frenzy paralysis drain oils PoisonResist","file":"potion-poison-ladders.md","section":"Poison ladders"}
+{"topic":"MGEF conversion PeakValueModifier archetype map BaseCost not gold live-winner traps","file":"potion-poison-ladders.md","section":"MGEF conversion pattern"}
+{"topic":"potion pattern breaks Invisibillity misspelling drain damage naming split lingering bases","file":"potion-poison-ladders.md","section":"Known pattern-breaks"}
+{"topic":"universal food shape NoAutoCalc FoodItem hunger size tag nutrition tag SM HS buff over time","file":"food-drink-kits.md","section":"Universal food shape"}
+{"topic":"REQ_Apo food effect library FormIDs fortify regen restore per second paralysis Apo_NosStack anti-stack","file":"food-drink-kits.md","section":"The FaB effect library"}
+{"topic":"food family kits raw meat cooked bread cheese fruit veg soup stew examples magnitudes durations","file":"food-drink-kits.md","section":"Family kits"}
+{"topic":"raw vs cooked paralysis food poisoning rule Khajiit exempt cooking removes","file":"food-drink-kits.md","section":"Family kits"}
+{"topic":"food value weight norms per family soup 27-35 raw meat 15 bread slice","file":"food-drink-kits.md","section":"Value / weight norms"}
+{"topic":"alcohol skeleton FortifyHealth Inebriation strength tiers Moderate Strong Extreme no addiction field drugs skooma","file":"food-drink-kits.md","section":"Alcohol & drugs"}
+{"topic":"racial cuisine LoreBox keywords on the food Green Pact BosmerExclusion beast feline stomach","file":"food-drink-kits.md","section":"Racial cuisine & the Green Pact"}
+{"topic":"food pattern breaks dual naming REQ_NULL_SalmonCooked02 SoulHuskExtract","file":"food-drink-kits.md","section":"Known pattern-breaks"}
+{"topic":"ingredient full payload NoAutoCalculation IngredientValue equals Value four effects quartet","file":"ingredients.md","section":"The full payload"}
+{"topic":"ingredient effect duration per-MGEF magnitude tier knob REQ_Alch pool worked quartets wheat nightshade daedra heart","file":"ingredients.md","section":"Effects: duration is per-MGEF"}
+{"topic":"ingredient value weight ladders discrete curated rarity peer archetype","file":"ingredients.md","section":"Value & weight ladders"}
+{"topic":"ingredient keywords VendorItemIngredient food replaces black market gore none","file":"ingredients.md","section":"Keywords"}
+{"topic":"REQ_Ingredient precedent set Requiem-defined organs glitterdust trophy fish decoupled value","file":"ingredients.md","section":"Requiem's own defined ingredients"}
+{"topic":"ingredient anomalies convention-broken forwarder auto-calc back on non-REQ effect injected","file":"ingredients.md","section":"Anomalies"}
+{"topic":"Reqtificator does not touch consumables RftI zero ALCH INGR COBJ override is final no safety net","file":"crafting-and-integration.md","section":"The Reqtificator does not touch consumables"}
+{"topic":"modded consumable patch pattern three kits potion keep links food rebuild alcohol pair worked examples Xelzaz chocolate cake mead layer order","file":"crafting-and-integration.md","section":"The modded-consumable patch pattern"}
+{"topic":"COBJ crafting cookpot station 0A5CB3 perk gate AlchemicalLore racial unperked skill band yield not potency ungated food lane craftability exception","file":"crafting-and-integration.md","section":"The COBJ crafting layer"}
+{"topic":"LVLI boundary placement leveled-list skill alchemists don't buy food closed economy","file":"crafting-and-integration.md","section":"LVLI boundary"}
+{"topic":"systemic knobs fAlchemySkillFactor AVAlchemy perk tree read-only never edit","file":"crafting-and-integration.md","section":"Systemic knobs"}
+{"topic":"houseCARL coverage audit ALCH INGR sweep disposition reconciliation","file":"housecarl-recipes.md","section":"Coverage audit (whole-plugin bulk pass)"}
+{"topic":"houseCARL rebalance modded potion shell flags value keywords zero magnitude","file":"housecarl-recipes.md","section":"A — Rebalance a modded potion"}
+{"topic":"houseCARL rebuild food effect list ReplaceAll composes Effect BaseEffect Data alcohol kit","file":"housecarl-recipes.md","section":"B — Rebuild a modded food's effect list"}
+{"topic":"houseCARL ingredient payload quartet composes IngredientValue","file":"housecarl-recipes.md","section":"C — Ingredient: the full payload"}
+{"topic":"houseCARL COBJ cookpot recipe ConditionFloat HasPerkConditionData compose ungated food","file":"housecarl-recipes.md","section":"D — Crafting recipe (COBJ) at the cookpot"}
+{"topic":"verify write full_readback not-yet-enabled patch conflict tree winner final","file":"housecarl-recipes.md","section":"Verify the write"}
+{"topic":"bulk pass protocol whole-plugin enumerate ALCH INGR disposition skip categories field-complete reconciliation no extrapolation","file":"../SKILL.md","section":"Bulk pass protocol (whole-plugin jobs)"}
+{"topic":"classify consumable potion food alcohol drug ingredient opposite techniques keep links vs rebuild","file":"../SKILL.md","section":"Workflow / Derive by class"}

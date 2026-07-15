@@ -1,0 +1,109 @@
+{
+  "_meta": {
+    "skill": "requiem-consumable-patching",
+    "created": "2026-07-15",
+    "validation": "§6.5 fresh-context agent fan-out against the real installed skill catalog (results archived alongside)."
+  },
+  "evals": [
+    {
+      "query": "this healing potion from my follower mod restores 150 health instantly, that's way too strong for Requiem — bring it in line",
+      "should_trigger": true,
+      "note": "core: balance a modded potion for Requiem"
+    },
+    {
+      "query": "patch the food items from Gourmet of Skyrim so they work with Requiem's survival and nutrition system",
+      "should_trigger": true,
+      "note": "core: food + Requiem nutrition system"
+    },
+    {
+      "query": "my mod adds a custom mead, what effects and value should it have in Requiem?",
+      "should_trigger": true,
+      "note": "alcohol kit derivation"
+    },
+    {
+      "query": "the modded skooma variant in this mod is priced like vanilla and has no drawbacks, requiemify it",
+      "should_trigger": true,
+      "note": "drug class, casual phrasing"
+    },
+    {
+      "query": "I added a new ingredient (frost lotus) — set up its four alchemy effects the way Requiem expects",
+      "should_trigger": true,
+      "note": "ingredient quartet mapping"
+    },
+    {
+      "query": "go through everything in KvSweets.esp and make the sweets Requiem-consistent",
+      "should_trigger": true,
+      "note": "whole-plugin consumable bulk pass"
+    },
+    {
+      "query": "make this stew craftable at the cooking pot with a Requiem-appropriate recipe",
+      "should_trigger": true,
+      "note": "COBJ cookpot recipe"
+    },
+    {
+      "query": "the poisons from this hunter mod barely tick for anything under Requiem, fix their magnitudes and prices",
+      "should_trigger": true,
+      "note": "poison ladder rebalance"
+    },
+    {
+      "query": "this mod's cheese wheel gives instant health on eat which feels wrong in requiem, whats the right effect setup",
+      "should_trigger": true,
+      "note": "instant-heal food anti-pattern, lowercase casual"
+    },
+    {
+      "query": "my custom wine needs the right Requiem keywords and that inebriation debuff thing",
+      "should_trigger": true,
+      "note": "alcohol keywords + Inebriation, vague user recall"
+    },
+    {
+      "query": "patch this modded steel greatsword so its damage fits Requiem's tiers",
+      "should_trigger": false,
+      "note": "near-miss: 'patch X for Requiem' but a weapon -> requiem-weapon-patching"
+    },
+    {
+      "query": "design a brand-new alchemy magic effect that drains shouts, balanced for Requiem",
+      "should_trigger": false,
+      "note": "near-miss: new MGEF design -> requiem-magic-patching (this skill wires existing effects)"
+    },
+    {
+      "query": "get my mod's potions to actually show up in dungeon loot and vendor inventories",
+      "should_trigger": false,
+      "note": "near-miss: potions, but the task is leveled-list/vendor placement -> requiem-leveled-list-patching"
+    },
+    {
+      "query": "write a SkyPatcher ini that doubles the gold value of all vanilla potions",
+      "should_trigger": false,
+      "note": "tricky near-miss: potions + value, but explicitly SkyPatcher runtime patching -> skypatcher-authoring"
+    },
+    {
+      "query": "use KID to add a keyword to every piece of food in my load order",
+      "should_trigger": false,
+      "note": "near-miss: food + keywords, but runtime KID distribution -> kid-authoring"
+    },
+    {
+      "query": "what's the best potion setup to carry for a Requiem legendary difficulty run?",
+      "should_trigger": false,
+      "note": "near-miss: gameplay advice about Requiem potions, not patch authoring"
+    },
+    {
+      "query": "this follower mod's NPC needs Requiem perks and factions set up properly",
+      "should_trigger": false,
+      "note": "near-miss: NPC patching -> requiem-npc-patching"
+    },
+    {
+      "query": "the eating animation for soup clips through the bowl, can you fix the OAR config",
+      "should_trigger": false,
+      "note": "near-miss: food-adjacent but an animation config problem -> oar-authoring"
+    },
+    {
+      "query": "add a drinking fountain activator to my player home that restores stamina",
+      "should_trigger": false,
+      "note": "near-miss: drinking + restore, but an ACTI/world-object job, not an ALCH record"
+    },
+    {
+      "query": "my quest mod hands out a scripted potion that teleports you — the script property broke under Requiem",
+      "should_trigger": false,
+      "note": "tricky near-miss: a potion, but the task is the script layer -> requiem-script-patching"
+    }
+  ]
+}

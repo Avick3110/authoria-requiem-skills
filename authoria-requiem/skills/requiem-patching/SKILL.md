@@ -13,10 +13,10 @@ with Requiem — both **balance** (stats the Reqtificator expects) and **gamepla
 make Requiem *Requiem*). It does that by enumerating every record the plugin touches, routing each to
 the right domain skill, and personally owning the cross-cutting systems no single domain skill covers.
 
-It does **not** re-derive what the seven domain skills already know. `requiem-weapon-patching`,
+It does **not** re-derive what the eight domain skills already know. `requiem-weapon-patching`,
 `requiem-armor-patching`, `requiem-ammo-patching`, `requiem-race-patching`, `requiem-npc-patching`,
-`requiem-leveled-list-patching`, and `requiem-magic-patching` each own a record type and its live
-analogy method; `requiem-script-patching` owns the Papyrus layer. This skill is the dispatcher over
+`requiem-leveled-list-patching`, `requiem-magic-patching`, and `requiem-consumable-patching` each
+own a record type and its live analogy method; `requiem-script-patching` owns the Papyrus layer. This skill is the dispatcher over
 them plus the gap mechanics (vampirism/lycanthropy, diseases, exhaustion, stealth, alchemy, food,
 shouts, standing stones, perks/skills, economy, and the core combat/resistance model).
 
@@ -79,7 +79,7 @@ Work the grouped worklist top to bottom:
 | `NPC_` | `requiem-npc-patching` | fixed level, class, perks, trait bridge, bosses, followers (record-side) |
 | `LVLI`, `LVLN`, `CONT`, `ECZN` | `requiem-leveled-list-patching` | additive merge, tier by repetition, containers, zones |
 | `MGEF`, `SPEL`, `ENCH`, `BOOK` (tomes), `SCRL`, `EXPL`, `HAZD` | `requiem-magic-patching` | school/tier/cost, HalfCostPerk classifier, three-layer split |
-| `INGR`, `ALCH` (potions, poisons, food, drink) | `requiem-magic-patching` + `references/alchemy.md` / `references/food.md` | per-record disposition; effects reuse Requiem's `REQ_Alch_*` / nutrition MGEFs. Where those references don't settle a record's balance, flag the remainder to the user — never skip it |
+| `INGR`, `ALCH` (potions, poisons, food, drink, alcohol), consumable `COBJ` | `requiem-consumable-patching` | class kits (potion/food/alcohol/drug/ingredient), value/weight/flags/keywords, cookpot recipes; the Reqtificator never rebalances consumables — the override is final. Genuinely new effect design still → `requiem-magic-patching` |
 | `SHOU`, `WOOP` | `references/shouts.md` + `requiem-magic-patching` | shout wrapper (3 words → 3 tier `SPEL` + recovery); the SHOU/WOOP frame is owned by `Requiem.esp` |
 | `PERK` | `references/perks-skills.md` | no domain skill owns standalone `PERK` rebalancing — still disposition every mod `PERK`: apply `perks-skills.md`'s constraints where they reach and flag what remains to the user; never silently skip the type |
 | `VirtualMachineAdapter` / script need; follower runtime registration | `requiem-script-patching` | reuse Nox/REQ scripts; most patches need none |
@@ -104,8 +104,8 @@ reference's constraints. Example: a new ingredient is an `INGR` whose effects ar
 | A contractable disease | `diseases.md` | clone the staged-MGEF-under-a-Touch-ability-spell pattern |
 | New attacks / stamina / casting behavior | `exhaustion-stress.md` | the stress/exhaustion perks are all-actor Reqtificator outputs; carry standard weapon keywords |
 | Sneak/lockpick/pickpocket/trap content | `stealth.md` | sneak perks are player-exclusive; lockpicking is an SKSE DLL, not record-patchable; traps are records |
-| Ingredients / potions / poisons | `alchemy.md` | ingredient effects must use Requiem `REQ_Alch_*` MGEFs; poison rescaling is a Reqtificator output |
-| Food / drink / alcohol | `food.md` | food gives long stacking effects by nutrition category; alchemists don't buy food |
+| Ingredients / potions / poisons | `alchemy.md` | record work → `requiem-consumable-patching`; ingredient effects must use Requiem `REQ_Alch_*` MGEFs |
+| Food / drink / alcohol | `food.md` | record work → `requiem-consumable-patching`; food gives long stacking effects by nutrition category; alchemists don't buy food |
 | A new shout / words of power | `shouts.md` | SHOU = 3 words → 3 SPEL + recovery; owned by `Requiem.esp` |
 | A standing stone / birthsign / doomstone | `standing-stones.md` | ConstantEffect ability spell with stacked MGEFs; player-only |
 | New perks / skills / a perk tree | `perks-skills.md` | hook into existing trees; never author a parallel tree; player-exclusive assignment |
