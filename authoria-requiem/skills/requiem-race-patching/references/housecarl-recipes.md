@@ -12,6 +12,32 @@ write — a malformed op refuses the whole call (all-or-nothing).
 > re-issue them. Don't re-issue a `Remove` the winner already applied. (Writing into a patch that
 > is already ACTIVE in the load order works — the old self-lock was fixed in houseCARL 1.2.1.)
 
+## Coverage audit (whole-plugin bulk pass)
+
+Before any per-record work on a whole-plugin job, enumerate the type in one read so the enumeration
+becomes your work queue (full doctrine: the skill body's *Bulk pass protocol*). This call doesn't
+write. Its fields are the triage matrix that drives the humanoid-vs-creature classification per row.
+
+```
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="RACE" \
+  fields=["Keywords","Flags","Starting","ActorEffect"]
+```
+
+`Keywords` classifies each row (`ActorTypeNPC 013794` → humanoid → Workflow A;
+`ActorType{Creature,Animal,Troll,Undead,Daedra}` → creature → Workflow B); `Starting`/`ActorEffect`/
+`Flags` show what balance-bearing content the record carries. `<Race>RaceVampire` counterparts
+enumerate as their **own** rows — disposition each against the analogue's vampire record, never as a
+rider on the base race.
+
+Give every FormID from the enumeration a disposition: **patched** (which workflow — and only once the
+per-record field checklist passes for it, so patched means field-complete, not merely touched) or
+**skipped** (a per-record reason, and the only valid one is "no balance-bearing field — `Starting`
+stats / regen / `UnarmedDamage` / `ActorEffect` / `SkillBoost`s / resistances / keywords — differs
+from this record's vanilla or Requiem base, verified on that record"). A cosmetic / gimmick / reskin /
+chargen-only purpose is **not** a skip reason — the skip is a field comparison, never a category label.
+Close with a reconciliation count: patched + skipped = enumerated, and never extrapolate a disposition
+across a same-prefix or playable/vampire family (read the divergent sibling's own record).
+
 ## A — Re-balance an existing modded race (the common case)
 
 The modded race exists in its own plugin with the mod's stats. Override it. `Starting` and `Regen`

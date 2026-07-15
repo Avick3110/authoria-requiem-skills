@@ -8,6 +8,7 @@ verify live.
 ## Table of contents
 - [The two-winner model (balance vs appearance)](#the-two-winner-model-balance-vs-appearance)
 - [Configuration: level + flags](#configuration-level--flags)
+- [PlayerSkills — per-skill combat values](#playerskills--per-skill-combat-values)
 - [Class — the balance spine](#class--the-balance-spine)
 - [Combat style](#combat-style)
 - [Factions, outfit, death item](#factions-outfit-death-item)
@@ -43,6 +44,23 @@ it, USMP-Requiem is just forwarding Requiem's values.
 - **Flags by role:** `Respawn` on generic spawns and creatures; `Unique` on named actors/bosses;
   `Protected` (and rarely `Essential`) on followers and quest-critical actors; `BleedoutOverride` on
   bosses that should bleed out rather than die. Read the comparable — don't invent flags.
+
+## PlayerSkills — per-skill combat values
+
+`PlayerSkills` holds the actor's per-skill values (one-handed, block, destruction, restoration, …) —
+the numbers that, alongside level and perks, decide how hard a de-levelled enemy actually **hits,
+blocks, and casts**. A record shipped with a fixed level but wrong skills fights or defends nothing
+like its Requiem analogue, so this field is part of "patched," not an afterthought. It pairs with
+`AutoCalcStats`:
+
+- **`AutoCalcStats` ON (humanoids — bandits, guards, followers):** `PlayerSkills` are **derived** from
+  the actor's `Class` (its skill weightings) + level. Don't hand-stamp them — set the right class and
+  level and let the derivation produce the skills; **verify** the read-back rather than authoring values.
+- **`AutoCalcStats` OFF (creatures and bosses):** `PlayerSkills` are **explicit** on the record, the
+  same as `HealthOffset`/`MagickaOffset`/`StaminaOffset`. Derive them from the live analogue like any
+  other stat — read the comparable creature/boss and carry its per-skill values. A caster boss whose
+  Destruction/Conjuration skills weren't carried casts far below its intended tier even with the right
+  level and `MagickaOffset`.
 
 ## Class — the balance spine
 

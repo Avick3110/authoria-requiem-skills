@@ -41,10 +41,14 @@ Confirm houseCARL is fresh, then enumerate the plugin. These are the canonical o
    the plugin adds or overrides, with type and override depth. That list is your worklist. Group it
    by record type; the counts tell you the shape of the job (an armor pack vs a follower mod vs a
    spell pack vs a quest mod that touches everything).
-3. **Triage.** Separate genuinely new content (override depth low, mod-defined) from records the mod
-   merely brushes. Skip pure-cosmetic touches the Reqtificator's auto-merge handles (NPC appearance,
-   race visuals). Note which gap mechanics the content implies (a vampire NPC → vampire system; an
-   ingredient → alchemy; a follower → follower registration; a merchant → economy).
+3. **Triage — classify every row, drop none.** Tag each enumerated record as **new-content**
+   (mod-defined, low override depth), **brushed-override** (a record the mod merely touches but doesn't
+   own), or **cosmetic-skip** (a pure-appearance touch the Reqtificator's auto-merge handles — NPC
+   face/body, race visuals — with the reason noted). Triage *finds* the work; it never *defines*
+   coverage — the full enumeration stays the denominator every record is reconciled against at the end
+   (the checklist below), so a "brushed" or "cosmetic" tag is a disposition recorded on the record, not
+   a licence to drop it from the list. Note too which gap mechanics the content implies (a vampire NPC
+   → vampire system; an ingredient → alchemy; a follower → follower registration; a merchant → economy).
 
 ## The integration workflow
 
@@ -75,7 +79,16 @@ Work the grouped worklist top to bottom:
 | `NPC_` | `requiem-npc-patching` | fixed level, class, perks, trait bridge, bosses, followers (record-side) |
 | `LVLI`, `LVLN`, `CONT`, `ECZN` | `requiem-leveled-list-patching` | additive merge, tier by repetition, containers, zones |
 | `MGEF`, `SPEL`, `ENCH`, `BOOK` (tomes), `SCRL`, `EXPL`, `HAZD` | `requiem-magic-patching` | school/tier/cost, HalfCostPerk classifier, three-layer split |
+| `INGR`, `ALCH` (potions, poisons, food, drink) | `requiem-magic-patching` + `references/alchemy.md` / `references/food.md` | per-record disposition; effects reuse Requiem's `REQ_Alch_*` / nutrition MGEFs. Where those references don't settle a record's balance, flag the remainder to the user — never skip it |
+| `SHOU`, `WOOP` | `references/shouts.md` + `requiem-magic-patching` | shout wrapper (3 words → 3 tier `SPEL` + recovery); the SHOU/WOOP frame is owned by `Requiem.esp` |
+| `PERK` | `references/perks-skills.md` | no domain skill owns standalone `PERK` rebalancing — still disposition every mod `PERK`: apply `perks-skills.md`'s constraints where they reach and flag what remains to the user; never silently skip the type |
 | `VirtualMachineAdapter` / script need; follower runtime registration | `requiem-script-patching` | reuse Nox/REQ scripts; most patches need none |
+
+**Every enumerated record type lands in exactly one disposition** — routed to a domain skill, handled
+via a gap-mechanic reference, skipped as cosmetic *with a stated reason*, or flagged "no owner" to the
+user. A type absent from these tables, or one you don't recognize, is never dropped on sight — surface
+it and assign one of those four, because a silently skipped type is the field failure this rule kills.
+The full signature map and the same catch-all live in `references/routing-table.md`.
 
 When a record implies a **gap mechanic**, route the record to its domain skill *and* apply the gap
 reference's constraints. Example: a new ingredient is an `INGR` whose effects are `MGEF` → patch via
@@ -118,10 +131,16 @@ reference's constraints. Example: a new ingredient is an `INGR` whose effects ar
 ## Checklist
 
 - [ ] Freshness probe passed; plugin enumerated with `cross_plugin_query plugins=[...]`.
-- [ ] Worklist grouped by record type; new content separated from cosmetic touches.
-- [ ] Every record type routed to its domain skill and patched there — and for **high-count types**
-      (`NPC_`, `ARMO`, `BOOK`, `CONT`, `LVLI`, …) every record dispositioned, not just a sample; counts
-      reconcile (per `references/integration-checklist.md` item 1).
+- [ ] Worklist grouped by record type; every row classified (new-content / brushed-override /
+      cosmetic-skip) with the full enumeration kept as the coverage denominator, not filtered down.
+- [ ] Every record type routed to its domain skill and patched there. **Per-record disposition applies
+      to every type, not a closed high-count list** — for any type carrying more than a handful of
+      records, run that domain skill's bulk pass protocol (each domain skill carries one); never sample
+      one record and extrapolate to the rest, for any type.
+- [ ] **Top-level reconciliation across all types:** (routed + patched) + (skipped with a stated
+      reason) + (flagged "no owner" to the user) = the total enumerated at the First step. The job is
+      not done while any enumerated record lacks a disposition (per
+      `references/integration-checklist.md` item 1).
 - [ ] Every gap mechanic the content implies handled per its reference (constraints applied).
 - [ ] `references/integration-checklist.md` run: masters correct + load-order-sorted; **no
       `REQ_NULL_*` anywhere**; Reqtificator-vs-manual matrix respected.

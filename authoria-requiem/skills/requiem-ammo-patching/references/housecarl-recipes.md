@@ -14,6 +14,30 @@ write.
 > winner already applied; copy the winner and add only new deltas. (Writing into a patch that is
 > already ACTIVE in the load order works — the old self-lock was fixed in houseCARL 1.2.1.)
 
+## Coverage audit (whole-plugin bulk pass)
+
+Before any per-record work on a whole-plugin job, sweep the type in one read so the enumeration
+becomes your work queue (full doctrine: the skill body's *Bulk pass protocol*). The call writes
+nothing.
+
+```
+# the triage matrix: every AMMO's disposition fields in one table.
+#   Flags → arrow (NonBolt) vs bolt (0) vs creature/trap (NonPlayable);
+#   Damage/Value/Weight → the ladder read; Keywords → what's already stamped;
+#   Projectile → the linked PROJ, which rides this sweep (no separate PROJ enumeration).
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="AMMO" \
+  fields=["Flags","Damage","Value","Weight","Keywords","Projectile"]
+```
+
+Give every FormID a disposition — **patched** (normal-tiered → the skill's Workflow; elemental /
+quest-unique → tiered frame with the effect on the PROJ; creature/trap `NonPlayable` → no recipe;
+bound → the `requiem-magic-patching` skill) or **skipped** (a named reason). A record counts as
+patched only when the skill body's `## Checklist` passes for it — field-complete, not merely touched.
+Patch or verify each patched AMMO's linked PROJ in the same disposition; a skipped AMMO's PROJ is a
+conscious skip, not an accident. Never extrapolate across a same-material arrow/bolt pair or along the
+material-tier line — read each AMMO's own stats. Close with a reconciliation count: patched + skipped
+= enumerated.
+
 ## A — Re-balance an existing modded arrow (the common case)
 
 The modded arrow already exists with the mod's own (wrong-for-Requiem) stats. Override it. Example:

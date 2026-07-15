@@ -66,6 +66,63 @@ Confirm houseCARL's authority is fresh, then identify what you are patching.
      arrow) → workflow for the frame, then `## Judgment` for what it may deviate on and what to
      route to the `requiem-magic-patching` skill.
 
+## Bulk pass protocol (whole-plugin jobs)
+
+When you're patching a whole plugin — routed here from the `requiem-patching` skill, or any job with
+more than a handful of AMMO records — the enumeration **is the work queue**, not a sample of it. A
+mod's quiver looks uniform on the shelf, but the record that fires wrong in game is the one arrow a
+modder hand-tuned to a different damage or dropped a keyword on, sitting among a dozen
+identical-looking siblings. Reading one member and copying the rest is exactly how that arrow ships
+unpatched.
+
+Open with one triage query — the whole type at once, no writes:
+
+```
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="AMMO" \
+  fields=["Flags","Damage","Value","Weight","Keywords","Projectile"]
+```
+
+That one table carries every disposition signal: `Flags` (arrow `NonBolt` vs bolt `0` vs the
+`NonPlayable` of creature/trap ammo), `Damage`/`Value`/`Weight` for the ladder read, `Keywords` for
+which material / armor-piercing / weight tags are already stamped, and `Projectile` for the linked
+PROJ (below).
+
+**Every FormID gets a disposition.** Walk the full enumeration; each record is either **patched** —
+noting which branch it routes to:
+
+- **normal-tiered** arrow or bolt → the main `## Workflow`;
+- **elemental** (`REQ_Ench_Arrow_*`-shaped) → tiered frame, effect carried on the PROJ;
+- **quest / unique** (fixed reward, bespoke value) → tiered frame, the author's value + effect kept;
+- **creature / trap** (`NonPlayable`) → keep `NonPlayable`, no forge recipe;
+- **bound** (conjured by a spell) → route the conjuration to the `requiem-magic-patching` skill —
+
+or **skipped** with a named reason (a non-AMMO caught by a loose enumeration, a placeholder record,
+ammo already sitting on Requiem's ladder), verified on *that* record and never inherited from a
+neighbour.
+
+**Patched means field-complete, not merely touched.** A record counts as patched only when the
+skill's per-record `## Checklist` passes for it — the ladder damage/value, `Weight = 0`, the full
+keyword set (material + vendor + ammo-weight + armor-piercing tier + RFTI exclusion), the projectile
+on Requiem's profile, and the recipe (or a justified absence). A record you edited but left
+half-derived is still on the queue, not done.
+
+**The projectile rides the AMMO transitively.** Every AMMO points at a PROJ, and there is no separate
+PROJ enumeration — the AMMO sweep *is* the PROJ sweep. When you patch an AMMO, patch or verify its
+linked projectile in the same disposition (Requiem's speed / gravity / flags profile — step 5). When
+you skip an AMMO, its PROJ is a **conscious** skip that rides along, never an accident: a supersonic
+modded arrow projectile left behind because its AMMO was passed over reads just as wrong as a wrong
+damage. State the PROJ's disposition alongside the AMMO's.
+
+**Never extrapolate across a uniform-looking family.** A mod's material-tier line (Iron→Daedric
+arrows), the arrow/bolt pair of one material, and the enchanted/elemental variants of one base arrow
+all *look* interchangeable. The arrow→bolt ×1.2 rule and the material ladder derive a **candidate**
+from Requiem's comparable — they never license deriving a sibling ammo from a neighbour you already
+read. A modder hand-tweaks one arrow inside a uniform-looking quiver set; read every AMMO's own stats.
+
+Close the pass with a **reconciliation count — patched + skipped = enumerated.** If the two sides
+don't add up, a record fell through; find it before you call the type done. (This is the per-record
+coverage the `requiem-patching` skill's integration checklist gates on for high-count types.)
+
 ## Workflow
 
 ### 1 — Find Requiem's comparable
@@ -231,6 +288,10 @@ assumed — rather than emitting a confident guess.
 - **Giving ammo a non-zero weight.** Requiem ammo weighs 0; heft is the `REQ_AmmoWeight_*` keyword.
 - **Copying vanilla damage.** Vanilla arrows are ~8–24 damage; Requiem ammo is 40–144. Always
   derive from a Requiem comparable.
+- **Extrapolating across a material-tier line or arrow/bolt pair.** Reading one arrow in a
+  uniform-looking quiver and stamping its stats onto its siblings ships the one the modder hand-tweaked
+  unpatched. The ladder and the arrow→bolt ×1.2 rule give a candidate to check against each record's
+  own read — not a licence to skip the read.
 - **Leaving a modded projectile supersonic / at the wrong speed.** Patch the PROJ to arrow
   3600 / no-Supersonic or bolt 5600 / Supersonic, or point at a Requiem arrow/bolt projectile.
 - **Re-pointing because `Requiem for the Indifferent.esp` wins.** On a live profile the
@@ -244,6 +305,9 @@ assumed — rather than emitting a confident guess.
 
 Before finishing an ammo override, confirm:
 
+- [ ] **Whole-plugin job:** every enumerated AMMO dispositioned (patched = the field checklist below
+      passed → branch, or skipped → reason), its linked PROJ dispositioned with it; counts reconcile
+      (patched + skipped = enumerated); no extrapolation across a material-tier line or arrow/bolt pair.
 - [ ] **Type** correct: arrow `Flags = NonBolt`, bolt `Flags = 0`; creature/trap ammo keeps
       `NonPlayable`.
 - [ ] **Damage** on the ladder for the material (bolt = arrow × 1.2).

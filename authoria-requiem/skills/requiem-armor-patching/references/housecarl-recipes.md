@@ -15,6 +15,30 @@ a malformed op refuses the whole call and writes nothing — so read first, then
 > new deltas. (Writing into a patch that is already ACTIVE in the load order works — the old
 > self-lock was fixed in houseCARL 1.2.1.)
 
+## Coverage audit (whole-plugin bulk pass)
+
+Before any per-record work on a whole-plugin job, sweep the type in one read so the enumeration
+becomes your work queue (full doctrine: the skill body's *Bulk pass protocol*). The call doesn't write.
+
+```
+# The triage matrix: the disposition fields for every ARMO of the plugin in one table.
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="ARMO" \
+  fields=["Name","ArmorRating","BodyTemplate.ArmorType","BodyTemplate.FirstPersonFlags","Keywords","ObjectEffect"]
+```
+
+Per row: `BodyTemplate.ArmorType` (armored vs `Clothing` vs none → armored workflow / clothing frame /
+skin-or-template skip), `ArmorRating` (>0 armored vs 0 cosmetic), `FirstPersonFlags` + part keyword
+(which slot → which comparable; flags an off-slot 46/47 accessory), and `ObjectEffect` (non-null →
+enchanted: link the frame here, route the effect design to the `requiem-magic-patching` skill).
+
+Give every FormID from the enumeration a disposition — **patched** (which part/material/weight
+workflow below) or **skipped** with the reason named (non-playable/template ARMO, skin/naked-body
+ARMO, creature-skin ARMO, or already-Requiem-consistent). **Patched counts only when the skill's
+per-record Checklist passes for that piece** — field-complete, not merely touched. Verify each
+disposition on *that* record; never extrapolate across a set, a light/heavy pair, a material tier, or
+an enchanted variant (a sibling can carry its own off-ladder AR, an off-slot biped tag, or a bespoke
+`ObjectEffect`). Close with a reconciliation count: patched + skipped = enumerated.
+
 ## A — Re-balance an existing modded armor (the common case)
 
 The modded armor already exists in some plugin with the mod's own (wrong-for-Requiem) stats.

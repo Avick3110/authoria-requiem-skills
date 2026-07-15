@@ -6,6 +6,7 @@ to a new patch plugin; originals are never touched. The patch is later run throu
 
 ## Contents
 
+- Coverage audit (whole-plugin bulk pass)
 - A — Reverse-reference: find where the comparable is placed
 - B — Read a list's tier weighting
 - C — Add an item to a leveled list (LVLI)
@@ -15,6 +16,44 @@ to a new patch plugin; originals are never touched. The patch is later run throu
 - G — Encounter zone (rare)
 - H — Masters & REQ_NULL hygiene
 - I — Verify the read-back
+
+## Coverage audit (whole-plugin bulk pass)
+
+Before any per-record work on a whole-plugin job, sweep each type against the **mod's own** records so
+the enumeration becomes your work queue (full doctrine: the skill body's *Bulk pass protocol*). None of
+these three calls writes.
+
+```
+# One sweep per leveled-list type — the mod's own records ARE the work queue.
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="LeveledItem"
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="LeveledNpc"
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="LeveledSpell"
+```
+
+For each enumerated list, read its entries and check the `Level` field — any entry `> 1` is a
+vanilla-style level gate to flatten (Requiem's model is `Level = 1` everywhere; see `list-structure.md`):
+
+```
+housecarl_read_record formid="<list>" fields=["Entries"] depth=2
+```
+
+De-level the mod's OWN gated lists by hand — they escape the merge (`baseVersion == null`) and ship
+verbatim. Rewrite each `Level > 1` entry to `Level = 1`:
+
+```
+housecarl_set_field formid="<mod's own list>" into="Requiem leveled list patching" \
+  field_path="Entries[0].Data.Level" value="1"     # flatten each gated entry
+```
+
+An **override of a Requiem-defined** list rides the merge instead — patch it add-only (§C/§D below),
+never hand-flatten it. Tell them apart by whether the list's winner chain carries a `Requiem.esp`
+version (Requiem-defined = add-only; only in `<NewMod>.esp` = the mod's own = hand-de-level).
+
+Give every FormID from the three sweeps a disposition — **de-levelled** (mod's own gated list
+flattened), **placed-into** (your record added, §C/§D), or **skipped** (already flat / quest-fixed /
+cosmetic, reason stated) — counting a record as done only when its per-record checklist passes,
+verified per record and never extrapolated across a sublist tree, a same-prefix family, or a per-tier
+variant. Close each type with a reconciliation count: de-levelled + placed + skipped = enumerated.
 
 ## A — Reverse-reference: where does Requiem place the comparable?
 

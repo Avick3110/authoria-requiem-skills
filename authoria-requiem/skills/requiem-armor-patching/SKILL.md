@@ -59,6 +59,67 @@ Confirm houseCARL's authority is fresh, then identify what you are patching.
      value tracks material, no resist/tempering, route any enchant to the `requiem-magic-patching` skill.
    - **Unique / faction / artifact piece** → workflow for the skeleton, then `## Judgment`.
 
+## Bulk pass protocol (whole-plugin jobs)
+
+When you're patching a whole plugin — routed here from the `requiem-patching` skill, or any job with
+more than a handful of `ARMO` records — the enumeration **is the work queue**, not a sample of it. A
+big armor mod hides its hard records inside uniform-looking families: the one cuirass with a
+hand-tweaked AR, the back-slot cloak on biped 46, the enchanted variant sitting among plain siblings.
+Those off-ladder outliers are exactly what a rebalance pass exists to catch — and the fastest way to
+ship them wrong is to patch one piece of a set and assume the rest match.
+
+Open with the triage matrix — one call, the whole plugin at once, and it doesn't write:
+
+```
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="ARMO" \
+  fields=["Name","ArmorRating","BodyTemplate.ArmorType","BodyTemplate.FirstPersonFlags","Keywords","ObjectEffect"]
+```
+
+Read each row to disposition the piece before any per-record work:
+
+- **`BodyTemplate.ArmorType`** — `HeavyArmor`/`LightArmor` → the armored `## Workflow`; `Clothing` →
+  a clothing/jewelry frame (`references/keywords.md`). No armor type at all on a body-slot record is a
+  nudge to check whether it's a skin or template `ARMO` (skip — below).
+- **`ArmorRating`** — `> 0` armored vs `0` cosmetic/clothing (a body-slot piece with a real AR but a
+  cloth archetype is a mis-tagged cosmetic worth a `## Judgment` look).
+- **`BodyTemplate.FirstPersonFlags`** + the **part keyword** — which slot the piece occupies, so you
+  pick the right per-part comparable and catch an off-slot 46/47 accessory the ratio table doesn't
+  model.
+- **`ObjectEffect`** — a non-null link means the piece is enchanted: patch the ARMO frame here and
+  route the effect *design* to the `requiem-magic-patching` skill.
+
+**Every FormID gets a disposition.** Walk the full enumeration: each record is **patched** (note
+which part/material/weight workflow) or **skipped** (note the reason, verified on *that* record). The
+skip categories to name explicitly:
+
+- **Non-playable / template `ARMO`** — a base or template record (`NonPlayable`, no biped slots)
+  never worn by the player; there is nothing to balance.
+- **Skin / naked-body `ARMO`** — a race's body-skin ARMO that renders the body, not a worn piece;
+  leave it to the race layer.
+- **Creature-skin `ARMO`** — a creature's natural-armor skin; creature protection is an actor/race
+  concern (`requiem-npc-patching` / `requiem-race-patching`), not this skill.
+- **Already-Requiem-consistent** — a piece whose winner already carries the correct set/part
+  keywords and on-ladder AR (often a WAR cross-patch already covers it); confirm on the record, then
+  leave it.
+
+**Patched means field-complete, not merely touched.** A record counts as patched only once the
+per-record **Checklist** (below) passes for *that* piece — the armor-type + part keyword, the set
+keyword, on-ladder AR/value/weight, the fist perk where it applies, the recipes, masters, and the
+`REQ_NULL` scan. Setting one field and moving on is not a disposition; the Checklist is the gate that
+turns "touched" into "patched."
+
+Close the pass with a **reconciliation count — patched + skipped = enumerated.** If the two sides
+don't add up, a record fell through; find it before you call the type done. (This is the per-record
+coverage the `requiem-patching` skill's integration checklist gates on for high-count jobs.)
+
+**Never extrapolate across a set, a light/heavy pair, a material tier, or an enchanted variant.** A
+full set (cuirass + boots + gauntlets + helmet + shield), a material's light-and-heavy pair, a run of
+same-material tiers, and the enchanted variants of one base piece all *look* uniform — but modders
+hand-tweak individuals: a sibling may carry its own off-ladder AR, an off-slot biped tag (46/47), or
+a bespoke `ObjectEffect`. **Read and disposition each member.** The per-part ratio table (Workflow
+step 3) derives a *target* from Requiem's comparable — it never substitutes for reading the new mod's
+actual sibling record, which is the only thing that tells you what that piece really carries.
+
 ## Workflow
 
 ### 1 — Find Requiem's comparable
@@ -276,6 +337,10 @@ assumed — rather than emitting a confident guess.
 
 Before finishing an armor override, confirm:
 
+- [ ] **Whole-plugin job:** every enumerated `ARMO` dispositioned — patched (the field checklist
+      below passed for that piece) or skipped with a reason (non-playable/template, skin/naked-body,
+      or creature-skin `ARMO` named); counts reconcile (patched + skipped = enumerated); no
+      set/pair/tier/variant extrapolation.
 - [ ] **Armor-type keyword** (heavy/light) and **armor-part keyword** present, matching
       `BodyTemplate.ArmorType` and the biped slot.
 - [ ] **Armor-set / material keyword** present (drives value tier, ranged resistance, tempering) —

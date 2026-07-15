@@ -5,6 +5,26 @@ plugin** (originals untouched); pass `into="<patch filename>"` to accumulate edi
 across calls. Every write resolves the record's load-order winner and overrides it. All-or-nothing:
 a malformed op refuses the whole call and writes nothing — so read first, then write.
 
+## Coverage audit (whole-plugin bulk pass)
+
+Before any per-record work on a whole-plugin job, sweep the type in one read so the enumeration
+becomes your work queue (full doctrine: the skill body's *Bulk pass protocol*). The call writes nothing.
+
+```
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="WEAP" \
+  fields=["Name","Data.AnimationType","Data.Flags","Keywords","BasicStats.Damage","ObjectEffect","Template"]
+```
+
+Read each row to disposition it: `Data.AnimationType` picks the workflow branch (plain melee,
+bow/crossbow, staff), `ObjectEffect` flags an enchanted variant, `Template` marks a variant vs a base
+record, and `Data.Flags` separates playable loot from NPC-only/non-playable weapons.
+
+Give every FormID a disposition — **patched** (routed to a workflow branch, and counting as patched
+only once the skill's per-record Checklist passes for it) or **skipped** (non-playable/NPC-only,
+trap/prop, unarmed placeholder, or template-only base record — the reason verified on *that* record,
+never extrapolated across a same-material / same-type / same-prefix / same-base family). Close with a
+reconciliation count: patched + skipped = enumerated.
+
 ## A — Re-balance an existing modded weapon (the common case)
 
 The modded weapon already exists in some plugin, with the mod's own (wrong-for-Requiem) stats.

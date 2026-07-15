@@ -19,6 +19,7 @@
 {"topic":"knockdown immunity ImmuneStrongUnrelentingForce Orc MinorKnockdownImmunity troll attack-data, knockdown tweak superseded","file":"keywords.md","section":"Knockdown"}
 {"topic":"diet cuisine keyword Apo_StrongStomach Food and Beverages Redone cuisine races","file":"keywords.md","section":"Diet (Food & Beverages Redone)"}
 {"topic":"attack data Attacks AttackData Spell Stagger Knockdown AttackEvent knockdown poison spit, preserve don't duplicate","file":"keywords.md","section":"Attack data (knockdown / poison / spit)"}
+{"topic":"coverage audit whole-plugin bulk pass enumerate RACE cross_plugin_query disposition patched skipped reconciliation count visual gimmick not exemption vampire own rows no extrapolation","file":"housecarl-recipes.md","section":"Coverage audit (whole-plugin bulk pass)"}
 {"topic":"houseCARL rebalance modded race bulk_apply Starting Regen dict set key BaseCarryWeight UnarmedDamage","file":"housecarl-recipes.md","section":"A — Re-balance an existing modded race (the common case)"}
 {"topic":"houseCARL skill boosts SkillBoost Skill Boost substruct playable","file":"housecarl-recipes.md","section":"B — Skill boosts (playable)"}
 {"topic":"houseCARL ActorEffect spells Add ReplaceAll ability bundle","file":"housecarl-recipes.md","section":"C — Ability spells (ActorEffect)"}
@@ -30,4 +31,5 @@
 {"topic":"worked example modded creature Wendigo Troll new race not recognized classify troll keep own Ab ability add armor healing","file":"worked-examples.md","section":"1 — Modded creature race the Reqtificator can't see: Wendigo Troll"}
 {"topic":"worked example creature round trip Frost Troll from Troll shared armor variant resist healing","file":"worked-examples.md","section":"2 — Creature round-trip (exact): Frost Troll from Troll"}
 {"topic":"worked example playable round trip Redguard ability bundle exact attributes live over doc","file":"worked-examples.md","section":"3 — Playable round-trip: Redguard"}
+{"topic":"bulk pass protocol whole-plugin job enumerate every RACE disposition patched field-complete skipped per-record reason visual gimmick reskin chargen not exemption bin vampire own rows reconciliation no variant extrapolation frost troll","file":"../SKILL.md","section":"Bulk pass protocol (whole-plugin jobs)"}
 {"topic":"identification humanoid vs creature which vanilla analogue new-race-not-recognized strategies preserve author intent ask when ambiguous","file":"../SKILL.md","section":"Judgment"}

@@ -15,6 +15,39 @@ read_record formid="012EB7:Skyrim.esm" conflict_tree=true
 # when houseCARL is reading the wrong instance: housecarl_set_mo2_instance path="<your MO2 instance>"
 ```
 
+## Coverage audit (whole-plugin bulk pass)
+
+On a whole-plugin job the script layer has no "needs a script" field to enumerate, so build the
+denominator with two sweeps before dispositioning anything (full doctrine: the skill body's *Bulk
+pass protocol*). Neither call writes.
+
+**Sweep (a) — records that already carry a script.** No single cross-type VMAD presence query is
+derivable (the NPC presence test keys off a scalar union arm; `VirtualMachineAdapter` is a struct with
+no scalar to compare), so sweep per type and keep the rows reporting a VMAD:
+
+```
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="MGEF" fields=["VirtualMachineAdapter"]
+# repeat for type = BOOK, ACTI, FURN, QUST — runtime-map hosts plus the non-obvious ones
+# (QUST result scripts, ACTI activators, FURN crafting stations). A present VMAD is a hit.
+```
+
+Disposition each hit: working modded script → preserve · reuse-Requiem-runtime candidate → clone path
+· incidental vanilla carry (e.g. `MG01FireEffectScript`) → leave · `REQ_NULL_*` → strip.
+
+**Sweep (b) — records with no script that need one.** These carry no VMAD, so sweep (a) can't see
+them; enumerate from named proxies instead:
+
+```
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="BOOK"     # every tome → multi-spell check
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="SPEL" fields=["EffectList"]  # cross-check the magic pass's special-mechanic flags
+# + the magic pass's flagged special-mechanic MGEF/SPEL hand-off list, and every follower NPC_
+```
+
+Disposition each candidate: script attached → clone path · marker-keyword reused (`Nox_KW_*`/FormList)
+· confirmed no-script-needed (stated per record). Close each sweep with a reconciliation count:
+dispositioned = enumerated. A special-mechanic record in neither queue is the "casts but does nothing"
+failure.
+
 ## Read a record's script attachment
 
 ```

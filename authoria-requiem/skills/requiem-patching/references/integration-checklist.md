@@ -5,15 +5,22 @@ single domain skill owns.
 
 ## The final checklist
 
-1. **Coverage — per record, not per type.** Every record type from
-   `cross_plugin_query plugins=["<NewMod>.esp"]` is routed to a domain skill or deliberately skipped as
-   cosmetic. But for **high-count types (`NPC_`, `ARMO`, `BOOK`, `CONT`, `LVLI`, …)** a nonzero patch
-   count does **not** clear the type: the enumeration is the work queue, so **every record gets a
-   disposition** (patched, or skipped with a reason), skips are verified per record rather than
-   inherited from a same-prefix neighbour, and the counts **reconcile** (patched + skipped =
-   enumerated). The outliers a rebalance exists to catch — the one hand-tweaked record hiding inside an
-   otherwise-uniform group — are exactly what sampling-and-extrapolating ships unpatched. The
-   `requiem-npc-patching` skill's *Bulk pass protocol* carries the one-call coverage finder for `NPC_`.
+1. **Coverage — per record, for every type.** Every record from
+   `cross_plugin_query plugins=["<NewMod>.esp"]` gets a disposition: routed to a domain skill and
+   patched, handled via a gap-mechanic reference, skipped as cosmetic with a stated reason, or flagged
+   "no owner" to the user. **Per-record disposition applies to every type — there is no closed
+   high-count list that earns the scrutiny while the rest ride on a sample.** A nonzero patch count
+   does not clear a type: the enumeration is the work queue. For any type carrying more than a handful
+   of records, run that domain skill's bulk pass protocol (each domain skill carries one) — read every
+   record, verify a skip on *that* record rather than inheriting it from a same-prefix neighbour, and
+   never sample one record and extrapolate to the rest. The outliers a rebalance exists to catch — the
+   one hand-tweaked record hiding inside an otherwise-uniform group — are exactly what
+   sampling-and-extrapolating ships unpatched. The `requiem-npc-patching` skill's *Bulk pass protocol*
+   carries the one-call coverage finder for `NPC_`; the same discipline holds for `ARMO`, `WEAP`,
+   `SPEL`, `MGEF`, `ENCH`, `RACE`, and every other type.
+   **Close with a top-level reconciliation across all types:** (routed + patched) + (skipped with a
+   reason) + (flagged "no owner") = the total enumerated. The job is not done while any enumerated
+   record lacks a disposition — silence is the failure mode this gate exists to kill, not a pass.
 2. **Gap mechanics.** Every system the content implies (vampire, disease, alchemy, economy, …) had its
    reference's constraints applied — not just the raw record.
 3. **Carry inputs, not outputs.** Verify against the matrix below that you carried the input keywords

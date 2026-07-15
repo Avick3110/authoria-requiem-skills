@@ -10,9 +10,12 @@ description: Place a new or modded item or NPC into Requiem's world via houseCAR
 This skill is the **placement and distribution** layer. The item skills (`requiem-weapon-patching`,
 `requiem-armor-patching`, `requiem-ammo-patching`) and the actor skill (`requiem-npc-patching`)
 produce a correctly *statted* record; this skill makes that record actually **appear in the world** —
-in dungeon loot, on enemies, in vendor stock, inside containers, and as spawns. It edits four record
-types: `LeveledItem` (LVLI), `LeveledNpc`/LeveledCharacter (LVLN), `Container` (CONT), and
-`EncounterZone` (ECZN). It **links** already-statted records into lists; it does **not** re-stat them.
+in dungeon loot, on enemies, in vendor stock, inside containers, and as spawns. It edits five record
+types: `LeveledItem` (LVLI), `LeveledNpc`/LeveledCharacter (LVLN), `LeveledSpell` (LVSP), `Container`
+(CONT), and `EncounterZone` (ECZN) — it owns the **list / distribution layer** for all of them. For
+LVSP that means where a spell gets distributed, not how it's designed: spell *design* stays routed to
+the `requiem-magic-patching` skill. It **links** already-statted records into lists; it does **not**
+re-stat them.
 
 The output is a **direct ESP override** authored with houseCARL `bulk_apply` / `set_field`, because the
 Reqtificator's build pass operates on real records. Two things make this domain different from the item
@@ -22,6 +25,11 @@ domains, and both come straight from the Reqtificator's source (`Transformers/Le
    So you **add** your entries and let the merge union them with Requiem's curated list, rather than
    rewriting the list. See `references/merge-behavior.md` for the exact algorithm — it has two hard
    gotchas (the patch must master `Requiem.esp`, and the merge only fires with ≥3 contributors).
+   **"Add to Requiem's list and let the merge sort it out" is true only for a list Requiem itself
+   defines.** A mod's OWN new leveled lists are *not* in the merge — Requiem never defined them, so
+   `baseVersion == null` and the merge guard excludes them (`references/merge-behavior.md`, the two
+   guards). They ship **verbatim, level-gates and all**, and you must de-level them by hand — that
+   inverse job is the `## Bulk pass protocol` below.
 2. **Requiem de-levels by distribution, not by the `Level` field.** Almost every Requiem list entry is
    `Level = 1`; the *tier* of an item is encoded by **which list** it sits in and by **how many times**
    it is repeated, not by a level gate. Putting a daedric sword in at `Level = 1` is correct — that is
@@ -48,9 +56,11 @@ Confirm authority is fresh, then identify what you are placing and where.
    skill's `references/scope-and-authority.md`.
 
 2. **Identify the subject and the goal.** You are placing an *existing* record (already statted by an
-   earlier phase). Decide which of the four jobs this is:
+   earlier phase). Decide which of the five jobs this is:
    - **Item into loot/vendor/reward lists** → LVLI, the `## Workflow` additive-add loop.
    - **NPC/creature into spawn lists** → LVLN, same additive loop (entries are NPC refs, not items).
+   - **Spell into a spell-distribution list** → LVSP, same additive loop (entries are spell refs;
+     design the spell in `requiem-magic-patching`, distribute it here).
    - **Fill or curate a container** → CONT, `## Containers` in `references/containers-and-zones.md`.
    - **De-level / open a new area's encounter zone** → ECZN, `## Encounter zones` (usually nothing to
      do — read the section before touching it).
@@ -65,6 +75,91 @@ Confirm authority is fresh, then identify what you are placing and where.
    A steel sword, for example, resolves into `REQ_LI_Loot_Weapon_Sword`, `REQ_LI_Town_Weapon_Sword`,
    `REQ_LI_Blacksmith_Weapon_Sword`, the faction pools (`LItemBanditSword`, `LItemVampireSword`), and
    the reward/special pools — that set *is* the placement plan for a new steel-tier sword.
+
+## Bulk pass protocol (whole-plugin jobs)
+
+When you're patching a whole plugin — routed here from the `requiem-patching` skill, or any job with
+more than a handful of lists — the enumeration **is the work queue**, not a sample of it. This domain
+carries an **inverse job** the placement workflow below doesn't touch: a mod ships its **own** leveled
+lists, and unless someone de-levels them by hand they keep their vanilla-style level gates in a Requiem
+game — the confirmed field failure is placing new content perfectly while the mod's own lists never got
+de-levelled.
+
+Open with one sweep per type against the **mod's own** records — one call each, none of them writes:
+
+```
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="LeveledItem"
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="LeveledNpc"
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="LeveledSpell"
+```
+
+Every FormID each returns is a record you must disposition. (LVSP has no merge toggle of its own — only
+LVLI and LVLN are merged — so an LVSP list resolves by plain conflict winner, which makes hand
+de-levelling the *only* lever for a gated spell list.)
+
+### The de-levelling triage
+
+For each enumerated list, read its entries' `Level` values:
+
+```
+housecarl_read_record formid="<list>" fields=["Entries"] depth=2
+```
+
+Any entry with **`Level > 1` is a vanilla-style level gate.** Requiem's model is flat — every entry is
+`Level = 1`, with tier encoded by list choice + repetition, never by a level field
+(`references/list-structure.md`, the de-leveling model). A gated entry in a Requiem game is a bug: that
+loot won't roll until the player reaches the gate level.
+
+Whether the gate is yours to fix turns on **who defined the list** — distinguish the two cases explicitly:
+
+- **An override of a Requiem-defined list** (Requiem shipped a version → `baseVersion != null`) rides
+  the merge. Patch it **add-only** — the placement workflow below — and Requiem's flat base carries the
+  distribution; don't hand-flatten it.
+- **The mod's OWN new list** (Requiem never defined it → `baseVersion == null`) **escapes the merge
+  guard entirely** (`references/merge-behavior.md`, the two guards). No Reqtificator pass touches it; it
+  ships **verbatim, level-gates and all**. De-level it **by hand** — rewrite each `Level > 1` entry to
+  `Level = 1`:
+
+  ```
+  housecarl_set_field formid="<mod's own list>" into="Requiem leveled list patching" \
+    field_path="Entries[0].Data.Level" value="1"     # flatten each gated entry
+  ```
+
+Tell the two apart with a conflict read: a list whose winner chain includes a `Requiem.esp` version is
+Requiem-defined (add-only); a list defined only in `<NewMod>.esp` with no Requiem version is the mod's
+own (hand-de-level).
+
+### Every record dispositioned
+
+Walk the full enumeration. Each list is exactly one of:
+
+- **de-levelled** — the mod's own gated list, every `Level > 1` entry rewritten to `Level = 1`;
+- **placed-into** — your new record added to it via the placement workflow (add-only, rides the merge);
+- **skipped** — already flat (every entry `Level = 1`), or a quest-fixed / cosmetic list a gate doesn't
+  hurt — **state the reason**, and verify it on *that* record.
+
+A record counts as **de-levelled** or **placed-into** only when the per-record checklist actually passes
+for it — every gated entry flattened, or your entry present at `Level = 1` with `Requiem.esp` mastered.
+**Touched is not patched:** a list with one gate still left is not de-levelled, and a placement whose
+patch never mastered Requiem is not placed. Verify per record; never inherit a neighbour's result.
+
+Close each type with a **reconciliation count — de-levelled + placed-into + skipped = enumerated.** If
+the sides don't add up, a list fell through; find it before you call the type done.
+
+### Never extrapolate across a list family
+
+Leveled lists arrive in uniform-looking families that hide a non-uniform outlier — and one gated sibling
+is exactly what this pass exists to catch:
+
+- **Sublist trees** — a parent list that references child leveled lists (Requiem's `SubChar*` shape).
+  Reading the parent flat says nothing about the children; the gate hides one level down.
+- **Same-prefix families** — `<Mod>_LList_Bandit01..06`, a run of same-named pools. A modder gates one
+  and leaves the rest flat.
+- **Per-tier variants** — one list authored per tier. Seeing the tier-1 variant flat doesn't make the
+  tier-5 variant flat.
+
+Read each sibling. Never read one member, see it flat, and assume the tree is — reading the outlier
+costs one query; missing it ships a level-gated list into someone's game.
 
 ## Workflow — add an entry to a leveled list
 
@@ -153,7 +248,11 @@ the `requiem-patching` skill.
   the Level-1 lists, **not** the encounter zone. The Reqtificator's `openEncounterZones` pass only sets
   the `DisableCombatBoundary` flag at build (it does **not** change min/max level), and it does this to
   every zone automatically. So a new area's ECZN normally needs **nothing**. Only touch `MinLevel` if a
-  modded zone hard-gates content in a way that fights Requiem's flat design, and say why.
+  modded zone hard-gates content in a way that fights Requiem's flat design, and say why. **Don't
+  generalize "the build pass handles it" from the zone to the lists:** `openEncounterZones` auto-opens
+  every zone, but no build pass de-levels a mod's OWN leveled lists — Requiem never defined them, so
+  they escape the merge (`baseVersion == null`) and keep their gates unless you flatten them by hand
+  (`## Bulk pass protocol`). The zone is automatic; the mod's own lists are not.
 
 - **REQ_NULL inside lists — leave Requiem's, never add your own.** Requiem deliberately keeps
   `REQ_NULL_*` entries and retired `REQ_NULL_*` sublists inside its lists as a removal/placeholder
@@ -193,6 +292,10 @@ the `requiem-patching` skill.
 
 Before finishing a placement, confirm:
 
+- [ ] **Whole-plugin job:** every enumerated LVLI/LVLN/LVSP dispositioned (de-levelled / placed-into /
+      skipped with reason), each counting only when its per-record checklist passes; counts reconcile
+      (de-levelled + placed + skipped = enumerated); the mod's own-list vs Requiem-override distinction
+      made per list; no sublist-tree / same-prefix / per-tier extrapolation.
 - [ ] **Right list family** chosen from the comparable's reverse-reference (Loot/Town/Best/Blacksmith/
       faction/reward), matching the item's intended availability.
 - [ ] **`Level = 1`, `Count = 1`**, repeated to match the comparable's tier weighting.
