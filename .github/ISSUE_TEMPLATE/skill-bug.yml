@@ -1,0 +1,56 @@
+name: Skill bug report
+description: A shipped skill produced a wrong patch, wrong routing, or wrong doctrine in a live session
+labels: ["bug", "from-live-session"]
+body:
+  - type: input
+    id: skill
+    attributes:
+      label: Skill
+      description: Which skill (or the router) misbehaved
+      placeholder: requiem-npc-patching
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Pack version
+      description: The `version` in the live install's plugin.json when it happened
+      placeholder: "1.2.2"
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: >-
+        The record(s) and plugin involved (FormIDs as XXXXXX:Plugin.esp), what the skill said or
+        did, and how you noticed it was wrong. Paste the relevant transcript excerpt if you have it.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected (the Requiem-correct outcome)
+      description: >-
+        What the correct derivation/routing/disposition was, with evidence — the live comparable
+        you'd derive from, the doctrine line it violates, or the in-game symptom.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Repro
+      description: The houseCARL call sequence or the prompt that reproduces it. No local machine paths — this repo is public.
+    validations:
+      required: false
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - ships-wrong-balance (a patch lands wrong in game)
+        - wrong-routing (record dispositioned to the wrong lane / dropped)
+        - doc-drift (skill text contradicts reality; output was caught)
+        - ergonomic (wasteful/confusing but the outcome was right)
+    validations:
+      required: true

@@ -64,12 +64,24 @@ dev/   (SHARED dev lane — tracked since 2026-07-15 so both maintainers + their
 
 - **Worktree & merge discipline — start every change that will commit in a worktree.** Branch
   `claude/<name>` under `.claude/worktrees/<name>/`; the main repo folder stays on `main`, read-only
-  except for landing. `main` is PR-protected (raw pushes are rejected); landing = push → PR → **Aaron's
-  explicit go** → merge → delete branch. Changes to this file get the same gate — surface them, never
-  self-commit. Check your branch at session start.
-- **Lanes.** Live-session bug reports from Aaron → the external HCBR gap/bug store (fixes reference
-  their `HCBR-<date>-<n>` id, as in CHANGELOG). Small dev-noticed follow-ups → `dev/BACKLOG.md`.
-  Chartered work → `dev/plans/`. Session state → `dev/session-handoffs/` (write one at end of session).
+  except for landing. `main` is PR-protected by ruleset (raw pushes rejected; rebase-merge only);
+  landing = push → PR (the template's checklist is the convention) → **the other maintainer's
+  approving review** (the ruleset requires 1 approval; the repo admin can bypass via PR for a
+  solo-urgent landing — GitHub flags the bypass visibly, so it's a deliberate act, not a habit) →
+  green **`conventions` CI check** (manifests, 500-line cap, `name:`==folder, description cap, and a
+  publish-hygiene scrub of added lines) → merge → delete branch. Changes to this file get the same
+  gate — surface them, never self-commit. Check your branch at session start.
+- **Parallel landings collide in two files.** Two maintainers + agents cut worktrees from different
+  points of `main`, and both `plugin.json` (the version bump) and `CHANGELOG.md` (the entry position)
+  assume they know what shipped last. Rebase on latest `main` immediately before merge and re-check
+  both — the PR template gates on it.
+- **Lanes.** Skill bugs and coverage gaps — live-session or dev-noticed, either maintainer → **GitHub
+  Issues on this repo** (forms provided: *Skill bug report*, *Coverage gap / no owner*); fixes
+  reference `#N` in the CHANGELOG. houseCARL tool bugs/gaps → Issues on the houseCARL repo. (The old
+  local HCBR store is retired — its live reports were migrated as houseCARL issues #195–#201 on
+  2026-07-15; pre-existing `HCBR-<date>-<n>` ids in the CHANGELOG are historical.) Small dev-noticed
+  follow-ups → `dev/BACKLOG.md`. Chartered work → `dev/plans/`. Session state →
+  `dev/session-handoffs/` (write one at end of session).
 - **`dev/` is the SHARED dev lane — tracked and pushed (since 2026-07-15; Heisen is a collaborator).**
   Two maintainers + their agents work from one state, so:
   - **Authorship stamps are mandatory.** Every new handoff, plan, and findings doc carries, directly

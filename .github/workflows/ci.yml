@@ -1,0 +1,93 @@
+# authoria-requiem-skills CI — a green/red gate on every push to main and every pull request.
+# What it does, in plain terms: checks the things the authoring standards make checkable without
+# a Claude runtime — the manifests parse and carry a real version, every SKILL.md respects the
+# 500-line cap / name==folder / description-length rules, and (on PRs) no newly-added line leaks
+# a local machine path or an email into this public repo. It is the mechanical half of the §8
+# reviewer checklist; the judgment half stays human.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Cancel a superseded in-progress run on the SAME pull request when a newer commit is pushed.
+# Never cancel main-branch (push) runs.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  conventions:
+    name: conventions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # the scrub step diffs against the PR base
+
+      - name: Manifests parse and carry a releasable version
+        run: |
+          set -euo pipefail
+          jq -e . .claude-plugin/marketplace.json > /dev/null
+          jq -e . authoria-requiem/.claude-plugin/plugin.json > /dev/null
+          ver=$(jq -r .version authoria-requiem/.claude-plugin/plugin.json)
+          echo "plugin version: $ver"
+          # X.Y.Z only — a temp "-dev" bump is a local testing convention and must never be committed
+          if ! [[ "$ver" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error file=authoria-requiem/.claude-plugin/plugin.json::version '$ver' is not X.Y.Z — never commit a -dev bump"
+            exit 1
+          fi
+
+      - name: Skill bodies conform (500-line cap, name==folder, description cap)
+        run: |
+          set -uo pipefail
+          fail=0
+          for f in authoria-requiem/skills/*/SKILL.md; do
+            dir=$(basename "$(dirname "$f")")
+            lines=$(wc -l < "$f")
+            if [ "$lines" -gt 500 ]; then
+              echo "::error file=$f::$lines lines — over the hard 500-line cap (HOUSECARL_SKILL_AUTHORING §4.1); move the tail to references/"
+              fail=1
+            fi
+            name=$(sed -n 's/^name: *//p' "$f" | head -1)
+            if [ "$name" != "$dir" ]; then
+              echo "::error file=$f::frontmatter name '$name' != folder '$dir' (§2 — Codex requires them equal)"
+              fail=1
+            fi
+            desc=$(sed -n 's/^description: *//p' "$f" | head -1)
+            if [ "${#desc}" -gt 1536 ]; then
+              echo "::error file=$f::description is ${#desc} chars — over the 1536-char truncation cap (§3.5)"
+              fail=1
+            fi
+          done
+          exit $fail
+
+      - name: Publish-hygiene scrub of ADDED lines (PRs only)
+        if: github.event_name == 'pull_request'
+        run: |
+          set -uo pipefail
+          # Only lines this PR adds are gated — historical ARCHIVE docs are immutable by the doc-
+          # hygiene standard and are not re-litigated here. The rule being enforced is CLAUDE.md's
+          # publish hygiene: no local machine paths (use <home> / $env: / <your-username>
+          # placeholders), no email addresses, in a public repo.
+          base="${{ github.event.pull_request.base.sha }}"
+          added=$(git diff "$base"...HEAD --unified=0 -- . | grep '^+' | grep -v '^+++' || true)
+          fail=0
+          # real user-profile paths (placeholders like C:\Users\<you> are fine)
+          hits=$(printf '%s\n' "$added" | grep -PiE '[a-z]:\\+users\\+(?![<$%])' || true)
+          if [ -n "$hits" ]; then
+            echo "::error::added line(s) contain a real user-profile path — use <home> or a placeholder:"; printf '%s\n' "$hits"; fail=1
+          fi
+          # any other absolute drive path (E:\Skyrim Modding\... etc), unless the line carries a placeholder/env form
+          hits=$(printf '%s\n' "$added" | grep -PiE '[a-z]:\\+[a-z0-9]' | grep -viE '<home>|<your-username>|\$env:|%userprofile%' || true)
+          if [ -n "$hits" ]; then
+            echo "::error::added line(s) contain an absolute local path — use <home>/relative paths per CLAUDE.md publish hygiene:"; printf '%s\n' "$hits"; fail=1
+          fi
+          # email addresses (the Claude commit-trailer domain and obvious placeholders excepted)
+          hits=$(printf '%s\n' "$added" | grep -PioE '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}' | grep -viE 'noreply@|@example\.' || true)
+          if [ -n "$hits" ]; then
+            echo "::error::added line(s) contain an email address:"; printf '%s\n' "$hits"; fail=1
+          fi
+          exit $fail
