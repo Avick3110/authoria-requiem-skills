@@ -104,7 +104,10 @@ neighbour.
 skill's per-record `## Checklist` passes for it — the ladder damage/value, `Weight = 0`, the full
 keyword set (material + vendor + ammo-weight + armor-piercing tier + RFTI exclusion), the projectile
 on Requiem's profile, and the recipe (or a justified absence). A record you edited but left
-half-derived is still on the queue, not done.
+half-derived is still on the queue, not done. **Flags fields are unions, not scalars:** an AMMO or
+PROJ `Flags` write replaces the whole bitfield, so read the winner's flags first and write
+original-bits + your change — a literal Set silently strips `NonBolt`, `NonPlayable`,
+`CanBePickedUp`, and their kin.
 
 **The projectile rides the AMMO transitively.** Every AMMO points at a PROJ, and there is no separate
 PROJ enumeration — the AMMO sweep *is* the PROJ sweep. When you patch an AMMO, patch or verify its
@@ -318,6 +321,8 @@ Before finishing an ammo override, confirm:
       none.
 - [ ] **`RFTI_Exclusions_NoDamageRescale`** present.
 - [ ] **Projectile** set and on Requiem's profile (arrow 3600 / bolt 5600, gravity 0.35).
+- [ ] **Flags written as unions** — any AMMO/PROJ `Flags` write carries the winner's original bits
+      plus your change; no bit silently dropped.
 - [ ] **Forge recipe** (ingot + firewood → 30) with the cloned perk gate — unless it's
       bespoke/creature ammo that shouldn't be craftable.
 - [ ] **Elemental/quest ammo**: effect carried on the projectile, value preserved, effect *design*

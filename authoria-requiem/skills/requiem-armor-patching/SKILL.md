@@ -24,8 +24,10 @@ Covers all `ARMO` records: cuirass (body), helmet (head), gauntlets (hands), boo
 **shields/bucklers**, in both **light and heavy**, plus clothing and jewelry *frames* (AR-0
 ARMO — robes, rings, amulets, circlets). What it does **not** do: design the enchantment *effect*
 on an enchanted piece (route that to the `requiem-magic-patching` skill — this skill only links an `ObjectEffect`),
-and add race/ARMA models for who can wear it (route to the `requiem-race-patching` skill). Set the frame here; route
-those onward.
+and *author* race-add ARMA wearability for a new race (route to the `requiem-race-patching` skill).
+An `ARMA` record **linked from an ARMO you patch is still dispositioned in this lane** (usually a
+cosmetic-skip — it carries no balance fields — but the disposition is recorded here, never waved to
+the race lane). Set the frame here; route the rest onward.
 
 ## First step
 
@@ -92,8 +94,11 @@ Read each row to disposition the piece before any per-record work:
 which part/material/weight workflow) or **skipped** (note the reason, verified on *that* record). The
 skip categories to name explicitly:
 
-- **Non-playable / template `ARMO`** — a base or template record (`NonPlayable`, no biped slots)
-  never worn by the player; there is nothing to balance.
+- **Template / no-slot `ARMO`** — a base or template record with **no biped slots**, worn by no
+  one; there is nothing to balance. This skip does **not** extend to a `NonPlayable` piece an NPC
+  actually wears: the player feels its armor rating in every fight, so a worn NonPlayable piece is
+  derived at its playable twin's (or wielder's) tier — AR, armor-type/set/part keywords, the lot —
+  and skips only the player-economy surface (recipes, value as authored).
 - **Skin / naked-body `ARMO`** — a race's body-skin ARMO that renders the body, not a worn piece;
   leave it to the race layer.
 - **Creature-skin `ARMO`** — a creature's natural-armor skin; creature protection is an actor/race
@@ -106,7 +111,9 @@ skip categories to name explicitly:
 per-record **Checklist** (below) passes for *that* piece — the armor-type + part keyword, the set
 keyword, on-ladder AR/value/weight, the fist perk where it applies, the recipes, masters, and the
 `REQ_NULL` scan. Setting one field and moving on is not a disposition; the Checklist is the gate that
-turns "touched" into "patched."
+turns "touched" into "patched." **Flags fields are unions, not scalars:** a flags write (record
+`Flags`, `BodyTemplate` flags) replaces the whole bitfield — read the winner's bits first and write
+original-bits + your change, or you silently strip `NonPlayable` and its kin.
 
 Close the pass with a **reconciliation count — patched + skipped = enumerated.** If the two sides
 don't add up, a record fell through; find it before you call the type done. (This is the per-record
@@ -338,9 +345,9 @@ assumed — rather than emitting a confident guess.
 Before finishing an armor override, confirm:
 
 - [ ] **Whole-plugin job:** every enumerated `ARMO` dispositioned — patched (the field checklist
-      below passed for that piece) or skipped with a reason (non-playable/template, skin/naked-body,
-      or creature-skin `ARMO` named); counts reconcile (patched + skipped = enumerated); no
-      set/pair/tier/variant extrapolation.
+      below passed for that piece) or skipped with a reason (template/no-slot, skin/naked-body,
+      or creature-skin `ARMO` named — a *worn* `NonPlayable` piece is tiered, not skipped); counts
+      reconcile (patched + skipped = enumerated); no set/pair/tier/variant extrapolation.
 - [ ] **Armor-type keyword** (heavy/light) and **armor-part keyword** present, matching
       `BodyTemplate.ArmorType` and the biped slot.
 - [ ] **Armor-set / material keyword** present (drives value tier, ranged resistance, tempering) —
@@ -352,6 +359,8 @@ Before finishing an armor override, confirm:
 - [ ] **Name** encodes material + part ("Ebony Gauntlets", "Glass Shield").
 - [ ] **Crafting recipe** (forge) + **tempering recipe** (armor workbench) with the cloned perk
       gate and correct ingot inputs.
+- [ ] **Flags written as unions** — any flags write carries the winner's original bits plus your
+      change; no bit silently dropped.
 - [ ] **`Requiem.esp` is a master** of the patch (auto when a Requiem keyword is referenced) —
       masters list correct + load-order-sorted (verify the `masters:` read-back).
 - [ ] **No `REQ_NULL_*` reference remains** in any patched field — strip it or replace it with the

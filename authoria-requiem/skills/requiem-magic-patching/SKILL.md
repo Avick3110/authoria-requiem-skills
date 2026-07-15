@@ -64,7 +64,11 @@ Confirm houseCARL's authority is fresh, then identify what you are patching.
    `Requiem - Magic Redone.esp`).
 
 2. **Classify what you are patching** — the branch decides the comparable:
-   - **Spell** (SPEL the player/NPC casts, or a spell tome teaches) → the `## Workflow`.
+   - **Spell** (SPEL the player/NPC casts, or a spell tome teaches) → the `## Workflow`. An
+     **ability SPEL granting standing-stone-like passive boons** (a birthsign/doomstone blessing, a
+     "Stone" power) additionally co-routes the `requiem-patching` skill's
+     `references/standing-stones.md` constraints — its magnitudes follow that model, not a combat
+     spell's tier ladder.
    - **Weapon enchantment** (charge-based ENCH) → workflow + the weapon section of
      `references/enchantments.md`.
    - **Apparel enchantment** (constant-effect ENCH) → the apparel section.
@@ -121,7 +125,11 @@ patched; it's half-done, and it belongs on the still-open side of the count.
 
 Close each type with a **reconciliation count — patched + skipped = enumerated** — for Spell,
 MagicEffect, ObjectEffect, Scroll, and tome-BOOK each. If a type's two sides don't add up, a record fell
-through; find it before you call the type done.
+through; find it before you call the type done. **Flags fields are unions, not scalars:** a SPEL or
+MGEF `Flags` write replaces the whole bitfield, so read the winner's flags first and write
+original-bits + your change — a literal Set that only names the bits you thought about silently strips
+`ManualCostCalc` (re-enabling auto-cost on every authored-cost spell), `PowerAffectsMagnitude`, and
+their kin.
 
 **MGEF cross-check** (closes "spell patched but its effects never rebalanced"). After the per-type
 counts, reconcile the set of MGEFs **referenced by the spells you patched** against the enumerated
@@ -340,6 +348,8 @@ Before finishing a magic override, confirm:
 - [ ] **Effect list** mirrors the comparable's shape (primary + secondary/taper), each with `Data`
       magnitude/area/duration and any `Conditions`.
 - [ ] **Element + Requiem-marker keywords** present; **MGEF `Flags`** (incl. `PowerAffectsMagnitude`) mirrored.
+- [ ] **Flags written as unions** — every SPEL/MGEF `Flags` write carries the winner's original bits
+      plus your change; `ManualCostCalc` never silently dropped.
 - [ ] **`HalfCostPerk`** = the correct `REQ_<School>_Mastery_<tier>` perk; specialization keyword if needed.
 - [ ] **No `RFTI_All_*` rescaling perk** hand-added; **special-mechanic `Nox_*` script routed to the `requiem-script-patching` skill.**
 - [ ] **Enchantment:** weapon = per-cast `EnchantmentCost` by tier (pool on the WEAP); apparel = constant, no pool.

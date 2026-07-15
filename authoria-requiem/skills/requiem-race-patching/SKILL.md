@@ -129,7 +129,10 @@ analogue's standard. Touching one field and moving on leaves it half-patched, wh
 count won't surface unless "patched" is held to the checklist.
 
 Close the pass with a **reconciliation count — patched + skipped = enumerated.** If the two sides don't
-add up, a record fell through; find it before you call the type done.
+add up, a record fell through; find it before you call the type done. **Flags fields are unions, not
+scalars:** a RACE `Flags` write replaces the whole bitfield, so read the winner's flags first and write
+original-bits + your change (the Workflow B example's `Flags` value is that union, not a fresh set) —
+a literal Set silently strips `Playable`, `Walks`, `Swims`, and their kin.
 
 **Never extrapolate across same-prefix race variants or playable/vampire pairs.** A run of
 `…FurstockRace0#`, a `<Race>Race`/`<Race>RaceVampire` pair, or a troll family *look* uniform — but the
@@ -239,7 +242,7 @@ undead) — never leave a creature unpatched.
      {formid:"<modded race>", field_path:"Keywords",  verb:"Add", value:"5F367F:Requiem.esp"}, # KnockdownImmunity
      {formid:"<modded race>", field_path:"ActorEffect", verb:"Add", value:"AD39E6:Requiem.esp"}, # Armor_Troll
      {formid:"<modded race>", field_path:"ActorEffect", verb:"Add", value:"AE3AED:Requiem.esp"}, # Healing_Troll
-     {formid:"<modded race>", field_path:"Flags", value:"Walks, NoCombatInWater, RegenHpInCombat, UseAdvancedAvoidance"}
+     {formid:"<modded race>", field_path:"Flags", value:"Walks, NoCombatInWater, RegenHpInCombat, UseAdvancedAvoidance"}  # UNION: winner's bits + RegenHpInCombat — never just the bits named here
    ]
    ```
 
@@ -351,6 +354,8 @@ Before finishing a race override, confirm:
 - [ ] **Ability spells** in `ActorEffect` — playable: Heritage/Blood/(Physique)/(Cuisine) + universal
       NoHealthRegeneration + MassEffect; creature: Armor (+ Resist if it has none of its own) (+ Healing).
 - [ ] **`RegenHpInCombat` flag** set whenever a Healing trait is present.
+- [ ] **Flags written as unions** — every RACE `Flags` write carries the winner's original bits plus
+      your change; no bit silently dropped.
 - [ ] **Keywords** — `ActorType*`, `REQ_DropsBloodKeyword`/`REQ_MinorKnockdownImmunity` as the
       analogue carries; `doNotInheritTraits` only to opt a record out.
 - [ ] **Creature**: trait-category + Layer-B perk **named** for the `requiem-npc-patching` skill's pass.

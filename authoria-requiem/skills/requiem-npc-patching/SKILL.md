@@ -63,10 +63,15 @@ Confirm authority is fresh, then identify what you're holding before you change 
    winner** owns face/body fields. Note which is which — you write balance, never appearance.
 
 3. **Decide: patch or skip.** Patch **combatants only.** Skip civilians, townsfolk, children,
-   quest-helpers, vendors with no combat role, and **conjured/summoned** actors. Tell them apart by
+   quest-helpers, and vendors with no combat role. Tell them apart by
    `Class` (a `*Citizen`/vendor/`Job*` class → skip), `AIData` (Aggression `Unaggressive` + low
    Assistance → skip), factions (job/crime only, no combat faction), the child race, and the absence
    of a combat class/style. Detail + signals in `references/identification.md`.
+   **A conjured/summoned actor is a combatant, not a skip.** Its summon *spell* (tier, cost) routes
+   to the `requiem-magic-patching` skill, but the summoned `NPC_` record's own level block is yours:
+   give it a fixed level and stats here like any combatant, or it ships on `PCLevelMult` — the
+   anti-Requiem pattern, hiding behind "the spell balances it" (the spell prices the summon; it does
+   not de-level the actor).
 
 4. **Classify the role** (drives everything): a **generic combatant** (bandit, forsworn, mage,
    marauder), a **creature** (animal/undead/daedra/automaton), a **follower**, or a **boss** (unique,
@@ -116,11 +121,24 @@ Open with the two coverage queries — one call each, the whole plugin at once, 
    Read `Class` + `AIData.Aggression` + `TemplateFlags` per row to disposition each NPC (which workflow,
    or which skip category) instead of hand-picking batch reads.
 
+**The mod's own actor-support records ride this pass.** A plugin that defines its own `CLAS`
+(class), `CSTY` (combat style), `OTFT` (outfit), or `FACT` (faction) records gets those dispositioned
+here too — enumerate each type (`cross_plugin_query plugins=["<NewMod>.esp"] type="CLAS"`, etc.).
+The usual fix is on the *actor*: retarget the NPC to the Requiem analogue (`REQ_Class_*`, a role
+combat style, a REQ outfit) per Workflow C, which leaves the custom record unreferenced and
+skippable. But where a custom record stays referenced — a bespoke boss class, a mod's own faction the
+quest needs — rebalance it by live analogy against the closest Requiem record (a class's
+`StatWeights` vs the matching `REQ_Class_*`) or skip it with the reason stated. Assignment on the
+actor and the record's own balance are both this lane's job; neither may be waved to another skill.
+
 **Every FormID gets a disposition, and "patched" is a field verdict — not a record-touch.** Walk the
 full enumeration: each record is **patched** (note which workflow) or **skipped** (note the reason —
-civilian / vendor / child / summon / already-templated / quest or scene actor; the fuller skip taxonomy
+civilian / vendor / child / already-templated / quest or scene actor; the fuller skip taxonomy
 is in `references/identification.md`), and a skip is verified on *that* record, never inherited from a
-neighbour. A record counts **patched only when the per-record field checklist (`## Checklist`) passes
+neighbour. **Flags fields are unions, not scalars:** a `Configuration.Flags` write replaces the whole
+bitfield, so read the winner's flags first and write original-bits + your change — a literal Set that
+only names the bits you thought about silently strips `Female`, `Essential`, `Unique`, `IsGhost`,
+`Invulnerable` from the actors that carried them. A record counts **patched only when the per-record field checklist (`## Checklist`) passes
 for it** — level *and* flags *and* class *and* perks *and* spells *and* stat offsets, as its archetype
 requires. In a bulk job that checklist runs **for every enumerated record, not once for the job**: a
 record that got a fixed level but never got its perks, spells, `PlayerSkills`, or stat offsets is **not
@@ -182,7 +200,7 @@ balance fields** instead — set them from the live analogue, never from guessed
 ```
 housecarl_bulk_apply into="Requiem NPC patching" operations=[
   {formid:"<npc>", field_path:"Configuration.Level.Level", value:"12"},              # fixed; read the analogue
-  {formid:"<npc>", field_path:"Configuration.Flags", value:"Respawn, AutoCalcStats"},# remove PCLevelMult; AutoCalcStats for humanoids
+  {formid:"<npc>", field_path:"Configuration.Flags", value:"Respawn, AutoCalcStats"},# UNION: winner's bits minus PCLevelMult, plus AutoCalcStats — never just the bits named here
   {formid:"<npc>", field_path:"Class",        value:"85BCE3:Requiem.esp"},           # REQ_Class_Bandit_SwordShield
   {formid:"<npc>", field_path:"CombatStyle",  value:"03BE1B:Skyrim.esm"},            # role combat style (often vanilla)
   {formid:"<npc>", field_path:"DefaultOutfit",value:"<REQ outfit>:Requiem.esp"},     # gear drives much of the difficulty
@@ -259,9 +277,11 @@ housecarl_bulk_apply into="Requiem NPC patching" operations=[
 
 The mechanics are easy; the judgment is **identification** — what the NPC is, and whether to touch it.
 
-- **Patch combatants; skip the rest.** Civilians, children, quest-givers, vendors-with-no-fight, and
-  conjured/summoned actors stay as authored. When the role is genuinely ambiguous (a guard who also
-  trades, a "boss" who's really a quest NPC), say what you checked and ask rather than guess.
+- **Patch combatants; skip the rest.** Civilians, children, quest-givers, and vendors-with-no-fight
+  stay as authored. A **conjured/summoned** actor is a combatant: its spell routes to the
+  `requiem-magic-patching` skill, its actor record gets the fixed-level/stats pass here. When the
+  role is genuinely ambiguous (a guard who also trades, a "boss" who's really a quest NPC), say what
+  you checked and ask rather than guess.
 
 - **Fixed level, remove `PCLevelMult` — except followers.** De-levelling is the core of Requiem
   balance; a non-follower must get a flat level and lose the multiplier. A **follower** keeps
@@ -323,8 +343,9 @@ Before finishing an NPC override, confirm:
 - [ ] **Whole-plugin job:** every enumerated NPC dispositioned — **patched = this checklist passed on
       that record**, or skipped with a reason; counts reconcile (patched + skipped = enumerated); query 1
       re-run drains to empty/followers-only; no same-prefix / shared-`Template` / shared-`Class`
-      extrapolation.
-- [ ] **Role identified** and it's a combatant (not a civilian/helper/summon).
+      extrapolation; the mod's own `CLAS`/`CSTY`/`OTFT`/`FACT` records dispositioned too.
+- [ ] **Role identified** and it's a combatant (not a civilian/helper) — a summoned actor counts as a
+      combatant (fixed level + stats here; the summon spell routed to the `requiem-magic-patching` skill).
 - [ ] **Level** fixed + `PCLevelMult` removed (followers: kept).
 - [ ] **Flags** correct (Respawn for generic spawns; Unique/Protected/Essential by role; AutoCalcStats
       for humanoids, explicit Health/Magicka/Stamina offsets for creatures/bosses).
@@ -343,6 +364,12 @@ Before finishing an NPC override, confirm:
 - [ ] **DefaultOutfit / DeathItem** links set to the Requiem analogue's (contents → the `requiem-leveled-list-patching` skill).
 - [ ] **Template + TemplateFlags** set when templating onto a Requiem base.
 - [ ] **Appearance fields untouched**; `Factions`/`AIData`/mod traits untouched.
+- [ ] **Flags written as unions** — every `Configuration.Flags` write carries the winner's original
+      bits plus your change; no `Female`/`Essential`/`Unique`/`IsGhost`/`Invulnerable` bit silently
+      dropped.
+- [ ] **Every carried FormID resolve-verified** — `housecarl_resolve` each derived FormID (perk,
+      class, outfit, spell) before the write; the classic slip is the right FormID under the wrong
+      master suffix, which reads fine until the record dangles.
 - [ ] **Masters correct** — houseCARL Add+Sorts them from referenced forms the xEdit way; verify the
       `masters:` read-back. `Requiem.esp` auto-masters when a Requiem class/perk/spell is referenced
       (force it in by referencing a real Requiem form when you specifically need it).

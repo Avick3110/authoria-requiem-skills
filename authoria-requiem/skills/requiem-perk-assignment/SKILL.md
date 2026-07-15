@@ -64,12 +64,14 @@ and only one lane is yours (proof and full lists in `references/boundary-and-wri
      disagree, Requiem's own actors follow the equipment. On any `Lvl*`/template/placeholder actor
      the class is pure noise (4,229 records carry the vanilla Dremora class as filler).
 
-3. **Split source-carried from build-stamped before deriving.** If the comparable's live winner is
-   the Reqtificator output (`Requiem for the Indifferent.esp`), its `Perks` list is ~80%
-   machine-stamped chassis. Read the **source** version (`plugin="Requiem.esp"` or the defining
-   addon) — or take the leading player-tree perks and discard everything matching the forbidden
-   prefixes (`RFTI_*`, `Nox_Perk_Mechanics_*`, `*GM_*`). Deriving from an unsplit winner list is
-   how a patch ends up hand-stamping the chassis.
+3. **Derive from the comparable's SOURCE perk list — always scope the read.** Read the
+   comparable's `Perks` with `plugin="Requiem.esp"` (or the defining addon) so you see the
+   hand-picked source set, never the live winner's. A winner list on an RftI-won actor is ~80%
+   machine-stamped chassis, and **prefix-filtering a winner list is not a safe substitute**: the
+   build pass also re-carries tier perks that pass every prefix filter, which is how field runs have
+   shipped 11–18-perk supersets the Reqtificator then double-stamps. The prefix screen (`RFTI_*`,
+   `Nox_Perk_Mechanics_*`, `*GM_*`) is a last-resort cross-check when no source version exists at
+   all — and that derivation gets flagged as unverified, not shipped silently.
 
 ## Bulk pass protocol (whole-plugin jobs)
 
@@ -238,7 +240,10 @@ Walk the PERK queue (bulk protocol above) with the three-way rule — full calib
   FormIDs; carry each rank as its own entry at Rank 1.
 - **Re-authoring a Requiem perk under a new FormID.** The space exists — assign the origin FormID
   and let the winner deliver Requiem's version.
-- **Deriving from an unsplit RftI winner list** — you'll copy the chassis in with the combat set.
+- **Deriving from a live winner list at all — even prefix-filtered.** The filter catches the named
+  chassis families but not every build-re-carried tier perk; the source-scoped read
+  (`plugin="Requiem.esp"` / the defining addon) is the derivation input, and its absence is a flag,
+  not a licence to filter.
 - **Trusting a vanilla EditorID's weapon role** over the record's own Class/Outfit/Perks.
 - **Tailoring a creature's perks to its one equipped weapon.** Requiem creatures carry race×tier
   supersets; copy the shape, don't trim it.
@@ -257,8 +262,9 @@ Before finishing, confirm:
       enumeration gate (or this skill's own sweep on a perk-only job); no family extrapolation.
 - [ ] **Derivation inputs read on this record:** full weapon union, armor class, shield, spell kit
       + highest spell tier, intended tier; class used only as corroboration.
-- [ ] **Comparable read at the matching tier**, source-carried set isolated from any build-stamped
-      chassis before copying.
+- [ ] **Comparable read at the matching tier, source-scoped** — the perk set derived from the
+      comparable's `plugin="Requiem.esp"`/defining-addon version, never from a live winner list
+      (prefix-filtered included); a no-source derivation flagged, not silent.
 - [ ] **Set shape correct for the archetype:** warrior weapon+defence+floor at tier depth; caster
       school nodes at spell-tier threshold + survivability set, no `_Mastery_` gates; hybrid stacks
       both; creature race×tier superset or trait-only kit.
@@ -266,6 +272,9 @@ Before finishing, confirm:
       `RFTI_Ench_*`/racial-state trait/`REQ_NULL_*` FormID anywhere in the composed `Perks` values.
 - [ ] **Write shape:** one PerkPlacement per rank FormID, `Rank=1`, origin FormIDs referenced;
       modded perks kept/augmented, vanilla ones replaced.
+- [ ] **Every carried FormID resolve-verified** — `housecarl_resolve` each perk FormID before the
+      write; the classic slip is the right FormID under the wrong master suffix (perk lists render
+      opaque below `depth=3`, which invites transcription slips).
 - [ ] **Masters correct** on the read-back (houseCARL Add+Sorts from referenced forms; a Requiem
       perk reference pulls `Requiem.esp`/the addon in as master — verify the `masters:` line).
 - [ ] Routed onward: NPC frame → `requiem-npc-patching`; trait bridge → npc/race skills; perk

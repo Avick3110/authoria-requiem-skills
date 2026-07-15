@@ -2,6 +2,61 @@
 
 All notable changes to the Authoria Requiem Patching Skills plugin. Versioning is [semantic](https://semver.org); the `version` in `authoria-requiem/.claude-plugin/plugin.json` is bumped on each release.
 
+## 1.2.2 — 2026-07-15
+
+The S4 findings batch: all eight skill-body findings from the Gray Cowl empirical close
+(`dev/s4-graycowl-validation/FINDINGS.md`, F1–F8) fixed in one pass. Body-only — no descriptions
+changed, no §6.5 re-measure owed.
+
+- **F1 — summoned actors get an owner (`requiem-npc-patching`).** Conjured/summoned actors were a
+  skip category ("balanced via the summon spell"); the spell only *prices* the summon, so two of
+  three summonables shipped on `PCLevelMult` in the S4 run. The rule is now: the summon spell routes
+  to `requiem-magic-patching`, but the summoned `NPC_` record itself is a combatant — fixed level +
+  stats here. First step, Judgment, checklist, and `references/identification.md` all updated.
+- **F2 — `NonPlayable` combat gear is tiered, not skipped (`requiem-weapon-patching`,
+  `requiem-armor-patching`).** NPC-hand weapon copies and worn NonPlayable armor were skipped as
+  "never reaches the player" — but the player *feels* them (the S4 oracle re-tiered every one).
+  Skip taxonomies rewritten: a NonPlayable combat copy derives at its playable twin's / wielder's
+  tier (a NonPlayable bow still needs `NPCsUseAmmo`); only the player-economy surface (recipes,
+  value) is exempt. True skips (traps/props, template/no-slot records) stay skips.
+- **F3 — unzoned dungeon cells get zones (`requiem-leveled-list-patching`).** The Reqtificator's
+  `openEncounterZones` opens *existing* zones; it cannot invent one, and no sweep surfaced cell→zone
+  assignment (the S4 oracle created 3 tiered ECZNs and assigned 18 unzoned cells). The bulk pass
+  gains a cell→zone sweep: enumerate the mod's cells' `EncounterZone` links; unzoned dungeon cells
+  are assigned an existing tier-matched zone or newly-created tiered ECZNs. Judgment and checklist
+  updated to "leave the existing ones; create the missing ones."
+- **F4 — recipes track the product's material (`requiem-weapon-patching`).** 6/8 S4 temper recipes
+  defaulted to the Steel ingot + Craftsmanship gate. Workflow step 6 now derives the ingot and
+  `HasPerk` gate from the weapon's own material keyword via the same-material comparable; Common
+  mistakes and the checklist name the anti-pattern.
+- **F5 — flags are unions, pack-wide.** A literal `Flags` Set cleared unlisted bits in the S4 run
+  (`ManualCostCalc` off all six authored-cost spells; `Female`/`Essential`/`Unique` off named NPCs).
+  Every flag-writing skill's bulk protocol + checklist now carries the rule — read the winner's
+  bits, write original-bits + your change — with the domain's classic casualties named (npc, weapon,
+  armor, ammo, magic, consumable, race, leveled-list; the two example `Flags` writes in npc/race are
+  annotated as unions). The houseCARL-side ask (flag-bit Add/Remove verbs) is filed as an HCBR gap.
+- **F6 — perk derivation is source-scoped, full stop (`requiem-perk-assignment`).** Prefix-filtering
+  a live winner list is no longer a sanctioned substitute for reading the comparable's
+  `plugin="Requiem.esp"`/defining-addon perk list — the build pass re-carries tier perks that pass
+  every prefix filter (S4 shipped 11–18-perk supersets). The filter is demoted to a last-resort
+  cross-check that ships flagged, not silent. First step, Common mistakes, and checklist updated.
+- **F7 — the resolve gate (`requiem-npc-patching`, `requiem-perk-assignment`, router).** Two S4
+  FormIDs shipped dangling — one the right FormID under the wrong master suffix. Checklists now
+  require `housecarl_resolve` on every carried FormID before write; the router's checklist gates on
+  it across lanes. (The depth-2 PerkPlacement opacity that invited the slip is filed as an HCBR
+  note.)
+- **F8 — router-table rows (`requiem-patching` + `references/routing-table.md`).** (a) `ARMA` gets
+  an explicit split rule — ARMO-linked addons disposition with their piece in the armor lane, race
+  skin/body ARMA in the race lane, every ARMA assigned to exactly one lane up front (the armor
+  skill's boundary note reconciled to match). (b) Quest-start level gating (`SMQN` / quest
+  `GetLevel` start conditions) gets an explicit **flag-to-the-user** row — quest pacing in a
+  de-levelled world is a judgment call, never auto-derived or silently kept. (c) The mod's own
+  `CLAS`/`CSTY`/`OTFT`/`FACT` records get an owner — `requiem-npc-patching`'s bulk pass dispositions
+  them (retarget the actor to the Requiem analogue, or rebalance a still-referenced custom record by
+  live analogy). (d) Standing-stone-like ability SPELs co-route `standing-stones.md` (their
+  magnitudes follow the stone model, not a combat tier ladder), stated in the gap table and the
+  magic skill's classify step.
+
 ## 1.2.1 — 2026-07-15
 
 Papercut fix: the router's missing LVSP row (the unfinished half of the 1.0.3 charter's D3 fold-in).
