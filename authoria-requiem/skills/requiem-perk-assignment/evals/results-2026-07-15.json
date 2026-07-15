@@ -1,0 +1,33 @@
+{
+  "_meta": {
+    "skill": "requiem-perk-assignment",
+    "date": "2026-07-15",
+    "method": "§6.5 fresh-context agent fan-out — 20 fresh Opus agents, one per query, each given only the anonymized description (verbatim, no skill name) + the single query; pure relevance question; verdicts adjudicated from each agent's reasoning, not the raw token.",
+    "description_measured": "Assign the right Requiem perks to a new or modded NPC via houseCARL — derive the source-carried perk set (weapon mastery, block, heavy armor, evasion, magic-school nodes) from the actor's equipment, spell kit, and tier against Requiem's own template ladders, write it as rank-chain PerkPlacements, and disposition a mod's own PERK records. Use when the user wants to give an NPC or follower Requiem perks, fix a boss or enemy whose perks are missing or wrong, build a perk loadout for a custom warrior, archer, mage, or spellsword from its gear and spells, ask which perks an NPC should carry in Requiem, or handle a mod's custom perk records. Never hand-place Reqtificator-stamped perks — load this before writing any Perks list, not after the build pass double-stamps the actor.",
+    "recall": "9/10 (90%) — threshold ≥80% PASS",
+    "specificity": "9/10 (90%) — threshold ≥50% PASS",
+    "verdict": "SHIP"
+  },
+  "results": [
+    {"id": 1, "should_trigger": true, "verdict": "YES", "correct": true, "reasoning_gist": "follower with zero perks = the missing-perks case named in the description"},
+    {"id": 2, "should_trigger": true, "verdict": "YES", "correct": true, "reasoning_gist": "boss with vanilla Armsman = 'fix a boss whose perks are wrong', central match"},
+    {"id": 3, "should_trigger": true, "verdict": "YES", "correct": true, "reasoning_gist": "warlock perks from its spells = mage loadout from spell kit"},
+    {"id": 4, "should_trigger": true, "verdict": "YES", "correct": true, "reasoning_gist": "per-record disposition of a mod's PERK records, named explicitly"},
+    {"id": 5, "should_trigger": true, "verdict": "YES", "correct": true, "reasoning_gist": "archer loadouts from gear = the gear-derivation method; plurality doesn't change scope"},
+    {"id": 6, "should_trigger": true, "verdict": "YES", "correct": true, "reasoning_gist": "the Reqtificator-vs-hand-place boundary question is the doctrine the capability owns"},
+    {"id": 7, "should_trigger": true, "verdict": "YES", "correct": true, "reasoning_gist": "spellsword mix of 1H + destruction = the named hybrid case"},
+    {"id": 8, "should_trigger": true, "verdict": "NO", "correct": false, "reasoning_gist": "MISS — judge read the smithing-yield perk clash as a crafting-economy/system question, not PERK disposition; conceded the custom-perk-record angle 'brushes the edge'. Borderline; the disposition lane (balance-bearing overlap → flag) is exactly this query"},
+    {"id": 9, "should_trigger": true, "verdict": "YES", "correct": true, "reasoning_gist": "draugr variants = enemy perk assignment"},
+    {"id": 10, "should_trigger": true, "verdict": "YES", "correct": true, "reasoning_gist": "knight loadout from greatsword/heavy/shield = the equipment formula"},
+    {"id": 11, "should_trigger": false, "verdict": "NO", "correct": true, "reasoning_gist": "whole-NPC frame (level/class/factions/outfit) correctly routed to NPC patching"},
+    {"id": 12, "should_trigger": false, "verdict": "NO", "correct": true, "reasoning_gist": "designing a new perk tree = authoring, which the capability never does"},
+    {"id": 13, "should_trigger": false, "verdict": "NO", "correct": true, "reasoning_gist": "SPID distribution mechanism, no derivation intent"},
+    {"id": 14, "should_trigger": false, "verdict": "NO", "correct": true, "reasoning_gist": "player build advice, no actor record or authoring task"},
+    {"id": 15, "should_trigger": false, "verdict": "NO", "correct": true, "reasoning_gist": "HalfCostPerk = spell-record wiring (magic domain); overlap is only the word 'perk'"},
+    {"id": 16, "should_trigger": false, "verdict": "NO", "correct": true, "reasoning_gist": "spell cost/magnitude = magic balancing, different domain"},
+    {"id": 17, "should_trigger": false, "verdict": "NO", "correct": true, "reasoning_gist": "racial abilities/resistances = RACE-record properties, race patching"},
+    {"id": 18, "should_trigger": false, "verdict": "NO", "correct": true, "reasoning_gist": "SkyPatcher ini = runtime authoring, wrong output medium, no derivation"},
+    {"id": 19, "should_trigger": false, "verdict": "YES", "correct": false, "reasoning_gist": "MISFIRE — judge argued a shield-carrying enemy that never blocks plausibly has a missing Block perk chain, so the skill should load to diagnose. Substantive reasoning; acceptable low-cost overtrigger under the §3.3 asymmetric-cost doctrine (intended answer: combat style → NPC patching)"},
+    {"id": 20, "should_trigger": false, "verdict": "NO", "correct": true, "reasoning_gist": "broken description strings = cosmetic text fix, no Requiem balance"}
+  ]
+}

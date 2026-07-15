@@ -1,0 +1,28 @@
+{"topic":"comparable sources REQ_Bandit_Template weapon ladders 84 records look-templates REQ_NULL leaves weapon-role classes","file":"equipment-perk-map.md","section":"The comparable sources (actor taxonomy)"}
+{"topic":"equipment perk matrix weapon-skill line defence line shield block heavy armor evasion light dual-wield bow crossbow universal floor union over loadout","file":"equipment-perk-map.md","section":"The core matrix: equipment → perk families"}
+{"topic":"tier escalation additive ladder perk count 5 to 18 focus ranks deepen level bands family-specific tier index","file":"equipment-perk-map.md","section":"Tier escalation (the ladder shape)"}
+{"topic":"perk FormID reference one-handed two-handed marksmanship block heavy armor evasion WeaponMastery SwordFocus Lethality HandToHand","file":"equipment-perk-map.md","section":"Perk FormID reference by tree"}
+{"topic":"per-weapon variation anti-extrapolation axe battleaxe PowerOfTheCombatant focus rank 3 Melee2H re-tasked EditorID trust class outfit","file":"equipment-perk-map.md","section":"Per-weapon variation (anti-extrapolation)"}
+{"topic":"NPC casters skip Mastery gate perks tier scales count 0 to 13 persistent spell rescaling","file":"caster-perks.md","section":"The two rules that shape everything"}
+{"topic":"caster comparables EncWarlock template ladder dragon priest vampire hybrid witch hagraven Magic Redone NPCs are summonables","file":"caster-perks.md","section":"The comparable sources"}
+{"topic":"spell kit drives perks school damage node threshold highest spell tier shared survivability set multi-school stacks","file":"caster-perks.md","section":"The derivation: spell kit → perks"}
+{"topic":"REQ magic perk tree destruction conjuration restoration alteration illusion pyromancy cryomancy electromancy necromancy FormIDs","file":"caster-perks.md","section":"The REQ magic perk tree (assignable nodes per school)"}
+{"topic":"dragon priest boss recipe hybrids stack vampire Magic Missile role not race","file":"caster-perks.md","section":"Boss-tier and hybrid shapes"}
+{"topic":"caster MagickaOffset attribute budget tier scaling","file":"caster-perks.md","section":"Magicka and attributes"}
+{"topic":"caster outliers Morokei spells not template hagraven under-perked source-won boss templates tier 1 zero perks","file":"caster-perks.md","section":"Outliers (anti-extrapolation)"}
+{"topic":"CLAS record schema SkillWeights StatWeights no perk field class cannot carry a perk","file":"class-and-creatures.md","section":"What a CLAS record actually is"}
+{"topic":"class unreliable perks scale with tier equipment out-resolves class sidearm AutoCalc off hand-perked class decorative","file":"class-and-creatures.md","section":"Why class cannot be the perk source"}
+{"topic":"placeholder trap EncClassDremoraMelee 4229 records Fox race Lvl UseTemplate junk class resolve template chain","file":"class-and-creatures.md","section":"The placeholder trap"}
+{"topic":"precedence rule equipment first tier second class corroboration only distrust on templated","file":"class-and-creatures.md","section":"The precedence rule"}
+{"topic":"creature perks race tier superset skeleton 1H 2H identical draugr falmer trait-only giant troll three archetypes","file":"class-and-creatures.md","section":"Creatures: race × tier supersets and trait-only kits"}
+{"topic":"three lanes player-tree Reqtificator chassis player-exclusive recognition Playable Hidden Name trait bridge exception","file":"boundary-and-write-shapes.md","section":"The three lanes (who owns which perks)"}
+{"topic":"before after proof source 5 perks build 50 RftI additive split winner list before deriving","file":"boundary-and-write-shapes.md","section":"The before/after proof"}
+{"topic":"assign vanilla FormID override in place Armsman WeaponMastery origin FormID resolver delivers winner never fresh FormID","file":"boundary-and-write-shapes.md","section":"Assign vanilla FormIDs — the override mechanism"}
+{"topic":"forbidden output RFTI_All Nox_Perk_Mechanics RFTI_Ench RFTI_Trait RFTI_Player REQ_NULL Mastery gates FormIDs","file":"boundary-and-write-shapes.md","section":"Forbidden output (recognition patterns + FormIDs)"}
+{"topic":"rank mechanics NextPerk chain separate single-rank FormIDs PerkPlacement Rank 1 never Rank 2","file":"boundary-and-write-shapes.md","section":"Rank mechanics and the write shape"}
+{"topic":"houseCARL recipes identity reads source split comparable queries references not where reverse lookup bulk_apply composes PerkPlacement verify masters","file":"boundary-and-write-shapes.md","section":"houseCARL recipes"}
+{"topic":"mod PERK disposition three-way rule hidden plumbing leave playable balance-bearing flag question obvious duplicate fold","file":"mod-perk-disposition.md","section":"The three-way rule"}
+{"topic":"disposition calibration Apocalypse Subclasses Shadow of Skyrim signals not plugin names","file":"mod-perk-disposition.md","section":"Calibration cases (read live)"}
+{"topic":"PERK reconciliation left-alone folded flagged equals enumerated catch-all owner","file":"mod-perk-disposition.md","section":"Reconciliation"}
+{"topic":"bulk pass protocol PERK queue enumerate disposition NPC perk lane rides npc-patching family extrapolation","file":"../SKILL.md","section":"Bulk pass protocol (whole-plugin jobs)"}
+{"topic":"warrior formula caster formula derive set write perks disposition workflow","file":"../SKILL.md","section":"Workflow"}

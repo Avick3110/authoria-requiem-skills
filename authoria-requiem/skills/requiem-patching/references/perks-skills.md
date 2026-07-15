@@ -24,13 +24,15 @@ utility spells (`examine 0832CC`, `bagOfHolding 078AA8`, the true-yield cloaks, 
 | A craftable weapon/armor | the material's smithing perk in the COBJ condition (`requiem-weapon-/armor-patching`). |
 | A specialization effect (e.g. a fire spell's bonus) | the school's specialization perk gates the secondary MGEF (`PerkToApply`/condition) — copy the gated effect verbatim. |
 | A sneak/stealth ability | the existing sneak mastery tree (`stealth.md`), player-exclusive. |
-| An NPC's combat ability | source-carried combat perks on the NPC (`requiem-npc-patching`); vanilla skill perks + Requiem skill-tree perks on stronger actors. |
+| An NPC's combat ability | source-carried combat perks on the NPC — derive the set from equipment/spell kit/tier via `requiem-perk-assignment`; the NPC frame stays with `requiem-npc-patching`. |
 
 ## If a mod ships its own perks
 
-Rebalance them to Requiem conventions only if the mod genuinely ships a perk record (PERK). Otherwise,
-route the *capability* to the matching existing tree. A mod's standalone perk that duplicates a Requiem
-gate should be neutralized or folded into the Requiem perk, not stacked alongside it.
+Route the PERK records to `requiem-perk-assignment` — its disposition rule (leave the mod's runtime
+plumbing alone / fold an obvious duplicate of a Requiem gate / flag a balance-bearing overlap to the
+user with a concrete question) is the owner method. If the mod ships no PERK record, route the
+*capability* to the matching existing tree. Either way, a standalone perk duplicating a Requiem gate
+is neutralized or folded, never stacked alongside it.
 
 ## Leveling
 

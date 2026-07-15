@@ -5,6 +5,11 @@ the **Reqtificator stamps at build**. Get this wrong and you either fight the au
 or leave the NPC missing its combat kit. The split is verified live and against
 `…\Reqtificator\Data\ActorAssignmentRules_Requiem.esp.conf`. Verify FormIDs live.
 
+This file covers the model from the NPC side; the copy-the-analogue move below is the normal path.
+When the *set itself* must be derived — no clean analogue, a custom gear mix, a hybrid caster, a
+dedicated perk job, or the mod ships its own `PERK` records — load the `requiem-perk-assignment`
+skill: it owns the equipment/spell-kit/tier derivation method and the mod-PERK disposition rule.
+
 ## Table of contents
 - [The three perk sources](#the-three-perk-sources)
 - [Source-carried: vanilla combat perks](#source-carried-vanilla-combat-perks)

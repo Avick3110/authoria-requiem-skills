@@ -1,0 +1,109 @@
+{
+  "_meta": {
+    "skill": "requiem-perk-assignment",
+    "created": "2026-07-15",
+    "validation": "§6.5 fresh-context agent fan-out: one fresh agent per query, given only the anonymized description + that single query, pure relevance question, verdicts adjudicated from reasoning (results archived alongside in results-2026-07-15.json)."
+  },
+  "evals": [
+    {
+      "query": "my follower mod's companion has zero perks — what should she actually carry in Requiem?",
+      "should_trigger": true,
+      "note": "core: derive a perk set for a modded NPC"
+    },
+    {
+      "query": "this custom boss dies way too easily, he only has vanilla Armsman ranks — give him a proper Requiem perk setup",
+      "should_trigger": true,
+      "note": "vanilla-perk replacement + boss tiering"
+    },
+    {
+      "query": "which perks should a modded warlock that casts fireball and frost cloak carry in requiem",
+      "should_trigger": true,
+      "note": "caster derivation from spell kit, lowercase casual"
+    },
+    {
+      "query": "go through the perk records that Vigilant.esp ships and figure out what to do with each of them for Requiem",
+      "should_trigger": true,
+      "note": "mod-shipped PERK disposition, whole-plugin"
+    },
+    {
+      "query": "the archer NPCs from this bandit mod need perk loadouts derived from their gear",
+      "should_trigger": true,
+      "note": "equipment→perk derivation, bulk"
+    },
+    {
+      "query": "do I need to give this NPC the armor penetration perks or does the Reqtificator add those at build?",
+      "should_trigger": true,
+      "note": "the assignment-boundary question itself"
+    },
+    {
+      "query": "my spellsword follower needs the right mix of one-handed and destruction perks for Requiem",
+      "should_trigger": true,
+      "note": "hybrid stack derivation"
+    },
+    {
+      "query": "this mod ships a custom perk giving 30% more smithing yield — does that clash with Requiem's crafting gates?",
+      "should_trigger": true,
+      "note": "mod PERK overlap disposition"
+    },
+    {
+      "query": "give the draugr variants in my dungeon mod the right requiem perks",
+      "should_trigger": true,
+      "note": "creature race×tier kit, casual"
+    },
+    {
+      "query": "patching a knight NPC — greatsword, heavy armor, shield on his back. build his perk list",
+      "should_trigger": true,
+      "note": "equipment-formula derivation, concrete loadout"
+    },
+    {
+      "query": "patch this follower mod's NPC for Requiem — level, class, factions, outfit, the works",
+      "should_trigger": false,
+      "note": "near-miss: whole-NPC frame -> requiem-npc-patching (perks are one lane of it)"
+    },
+    {
+      "query": "design a new perk tree for my crafting overhaul mod, balanced against Requiem smithing",
+      "should_trigger": false,
+      "note": "near-miss: authoring new PERK records/trees — this skill never authors PERKs"
+    },
+    {
+      "query": "use SPID to hand out a perk to every bandit in my load order",
+      "should_trigger": false,
+      "note": "near-miss: runtime perk distribution -> spid-authoring"
+    },
+    {
+      "query": "what perks should I take for a Requiem stealth archer playthrough?",
+      "should_trigger": false,
+      "note": "near-miss: player build advice, not patch authoring"
+    },
+    {
+      "query": "my new spell needs its HalfCostPerk pointed at the right Requiem school tier perk",
+      "should_trigger": false,
+      "note": "tricky near-miss: a perk link, but it's spell tier classification -> requiem-magic-patching"
+    },
+    {
+      "query": "rebalance this modded spell's magicka cost and magnitude for Requiem",
+      "should_trigger": false,
+      "note": "near-miss: magic balance -> requiem-magic-patching"
+    },
+    {
+      "query": "my custom race needs its racial abilities and damage resistances set up for Requiem",
+      "should_trigger": false,
+      "note": "near-miss: racial traits live on the RACE -> requiem-race-patching (trait perks are the Reqtificator's lane)"
+    },
+    {
+      "query": "write a SkyPatcher ini that adds a perk to every guard",
+      "should_trigger": false,
+      "note": "near-miss: perk + NPCs, but runtime ini patching -> skypatcher-authoring"
+    },
+    {
+      "query": "this enemy never blocks even with a shield equipped, fix whatever drives that",
+      "should_trigger": false,
+      "note": "near-miss: combat STYLE behavior -> requiem-npc-patching"
+    },
+    {
+      "query": "the perk descriptions from my mod render with broken tags in the skill menu, fix the strings",
+      "should_trigger": false,
+      "note": "near-miss: PERK records but cosmetic string fix, no Requiem balance"
+    }
+  ]
+}

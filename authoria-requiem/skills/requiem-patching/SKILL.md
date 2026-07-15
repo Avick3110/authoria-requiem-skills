@@ -13,10 +13,11 @@ with Requiem — both **balance** (stats the Reqtificator expects) and **gamepla
 make Requiem *Requiem*). It does that by enumerating every record the plugin touches, routing each to
 the right domain skill, and personally owning the cross-cutting systems no single domain skill covers.
 
-It does **not** re-derive what the eight domain skills already know. `requiem-weapon-patching`,
+It does **not** re-derive what the nine domain skills already know. `requiem-weapon-patching`,
 `requiem-armor-patching`, `requiem-ammo-patching`, `requiem-race-patching`, `requiem-npc-patching`,
-`requiem-leveled-list-patching`, `requiem-magic-patching`, and `requiem-consumable-patching` each
-own a record type and its live analogy method; `requiem-script-patching` owns the Papyrus layer. This skill is the dispatcher over
+`requiem-leveled-list-patching`, `requiem-magic-patching`, `requiem-consumable-patching`, and
+`requiem-perk-assignment` each own a record type or lane and its live analogy method;
+`requiem-script-patching` owns the Papyrus layer. This skill is the dispatcher over
 them plus the gap mechanics (vampirism/lycanthropy, diseases, exhaustion, stealth, alchemy, food,
 shouts, standing stones, perks/skills, economy, and the core combat/resistance model).
 
@@ -81,7 +82,7 @@ Work the grouped worklist top to bottom:
 | `MGEF`, `SPEL`, `ENCH`, `BOOK` (tomes), `SCRL`, `EXPL`, `HAZD` | `requiem-magic-patching` | school/tier/cost, HalfCostPerk classifier, three-layer split |
 | `INGR`, `ALCH` (potions, poisons, food, drink, alcohol), consumable `COBJ` | `requiem-consumable-patching` | class kits (potion/food/alcohol/drug/ingredient), value/weight/flags/keywords, cookpot recipes; the Reqtificator never rebalances consumables — the override is final. Genuinely new effect design still → `requiem-magic-patching` |
 | `SHOU`, `WOOP` | `references/shouts.md` + `requiem-magic-patching` | shout wrapper (3 words → 3 tier `SPEL` + recovery); the SHOU/WOOP frame is owned by `Requiem.esp` |
-| `PERK` | `references/perks-skills.md` | no domain skill owns standalone `PERK` rebalancing — still disposition every mod `PERK`: apply `perks-skills.md`'s constraints where they reach and flag what remains to the user; never silently skip the type |
+| `PERK` | `requiem-perk-assignment` | disposition every mod `PERK` (leave runtime plumbing / fold obvious duplicates / flag balance-bearing overlaps with a question); NPC perk *derivation* also lives there. System-level constraints stay in `references/perks-skills.md` |
 | `VirtualMachineAdapter` / script need; follower runtime registration | `requiem-script-patching` | reuse Nox/REQ scripts; most patches need none |
 
 **Every enumerated record type lands in exactly one disposition** — routed to a domain skill, handled
@@ -108,7 +109,7 @@ reference's constraints. Example: a new ingredient is an `INGR` whose effects ar
 | Food / drink / alcohol | `food.md` | record work → `requiem-consumable-patching`; food gives long stacking effects by nutrition category; alchemists don't buy food |
 | A new shout / words of power | `shouts.md` | SHOU = 3 words → 3 SPEL + recovery; owned by `Requiem.esp` |
 | A standing stone / birthsign / doomstone | `standing-stones.md` | ConstantEffect ability spell with stacked MGEFs; player-only |
-| New perks / skills / a perk tree | `perks-skills.md` | hook into existing trees; never author a parallel tree; player-exclusive assignment |
+| New perks / skills / a perk tree | `perks-skills.md` | hook into existing trees; never author a parallel tree; player-exclusive assignment; `PERK` records + NPC perk sets → `requiem-perk-assignment` |
 | A merchant / vendor / prices | `economy.md` | record-driven vendor chests + LVLI; round values to 5; no dynamic-pricing config |
 | (the "why" for any combat call) | `combat-resistance.md` | damage vs resistance/armor, armor-penetration by damage type, stagger, the keyword chain |
 
