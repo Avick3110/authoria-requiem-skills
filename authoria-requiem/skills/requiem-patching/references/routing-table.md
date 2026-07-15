@@ -17,6 +17,7 @@ group by type, route each group.
 | `NPC_` | Npc | `requiem-npc-patching` |
 | `LVLI` | LeveledItem | `requiem-leveled-list-patching` |
 | `LVLN` | LeveledNpc | `requiem-leveled-list-patching` |
+| `LVSP` | LeveledSpell | `requiem-leveled-list-patching` (distribution; no merge toggle — hand de-level); spell *design* → `requiem-magic-patching` |
 | `CONT` | Container | `requiem-leveled-list-patching` (incl. vendor chests) |
 | `ECZN` | EncounterZone | `requiem-leveled-list-patching` |
 | `MGEF` | MagicEffect | `requiem-magic-patching` |
