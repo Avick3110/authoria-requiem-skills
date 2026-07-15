@@ -1,0 +1,7 @@
+blank_issues_enabled: true
+contact_links:
+  - name: houseCARL tool bug or gap
+    url: https://github.com/Avick3110/houseCARL/issues
+    about: >-
+      Bugs and gaps in houseCARL itself (tools, filters, verbs, rendering) belong on the houseCARL
+      repo — file there, and reference the issue from any authoria doc that depends on it.

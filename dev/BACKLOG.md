@@ -5,9 +5,9 @@
 get lost in a superseded handoff. Sibling to `session-handoffs/`: handoffs are meant to be superseded;
 this list persists.*
 
-**Not** for: live-session bug reports from Aaron (→ the external HCBR store,
-`E:\Skyrim Modding\ARR Workspace\houseCARL Bug Reports`); chartered work (→ `dev/plans/`); in-flight PR
-state (→ latest handoff + `git log`).
+**Not** for: skill bugs and coverage gaps (→ GitHub Issues on this repo; houseCARL tool bugs/gaps →
+the houseCARL repo's Issues); chartered work (→ `dev/plans/`); in-flight PR state (→ latest handoff +
+`git log`).
 
 **How to use:** append when you notice one (enough context to act without the originating
 conversation); prune when done — delete or move under *Done* with the resolving commit. Keep it short.
@@ -48,10 +48,11 @@ conversation); prune when done — delete or move under *Done* with the resolvin
   VMAD is a struct. If houseCARL adds a presence/has-field filter, collapse the per-type sweeps into
   one call and drop the inline rationale. `(2026-07-15, S1 coverage batch)`
   **Update 2026-07-15 (post-houseCARL-update probe):** still blocked — the new `has value` operator
-  is scalar-only (container fields are counted in its diagnostics but not matched). Gap report filed:
-  HCBR `2026-07-15_gap_struct-presence-filter-has-scalar-only.md` (+ 2 sibling gaps and a note from
-  the S4 run: batch plugin-scope, flag-bit verbs, PerkPlacement depth-2 identity). Re-probe on the
-  next houseCARL update.
+  is scalar-only (container fields are counted in its diagnostics but not matched). Gap filed as
+  houseCARL issue [#197](https://github.com/Avick3110/houseCARL/issues/197) (+ siblings from the S4
+  run: batch plugin-scope [#195](https://github.com/Avick3110/houseCARL/issues/195), flag-bit verbs
+  [#196](https://github.com/Avick3110/houseCARL/issues/196), PerkPlacement depth-2 identity
+  [#198](https://github.com/Avick3110/houseCARL/issues/198)). Re-probe on the next houseCARL update.
 
 ## Done
 

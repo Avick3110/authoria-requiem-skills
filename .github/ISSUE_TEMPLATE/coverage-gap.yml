@@ -1,0 +1,29 @@
+name: Coverage gap / no owner
+description: A record type, mechanic, or job shape no skill owns — or a bulk pass that can miss records
+labels: ["gap"]
+body:
+  - type: input
+    id: shape
+    attributes:
+      label: What has no owner
+      description: The record type, gap mechanic, or job shape
+      placeholder: "SMQN quest-start level gating"
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Where it surfaced
+      description: >-
+        The mod/job where the gap bit, what the router/catch-all did with it (flagged? dropped?
+        mis-routed?), and what a correct owner would have done. FormIDs as XXXXXX:Plugin.esp; no
+        local machine paths — this repo is public.
+    validations:
+      required: true
+  - type: textarea
+    id: candidate
+    attributes:
+      label: Candidate fix (optional)
+      description: Which skill should own it and roughly how — a router row, a new bulk-pass sweep, a gap-mechanic reference, or flag-to-user.
+    validations:
+      required: false
