@@ -1,0 +1,259 @@
+{
+  "lane": "perk-race",
+  "skill_versions": "requiem-perk-assignment + requiem-race-patching (pack 1.2.1)",
+  "enumerated": { "PERK": 2, "RACE": 5, "ARMA_race_add": 4 },
+  "records": [
+    {
+      "formid": "028CA5:Gray Fox Cowl.esm",
+      "type": "PERK",
+      "editorid": "manny_GF_Perk_LuckyLantern",
+      "disposition": "flagged",
+      "skip_reason": "",
+      "flag_question": "manny_GF_Perk_LuckyLantern 'The Lucky Lantern' is a Playable, non-Hidden, Named quest-reward perk whose only entry point is ModSkillUse Multiply x1.05 (a permanent +5% skill-use / skill-XP gain, one condition tab). That parallels Requiem's deliberately re-tuned skill-progression economy (Requiem slows and re-weights leveling). Disposition options: (a) FOLD/neutralize the +5% into Requiem's curve, (b) KEEP as-is (a small quest reward, arguably intended flavor), or (c) rescale the magnitude. Which do you want?",
+      "comparable": "no direct Requiem perk analogue — overlaps Requiem's skill-progression tuning, not a single gate perk",
+      "fields_to_set": {},
+      "field_checklist": {
+        "dispositioned": true,
+        "three_way": "flagged (Playable + Named + balance magnitude paralleling a Requiem economy)",
+        "not_a_flat_duplicate": true,
+        "not_hidden_plumbing": true
+      },
+      "rationale": "Three-way disposition per requiem-perk-assignment references/mod-perk-disposition.md: Playable=True, Hidden=False, Name='The Lucky Lantern', single PerkEntryPointModifyValue (ModSkillUse x1.05). Not Hidden plumbing (has a Name, not driven purely by scripts) and not an obvious flat duplicate of a Requiem player-tree node — so the default disposition for a playable, balance-bearing perk is a flagged question naming the specific overlap, never a silent rebalance."
+    },
+    {
+      "formid": "893CCE:Gray Fox Cowl.esm",
+      "type": "PERK",
+      "editorid": "manny_GF_Perk_ScorchOfTheUndead",
+      "disposition": "skipped",
+      "skip_reason": "Hidden runtime plumbing — leave alone. Hidden=True + no Name + mod prefix (manny_GF_) => the mod's own runtime plumbing that its scripts/MGEFs/conditions place (CalculateWeaponDamage x1.2 gated by 2 PerkConditions, likely applied to undead/Draukiir combat by the mod itself). Per the disposition doctrine's first branch: leave it alone, and never hand-place it on an NPC. Caveat noted: the +20% weapon-damage magnitude is balance-bearing, but because it is Hidden plumbing driven by the mod's own conditions (not a player-facing perk), the doctrine's disposition is leave-alone, not a flag.",
+      "flag_question": "",
+      "comparable": "n/a (runtime plumbing, not assigned by this lane)",
+      "fields_to_set": {},
+      "field_checklist": {
+        "dispositioned": true,
+        "three_way": "left alone (Hidden + prefix-family + no Name = mod runtime plumbing)",
+        "never_hand_placed_on_npc": true
+      },
+      "rationale": "Hidden=True, Name absent, manny_GF_ prefix, single PerkEntryPointModifyValue (CalculateWeaponDamage Multiply x1.2, 2 conditions). Matches the doctrine's Hidden-plumbing branch exactly: the mod's scripts/conditions drive it; the patch neither folds nor re-authors nor hand-places it."
+    },
+    {
+      "formid": "000800:Gray Fox Cowl.esm",
+      "type": "RACE",
+      "editorid": "mihailgoronrace",
+      "disposition": "patched",
+      "skip_reason": "",
+      "flag_question": "",
+      "comparable": "AtronachFrostRace 0131F6:Skyrim.esm (Frost Atronach; live winner Authoria - Master Patch - Races Merge.esp)",
+      "fields_to_set": {
+        "Starting": { "Health": "350", "Magicka": "0", "Stamina": "10000" },
+        "Regen": { "Health": "0", "Magicka": "10", "Stamina": "1000" },
+        "UnarmedDamage": "60",
+        "BaseCarryWeight": "200",
+        "Keywords_Add": ["4F6D1E:Requiem.esp", "5F367F:Requiem.esp", "013797:Skyrim.esm", "44BE5E:Requiem.esp", "06F6FB:Skyrim.esm", "0FFEA0:Skyrim.esm"],
+        "ActorEffect_Add": ["AD39D7:Requiem.esp"],
+        "ActorEffect_Keep": ["000804:Gray Fox Cowl.esm"],
+        "AttackRace": "0131F6:Skyrim.esm",
+        "Flags": "Walks, NoCombatInWater, DontShowBloodDecal, NoKnockdowns, DontShowWeaponBlood, UseAdvancedAvoidance"
+      },
+      "field_checklist": {
+        "stats": true,
+        "skillboosts": "kept own Destruction 10 (creature, minor)",
+        "ability_spells": "Add Armor_AtronachFrost; kept own mihailabgoron (Resist Frost) — Resist_AtronachFrost NOT added because the race ships its own resistance (creature asymmetry rule)",
+        "regenhpincombat_flag": "n/a — no Healing trait added (AtronachFrost has none); RegenHpInCombat dropped to match analogue",
+        "keywords": true,
+        "creature_traitcat_and_layerB_perk_named": "physique=atronach/construct; Layer-B incomingDamageModifier = the Frost Atronach perk the Reqtificator assigns to AtronachFrostRace NPCs — route per-NPC application to requiem-npc-patching (hand-add to goron NPCs or template them onto AtronachFrostRace)",
+        "requiem_master": true,
+        "no_req_null": true
+      },
+      "rationale": "Creature (ActorTypeCreature + ImmuneParalysis, ActorEffect = own Resist Frost). Every creature maps (Workflow B). Classified to Frost Atronach by the recycled Name stub 'Frost Atronach' + ImmuneParalysis + Resist-Frost ability + Destruction/Magicka lean. AMBIGUITY NOTED: 'goron' is a Mihail stone/earth creature; Frost Atronach is the best live analogue on the balance-bearing signals but a stone-atronach reading is plausible — surfaced rather than silently forced. Kept its own Ab* resistance, added only the natural-armor trait, set AttackRace so its (vanilla-skeleton) attacks fire like the Frost Atronach's; skipped FX per doctrine (never add REQ_Trait_FX_* to a modded race)."
+    },
+    {
+      "formid": "60009D:Gray Fox Cowl.esm",
+      "type": "RACE",
+      "editorid": "mihailwormmouthrace",
+      "disposition": "patched",
+      "skip_reason": "",
+      "flag_question": "",
+      "comparable": "DLC1DeathHoundRace 00C5F0:Dawnguard.esm (Death Hound; live winner Requiem.esp)",
+      "fields_to_set": {
+        "Starting": { "Health": "300", "Magicka": "0", "Stamina": "100" },
+        "Regen": { "Health": "1.5", "Magicka": "0", "Stamina": "10" },
+        "UnarmedDamage": "35",
+        "BaseCarryWeight": "200",
+        "Keywords_Add": ["4F6D1E:Requiem.esp"],
+        "ActorEffect_Add": ["00C5F3:Dawnguard.esm"],
+        "AttackRace": "00C5F0:Dawnguard.esm",
+        "Flags": "TiltFrontBack, Walks, NoCombatInWater, RegenHpInCombat, CantOpenDoors, NoKnockdowns"
+      },
+      "field_checklist": {
+        "stats": true,
+        "skillboosts": "kept own Sneak 35 (predator; consistent with a stealthy hound)",
+        "ability_spells": "Add Resist_DeathHound (race ships no resistance of its own); FX skipped; the analogue's Cloak (a special attack) left off/route to requiem-magic-patching rather than stamped on a modded race",
+        "regenhpincombat_flag": "SET — Death Hound regenerates in combat (Regen Health 1.5); flag required for combat regen to fire",
+        "keywords": "Added SneakAttackImmunity; KEPT ActorTypeAnimal (did not force the analogue's ActorTypeUndead — respecting the mod's living-animal classification; noted)",
+        "creature_traitcat_and_layerB_perk_named": "physique=beast/hound; Layer-B incomingDamageModifier = the Death Hound perk Reqtificator assigns to DLC1DeathHoundRace NPCs — route per-NPC to requiem-npc-patching for NPCs 60A316 (Wormmouth), 60A317 (Horrid Wormmouth)",
+        "requiem_master": true,
+        "no_req_null": true
+      },
+      "rationale": "Creature (ActorTypeCreature + ActorTypeAnimal). The mod's own naked-body ARMA (mihailwormmouthnaked 60009C) shares its body with C06WolfSpiritRace + DLC1DeathHound races — a decisive quadruped-hound signal past the recycled 'Dog' Name stub. Classified to Death Hound (nearest hound kin). Copied Death Hound stats/regen/unarmed, added its Resist trait + AttackRace, kept its own Sneak boost. Animal-vs-undead nuance surfaced: kept ActorTypeAnimal rather than stamping ActorTypeUndead."
+    },
+    {
+      "formid": "6000AE:Gray Fox Cowl.esm",
+      "type": "RACE",
+      "editorid": "mihaildwarvenspinnerrace",
+      "disposition": "patched",
+      "skip_reason": "",
+      "flag_question": "",
+      "comparable": "DwarvenSpiderRace 0131F3:Skyrim.esm (Dwarven Spider; live winner Requiem.esp)",
+      "fields_to_set": {
+        "Starting": { "Health": "250", "Magicka": "5", "Stamina": "10000" },
+        "Regen": { "Health": "0", "Magicka": "0.8", "Stamina": "10" },
+        "UnarmedDamage": "20",
+        "BaseCarryWeight": "200",
+        "Keywords_Add": ["4F6D1E:Requiem.esp"],
+        "ActorEffect_Add": ["AD39DE:Requiem.esp", "AE3AFC:Requiem.esp"],
+        "ActorEffect_Remove": ["090357:Skyrim.esm"],
+        "ActorEffect_Keep": ["6000A7:Gray Fox Cowl.esm"],
+        "AttackRace": "0131F3:Skyrim.esm",
+        "Flags": "NoShadow, TiltFrontBack, TiltLeftRight, Walks, NoCombatInWater, DontShowBloodSpray, DontShowBloodDecal, AllowRagdollCollision, CantOpenDoors, NoKnockdowns, DontShowWeaponBlood, SpellsAlignWithMagicNode, UseAdvancedAvoidance"
+      },
+      "field_checklist": {
+        "stats": true,
+        "skillboosts": "none (matches analogue; both have no skill boosts)",
+        "ability_spells": "Add current Armor_DwarvenSpider + Resist_DwarvenSpider; REMOVE REQ_LEGACY_AbDwarvenAutomatons (090357, a deprecated Requiem legacy form superseded by the current Resist trait); KEEP own mihaildwarvenspinnerAB (bespoke Spriggan abilities); FX skipped",
+        "regenhpincombat_flag": "n/a — dropped (DwarvenSpider does not regen in combat; no Healing trait)",
+        "keywords": true,
+        "creature_traitcat_and_layerB_perk_named": "physique=dwarven-construct; Layer-B incomingDamageModifier = the Dwarven Spider perk Reqtificator assigns to DwarvenSpiderRace NPCs — route per-NPC to requiem-npc-patching",
+        "requiem_master": true,
+        "no_req_null": true
+      },
+      "rationale": "Creature (ActorTypeDwarven + NoSoulTrap + MagicNoReanimate + ImmuneParalysis). 'Dwarven Spinner' is a Dwemer spider automaton => Dwarven Spider analogue (clean). Replaced the deprecated REQ_LEGACY_AbDwarvenAutomatons resistance with the analogue's current Armor+Resist traits, kept the mod's own Spriggan ability, set AttackRace + spider-gait tilt flags. Note: REQ_LEGACY_* is not REQ_NULL_* (it resolves), but it is a superseded Requiem form — normalized to the live analogue's current traits."
+    },
+    {
+      "formid": "62DAD1:Gray Fox Cowl.esm",
+      "type": "RACE",
+      "editorid": "manny_GF_Race_Draukiir",
+      "disposition": "patched",
+      "skip_reason": "",
+      "flag_question": "",
+      "comparable": "DraugrRace 000D53:Skyrim.esm (Draugr; live winner Requiem.esp)",
+      "fields_to_set": {
+        "Starting": { "Health": "300", "Magicka": "0", "Stamina": "10000" },
+        "Regen": { "Health": "0", "Magicka": "3", "Stamina": "5" },
+        "UnarmedDamage": "20",
+        "BaseCarryWeight": "9999",
+        "SkillBoost0": { "Skill": "Destruction", "Boost": "5" },
+        "SkillBoost1": { "Skill": "Illusion", "Boost": "35" },
+        "Keywords_Add": ["4F6D1E:Requiem.esp"],
+        "ActorEffect_Add": ["AE3AD2:Requiem.esp"],
+        "ActorEffect_Keep": ["62DAD0:Gray Fox Cowl.esm"],
+        "AttackRace": "000D53:Skyrim.esm",
+        "Flags": "Walks, NoCombatInWater, UsesHeadTrackAnims, DontShowWeaponBlood, UseAdvancedAvoidance"
+      },
+      "field_checklist": {
+        "stats": true,
+        "skillboosts": "aligned to Draugr: Destruction 5 (already), Illusion 5 -> 35",
+        "ability_spells": "Add Resist_Draugr (race has no own resistance); KEEP own manny_GF_Ability_MihailDraugrKid_AB (Draugr Abilities); FX skipped",
+        "regenhpincombat_flag": "n/a — Draugr does not regen in combat",
+        "keywords": true,
+        "creature_traitcat_and_layerB_perk_named": "physique=undead/draugr; Layer-B incomingDamageModifier = the Draugr perk Reqtificator assigns to DraugrRace NPCs — route per-NPC to requiem-npc-patching (or template Draukiir NPCs onto DraugrRace)",
+        "requiem_master": true,
+        "no_req_null": true
+      },
+      "rationale": "Creature (ActorTypeCreature + ActorTypeUndead, 'Draukiir' = draugr-kin, own 'Draugr Abilities'). Keywords already near-identical to Requiem's Draugr (Creature/Undead/UpdateDuringArchery). Classified to Draugr (clean). Copied Draugr stats/regen/skill-boosts, added Resist_Draugr + AttackRace, kept the mod's own Draugr-abilities spell. BaseCarryWeight already 9999 (matches)."
+    },
+    {
+      "formid": "600095:Gray Fox Cowl.esm",
+      "type": "RACE",
+      "editorid": "mihailwormmouthrace2",
+      "disposition": "patched",
+      "skip_reason": "",
+      "flag_question": "",
+      "comparable": "DLC1DeathHoundRace 00C5F0:Dawnguard.esm (Death Hound; live winner Requiem.esp)",
+      "fields_to_set": {
+        "Starting": { "Health": "300", "Magicka": "0", "Stamina": "100" },
+        "Regen": { "Health": "1.5", "Magicka": "0", "Stamina": "10" },
+        "UnarmedDamage": "35",
+        "BaseCarryWeight": "200",
+        "Keywords_Add": ["4F6D1E:Requiem.esp"],
+        "ActorEffect_Add": ["00C5F3:Dawnguard.esm"],
+        "AttackRace": "00C5F0:Dawnguard.esm",
+        "Flags": "TiltFrontBack, Walks, NoCombatInWater, RegenHpInCombat, CantOpenDoors, AllowPcDialog, NoKnockdowns"
+      },
+      "field_checklist": {
+        "stats": true,
+        "skillboosts": "kept own Sneak 35",
+        "ability_spells": "Add Resist_DeathHound (no own resistance); FX skipped; Cloak left off/route",
+        "regenhpincombat_flag": "SET — Death Hound regenerates in combat",
+        "keywords": "Added SneakAttackImmunity; ActorTypeCreature only on this variant (no ActorTypeAnimal) — kept as-is; kept AllowPcDialog flag (matches Death Hound)",
+        "creature_traitcat_and_layerB_perk_named": "physique=beast/hound; Layer-B = Death Hound perk — route per-NPC to requiem-npc-patching (shares NPC 60A317 Horrid Wormmouth with 60009D)",
+        "requiem_master": true,
+        "no_req_null": true
+      },
+      "rationale": "Read as its OWN record per the bulk-pass no-extrapolation rule: it is a divergent sibling of mihailwormmouthrace (60009D) — 1 keyword vs 2 (no ActorTypeAnimal), UnarmedDamage 20 vs 10, AllowPcDialog flag. Same Death Hound analogue, own disposition and own field derivation (UnarmedDamage normalized to 35 like the analogue)."
+    },
+    {
+      "formid": "000801:Gray Fox Cowl.esm",
+      "type": "ARMA",
+      "editorid": "mihailgoronnaked",
+      "disposition": "skipped",
+      "skip_reason": "Race-add ARMA (body/skin) — already correctly wired: Race = 000800 (mihailgoronrace, the mod's own new race). ARMA carries no Requiem balance-bearing field (no stats/keywords/recipe on an ArmorAddon body); the race-add itself is satisfied because the naked body already points at the new race. No patch action. CLAIMED by this lane (race-add ARMA); armor-coverage ARMA belong to the armor lane.",
+      "flag_question": "",
+      "comparable": "n/a",
+      "fields_to_set": {},
+      "field_checklist": { "race_add_wired": true, "no_balance_field": true, "claimed_seam": "perk-race lane" },
+      "rationale": "Body ARMA giving mihailgoronrace its skin. Race-add already present; nothing to normalize to Requiem."
+    },
+    {
+      "formid": "60009C:Gray Fox Cowl.esm",
+      "type": "ARMA",
+      "editorid": "mihailwormmouthnaked",
+      "disposition": "skipped",
+      "skip_reason": "Race-add ARMA — Race = 60009D (mihailwormmouthrace) + AdditionalRaces {C06WolfSpiritRace, DLC1DeathHound x2}. Body/skin ARMA, no Requiem balance field; race-add already wired. Note: covers wormmouthrace but NOT wormmouthrace2 (600095) in its AdditionalRaces — flagged in notes so the armor/body seam owner can confirm 600095's body coverage. CLAIMED by this lane.",
+      "flag_question": "",
+      "comparable": "n/a",
+      "fields_to_set": {},
+      "field_checklist": { "race_add_wired": true, "no_balance_field": true, "claimed_seam": "perk-race lane" },
+      "rationale": "Body ARMA for the wormmouth; its shared-body AdditionalRaces (wolf/death-hound) is the signal that fixed the wormmouth's creature classification."
+    },
+    {
+      "formid": "6000AD:Gray Fox Cowl.esm",
+      "type": "ARMA",
+      "editorid": "mihaildwarvenspinnernaked",
+      "disposition": "skipped",
+      "skip_reason": "Race-add ARMA — Race = 6000AE (mihaildwarvenspinnerrace, mod's own race). Body/skin, no Requiem balance field; race-add wired. CLAIMED by this lane.",
+      "flag_question": "",
+      "comparable": "n/a",
+      "fields_to_set": {},
+      "field_checklist": { "race_add_wired": true, "no_balance_field": true, "claimed_seam": "perk-race lane" },
+      "rationale": "Body ARMA giving mihaildwarvenspinnerrace its skin. Race-add already present."
+    },
+    {
+      "formid": "62DAD4:Gray Fox Cowl.esm",
+      "type": "ARMA",
+      "editorid": "manny_GF_Naked_Draukiir",
+      "disposition": "skipped",
+      "skip_reason": "Race-add ARMA — Race = 62DAD1 (manny_GF_Race_Draukiir, mod's own race). Body/skin, no Requiem balance field; race-add wired. CLAIMED by this lane.",
+      "flag_question": "",
+      "comparable": "n/a",
+      "fields_to_set": {},
+      "field_checklist": { "race_add_wired": true, "no_balance_field": true, "claimed_seam": "perk-race lane" },
+      "rationale": "Body ARMA giving the Draukiir race its skin. Race-add already present."
+    }
+  ],
+  "reconciliation": { "patched": 5, "skipped": 5, "flagged": 1, "total": 11, "closes": true },
+  "notes": [
+    "Freshness probe OK: instance 'E:\\Skyrim Modding\\ARR 2.0', profile 'Authoria - Requiem Reforged - NSFW Profile'; Iron Sword 012EB7 conflict tree shows Requiem.esp in chain (winner Requiem for the Indifferent.esp). Authority live.",
+    "BLINDING respected: every Gray Fox Cowl.esm target read with plugin defaulting to its OWN defined version (winner=Gray Fox Cowl.esm on all mod records, override_depth=1 — the curated patch 'Authoria - Patch - Gray Cowl of Nocturnal Requiem.esp' does NOT override these RACE/PERK/ARMA records, so no leakage). Requiem comparables read normally as live winners (AtronachFrost via Master Patch Races Merge; DwarvenSpider/Draugr/DeathHound via Requiem.esp).",
+    "Enumeration true counts: PERK 2, RACE 5, ARMA(defined_in) 15 total of which 4 are race-add (body ARMA pointing at a mod-defined race). The other 11 ARMA are armor-coverage: GrayCowl addons (Khajiit/Argonian/base), Right Eye of Coldharbour amulet, Yokuda/Corrupted hoods, Corrupted Redguard hood, and creature-skin ARMA on VANILLA races (DesertWolf->WolfRace, Duneripper->0131EB, Mummy01->DraugrRace, AncestralCheetah->SabreCat 013200) — those belong to the ARMOR lane, not this one.",
+    "All 5 RACE records are creatures (Workflow B) and every creature maps => none eligible for skip (each carries a divergent balance-bearing stat block; skip is only earned by a per-record field match to base, which none satisfy). No <Race>RaceVampire counterparts exist in this plugin.",
+    "No-extrapolation applied to the wormmouth pair: 60009D and 600095 read as separate records and dispositioned separately (they diverge: keyword count, UnarmedDamage 10 vs 20, AllowPcDialog).",
+    "PERK three-way: LuckyLantern (Named, Playable, +5% skill-use) => flagged with concrete question; ScorchOfTheUndead (Hidden, no Name, manny_GF_ prefix, +20% weapon dmg via conditions) => left alone as mod runtime plumbing (skipped). Neither is a flat duplicate to fold. No RFTI_*/Nox_*/REQ_NULL_* touched.",
+    "Layer-B incomingDamageModifier perk is NOT set on any RACE (it lives on NPC_ records, Reqtificator-assigned by race-FormID match). For each new race the trait SPELLS propagate to its NPCs for free, but the incomingDamageModifier perk does not — named per record and routed to requiem-npc-patching for per-NPC application (or templating the NPCs onto the analogue vanilla race). Affected NPCs found: 60A316 Wormmouth, 60A317 Horrid Wormmouth (wormmouth races). goron/dwarvenspinner/draukiir NPCs to be enumerated by the NPC lane.",
+    "Doctrine specifics honored: never added REQ_Trait_FX_* to any modded race; kept a creature's OWN Ab* resistance and only ADDED armor (goron: kept mihailabgoron Resist Frost, added Armor_AtronachFrost, did NOT add Resist_AtronachFrost); set AttackRace to the analogue for correct knockdown/stagger/attack data; set RegenHpInCombat only where a combat-regen (Healing) profile applies (both wormmouths, matching Death Hound).",
+    "REQ_LEGACY note: mihaildwarvenspinnerrace carried REQ_LEGACY_AbDwarvenAutomatons 090357 — resolvable (not a REQ_NULL_* inert stub) but a superseded legacy Requiem form; normalized it out in favor of the live analogue's current Armor+Resist traits. No REQ_NULL_* reference found on any of the 5 races.",
+    "AMBIGUITY surfaced (not silently forced): mihailgoronrace classification (Frost Atronach vs a stone/earth-atronach reading) — chose Frost Atronach on Name-stub + ImmuneParalysis + Resist-Frost signals; and the wormmouth animal-vs-undead type (kept ActorTypeAnimal rather than stamping the Death Hound's ActorTypeUndead).",
+    "Routing: RACE frames set here; per-NPC trait-perk application -> requiem-npc-patching; the LuckyLantern flag decision -> user; any Cloak/special-attack spell design (Death Hound cloak, Atronach cloak) -> requiem-magic-patching if later adopted.",
+    "Reconciliation: 11 records total = 2 PERK + 5 RACE + 4 race-add ARMA. Dispositions: patched=5 (all RACE), skipped=5 (ScorchOfTheUndead PERK left-alone as runtime plumbing + 4 race-add ARMA already-wired), flagged=1 (LuckyLantern PERK). 5+5+1 = 11 = enumerated. Closes clean; nothing dropped."
+  ]
+}

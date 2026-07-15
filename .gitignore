@@ -5,6 +5,3 @@ desktop.ini
 
 # Claude Code local project state (not part of the plugin)
 .claude/
-
-# Private build docs — local only, never published
-dev/

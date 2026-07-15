@@ -1,0 +1,836 @@
+{
+  "lane": "armor",
+  "skill_versions": "requiem-armor-patching (pack 1.2.1)",
+  "enumerated": { "ARMO": 33, "ARMA": 15, "COBJ": 10 },
+  "records": [
+    {
+      "formid": "0021D3:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Armor_BladesCuirass",
+      "disposition": "patched",
+      "comparable": "REQ_Heavy_Steel_Body (013952:Skyrim.esm) — Steel Cuirass AR300/Val250/Wt25",
+      "fields_to_set": {
+        "ArmorRating": 300,
+        "Value": 250,
+        "Weight": 25,
+        "Keywords": ["06BBD2:Skyrim.esm", "06BBE6:Skyrim.esm", "06C0EC:Skyrim.esm", "08F959:Skyrim.esm"]
+      },
+      "field_checklist": {
+        "armor_type_kw": "ArmorHeavy 06BBD2 (matches BodyTemplate.ArmorType=HeavyArmor)",
+        "part_kw": "ArmorCuirass 06C0EC (body slot 32)",
+        "set_material_kw": "REQ_ArmorSet_Steel 06BBE6 ADDED (mod had none — Blades=Akaviri steel tier)",
+        "AR_on_ladder": "300 (steel heavy body; ≤740 heavy-body cap)",
+        "value_weight": "250 / 25 (steel body comparable, ×1.00)",
+        "fist_perk": "n/a (body)",
+        "shield_block_impact": "n/a",
+        "resist_tempering_not_hand_set": "true — Ranged_Tier5 + Tempering_Craftsmanship left to Reqtificator",
+        "req_null_scan": "clean",
+        "masters": "Requiem.esp auto-pulled (REQ_ArmorSet_Steel referenced)"
+      },
+      "rationale": "NonPlayable NPC/display cuirass with vanilla part keywords + vanilla-scale AR44 and NO Requiem material-set keyword. NonPlayable-with-biped-slots is NOT the template skip (that requires no slots); Reqtificator balances NPC-worn armor by its set/type keywords, so derive the full steel-tier frame. Requiem ships no distinct Blades ARMO set — the reused BladesCuirass mesh sits at AR300 (steel body) across the CC alt-armor patches, confirming Steel tier."
+    },
+    {
+      "formid": "0021D4:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Armor_BladesGauntlets",
+      "disposition": "patched",
+      "comparable": "REQ_Heavy_Steel_Hands (013953:Skyrim.esm) — Steel Gauntlets AR90/Val75/Wt7.5",
+      "fields_to_set": {
+        "ArmorRating": 90,
+        "Value": 75,
+        "Weight": 7.5,
+        "Keywords": ["06BBD2:Skyrim.esm", "06BBE6:Skyrim.esm", "06C0EF:Skyrim.esm", "08F959:Skyrim.esm", "09379E:Skyrim.esm"]
+      },
+      "field_checklist": {
+        "armor_type_kw": "ArmorHeavy 06BBD2",
+        "part_kw": "ArmorGauntlets 06C0EF (hands slot 33)",
+        "set_material_kw": "REQ_ArmorSet_Steel 06BBE6 ADDED",
+        "AR_on_ladder": "90 (steel heavy hands ×0.30 spine)",
+        "value_weight": "75 / 7.5",
+        "fist_perk": "PerkFistsSteel 09379E ADDED — heavy gauntlets carry the fist-damage perk (copied from REQ_Heavy_Steel_Hands)",
+        "resist_tempering_not_hand_set": "true",
+        "req_null_scan": "clean",
+        "masters": "Requiem.esp auto"
+      },
+      "rationale": "Read as its own sibling, not extrapolated off the cuirass — heavy gauntlets uniquely add PerkFistsSteel, which the ratio table does not model. NonPlayable NPC/display piece, derived as steel heavy hands."
+    },
+    {
+      "formid": "0021D2:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Armor_BladesBoots",
+      "disposition": "patched",
+      "comparable": "REQ_Heavy_Steel_Feet (013951:Skyrim.esm) — Steel Boots AR90/Val75/Wt7.5",
+      "fields_to_set": {
+        "ArmorRating": 90,
+        "Value": 75,
+        "Weight": 7.5,
+        "Keywords": ["06BBD2:Skyrim.esm", "06BBE6:Skyrim.esm", "06C0ED:Skyrim.esm", "08F959:Skyrim.esm"]
+      },
+      "field_checklist": {
+        "armor_type_kw": "ArmorHeavy 06BBD2",
+        "part_kw": "ArmorBoots 06C0ED (feet slot 37)",
+        "set_material_kw": "REQ_ArmorSet_Steel 06BBE6 ADDED",
+        "AR_on_ladder": "90 (steel heavy feet)",
+        "value_weight": "75 / 7.5",
+        "fist_perk": "n/a (feet)",
+        "resist_tempering_not_hand_set": "true",
+        "req_null_scan": "clean",
+        "masters": "Requiem.esp auto"
+      },
+      "rationale": "NonPlayable NPC/display boots; derived as steel heavy feet from its own comparable."
+    },
+    {
+      "formid": "0021D5:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Armor_BladesHelmet",
+      "disposition": "patched",
+      "comparable": "REQ_Heavy_Steel_Head (013954:Skyrim.esm) — Steel Helmet AR120/Val100/Wt10",
+      "fields_to_set": {
+        "ArmorRating": 120,
+        "Value": 100,
+        "Weight": 10,
+        "Keywords": ["06BBD2:Skyrim.esm", "06BBE6:Skyrim.esm", "06C0EE:Skyrim.esm", "08F959:Skyrim.esm"]
+      },
+      "field_checklist": {
+        "armor_type_kw": "ArmorHeavy 06BBD2",
+        "part_kw": "ArmorHelmet 06C0EE (head slots 31,42)",
+        "set_material_kw": "REQ_ArmorSet_Steel 06BBE6 ADDED",
+        "AR_on_ladder": "120 (steel heavy head)",
+        "value_weight": "100 / 10",
+        "fist_perk": "n/a",
+        "resist_tempering_not_hand_set": "true",
+        "req_null_scan": "clean",
+        "masters": "Requiem.esp auto"
+      },
+      "rationale": "NonPlayable NPC/display helmet; derived as steel heavy head."
+    },
+    {
+      "formid": "0021D6:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Armor_BladesShield",
+      "disposition": "patched",
+      "comparable": "REQ_Heavy_Steel_Shield (013955:Skyrim.esm) — Steel Shield AR180/Val125/Wt12.5",
+      "fields_to_set": {
+        "ArmorRating": 180,
+        "Value": 125,
+        "Weight": 12.5,
+        "Keywords": ["06BBD2:Skyrim.esm", "06BBE6:Skyrim.esm", "08F959:Skyrim.esm", "0965B2:Skyrim.esm"],
+        "BashImpactDataSet": "0183FE:Skyrim.esm",
+        "AlternateBlockMaterial": "016979:Skyrim.esm"
+      },
+      "field_checklist": {
+        "armor_type_kw": "ArmorHeavy 06BBD2 ADDED (mod shield had only VendorItemArmor + ArmorShield)",
+        "part_kw": "ArmorShield 0965B2 (shield slot 39; body-slot part kw correctly absent)",
+        "set_material_kw": "REQ_ArmorSet_Steel 06BBE6 ADDED",
+        "AR_on_ladder": "180 (steel heavy shield; ≤540 heavy-shield cap)",
+        "value_weight": "125 / 12.5 (shield ×0.50 value/weight)",
+        "shield_block_impact": "BashImpactDataSet 0183FE + AlternateBlockMaterial 016979 (MaterialShieldHeavy) — match steel shield comparable; already present on mod record, verified",
+        "resist_tempering_not_hand_set": "true",
+        "req_null_scan": "clean",
+        "masters": "Requiem.esp auto"
+      },
+      "rationale": "Heavy steel shield. Playable (MajorFlags=Shield). Carries ObjectEffect 0AD493 (REQ_Ench_Armor_FortifyHealthRegeneration06) — already a Requiem-provided enchantment; armor frame patched here, effect design owned by magic lane (boundary handoff below).",
+      "magic_lane_handoff": "ObjectEffect 0AD493:Skyrim.esm (REQ_Ench_Armor_FortifyHealthRegeneration06) — already a Requiem ENCH; no redesign needed but flagged to magic lane per doctrine."
+    },
+    {
+      "formid": "041911:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Armor_Yokuda",
+      "disposition": "patched",
+      "comparable": "REQ_Heavy_Iron_Shield (012EB6:Skyrim.esm) — Iron Shield AR150/Val62/Wt10",
+      "fields_to_set": {
+        "ArmorRating": 150,
+        "Value": 62,
+        "Weight": 10,
+        "Keywords": ["06BBD2:Skyrim.esm", "06BBE3:Skyrim.esm", "08F959:Skyrim.esm", "0965B2:Skyrim.esm"],
+        "BashImpactDataSet": "0183FE:Skyrim.esm",
+        "AlternateBlockMaterial": "016979:Skyrim.esm"
+      },
+      "field_checklist": {
+        "armor_type_kw": "ArmorHeavy 06BBD2 ADDED (mod record missing the armor-type keyword)",
+        "part_kw": "ArmorShield 0965B2 (shield slot 39)",
+        "set_material_kw": "REQ_ArmorSet_Iron 06BBE3 (already present on mod record — kept)",
+        "AR_on_ladder": "150 (iron heavy shield; mod had vanilla-scale AR20 → ×10 Requiem)",
+        "value_weight": "62 / 10 (iron shield comparable; mod had off-tier Val600)",
+        "shield_block_impact": "BashImpactDataSet 0183FE + AlternateBlockMaterial 016979 (MaterialShieldHeavy) — present, matches iron shield comparable",
+        "resist_tempering_not_hand_set": "true",
+        "req_null_scan": "clean",
+        "masters": "Requiem.esp auto",
+        "recipe": "temper COBJ manny_GF_CO_Yokuda (014955) — armor workbench 0ADB78, EPTemperingItemIsEnchanted + HasPerk gate (see COBJ entry)"
+      },
+      "rationale": "Playable iron-tier heavy shield (author already set REQ_ArmorSet_Iron). Read as its own sibling — its AR/value were vanilla-scale and off-tier while the set keyword was already iron; add the missing ArmorHeavy type keyword and re-scale AR/value/weight to the live iron-shield comparable."
+    },
+    {
+      "formid": "017AE5:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Armor_GrayCowl",
+      "disposition": "patched",
+      "comparable": "REQ_Light_Hide_Head (013913:Skyrim.esm) — Hide Helmet AR60/Val40/Wt2",
+      "fields_to_set": {
+        "ArmorRating": 60,
+        "Keywords": ["06BBD3:Skyrim.esm", "06BBDD:Skyrim.esm", "06C0EE:Skyrim.esm", "0C27BD:Skyrim.esm", "0A8668:Skyrim.esm", "0917E8:Skyrim.esm"]
+      },
+      "field_checklist": {
+        "armor_type_kw": "ArmorLight 06BBD3 (matches LightArmor)",
+        "part_kw": "ArmorHelmet 06C0EE (head slots 31,42,43)",
+        "set_material_kw": "REQ_ArmorSet_Hide 06BBDD (already present — kept; drives resist tier + tempering)",
+        "AR_on_ladder": "60 (hide light head; mod had vanilla-scale AR10)",
+        "value_weight": "left artifact-authorial (Val 0, Wt 0.5) — DaedricArtifact, not on the standard sale ladder",
+        "fist_perk": "n/a",
+        "resist_tempering_not_hand_set": "true",
+        "req_null_scan": "clean",
+        "masters": "Requiem.esp auto",
+        "artifact_flags": "DaedricArtifact 0A8668 + VendorItemDaedricArtifact 0917E8 + MagicDisallowEnchanting 0C27BD retained",
+        "recipe": "temper COBJ manny_GF_CO_GrayCowl (014954) — armor workbench 0ADB78 (see COBJ entry)"
+      },
+      "rationale": "Genuine Daedric artifact (the signature Gray Cowl of Nocturnal). Judgment ladder step 1: known artifact → mirror artifact treatment. Already correctly framed (ArmorLight + REQ_ArmorSet_Hide + ArmorHelmet + DaedricArtifact); only the vanilla-scale AR needed lifting to the hide light-head comparable. Value/weight deliberately left off-ladder as an artifact.",
+      "magic_lane_handoff": "ObjectEffect 020119:Gray Fox Cowl.esm (manny_GF_Ench_GrayCowl) — effect design owned by magic lane."
+    },
+    {
+      "formid": "02DCA1:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Armor_ImhotepCrown",
+      "disposition": "flagged",
+      "flag_question": "Jagged Crown copy: the record's own set keyword is REQ_ArmorSet_Daedric with an artifact-tier Value 5000, but the Jagged Crown is lore-wise a unique dragonbone crown, and this copy is NonPlayable (an NPC/display piece with no craft recipe or leveled-list entry). Treat as a daedric-tier heavy helmet (AR 240 per its own keyword), OR mirror the real Jagged Crown's Requiem artifact/dragon-tier treatment? Recommend keeping the daedric-tier derivation since the record already carries the daedric set keyword that drives Reqtificator resist/tempering.",
+      "comparable": "REQ_Heavy_Daedric_Head (01396D:Skyrim.esm) — Daedric Helmet AR240/Val10000/Wt20",
+      "fields_to_set": {
+        "ArmorRating": 240,
+        "Keywords": ["06BBD2:Skyrim.esm", "06BBD4:Skyrim.esm", "06C0EE:Skyrim.esm", "08F959:Skyrim.esm"]
+      },
+      "field_checklist": {
+        "armor_type_kw": "ArmorHeavy 06BBD2 (present)",
+        "part_kw": "ArmorHelmet 06C0EE (head slot 31)",
+        "set_material_kw": "REQ_ArmorSet_Daedric 06BBD4 (present — kept per record intent; SEE FLAG)",
+        "AR_on_ladder": "240 (daedric heavy head; mod had vanilla-scale AR23)",
+        "value_weight": "Value 5000 authorial/unique (daedric head comparable is 10000); weight not forced",
+        "resist_tempering_not_hand_set": "true (Tempering_DaedricSmithing left to Reqtificator)",
+        "req_null_scan": "clean",
+        "masters": "Requiem.esp auto"
+      },
+      "rationale": "NonPlayable display/NPC crown. Keywords already form a valid daedric heavy-head set, so the concrete derivation is the daedric head comparable (AR 240). Flagged because the material choice (daedric on a Jagged Crown) and artifact-vs-material intent are an authorial call the data can't settle."
+    },
+    {
+      "formid": "018B4B:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Armor_BootsofSpringheelJak",
+      "disposition": "flagged",
+      "flag_question": "Boots of Springheel Jak (famous jump-boots artifact): tagged LightArmor with REQ_ArmorSet_Leather + ArmorBoots but ArmorRating is 0. Because it carries the leather-set + boots part keywords, the Reqtificator will assign it leather-boots resistance/tempering and expects a real AR. Derive the on-ladder leather light-boots AR (45), OR keep AR 0 as an intentional artifact choice (the boots are about jumping, not protection)? Recommend AR 45 for consistency with the keywords it carries.",
+      "comparable": "REQ_Light_Leather_Feet (013920:Skyrim.esm) — Leather Boots AR45/Val30/Wt1.5",
+      "fields_to_set": {
+        "ArmorRating": 45,
+        "Keywords": ["06BBD3:Skyrim.esm", "06BBDB:Skyrim.esm", "06C0ED:Skyrim.esm", "08F959:Skyrim.esm", "0C27BD:Skyrim.esm"]
+      },
+      "field_checklist": {
+        "armor_type_kw": "ArmorLight 06BBD3",
+        "part_kw": "ArmorBoots 06C0ED (feet slot 37)",
+        "set_material_kw": "REQ_ArmorSet_Leather 06BBDB (present — kept)",
+        "AR_on_ladder": "45 derived (leather light feet); mod value 0 — SEE FLAG",
+        "value_weight": "Value 500 artifact-authorial (leather-boots comparable is 30); Wt 2",
+        "resist_tempering_not_hand_set": "true",
+        "req_null_scan": "clean",
+        "masters": "Requiem.esp auto",
+        "artifact_flags": "MagicDisallowEnchanting 0C27BD retained"
+      },
+      "rationale": "Artifact boots. Frame keywords are already leather light-feet; the only open question is whether AR 0 is intentional. Provided the on-ladder AR 45 as the recommended value.",
+      "magic_lane_handoff": "ObjectEffect 019612:Gray Fox Cowl.esm (manny_GF_Ench_BootsofSpringheelJak, 'Run... Fast!') — movement effect owned by magic lane."
+    },
+    {
+      "formid": "674F20:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Armor_DraukiirMask",
+      "disposition": "flagged",
+      "flag_question": "Draukiir Mask: LightArmor head with AR 1 and NO Requiem material-set keyword. 'Draukiir' is a novel/themed (draugr) material with no Requiem set. Borrow the closest light-head tier — REQ_ArmorSet_Hide (crude/ancient, AR60) chosen; REQ_ArmorSet_Leather (also AR60) is an equal alternative. Confirm the intended tier.",
+      "comparable": "REQ_Light_Hide_Head (013913:Skyrim.esm) — Hide Helmet AR60/Val40/Wt2 (Leather head 013922 is identical AR60)",
+      "fields_to_set": {
+        "ArmorRating": 60,
+        "Keywords": ["06BBD3:Skyrim.esm", "06BBDD:Skyrim.esm", "06C0EE:Skyrim.esm", "08F959:Skyrim.esm"]
+      },
+      "field_checklist": {
+        "armor_type_kw": "ArmorLight 06BBD3 (present)",
+        "part_kw": "ArmorHelmet 06C0EE (head slots 30,42)",
+        "set_material_kw": "REQ_ArmorSet_Hide 06BBDD ADDED (borrowed — SEE FLAG; mod had no material set)",
+        "AR_on_ladder": "60 (light head; mod had nominal AR1)",
+        "value_weight": "Value 100 kept (unique enchanted mask); Wt 2",
+        "resist_tempering_not_hand_set": "true",
+        "req_null_scan": "clean",
+        "masters": "Requiem.esp auto"
+      },
+      "rationale": "Enchanted light head mask with no material set keyword — needs one so the Reqtificator can assign a resist tier + tempering. Borrowed the closest primitive light-head tier (hide). Flagged for the borrowed-material decision.",
+      "magic_lane_handoff": "ObjectEffect 69D8AA:Gray Fox Cowl.esm (manny_GF_Ench_DraukiirMask) — effect design owned by magic lane."
+    },
+    {
+      "formid": "042437:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Armor_YokudaNonPlayable",
+      "disposition": "skipped",
+      "skip_reason": "Non-playable, Value-0 display/mannequin duplicate of the playable Yokuda (041911). MajorFlags=NonPlayable,Shield; the player never obtains it and its playable twin (patched above) carries the balance — nothing to re-balance here.",
+      "comparable": null,
+      "fields_to_set": {},
+      "field_checklist": {},
+      "rationale": "Exact-duplicate display copy of a patched playable item; no independent balance."
+    },
+    {
+      "formid": "014A6C:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Amulet_RightEyeOfColdharbour",
+      "disposition": "patched",
+      "comparable": "AR-0 jewelry frame (amulet) — value tracks material; no resist/tempering",
+      "fields_to_set": { "ArmorRating": 0 },
+      "field_checklist": {
+        "frame": "AR 0 clothing/jewelry frame (BodyTemplate.ArmorType=Clothing, amulet slot 35)",
+        "jewelry_kw": "ArmorJewelry 06BBE9 + VendorItemJewelry 08F95A + JewelryExpensive 0A8664 + ClothingNecklace 10CD0A + MagicDisallowEnchanting 0C27BD — all present, Requiem-consistent",
+        "value": "1000 (on-tier expensive amulet) — kept",
+        "resist_tempering": "none (correct for jewelry)"
+      },
+      "rationale": "Already a correct AR-0 jewelry frame; no armor rebalance. Value on-tier."
+    },
+    {
+      "formid": "0356A8:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Amulet_Sayara",
+      "disposition": "patched",
+      "comparable": "AR-0 jewelry frame (circlet)",
+      "fields_to_set": { "ArmorRating": 0 },
+      "field_checklist": {
+        "frame": "AR 0 clothing frame (circlet slot 42)",
+        "jewelry_kw": "ArmorJewelry 06BBE9 + VendorItemJewelry 08F95A + JewelryExpensive 0A8664 + ClothingCirclet 10CD08 — present",
+        "value": "250 kept",
+        "resist_tempering": "none"
+      },
+      "rationale": "Correct AR-0 jewelry frame; enchant routes to magic lane.",
+      "magic_lane_handoff": "ObjectEffect 03B874:Gray Fox Cowl.esm (manny_GF_Ench_SayaraWisdom)"
+    },
+    {
+      "formid": "02F271:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Amulet_TelravAmulet",
+      "disposition": "patched",
+      "comparable": "AR-0 jewelry frame (amulet)",
+      "fields_to_set": { "ArmorRating": 0 },
+      "field_checklist": {
+        "frame": "AR 0 clothing frame (amulet slot 35)",
+        "jewelry_kw": "ArmorJewelry 06BBE9 + VendorItemJewelry 08F95A + JewelryExpensive 0A8664 + ClothingNecklace 10CD0A — present",
+        "value": "250 kept",
+        "resist_tempering": "none"
+      },
+      "rationale": "Correct AR-0 jewelry frame; carries a Requiem armor enchant, routed to magic lane.",
+      "magic_lane_handoff": "ObjectEffect 10CF26:Skyrim.esm (REQ_Ench_Armor_FortifyHealthRegeneration01) — already a Requiem ENCH."
+    },
+    {
+      "formid": "00AE01:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Armor_AncientRedguardHood",
+      "disposition": "patched",
+      "comparable": "AR-0 clothing frame (head)",
+      "fields_to_set": { "ArmorRating": 0 },
+      "field_checklist": {
+        "frame": "AR 0 clothing frame (head slots 31,42)",
+        "clothing_kw": "ArmorClothing 06BBE8 + VendorItemClothing 08F95B + ClothingHead 10CD11 — present",
+        "value": "200 kept",
+        "resist_tempering": "none"
+      },
+      "rationale": "Correct AR-0 clothing frame; enchant routes to magic lane.",
+      "magic_lane_handoff": "ObjectEffect 0BE00E:Skyrim.esm (REQ_Ench_Armor_FortifyMarksman06) — Requiem ENCH."
+    },
+    {
+      "formid": "00AE03:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Armor_AncientRedguardBoots",
+      "disposition": "patched",
+      "comparable": "AR-0 clothing frame (feet)",
+      "fields_to_set": { "ArmorRating": 0 },
+      "field_checklist": {
+        "frame": "AR 0 clothing frame (feet slot 37)",
+        "clothing_kw": "ArmorClothing 06BBE8 + VendorItemClothing 08F95B + ClothingFeet 10CD12 — present",
+        "value": "100 kept",
+        "resist_tempering": "none"
+      },
+      "rationale": "Correct AR-0 clothing frame; enchant routes to magic lane.",
+      "magic_lane_handoff": "ObjectEffect 0BE024:Skyrim.esm (REQ_Ench_Armor_FortifyStaminaRegeneration06)"
+    },
+    {
+      "formid": "00AE02:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Armor_AncientRedguardClothes",
+      "disposition": "patched",
+      "comparable": "AR-0 clothing frame (body)",
+      "fields_to_set": { "ArmorRating": 0 },
+      "field_checklist": {
+        "frame": "AR 0 clothing frame (body slot 32)",
+        "clothing_kw": "ArmorClothing 06BBE8 + VendorItemClothing 08F95B + ClothingBody 0A8657 + ClothingRich 0A865D — present",
+        "value": "300 kept",
+        "resist_tempering": "none"
+      },
+      "rationale": "Correct AR-0 clothing frame; enchant routes to magic lane.",
+      "magic_lane_handoff": "ObjectEffect 0BE02A:Skyrim.esm (REQ_Ench_Armor_ResistFire06)"
+    },
+    {
+      "formid": "03DB16:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Armor_CorruptedRedguardHood",
+      "disposition": "patched",
+      "comparable": "AR-0 clothing frame (head)",
+      "fields_to_set": { "ArmorRating": 0 },
+      "field_checklist": {
+        "frame": "AR 0 clothing frame (Alik'r Hood, head slot 31)",
+        "clothing_kw": "ArmorClothing 06BBE8 + VendorItemClothing 08F95B + ClothingHead 10CD11 — present",
+        "value": "2 kept (crude hood)",
+        "resist_tempering": "none"
+      },
+      "rationale": "Correct AR-0 clothing frame; no enchant."
+    },
+    {
+      "formid": "043B8F:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Amulet_MetiliusAmulet",
+      "disposition": "patched",
+      "comparable": "AR-0 jewelry frame (amulet)",
+      "fields_to_set": { "ArmorRating": 0 },
+      "field_checklist": {
+        "frame": "AR 0 clothing frame (amulet slot 35)",
+        "jewelry_kw": "ArmorJewelry 06BBE9 + VendorItemJewelry 08F95A + JewelryExpensive 0A8664 + ClothingNecklace 10CD0A — present",
+        "value": "250 kept",
+        "resist_tempering": "none"
+      },
+      "rationale": "Correct AR-0 jewelry frame; Requiem armor enchant routed to magic lane.",
+      "magic_lane_handoff": "ObjectEffect 0AD460:Skyrim.esm (REQ_Ench_Armor_FortifyHealthRegeneration03)"
+    },
+    {
+      "formid": "06D02A:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Armor_ThePitRags",
+      "disposition": "patched",
+      "comparable": "AR-0 clothing frame (body)",
+      "fields_to_set": { "ArmorRating": 0 },
+      "field_checklist": {
+        "frame": "AR 0 clothing frame (Ragged Trousers, body slot 32)",
+        "clothing_kw": "ArmorClothing 06BBE8 + VendorItemClothing 08F95B + ClothingBody 0A8657 + Survival_ArmorCold 002ED8 — present",
+        "value": "0 kept (rags)",
+        "resist_tempering": "none"
+      },
+      "rationale": "Correct AR-0 clothing frame; no enchant."
+    },
+    {
+      "formid": "0303BA:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Amulet_IrlavExperimentReward",
+      "disposition": "patched",
+      "comparable": "AR-0 jewelry frame (amulet)",
+      "fields_to_set": { "ArmorRating": 0 },
+      "field_checklist": {
+        "frame": "AR 0 clothing frame (Irlav's Penitence, amulet slot 35)",
+        "jewelry_kw": "ArmorJewelry 06BBE9 + VendorItemJewelry 08F95A + JewelryExpensive 0A8664 + ClothingNecklace 10CD0A — present",
+        "value": "1000 kept",
+        "resist_tempering": "none"
+      },
+      "rationale": "Correct AR-0 jewelry frame; enchant routes to magic lane.",
+      "magic_lane_handoff": "ObjectEffect 0303BB:Gray Fox Cowl.esm (manny_GF_Ench_IrlavPenitence)"
+    },
+    {
+      "formid": "0190FA:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Amulet_EagleEye",
+      "disposition": "patched",
+      "comparable": "AR-0 jewelry frame (ring)",
+      "fields_to_set": { "ArmorRating": 0 },
+      "field_checklist": {
+        "frame": "AR 0 clothing frame (ring slot 36)",
+        "jewelry_kw": "ArmorJewelry 06BBE9 + VendorItemJewelry 08F95A + JewelryExpensive 0A8664 + ClothingRing 10CD09 — present",
+        "value": "1000 kept",
+        "resist_tempering": "none"
+      },
+      "rationale": "Correct AR-0 jewelry frame; enchant routes to magic lane.",
+      "magic_lane_handoff": "ObjectEffect 0190F9:Gray Fox Cowl.esm (manny_GF_Ench_EagleEye)"
+    },
+    {
+      "formid": "034B20:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Amulet_AllianceOfAncestralCheetahs",
+      "disposition": "patched",
+      "comparable": "AR-0 jewelry frame (amulet)",
+      "fields_to_set": { "ArmorRating": 0 },
+      "field_checklist": {
+        "frame": "AR 0 clothing frame (amulet slot 35)",
+        "jewelry_kw": "ArmorJewelry 06BBE9 + VendorItemJewelry 08F95A + JewelryExpensive 0A8664 + MagicDisallowEnchanting 0C27BD — present",
+        "value": "200 kept",
+        "resist_tempering": "none"
+      },
+      "rationale": "Correct AR-0 jewelry frame; no enchant (MagicDisallowEnchanting present)."
+    },
+    {
+      "formid": "03504D:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Amulet_Basil",
+      "disposition": "patched",
+      "comparable": "AR-0 jewelry frame (amulet)",
+      "fields_to_set": { "ArmorRating": 0 },
+      "field_checklist": {
+        "frame": "AR 0 clothing frame (Basil's Eternity, amulet slot 35)",
+        "jewelry_kw": "ArmorJewelry 06BBE9 + VendorItemJewelry 08F95A + JewelryExpensive 0A8664 + ClothingNecklace 10CD0A — present",
+        "value": "250 kept",
+        "resist_tempering": "none"
+      },
+      "rationale": "Correct AR-0 jewelry frame; Requiem armor enchant routed to magic lane.",
+      "magic_lane_handoff": "ObjectEffect 0AD460:Skyrim.esm (REQ_Ench_Armor_FortifyHealthRegeneration03)"
+    },
+    {
+      "formid": "019BB2:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Amulet_LeftEyeOfColdharbour",
+      "disposition": "patched",
+      "comparable": "AR-0 jewelry frame (ring)",
+      "fields_to_set": { "ArmorRating": 0 },
+      "field_checklist": {
+        "frame": "AR 0 clothing frame (ring slot 36)",
+        "jewelry_kw": "ArmorJewelry 06BBE9 + VendorItemJewelry 08F95A + ClothingRing 10CD09 + MagicDisallowEnchanting 0C27BD — present",
+        "value": "1000 kept",
+        "resist_tempering": "none"
+      },
+      "rationale": "Correct AR-0 jewelry frame; enchant routes to magic lane.",
+      "magic_lane_handoff": "ObjectEffect 01E534:Gray Fox Cowl.esm (manny_GF_Ench_LeftEyeOfColdharbour)"
+    },
+    {
+      "formid": "000802:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "mihailgoronskin",
+      "disposition": "skipped",
+      "skip_reason": "Creature-skin ARMO (no name, no keywords, AR 0, head slot 30) rendering the mihailgoronrace body — creature natural-armor skin. Belongs to the race/npc layer, not this skill.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Creature body skin; routed to race lane."
+    },
+    {
+      "formid": "60009B:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "mihailwormmouthnakedskin",
+      "disposition": "skipped",
+      "skip_reason": "Creature/naked-body skin ARMO (no name/keywords, body slot 32) for mihailwormmouthrace — renders the body, not a worn piece. Race/npc layer.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Creature body skin; routed to race lane."
+    },
+    {
+      "formid": "032E65:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Skin_AncestralCheetah",
+      "disposition": "skipped",
+      "skip_reason": "Creature-skin ARMO (no name/keywords, body slot 32) for the Sabre Cat / ancestral cheetah — natural-armor body skin. Race/npc layer.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Creature body skin; routed to race lane."
+    },
+    {
+      "formid": "03663B:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Skin_Duneripper",
+      "disposition": "skipped",
+      "skip_reason": "Creature-skin ARMO (Skin editorid, no keywords, body slot 32) for the Chaurus-based Duneripper — natural-armor body skin. Race/npc layer.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Creature body skin; routed to race lane."
+    },
+    {
+      "formid": "6000AC:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "mihaildwarvenspinnerskin",
+      "disposition": "skipped",
+      "skip_reason": "Creature-skin ARMO (no name/keywords, head slot 30) for mihaildwarvenspinnerrace (ice-wraith-based). Natural-armor body skin; race/npc layer.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Creature body skin; routed to race lane."
+    },
+    {
+      "formid": "023C35:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Skin_DesertWolf",
+      "disposition": "skipped",
+      "skip_reason": "Creature-skin ARMO (no name/keywords, body slot 32) for the Wolf race Desert Wolf — natural-armor body skin. Race/npc layer.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Creature body skin; routed to race lane."
+    },
+    {
+      "formid": "600001:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Skin_Mummy01",
+      "disposition": "skipped",
+      "skip_reason": "Creature/NPC-skin ARMO (no name/keywords, body slot 32) for a Draugr-race mummy — renders the body, not a worn piece. Race/npc layer.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Creature/NPC body skin; routed to race lane."
+    },
+    {
+      "formid": "62DAD3:Gray Fox Cowl.esm",
+      "type": "ARMO",
+      "editorid": "manny_GF_Skin_MihailDraugrKid",
+      "disposition": "skipped",
+      "skip_reason": "Creature-skin ARMO (no name/keywords, body slot 32) for a Draukiir/Draugr child actor — natural-armor body skin. Race/npc layer.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Creature body skin; routed to race lane."
+    },
+
+    {
+      "formid": "000801:Gray Fox Cowl.esm",
+      "type": "ARMA",
+      "editorid": "mihailgoronnaked",
+      "disposition": "skipped",
+      "skip_reason": "ArmorAddon (race-add, mihailgoronrace naked body) — ARMA belongs to the race lane per coverage doctrine.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Race-add ARMA; routed to race lane."
+    },
+    {
+      "formid": "0052CF:Gray Fox Cowl.esm",
+      "type": "ARMA",
+      "editorid": "manny_GF_Addon_RightEyeOfColdharbourAmulet",
+      "disposition": "skipped",
+      "skip_reason": "ArmorAddon (race-add, ArgonianRace) — race lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Race-add ARMA; routed to race lane."
+    },
+    {
+      "formid": "01210B:Gray Fox Cowl.esm",
+      "type": "ARMA",
+      "editorid": "manny_GF_Addon_GrayCowl_Khajiit",
+      "disposition": "skipped",
+      "skip_reason": "ArmorAddon (race-add, KhajiitRace Gray Cowl model) — race lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Race-add ARMA; routed to race lane."
+    },
+    {
+      "formid": "041910:Gray Fox Cowl.esm",
+      "type": "ARMA",
+      "editorid": "manny_GF_Addon_Yokuda",
+      "disposition": "skipped",
+      "skip_reason": "ArmorAddon (race-add, DefaultRace Yokuda model) — race lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Race-add ARMA; routed to race lane."
+    },
+    {
+      "formid": "023C36:Gray Fox Cowl.esm",
+      "type": "ARMA",
+      "editorid": "manny_GF_Naked_DesertWolf",
+      "disposition": "skipped",
+      "skip_reason": "ArmorAddon (creature naked body, WolfRace) — race lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Race-add ARMA; routed to race lane."
+    },
+    {
+      "formid": "60009C:Gray Fox Cowl.esm",
+      "type": "ARMA",
+      "editorid": "mihailwormmouthnaked",
+      "disposition": "skipped",
+      "skip_reason": "ArmorAddon (creature naked body, mihailwormmouthrace) — race lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Race-add ARMA; routed to race lane."
+    },
+    {
+      "formid": "01210C:Gray Fox Cowl.esm",
+      "type": "ARMA",
+      "editorid": "manny_GF_Addon_GrayCowl_Argonian",
+      "disposition": "skipped",
+      "skip_reason": "ArmorAddon (race-add, ArgonianRace Gray Cowl model) — race lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Race-add ARMA; routed to race lane."
+    },
+    {
+      "formid": "042FEA:Gray Fox Cowl.esm",
+      "type": "ARMA",
+      "editorid": "manny_GF_Addon_YokudaCorrupted",
+      "disposition": "skipped",
+      "skip_reason": "ArmorAddon (race-add, DefaultRace corrupted Yokuda model) — race lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Race-add ARMA; routed to race lane."
+    },
+    {
+      "formid": "017AE6:Gray Fox Cowl.esm",
+      "type": "ARMA",
+      "editorid": "manny_GF_Addon_GrayCowl",
+      "disposition": "skipped",
+      "skip_reason": "ArmorAddon (race-add, DefaultRace Gray Cowl model) — race lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Race-add ARMA; routed to race lane."
+    },
+    {
+      "formid": "03663C:Gray Fox Cowl.esm",
+      "type": "ARMA",
+      "editorid": "manny_GF_Naked_Duneripper",
+      "disposition": "skipped",
+      "skip_reason": "ArmorAddon (creature naked body, ChaurusRace) — race lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Race-add ARMA; routed to race lane."
+    },
+    {
+      "formid": "600000:Gray Fox Cowl.esm",
+      "type": "ARMA",
+      "editorid": "manny_GF_Naked_Mummy01",
+      "disposition": "skipped",
+      "skip_reason": "ArmorAddon (creature naked body, DraugrRace) — race lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Race-add ARMA; routed to race lane."
+    },
+    {
+      "formid": "032E67:Gray Fox Cowl.esm",
+      "type": "ARMA",
+      "editorid": "manny_GF_Naked_AncestralCheetah",
+      "disposition": "skipped",
+      "skip_reason": "ArmorAddon (creature naked body, SabreCatRace) — race lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Race-add ARMA; routed to race lane."
+    },
+    {
+      "formid": "6000AD:Gray Fox Cowl.esm",
+      "type": "ARMA",
+      "editorid": "mihaildwarvenspinnernaked",
+      "disposition": "skipped",
+      "skip_reason": "ArmorAddon (creature naked body, mihaildwarvenspinnerrace) — race lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Race-add ARMA; routed to race lane."
+    },
+    {
+      "formid": "03DB18:Gray Fox Cowl.esm",
+      "type": "ARMA",
+      "editorid": "manny_GF_Addon_CorruptedRedguardHood",
+      "disposition": "skipped",
+      "skip_reason": "ArmorAddon (race-add, SkeletonNecroRace) — race lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Race-add ARMA; routed to race lane."
+    },
+    {
+      "formid": "62DAD4:Gray Fox Cowl.esm",
+      "type": "ARMA",
+      "editorid": "manny_GF_Naked_Draukiir",
+      "disposition": "skipped",
+      "skip_reason": "ArmorAddon (creature naked body, manny_GF_Race_Draukiir) — race lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Race-add ARMA; routed to race lane."
+    },
+
+    {
+      "formid": "014955:Gray Fox Cowl.esm",
+      "type": "COBJ",
+      "editorid": "manny_GF_CO_Yokuda",
+      "disposition": "patched",
+      "comparable": "armor temper recipe — CraftingSmithingArmorTable (0ADB78)",
+      "fields_to_set": {
+        "CreatedObject": "041911:Gray Fox Cowl.esm",
+        "WorkbenchKeyword": "0ADB78:Skyrim.esm"
+      },
+      "field_checklist": {
+        "produces_armor": "Yokuda (041911) — armor recipe, MINE",
+        "workbench": "CraftingSmithingArmorTable 0ADB78 (correct armor workbench, NOT the grindstone)",
+        "conditions": "EPTemperingItemIsEnchanted (OR) + HasPerk gate — standard Requiem temper shape; perk gate should match the iron tier's tempering perk",
+        "recipe_type": "temper (single-ingot at armor table)"
+      },
+      "rationale": "Armor temper recipe for the iron-tier Yokuda shield. Structurally Requiem-consistent (armor table + enchant/perk temper conditions); kept."
+    },
+    {
+      "formid": "014954:Gray Fox Cowl.esm",
+      "type": "COBJ",
+      "editorid": "manny_GF_CO_GrayCowl",
+      "disposition": "patched",
+      "comparable": "armor temper recipe — CraftingSmithingArmorTable (0ADB78)",
+      "fields_to_set": {
+        "CreatedObject": "017AE5:Gray Fox Cowl.esm",
+        "WorkbenchKeyword": "0ADB78:Skyrim.esm"
+      },
+      "field_checklist": {
+        "produces_armor": "Gray Cowl of Nocturnal (017AE5) — armor recipe, MINE",
+        "workbench": "CraftingSmithingArmorTable 0ADB78 (correct armor workbench)",
+        "conditions": "EPTemperingItemIsEnchanted (OR) + HasPerk gate — standard Requiem temper shape",
+        "recipe_type": "temper (armor table); artifact — no forge recipe (correct, artifacts are not craftable)"
+      },
+      "rationale": "Temper recipe for the Gray Cowl artifact; armor-table temper is consistent. Kept."
+    },
+    {
+      "formid": "866240:Gray Fox Cowl.esm",
+      "type": "COBJ",
+      "editorid": "manny_GF_CO_ScorchOfTheUndead",
+      "disposition": "skipped",
+      "skip_reason": "Weapon recipe (produces Scorch of the Undead WEAP; WorkbenchKeyword CraftingSmithingSharpeningWheel 088108, the grindstone) — routed to weapons lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Weapon temper recipe; not this skill's domain."
+    },
+    {
+      "formid": "0340F3:Gray Fox Cowl.esm",
+      "type": "COBJ",
+      "editorid": "manny_GF_CO_GoldenScimitar",
+      "disposition": "skipped",
+      "skip_reason": "Weapon recipe (Golden Scimitar WEAP; grindstone 088108) — routed to weapons lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Weapon recipe; not this skill's domain."
+    },
+    {
+      "formid": "014950:Gray Fox Cowl.esm",
+      "type": "COBJ",
+      "editorid": "manny_GF_CO_Umbra",
+      "disposition": "skipped",
+      "skip_reason": "Weapon recipe (Umbra WEAP; grindstone 088108) — routed to weapons lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Weapon recipe; not this skill's domain."
+    },
+    {
+      "formid": "004DA0:Gray Fox Cowl.esm",
+      "type": "COBJ",
+      "editorid": "manny_GF_CO_AncientScimitar",
+      "disposition": "skipped",
+      "skip_reason": "Weapon recipe (Ancient Scimitar WEAP; grindstone 088108) — routed to weapons lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Weapon recipe; not this skill's domain."
+    },
+    {
+      "formid": "014951:Gray Fox Cowl.esm",
+      "type": "COBJ",
+      "editorid": "manny_GF_CO_ElvenClub",
+      "disposition": "skipped",
+      "skip_reason": "Weapon recipe (Elven Club WEAP; grindstone 088108) — routed to weapons lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Weapon recipe; not this skill's domain."
+    },
+    {
+      "formid": "038585:Gray Fox Cowl.esm",
+      "type": "COBJ",
+      "editorid": "manny_GF_CO_BladeOfYokudaScimitar",
+      "disposition": "skipped",
+      "skip_reason": "Weapon recipe (Blade of Yokuda WEAP; grindstone 088108) — routed to weapons lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Weapon recipe; not this skill's domain."
+    },
+    {
+      "formid": "800B33:Gray Fox Cowl.esm",
+      "type": "COBJ",
+      "editorid": "manny_GF_CO_DawnOfMan",
+      "disposition": "skipped",
+      "skip_reason": "Weapon recipe (Dawn of Man WEAP; grindstone 088108) — routed to weapons lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Weapon recipe; not this skill's domain."
+    },
+    {
+      "formid": "014953:Gray Fox Cowl.esm",
+      "type": "COBJ",
+      "editorid": "manny_GF_CO_ForgottenChaosBow",
+      "disposition": "skipped",
+      "skip_reason": "Weapon recipe (Bow of the Forgotten Chaos WEAP; grindstone 088108) — routed to weapons lane.",
+      "comparable": null, "fields_to_set": {}, "field_checklist": {},
+      "rationale": "Weapon recipe; not this skill's domain."
+    }
+  ],
+  "reconciliation": {
+    "patched": 23,
+    "skipped": 32,
+    "flagged": 3,
+    "total": 58,
+    "closes": true,
+    "by_type": {
+      "ARMO": { "patched": 21, "skipped": 9, "flagged": 3, "total": 33 },
+      "ARMA": { "patched": 0, "skipped": 15, "flagged": 0, "total": 15 },
+      "COBJ": { "patched": 2, "skipped": 8, "flagged": 0, "total": 10 }
+    }
+  },
+  "notes": [
+    "Freshness probe OK: instance E:\\Skyrim Modding\\ARR 2.0, profile 'Authoria - Requiem Reforged - NSFW Profile'; Requiem.esp + Requiem for the Indifferent.esp both in the override chain — the live winner (RftI) is the authority for Requiem's own comparables.",
+    "BLINDING honored: every Gray Fox Cowl.esm target read with plugin='Gray Fox Cowl.esm' (its own version), never the winner — for the 11 armored/recipe records whose live winner is 'Authoria - Patch - Gray Cowl of Nocturnal Requiem.esp' this required explicit plugin= reads. The existing Authoria patch was never read. Requiem comparables read as live winners per doctrine.",
+    "Blades set material: Requiem defines NO distinct 'Blades' ARMO set (0 matches). Classified as Steel tier (Akaviri steel) — corroborated by the reused BladesCuirass mesh sitting at AR300 (= REQ steel body) across the CC Alternative-Armors Reqtificated patches. Full set derived from REQ_Heavy_Steel_* comparables read live.",
+    "Blades cuirass/gauntlets/boots/helmet + Jagged Crown carry MajorFlags=NonPlayable but HAVE biped slots + armor keywords — NOT the 'template ARMO' skip (which requires no biped slots). They are NPC/display armor the Reqtificator still balances by set/type keywords, so they were derived, not skipped. Preserve the NonPlayable flag on write.",
+    "YokudaNonPlayable (042437) is a Value-0 NonPlayable exact duplicate of the playable Yokuda (041911) — dispositioned skipped as a display/mannequin twin; its playable twin carries the balance.",
+    "Never hand-stamped resist-tier or tempering keywords — REQ_Armor_Resistance_Ranged_Tier5, REQ_Tempering_* and Survival_Armor* are Reqtificator OUTPUTS on the comparables; only the source-carried armorType + REQ_ArmorSet + part + VendorItemArmor (+PerkFists on heavy gauntlets) keywords were set. Get the set keyword right and resist+tempering follow at build.",
+    "3 flagged records need an authorial call: (1) Jagged Crown copy 02DCA1 — daedric-tier vs real-artifact treatment; (2) Boots of Springheel Jak 018B4B — on-ladder leather AR45 vs intentional artifact AR0; (3) Draukiir Mask 674F20 — borrowed light-head material (Hide chosen; Leather equal). Concrete recommended derivations provided for each.",
+    "14 clothing/jewelry frames (amulets/rings/circlets/hoods/clothes) were already correct AR-0 Requiem clothing/jewelry frames (proper ArmorJewelry/ArmorClothing + Vendor + Clothing* keywords, value on-tier) — dispositioned patched (frame confirmed, no resist/tempering). Enchanted ones route their ObjectEffect to the magic lane.",
+    "Magic-lane boundary handoffs (ObjectEffect design NOT set here): Blades Shield 0AD493, Gray Cowl 020119, Boots Springheel 019612, Draukiir Mask 69D8AA, Sayara 03B874, Telrav 10CF26, AncientRedguardHood 0BE00E, AncientRedguardBoots 0BE024, AncientRedguardClothes 0BE02A, Metilius 0AD460, Irlav 0303BB, EagleEye 0190F9, Basil 0AD460, LeftEyeOfColdharbour 01E534.",
+    "Race-lane handoff: all 15 ARMA (race-add / creature-naked ArmorAddons) + the 8 creature-skin ARMO route to the race/npc lane.",
+    "Weapons-lane handoff: 8 of the 10 COBJ are weapon grindstone recipes (Scorch, Golden Scimitar, Umbra, Ancient Scimitar, Elven Club, Blade of Yokuda, Dawn of Man, Forgotten Chaos Bow). Only 2 COBJ produce armor (Yokuda + Gray Cowl temper recipes at the armor table) — the mod defines no forge recipe for the Blades set (correct: NonPlayable NPC/display armor).",
+    "READ-ONLY lane: no plugins created, no fields written — fields_to_set are write-ready houseCARL tokens for the eventual patch, derivations only."
+  ]
+}

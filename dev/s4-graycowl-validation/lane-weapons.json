@@ -1,0 +1,408 @@
+{
+  "lane": "weapons-ammo",
+  "skill_versions": "requiem-weapon-patching + requiem-ammo-patching (pack 1.2.1)",
+  "enumerated": { "WEAP": 17, "AMMO": 1, "PROJ": 2, "COBJ": 10 },
+  "blinding": "All Gray Fox Cowl.esm target records read with plugin=\"Gray Fox Cowl.esm\" (own version), never the live winner 'Authoria - Patch - Gray Cowl of Nocturnal Requiem.esp' and never conflict_tree. Requiem comparables read normally: Requiem source values via plugins=[\"Requiem.esp\"] (pre-Reqtificator INPUTS) for melee damage/crit, since melee weapon damage is Reqtificator-rescaled (RftI iron sword source 7 -> winner 42) and carrying the winner value would double-scale. Bows carry RFTI_Exclusions_NoDamageRescale so their source == final. Freshness probe: instance E:\\Skyrim Modding\\ARR 2.0, profile 'Authoria - Requiem Reforged - NSFW Profile'; Requiem.esp present in override chain of 012EB7:Skyrim.esm (winner 'Requiem for the Indifferent.esp' = live RftI profile, valid authority). Note: 'Authoria - RFTI Output' is DISABLED on this profile, so the hand-patch wins these records directly.",
+  "records": [
+    {
+      "formid": "0021D7:Gray Fox Cowl.esm", "type": "WEAP", "editorid": "manny_GF_Weapon_BladesSword",
+      "disposition": "patched",
+      "comparable": "REQ_Weapon_Steel_Sword 013989:Skyrim.esm (source dmg 8 / crit 4 / val 45 / wt 10)",
+      "fields_to_set": {
+        "BasicStats.Damage": 8,
+        "Critical.Damage": 4,
+        "Critical.PercentMult": 1,
+        "Data.Speed": 1.0,
+        "Data.Reach": 1.0,
+        "Keywords": ["01E711:Skyrim.esm", "01E719:Skyrim.esm", "08F958:Skyrim.esm"],
+        "BasicStats.Value": 300,
+        "BasicStats.Weight": 10,
+        "ObjectEffect": "0ACBBC:Skyrim.esm",
+        "EnchantmentAmount": 3000,
+        "ImpactDataSet": "013CAC:Skyrim.esm",
+        "EquipSound": "03C72E:Skyrim.esm"
+      },
+      "field_checklist": { "weapon_type_kw": "WeapTypeSword (damage-type left to Reqtificator)", "material_kw": "WeapMaterialSteel", "damage_on_ladder": "8 (steel 1H source)", "crit_floor_dmg2": "4", "value_on_tier": "300 kept - within Requiem named-unique steel range (Queen Freydis' 450)", "speed_reach_type": "1.0/1.0 sword", "sound_impact": "copied", "recipe": "temper COBJ 866240? no - this weapon has no COBJ; obtained as reward", "ench_frame": "ObjectEffect + EnchantmentAmount set; Template n/a (pre-enchanted unique)", "masters": "Requiem.esp pulled via no new REQ ref here" },
+      "ench_boundary": "ObjectEffect 0ACBBC -> REQ_Ench_Weapon_Paralyze6 is REQUIEM'S OWN balanced enchantment (winner Requiem - Magic Redone.esp). Already Requiem-balanced; NO magic-lane handoff needed.",
+      "rationale": "Steel 1H sword. Damage/crit brought onto Requiem's steel source tier (the Reqtificator input); named-unique value 300 kept (in Requiem range, not clearly off-tier). Enchant is Requiem's own Paralyze6, already balanced. No craft/temper COBJ ships for it."
+    },
+    {
+      "formid": "004D9F:Gray Fox Cowl.esm", "type": "WEAP", "editorid": "manny_GF_Weapon_AncientScimitar",
+      "disposition": "patched",
+      "comparable": "REQ_Weapon_Steel_Sword 013989:Skyrim.esm",
+      "fields_to_set": {
+        "BasicStats.Damage": 8, "Critical.Damage": 4, "Critical.PercentMult": 1,
+        "Data.Speed": 1.0, "Data.Reach": 1.0,
+        "Keywords": ["01E711:Skyrim.esm", "01E719:Skyrim.esm", "08F958:Skyrim.esm"],
+        "BasicStats.Value": 300, "BasicStats.Weight": 10,
+        "ObjectEffect": "05B468:Skyrim.esm", "EnchantmentAmount": 3000,
+        "ImpactDataSet": "013CAC:Skyrim.esm", "EquipSound": "03C72E:Skyrim.esm"
+      },
+      "field_checklist": { "weapon_type_kw": "WeapTypeSword", "material_kw": "WeapMaterialSteel", "damage_on_ladder": "8", "crit": "4", "value_on_tier": "300 kept", "recipe": "temper COBJ 004DA0 (this lane)", "ench_frame": "set" },
+      "ench_boundary": "ObjectEffect 05B468 -> REQ_Ench_Weapon_Fear4 is Requiem's own balanced enchantment. No magic-lane handoff.",
+      "rationale": "Steel 1H sword, Requiem Fear4 enchant (already balanced). Damage/crit to steel source tier; value 300 kept. Tempered via COBJ 004DA0."
+    },
+    {
+      "formid": "02B7DC:Gray Fox Cowl.esm", "type": "WEAP", "editorid": "manny_GF_Weapon_GoldenScimitar",
+      "disposition": "patched",
+      "comparable": "REQ_Weapon_Steel_Sword 013989:Skyrim.esm",
+      "fields_to_set": {
+        "BasicStats.Damage": 8, "Critical.Damage": 4, "Critical.PercentMult": 1,
+        "Data.Speed": 1.0, "Data.Reach": 1.0,
+        "Keywords": ["01E719:Skyrim.esm", "01E711:Skyrim.esm", "08F958:Skyrim.esm"],
+        "BasicStats.Value": 300, "BasicStats.Weight": 10,
+        "ObjectEffect": "045C2C:Skyrim.esm", "EnchantmentAmount": 3000,
+        "ImpactDataSet": "013CAC:Skyrim.esm", "EquipSound": "03C72E:Skyrim.esm"
+      },
+      "field_checklist": { "weapon_type_kw": "WeapTypeSword", "material_kw": "WeapMaterialSteel", "damage": "8", "crit": "4", "value": "300 kept", "recipe": "temper COBJ 0340F3 (this lane)", "ench_frame": "set" },
+      "ench_boundary": "ObjectEffect 045C2C -> REQ_Ench_Weapon_Fire3 is Requiem's own balanced enchantment. No magic-lane handoff.",
+      "rationale": "Steel 1H sword, Requiem Fire3 enchant. Damage/crit to steel tier; value 300 kept; tempered via COBJ 0340F3."
+    },
+    {
+      "formid": "05F05D:Gray Fox Cowl.esm", "type": "WEAP", "editorid": "manny_GF_Weapon_BladeOfYokuda",
+      "disposition": "patched",
+      "comparable": "REQ_Weapon_Steel_Sword 013989:Skyrim.esm",
+      "fields_to_set": {
+        "BasicStats.Damage": 8, "Critical.Damage": 4, "Critical.PercentMult": 1,
+        "Data.Speed": 1.0, "Data.Reach": 1.0,
+        "Keywords": ["01E719:Skyrim.esm", "01E711:Skyrim.esm", "08F958:Skyrim.esm"],
+        "BasicStats.Value": 300, "BasicStats.Weight": 10,
+        "ObjectEffect": "05F05F:Gray Fox Cowl.esm", "EnchantmentAmount": 3000,
+        "ImpactDataSet": "013CAC:Skyrim.esm", "EquipSound": "03C72E:Skyrim.esm"
+      },
+      "field_checklist": { "weapon_type_kw": "WeapTypeSword", "material_kw": "WeapMaterialSteel", "damage": "8", "crit": "4", "value": "300 kept", "recipe": "temper COBJ 038585 (this lane)", "ench_frame": "weapon-side set; effect design routed" },
+      "ench_boundary": "ObjectEffect 05F05F -> manny_GF_Ench_BladeOfYokuda is a MODDED enchantment. Weapon-side frame set here; ENCH/MGEF balancing routed to requiem-magic-patching (magic lane).",
+      "rationale": "Steel 1H sword with a modded enchant. Damage/crit to steel tier; value 300 kept; tempered via COBJ 038585. Enchantment design handed to magic lane."
+    },
+    {
+      "formid": "851D0A:Gray Fox Cowl.esm", "type": "WEAP", "editorid": "manny_GF_Weapon_ScorchOfTheUndead",
+      "disposition": "patched",
+      "comparable": "REQ_Weapon_Steel_Sword 013989:Skyrim.esm (named-unique value cf. REQ_Artifact_QueenFreydisSword steel val 450)",
+      "fields_to_set": {
+        "BasicStats.Damage": 8, "Critical.Damage": 4, "Critical.PercentMult": 1,
+        "Data.Speed": 1.0, "Data.Reach": 1.0,
+        "Keywords": ["08F958:Skyrim.esm", "01E711:Skyrim.esm", "01E719:Skyrim.esm", "0C27BD:Skyrim.esm"],
+        "BasicStats.Value": 500, "BasicStats.Weight": 9,
+        "Data.Flags": "DontUseFirstPersonIsAnim, DontUseThirdPersonISAnim",
+        "ImpactDataSet": "013CAC:Skyrim.esm", "EquipSound": "03C72E:Skyrim.esm"
+      },
+      "field_checklist": { "weapon_type_kw": "WeapTypeSword", "material_kw": "WeapMaterialSteel", "damage": "8", "crit": "4", "value": "500 kept (named unique, in Requiem range)", "speed_reach": "1.0/1.0", "recipe": "temper COBJ 866240 (this lane)", "ench_frame": "none - MagicDisallowEnchanting unenchantable named unique" },
+      "ench_boundary": "No ObjectEffect. MagicDisallowEnchanting present (bespoke named unique). Nothing to route.",
+      "rationale": "Unenchantable named steel sword. Damage/crit to steel source tier; value 500 kept (within Requiem named-unique range). Animation flags kept. Tempered via COBJ 866240."
+    },
+    {
+      "formid": "00341D:Gray Fox Cowl.esm", "type": "WEAP", "editorid": "manny_GF_Weapon_ElvenClub",
+      "disposition": "patched",
+      "comparable": "REQ_Weapon_Elven_Mace 0139A0:Skyrim.esm (source dmg 11 / crit 5 / val 195 / wt 12 / speed 0.8 / stagger 1)",
+      "fields_to_set": {
+        "BasicStats.Damage": 11, "Critical.Damage": 5, "Critical.PercentMult": 1,
+        "Data.Speed": 0.8, "Data.Reach": 1.0, "Data.Stagger": 1.0,
+        "Keywords": ["01E714:Skyrim.esm", "01E71B:Skyrim.esm", "08F958:Skyrim.esm", "0C27BD:Skyrim.esm"],
+        "BasicStats.Value": 195, "BasicStats.Weight": 12,
+        "ObjectEffect": "072674:Skyrim.esm", "EnchantmentAmount": 3000,
+        "ImpactDataSet": "013CAC:Skyrim.esm", "EquipSound": "03DE2A:Skyrim.esm"
+      },
+      "field_checklist": { "weapon_type_kw": "WeapTypeMace", "material_kw": "WeapMaterialElven", "damage": "11 (was 1 - clearly off)", "crit": "5", "value": "195 (was 4500 - clearly off elven tier, corrected)", "speed": "0.8 (mace, was 1.0)", "recipe": "temper COBJ 014951 (this lane)", "ench_frame": "vanilla EnchStagger kept - see note" },
+      "ench_boundary": "ObjectEffect 072674 -> EnchStagger is a VANILLA generic (not Requiem-owned, not modded). Borderline: recommend either leaving it or swapping to a Requiem stagger effect via magic lane. Not a new ENCH needing design.",
+      "rationale": "Elven mace. Author left dmg 1 / value 4500 (both clearly off the elven mace tier). Corrected damage 11, crit 5, mace speed 0.8, value 195. MagicDisallowEnchanting kept. Tempered via COBJ 014951 (Elven Smithing + Refined Moonstone)."
+    },
+    {
+      "formid": "01FAEC:Gray Fox Cowl.esm", "type": "WEAP", "editorid": "manny_GF_Weapon_TheWithdrawal",
+      "disposition": "patched",
+      "comparable": "REQ_Weapon_Steel_Dagger 013986:Skyrim.esm (source dmg 5 / crit 2 / val 20 / wt 2.5 / speed 1.3 / reach 0.7)",
+      "fields_to_set": {
+        "BasicStats.Damage": 5, "Critical.Damage": 2, "Critical.PercentMult": 1,
+        "Data.Speed": 1.3, "Data.Reach": 0.7,
+        "Keywords": ["01E713:Skyrim.esm", "08F958:Skyrim.esm", "0C27BD:Skyrim.esm", "01E719:Skyrim.esm"],
+        "BasicStats.Value": 1500, "BasicStats.Weight": 2,
+        "ObjectEffect": "01FBFE:Gray Fox Cowl.esm",
+        "ImpactDataSet": "013CAC:Skyrim.esm", "EquipSound": "03C72E:Skyrim.esm"
+      },
+      "field_checklist": { "weapon_type_kw": "WeapTypeDagger", "material_kw": "WeapMaterialSteel ADDED (was missing - required for value/temper tier)", "damage": "5 (was 1 - effect-only, off tier)", "crit": "2", "value": "1500 kept (named enchanted unique, high but within range)", "speed_reach": "1.3/0.7 dagger", "recipe": "no COBJ ships (reward item)", "ench_frame": "weapon-side; effect routed" },
+      "ench_boundary": "ObjectEffect 01FBFE -> manny_GF_Ench_TheWithdrawal is MODDED. Weapon-side frame set; ENCH/MGEF design routed to requiem-magic-patching (magic lane).",
+      "rationale": "Named enchanted dagger. Author left dmg 1 (relies on enchant) and NO material keyword. Added WeapMaterialSteel (default tier from its 5-6 damage band); damage 5, crit 2 to steel dagger tier. Value 1500 kept (named unique). Effect to magic lane."
+    },
+    {
+      "formid": "02298B:Gray Fox Cowl.esm", "type": "WEAP", "editorid": "manny_GF_Weapon_Ocato",
+      "disposition": "patched",
+      "comparable": "REQ_Weapon_Steel_Dagger 013986:Skyrim.esm",
+      "fields_to_set": {
+        "BasicStats.Damage": 5, "Critical.Damage": 2, "Critical.PercentMult": 1,
+        "Data.Speed": 1.3, "Data.Reach": 0.7,
+        "Keywords": ["08F958:Skyrim.esm", "01E713:Skyrim.esm", "01E719:Skyrim.esm"],
+        "BasicStats.Value": 50, "BasicStats.Weight": 2.5,
+        "ObjectEffect": "02299B:Gray Fox Cowl.esm", "EnchantmentAmount": 3000,
+        "ImpactDataSet": "013CAC:Skyrim.esm", "EquipSound": "03CED9:Skyrim.esm"
+      },
+      "field_checklist": { "weapon_type_kw": "WeapTypeDagger", "material_kw": "WeapMaterialSteel ADDED (was missing)", "damage": "5 (was 6)", "crit": "2", "value": "50 kept", "speed_reach": "1.3/0.7", "recipe": "no COBJ ships", "ench_frame": "weapon-side; effect routed" },
+      "ench_boundary": "ObjectEffect 02299B -> manny_GF_Ench_Ocato is MODDED. Weapon-side set; effect design routed to magic lane.",
+      "rationale": "Enchanted dagger, no material keyword. Added WeapMaterialSteel; damage 5 / crit 2 on steel dagger tier; value 50 kept; weight 5->2.5 (steel dagger). Effect to magic lane."
+    },
+    {
+      "formid": "03A217:Gray Fox Cowl.esm", "type": "WEAP", "editorid": "manny_GF_Weapon_ForgottenChaosBow",
+      "disposition": "patched",
+      "comparable": "REQ_Weapon_AncientNordHoned_Bow 05D179:Skyrim.esm (Supple Ancient Nord Bow; dmg 60 / crit 7 / val 235 / wt 18 / speed 0.3704 / NPCsUseAmmo; matches WeapMaterialDraugrHoned tier)",
+      "fields_to_set": {
+        "BasicStats.Damage": 60, "Critical.Damage": 7, "Critical.PercentMult": 1,
+        "Data.Speed": 0.3704, "Data.Reach": 1.0, "Data.Flags": "NPCsUseAmmo",
+        "Keywords": ["01E715:Skyrim.esm", "08F958:Skyrim.esm", "0C5C02:Skyrim.esm", "2E232E:Requiem.esp", "AD3B2D:Requiem.esp", "9F9914:Requiem.esp", "AD3B2F:Requiem.esp"],
+        "BasicStats.Value": 235, "BasicStats.Weight": 18,
+        "ObjectEffect": "03A218:Gray Fox Cowl.esm", "EnchantmentAmount": 5000,
+        "ImpactDataSet": "0193B9:Skyrim.esm", "EquipSound": "03D78C:Skyrim.esm"
+      },
+      "field_checklist": { "weapon_type_kw": "WeapTypeBow", "material_kw": "WeapMaterialDraugrHoned", "damage": "60 (bow, source==final; was 14 vanilla-tuned)", "crit": "7 (copied from comparable - NOT floor(dmg/2); bows override)", "speed": "0.3704 (Requiem draw; was 0.875)", "npcs_use_ammo": "SET (was missing)", "bow_kws": "REQ_BowBreakable + RFTI_Exclusions_NoDamageRescale + REQ_WeaponType_BowHeavy + RFTI_Exclusions_NoBowSpeedRescale ALL ADDED", "value": "235 (was 2350, off-tier; enchanted keeps base)", "recipe": "temper COBJ 014953 (this lane)", "ench_frame": "weapon-side; effect routed" },
+      "ench_boundary": "ObjectEffect 03A218 -> manny_GF_Ench_ForgottenChaosBow is MODDED. Weapon-side frame set; ENCH/MGEF design routed to requiem-magic-patching (magic lane).",
+      "rationale": "The biggest catch: author shipped a vanilla-tuned bow (dmg 14, speed 0.875, no NPCsUseAmmo, none of the REQ bow keywords). Retuned to the AncientNordHoned bow tier (dmg 60, speed 0.3704), added NPCsUseAmmo and the full REQ bow keyword set incl. both RFTI rescale-exclusions (so its hand-tuned damage/speed survive the build) and REQ_WeaponType_BowHeavy. Value onto bow tier. Effect to magic lane."
+    },
+    {
+      "formid": "7D317B:Gray Fox Cowl.esm", "type": "WEAP", "editorid": "manny_GF_Weapon_DawnOfMan",
+      "disposition": "patched",
+      "comparable": "REQ_Weapon_Dragonbone_Mace 014FCD:Dawnguard.esm (source dmg 16 / crit 8 / val 5200 / wt 20 / speed 0.8 / reach 1 / stagger 1)",
+      "fields_to_set": {
+        "BasicStats.Damage": 16, "Critical.Damage": 8, "Critical.PercentMult": 1,
+        "Data.Speed": 0.8, "Data.Reach": 1.0, "Data.Stagger": 1.0,
+        "Keywords": ["019822:Dawnguard.esm", "08F958:Skyrim.esm", "01E714:Skyrim.esm"],
+        "BasicStats.Value": 5200, "BasicStats.Weight": 18,
+        "ImpactDataSet": "0193B7:Skyrim.esm", "EquipSound": "03DE2A:Skyrim.esm"
+      },
+      "field_checklist": { "weapon_type_kw": "WeapTypeMace", "material_kw": "DLC1WeapMaterialDragonbone", "damage": "16 (was 18)", "crit": "8 (was 0 - fixed)", "value": "5200 (was 1 - author error, dragonbone mace tier)", "speed": "0.8 mace", "reach": "1.0 (was 1.3)", "recipe": "temper COBJ 800B33 (this lane)", "ench_frame": "none" },
+      "ench_boundary": "No ObjectEffect. Nothing to route.",
+      "rationale": "Dragonbone mace, unenchanted named unique. Author left value 1 (error) and crit 0. Corrected damage 16 / crit 8 / value 5200 to Requiem dragonbone mace tier; mace reach 1.0. Tempered via COBJ 800B33 (Draconic Blacksmithing + Dragon Bone)."
+    },
+    {
+      "formid": "665AFD:Gray Fox Cowl.esm", "type": "WEAP", "editorid": "manny_GF_Weapon_DragonPriestStaff",
+      "disposition": "patched",
+      "comparable": "REQ_Staff_Destruction_WallofStorms 029B87:Skyrim.esm (same ObjectEffect 029B5F; source dmg 0 / val 5 / EnchAmount 3000) + frame REQ_Artifact_DragonPriestStaff 04DE5B (dmg 2 / val 25)",
+      "fields_to_set": {
+        "BasicStats.Damage": 2, "BasicStats.Value": 25, "BasicStats.Weight": 8,
+        "Data.Reach": 1.3, "Data.Skill": "Destruction",
+        "Keywords": ["01E716:Skyrim.esm", "0937A4:Skyrim.esm"],
+        "ObjectEffect": "029B5F:Skyrim.esm", "EnchantmentAmount": 3000,
+        "EquipSound": "03DE2C:Skyrim.esm"
+      },
+      "field_checklist": { "staff_kws": "WeapTypeStaff + VendorItemStaff (matches comparable)", "damage_1": "2 (matches REQ_Artifact_DragonPriestStaff frame)", "value_from_spell": "25 (dragon-priest-staff frame tier)", "ench_from_spell": "ObjectEffect 029B5F is Requiem's own Destruction-4 shock wall staff enchant", "ench_amount": "3000 (was 2000 - matched to comparable staff)", "data_skill": "Destruction added" },
+      "ench_boundary": "ObjectEffect 029B5F -> REQ_Ench_Staff_Destruction4_Shock_ConcAimedHazard is REQUIEM'S OWN staff enchantment (Requiem - Magic Redone.esp), already balanced. No magic-lane handoff.",
+      "rationale": "Dragon Priest Staff carrying Requiem's own Lightning Wall (Destruction tier-4 shock) staff enchant. Staff balance is enchant-driven: frame matches REQ_Artifact_DragonPriestStaff (dmg 2, val 25), keywords already correct, Data.Skill=Destruction set, EnchantmentAmount corrected 2000->3000 to match the comparable staff. Effect is Requiem-owned (balanced)."
+    },
+    {
+      "formid": "00334E:Gray Fox Cowl.esm", "type": "WEAP", "editorid": "manny_GF_Weapon_Umbra",
+      "disposition": "flagged",
+      "comparable": "No Requiem Umbra exists. Nearest artifact-1H-sword structure: REQ_Artifact_Dawnbreaker 04E4EE (dmg 13, Daedric signature) / REQ_Artifact_RedEaglesBane (dmg 11, val 5000). Steel-tier source dmg would be 8.",
+      "flag_question": "Author gives Umbra dmg 24 + Critical 24 with a WeapMaterialSteel keyword, but it is framed as a Daedric artifact (VendorItemDaedricArtifact + DaedricArtifact + MagicDisallowEnchanting + bespoke Soul Trap enchant + value 4500). Two things conflict: (1) dmg 24 is far above both the steel 1H source tier (8) and the Requiem 1H artifact-sword band (~11-13, e.g. Dawnbreaker 13); (2) crit is 24 (should be floor(dmg/2)). Resolve tier intent: (a) Daedric signature -> set dmg 13 (Dawnbreaker tier), crit 6, and raise the material keyword above Steel; or (b) keep Steel keyword -> dmg 8, crit 4. Bespoke value 4500 and the modded enchant are artifact-appropriate and kept either way.",
+      "fields_to_set_recommended_option_a": {
+        "BasicStats.Damage": 13, "Critical.Damage": 6, "Critical.PercentMult": 1,
+        "Data.Speed": 1.0, "Data.Reach": 1.0,
+        "Keywords": ["01E711:Skyrim.esm", "0917E8:Skyrim.esm", "0C27BD:Skyrim.esm", "0A8668:Skyrim.esm", "REPLACE_WeapMaterialSteel_01E719_with_higher_tier_pending_decision"],
+        "BasicStats.Value": 4500, "BasicStats.Weight": 10,
+        "ObjectEffect": "018080:Gray Fox Cowl.esm", "EnchantmentAmount": 3000,
+        "ImpactDataSet": "013CAC:Skyrim.esm", "EquipSound": "03C72E:Skyrim.esm"
+      },
+      "ench_boundary": "ObjectEffect 018080 -> manny_GF_Ench_Umbra (Soul Trap) is MODDED. Weapon-side charge/value derived here; ENCH/MGEF design routed to requiem-magic-patching (magic lane).",
+      "rationale": "Genuine artifact (Daedric-artifact keyword set, not forge-craftable, temper-only via COBJ 014950). Deviating value/enchant is artifact-legitimate, but the dmg-24/steel-keyword pairing is internally inconsistent and crit is unset per floor(dmg/2). Flagged for tier decision rather than silently classified; recommended option-a fields provided."
+    },
+    {
+      "formid": "00279A:Gray Fox Cowl.esm", "type": "WEAP", "editorid": "manny_GF_Weapon_BladesSwordGuardian",
+      "disposition": "skipped",
+      "skip_reason": "Non-playable / NPC-only weapon (Data.Flags = CantDrop, NonPlayable; dmg 30 hand-set for an actor's hand). Never reaches the player as loot, so no material tier applies.",
+      "rationale": "Guardian variant of the Blades Sword, flagged NonPlayable+CantDrop."
+    },
+    {
+      "formid": "006457:Gray Fox Cowl.esm", "type": "WEAP", "editorid": "manny_GF_Weapon_BenSala_Scimitar",
+      "disposition": "skipped",
+      "skip_reason": "Non-playable / NPC-only weapon (Data.Flags = CantDrop, NonPlayable). Exists for an NPC's hand; no player-facing tier.",
+      "rationale": "Ben Sala's scimitar, NonPlayable+CantDrop."
+    },
+    {
+      "formid": "01761C:Gray Fox Cowl.esm", "type": "WEAP", "editorid": "manny_GF_Weapon_UmbraNonPlayable",
+      "disposition": "skipped",
+      "skip_reason": "Non-playable / NPC-only weapon (Data.Flags = CantDrop, NonPlayable). The NPC-hand copy of Umbra; the playable Umbra (00334E) is dispositioned separately.",
+      "rationale": "NonPlayable Umbra copy."
+    },
+    {
+      "formid": "02ACF9:Gray Fox Cowl.esm", "type": "WEAP", "editorid": "manny_GF_Weapon_ForgottenChaosBowNonPlayable",
+      "disposition": "skipped",
+      "skip_reason": "Non-playable / NPC-only weapon (Data.Flags = CantDrop, NonPlayable). NPC-hand copy of the Forgotten Chaos Bow; the playable bow (03A217) is dispositioned separately.",
+      "rationale": "NonPlayable bow copy."
+    },
+    {
+      "formid": "60A32B:Gray Fox Cowl.esm", "type": "WEAP", "editorid": "manny_GF_Weapon_DraukiirTorch",
+      "disposition": "skipped",
+      "skip_reason": "Trap/prop pseudo-weapon that is also Non-playable (Data.Flags = CantDrop, NonPlayable; Name 'Torch', dmg 2). A held prop, not a real weapon with a tier.",
+      "rationale": "Draukiir torch prop, NonPlayable."
+    },
+    {
+      "formid": "0021E2:Gray Fox Cowl.esm", "type": "AMMO", "editorid": "manny_GF_Ammo_ExtricationArrow",
+      "disposition": "patched",
+      "comparable": "Special/quest utility arrow - no material-tiered Requiem comparable applies (effect-driven, not a war arrow). Physics profile from Requiem's arrow standard (speed 3600, gravity 0.35, no Supersonic).",
+      "fields_to_set": {
+        "Weight": 0,
+        "Flags": "NonBolt",
+        "Damage": 1,
+        "Value": 0,
+        "Keywords": ["0917E7:Skyrim.esm"],
+        "Projectile": "0021E3:Gray Fox Cowl.esm"
+      },
+      "field_checklist": { "type": "arrow (Flags = NonBolt)", "damage": "1 kept (utility/quest arrow, effect-driven - NOT a tiered war arrow)", "weight_zero": "0 (was 0.1 - corrected; Requiem ammo weighs 0)", "value": "0 kept (quest item)", "vendor_arrow_kw": "VendorItemArrow present", "material/AP/weight_kw": "N/A - special utility arrow, no material tier; forcing an armor-piercing/weight tier would misrepresent it", "rfti_exclusion": "recommend adding RFTI_Exclusions_NoDamageRescale AD3B2D:Requiem.esp to protect the intentional dmg 1", "projectile": "0021E3 already on Requiem arrow profile (3600 / 0.35 / CanBePickedUp, no Supersonic) - verified, no change", "recipe": "none - quest item, not craftable" },
+      "ench_boundary": "The arrow's effect lives on its projectile's Explosion (0021F1 -> manny_GF_Explosion_ArrrowEffect). Explosion/MGEF design routed to requiem-magic-patching (magic lane).",
+      "rationale": "Arrow of Extrication is a special quest/utility arrow (the effect is carried by the projectile's Explosion, not by ammo damage). Kept the bespoke frame (dmg 1, value 0), zeroed the weight (0.1->0), kept VendorItemArrow; deliberately did NOT stamp a material/armor-piercing/ammo-weight tier because it is not a combat war-arrow. Recommend RFTI_Exclusions_NoDamageRescale to keep dmg 1. Projectile already Requiem-standard."
+    },
+    {
+      "formid": "0021E3:Gray Fox Cowl.esm", "type": "PROJ", "editorid": "manny_GF_Projectile_ExtricationArrow",
+      "disposition": "patched",
+      "comparable": "Requiem arrow projectile standard (arrow: Speed 3600, Gravity 0.35, Flags CanBePickedUp, no Supersonic, Type Arrow)",
+      "fields_to_set": {
+        "Speed": 3600,
+        "Gravity": 0.35,
+        "Flags": "CanBePickedUp",
+        "Type": "Arrow"
+      },
+      "field_checklist": { "arrow_profile": "Speed 3600 / Gravity 0.35 / CanBePickedUp / no Supersonic - ALREADY on Requiem arrow profile, verified, no change needed", "explosion_effect": "Explosion 0021F1 (effect) routed to magic lane" },
+      "ench_boundary": "Explosion 0021F1 -> manny_GF_Explosion_ArrrowEffect design routed to requiem-magic-patching.",
+      "rationale": "The Extrication Arrow's linked projectile. Rides with the AMMO (0021E2) disposition. Physics already match Requiem's arrow standard exactly (3600/0.35/CanBePickedUp, Supersonic already stripped) - verified, nothing to change. Its Explosion effect is a magic-lane concern."
+    },
+    {
+      "formid": "037E47:Gray Fox Cowl.esm", "type": "PROJ", "editorid": "manny_GF_Projectile_FastFireBall",
+      "disposition": "skipped",
+      "skip_reason": "Spell/missile projectile (Type = Missile, Speed 5000, Gravity 0), NOT ammo-linked - no AMMO in the plugin points at it. It belongs to a spell/magic effect, not a bow/crossbow. Out of the weapons/ammo lane.",
+      "rationale": "A fireball-style missile projectile for a spell effect. Routed to the magic lane (spell/MGEF projectile). Conscious skip - not a stray leftover.",
+      "routed_to": "requiem-magic-patching (magic lane)"
+    },
+    {
+      "formid": "866240:Gray Fox Cowl.esm", "type": "COBJ", "editorid": "manny_GF_CO_ScorchOfTheUndead",
+      "disposition": "patched",
+      "comparable": "REQ_Temper_Weapon_Steel_Sword 0F46AE:Skyrim.esm (grindstone; HasPerk Craftsmanship; 1 Steel Ingot)",
+      "fields_to_set": {
+        "CreatedObject": "851D0A:Gray Fox Cowl.esm",
+        "CreatedObjectCount": 1,
+        "WorkbenchKeyword": "088108:Skyrim.esm",
+        "Conditions[0]": "HasPerk EqualTo 1, Perk = 0CB40D:Skyrim.esm (REQ_Smithing_Craftsmanship)",
+        "Items[0]": "1 x 05ACE5:Skyrim.esm (Steel Ingot)"
+      },
+      "field_checklist": { "product": "851D0A ScorchOfTheUndead (steel sword) - weapon product, this lane", "workbench": "grindstone 088108 (temper)", "perk_gate": "Craftsmanship (steel tier)", "ingot": "1 Steel Ingot" },
+      "rationale": "Temper recipe for the steel sword Scorch of the Undead. Grindstone keyword correct; composed the Craftsmanship perk gate + 1 steel ingot from the Requiem steel-sword temper comparable."
+    },
+    {
+      "formid": "0340F3:Gray Fox Cowl.esm", "type": "COBJ", "editorid": "manny_GF_CO_GoldenScimitar",
+      "disposition": "patched",
+      "comparable": "REQ_Temper_Weapon_Steel_Sword 0F46AE:Skyrim.esm",
+      "fields_to_set": {
+        "CreatedObject": "02B7DC:Gray Fox Cowl.esm", "CreatedObjectCount": 1,
+        "WorkbenchKeyword": "088108:Skyrim.esm",
+        "Conditions[0]": "HasPerk EqualTo 1, Perk = 0CB40D:Skyrim.esm (Craftsmanship)",
+        "Items[0]": "1 x 05ACE5:Skyrim.esm (Steel Ingot)"
+      },
+      "field_checklist": { "product": "02B7DC GoldenScimitar (steel sword)", "workbench": "grindstone", "perk_gate": "Craftsmanship", "ingot": "1 Steel Ingot" },
+      "rationale": "Steel-sword temper recipe; Craftsmanship + 1 steel ingot."
+    },
+    {
+      "formid": "004DA0:Gray Fox Cowl.esm", "type": "COBJ", "editorid": "manny_GF_CO_AncientScimitar",
+      "disposition": "patched",
+      "comparable": "REQ_Temper_Weapon_Steel_Sword 0F46AE:Skyrim.esm",
+      "fields_to_set": {
+        "CreatedObject": "004D9F:Gray Fox Cowl.esm", "CreatedObjectCount": 1,
+        "WorkbenchKeyword": "088108:Skyrim.esm",
+        "Conditions[0]": "HasPerk EqualTo 1, Perk = 0CB40D:Skyrim.esm (Craftsmanship)",
+        "Items[0]": "1 x 05ACE5:Skyrim.esm (Steel Ingot)"
+      },
+      "field_checklist": { "product": "004D9F AncientScimitar (steel sword)", "workbench": "grindstone", "perk_gate": "Craftsmanship", "ingot": "1 Steel Ingot" },
+      "rationale": "Steel-sword temper recipe; Craftsmanship + 1 steel ingot."
+    },
+    {
+      "formid": "038585:Gray Fox Cowl.esm", "type": "COBJ", "editorid": "manny_GF_CO_BladeOfYokudaScimitar",
+      "disposition": "patched",
+      "comparable": "REQ_Temper_Weapon_Steel_Sword 0F46AE:Skyrim.esm",
+      "fields_to_set": {
+        "CreatedObject": "05F05D:Gray Fox Cowl.esm", "CreatedObjectCount": 1,
+        "WorkbenchKeyword": "088108:Skyrim.esm",
+        "Conditions[0]": "HasPerk EqualTo 1, Perk = 0CB40D:Skyrim.esm (Craftsmanship)",
+        "Items[0]": "1 x 05ACE5:Skyrim.esm (Steel Ingot)"
+      },
+      "field_checklist": { "product": "05F05D BladeOfYokuda (steel sword)", "workbench": "grindstone", "perk_gate": "Craftsmanship", "ingot": "1 Steel Ingot" },
+      "rationale": "Steel-sword temper recipe; Craftsmanship + 1 steel ingot."
+    },
+    {
+      "formid": "014951:Gray Fox Cowl.esm", "type": "COBJ", "editorid": "manny_GF_CO_ElvenClub",
+      "disposition": "patched",
+      "comparable": "REQ_Temper_Weapon_Elven_Mace 0F46C4:Skyrim.esm (grindstone; HasPerk Elven Smithing; 1 Refined Moonstone)",
+      "fields_to_set": {
+        "CreatedObject": "00341D:Gray Fox Cowl.esm", "CreatedObjectCount": 1,
+        "WorkbenchKeyword": "088108:Skyrim.esm",
+        "Conditions[0]": "HasPerk EqualTo 1, Perk = 0CB40F:Skyrim.esm (REQ_Smithing_ElvenSmithing)",
+        "Items[0]": "1 x 05AD9F:Skyrim.esm (Refined Moonstone)"
+      },
+      "field_checklist": { "product": "00341D ElvenClub (elven mace)", "workbench": "grindstone", "perk_gate": "Elven Smithing", "ingot": "1 Refined Moonstone" },
+      "rationale": "Elven-mace temper recipe; Elven Smithing perk gate + 1 refined moonstone."
+    },
+    {
+      "formid": "800B33:Gray Fox Cowl.esm", "type": "COBJ", "editorid": "manny_GF_CO_DawnOfMan",
+      "disposition": "patched",
+      "comparable": "REQ_Temper_Weapon_Dragonbone_Mace 017EA6:Dawnguard.esm (grindstone; HasPerk Draconic Blacksmithing; 1 Dragon Bone)",
+      "fields_to_set": {
+        "CreatedObject": "7D317B:Gray Fox Cowl.esm", "CreatedObjectCount": 1,
+        "WorkbenchKeyword": "088108:Skyrim.esm",
+        "Conditions[0]": "HasPerk EqualTo 1, Perk = 052190:Skyrim.esm (REQ_Smithing_DraconicBlacksmithing)",
+        "Items[0]": "1 x 03ADA4:Skyrim.esm (Dragon Bone)"
+      },
+      "field_checklist": { "product": "7D317B DawnOfMan (dragonbone mace)", "workbench": "grindstone", "perk_gate": "Draconic Blacksmithing", "ingot": "1 Dragon Bone" },
+      "rationale": "Dragonbone-mace temper recipe; Draconic Blacksmithing gate + 1 dragon bone. (Record was fully unpatched - winner was Gray Fox Cowl.esm.)"
+    },
+    {
+      "formid": "014953:Gray Fox Cowl.esm", "type": "COBJ", "editorid": "manny_GF_CO_ForgottenChaosBow",
+      "disposition": "patched",
+      "comparable": "REQ_Temper_Weapon_AncientNordHoned_Bow 00FB17 (grindstone; HasPerk Craftsmanship; 1 Steel Ingot)",
+      "fields_to_set": {
+        "CreatedObject": "03A217:Gray Fox Cowl.esm", "CreatedObjectCount": 1,
+        "WorkbenchKeyword": "088108:Skyrim.esm",
+        "Conditions[0]": "HasPerk EqualTo 1, Perk = 0CB40D:Skyrim.esm (Craftsmanship)",
+        "Items[0]": "1 x 05ACE5:Skyrim.esm (Steel Ingot)"
+      },
+      "field_checklist": { "product": "03A217 ForgottenChaosBow (ancient-nord-honed bow)", "workbench": "grindstone", "perk_gate": "Craftsmanship (per Requiem AncientNordHoned bow temper)", "ingot": "1 Steel Ingot" },
+      "rationale": "Bow temper recipe; matched the AncientNordHoned bow temper comparable (Craftsmanship + 1 steel ingot)."
+    },
+    {
+      "formid": "014950:Gray Fox Cowl.esm", "type": "COBJ", "editorid": "manny_GF_CO_Umbra",
+      "disposition": "patched",
+      "comparable": "Requiem artifact temper pattern (grindstone; HasPerk gate matching the weapon's resolved smithing tier; 1 ingot of that material)",
+      "fields_to_set": {
+        "CreatedObject": "00334E:Gray Fox Cowl.esm", "CreatedObjectCount": 1,
+        "WorkbenchKeyword": "088108:Skyrim.esm",
+        "Conditions[0]": "HasPerk EqualTo 1, Perk = PENDING (matches Umbra tier decision: Craftsmanship 0CB40D if Steel kept, or Daedric Smithing if material bumped)",
+        "Items[0]": "1 ingot matching the resolved material (Steel Ingot 05ACE5 if Steel kept)"
+      },
+      "field_checklist": { "product": "00334E Umbra (artifact 1H sword)", "workbench": "grindstone", "perk_gate": "tied to Umbra tier flag", "ingot": "tied to Umbra material decision" },
+      "rationale": "Temper recipe structure correct (grindstone, count 1). Perk gate + ingot depend on the Umbra tier/material decision flagged on the WEAP record (00334E). Recipe shape composed; final perk/ingot pending that resolution."
+    },
+    {
+      "formid": "014955:Gray Fox Cowl.esm", "type": "COBJ", "editorid": "manny_GF_CO_Yokuda",
+      "disposition": "skipped",
+      "skip_reason": "Routed to armor lane - product CreatedObject 041911:Gray Fox Cowl.esm is manny_GF_Armor_Yokuda (ARMO), crafted at the Armor Table (0ADB78 CraftingSmithingArmorTable). Not a weapon/ammo recipe.",
+      "rationale": "Armor crafting recipe (Yokudan armor), belongs to the armor lane."
+    },
+    {
+      "formid": "014954:Gray Fox Cowl.esm", "type": "COBJ", "editorid": "manny_GF_CO_GrayCowl",
+      "disposition": "skipped",
+      "skip_reason": "Routed to armor lane - product CreatedObject 017AE5:Gray Fox Cowl.esm is manny_GF_Armor_GrayCowl (ARMO, the Gray Cowl of Nocturnal), crafted at the Armor Table (0ADB78). Not a weapon/ammo recipe.",
+      "rationale": "Armor crafting recipe (the Gray Cowl), belongs to the armor lane."
+    }
+  ],
+  "reconciliation": {
+    "WEAP": { "patched": 11, "flagged": 1, "skipped": 5, "total": 17, "closes": true },
+    "AMMO": { "patched": 1, "flagged": 0, "skipped": 0, "total": 1, "closes": true },
+    "PROJ": { "patched": 1, "flagged": 0, "skipped": 1, "total": 2, "closes": true },
+    "COBJ": { "patched": 8, "flagged": 0, "skipped": 2, "total": 10, "closes": true },
+    "patched": 21, "flagged": 1, "skipped": 8, "total": 30, "closes": true
+  },
+  "notes": [
+    "DERIVATION DOCTRINE (the load-bearing call): melee weapon DAMAGE/CRIT are carried at Requiem's SOURCE tier (read via plugins=[\"Requiem.esp\"]), NOT the RftI live-winner value, because Requiem melee weapons are NOT RFTI-excluded and the Reqtificator rescales them each build (proof: REQ_Weapon_Iron_Sword source dmg 7 -> RftI winner dmg 42). Carrying the winner value would double-scale. This honors 'carry inputs, never hand-stamp Reqtificator outputs.' KEYWORDS, type-defined speed/reach, and material-tier VALUE are also read off Requiem source comparables.",
+    "BOWS are the exception: they carry RFTI_Exclusions_NoDamageRescale + NoBowSpeedRescale, so their source == final. The ForgottenChaosBow was derived at the final AncientNordHoned bow tier (dmg 60) and given the full REQ bow keyword set incl. both exclusions and NPCsUseAmmo. Its crit (7) was COPIED from the comparable, NOT computed as floor(dmg/2) - bows break the floor(dmg/2) rule.",
+    "ENCH boundary handled per record: BladesSword/AncientScimitar/GoldenScimitar carry Requiem's OWN balanced enchants (Paralyze6/Fear4/Fire3 via Requiem - Magic Redone.esp) and the DragonPriestStaff carries Requiem's own shock-wall staff enchant - NO magic-lane handoff for those. The modded enchants (Umbra Soul Trap, BladeOfYokuda, TheWithdrawal, Ocato, ForgottenChaosBow) and the Extrication Arrow's projectile Explosion are routed to requiem-magic-patching; only the weapon-side frame (charge/value) was derived here.",
+    "Two daggers (TheWithdrawal, Ocato) shipped with NO material keyword - a real gap that drives value/temper tier. Added WeapMaterialSteel (default from their damage band); noted as an assumption.",
+    "Umbra (00334E) is flagged, not force-classified: it is a genuine Daedric artifact (artifact keyword set, temper-only, not forge-craftable) but its dmg-24 / WeapMaterialSteel / crit-24 combination is internally inconsistent. Recommended option-a fields provided (Dawnbreaker-tier dmg 13, crit 6); the material keyword + temper perk gate (COBJ 014950) resolve together with that decision.",
+    "Clear author errors corrected onto Requiem tiers: ElvenClub (dmg 1 + value 4500 -> elven mace 11/195), DawnOfMan (value 1 + crit 0 -> dragonbone mace 16/8/5200), ForgottenChaosBow (vanilla-tuned dmg 14/speed 0.875/no REQ bow kws -> full AncientNordHoned bow profile). Named-unique values that were already in Requiem's range (steel scimitars at 300, Scorch 500) were KEPT per 'don't change a sensible author value unprovoked.'",
+    "All 8 weapon COBJs are grindstone TEMPER recipes (WorkbenchKeyword 088108 = CraftingSmithingSharpeningWheel); the mod ships NO forge recipes for these weapons (consistent with quest/unique/artifact items that temper but aren't forge-crafted). Perk gates derived from Requiem comparables: Craftsmanship 0CB40D + Steel Ingot 05ACE5 (steel swords + bow), Elven Smithing 0CB40F + Refined Moonstone 05AD9F (elven club), Draconic Blacksmithing 052190 + Dragon Bone 03ADA4 (Dawn of Man).",
+    "PROJ 037E47 (FastFireBall, Type=Missile) is not ammo-linked and is a spell projectile - consciously skipped to the magic lane, not dropped. PROJ 0021E3 (Extrication arrow) was already on Requiem's arrow physics profile - verified, no change.",
+    "Reqtificator masters note: patched melee/bow overrides reference Requiem forms (bow REQ keywords, temper perks) -> Requiem.esp is pulled as a master automatically; masters must be sorted on write. No REQ_NULL_* references were encountered in any patched field.",
+    "Leveled-list placement not enumerated in this lane; these are quest/unique/reward weapons - LVLI/placement is a requiem-leveled-list-patching concern.",
+    "READ-ONLY: no plugins created, no fields written. All values are derivations."
+  ]
+}
