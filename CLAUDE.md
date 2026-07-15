@@ -68,12 +68,14 @@ dev/   (SHARED dev lane — tracked since 2026-07-15 so both maintainers + their
 - **Worktree & merge discipline — start every change that will commit in a worktree.** Branch
   `claude/<name>` under `.claude/worktrees/<name>/`; the main repo folder stays on `main`, read-only
   except for landing. `main` is PR-protected by ruleset (raw pushes rejected; rebase-merge only);
-  landing = push → PR (the template's checklist is the convention) → **the other maintainer's
-  approving review** (the ruleset requires 1 approval; the repo admin can bypass via PR for a
-  solo-urgent landing — GitHub flags the bypass visibly, so it's a deliberate act, not a habit) →
-  green **`conventions` CI check** (manifests, 500-line cap, `name:`==folder, description cap, and a
-  publish-hygiene scrub of added lines) → merge → delete branch. Changes to this file get the same
-  gate — surface them, never self-commit. Check your branch at session start.
+  landing = push → PR (the template's checklist is the convention) → green **`conventions` CI
+  check** (manifests, 500-line cap, `name:`==folder, description cap, and a publish-hygiene scrub
+  of added lines) → merge → delete branch. **Review is by request, not by ruleset** (relaxed
+  2026-07-15 so either maintainer can land without the other): each maintainer merges their own
+  PRs freely, and *requests the other's review* when a change warrants eyes — doctrine/authority
+  changes, new skills, anything you'd want to know shipped if you were the other person. Agents:
+  a maintainer's explicit go is still the gate before you merge anything. Changes to this file get
+  the same flow — surface them, never self-commit. Check your branch at session start.
 - **Parallel landings collide in two files.** Two maintainers + agents cut worktrees from different
   points of `main`, and both `plugin.json` (the version bump) and `CHANGELOG.md` (the entry position)
   assume they know what shipped last. Rebase on latest `main` immediately before merge and re-check
