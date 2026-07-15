@@ -2,7 +2,7 @@
   "lane": "consumables",
   "skill_versions": "requiem-consumable-patching (pack 1.2.1)",
   "enumerated": { "INGR": 4, "ALCH": 1, "FLOR": 1, "COBJ": 10 },
-  "method_note": "Blinded fresh-patch simulation: every Gray Fox Cowl.esm record read with plugin=\"Gray Fox Cowl.esm\" (own version), never the live winner and never the existing Authoria patch. Requiem comparables (REQ_Alch_* MGEF standards via effect_chain, REQ_Poison_* / REQ_Ingredient_* shells) read as live winners = the authority. Core doctrine confirmed live: no Requiem plugin or Reqtificator touches ALCH/INGR/COBJ here, so these overrides are FINAL — field-correctness is entirely on this pass.",
+  "method_note": "Blinded fresh-patch simulation: every Gray Fox Cowl.esm record read with plugin=\"Gray Fox Cowl.esm\" (own version), never the live winner and never the existing Authoria patch. Requiem comparables (REQ_Alch_* MGEF standards via effect_chain, REQ_Poison_* / REQ_Ingredient_* shells) read as live winners = the authority. Core doctrine confirmed live: no Requiem plugin or Reqtificator touches ALCH/INGR/COBJ here, so these overrides are FINAL â€” field-correctness is entirely on this pass.",
   "records": [
     {
       "formid": "006A57:Gray Fox Cowl.esm",
@@ -327,7 +327,7 @@
     "closes": true
   },
   "notes": [
-    "Freshness probe PASS: houseCARL instance = ARR 2.0, profile 'Authoria - Requiem Reforged - NSFW Profile'; Iron Sword 012EB7 conflict_tree shows Requiem.esp in the override chain (winner Requiem for the Indifferent.esp). Live winner is the authority.",
+    "Freshness probe PASS: houseCARL instance = ARR 2.0, profile 'Authoria - Requiem Reforged'; Iron Sword 012EB7 conflict_tree shows Requiem.esp in the override chain (winner Requiem for the Indifferent.esp). Live winner is the authority.",
     "Blinding held: all 6 Gray Fox Cowl.esm balance targets (4 INGR + 1 ALCH + 1 FLOR) read with plugin=\"Gray Fox Cowl.esm\" own version. The existing 'Authoria - Patch - Gray Cowl of Nocturnal Requiem.esp' (which wins 7 of the 10 COBJs) was never read for derivation.",
     "Key structural finding: EVERY effect on all 4 INGR and the ALCH already points at a vanilla MGEF FormID that Requiem overrides IN PLACE (all resolve to REQ_Alch_* via resolve_names). This is the 'keep the links, rebalance the shell' case - zero effect rebuilds, and NOTHING routes to requiem-magic-patching. No genuinely new MGEF exists in this lane.",
     "The dominant fresh-patch correction across the INGR set is that the mod authored vanilla-scale magnitudes and durations (e.g. RestoreStamina mag 5 vs Requiem 1; FortifyArmorRating mag 2 vs Requiem 24; FortifySmithing dur 15/30 vs Requiem 60) and shipped every ingredient with auto-calc ON (Flags=0). Requiem standardizes duration per-MGEF and uses a discrete magnitude ladder; both derived live via effect_chain over Requiem - Alchemy Redone.esp carriers.",
