@@ -2,6 +2,12 @@
 
 All notable changes to the Authoria Requiem Patching Skills plugin. Versioning is [semantic](https://semver.org); the `version` in `authoria-requiem/.claude-plugin/plugin.json` is bumped on each release.
 
+## 1.2.1 — 2026-07-15
+
+Papercut fix: the router's missing LVSP row (the unfinished half of the 1.0.3 charter's D3 fold-in).
+
+- **Router (`requiem-patching`) gains the `LVSP` routing row** (SKILL.md table + `references/routing-table.md`) → `requiem-leveled-list-patching`, which has owned LeveledSpell since 1.0.3 (scope, workflow branch, bulk sweep, checklist). Until now an enumerated LVSP fell to the four-way catch-all and was flagged "no owner" — surfaced, never dropped, but the wrong disposition when an owner exists. The row carries the no-merge-toggle note (only LVLI/LVLN are Reqtificator-merged; LVSP resolves by plain conflict winner → hand de-level) and routes spell *design* to `requiem-magic-patching`. Body-only — no descriptions changed, no re-measure owed.
+
 ## 1.2.0 — 2026-07-15
 
 New domain skill (S3 of the 1.0.3 coverage-audit charter, decision D1): perk assignment gets a first-class owner, closing the audit's "PERK is a pack-level hole" finding.

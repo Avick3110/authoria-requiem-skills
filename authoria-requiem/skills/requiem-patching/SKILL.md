@@ -78,7 +78,7 @@ Work the grouped worklist top to bottom:
 | `AMMO` + ammo `PROJ` | `requiem-ammo-patching` | arrow/bolt ladders, AP tier, AmmoWeight, PROJ profile |
 | `RACE`, racial `SPEL`/`ARMA` | `requiem-race-patching` | playable vs creature, two-layer trait model, new-race recognition |
 | `NPC_` | `requiem-npc-patching` | fixed level, class, perks, trait bridge, bosses, followers (record-side) |
-| `LVLI`, `LVLN`, `CONT`, `ECZN` | `requiem-leveled-list-patching` | additive merge, tier by repetition, containers, zones |
+| `LVLI`, `LVLN`, `LVSP`, `CONT`, `ECZN` | `requiem-leveled-list-patching` | additive merge, tier by repetition, containers, zones; LVSP has no merge toggle — hand de-level (spell *design* stays with `requiem-magic-patching`) |
 | `MGEF`, `SPEL`, `ENCH`, `BOOK` (tomes), `SCRL`, `EXPL`, `HAZD` | `requiem-magic-patching` | school/tier/cost, HalfCostPerk classifier, three-layer split |
 | `INGR`, `ALCH` (potions, poisons, food, drink, alcohol), consumable `COBJ` | `requiem-consumable-patching` | class kits (potion/food/alcohol/drug/ingredient), value/weight/flags/keywords, cookpot recipes; the Reqtificator never rebalances consumables — the override is final. Genuinely new effect design still → `requiem-magic-patching` |
 | `SHOU`, `WOOP` | `references/shouts.md` + `requiem-magic-patching` | shout wrapper (3 words → 3 tier `SPEL` + recovery); the SHOU/WOOP frame is owned by `Requiem.esp` |

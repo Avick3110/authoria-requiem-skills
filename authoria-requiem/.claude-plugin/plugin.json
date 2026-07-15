@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "authoria-requiem",
   "displayName": "houseCARL - Authoria Requiem Skills",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Patch newly-added mods to be Requiem-consistent — derive stats, keywords, recipes, and leveled-list placement by comparing new content live against Requiem's own records via houseCARL, then emit a direct ESP override the Reqtificator integrates at build time. Requires houseCARL.",
   "author": { "name": "DrHeisen" },
   "keywords": ["skyrim", "requiem", "modding", "patching", "authoria", "housecarl"]
