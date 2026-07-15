@@ -40,6 +40,9 @@ README.md                          public overview + install (capability + roste
 CHANGELOG.md                       version history (the version itself lives in plugin.json)
 LICENSE                            MIT © DrHeisen
 .claude-plugin/marketplace.json    marketplace manifest (optional plugin-install path)
+.github/                           the collaboration layer: CI (workflows/ci.yml — the required
+                                   `conventions` check), the PR template (the landing checklist),
+                                   and the issue forms (skill bug / coverage gap)
 authoria-requiem/                  THE PLUGIN — the shipped artifact
   .claude-plugin/plugin.json       manifest; the `version` lives here (bump on release)
   skills/README.md                 skills index
@@ -82,6 +85,12 @@ dev/   (SHARED dev lane — tracked since 2026-07-15 so both maintainers + their
   2026-07-15; pre-existing `HCBR-<date>-<n>` ids in the CHANGELOG are historical.) Small dev-noticed
   follow-ups → `dev/BACKLOG.md`. Chartered work → `dev/plans/`. Session state →
   `dev/session-handoffs/` (write one at end of session).
+- **External reports (an .md report handed over via Discord or similar) don't get pasted straight
+  into an issue.** Triage first (valid? reproducible? duplicate of an open issue?), **scrub** —
+  a third party's report carries *their* machine paths, usernames, and setup details they never
+  agreed to publish — then file it via the matching form/title convention, largely verbatim, with a
+  provenance line (name the reporter only with their OK), and hand back the issue `#N` for the
+  reply.
 - **`dev/` is the SHARED dev lane — tracked and pushed (since 2026-07-15; Heisen is a collaborator).**
   Two maintainers + their agents work from one state, so:
   - **Authorship stamps are mandatory.** Every new handoff, plan, and findings doc carries, directly
@@ -104,8 +113,11 @@ dev/   (SHARED dev lane — tracked since 2026-07-15 so both maintainers + their
   ```
 
   (`/MIR` mirrors exactly — the live copy is disposable by design.) While testing unreleased edits,
-  temp-bump `plugin.json` to `<next>-dev` (e.g. `1.0.3-dev`), **uncommitted**; the real bump happens at
-  release. Same convention as houseCARL.
+  temp-bump `plugin.json` to `<next>-dev` (e.g. `1.0.3-dev`), **uncommitted** — CI rejects a
+  committed `-dev`; the real bump happens at release. Same convention as houseCARL. **This cuts both
+  ways in a two-maintainer repo:** after `git pull` lands the *other* maintainer's plugin changes,
+  your live install is stale until you re-run the sync + restart — check `plugin.json` against your
+  installed copy's when picking up work.
 - **Candor + no silent workarounds.** Hit a block that pressures a standard, the authority model, or a
   shipped behavior? Surface it with a recommendation; don't quietly work around it.
 
