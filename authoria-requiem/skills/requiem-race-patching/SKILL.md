@@ -86,6 +86,60 @@ Confirm authority is fresh, note the race-domain authority, then classify what y
    powers. Then pick the **vanilla Requiem analogue** — the race the mod is *meant to be* — read its
    Master-Patch winner, and branch to `## Workflow` A (humanoid) or B (creature).
 
+## Bulk pass protocol (whole-plugin jobs)
+
+When you're patching a whole plugin — routed here from the `requiem-patching` skill, or any job with
+more than a handful of races — the enumeration **is the work queue**, not a sample of it. Race packs
+hide their divergent record inside a uniform-looking family: the one furstock re-tiered off its
+siblings, the vampire counterpart carrying its own trait spell, the "cosmetic" race that still ships a
+full stat block. Those are exactly what a rebalance pass exists to catch.
+
+Open with the enumeration — one call, the whole plugin at once, and it doesn't write. Its fields are
+the triage matrix that drives the humanoid-vs-creature classification (First step §3) per row:
+
+```
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="RACE" \
+  fields=["Keywords","Flags","Starting","ActorEffect"]
+```
+
+Read `Keywords` per row to classify (`ActorTypeNPC 013794` → humanoid → Workflow A;
+`ActorTypeCreature`/`ActorTypeAnimal`/`ActorTypeTroll`… → creature → Workflow B), and read
+`Starting`/`ActorEffect`/`Flags` to see what balance-bearing content the record actually carries.
+
+**Every RACE record gets a disposition** — patched (note which workflow) or skipped (note a
+**per-record** reason). The only valid skip reason is that **no balance-bearing field differs from
+this record's vanilla or Requiem base, verified on that record** — none of `Starting` stats, regen,
+`UnarmedDamage`, `ActorEffect` abilities, `SkillBoost`s, resistances, or keywords. A skip is earned by
+a field comparison on that record, never inherited from a neighbour.
+
+**Visual, gimmick, reskin, and chargen-only races are not an exemption bin.** A race's cosmetic purpose
+does not exempt it — it still carries the same balance-bearing fields (a reskinned Nord still has a stat
+block, skill boosts, and an ability bundle that must match the analogue). The skip decision is per
+record by field comparison, never per category by label. This is the field failure this protocol closes:
+excluding "just a visual race" by unstated judgment ships it on non-Requiem stats.
+
+**`<Race>RaceVampire` counterparts enumerate as their own rows.** Each vampire variant is its own RACE
+record carrying its own `REQ_Trait_Vampire_<Race>` spell, so it gets its own disposition — patched
+against the analogue's *vampire* record, or skipped by its own field comparison. Never fold it in as a
+rider on the base-race patch; a base race that's field-complete does not make its vampire counterpart so.
+
+**Patched means field-complete, not merely touched.** A record counts as *patched* only when the
+per-record field **Checklist** (below) passes for it — every balance-bearing field brought onto the
+analogue's standard. Touching one field and moving on leaves it half-patched, which the reconciliation
+count won't surface unless "patched" is held to the checklist.
+
+Close the pass with a **reconciliation count — patched + skipped = enumerated.** If the two sides don't
+add up, a record fell through; find it before you call the type done.
+
+**Never extrapolate across same-prefix race variants or playable/vampire pairs.** A run of
+`…FurstockRace0#`, a `<Race>Race`/`<Race>RaceVampire` pair, or a troll family *look* uniform — but the
+divergent sibling is the whole point of the pass. Read each variant's **own** record: the frost troll
+(`TrollFrostRace 013206`) carries **H750** where the base troll (`TrollRace 013205`) carries **H300**,
+with its own per-variant resist and healing traits (`Resist_TrollFrost`/`Healing_TrollFrost`, not the
+base troll's). The trait *structure* transfers across the family; the *numbers and per-variant spells*
+must be read off the sibling, never inferred from it. Reading the outlier costs one query; missing it
+ships a race on the wrong stats.
+
 ## Workflow
 
 Real call shapes below; the full copy-ready set is in `references/housecarl-recipes.md`, and
@@ -287,6 +341,10 @@ winner is authority over `Races.md`** when they disagree.
 
 Before finishing a race override, confirm:
 
+- [ ] **Whole-plugin job:** every enumerated RACE dispositioned — patched (the field checklist below
+      passed for it) or skipped with a per-record field-comparison reason (visual/gimmick is not a
+      reason); `<Race>RaceVampire` counterparts dispositioned as their own rows; counts reconcile
+      (patched + skipped = enumerated); no variant-pair extrapolation.
 - [ ] **Stats** on the analogue's standard: `Starting` (H/M/S), `Regen`, `BaseCarryWeight`,
       `UnarmedDamage` (`UnarmedReach` matters only for humanoids).
 - [ ] **Skill bonuses** (playable) — the six/seven `SkillBoost` entries match the analogue.

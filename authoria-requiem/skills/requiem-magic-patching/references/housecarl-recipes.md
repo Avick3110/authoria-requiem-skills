@@ -6,6 +6,7 @@ originals are never touched. The patch is later run through the Reqtificator.
 
 ## Contents
 
+- Coverage audit (whole-plugin bulk pass)
 - A — Find the comparable (by school/tier/delivery)
 - B — Read the comparable's cost, charge, effects, keywords, flags
 - C — Read a comparable's MGEF (design + keyword vocab)
@@ -16,6 +17,30 @@ originals are never touched. The patch is later run through the Reqtificator.
 - H — Patch a spell tome (BOOK)
 - I — Masters & REQ_NULL hygiene
 - J — Verify the read-back
+
+## Coverage audit (whole-plugin bulk pass)
+
+Before any per-record work on a whole-plugin job, sweep **each record type as its own coverage
+denominator** — one call per type, the whole plugin at once (full doctrine: the skill body's *Bulk pass
+protocol*). None of these writes:
+
+```
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="Spell" \
+  fields=["EditorID","HalfCostPerk","BaseCost","Effects"]
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="MagicEffect" \
+  fields=["EditorID","MagicSkill","ResistValue","Keywords","Flags"]     # MGEF first-class, never reached only via spells
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="ObjectEffect" \
+  fields=["EditorID","EnchantType","CastType","EnchantmentCost","Effects"]
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="Scroll" fields=["EditorID","Value","Effects"]
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="Book"   fields=["EditorID","Teaches","Value","Weight"]   # tomes = Teaches present
+```
+
+Give every FormID from each enumeration a disposition (patched → which workflow below, or skipped → the
+reason), verified per record — never extrapolated across a rank chain, element triple, enchant-tier run,
+or tome-value ladder. **"Patched" counts only when that record's field checklist passes** (field-complete,
+not merely touched). Close each type with a reconciliation count: patched + skipped = enumerated. Then
+**MGEF cross-check** — reconcile the MGEFs referenced by the spells you patched against the enumerated
+`MagicEffect` set, so no patched spell is left with an undispositioned modded effect.
 
 ## A — Find the comparable
 
@@ -54,7 +79,8 @@ A non-null `VirtualMachineAdapter` means a `Nox_*` script → route to `requiem-
 
 ## D — Patch an existing modded spell (the common case)
 
-Most magic work is rebalancing a mod's spell, not creating one. Set the four core fields from the
+Rebalancing an existing modded spell is the common per-record move (a whole-plugin job runs the
+*Coverage audit* above first, then this on each record it enumerates). Set the four core fields from the
 comparable — `BaseCost`, `ChargeTime`, `HalfCostPerk` (the school+tier classifier), and the effect
 magnitudes:
 

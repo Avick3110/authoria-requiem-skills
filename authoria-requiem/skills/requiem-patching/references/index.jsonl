@@ -18,3 +18,4 @@
 {"topic": "standing stones / birthsigns — ConstantEffect ability spell, player-only", "file": "standing-stones.md", "section": "all"}
 {"topic": "perks/skills/leveling — hook existing trees, player-exclusive perk FormIDs", "file": "perks-skills.md", "section": "all"}
 {"topic": "economy — value ladders, round-to-5, record-driven vendor chests, no pricing config", "file": "economy.md", "section": "all"}
+{"topic": "catch-all disposition no record type silently dropped routed gap-reference cosmetic-skip with reason flagged no-owner to user unlisted unrecognized types top-level reconciliation", "file": "routing-table.md", "section": "Catch-all disposition — no type is silently dropped"}

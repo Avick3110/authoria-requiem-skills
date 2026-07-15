@@ -25,8 +25,13 @@ housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="NPC_" \
 ```
 
 Give every FormID from the enumeration a disposition (patched → which workflow below, or skipped →
-the reason), verified per record — never extrapolated across a same-prefix EditorID family. Close
-with a reconciliation count: patched + skipped = enumerated.
+the reason), verified per record — never extrapolated across a same-prefix / shared-`Template` /
+shared-`Class` family. **"Patched" means the per-record field checklist passed on *that* record**
+(level, flags, class, perks, spells, `PlayerSkills` / stat offsets as its archetype needs) — not merely
+that the record was touched. Close with a reconciliation count: patched + skipped = enumerated. Then
+**re-run query 1 as a drain check** — it must come back empty or return only intended keepers
+(followers keep `PCLevelMult`); a non-follower still on it means a `LevelMult` was never removed, so
+find and de-level it before closing.
 
 ## A — Re-balance a standalone combatant (replicate the analogue's fields)
 

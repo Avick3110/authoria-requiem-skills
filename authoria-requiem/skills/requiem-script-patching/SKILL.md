@@ -35,6 +35,66 @@ Reqtificator's output wins. Full doctrine: the `requiem-patching` skill's
 
 Then **decide whether a script is even needed** (the gate below). Don't attach Papyrus reflexively.
 
+## Bulk pass protocol (whole-plugin jobs)
+
+Routed here from the `requiem-patching` skill for a whole mod, the script layer has a coverage trap
+the record domains don't: **no field says "this record needs a script."** Every other domain
+enumerates its record type and dispositions each row; here the candidate-finder is pure judgment, so a
+special-mechanic spell whose script you never think to look for simply never enters a queue — and "the
+modded spell casts but does nothing" ships. Build a denominator with two sweeps *before* you
+disposition anything. Neither sweep writes.
+
+### Sweep (a) — what already carries a script
+
+Enumerate every record in the mod that already has a `VirtualMachineAdapter`, so no attached script
+goes unexamined. Scripts hide on non-obvious hosts a type-based triage waves through as cosmetic —
+QUST result scripts, ACTI activators, FURN crafting stations — not just the MGEF/BOOK the runtime map
+names. A single cross-type VMAD presence sweep isn't derivable from the recipes: the NPC skill's
+query-1 presence test keys off a *scalar* union arm (`LevelMult >= 0`), and `VirtualMachineAdapter` is
+a struct with no scalar to compare. So sweep per type and keep the rows that report a VMAD:
+
+```
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="MGEF" fields=["VirtualMachineAdapter"]
+# repeat for type = BOOK, ACTI, FURN, QUST — the runtime-map hosts plus the non-obvious ones.
+# A row with a VirtualMachineAdapter present is a hit; an (absent) row drops out.
+```
+
+Disposition every hit:
+- **working modded script** — the mod's own functioning mechanic → **preserve** (rebalance
+  record-side only; don't bolt a Nox equivalent over it, per *Judgment*).
+- **reuse-Requiem-runtime candidate** — a mechanic that should ride a `Nox_*`/`REQ_*` script → queue
+  for the reuse path (Workflow 2).
+- **incidental vanilla carry** — a vanilla FX/quest script inherited with a reused MGEF FormID (e.g.
+  `MG01FireEffectScript`) → **leave** (not a mechanic you add or strip).
+- **`REQ_NULL_*` in a property/reference** → **strip** (the masters/`REQ_NULL` rule).
+
+### Sweep (b) — what carries no script but needs one
+
+The records that cast-but-do-nothing carry no VMAD yet, so sweep (a) can't see them. Build their
+denominator from named proxies handed over by the other domain passes — not from judgment:
+- every **MGEF/SPEL the magic pass flagged as a special mechanic** (bound weapon, teleport,
+  mind-control, weather, summon-transform, multi-spell…) — the `requiem-magic-patching` hand-off list.
+- every **BOOK** in the plugin (multi-spell-tome check — a tome teaching several spells needs
+  `Nox_TomeMultipleSpells`; a single-spell tome needs nothing).
+- every **follower `NPC_`** (follower-system registration — record-side factions alone don't register it).
+
+```
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="BOOK"     # every tome → multi-spell check
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="SPEL" fields=["EffectList"]  # cross-check the magic pass's special-mechanic flags
+```
+
+Disposition every candidate:
+- **script attached** — cloned a `Nox_*`/`REQ_*` VMAD onto it (Workflow 2 or 4).
+- **marker-keyword reused** — a `Nox_KW_*`/`REQ_List_*` marker the existing runtime scans; no VMAD.
+- **confirmed no-script-needed** — stated per record (a plain damage/heal/buff effect; a single-spell
+  tome; a vanilla-or-Requiem-aware follower that auto-registers). This verdict is per record, never
+  inherited from a sibling.
+
+**Close each sweep with a reconciliation count — dispositioned = enumerated.** A special-mechanic
+record that never landed in either queue is exactly the "spell casts but does nothing" failure this
+protocol exists to catch; if the counts don't add up, find the missing record before calling the pass
+done.
+
 ## Workflow
 
 ### 1. The script decision gate
@@ -79,6 +139,22 @@ behave like one of them, you have two complementary levers, and you usually want
    `Nox_KW_*` family — see `requiem-magic-patching`'s `keywords.md`) or membership in the right
    `REQ_List_*`/FormList, and the existing runtime picks it up. Prefer this when it exists — no VMAD
    to manage.
+
+**A family of special-mechanic records is N rows, not one.** Sibling spells that share a single Nox
+script — a set of teleport spells, a spread of bound-weapon effects, several charm variants — carry
+the *identical* script name, but their object properties differ per record: `Mark`/`Park` point at
+different markers, `BoundAbility` at a different summon, `CharmFaction` at a different faction. Verify
+and fill each sibling's properties on its own record; never confirm one sibling's attachment and then
+clone its property fills onto the rest, or every copy teleports to the same marker or summons the same
+weapon.
+
+**Disposition every declared property, not just the ones you notice.** List the `.psc`'s declared
+`Property` set — from the script source under `…\scripts\source\Nox_*.psc`, or from the comparable's
+`depth=3` VMAD read — and account for each one individually: a **fill with your own form** (your Mark,
+your bound ability), an **intentionally-shared Requiem form** (some gates must stay on Requiem's form —
+a `MysticInfusion` perk, a shared `XarrianCell` — don't repoint these), or an **array with the right
+member count** (`SpellsToLearn`, `BoundAbility`, `WeatherList` need N members, not one). On read-back,
+none may be empty and none may sit unintentionally at the comparable's form.
 
 Most Nox scripts use levers in combination: the script on the effect does the work, but it reads
 properties (spell arrays, perks, activators) that you must point at the right forms. Read the script
@@ -165,9 +241,15 @@ See `references/vmad-and-compile.md` for the `VirtualMachineAdapter` field struc
 ## Checklist
 
 - [ ] Ran the freshness probe (Iron Sword's chain contains `Requiem.esp`).
+- [ ] **Whole-plugin job:** both coverage sweeps run — VMAD-present records (sweep a, across MGEF /
+      BOOK / ACTI / FURN / QUST) and needs-a-script proxies (sweep b: the magic pass's flagged
+      special-mechanic MGEF/SPEL, every BOOK, every follower `NPC_`); each hit dispositioned; counts
+      reconcile (dispositioned = enumerated).
 - [ ] Confirmed a script is actually needed (special mechanic / follower) — not a plain effect.
 - [ ] Reused Requiem's `Nox_*`/`REQ_*` script + marker where one exists, before considering authoring.
-- [ ] Every VMAD object property repointed to the patch's own forms; read back and verified.
+- [ ] Every declared VMAD property dispositioned — filled with your own form, intentionally shared with
+      Requiem, or an array at the right member count; none left empty or unintentionally at the
+      comparable's form on read-back. For a shared-script family, each sibling verified on its own record.
 - [ ] Follower: in the Requiem follower factions (record-side) **and** registered with the bridge
       quest/alias (runtime-side) if it's a major custom follower.
 - [ ] Any compiled `.pex` produced by `housecarl_compile_script` with no errors; `.psc` checked

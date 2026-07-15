@@ -69,7 +69,10 @@ Every addon normalizes its tomes to the same tier ladder, regardless of the mod'
 
 ## Round-trip — reproduce Ice Spike (T2 frost) from the Firebolt comparable
 
-A same-tier cross-element reproduction, built from scratch and diffed against the live winner. Take the tier-2 fire bolt `REQ_Destruction2_Fire_Aimed` (Firebolt)
+A same-tier cross-element reproduction, built from scratch and diffed against the live winner. **This is a
+*validation* exercise — proof the recipe reproduces a known Requiem spell — not license to patch a real
+element triple by reading one member and swapping the element on the rest. When you patch a family for
+real, read each member's own record (the skill body's *Bulk pass protocol*).** Take the tier-2 fire bolt `REQ_Destruction2_Fire_Aimed` (Firebolt)
 as the comparable and reproduce the tier-2 frost bolt `REQ_Destruction2_Frost_Aimed` (Ice Spike),
 changing only the element-specific pieces:
 

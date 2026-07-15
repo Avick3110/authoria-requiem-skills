@@ -84,10 +84,12 @@ summon, the level-1 quest attacker sitting among a dozen near-identical guards. 
 outliers are exactly what a rebalance pass exists to catch — and the fastest way to ship them unpatched
 is to read one member of a same-prefix EditorID family and extrapolate to the rest.
 
-**Never extrapolate across same-prefix EditorIDs.** `AlikrEncBandit01..06`, a `Thalmor*` pair, a run of
-`…Guard##` *look* uniform, but a modder hand-tweaks individuals inside the family — the one carrying its
-own stats is the record that needs you. Reading the outlier costs one query; missing it ships a vendor
-that never got de-levelled, or a boss that dies to one arrow in someone else's game.
+**Never extrapolate across a uniform-looking family — a same-prefix EditorID, a shared `Template`, or a
+shared `Class`.** `AlikrEncBandit01..06`, a `Thalmor*` pair, a run of `…Guard##`, a block that all
+template onto one base, or a group that all carry one `Class` *look* uniform, but a modder hand-tweaks
+individuals inside the family — the one carrying its own stats is the record that needs you. Reading the
+outlier costs one query; missing it ships a vendor that never got de-levelled, or a boss that dies to
+one arrow in someone else's game.
 
 Open with the two coverage queries — one call each, the whole plugin at once, and neither writes:
 
@@ -114,12 +116,22 @@ Open with the two coverage queries — one call each, the whole plugin at once, 
    Read `Class` + `AIData.Aggression` + `TemplateFlags` per row to disposition each NPC (which workflow,
    or which skip category) instead of hand-picking batch reads.
 
-**Every FormID gets a disposition.** Walk the full enumeration: each record is **patched** (note which
-workflow) or **skipped** (note the reason — civilian / summon / already-templated / scene actor), and a
-skip is verified on *that* record, never inherited from a neighbour. Close the pass with a
-**reconciliation count — patched + skipped = enumerated.** If the two sides don't add up, a record fell
-through; find it before you call the type done. (This is the per-record coverage the `requiem-patching`
-skill's integration checklist gates on for high-count types.)
+**Every FormID gets a disposition, and "patched" is a field verdict — not a record-touch.** Walk the
+full enumeration: each record is **patched** (note which workflow) or **skipped** (note the reason —
+civilian / vendor / child / summon / already-templated / quest or scene actor; the fuller skip taxonomy
+is in `references/identification.md`), and a skip is verified on *that* record, never inherited from a
+neighbour. A record counts **patched only when the per-record field checklist (`## Checklist`) passes
+for it** — level *and* flags *and* class *and* perks *and* spells *and* stat offsets, as its archetype
+requires. In a bulk job that checklist runs **for every enumerated record, not once for the job**: a
+record that got a fixed level but never got its perks, spells, `PlayerSkills`, or stat offsets is **not
+patched, it's half-done**, and the count must never close green over it.
+
+Close the pass with a **reconciliation count — patched (field checklist passed) + skipped =
+enumerated.** If the two sides don't add up, a record fell through; find it before you call the type
+done. Then **re-run query 1 as a drain check**: it must come back empty, or return only intended keepers
+(followers, which keep `PCLevelMult`). A non-empty result carrying any non-follower means a `LevelMult`
+was never removed on that actor — find it and de-level it before you close. (This is the per-record
+coverage the `requiem-patching` skill's integration checklist gates on for high-count types.)
 
 ## Workflow
 
@@ -176,17 +188,27 @@ housecarl_bulk_apply into="Requiem NPC patching" operations=[
   {formid:"<npc>", field_path:"DefaultOutfit",value:"<REQ outfit>:Requiem.esp"},     # gear drives much of the difficulty
   {formid:"<npc>", field_path:"Perks", verb:"ReplaceAll", values:["<combat perks from the analogue>"]},
   {formid:"<npc>", field_path:"ActorEffect", verb:"Add", value:"93369F:Requiem.esp"} # REQ_Trait_Tempering_* (tempers its gear)
+  # AutoCalc ON (this bandit): PlayerSkills derive from class + level — verify, don't hand-stamp.
+  # A creature/boss (AutoCalc OFF): also set PlayerSkills — the analogue's explicit per-skill values.
+  # A caster: also carry the analogue's castable spells (ActorEffect spell entries, or the template SpellList).
 ]
 ```
 
 **Class is the balance spine** — Requiem's `REQ_Class_*` set has `StatWeights` that distribute
 AutoCalc stats by role (Bandit Health 4/Stamina 6, Guard 5/5, **Slighted 1/0/0** = the weak tier).
 Pick the class whose role + weapon + strength matches; the rest of the difficulty follows from class,
-level, perks, and gear. Combat perks are **vanilla `Skyrim.esm` skill perks** the analogue carries
+level, perks, and gear. With `AutoCalcStats` on, the actor's **`PlayerSkills`** (its per-skill
+one-handed / block / destruction values) derive from class + level — verify them, don't hand-stamp. A
+creature or boss with AutoCalc **off** carries explicit `PlayerSkills` instead: copy the analogue's
+per-skill values, because they decide how hard a de-levelled enemy actually hits, blocks, and casts.
+Combat perks are **vanilla `Skyrim.esm` skill perks** the analogue carries
 (escalating with tier) plus, on stronger actors, Requiem skill-tree perks (`REQ_OneHanded_*`,
 `REQ_Conjuration_Empower_*`); copy the analogue's set. The `ActorEffect` carries Requiem
 **`REQ_Trait_Tempering_<role>_<tier>`** marker spells that temper the NPC's worn gear — match the
-analogue's. **Do not hand-add the armor-penetration / armor-weight / arrow-recovery perks or the
+analogue's. A **caster** needs more than that trait: carry the analogue's actual **castable spell
+list** — its `ActorEffect` spell entries, or the `SpellList` it inherits through its template —
+because the tempering/resist trait alone is not the magic kit, and a caster with no spells carried just
+stands there. **Do not hand-add the armor-penetration / armor-weight / arrow-recovery perks or the
 racial trait perk — those are Reqtificator-assigned** (see `## Common mistakes` and
 `references/perks.md`).
 
@@ -297,18 +319,25 @@ The mechanics are easy; the judgment is **identification** — what the NPC is, 
 
 Before finishing an NPC override, confirm:
 
-- [ ] **Whole-plugin job:** every enumerated NPC dispositioned (patched, or skipped with a reason);
-      counts reconcile (patched + skipped = enumerated); no same-prefix EditorID extrapolation.
+- [ ] **Whole-plugin job:** every enumerated NPC dispositioned — **patched = this checklist passed on
+      that record**, or skipped with a reason; counts reconcile (patched + skipped = enumerated); query 1
+      re-run drains to empty/followers-only; no same-prefix / shared-`Template` / shared-`Class`
+      extrapolation.
 - [ ] **Role identified** and it's a combatant (not a civilian/helper/summon).
 - [ ] **Level** fixed + `PCLevelMult` removed (followers: kept).
 - [ ] **Flags** correct (Respawn for generic spawns; Unique/Protected/Essential by role; AutoCalcStats
       for humanoids, explicit Health/Magicka/Stamina offsets for creatures/bosses).
+- [ ] **PlayerSkills** consistent with the archetype: AutoCalc-on humanoids derive them from class +
+      level (verify); AutoCalc-off creatures/bosses carry the analogue's explicit per-skill values.
 - [ ] **Class** = the role-correct `REQ_Class_*`; **CombatStyle** matches the role.
 - [ ] **Perks** = the analogue's combat perks (vanilla + Requiem skill perks); **no** Reqtificator-
       assigned perks hand-added.
 - [ ] **Trait bridge:** recognized-race creature → nothing (Reqtificator handles it); new-race
       creature → retarget `Race` or hand-add the physique perk.
 - [ ] **ActorEffect** = the analogue's `REQ_Trait_Tempering_*` (and a `REQ_Trait_*` for a boss).
+- [ ] **Caster spell kit:** a caster carries the analogue's actual castable spells (its `ActorEffect`
+      spell entries, or the `SpellList` inherited through its template) — not just the tempering/resist
+      trait.
 - [ ] **Spells/perks:** modded ones augmented (not removed); vanilla ones replaced with the analogue.
 - [ ] **DefaultOutfit / DeathItem** links set to the Requiem analogue's (contents → the `requiem-leveled-list-patching` skill).
 - [ ] **Template + TemplateFlags** set when templating onto a Requiem base.

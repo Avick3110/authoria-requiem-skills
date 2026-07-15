@@ -74,6 +74,61 @@ Confirm houseCARL's authority is fresh, then identify what you are patching.
    - **Alchemy effect** (potion/poison MGEF) → the alchemy section.
    - **Scroll / shout** → the `## Notes` sub-cases (scrolls mirror their spell; shouts are niche).
 
+## Bulk pass protocol (whole-plugin jobs)
+
+When you're patching a whole plugin — routed here from the `requiem-patching` skill, or any job with
+more than a handful of magic records — the enumeration **is the work queue**, not a sample of it. Magic
+is the most uniform-*looking* domain in Requiem, and that surface uniformity is the trap. Its records
+come in **family shapes**: rank chains (Novice→Master of one spell line), element triples (the
+Fire/Frost/Shock variants of one spell), enchant tiers 01–06 of one effect, and tome values on a fixed
+ladder. A modder hand-tunes individuals inside those families, so the fastest way to ship a spell
+unbalanced is to read one member of a family and extrapolate the numbers to the rest.
+
+**Never extrapolate across a family — read each member's own record before you patch it.** A rank chain,
+an element triple, an enchant-tier run, and a tome-value ladder each *look* mechanical, but the tier-4
+frost variant may carry its own cost, or one tome in the ladder its own price. Reading the member costs
+one query; extrapolating ships the T3 shock bolt with the fire bolt's magnitude, or an un-priced tome.
+
+Sweep **each record type as its own coverage denominator** — one call per type, the whole plugin at
+once, and none of these writes:
+
+```
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="Spell" \
+  fields=["EditorID","HalfCostPerk","BaseCost","Effects"]
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="MagicEffect" \
+  fields=["EditorID","MagicSkill","ResistValue","Keywords","Flags"]
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="ObjectEffect" \
+  fields=["EditorID","EnchantType","CastType","EnchantmentCost","Effects"]
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="Scroll" \
+  fields=["EditorID","Value","Effects"]
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="Book" \
+  fields=["EditorID","Teaches","Value","Weight"]
+```
+
+**Enumerate MGEF first-class.** The `MagicEffect` sweep is its own denominator — never reach an MGEF
+only through the spells that reference it. A spell's effects are records in their own right, and the
+single most common coverage failure here is a spell whose cost + `HalfCostPerk` you patched while its
+modded MGEF's magnitude/keywords/flags never got rebalanced. Filter the `Book` sweep to **tomes** — the
+ones with `Teaches` present; a non-tome BOOK (a readable, a recipe) is out of scope.
+
+**Every record gets a disposition.** Walk each type's full enumeration: each record is **patched** (note
+which workflow) or **skipped** (name the reason — a pure-FX or art-carrier MGEF that carries no balance,
+a non-tome BOOK, a cosmetic-only effect), and a skip is verified on *that* record, never inherited from a
+neighbour. **"Patched" counts only when that record's field Checklist (`## Checklist`) passes for it** —
+patched means field-complete (school, cost, `HalfCostPerk`, keywords, effect shape all set from the
+comparable), not merely touched. A record you set a cost on but never gave its `HalfCostPerk` is not
+patched; it's half-done, and it belongs on the still-open side of the count.
+
+Close each type with a **reconciliation count — patched + skipped = enumerated** — for Spell,
+MagicEffect, ObjectEffect, Scroll, and tome-BOOK each. If a type's two sides don't add up, a record fell
+through; find it before you call the type done.
+
+**MGEF cross-check** (closes "spell patched but its effects never rebalanced"). After the per-type
+counts, reconcile the set of MGEFs **referenced by the spells you patched** against the enumerated
+`MagicEffect` set: every modded effect a patched spell casts must itself be dispositioned. A spell is
+not done while any of its own modded effects is undispositioned. (This is the per-record coverage the
+`requiem-patching` skill's integration checklist gates on for high-count types.)
+
 ## Workflow
 
 ### 1 — Identify school, tier, and delivery
@@ -177,12 +232,15 @@ author new perk trees** (`references/perks-and-tomes.md`).
 
 ### 7 — The spell tome (BOOK) and scrolls
 
-If the mod ships a tome, patch the BOOK: keep `Type = BookOrTome` and `Teaches` → the spell, set
-`Weight = 1`, and set **`Value` to Requiem's tier ladder** — Novice 100 / Apprentice ~300–400 / Adept
-600 / Expert 800 (≤1000) / Master 2000 (verified identical across every MR-patch addon). The tome has
-no learn-gate field; learning is gated by the spell's `HalfCostPerk` tier. **Placement of the tome in
-a vendor/loot list → `requiem-leveled-list-patching`.** A **scroll** (SCRL) is a one-shot cast of the
-spell at its tier: `Weight 0.5`, a modest tier-scaled `Value`, charge mirroring the spell.
+**For every spell you patch, reverse-resolve its teaching tome and price it — an un-priced tome leaves
+the spell half-patched.** The tome value is part of the spell's balance, not an optional extra: a patched
+SPEL whose BOOK still carries the mod's original price is not done. Find the BOOK that `Teaches` the
+spell, keep `Type = BookOrTome` and `Teaches` → the spell, set `Weight = 1`, and set **`Value` to
+Requiem's tier ladder** — Novice 100 / Apprentice ~300–400 / Adept 600 / Expert 800 (≤1000) / Master
+2000 (verified identical across every MR-patch addon). The tome has no learn-gate field; learning is
+gated by the spell's `HalfCostPerk` tier. **Placement of the tome in a vendor/loot list →
+`requiem-leveled-list-patching`.** A **scroll** (SCRL) is a one-shot cast of the spell at its tier:
+`Weight 0.5`, a modest tier-scaled `Value`, charge mirroring the spell.
 
 ### 8 — Enchantments and staves
 
@@ -272,6 +330,10 @@ checked — rather than inventing a number.
 
 Before finishing a magic override, confirm:
 
+- [ ] **Whole-plugin job:** every enumerated SPEL/MGEF/ENCH/SCRL/tome-BOOK dispositioned (patched = its
+      per-record field Checklist passed; or skipped with a named reason); counts reconcile per type
+      (patched + skipped = enumerated); **MGEF cross-check** done (every effect a patched spell casts is
+      dispositioned); no rank-chain / element-variant / enchant-tier extrapolation.
 - [ ] **School** set on the MGEF `MagicSkill` (the school ActorValue); `ResistValue` matches the element.
 - [ ] **CastType + TargetType** match the delivery; SPEL and MGEF agree.
 - [ ] **BaseCost** taken from the comparable (explicit, `ManualCostCalc`); **ChargeTime** on the tier ladder.
@@ -281,7 +343,9 @@ Before finishing a magic override, confirm:
 - [ ] **`HalfCostPerk`** = the correct `REQ_<School>_Mastery_<tier>` perk; specialization keyword if needed.
 - [ ] **No `RFTI_All_*` rescaling perk** hand-added; **special-mechanic `Nox_*` script routed to the `requiem-script-patching` skill.**
 - [ ] **Enchantment:** weapon = per-cast `EnchantmentCost` by tier (pool on the WEAP); apparel = constant, no pool.
-- [ ] **Spell tome:** `Teaches` → spell, `Value` on the tier ladder, Weight 1. **Placement → `requiem-leveled-list-patching` skill.**
+- [ ] **Spell tome (per patched spell):** every SPEL you patched has its teaching BOOK reverse-resolved
+      and `Value` priced to the tier ladder (Weight 1); an un-priced tome leaves the spell half-patched.
+      **Placement → `requiem-leveled-list-patching` skill.**
 - [ ] **Masters** include `Requiem.esp` / MR (reference a real Requiem form); **no `REQ_NULL_*` remains.**
 
 ## Notes

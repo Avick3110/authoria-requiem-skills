@@ -49,12 +49,74 @@ Confirm houseCARL's authority is fresh, then identify what you are patching.
    - **Plain melee or bow/crossbow** → the main `## Workflow` below.
    - **Enchanted weapon** (it has an `ObjectEffect`) → workflow, then the enchantment section of
      `references/enchanted-and-staves.md` (Template links the plain base; `EnchantmentAmount` is
-     the charge pool).
+     the charge pool). A **modded** `ObjectEffect` is a new enchantment that itself needs Requiem
+     balancing — route its ENCH/MGEF design to the `requiem-magic-patching` skill. This skill sets
+     only the weapon-side frame (the `Template` link, the `ObjectEffect` link, `EnchantmentAmount`);
+     setting those does **not** make the enchantment balanced, the same way that skill designs the
+     effect and this one only links it.
    - **Staff** (`Data.AnimationType = Staff`, `Damage = 1`) → keywords and value come from the
      staff's spell, not a material ladder. Go to the staff section of
      `references/enchanted-and-staves.md`.
    - **Unique artifact** (bespoke enchantment, hand-set value) → workflow for the skeleton, then
      `## Judgment` for what it is allowed to deviate on.
+
+## Bulk pass protocol (whole-plugin jobs)
+
+When you're patching a whole plugin — routed here from the `requiem-patching` skill, or any job with
+more than a handful of weapons — the enumeration **is the work queue**, not a sample of it. A weapon
+plugin hides its hard records inside uniform-looking groups: the one dagger in a matched set carrying
+a hand-set value, the "steel" sword the author quietly gave ebony damage, the enchanted variant whose
+`ObjectEffect` is a brand-new enchantment nobody balanced. Those outliers are exactly what a rebalance
+pass exists to catch, and the fastest way to ship them wrong is to read one member of a family and
+extrapolate to the rest.
+
+Open with one enumeration query — the whole plugin at once, no writes — and use it as your triage
+table:
+
+```
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="WEAP" \
+  fields=["Name","Data.AnimationType","Data.Flags","Keywords","BasicStats.Damage","ObjectEffect","Template"]
+```
+
+Read each row's `Data.AnimationType` (which workflow branch), `ObjectEffect` (enchanted vs plain),
+`Template` (variant vs base), and `Data.Flags` (playable loot vs not) to disposition every record.
+
+**Every FormID gets a disposition.** Walk the full enumeration; each record is either **patched** —
+routed to a named branch: plain melee, bow/crossbow, enchanted, staff, or artifact — or **skipped**
+with a reason verified on *that* record, never inherited from a neighbour. The skip categories to name:
+
+- **Non-playable / NPC-only weapons** — `Data.Flags` marks it non-playable; it exists for an actor's
+  hand and never reaches the player as loot, so no material tier applies.
+- **Trap / prop / pseudo-weapons** — a trap trigger, a static prop, or a display piece that happens to
+  be a WEAP; there's no tier to place it on.
+- **Unarmed placeholders** — a zero-stat unarmed marker record, not a real weapon.
+- **Template-only base records** — a hollow record that exists only to be a `Template` target for
+  variants and carries no stats of its own; skip it and patch the variants that point at it.
+
+**Patched means field-complete, not merely touched.** A record counts as patched only when the
+`## Checklist` below passes for that record — the per-record field checklist is the gate. A weapon you
+set the damage on but never gave its material keyword, its recipe, or (for an enchanted one) a
+balanced enchantment is not patched, it's in progress. Run the checklist per record before you mark it
+done.
+
+Close the pass with a **reconciliation count — patched + skipped = enumerated.** If the two sides
+don't add up, a record fell through; find it before you call the type done. (This is the per-record
+coverage the `requiem-patching` skill's integration checklist gates on for high-count types.)
+
+**Don't extrapolate across a uniform-looking family.** Four weapon-family shapes *look* uniform and
+tempt one read applied to the whole group:
+
+- **same-material tiers** — a run of steel weapons of different types;
+- **same-type families** — every sword in the mod across materials;
+- **same-prefix EditorID lines** — `MyMod_Sword_01..09`;
+- **enchanted variants of one base** — a plain sword and its Fire/Frost/Shock editions.
+
+This skill's own ladder formulas (+1 damage per material tier, `floor(Damage/2)` crit, ≈ 500 × tier
+enchantment charge) produce a **candidate** value for a sibling — a starting point to check the read
+against, never a value to stamp unread. Each sibling WEAP is still read and dispositioned on its own
+record, because the hand-tweaked outlier inside a uniform-looking family — the "steel" sword given
+ebony damage, the one variant carrying a bespoke enchantment — is precisely what the pass exists to
+catch.
 
 ## Workflow
 
@@ -224,6 +286,10 @@ assumed — rather than emitting a confident guess.
   Reqtificator rescales the bow's hand-tuned damage and NPCs won't fire it.
 - **Giving an enchanted weapon a value bump.** In Requiem the enchanted variant keeps the base
   weapon's value; the enchantment adds a charge pool, not gold.
+- **Treating an enchanted weapon as balanced once the frame is set.** Wiring
+  `Template` / `ObjectEffect` / `EnchantmentAmount` balances the *weapon* side only; a modded
+  `ObjectEffect` is a new enchantment whose ENCH/MGEF still needs Requiem balancing — route its design
+  to the `requiem-magic-patching` skill. A charge pool on an unbalanced effect is still unbalanced.
 - **Carrying a `REQ_NULL_*` reference forward.** Requiem retires records as inert `REQ_NULL_*`
   stubs; if a modded weapon's keyword / `ObjectEffect` / recipe points at one (houseCARL resolves
   the live EditorID), strip it or replace it with the real Requiem form — never keep or add one.
@@ -232,6 +298,9 @@ assumed — rather than emitting a confident guess.
 
 Before finishing a weapon override, confirm:
 
+- [ ] **Whole-plugin job:** every enumerated WEAP dispositioned — patched (this field checklist
+      passed for that record) or skipped with a reason; counts reconcile (patched + skipped =
+      enumerated); no family extrapolation (material tier, type, EditorID prefix, or enchant variant).
 - [ ] **Weapon-type keyword** present (so the Reqtificator assigns the correct damage type) — and
       the damage-type keyword is **not** hand-added.
 - [ ] **Material keyword** present (drives value tier, tempering, and damage interactions).
@@ -243,6 +312,8 @@ Before finishing a weapon override, confirm:
 - [ ] **Crafting recipe** (forge) + **tempering recipe** with the correct perk gate and inputs.
 - [ ] **Enchanted weapons**: `Template` → plain base variant; `ObjectEffect` set;
       `EnchantmentAmount` = charge pool (≈ 500 × tier).
+  - [ ] A **modded** `ObjectEffect` is routed to the `requiem-magic-patching` skill for its ENCH/MGEF
+        balancing — the weapon-side frame alone doesn't make the enchantment balanced.
 - [ ] **Staves**: keywords derived from the staff's spell; `Damage = 1`.
 - [ ] **Leveled-list placement** noted (which LVLI it should join) — the merge happens in the
       `requiem-leveled-list-patching` skill, but record the intent.
