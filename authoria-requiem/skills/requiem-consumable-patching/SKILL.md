@@ -85,7 +85,10 @@ inherited from a neighbour. The skip categories to name:
 
 **Patched means field-complete, not merely touched.** A potion you re-valued but left auto-calc
 on, or a food you gave effects but no hunger/nutrition tag, is in progress, not patched. Run the
-class checklist per record before you mark it done.
+class checklist per record before you mark it done. **Flags fields are unions, not scalars:** an
+ALCH/INGR `Flags` write replaces the whole set, so read the winner's flags first and write
+original-bits + your change — a literal Set silently strips `FoodItem`, `Poison`, `Medicine`, and
+their kin from records that carried them.
 
 Close with a **reconciliation count — patched + skipped = enumerated, per type (ALCH and INGR
 separately).** If the sides don't add up, a record fell through; find it before the type is done.
@@ -284,6 +287,8 @@ Before finishing a consumable override, confirm:
       tiering.
 - [ ] **Placement intent noted** for `requiem-leveled-list-patching`; food kept out of alchemist
       vendor lanes.
+- [ ] **Flags written as unions** — every `Flags` write carries the winner's original bits plus
+      your change; no `FoodItem`/`Poison`/`Medicine` bit silently dropped.
 - [ ] **Masters correct + load-order-sorted** on the read-back; **no `REQ_NULL_*` reference
       remains** in any patched field.
 

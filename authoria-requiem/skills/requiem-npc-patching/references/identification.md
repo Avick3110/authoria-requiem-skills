@@ -25,9 +25,11 @@ a quest NPC) is as bad as missing an enemy. Signals that say **skip**:
   `Foolhardy`, `HelpsAllies`/`HelpsFriendsAndAllies`.
 - **Factions** — only job/crime/town factions, no combat faction (bandit/guard/creature/military).
 - **Race / flags** — a child race, or a clearly non-combat unique.
-- **Conjured/summoned actors** — atronachs/thralls a *spell* summons are balanced via the spell
-  (the `requiem-magic-patching` skill), not as placed NPCs. A summon's base actor that's purely a
-  conjuration target → skip.
+
+**Conjured/summoned actors are combatants, not skips.** The summon *spell* (tier, magicka cost)
+routes to the `requiem-magic-patching` skill, but the spell only prices the summon — it does not
+de-level the actor. The summoned `NPC_` record still gets the fixed-level/stats pass here like any
+combatant; leaving it "balanced via the spell" ships it on `PCLevelMult`, the anti-Requiem pattern.
 
 Signals that say **patch**: a combat class (`REQ_Class_*`, bandit/warrior/mage classes), a combat
 style, `Aggressive`+ AI, a combat faction, combat perks, weapon/armor in the outfit.

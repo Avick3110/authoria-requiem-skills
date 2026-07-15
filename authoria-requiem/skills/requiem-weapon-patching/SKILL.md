@@ -81,12 +81,18 @@ housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="WEAP" \
 Read each row's `Data.AnimationType` (which workflow branch), `ObjectEffect` (enchanted vs plain),
 `Template` (variant vs base), and `Data.Flags` (playable loot vs not) to disposition every record.
 
+**A `NonPlayable` weapon in an actor's hand is combat gear, not a cosmetic skip.** The player never
+loots it, but the player *feels* it — an NPC-hand copy of a sword deals its stamped damage on every
+hit. Derive its damage, crit, and keywords at the same tier as its playable twin (or the wielder's
+tier when no twin exists), exactly like a playable weapon; a NonPlayable **bow** still needs
+`Data.Flags = NPCsUseAmmo` or its wielder won't fire it. What NonPlayable copies legitimately skip
+is the player-economy surface only: no forge/temper recipes, value as authored. The true skips are
+below — records with no combat surface at all.
+
 **Every FormID gets a disposition.** Walk the full enumeration; each record is either **patched** —
 routed to a named branch: plain melee, bow/crossbow, enchanted, staff, or artifact — or **skipped**
 with a reason verified on *that* record, never inherited from a neighbour. The skip categories to name:
 
-- **Non-playable / NPC-only weapons** — `Data.Flags` marks it non-playable; it exists for an actor's
-  hand and never reaches the player as loot, so no material tier applies.
 - **Trap / prop / pseudo-weapons** — a trap trigger, a static prop, or a display piece that happens to
   be a WEAP; there's no tier to place it on.
 - **Unarmed placeholders** — a zero-stat unarmed marker record, not a real weapon.
@@ -97,7 +103,9 @@ with a reason verified on *that* record, never inherited from a neighbour. The s
 `## Checklist` below passes for that record — the per-record field checklist is the gate. A weapon you
 set the damage on but never gave its material keyword, its recipe, or (for an enchanted one) a
 balanced enchantment is not patched, it's in progress. Run the checklist per record before you mark it
-done.
+done. **Flags fields are unions, not scalars:** a `Data.Flags` write replaces the whole bitfield, so
+read the winner's flags first and write original-bits + your change — setting only the bit you thought
+about silently strips `NPCsUseAmmo`, `NonPlayable`, and their kin.
 
 Close the pass with a **reconciliation count — patched + skipped = enumerated.** If the two sides
 don't add up, a record fell through; find it before you call the type done. (This is the per-record
@@ -207,9 +215,14 @@ housecarl_cross_plugin_query type="COBJ" references="013989:Skyrim.esm" conflict
 - **Smelter** (`WorkbenchKeyword` = `0A5CCE`): melts the weapon back to ingots (optional).
 
 Author the new recipes by cloning the comparable's `Conditions` and `Items` and swapping the
-`CreatedObject` to your weapon. Read the comparable's condition (houseCARL 1.2.2+ renders the perk
-parameter as a readable FormID) and compose the same gate onto the new recipe — the condition
-grammar is in `references/housecarl-recipes.md` § E. Recipe shapes in `references/crafting.md`.
+`CreatedObject` to your weapon. **The comparable is the one matching the product weapon's own
+material keyword** — a moonstone blade tempers on Refined Moonstone behind the elven smithing gate,
+an ebony one on an Ebony Ingot behind Ebony Smithing. Never default the inputs or the perk gate to
+the Steel/Craftsmanship shape because it's the first recipe you saw: the ingot and the `HasPerk`
+gate both track the material, and a wrong gate makes the recipe available at the wrong smithing
+tier. Read the comparable's condition (houseCARL 1.2.2+ renders the perk parameter as a readable
+FormID) and compose the same gate onto the new recipe — the condition grammar is in
+`references/housecarl-recipes.md` § E. Recipe shapes in `references/crafting.md`.
 
 ### 7 — Emit the override
 
@@ -284,6 +297,11 @@ assumed — rather than emitting a confident guess.
   every subsequent read.
 - **Forgetting the bow rescale-exclusion keywords or `NPCsUseAmmo`** — without them the
   Reqtificator rescales the bow's hand-tuned damage and NPCs won't fire it.
+- **Defaulting a recipe to the Steel ingot + Craftsmanship gate.** The temper/forge inputs and the
+  `HasPerk` gate track the weapon's own material keyword — read the same-material comparable's
+  recipe, don't reuse the first (steel) shape for the whole plugin.
+- **Skipping a `NonPlayable` NPC-hand weapon as cosmetic.** The player takes its damage; tier it
+  like its playable twin (it only skips recipes/value).
 - **Giving an enchanted weapon a value bump.** In Requiem the enchanted variant keeps the base
   weapon's value; the enchantment adds a charge pool, not gold.
 - **Treating an enchanted weapon as balanced once the frame is set.** Wiring
@@ -300,7 +318,8 @@ Before finishing a weapon override, confirm:
 
 - [ ] **Whole-plugin job:** every enumerated WEAP dispositioned — patched (this field checklist
       passed for that record) or skipped with a reason; counts reconcile (patched + skipped =
-      enumerated); no family extrapolation (material tier, type, EditorID prefix, or enchant variant).
+      enumerated); no family extrapolation (material tier, type, EditorID prefix, or enchant variant);
+      `NonPlayable` NPC-hand copies tiered like their playable twins, not skipped as cosmetic.
 - [ ] **Weapon-type keyword** present (so the Reqtificator assigns the correct damage type) — and
       the damage-type keyword is **not** hand-added.
 - [ ] **Material keyword** present (drives value tier, tempering, and damage interactions).
@@ -309,7 +328,10 @@ Before finishing a weapon override, confirm:
 - [ ] **Data**: Speed/Reach/AnimationType match the type; bows have `NPCsUseAmmo`.
 - [ ] **Name** encodes the material/class ("Steel Greatsword", "Ebony Dagger").
 - [ ] **Sound + ImpactDataSet** links copied from the comparable.
-- [ ] **Crafting recipe** (forge) + **tempering recipe** with the correct perk gate and inputs.
+- [ ] **Crafting recipe** (forge) + **tempering recipe** with the ingot and perk gate matching the
+      weapon's own material keyword (never a defaulted Steel/Craftsmanship gate).
+- [ ] **Flags written as unions** — any `Data.Flags` write carries the winner's original bits plus
+      your change; no bit silently dropped.
 - [ ] **Enchanted weapons**: `Template` → plain base variant; `ObjectEffect` set;
       `EnchantmentAmount` = charge pool (≈ 500 × tier).
   - [ ] A **modded** `ObjectEffect` is routed to the `requiem-magic-patching` skill for its ENCH/MGEF

@@ -13,8 +13,9 @@ group by type, route each group.
 | `AMMO` | Ammo | `requiem-ammo-patching` |
 | `PROJ` | Projectile | ammo PROJ → `requiem-ammo-patching`; spell PROJ → `requiem-magic-patching` |
 | `RACE` | Race | `requiem-race-patching` |
-| `ARMA` | ArmorAddon | `requiem-race-patching` (race-add) / `requiem-armor-patching` (coverage) |
+| `ARMA` | ArmorAddon | split by referencing record — linked from an `ARMO` → `requiem-armor-patching` (dispositioned with its piece, usually cosmetic-skip); a race's skin/body ARMA → `requiem-race-patching`. The router assigns every ARMA to exactly one lane; neither lane may wave its subset to the other without that lane claiming it |
 | `NPC_` | Npc | `requiem-npc-patching` |
+| `CLAS` / `CSTY` / `OTFT` / `FACT` | Class / CombatStyle / Outfit / Faction | `requiem-npc-patching` — the mod's own records disposition in its bulk pass (retarget the actor to the Requiem analogue, or rebalance the still-referenced custom record by live analogy) |
 | `LVLI` | LeveledItem | `requiem-leveled-list-patching` |
 | `LVLN` | LeveledNpc | `requiem-leveled-list-patching` |
 | `LVSP` | LeveledSpell | `requiem-leveled-list-patching` (distribution; no merge toggle — hand de-level); spell *design* → `requiem-magic-patching` |
@@ -34,6 +35,7 @@ group by type, route each group.
 | `FLST` | FormList | route by the list's *contents'* domain (a FLST of weapons → `requiem-weapon-patching`); the list record itself isn't rebalanced |
 | `KYWD` | Keyword | no standalone patch — a keyword rides the domain of the records that carry it; disposition it with its carriers |
 | `QUST` | Quest | `requiem-script-patching` for result scripts / aliases only; the quest record carries no Requiem balance to rebalance |
+| `SMQN` / quest-start `GetLevel` conditions | StoryManagerQuestNode | **flag to the user** — quest pacing in a de-levelled world is a judgment call; surface the level gate and the Requiem-consistent options, never auto-derive or silently keep it |
 | `CELL` / `REFR` | Cell / placed reference | usually placement/cosmetic → skip with a reason; route the placed record's own type if it drops a combatant or container; zone balance → `requiem-leveled-list-patching` (`ECZN`) |
 | `GMST` | GameSetting | Requiem owns the global tuning — skip a mod's GMST unless it's flagged for review; never carry a value that fights Requiem's settings |
 | `ACTI` / `MISC` / `FURN` / `IDLE` | Activator / MiscItem / Furniture / IdleAnimation | usually flavor/cosmetic → skip with a reason; route only when it carries a balance field (a `MISC` with a gold value → `economy.md`) |
@@ -45,7 +47,8 @@ group by type, route each group.
 vampire/werewolf → `vampirism-lycanthropy.md` · disease → `diseases.md` · stamina/attacks →
 `exhaustion-stress.md` · sneak/lockpick/trap → `stealth.md` · ingredient/potion/poison →
 `alchemy.md` (records → `requiem-consumable-patching`) · food/drink → `food.md` (records →
-`requiem-consumable-patching`) · shout → `shouts.md` · standing stone → `standing-stones.md` ·
+`requiem-consumable-patching`) · shout → `shouts.md` · standing stone / standing-stone-like ability
+SPEL → `standing-stones.md` ·
 perk/skill → `perks-skills.md` (records + NPC perk sets → `requiem-perk-assignment`) ·
 merchant/value → `economy.md` · any combat "why" →
 `combat-resistance.md`.

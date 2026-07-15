@@ -76,8 +76,10 @@ Work the grouped worklist top to bottom:
 | `WEAP` (incl. staff frames), weapon `COBJ`/`PROJ` | `requiem-weapon-patching` | melee/bow/staff frame, damage, value, charge, tempering |
 | `ARMO` (incl. clothing/jewelry frames) | `requiem-armor-patching` | AR ladder, set/part keywords, fist perk, shields |
 | `AMMO` + ammo `PROJ` | `requiem-ammo-patching` | arrow/bolt ladders, AP tier, AmmoWeight, PROJ profile |
-| `RACE`, racial `SPEL`/`ARMA` | `requiem-race-patching` | playable vs creature, two-layer trait model, new-race recognition |
-| `NPC_` | `requiem-npc-patching` | fixed level, class, perks, trait bridge, bosses, followers (record-side) |
+| `RACE`, racial `SPEL` | `requiem-race-patching` | playable vs creature, two-layer trait model, new-race recognition |
+| `ARMA` | split by referencing record | linked from an `ARMO` → rides `requiem-armor-patching` with its piece (usually cosmetic-skip, dispositioned there); a race's skin/body ARMA → `requiem-race-patching`. The router assigns **every** ARMA to exactly one lane up front — a lane never waves its subset to the other without that lane claiming it |
+| `NPC_` + the mod's own `CLAS`/`CSTY`/`OTFT`/`FACT` | `requiem-npc-patching` | fixed level, class, perks, trait bridge, bosses, followers (record-side); record-level disposition of the mod's own class/combat-style/outfit/faction records rides its bulk pass |
+| Quest-start level gating (`SMQN` / quest `GetLevel` start conditions) | **flag to the user** | quest pacing in a de-levelled world is a judgment call — surface the condition (e.g. a `GetLevel >= 10` start gate) with the Requiem-consistent options; no skill auto-derives it |
 | `LVLI`, `LVLN`, `LVSP`, `CONT`, `ECZN` | `requiem-leveled-list-patching` | additive merge, tier by repetition, containers, zones; LVSP has no merge toggle — hand de-level (spell *design* stays with `requiem-magic-patching`) |
 | `MGEF`, `SPEL`, `ENCH`, `BOOK` (tomes), `SCRL`, `EXPL`, `HAZD` | `requiem-magic-patching` | school/tier/cost, HalfCostPerk classifier, three-layer split |
 | `INGR`, `ALCH` (potions, poisons, food, drink, alcohol), consumable `COBJ` | `requiem-consumable-patching` | class kits (potion/food/alcohol/drug/ingredient), value/weight/flags/keywords, cookpot recipes; the Reqtificator never rebalances consumables — the override is final. Genuinely new effect design still → `requiem-magic-patching` |
@@ -108,7 +110,7 @@ reference's constraints. Example: a new ingredient is an `INGR` whose effects ar
 | Ingredients / potions / poisons | `alchemy.md` | record work → `requiem-consumable-patching`; ingredient effects must use Requiem `REQ_Alch_*` MGEFs |
 | Food / drink / alcohol | `food.md` | record work → `requiem-consumable-patching`; food gives long stacking effects by nutrition category; alchemists don't buy food |
 | A new shout / words of power | `shouts.md` | SHOU = 3 words → 3 SPEL + recovery; owned by `Requiem.esp` |
-| A standing stone / birthsign / doomstone | `standing-stones.md` | ConstantEffect ability spell with stacked MGEFs; player-only |
+| A standing stone / birthsign / doomstone — or any ability SPEL granting standing-stone-like passive boons (a "Stone blessing" power) | `standing-stones.md` | ConstantEffect ability spell with stacked MGEFs; player-only; magnitudes follow the stone model, not a combat spell's tier ladder |
 | New perks / skills / a perk tree | `perks-skills.md` | hook into existing trees; never author a parallel tree; player-exclusive assignment; `PERK` records + NPC perk sets → `requiem-perk-assignment` |
 | A merchant / vendor / prices | `economy.md` | record-driven vendor chests + LVLI; round values to 5; no dynamic-pricing config |
 | (the "why" for any combat call) | `combat-resistance.md` | damage vs resistance/armor, armor-penetration by damage type, stagger, the keyword chain |
@@ -145,6 +147,9 @@ reference's constraints. Example: a new ingredient is an `INGR` whose effects ar
 - [ ] Every gap mechanic the content implies handled per its reference (constraints applied).
 - [ ] `references/integration-checklist.md` run: masters correct + load-order-sorted; **no
       `REQ_NULL_*` anywhere**; Reqtificator-vs-manual matrix respected.
+- [ ] **Every derived/carried FormID `housecarl_resolve`-verified before write** — right FormID
+      *and* right master suffix; a dangling reference caught at the final gate means a lane skipped
+      this.
 - [ ] Plan ends with "run the patch through the Reqtificator."
 
 ## Notes

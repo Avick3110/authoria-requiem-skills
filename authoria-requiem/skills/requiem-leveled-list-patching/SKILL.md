@@ -97,6 +97,24 @@ Every FormID each returns is a record you must disposition. (LVSP has no merge t
 LVLI and LVLN are merged — so an LVSP list resolves by plain conflict winner, which makes hand
 de-levelling the *only* lever for a gated spell list.)
 
+### The cell→zone sweep (unzoned dungeon cells)
+
+A fourth sweep rides every whole-plugin job here: the mod's own **dungeon cells' `EncounterZone`
+links**. The Reqtificator's `openEncounterZones` pass opens every *existing* zone — it cannot invent
+one — so an interior cell the mod shipped with **no** EncounterZone sits outside Requiem's zone model
+entirely (no zone-level floor, no boundary behaviour) and no build pass will ever fix it:
+
+```
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="Cell" fields=["Name","EncounterZone"]
+```
+
+Disposition every interior/dungeon cell: **already zoned** (an `EncounterZone` link present — the
+zone itself usually needs nothing; see `## Judgment`), or **unzoned → assign a zone**. Point the cell
+at an existing zone of the matching tier where one fits, or create a small set of **tiered ECZN
+records** for the mod's dungeons (the level floor derived from the dungeon's intended tier — read a
+comparable Requiem dungeon's zone) and assign each unzoned cell to the right one. Exterior/wilderness
+and pure-interior home cells with no combat content are skips with that reason stated.
+
 ### The de-levelling triage
 
 For each enumerated list, read its entries' `Level` values:
@@ -143,8 +161,11 @@ for it — every gated entry flattened, or your entry present at `Level = 1` wit
 **Touched is not patched:** a list with one gate still left is not de-levelled, and a placement whose
 patch never mastered Requiem is not placed. Verify per record; never inherit a neighbour's result.
 
-Close each type with a **reconciliation count — de-levelled + placed-into + skipped = enumerated.** If
-the sides don't add up, a list fell through; find it before you call the type done.
+Close each type with a **reconciliation count — de-levelled + placed-into + skipped = enumerated**
+(and for the cell sweep: zoned + newly-assigned + skipped = enumerated). If the sides don't add up, a
+list fell through; find it before you call the type done. **Flags fields are unions, not scalars:**
+when a list or zone write touches a `Flags` field, read the winner's bits first and write
+original-bits + your change — a literal Set silently strips the bits you didn't name.
 
 ### Never extrapolate across a list family
 
@@ -244,15 +265,19 @@ the `requiem-patching` skill.
   are): a container override fully replaces its `Items`, so build on the winner and keep its contents.
   See `references/containers-and-zones.md`.
 
-- **Encounter zones — usually leave them.** Requiem's de-leveling is the fixed-level NPCs (the NPC domain) plus
-  the Level-1 lists, **not** the encounter zone. The Reqtificator's `openEncounterZones` pass only sets
-  the `DisableCombatBoundary` flag at build (it does **not** change min/max level), and it does this to
-  every zone automatically. So a new area's ECZN normally needs **nothing**. Only touch `MinLevel` if a
-  modded zone hard-gates content in a way that fights Requiem's flat design, and say why. **Don't
-  generalize "the build pass handles it" from the zone to the lists:** `openEncounterZones` auto-opens
-  every zone, but no build pass de-levels a mod's OWN leveled lists — Requiem never defined them, so
-  they escape the merge (`baseVersion == null`) and keep their gates unless you flatten them by hand
-  (`## Bulk pass protocol`). The zone is automatic; the mod's own lists are not.
+- **Encounter zones — leave the existing ones; create the missing ones.** Requiem's de-leveling is
+  the fixed-level NPCs (the NPC domain) plus the Level-1 lists, **not** the encounter zone. The
+  Reqtificator's `openEncounterZones` pass only sets the `DisableCombatBoundary` flag at build (it
+  does **not** change min/max level), and it does this to every zone automatically. So an area's
+  *existing* ECZN normally needs **nothing** — only touch `MinLevel` if a modded zone hard-gates
+  content in a way that fights Requiem's flat design, and say why. But that automatism covers only
+  zones that **exist**: an unzoned dungeon cell gets nothing from any build pass, and assigning it a
+  zone (creating tiered ECZNs if the mod has none) is this skill's job — the cell→zone sweep in
+  `## Bulk pass protocol`. **Don't generalize "the build pass handles it" from the zone to the
+  lists:** `openEncounterZones` auto-opens every zone, but no build pass de-levels a mod's OWN
+  leveled lists — Requiem never defined them, so they escape the merge (`baseVersion == null`) and
+  keep their gates unless you flatten them by hand. The existing zone is automatic; the missing zone
+  and the mod's own lists are not.
 
 - **REQ_NULL inside lists — leave Requiem's, never add your own.** Requiem deliberately keeps
   `REQ_NULL_*` entries and retired `REQ_NULL_*` sublists inside its lists as a removal/placeholder
@@ -286,7 +311,10 @@ the `requiem-patching` skill.
 - **Stripping Requiem's `REQ_NULL` list entries**, or **adding an item to a `REQ_NULL_*` list.** Leave
   Requiem's; never introduce your own.
 - **Touching an encounter zone's level to "de-level" it.** That's not where Requiem's de-leveling lives;
-  the build pass handles the zone. Fix the NPCs' fixed level and the list placement instead.
+  the build pass handles the existing zone. Fix the NPCs' fixed level and the list placement instead.
+- **Leaving a dungeon cell with no encounter zone at all.** The build pass opens existing zones; it
+  never creates one. An unzoned cell needs a zone assigned here (the cell→zone sweep) or it sits
+  outside Requiem's zone model.
 
 ## Checklist
 
@@ -303,7 +331,11 @@ Before finishing a placement, confirm:
 - [ ] **`Requiem.esp` is a master** (reference a Requiem form; verify the `masters:` read-back).
 - [ ] **No `REQ_NULL_*` introduced**; Requiem's own `REQ_NULL` entries left intact.
 - [ ] **Containers** reference themed leveled lists (built on the winner's `Items`), not raw gear.
-- [ ] **Encounter zone** left alone unless a real level-gate conflict demands a `MinLevel` fix.
+- [ ] **Encounter zones:** existing zones left alone unless a real level-gate conflict demands a
+      `MinLevel` fix; **whole-plugin job:** the cell→zone sweep run — every unzoned dungeon cell
+      assigned a zone (tiered ECZNs created if the mod ships none).
+- [ ] **Flags written as unions** — any `Flags` write carries the winner's original bits plus your
+      change; no bit silently dropped.
 - [ ] **Linked, not re-statted** — the item/NPC record itself is unchanged here.
 - [ ] **Read-back verified** — re-read each list/container and confirm your entry is present.
 
