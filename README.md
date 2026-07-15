@@ -24,6 +24,7 @@ Load `requiem-patching` first for a whole-mod job; the domain skills also trigge
 | `requiem-npc-patching` | NPCs/enemies/followers — fixed level, class, combat style, factions, perks, the creature trait bridge |
 | `requiem-leveled-list-patching` | Placement — leveled lists (additive merge), containers, encounter zones |
 | `requiem-magic-patching` | Spells/effects/enchantments — school/tier/cost, the HalfCostPerk classifier, the three-layer split |
+| `requiem-consumable-patching` | Consumables (ALCH + INGR) — potions/poisons/oils, food, drink/alcohol, drugs, ingredients: class effect-kits, value/weight ladders, cookpot recipes (the Reqtificator never rebalances consumables — the override is final) |
 | `requiem-script-patching` | The Papyrus layer — Magic Redone `Nox_*` runtime, follower registration, VMAD attach (most patches need no script) |
 
 Each skill bundles a `references/` library (live-mined ladders, keyword vocab, copy-ready houseCARL call shapes, worked examples) and an archived `evals/` set.
@@ -38,7 +39,7 @@ Requires **houseCARL** installed and configured first — these skills read your
 2. Copy the `authoria-requiem` folder into your Claude Code skills folder. On Windows that's `C:\Users\<your-username>\.claude\skills\`.
 3. Fully restart Claude Code.
 
-The nine skills load automatically, namespaced as `/authoria-requiem:…`. That's it — no commands.
+The ten skills load automatically, namespaced as `/authoria-requiem:…`. That's it — no commands.
 
 **Alternative — Claude Code's plugin marketplace** (if you'd rather manage it in-app): in a Claude Code session run `/plugin marketplace add <repo-or-local-path>`, then `/plugin install authoria-requiem@authoria-requiem-skills`, and restart. These are in-app slash commands, not a terminal.
 
@@ -57,7 +58,7 @@ authoria-requiem/                 the plugin — drop this folder into ~/.claude
 
 ## Status
 
-**Feature-complete and maintained** — all nine skills authored and verified by round-trip against live Requiem records; the current version lives in [CHANGELOG.md](CHANGELOG.md). Skill descriptions passed the skill-authoring standard's checks via manual prediction plus an independent peer-prediction check; an empirical trigger re-validation remains as a follow-up, alongside a handful of live-verification items.
+**Feature-complete and maintained** — all ten skills authored and verified against live Requiem records; the current version lives in [CHANGELOG.md](CHANGELOG.md). The original nine descriptions passed the skill-authoring standard's checks via manual prediction plus an independent peer-prediction check (empirical re-validation remains a follow-up); `requiem-consumable-patching` was validated by the standard's fresh-context agent fan-out (20/20, results archived in its `evals/`).
 
 ## Credits
 

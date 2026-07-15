@@ -367,6 +367,9 @@ Before finishing a magic override, confirm:
 - **Alchemy** (potion/poison MGEF, `Requiem - Alchemy Redone.esp`): `PeakValueModifier` archetype,
   `FireAndForget`/`Self`, `Flags = PowerAffectsMagnitude, Recover`, `MagicAlch*` keywords
   (`MagicAlchHarmful` = poison); potency scales with Alchemy skill and `RFTI_All_PoisonRescaling`
-  (Layer 2). See `references/enchantments.md`.
+  (Layer 2). See `references/enchantments.md`. This skill owns designing a genuinely **new**
+  alchemy/food MGEF; the ALCH/INGR **records** that carry effects (potions, poisons, oils, food,
+  drink, ingredients — their value/weight/flags/keywords/recipes) belong to
+  `requiem-consumable-patching`, which routes new-effect design back here.
 - houseCARL writes go to a new patch plugin; the live load order is never modified. The patch is later
   run through the Reqtificator.

@@ -26,8 +26,8 @@ group by type, route each group.
 | `SCRL` | Scroll | `requiem-magic-patching` |
 | `EXPL` | Explosion | `requiem-magic-patching` |
 | `HAZD` | Hazard | `requiem-magic-patching` |
-| `INGR` | Ingredient | `requiem-magic-patching` + `references/alchemy.md` constraints |
-| `ALCH` | Ingestible | potions/poisons → `requiem-magic-patching` + `alchemy.md`; food → `food.md` |
+| `INGR` | Ingredient | `requiem-consumable-patching` (+ `references/alchemy.md` constraints) |
+| `ALCH` | Ingestible | `requiem-consumable-patching` — all classes: potions/poisons/oils, food, drink/alcohol, drugs (+ `alchemy.md`/`food.md` constraints) |
 | `SHOU` / `WOOP` | Shout / WordOfPower | `references/shouts.md` (wrapper) + `requiem-magic-patching` (tier spells) |
 | `PERK` | Perk | `references/perks-skills.md` — no domain skill owns standalone `PERK` rebalancing; disposition every one, flag the remainder to the user |
 | `FLST` | FormList | route by the list's *contents'* domain (a FLST of weapons → `requiem-weapon-patching`); the list record itself isn't rebalanced |
@@ -43,7 +43,8 @@ group by type, route each group.
 
 vampire/werewolf → `vampirism-lycanthropy.md` · disease → `diseases.md` · stamina/attacks →
 `exhaustion-stress.md` · sneak/lockpick/trap → `stealth.md` · ingredient/potion/poison →
-`alchemy.md` · food/drink → `food.md` · shout → `shouts.md` · standing stone → `standing-stones.md` ·
+`alchemy.md` (records → `requiem-consumable-patching`) · food/drink → `food.md` (records →
+`requiem-consumable-patching`) · shout → `shouts.md` · standing stone → `standing-stones.md` ·
 perk/skill → `perks-skills.md` · merchant/value → `economy.md` · any combat "why" →
 `combat-resistance.md`.
 

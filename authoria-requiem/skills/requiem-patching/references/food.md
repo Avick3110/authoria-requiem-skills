@@ -26,11 +26,11 @@ refills every 15 min / on sleep and rotates 5 strong buffs. Sleeping Tree Sap yi
 
 ## Integration recipes
 
-- **New food/drink** → ALCH records with a single category effect; route the effect via
-  `requiem-magic-patching` using the category's MGEF, value off the comparable (`economy.md`). Tag it
-  to the right nutrition category so it stacks/contributes correctly. Don't give food a vanilla
-  restore-health-on-eat effect — Requiem food is buff-over-time, not instant heal (except sweets'
-  instant restore).
+- **New food/drink** → `requiem-consumable-patching` builds the ALCH record's effect kit from the
+  category's MGEFs, value off the comparable. Tag it to the right nutrition category so it
+  stacks/contributes correctly. Don't give food a vanilla restore-health-on-eat effect — Requiem
+  food is buff-over-time, not instant heal (except sweets' instant restore). A genuinely new food
+  MGEF's design routes to `requiem-magic-patching`.
 - **A cooking recipe** → a `CraftingCookpot` COBJ; mirror Requiem's food recipes.
 - **Alchemists buying food / instant-heal food** are the two anti-patterns to avoid (they break the
   survival economy). Keep food out of alchemist vendor lists.

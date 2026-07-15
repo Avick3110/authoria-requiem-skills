@@ -22,16 +22,17 @@ MGEFs**, not vanilla effects — otherwise the effect is unbalanced and ignored 
 
 ## Integration recipes
 
-- **A new ingredient** → `requiem-magic-patching` designs/maps the 4 effects; **point all four at
+- **A new ingredient** → `requiem-consumable-patching` maps the 4 effects; **point all four at
   existing `REQ_Alch_*` MGEFs** (find them by `cross_plugin_query type=MagicEffect editorid_contains="REQ_Alch"
   plugins=["Requiem - Alchemy Redone.esp"]`). Don't invent a new alchemy MGEF unless the effect truly
-  doesn't exist — then clone a `REQ_Alch_*` for its profile.
-- **A new potion/poison** → single `REQ_Alch_*` effect + the right keyword; value off Requiem's
-  comparable potion (`economy.md`). Place via `requiem-leveled-list-patching` / vendor chests.
+  doesn't exist — then its design routes to `requiem-magic-patching` (clone a `REQ_Alch_*` profile).
+- **A new potion/poison** → `requiem-consumable-patching`: single `REQ_Alch_*` effect + the right
+  keyword; value off Requiem's comparable potion ladder. Place via `requiem-leveled-list-patching` /
+  vendor chests.
 - **A modded ingredient using vanilla effects** → replace each vanilla effect with the `REQ_Alch_*`
   analogue; otherwise it bypasses Requiem's alchemy economy.
 - **Fortify-skill potions** overlap food/Alchemy; some are shared with `Requiem - Food and Beverages
-  Redone.esp` — read the live winner.
+  Redone.esp` or won by `Requiem - Magic Redone.esp` — read the live winner.
 
-This extends `requiem-magic-patching`'s alchemy note with the "must use Requiem MGEFs, exactly 4
-ingredient effects" constraint.
+The record work (ALCH/INGR shells, ladders, kits, cookpot recipes) is owned by
+`requiem-consumable-patching`; this reference carries the system-level constraints.

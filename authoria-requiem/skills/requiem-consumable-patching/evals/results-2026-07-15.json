@@ -1,0 +1,34 @@
+{
+  "skill": "requiem-consumable-patching",
+  "date": "2026-07-15",
+  "method": "HOUSECARL_SKILL_AUTHORING §6.5 fresh-context agent fan-out: one fresh agent per query (20 total), each given ONLY the skill's description verbatim as an anonymized capability statement (no skill name) plus its single query, asked a pure relevance question with reasoning + YES/NO verdict. Judges: Opus, high reasoning effort, no tools. Verdicts adjudicated from the reasoning paragraphs per §6.5 step 4.",
+  "description_measured": "the shipped frontmatter description (911 chars, 145 words), unmodified",
+  "scores": {
+    "recall": "10/10 (gate: >= 80%)",
+    "specificity": "10/10 (gate: >= 50%)",
+    "misfires": 0
+  },
+  "per_query": [
+    {"q": 1,  "expect": true,  "verdict": "YES", "basis": "modded healing potion too strong -> ALCH rebalance, core purpose"},
+    {"q": 2,  "expect": true,  "verdict": "YES", "basis": "mod food -> Requiem nutrition = effects on the ALCH record, not a separate runtime job"},
+    {"q": 3,  "expect": true,  "verdict": "YES", "basis": "custom mead effects+value = alcohol derivation, named in description"},
+    {"q": 4,  "expect": true,  "verdict": "YES", "basis": "skooma price+drawbacks = ALCH value + effects, skooma named verbatim"},
+    {"q": 5,  "expect": true,  "verdict": "YES", "basis": "ingredient four-effect setup = INGR quartet, named verbatim"},
+    {"q": 6,  "expect": true,  "verdict": "YES", "basis": "whole-plugin sweets pass = per-consumable balance pass"},
+    {"q": 7,  "expect": true,  "verdict": "YES", "basis": "stew craftable at cookpot = COBJ recipe, named trigger"},
+    {"q": 8,  "expect": true,  "verdict": "YES", "basis": "weak poisons = magnitude+price ladders, core ALCH fields"},
+    {"q": 9,  "expect": true,  "verdict": "YES", "basis": "instant-heal cheese wheel = the vanilla-food anti-pattern this skill replaces"},
+    {"q": 10, "expect": true,  "verdict": "YES", "basis": "wine keywords + inebriation = alcohol kit derivation"},
+    {"q": 11, "expect": false, "verdict": "NO",  "basis": "greatsword damage = WEAP domain -> weapon skill"},
+    {"q": 12, "expect": false, "verdict": "NO",  "basis": "brand-new shout-drain effect = MGEF design -> magic skill"},
+    {"q": 13, "expect": false, "verdict": "NO",  "basis": "loot/vendor appearance = leveled-list/placement, not record balance"},
+    {"q": 14, "expect": false, "verdict": "NO",  "basis": "SkyPatcher ini = runtime-ini patching, not ESP override derivation"},
+    {"q": 15, "expect": false, "verdict": "NO",  "basis": "KID keyword distribution = kid-authoring, no consumable balanced"},
+    {"q": 16, "expect": false, "verdict": "NO",  "basis": "best-potions loadout = gameplay advice, not record authoring"},
+    {"q": 17, "expect": false, "verdict": "NO",  "basis": "NPC perks/factions = NPC_ domain -> npc skill"},
+    {"q": 18, "expect": false, "verdict": "NO",  "basis": "soup eating animation clipping = OAR config, not a data-layer edit"},
+    {"q": 19, "expect": false, "verdict": "NO",  "basis": "drinking fountain = ACTI/world placement, not an inventory ingestible"},
+    {"q": 20, "expect": false, "verdict": "NO",  "basis": "scripted potion's broken script property = VMAD/script layer -> script skill"}
+  ],
+  "notes": "Both §6.3 gates passed with margin. All 20 reasoning paragraphs judged on the record-domain/task-kind basis rather than keyword overlap; no meta-confusion observed (description contained no skill name). Judges ran per Aaron's standing model rule: Opus, high effort."
+}

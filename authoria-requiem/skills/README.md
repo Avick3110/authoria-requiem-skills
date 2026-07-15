@@ -12,6 +12,7 @@ Load **`requiem-patching`** first for a whole-mod job; it routes to the domain s
 - `requiem-npc-patching` — NPCs / enemies / followers
 - `requiem-leveled-list-patching` — leveled lists, containers, encounter zones
 - `requiem-magic-patching` — spells, effects, enchantments
+- `requiem-consumable-patching` — consumables: potions, poisons, oils, food, drink/alcohol, drugs, ingredients (ALCH + INGR + their cookpot recipes)
 - `requiem-script-patching` — the Papyrus / scripts layer
 
 The cross-cutting masters/`REQ_NULL` hygiene rule and the scope/authority rule live in the `requiem-patching` skill's `references/` (`masters-and-null-stripping.md` and `scope-and-authority.md`).
