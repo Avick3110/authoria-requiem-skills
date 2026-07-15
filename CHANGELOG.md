@@ -32,4 +32,4 @@ First feature-complete release. Nine skills, each built by mining the live Autho
 ### Known follow-ups
 
 - Empirical eval-loop re-validation on a non-Windows host (recall/specificity were validated via the §6.5 manual-prediction fallback; Windows blocks `run_loop`) + a peer prediction check.
-- A few live-verification items tracked in `STATE.md` (Phase 8/9): a live VMAD-write round-trip, the `housecarl_compile_script` path, the disease payload MGEF winner, the standing-stone activation quest trace, and the (currently inactive) follower-registration ESP.
+- A few live-verification items: a live VMAD-write round-trip, the `housecarl_compile_script` path, the disease payload MGEF winner, the standing-stone activation quest trace, and the (currently inactive) follower-registration ESP.
