@@ -29,7 +29,7 @@ group by type, route each group.
 | `INGR` | Ingredient | `requiem-consumable-patching` (+ `references/alchemy.md` constraints) |
 | `ALCH` | Ingestible | `requiem-consumable-patching` — all classes: potions/poisons/oils, food, drink/alcohol, drugs (+ `alchemy.md`/`food.md` constraints) |
 | `SHOU` / `WOOP` | Shout / WordOfPower | `references/shouts.md` (wrapper) + `requiem-magic-patching` (tier spells) |
-| `PERK` | Perk | `references/perks-skills.md` — no domain skill owns standalone `PERK` rebalancing; disposition every one, flag the remainder to the user |
+| `PERK` | Perk | `requiem-perk-assignment` — disposition every one (leave plumbing / fold obvious duplicates / flag overlaps with a question); NPC perk derivation lives there too (+ `references/perks-skills.md` system constraints) |
 | `FLST` | FormList | route by the list's *contents'* domain (a FLST of weapons → `requiem-weapon-patching`); the list record itself isn't rebalanced |
 | `KYWD` | Keyword | no standalone patch — a keyword rides the domain of the records that carry it; disposition it with its carriers |
 | `QUST` | Quest | `requiem-script-patching` for result scripts / aliases only; the quest record carries no Requiem balance to rebalance |
@@ -45,7 +45,8 @@ vampire/werewolf → `vampirism-lycanthropy.md` · disease → `diseases.md` · 
 `exhaustion-stress.md` · sneak/lockpick/trap → `stealth.md` · ingredient/potion/poison →
 `alchemy.md` (records → `requiem-consumable-patching`) · food/drink → `food.md` (records →
 `requiem-consumable-patching`) · shout → `shouts.md` · standing stone → `standing-stones.md` ·
-perk/skill → `perks-skills.md` · merchant/value → `economy.md` · any combat "why" →
+perk/skill → `perks-skills.md` (records + NPC perk sets → `requiem-perk-assignment`) ·
+merchant/value → `economy.md` · any combat "why" →
 `combat-resistance.md`.
 
 ## Catch-all disposition — no type is silently dropped

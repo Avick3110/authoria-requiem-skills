@@ -203,7 +203,8 @@ creature or boss with AutoCalc **off** carries explicit `PlayerSkills` instead: 
 per-skill values, because they decide how hard a de-levelled enemy actually hits, blocks, and casts.
 Combat perks are **vanilla `Skyrim.esm` skill perks** the analogue carries
 (escalating with tier) plus, on stronger actors, Requiem skill-tree perks (`REQ_OneHanded_*`,
-`REQ_Conjuration_Empower_*`); copy the analogue's set. The `ActorEffect` carries Requiem
+`REQ_Conjuration_Empower_*`); copy the analogue's set — and when no clean analogue exists (a custom
+gear mix, a hybrid), derive the set via the `requiem-perk-assignment` skill. The `ActorEffect` carries Requiem
 **`REQ_Trait_Tempering_<role>_<tier>`** marker spells that temper the NPC's worn gear — match the
 analogue's. A **caster** needs more than that trait: carry the analogue's actual **castable spell
 list** — its `ActorEffect` spell entries, or the `SpellList` it inherits through its template —
@@ -365,4 +366,5 @@ Before finishing an NPC override, confirm:
   The `where=` filter helps archetype scans (e.g. `where="Configuration.Level.Level >= 30"`).
 - This skill sets the NPC frame and links Requiem forms. **Race** traits → `requiem-race-patching`;
   **spell/MGEF design** → the `requiem-magic-patching` skill; **leveled-list contents** → the `requiem-leveled-list-patching` skill;
-  **script-based follower registration** → the `requiem-script-patching` skill.
+  **script-based follower registration** → the `requiem-script-patching` skill; **perk-set derivation
+  with no clean analogue + mod `PERK` records** → the `requiem-perk-assignment` skill.
