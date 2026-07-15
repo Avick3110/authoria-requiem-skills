@@ -2,7 +2,7 @@
   "_meta": {
     "skill": "requiem-consumable-patching",
     "created": "2026-07-15",
-    "validation": "§6.5 fresh-context agent fan-out against the real installed skill catalog (results archived alongside)."
+    "validation": "§6.5 fresh-context agent fan-out: one fresh agent per query, given only the anonymized description + that single query, pure relevance question, verdicts adjudicated from reasoning (results archived alongside in results-2026-07-15.json)."
   },
   "evals": [
     {

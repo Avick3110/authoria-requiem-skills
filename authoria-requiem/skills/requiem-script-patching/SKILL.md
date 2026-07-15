@@ -9,7 +9,7 @@ description: Patch the Papyrus/script layer of a mod for Requiem via houseCARL â
 
 This skill covers the **Papyrus layer** of making a mod play well with Requiem: when a new
 spell, item, or follower needs a script to behave correctly, and how to wire it up with
-houseCARL. It is the runtime counterpart to the seven record-side domain skills (`requiem-weapon-patching`,
+houseCARL. It is the runtime counterpart to the eight record-side domain skills (`requiem-weapon-patching`,
 `requiem-magic-patching`, `requiem-npc-patching`, â€¦). Those set fields; this one attaches behavior.
 
 The single most important thing to internalize: **most patches need no script at all.** Requiem

@@ -54,5 +54,5 @@ this is the frame.
 
 `…\Requiem 6.0.2 …\documentation\` (`Changelog.md`, `Races.md`, `Artifacts.md`) for the design intent;
 the Reqtificator config (`Reqtificator.conf`, `ActorAssignmentRules_Requiem.esp.conf`,
-`Weapon/ArmorKeywordAssignments`) for the underivable rules; the seven domain skills for the derived
+`Weapon/ArmorKeywordAssignments`) for the underivable rules; the eight domain skills for the derived
 methods. `combat-resistance.md` and the other gap references turn the vision into FormIDs and recipes.
