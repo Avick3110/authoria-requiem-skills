@@ -42,19 +42,17 @@ conversation); prune when done — delete or move under *Done* with the resolvin
   the §6.5 manual-prediction fallback + independent peer-prediction (empirical `run_loop` eval is
   blocked on Windows, §6.4) and are flagged for empirical re-validation when a non-Windows host is
   available. `(CLAUDE.md §Repo-specific deviations · standing since 1.0.0)`
-- **Simplify `requiem-script-patching`'s VMAD sweep if houseCARL grows a struct-presence filter.**
-  Sweep (a) of its Bulk pass protocol runs per-type (`fields=["VirtualMachineAdapter"]`, keep rows
-  reporting one) because `cross_plugin_query`'s union-arm `where=` presence test needs a scalar and
-  VMAD is a struct. If houseCARL adds a presence/has-field filter, collapse the per-type sweeps into
-  one call and drop the inline rationale. `(2026-07-15, S1 coverage batch)`
-  **Update 2026-07-15 (post-houseCARL-update probe):** still blocked — the new `has value` operator
-  is scalar-only (container fields are counted in its diagnostics but not matched). Gap filed as
-  houseCARL issue [#197](https://github.com/Avick3110/houseCARL/issues/197) (+ siblings from the S4
-  run: batch plugin-scope [#195](https://github.com/Avick3110/houseCARL/issues/195), flag-bit verbs
-  [#196](https://github.com/Avick3110/houseCARL/issues/196), PerkPlacement depth-2 identity
-  [#198](https://github.com/Avick3110/houseCARL/issues/198)). Re-probe on the next houseCARL update.
-
 ## Done
+
+- ~~Simplify `requiem-script-patching`'s VMAD sweep if houseCARL grows a struct-presence filter~~ —
+  **done 2026-07-16** (the 1.2.3 batch): houseCARL shipped the `exists` / `missing` presence tests
+  (issue [#197](https://github.com/Avick3110/houseCARL/issues/197) closed); re-probed live (struct
+  match + one `plugins=`-scoped cross-type call, both confirmed) and sweep (a) collapsed to a single
+  `where=["VirtualMachineAdapter exists"]` query in SKILL.md + `housecarl-recipes.md` + the index.
+  Sibling issues [#195](https://github.com/Avick3110/houseCARL/issues/195) /
+  [#196](https://github.com/Avick3110/houseCARL/issues/196) /
+  [#198](https://github.com/Avick3110/houseCARL/issues/198) remain houseCARL-side.
+  `(2026-07-16, Aaron)`
 
 - ~~"Aaron" named in three shipped reference files~~ — **fixed 2026-07-15** in `2e4a17e` (PR #4, the
   1.0.3 batch): all three now read "the author" / "author-approved".

@@ -49,14 +49,13 @@ disposition anything. Neither sweep writes.
 Enumerate every record in the mod that already has a `VirtualMachineAdapter`, so no attached script
 goes unexamined. Scripts hide on non-obvious hosts a type-based triage waves through as cosmetic —
 QUST result scripts, ACTI activators, FURN crafting stations — not just the MGEF/BOOK the runtime map
-names. A single cross-type VMAD presence sweep isn't derivable from the recipes: the NPC skill's
-query-1 presence test keys off a *scalar* union arm (`LevelMult >= 0`), and `VirtualMachineAdapter` is
-a struct with no scalar to compare. So sweep per type and keep the rows that report a VMAD:
+names. One presence-filtered query covers every record type at once — the `where=` `exists` test
+matches a carried struct — so no host type you didn't think to sweep can hide a script:
 
 ```
-housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="MGEF" fields=["VirtualMachineAdapter"]
-# repeat for type = BOOK, ACTI, FURN, QUST — the runtime-map hosts plus the non-obvious ones.
-# A row with a VirtualMachineAdapter present is a hit; an (absent) row drops out.
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] where=["VirtualMachineAdapter exists"]
+# one call, all record types — every match carries a script. Expand the hits for disposition:
+# housecarl_batch_record_detail formids=[<hits>] fields=["VirtualMachineAdapter"] depth=3
 ```
 
 Disposition every hit:
@@ -241,8 +240,8 @@ See `references/vmad-and-compile.md` for the `VirtualMachineAdapter` field struc
 ## Checklist
 
 - [ ] Ran the freshness probe (Iron Sword's chain contains `Requiem.esp`).
-- [ ] **Whole-plugin job:** both coverage sweeps run — VMAD-present records (sweep a, across MGEF /
-      BOOK / ACTI / FURN / QUST) and needs-a-script proxies (sweep b: the magic pass's flagged
+- [ ] **Whole-plugin job:** both coverage sweeps run — VMAD-present records (sweep a, the one
+      cross-type `VirtualMachineAdapter exists` query) and needs-a-script proxies (sweep b: the magic pass's flagged
       special-mechanic MGEF/SPEL, every BOOK, every follower `NPC_`); each hit dispositioned; counts
       reconcile (dispositioned = enumerated).
 - [ ] Confirmed a script is actually needed (special mechanic / follower) — not a plain effect.

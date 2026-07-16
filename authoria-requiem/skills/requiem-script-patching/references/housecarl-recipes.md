@@ -21,14 +21,15 @@ On a whole-plugin job the script layer has no "needs a script" field to enumerat
 denominator with two sweeps before dispositioning anything (full doctrine: the skill body's *Bulk
 pass protocol*). Neither call writes.
 
-**Sweep (a) — records that already carry a script.** No single cross-type VMAD presence query is
-derivable (the NPC presence test keys off a scalar union arm; `VirtualMachineAdapter` is a struct with
-no scalar to compare), so sweep per type and keep the rows reporting a VMAD:
+**Sweep (a) — records that already carry a script.** The `where=` `exists` presence test matches a
+carried struct, so one query sweeps every record type at once — no per-type fan-out, no host type
+missed:
 
 ```
-housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="MGEF" fields=["VirtualMachineAdapter"]
-# repeat for type = BOOK, ACTI, FURN, QUST — runtime-map hosts plus the non-obvious ones
-# (QUST result scripts, ACTI activators, FURN crafting stations). A present VMAD is a hit.
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] where=["VirtualMachineAdapter exists"]
+# every match carries a script (QUST result scripts, ACTI activators, FURN stations included).
+# Expand the hits for disposition:
+housecarl_batch_record_detail formids=[<hits>] fields=["VirtualMachineAdapter"] depth=3
 ```
 
 Disposition each hit: working modded script → preserve · reuse-Requiem-runtime candidate → clone path

@@ -2,6 +2,18 @@
 
 All notable changes to the Authoria Requiem Patching Skills plugin. Versioning is [semantic](https://semver.org); the `version` in `authoria-requiem/.claude-plugin/plugin.json` is bumped on each release.
 
+## 1.2.3 — 2026-07-16
+
+- **`requiem-script-patching` — VMAD sweep (a) collapsed to one call.** houseCARL's `where=`
+  presence tests (`exists` / `missing`) now match struct fields (houseCARL issue #197, closed),
+  so the bulk-pass per-type fan-out (MGEF → BOOK → ACTI → FURN → QUST, one query each) is
+  replaced by a single cross-type `where=["VirtualMachineAdapter exists"]` query, with hits
+  expanded via `housecarl_batch_record_detail depth=3` for disposition. This also closes the
+  residual gap the per-type list carried — a host type nobody thought to sweep could hide a
+  script; the one-call sweep covers every record type by construction. Re-probed live before the
+  edit (struct presence match + `plugins=`-scoped cross-type call both confirmed). Body-only —
+  no description changed, no §6.5 re-measure owed. Closes the standing `dev/BACKLOG.md` entry.
+
 ## 1.2.2 — 2026-07-15
 
 The S4 findings batch: all eight skill-body findings from the Gray Cowl empirical close
