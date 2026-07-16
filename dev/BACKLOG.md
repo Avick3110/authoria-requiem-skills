@@ -42,6 +42,20 @@ conversation); prune when done — delete or move under *Done* with the resolvin
   the §6.5 manual-prediction fallback + independent peer-prediction (empirical `run_loop` eval is
   blocked on Windows, §6.4) and are flagged for empirical re-validation when a non-Windows host is
   available. `(CLAUDE.md §Repo-specific deviations · standing since 1.0.0)`
+
+- **Add an explicit "scan forwarded lists for `REQ_NULL_*`" step to domain-skill bulk passes**
+  (npc first; any lane that forwards ActorEffect/Perks/list fields). Val Serano live run: lanes
+  correctly authored no NULLs but *forwarded* 7 that rode in on NPC list fields; only the
+  integration gate's whole-patch scan caught them. Finding F-VS2 in
+  `session-handoffs/SESSION_HANDOFF_2026-07-16_valserano-first-live-run.md`.
+  `(2026-07-16, Val Serano live run, Aaron)`
+
+- **Router caveat: patch-plugin enumeration counts ≠ distinct-record counts.** `cross_plugin_query
+  group_by=type` over a mod's compat patches counts overrides the patch wins as that plugin's rows —
+  the Val Serano router briefed lanes with over-counts (PERK "10" vs 9, FormList "61" vs 59,
+  CONT "29" vs 26). Harmless (lanes reconcile against their own enumeration) but one sentence in
+  `requiem-patching`'s First step would stop the drift. Finding F-VS3, same handoff.
+  `(2026-07-16, Val Serano live run, Aaron)`
 ## Done
 
 - ~~Simplify `requiem-script-patching`'s VMAD sweep if houseCARL grows a struct-presence filter~~ —
