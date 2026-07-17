@@ -2,6 +2,51 @@
 
 All notable changes to the Authoria Requiem Patching Skills plugin. Versioning is [semantic](https://semver.org); the `version` in `authoria-requiem/.claude-plugin/plugin.json` is bumped on each release.
 
+## 1.4.0 — 2026-07-17
+
+Two doctrine fixes found by the **1.3.0 empirical close** — the first live re-run of the pack's own
+output (the Val Serano patch, authored under 1.2.3) against the 1.3.0 rules. Body + references only —
+no descriptions changed, no §6.5 re-measure owed. Both rules were verified against the live source
+rather than the handoff that reported them; both reports turned out to be *partly* wrong, and the
+corrections are the interesting part.
+
+- **`requiem-magic-patching` — creature-innate magic is its own lane, off the ladder
+  ([#21](https://github.com/Avick3110/authoria-requiem-skills/issues/21)).** Step 2's classification
+  put every SPEL "the player/NPC casts" in one branch, and every archetype representative is a player
+  spell — so a creature's breath or bite classified down the spell lane picked up the tier cost ladder
+  *and* the rider set. Measured live: `REQ_Destruction4_Shock_Aimed` is 4 effects at BaseCost 330,
+  while `REQ_Creature_AtronachStorm_LightningBolt` is **1 effect at 30**, and across the family effect
+  counts run **1–4**, `BaseCost` **0–794**, `ManualCostCalc` inconsistent — hand-tuned per creature.
+  The family is also **mostly Requiem's, not MR's** (64 of ~72 SPELs touched by `Requiem.esp`, 8 by
+  Magic Redone), so it sits outside the 833-record MR census the ladders are mined from — which is how
+  it stayed a footnote. New `spell-archetypes.md` → *Creature innates* section (live table + the
+  find-the-family query), a step-2 branch, and a caveat on the rider doctrine itself: **riders are a
+  scheme-spell convention, and adding them to an innate is not a harmless over-write** — it hands the
+  creature a magicka drain and an extra stagger. Unlike the DNAM rule (#19), erring toward the write
+  is *not* safe here, which is why this one needed the branch rather than a blanket rule.
+  - **The obvious disambiguator was wrong and is now stated as such:** `_NPC`-suffixed spells are
+    **not** creature innates — they are NPC-cast copies built exactly like the player original
+    (`REQ_Destruction5_AbsorbHealth_Aimed_NPC` = 5 effects / BaseCost 600 / ChargeTime 1.25, the FaF
+    T5 ladder exactly; `REQ_Conjuration3_Spirit_Troll_NPC` = 500 / 0.75, Conjuration T3 exactly). "An
+    NPC casts it" and "no tome teaches it" both misroute them. The test is whether the magic **is the
+    creature**.
+- **`requiem-script-patching` — `follower-registration.md` rewritten
+  ([#15](https://github.com/Avick3110/authoria-requiem-skills/issues/15)).** The reference claimed the
+  Authoria bridge "already iterates its aliases, so adding an alias is enough — no new script code is
+  needed." Reading the shipped `_Authoria_REQ_MajorFollowerBridge.psc` confirms the opposite: it
+  declares **ten fixed named properties** and calls `RegisterOne(InigoFollower, "Inigo")` … ten times,
+  hardcoded — **no array, no loop**. An eleventh alias is a no-op; extending the bridge means editing
+  and **recompiling a third-party mod's script**. The **standalone bridge quest** (own quest + alias +
+  compiled script + `.seq`) is now the primary prescription, with the bridge kept as the shape to copy
+  (`OnInit` → single `OnUpdate` → bounded retry, `False` return non-fatal).
+  - **Plus the consent gate the live run demanded:** registration is **a decision, not a default**. A
+    follower shipping its own `*Controller` framework is a user call — Requiem's follower factions are
+    a registration prerequisite and can cut across the mod's own recruit flow. Precedent: a fully-built
+    registration (factions + quest + script + `.seq`) was **removed in full** at the user's request
+    because the mod already owned recruitment. Nothing built was wrong; the default was. Removal is
+    all-or-nothing — the factions come back off the NPC too, or the actor sits in Requiem's follower
+    factions with nothing tracking it.
+
 ## 1.3.0 — 2026-07-17
 
 Field-report round 2 (Heisen, 2026-07-17): per-record *derivation* depth across NPC, magic, and

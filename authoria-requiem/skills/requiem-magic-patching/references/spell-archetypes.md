@@ -17,10 +17,55 @@ very often has an MR-new archetype as its true comparable, not an element.
 **Naming tails that break the scheme (57 records — they still ride your coverage denominator):**
 `REQ_IllusionGM_*` (37 — GM variants, the tier is a *trailing digit*: `REQ_IllusionGM_Calm4`),
 `REQ_ConjurationGM_Bound_Shield_*` / `REQ_AlterationGM_*`, `REQ_Creature_*` (innate creature
-spells), `REQ_Ench_*_Explosion` (enchant drivers), `REQ_Ability_Staff_*`, and vanilla
+spells — a **separate lane**, see below), `REQ_Ench_*_Explosion` (enchant drivers),
+`REQ_Ability_Staff_*`, and vanilla
 `DLC2Ignite`/`DLC2Freeze`. Also: `_LeftHand`/`_RightHand` mirrors duplicate about a third of all
-spells (dual-cast hands) — **patch the pair together, never one hand**; `_NPC` variants are the
-NPC-cast copies of player spells.
+spells (dual-cast hands) — **patch the pair together, never one hand**.
+
+**`_NPC` variants stay on the ladder.** They are the NPC-cast copies of player spells and are built
+*exactly* like the player original — same tier scheme, same cost, same ChargeTime, same riders.
+Verified live 2026-07-17: `REQ_Destruction5_AbsorbHealth_Aimed_NPC 054FE1` is 5 effects at BaseCost
+**600** / ChargeTime **1.25** (the FaF T5 ladder exactly); `REQ_Conjuration3_Spirit_Troll_NPC 10E15D`
+is BaseCost **500** / ChargeTime **0.75** (Conjuration T3 exactly). **"An NPC casts it" is therefore
+not the creature-innate test** — a boss casting Thunderbolt is on the ladder. The test is whether the
+magic *is the creature* (below).
+
+## Creature innates — `REQ_Creature_*` (a separate lane, off the ladder)
+
+A creature's **bite, breath, cloak, or innate elemental attack** — magic that *is* the creature's
+body, not a spell anyone learns. **~72 SPEL records live, and the family is mostly Requiem's, not
+MR's: 64 are touched by `Requiem.esp`, only 8 by Magic Redone** (measured 2026-07-17) — which is why
+they sit outside MR's 833-record census the ladders above are mined from.
+
+**They follow neither the cost ladder nor the rider convention.** Measured live 2026-07-17:
+
+| Record | Effects | BaseCost | `ManualCostCalc` |
+|---|---|---|---|
+| `REQ_Destruction2_Shock_Aimed 02DD29` *(player, for contrast)* | 4 (primary + ED2 pair + Impact_Stagger) | 90 | yes |
+| `REQ_Destruction4_Shock_Aimed 10F7EE` *(player, for contrast)* | 4 (primary + ED4 pair + Impact_Stagger) | 330 | yes |
+| `REQ_Creature_AtronachStorm_LightningBolt 02FB88` | **1** | **30** | yes |
+| `REQ_Creature_Watcher_Sparks 007642:MR` | 1 | 31 | **no** |
+| `REQ_Creature_Watcher_LightningCloak 007640:MR` | 1 | **794** | **no** |
+| `REQ_Creature_Watcher_LightningNova 007643:MR` | 2 | 17 | **no** |
+| `REQ_Creature_SpiritFireWyrm_Bite 00603F:MR` | 1 | 0 | yes |
+| `REQ_Creature_ShadowWolf_Bite 007707:MR` | 3 | 0 | yes |
+
+Across the family: effect counts **1–4**, `BaseCost` **0–794** with no tier scheme, `ManualCostCalc`
+**inconsistent** (creature innates are among the 6-of-833 exceptions noted in
+`cost-and-magnitude.md`). They are hand-tuned per creature.
+
+**So: mirror the nearest same-creature-family comparable verbatim; derive nothing from the tier
+ladder, and add no riders.** Requiem has a named innate set for many creature families (Watcher,
+AtronachStorm, Seeker, ShadowWolf, SpiritFireWyrm/StormWyrm, …) — find the family first:
+
+```
+housecarl_cross_plugin_query plugins=["Requiem.esp","Requiem - Magic Redone.esp"] type="SPEL" \
+  editorid_contains="REQ_Creature_" fields=["Effects","BaseCost","ChargeTime","Flags"]
+```
+
+If the modded creature has no family analogue at all, **flag it** rather than pricing it off the
+player ladder — an innate given the player ladder's cost can leave the creature unable to cast it,
+and given the player's riders will drain and stagger the player in ways Requiem never intended.
 
 ## Destruction — direct damage & damage-over-time
 
