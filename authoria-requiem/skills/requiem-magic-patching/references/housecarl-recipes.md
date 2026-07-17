@@ -89,13 +89,30 @@ housecarl_bulk_apply into="Requiem magic patching" operations=[
   {formid:"<spell FormID>", field_path:"BaseCost",      value:"90"},
   {formid:"<spell FormID>", field_path:"ChargeTime",    value:"0.5"},
   {formid:"<spell FormID>", field_path:"HalfCostPerk",  value:"0C44BF:Skyrim.esm"},   # Apprentice Destruction
-  {formid:"<spell FormID>", field_path:"Flags",         value:"ManualCostCalc"},
+  {formid:"<spell FormID>", field_path:"Flags",         value:"ManualCostCalc"},      # UNION: winner's bits + this — the flag is a WRITE (mods ship auto-calc)
   {formid:"<spell FormID>", field_path:"Effects[0].Data.Magnitude", value:"<tier magnitude>"}
 ]
 ```
 
 (Re-pointing `HalfCostPerk` is how the MR-patch addons reclassify a spell's school+tier — see
 `worked-examples.md`.)
+
+Cost + flag alone is **not** a patched spell. Finish the same record with:
+
+- **the comparable's riders** — `Add` each secondary the MR comparable carries (element rider,
+  Impact Stagger, `_Improved`/`_Potent`…) via recipe E; the rider table with FormIDs is in
+  `cost-and-magnitude.md`;
+- **the NULL re-point** — read `Effects` with `resolve_names=true`; any `REQ_NULL_*`/
+  `REQ_DEPRECATED_*` BaseEffect gets `Effects[i].BaseEffect` re-pointed same-lane, same-element
+  per `resistance-map.md`:
+
+```
+{formid:"<spell FormID>", field_path:"Effects[0].BaseEffect", value:"0008CD:Requiem.esp"}  # dead AbResistFire → REQ_AbHide_FortifyFireResistance (ability lane)
+```
+
+- **the MGEF side** — the modded effect's `MinimumSkillLevel` (tier marker), keywords, flags, and
+  any conditions (recipes C/F, `mgef-conditions.md`);
+- **the tome** — recipe H.
 
 ## E — Compose a multi-effect spell's `Effects` list
 

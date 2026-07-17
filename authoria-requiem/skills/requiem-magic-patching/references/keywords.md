@@ -54,11 +54,34 @@ ActorValue (`Destruction` / `Restoration` / `Alteration` / `Conjuration` / `Illu
 | Keyword | FormID | Meaning |
 |---|---|---|
 | `REQ_SpellConcentration` | `2FFEAD` | tags a concentration effect |
-| `REQ_NoDurationScaling` | `412EDF` | opts the effect out of duration scaling |
+| `REQ_NoDurationScaling` | `412EDF` | duration fixed — opts out of duration scaling (damage/DoT/rune) |
+| `REQ_NoMagnitudeScaling` | `3FCA4C` | magnitude fixed (invisibility, paralyze, shadow-summons, cloaks) |
+| `REQ_Absorb` | `ADDDF7` | absorb-archetype marker |
+| `REQ_NoLifeDrainAllowed` | `2EA062` | immunity key life-drain effects test via conditions (`mgef-conditions.md`) |
 
 A tier-1 fire effect carries `[MagicDamageFire 01CEAD, REQ_SpellConcentration 2FFEAD,
 REQ_NoDurationScaling 412EDF]`. Copy the exact set off the comparable; the frost/shock analogues swap
-only the element keyword.
+only the element keyword. Vanilla effect-class tags MR keeps on the matching archetypes:
+`MagicRestoreHealth 01CEB0`, `MagicInvisibility 01EA6F`, `MagicParalysis 01EA70`,
+`MagicInfluenceFear 0424E0`, `MagicInfluence 078098`, `MagicCloak 0B62E4` (+ `MagicFlameCloak
+002EDA:Update.esm`), `MagicRune 109D79` (all `:Skyrim.esm` unless noted).
+
+**The Association doubling rule (verified live 2026-07-17):** on a `PeakValueModifier` buff
+(shield/mage-armor, fortify, resist, fear) the family's `Nox_KW_*` keyword is **also the MGEF's
+`Archetype.Association`** — e.g. `Nox_KW_Alteration_Shield 000813` sits in `Keywords` *and* as the
+Association on the mage-armor effects, and the GM "improved" variants dispel-by-keyword against it
+(`DispelWithKeywords` + `Nox_KW_Alteration_Shield_Improved 00081F`). When you patch a buff MGEF into
+a family, carry the family keyword in **both** places, exactly as the comparable does.
+
+## Tier and cost markers on the MGEF itself
+
+- **`MinimumSkillLevel` is the tier marker on effects**: 0 / 25 / 50 / 75 / 100 = tiers 1–5
+  (verified across schools). Set it to match the spell's tier. **GM/perk-gated effects sit at 0**
+  and gate through the perk + `HideInUI` instead.
+- **MGEF `BaseCost` is NOT the spell's magicka cost** (that lives on the SPEL, `ManualCostCalc`).
+  It is the engine's per-magnitude autocalc weight — small on damage (Fire touch 1.2, frost DoT
+  3.55), large on binary/utility (Invisibility 25, Paralyze 450), 0 on hidden worker effects.
+  Copy the comparable's; never invent it (it feeds enchanting/potion pricing math).
 
 ## The `Nox_KW_*` marker vocabulary (Magic Redone — 107 keywords)
 
@@ -105,14 +128,33 @@ These `REQ_*` keywords are Requiem.esp-defined but carried by MR's new damage ef
 | `Hostile` | offensive (enemy-targeting) |
 | `Detrimental` | reduces the actor value (damage) |
 | `Recover` | the value recovers after the effect ends |
-| `PowerAffectsMagnitude` | **skill scales the magnitude at runtime** — Requiem's core scaling switch |
-| `FXPersist` | the visual persists for the effect's duration |
-| `NoDeathDispel` | the effect isn't dispelled on the caster's death |
+| `PowerAffectsMagnitude` | skill scales the **magnitude** at runtime |
+| `PowerAffectsDuration` | skill scales the **duration** — Requiem's switch on timed buffs/debuffs |
+| `NoMagnitude` | binary state — no magnitude at all (invisibility, paralyze, summons) |
+| `NoDuration` | instantaneous / constant (heals, constant drains) |
+| `FXPersist` | the visual persists for the effect's duration (near-universal) |
+| `NoDeathDispel` | not dispelled on death — on damage so the killing tick still lands |
 | `NoArea` | single-target (no area falloff) |
-| `HideInUI` | mechanic-only effect, hidden from the magic menu (used on taper/GM effects) |
+| `HideInUI` | mechanic-only effect, hidden from the magic menu (taper/GM/worker effects) |
+| `DispelWithKeywords` | replaces same-family effects on apply (GM shields — see Association rule) |
 | `IgnoreResistance`, `NoAbsorbOrReflect` | self-buffs, heals, summons (can't be resisted/absorbed) |
 
-A hostile damage effect typically carries `Hostile, Detrimental, FXPersist, NoDeathDispel,
-PowerAffectsMagnitude` (+ `NoArea` for single-target). A self-buff/heal/summon carries
-`IgnoreResistance, NoAbsorbOrReflect` (+ `Recover` on temporary buffs). Read and copy — the flag set is
-part of the design, not boilerplate.
+The archetype decides the set — the rule of thumb, verified per-archetype live (2026-07-17):
+**damage → `PowerAffectsMagnitude`; timed buff/debuff → `PowerAffectsDuration`**; `NoMagnitude` for
+binary states; `NoDuration` for instantaneous heals and constants. Canonical sets:
+
+| Archetype | Flags |
+|---|---|
+| Direct damage | `Hostile, Detrimental, FXPersist, PowerAffectsMagnitude, NoDeathDispel` (+`NoArea` single-target) |
+| Heal (self) | `NoDuration, NoArea, FXPersist, PowerAffectsMagnitude` — *not* Hostile/Detrimental |
+| Shield / mage-armor / fortify / resist | `Recover, NoArea, FXPersist, PowerAffectsDuration` (GM adds `DispelWithKeywords, HideInUI`) |
+| Weakness debuff | `Hostile, Recover, Detrimental, NoArea, FXPersist, PowerAffectsDuration` |
+| Fear (PeakValueMod) | `Hostile, Recover, NoHitEvent, DispelWithKeywords, FXPersist, PowerAffectsDuration` |
+| Invisibility / Paralyze | `Recover, NoMagnitude, FXPersist, PowerAffectsDuration` (+`Hostile` on paralyze) |
+| Summon | `NoMagnitude, NoArea, FXPersist, PowerAffectsDuration, NoHitEffect` |
+| Cloak | `NoArea, FXPersist, PowerAffectsDuration` |
+| Weapon-ench worker | `Hostile, FXPersist, HideInUI, PowerAffectsMagnitude` |
+
+Read and copy the comparable's exact set — the flag set is part of the design, not boilerplate.
+`Taper*` values matter only on damage/DoT/cloak (instant fire hit 0.3/2/1; pure DoT 1/0/0;
+shock 0.01/0/0.1) — copy them with the flags.

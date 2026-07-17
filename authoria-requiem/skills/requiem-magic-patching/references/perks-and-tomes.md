@@ -68,18 +68,21 @@ SPEL. Patch shape:
 - `Keywords` → `VendorItemSpellTome` (+ any school/tier tag the comparable carries).
 - **`Value` = the Requiem tier ladder** (this is the field the MR-patch addons normalize):
 
-| Tier (editorid `…00/25/50/75/100`) | Tome Value |
+| Tier (editorid `…00/25/50/75/100`) | Tome Value band (damage → utility/summon) |
 |---|---|
-| Novice (`00`) | **100** |
-| Apprentice (`25`) | ~**300–400** |
-| Adept (`50`) | **600** |
-| Expert (`75`) | **800** (occasionally up to 1000) |
-| Master (`100`) | **2000** |
+| Novice (`00`) | **100** damage · **200** utility/flesh/bound/mind · **300** reanimate |
+| Apprentice (`25`) | **300** utility · **400** damage/flesh/bound · **500** reanimate |
+| Adept (`50`) | **500** detect/telekinesis · **600** flesh/banish · **700** summons/reanimate |
+| Expert (`75`) | **800** control/flesh · **900** summons/reanimate |
+| Master (`100`) | **2000** flat |
 
-Verified identical across **every** MR-patch addon (Constellation, Sonic Mage, Obscure, Dark Hierophant,
-Holy Templar, Wildwaker): e.g. Sonic Mage Amplifier/Muffler 100, Resona 400, Reverbra 600, Novasphere
-800, Mega Reverbra 2000; the Supernova tome `00081F` was set from the mod's 4975 → **2000** (Master).
-**Don't carry the mod's original price** — set value to the tier.
+**The value is a band, not a flat number — within a tier, summons and utility price higher than
+damage** (re-verified on MR's own 584 tomes, 2026-07-17: Flames 100 but Oakflesh/Bound Sword 200,
+Reanimate Zombie 300; Flame Atronach 700 at Adept; Storm Atronach 900 at Expert). Pick the value
+off a same-tier same-*role* tome, not the tier's floor. The addon precedent holds the same shape
+(Sonic Mage Amplifier 100, Resona 400, Reverbra 600, Novasphere 800, Mega Reverbra 2000; the
+Supernova tome was cut from the mod's 4975 → **2000**). **Don't carry the mod's original price.**
+Tome `Weight` is uniformly **1**.
 
 A tome has **no learn-gate field** — learning is gated globally by the spell's `HalfCostPerk` tier, so a
 correctly-classified spell automatically gates its tome. **Placement** of the tome into a vendor or loot

@@ -49,14 +49,16 @@ conversation); prune when done — delete or move under *Done* with the resolvin
   integration gate's whole-patch scan caught them. Finding F-VS2 in
   `session-handoffs/SESSION_HANDOFF_2026-07-16_valserano-first-live-run.md`.
   `(2026-07-16, Val Serano live run, Aaron)`
-
-- **Router caveat: patch-plugin enumeration counts ≠ distinct-record counts.** `cross_plugin_query
-  group_by=type` over a mod's compat patches counts overrides the patch wins as that plugin's rows —
-  the Val Serano router briefed lanes with over-counts (PERK "10" vs 9, FormList "61" vs 59,
-  CONT "29" vs 26). Harmless (lanes reconcile against their own enumeration) but one sentence in
-  `requiem-patching`'s First step would stop the drift. Finding F-VS3, same handoff.
-  `(2026-07-16, Val Serano live run, Aaron)`
+  **Update 2026-07-17 (1.3.0, Heisen):** done for the two biggest forwarders — npc (sweep 4 of the
+  coverage audit, `resolve_names` over Perks/ActorEffect/Keywords) and magic (the NULL scan over
+  Spell/ObjectEffect/Ingestible `Effects`). Still open for the remaining list-forwarding lanes
+  (armor/weapon/ammo keywords + leveled-list entries) if a live run shows NULLs riding those.
 ## Done
+
+- ~~Router caveat: patch-plugin enumeration counts ≠ distinct-record counts (F-VS3)~~ — **fixed
+  2026-07-17** in the 1.3.0 batch: `requiem-patching` First step 2 now states per-plugin
+  `group_by=type` counts overlap across compat patches and the lane's own enumeration is the
+  true denominator. `(1.3.0, Heisen)`
 
 - ~~Simplify `requiem-script-patching`'s VMAD sweep if houseCARL grows a struct-presence filter~~ —
   **done 2026-07-16** (the 1.2.3 batch): houseCARL shipped the `exists` / `missing` presence tests

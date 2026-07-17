@@ -62,11 +62,17 @@ Confirm authority is fresh, then identify what you're holding before you change 
    The **balance winner** owns Configuration/Class/CombatStyle/Perks/factions; an **appearance
    winner** owns face/body fields. Note which is which — you write balance, never appearance.
 
-3. **Decide: patch or skip.** Patch **combatants only.** Skip civilians, townsfolk, children,
-   quest-helpers, and vendors with no combat role. Tell them apart by
-   `Class` (a `*Citizen`/vendor/`Job*` class → skip), `AIData` (Aggression `Unaggressive` + low
-   Assistance → skip), factions (job/crime only, no combat faction), the child race, and the absence
-   of a combat class/style. Detail + signals in `references/identification.md`.
+3. **Decide: patch or skip — and a skip needs positive evidence.** Patch combatants; but the field
+   failure mode is combatants misclassified as civilians, so **one civilian-looking signal never
+   decides a skip, and any combat signal overrides them all** (a "citizen"-classed actor with a
+   weapon, combat style, hostile faction, or dungeon placement is a combatant). Skip only when the
+   skip signals agree — civilian class AND unaggressive AI AND no combat faction AND no combat
+   gear/perks/spells — verified on *that* record. True non-combatants split two ways: a generic
+   civilian/child/beggar is left alone (Requiem ships no override for them), while a **named
+   non-combatant with wrong numbers** (PCLevelMult, inflated skills) gets Requiem's own
+   civilian treatment — a **stat-only pass** (fixed low level, skills to 5–20, DNAM base
+   attributes), no kit. Genuinely ambiguous → patch the combat-consistent minimum and say so,
+   don't skip. Full signal table + the two civilian lanes: `references/identification.md`.
    **A conjured/summoned actor is a combatant, not a skip.** Its summon *spell* (tier, cost) routes
    to the `requiem-magic-patching` skill, but the summoned `NPC_` record's own level block is yours:
    give it a fixed level and stats here like any combatant, or it ships on `PCLevelMult` — the
@@ -96,7 +102,13 @@ individuals inside the family — the one carrying its own stats is the record t
 outlier costs one query; missing it ships a vendor that never got de-levelled, or a boss that dies to
 one arrow in someone else's game.
 
-Open with the two coverage queries — one call each, the whole plugin at once, and neither writes:
+Open with the four coverage queries — one call each, the whole plugin at once, and none writes
+(the third is the stat/kit matrix — DNAM base attributes, ACBS offsets, perk/spell counts — the
+per-record baseline the field checklist reconciles against; the fourth is the **forwarded-NULL
+scan**: a `resolve_names=true` read of `Perks`/`ActorEffect`/`Keywords`, because `REQ_NULL_*`
+stubs ride in on the mod's own list fields even when you author none — strip them during each
+record's patch, don't leave them for the integration gate. Shapes in
+`references/housecarl-recipes.md`):
 
 1. **The de-levelling work list** — every NPC still on a player-level multiplier. A scalar comparison on
    the union-arm field doubles as an **arm-presence test**: PC-scaling actors have a readable `LevelMult`
@@ -205,12 +217,22 @@ housecarl_bulk_apply into="Requiem NPC patching" operations=[
   {formid:"<npc>", field_path:"CombatStyle",  value:"03BE1B:Skyrim.esm"},            # role combat style (often vanilla)
   {formid:"<npc>", field_path:"DefaultOutfit",value:"<REQ outfit>:Requiem.esp"},     # gear drives much of the difficulty
   {formid:"<npc>", field_path:"Perks", verb:"ReplaceAll", values:["<combat perks from the analogue>"]},
-  {formid:"<npc>", field_path:"ActorEffect", verb:"Add", value:"93369F:Requiem.esp"} # REQ_Trait_Tempering_* (tempers its gear)
-  # AutoCalc ON (this bandit): PlayerSkills derive from class + level — verify, don't hand-stamp.
-  # A creature/boss (AutoCalc OFF): also set PlayerSkills — the analogue's explicit per-skill values.
+  {formid:"<npc>", field_path:"ActorEffect", verb:"Add", value:"93369F:Requiem.esp"}, # REQ_Trait_Tempering_* (tempers its gear)
+  # The DNAM block — ALWAYS carry the analogue's, whatever AutoCalcStats says (npc-fields.md):
+  {formid:"<npc>", field_path:"PlayerSkills.Health",  value:"112"},   # base attributes (NOT the ACBS offsets)
+  {formid:"<npc>", field_path:"PlayerSkills.Magicka", value:"100"},
+  {formid:"<npc>", field_path:"PlayerSkills.Stamina", value:"118"},
+  {formid:"<npc>", field_path:"PlayerSkills.SkillValues[OneHanded]", value:"21"}      # each elevated skill, from the analogue
+  # Named/scaling actor: also the analogue's PlayerSkills.SkillOffsets[<Skill>] (generic mobs: 0).
+  # Creature/boss: also Configuration.<Stat>Offset — the offsets stack ON the DNAM base attrs.
   # A caster: also carry the analogue's castable spells (ActorEffect spell entries, or the template SpellList).
 ]
 ```
+
+**The modded NPC's own empty lists are never the reason to skip perks or spells.** The analogue is
+the derivation source: Requiem's own low-tier records ship with zero perks and zero `ActorEffect`
+(bandit `_Base`, `EncWolf` — verified live), and a modded combatant in that state still gets the
+analogue's full kit for its role and tier. See `references/perks.md`.
 
 **Class is the balance spine** — Requiem's `REQ_Class_*` set has `StatWeights` that distribute
 AutoCalc stats by role (Bandit Health 4/Stamina 6, Guard 5/5, **Slighted 1/0/0** = the weak tier).
@@ -277,11 +299,14 @@ housecarl_bulk_apply into="Requiem NPC patching" operations=[
 
 The mechanics are easy; the judgment is **identification** — what the NPC is, and whether to touch it.
 
-- **Patch combatants; skip the rest.** Civilians, children, quest-givers, and vendors-with-no-fight
-  stay as authored. A **conjured/summoned** actor is a combatant: its spell routes to the
-  `requiem-magic-patching` skill, its actor record gets the fixed-level/stats pass here. When the
-  role is genuinely ambiguous (a guard who also trades, a "boss" who's really a quest NPC), say what
-  you checked and ask rather than guess.
+- **Patch combatants; a skip needs positive evidence.** Any combat signal (weapon, style, hostile
+  faction, combat perks/spells, dungeon placement) overrides a civilian-looking class — mislabeled
+  combatants are the recurring field failure, not over-patched shopkeepers. Generic
+  civilians/children/beggars stay as authored; a **named** non-combatant with wrong numbers gets
+  the stat-only pass (`references/identification.md`). A **conjured/summoned** actor is a
+  combatant: its spell routes to the `requiem-magic-patching` skill, its actor record gets the
+  fixed-level/stats pass here. Genuinely ambiguous after reading all the signals → patch the
+  combat-consistent minimum and say so; in an interactive session, ask.
 
 - **Fixed level, remove `PCLevelMult` — except followers.** De-levelling is the core of Requiem
   balance; a non-follower must get a flat level and lose the multiplier. A **follower** keeps
@@ -347,13 +372,20 @@ Before finishing an NPC override, confirm:
 - [ ] **Role identified** and it's a combatant (not a civilian/helper) — a summoned actor counts as a
       combatant (fixed level + stats here; the summon spell routed to the `requiem-magic-patching` skill).
 - [ ] **Level** fixed + `PCLevelMult` removed (followers: kept).
-- [ ] **Flags** correct (Respawn for generic spawns; Unique/Protected/Essential by role; AutoCalcStats
-      for humanoids, explicit Health/Magicka/Stamina offsets for creatures/bosses).
-- [ ] **PlayerSkills** consistent with the archetype: AutoCalc-on humanoids derive them from class +
-      level (verify); AutoCalc-off creatures/bosses carry the analogue's explicit per-skill values.
+- [ ] **Flags** correct (Respawn for generic spawns; Unique/Protected/Essential by role;
+      `AutoCalcStats` **as the analogue carries it** — never assumed by archetype: bandit `_Base`
+      and warlocks are OFF).
+- [ ] **The DNAM block carried from the analogue on every combatant** — `PlayerSkills.Health/
+      Magicka/Stamina` (the base attributes, distinct from the ACBS offsets), the elevated
+      `SkillValues`, and — on named/scaling actors — the analogue's `SkillOffsets` (generic mobs: 0).
+- [ ] **ACBS stat offsets** (`Configuration.<Stat>Offset`) set from the analogue on
+      creatures/casters/bosses — they stack on the DNAM base attributes.
 - [ ] **Class** = the role-correct `REQ_Class_*`; **CombatStyle** matches the role.
-- [ ] **Perks** = the analogue's combat perks (vanilla + Requiem skill perks); **no** Reqtificator-
-      assigned perks hand-added.
+- [ ] **Perks** = the analogue's combat perks (Requiem's player perk tree on vanilla FormIDs);
+      **an empty source list still gets the analogue's kit** — the modded record is never the
+      derivation source; **no** Reqtificator-assigned perks hand-added.
+- [ ] **Named non-combatant with wrong numbers:** got the stat-only civilian pass (fixed low level,
+      skills 5–20, DNAM set, no kit) — not skipped outright, not given a combat kit.
 - [ ] **Trait bridge:** recognized-race creature → nothing (Reqtificator handles it); new-race
       creature → retarget `Race` or hand-add the physique perk.
 - [ ] **ActorEffect** = the analogue's `REQ_Trait_Tempering_*` (and a `REQ_Trait_*` for a boss).
@@ -380,14 +412,15 @@ Before finishing an NPC override, confirm:
 
 ## Notes
 
-- **Authority** = houseCARL's live conflict winner. The Reqtificator merges actors heavily, so on
-  a live profile `Requiem for the Indifferent.esp` (its generated output) wins most NPCs and is the
-  winner to derive from — it folds the merge in. The hand-authored balance layers beneath it are
-  `Requiem.esp`, **`USMP - Requiem.esp`** (an in-scope Requiem compatibility patch that carries
-  Requiem's values forward — the hand-authored winner for many named actors), and Requiem addons
-  (`Requiem - Minor Arcana - *`, `Requiem - Magic Redone.esp`, `Requiem_VampireCollection.esp`,
-  WAR). **Appearance** resolves to a separate visual winner. Read the live chain per record — it
-  tells you which source owns balance vs appearance.
+- **Authority** = houseCARL's live conflict winner **across the whole Requiem lane** — all seven
+  hand-authored Requiem plugins that touch actors, enumerated with per-lane guidance (vampires →
+  `Requiem_VampireCollection.esp`, forsworn → Minor Arcana, summons → Magic Redone, named-actor
+  forwards → `USMP - Requiem.esp`) in `references/npc-authority.md`. Pick the lane before the
+  actor: the analogue for a modded vampire lives in the vampire lane, not among Requiem.esp
+  bandits. On a live profile `Requiem for the Indifferent.esp` (the Reqtificator's output) wins
+  most NPCs and is the winner to derive from — it folds the merge in. **Appearance** resolves to
+  a separate visual winner. Read the live chain per record — it tells you which source owns
+  balance vs appearance.
 - **houseCARL writes directly into active patches via `into=`** — author straight into
   `Requiem NPC patching`; verify a brand-new patch via the `bulk_apply` read-back until it's refreshed.
   The `where=` filter helps archetype scans (e.g. `where="Configuration.Level.Level >= 30"`).

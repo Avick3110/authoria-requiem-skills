@@ -22,6 +22,20 @@ housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="NPC_" \
 # 2 — the triage matrix: the disposition fields for every NPC of the type in one table.
 housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="NPC_" \
   fields=["Configuration.Level","Configuration.Flags","Configuration.TemplateFlags","AIData.Aggression","Class"]
+
+# 3 — the stat/kit matrix: the DNAM block + kit sizes for every NPC, so the field checklist
+#     has a per-record baseline (who ships vanilla-default 50/50/50, who has an empty kit).
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="NPC_" \
+  fields=["PlayerSkills.Health","PlayerSkills.Magicka","PlayerSkills.Stamina",
+          "Configuration.HealthOffset","Configuration.MagickaOffset","Configuration.StaminaOffset",
+          "Perks","ActorEffect"]
+
+# 4 — the forwarded-NULL scan: list fields you forward (Perks/ActorEffect/Items/Keywords) can
+#     carry REQ_NULL_* stubs IN on the mod's own records even when you author none — the Val
+#     Serano live run forwarded 7 this way. resolve_names makes them visible per row; every hit
+#     is stripped/replaced during that record's patch, not left for the integration gate.
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="NPC_" \
+  fields=["Perks","ActorEffect","Keywords"] resolve_names=true
 ```
 
 Give every FormID from the enumeration a disposition (patched → which workflow below, or skipped →
@@ -46,9 +60,22 @@ housecarl_bulk_apply into="Requiem NPC patching" operations=[
   {formid:"<npc>:ModBandits.esp", field_path:"CombatStyle",  value:"03BE1B:Skyrim.esm"},
   {formid:"<npc>:ModBandits.esp", field_path:"DefaultOutfit",value:"9336AF:Requiem.esp"},  # tier outfit (gear = difficulty)
   {formid:"<npc>:ModBandits.esp", field_path:"Perks", verb:"ReplaceAll", values:[/* analogue's combat perks */]},
-  {formid:"<npc>:ModBandits.esp", field_path:"ActorEffect", verb:"Add", value:"93369F:Requiem.esp"}  # REQ_Trait_Tempering_Bandit_Heavy_Rank4
+  {formid:"<npc>:ModBandits.esp", field_path:"ActorEffect", verb:"Add", value:"93369F:Requiem.esp"},  # REQ_Trait_Tempering_Bandit_Heavy_Rank4
+  # The DNAM block — carry the analogue's, even on AutoCalc-ON actors (npc-fields.md):
+  {formid:"<npc>:ModBandits.esp", field_path:"PlayerSkills.Health",  value:"112"},        # DNAM base attrs, NOT the ACBS offsets
+  {formid:"<npc>:ModBandits.esp", field_path:"PlayerSkills.Magicka", value:"100"},
+  {formid:"<npc>:ModBandits.esp", field_path:"PlayerSkills.Stamina", value:"118"},
+  {formid:"<npc>:ModBandits.esp", field_path:"PlayerSkills.SkillValues[OneHanded]", value:"21"},  # per elevated skill, from the analogue
+  {formid:"<npc>:ModBandits.esp", field_path:"PlayerSkills.SkillValues[Block]",     value:"21"},
+  {formid:"<npc>:ModBandits.esp", field_path:"PlayerSkills.SkillValues[HeavyArmor]",value:"21"}
+  # A named/scaling actor also carries the analogue's PlayerSkills.SkillOffsets[<Skill>];
+  # generic mobs leave offsets 0. A creature/boss also sets Configuration.<Stat>Offset.
 ]
 ```
+
+An NPC whose own `Perks`/`ActorEffect` are **empty** still gets the analogue's full kit here —
+the analogue is the derivation source, not the record you're patching (`perks.md`). For a caster,
+`ActorEffect` also carries the analogue's **castable spells**, not just traits.
 
 Removing `PCLevelMult`: set `Configuration.Flags` to the full flag string **without** `PCLevelMult`
 and set a flat `Configuration.Level.Level` (read the analogue's flags first so you don't drop a flag

@@ -41,7 +41,11 @@ Confirm houseCARL is fresh, then enumerate the plugin. These are the canonical o
 2. **Enumerate the plugin.** `cross_plugin_query plugins=["<NewMod>.esp"]` — this returns every record
    the plugin adds or overrides, with type and override depth. That list is your worklist. Group it
    by record type; the counts tell you the shape of the job (an armor pack vs a follower mod vs a
-   spell pack vs a quest mod that touches everything).
+   spell pack vs a quest mod that touches everything). When the job spans a mod **plus its compat
+   patches**, per-plugin `group_by=type` counts overlap (an override counts once per plugin that
+   touches it), so the briefed totals can exceed the distinct-record count — the lane's own
+   enumeration is the true denominator, and the reconciliation counts are run against that, not
+   the router's brief.
 3. **Triage — classify every row, drop none.** Tag each enumerated record as **new-content**
    (mod-defined, low override depth), **brushed-override** (a record the mod merely touches but doesn't
    own), or **cosmetic-skip** (a pure-appearance touch the Reqtificator's auto-merge handles — NPC

@@ -67,10 +67,16 @@ housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="ALCH" \
   fields=["Name","Value","Weight","Flags","Keywords"]
 housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="INGR" \
   fields=["Name","Value","Weight","Flags"]
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="FLOR" \
+  fields=["Name","Ingredient"]
 ```
 
 Read each ALCH row's `Flags` (FoodItem? Poison? auto-calc still on?) and `Keywords` to give every
-record a class from First step 2; every INGR row goes to the ingredient lane.
+record a class from First step 2; every INGR row goes to the ingredient lane. The FLOR sweep covers
+**harvestable food-plants**: a Flora record carries no balance of its own, but its `Ingredient`
+link (the harvest yield) must point at a consumable this pass dispositioned — FaB itself overrides
+52 Flora records to re-point food plants, so a plant whose yield you rebalanced rides this lane
+(verify the link resolves; re-point it if the mod's plant yields an unpatched duplicate).
 
 **Every FormID gets a disposition** — **patched** (routed to a class lane, and that class's field
 checklist passed on *that* record) or **skipped** with a reason verified on that record, never
@@ -305,4 +311,8 @@ Before finishing a consumable override, confirm:
 - **Systemic knobs are read-only context.** Requiem tunes the alchemy economy through a GMST
   (`fAlchemySkillFactor`), the Alchemy AVIF, and its perk tree. A patch never re-tunes those to
   balance one item.
+- **Thrown consumables are a delivery form AR models with SCRL, not ALCH.** AR defines thrown
+  powders as Scroll records (`REQ_Powder_Silver 000805:Requiem - Alchemy Redone.esp`) with their
+  own PROJ/ArtObject chain. A mod's thrown vial/powder maps to that shape — the SCRL/PROJ design
+  routes to `requiem-magic-patching`; this skill owns only an ALCH/INGR sibling if one exists.
 - houseCARL writes go to a new patch plugin; the live load order is never modified.

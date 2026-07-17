@@ -91,7 +91,10 @@ Drain Magicka/Stamina (dur 500). Values 175–300 (BalmoraBlue V1500 is a flagge
 ## Racial cuisine & the Green Pact
 
 The gate is a **keyword on the food**, read by the race's `REQ_Trait_Cuisine_<Race>` ability
-(Requiem.esp `AE3B70–AE3B73`) — never a race-record edit from this skill. FaB's `LoreBox_*`
+(Requiem.esp `AE3B70–AE3B73`) — never a race-record edit from this skill. (FaB itself carries 8
+RACE overrides wiring those cuisine/stomach traits race-side — that side is already built; the
+keyword on the food is your only lever, and a mod's new playable race needing the trait side
+routes to `requiem-race-patching`.) FaB's `LoreBox_*`
 taxonomy (all `:FaB`): stomach gates `REQ_BeastStomach 000A2F` / `REQ_FelineStomach 000A35` /
 `REQ_OrcPoisonResistance 000A34`; bonus tags `REQ_ArcheryBonus 000A30` (+Bosmer variant
 `000B3D`), `REQ_MeleeBonus 000A31` (+Nord `000B3E`), `REQ_MageBonus 000A3B`; named-dish gates

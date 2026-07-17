@@ -37,30 +37,51 @@ it, USMP-Requiem is just forwarding Requiem's values.
   priest 50). **When you patch a combatant, set a fixed level and remove `PCLevelMult`.** A
   `PcLevelMult` level (with `CalcMinLevel`/`CalcMaxLevel`) is the player-scaling form — **followers
   keep it** (Lydia is `PcLevelMult`, CalcMin 6 / CalcMax 50); everyone else loses it.
-- **`AutoCalcStats`** — **ON for humanoids** (bandits, guards, followers derive stats from
-  level + class `StatWeights` + race). **OFF for creatures and bosses**, which carry explicit
-  `HealthOffset` / `MagickaOffset` / `StaminaOffset` instead (EncTroll H+350/S+175; dragon priest
-  M+1300; Lydia H+50).
+- **`AutoCalcStats`** — **read the analogue's flag; never assume it by archetype.** Verified live
+  (2026-07-17): ON on the generic templated humanoid tiers (bandit 01–03, guards, followers) but
+  **OFF** on creatures, bosses, casters — *and even some Base-tier humanoid templates* (bandit
+  `_Base` and the warlock line are OFF). The ACBS `HealthOffset` / `MagickaOffset` /
+  `StaminaOffset` stack **on top of** the DNAM base attributes (below) and carry the big
+  archetype numbers: troll H+350/S+175, warlock M+400–450, dragon priest M+1300, vampire tier-2
+  270/270/135; Magicka offset stays 0 on non-casters.
 - **Flags by role:** `Respawn` on generic spawns and creatures; `Unique` on named actors/bosses;
   `Protected` (and rarely `Essential`) on followers and quest-critical actors; `BleedoutOverride` on
   bosses that should bleed out rather than die. Read the comparable — don't invent flags.
 
-## PlayerSkills — per-skill combat values
+## PlayerSkills — base attributes, skill values, skill offsets (the DNAM block)
 
-`PlayerSkills` holds the actor's per-skill values (one-handed, block, destruction, restoration, …) —
-the numbers that, alongside level and perks, decide how hard a de-levelled enemy actually **hits,
-blocks, and casts**. A record shipped with a fixed level but wrong skills fights or defends nothing
-like its Requiem analogue, so this field is part of "patched," not an afterthought. It pairs with
-`AutoCalcStats`:
+`PlayerSkills` is the NPC record's DNAM block and carries **three distinct balance payloads**, each
+addressable as a dotted path (`PlayerSkills.Health`, `PlayerSkills.SkillValues[OneHanded]`,
+`PlayerSkills.SkillOffsets[Conjuration]`). Requiem hand-sets all three on its own actors, so a
+patched combatant that keeps its vanilla DNAM is **half-patched** — field reports repeatedly named
+exactly this omission. All values below verified live 2026-07-17.
 
-- **`AutoCalcStats` ON (humanoids — bandits, guards, followers):** `PlayerSkills` are **derived** from
-  the actor's `Class` (its skill weightings) + level. Don't hand-stamp them — set the right class and
-  level and let the derivation produce the skills; **verify** the read-back rather than authoring values.
-- **`AutoCalcStats` OFF (creatures and bosses):** `PlayerSkills` are **explicit** on the record, the
-  same as `HealthOffset`/`MagickaOffset`/`StaminaOffset`. Derive them from the live analogue like any
-  other stat — read the comparable creature/boss and carry its per-skill values. A caster boss whose
-  Destruction/Conjuration skills weren't carried casts far below its intended tier even with the right
-  level and `MagickaOffset`.
+- **`PlayerSkills.Health` / `.Magicka` / `.Stamina` — the base attributes.** These are **not** the
+  ACBS `Configuration.*Offset` fields — they are the DNAM base stats the offsets stack on, and they
+  escalate with tier: bandit tiers H 104→118 / S 106→127 (M pinned 100), warlock H 50→142 /
+  M 100→158, draugr H 300→387, wolf 85/0/205, dragon priest H 1490 / M 545. Mirror the analogue's
+  numbers on every combatant you patch.
+- **`PlayerSkills.SkillValues[<Skill>]` — the 18 per-skill values.** The actor's combat skills
+  escalate with tier while irrelevant skills stay pinned at 5 (bandit 1H/Block/HeavyArmor
+  10→21→29). On Requiem's named civilians the same pass runs **downward** (skills pulled to 5–20)
+  — the stat pass corrects in both directions. These decide how hard a de-levelled enemy hits,
+  blocks, and casts; a caster whose Destruction/Conjuration values weren't carried casts far below
+  its tier even with the right level and `MagickaOffset`.
+- **`PlayerSkills.SkillOffsets[<Skill>]` — the per-level scaling knob.** Zero on generic templated
+  mobs; **actively used on named/unique humanoids and leveled summons** (11 actors verified:
+  Alain Dufont 1H/Block offset 100, Warlock01 Conjuration offset 30, General Tullius, Soul Cairn
+  wrathmen…). Carry the analogue's offsets when patching a named/scaling actor; leave 0 on
+  generic mobs. The one-call finder for actors that use them:
+  `housecarl_cross_plugin_query plugins=["<plugin>"] type="NPC_"
+  where=["PlayerSkills.SkillOffsets[OneHanded] > 0"]` (bracket paths work in `where=`).
+
+**The patch rule is uniform regardless of `AutoCalcStats`: carry the analogue's DNAM block.**
+Requiem writes explicit DNAM values even on AutoCalc-ON actors (the bandit 01–03 tiers carry
+hand-escalating values with the flag on). On an AutoCalc-ON actor the class + level still drive
+the runtime derivation — but matching the analogue's on-record values keeps the record consistent
+with the class/level you set and costs one batched write. On an AutoCalc-OFF actor (creatures,
+bosses, casters, Base tiers) the DNAM block + ACBS offsets **are** the stats — there is no
+derivation behind them.
 
 ## Class — the balance spine
 
@@ -132,14 +153,24 @@ To integrate a new generic enemy: set `Template` to the matching `REQ_<Role>_Tem
 and `Configuration.TemplateFlags` to inherit `Stats` + `SpellList` (+ Factions/AIData as the analogue
 does). Everything Requiem-balanced then flows from the base.
 
-## Archetype quick-reference (sampled live)
+## Archetype quick-reference (sampled live 2026-07-17)
 
-| Archetype | Level | AutoCalc | Flags | Class | Perks (source) | ActorEffect | Notes |
+| Archetype | Level | AutoCalc | DNAM H/M/S | ACBS offsets H/M/S | Perks | ActorEffect | Notes |
 |---|---|---|---|---|---|---|---|
-| Bandit (tiered) | fixed 6–12+ | on | Respawn(+AutoCalc) | `REQ_Class_Bandit_*` | vanilla combat ×5→12, escalating + 1 REQ skill perk | `REQ_Trait_Tempering_Bandit_*` | templates onto `REQ_Bandit_Template_*` |
-| Guard | fixed | on | Respawn | `REQ_Class_Guard_*` | ~17 (heavily perked) | `REQ_Trait_Tempering_Guard_*` | `REQ_CombatStyle_Guard_*` |
-| Caster/mage | fixed | on | Respawn | mage/`FZR_Class_Cultist_*` | vanilla magic + `REQ_Conjuration_*`/destruction perks | resist trait | big `MagickaOffset` |
-| Creature (recognized race) | fixed low | **off** | Respawn | vanilla creature class | 0–1 | absent (race carries traits) | Reqtificator adds trait perk; touch almost nothing |
-| Follower | **PcLevelMult kept** | on | Unique, Protected | role class | ~7 + 2 REQ perks | — | follower factions (see followers.md) |
-| Boss | fixed high (≈50) | off | Unique/Respawn, BleedoutOverride | strong role class | rich, + REQ skill perks | `REQ_Trait_*` (e.g. ResistMagic30) | big stat offset; never template onto a generic base |
-| Civilian / vendor / child | — | — | — | `*Citizen`/`Job*`/child | — | — | **skip — not a combatant** |
+| Bandit `_Base` `86837D` | 1 | **off** | 25/25/50 | 0/0/0 | **0** | **0** | empty kit is normal on a source record — the analogue's tier supplies it |
+| Bandit 01/02/03 | 3/7/10 | on | 104→118 / 100 / 106→127 | 0/0/0 | 5/9/12 | tempering R1→R3 | `REQ_Class_Bandit_*`; skills 1H/Block/Heavy 10→21→29 |
+| Warlock 01/02 | 1/6 | **off** | 50→142 / 100→158 / 25 | 100→60 / **450→400** / 100 | 0/2 | 2/5 castable spells | Conjuration SkillOffset 30 on the summon-scaler |
+| Draugr 01/02 | 1/6 | off | 300→387 / 0 / high | 200 / 0 / 0→100 | 10/14 | 0/1 (natural armor) | perks despite being a creature — read, don't assume |
+| Wolf `023ABE` | 2 | off | 85/0/205 | 0/0/0 | **0** | **0** | recognized race — Reqtificator perks it |
+| Troll `023ABA` | 14 | off | 280/0/340 | 350/0/175 | 1 | 0 | offsets carry the bulk |
+| Dragon priest `023A93` (boss) | **50** | off | **1490/545/0** | 0/**1300**/0 | 15 | 5 (boss spells + ResistMagic30) | never template onto a generic base |
+| Vampire tier-2 `03384E` | 27 | off | 224/169/112 | 270/270/135 | **30** | 8 (drain/claws/traits) | `Requiem_VampireCollection.esp` lane |
+| Guard | fixed | on | — | 0 | ~17 | `REQ_Trait_Tempering_Guard_*` | `REQ_Class_Guard_*`, `REQ_CombatStyle_Guard_*` |
+| Follower | **PcLevelMult kept** | on | — | small (Lydia H+50) | ~7 + 2 REQ perks | — | follower factions (see followers.md) |
+| Named civilian (Belethor, Sven, Faendal) | fixed low | on | pushed UP | 0 | **0** | **0** | **stat-only pass**: SkillValues pulled down to 5–20, DNAM up — no perks, no kit |
+| Generic civilian / child / beggar | — | — | — | — | — | — | Requiem doesn't override them at all — skip, with the reason verified on the record |
+
+Perk lists on enemies resolve to **Requiem's own player perk tree** (vanilla `Skyrim.esm` FormIDs
+carrying `REQ_*` EditorIDs — `REQ_OneHanded_WeaponMastery1/2`, `REQ_Block_ImprovedBlocking`,
+`REQ_HeavyArmor_Conditioning`…): enemies wear the same perks the player earns, and a higher tier
+means deeper into the tree. Copy the analogue's list; don't compose one from memory.

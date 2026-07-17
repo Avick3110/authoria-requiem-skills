@@ -14,25 +14,45 @@ so use a layered read rather than any single field.
 
 ## Step 1 — combatant or skip?
 
-**Patch combatants. Skip everyone else.** Skipping the wrong actor (buffing a shopkeeper, de-levelling
-a quest NPC) is as bad as missing an enemy. Signals that say **skip**:
+**A skip is a positive verdict that needs evidence, not a default for anything that doesn't look
+like a bandit.** Field reports showed the real failure mode is combatants misclassified as
+civilians and silently dropped — so the burden of proof sits on the skip, and one signal never
+decides. **Skip only when the skip signals agree AND no combat signal contradicts them:**
 
 - **Class** — a civilian/vendor/job class: `Citizen 01326B`, `FZR_Class_Citizen AE3989`, vendor and
-  `Job*` classes, trainer classes on a non-combatant. (Requiem may still touch a vendor's record for
-  non-combat reasons — that's not your cue to balance it as an enemy.)
+  `Job*` classes, trainer classes on a non-combatant.
 - **AIData** — `Aggression = Unaggressive` (won't start a fight) with low `Confidence`/`Assistance`,
   or `Responsibility` high (law-abiding). Combatants are `Aggressive`/`VeryAggressive`,
   `Foolhardy`, `HelpsAllies`/`HelpsFriendsAndAllies`.
 - **Factions** — only job/crime/town factions, no combat faction (bandit/guard/creature/military).
 - **Race / flags** — a child race, or a clearly non-combat unique.
 
+**Any combat signal overrides a civilian-looking one.** A "citizen"-classed actor with a weapon in
+its outfit, a combat style, a hostile faction, combat perks/spells, or a dungeon/ambush placement
+is a **combatant that a lazy or reused class is mislabeling** — patch it. Guards, soldiers,
+mercenaries, hostile "villagers", quest attackers, and arena/duel actors are all combatants even
+when their class or day-job says otherwise. A quest-giver who is scripted to fight in any scene is
+a combatant. If, after reading class + AI + factions + outfit + perks/spells, the verdict is still
+genuinely ambiguous — **patch the combat-consistent minimum** (fixed level + role class, per the
+analogue) and say so, rather than skipping; an over-levelled shopkeeper is a mild bug, an
+unpatched enemy is the failure class this skill exists to kill.
+
 **Conjured/summoned actors are combatants, not skips.** The summon *spell* (tier, magicka cost)
 routes to the `requiem-magic-patching` skill, but the spell only prices the summon — it does not
 de-level the actor. The summoned `NPC_` record still gets the fixed-level/stats pass here like any
 combatant; leaving it "balanced via the spell" ships it on `PCLevelMult`, the anti-Requiem pattern.
 
-Signals that say **patch**: a combat class (`REQ_Class_*`, bandit/warrior/mage classes), a combat
-style, `Aggressive`+ AI, a combat faction, combat perks, weapon/armor in the outfit.
+**True non-combatants split into two lanes** (mirroring what Requiem itself does — verified live
+2026-07-17):
+
+1. **Generic civilian / child / beggar / farmer** — Requiem ships **no override at all** for these
+   (Carlotta, Hulda, Arcadia, Brenuin, Braith checked live). Skip, with the reason verified on
+   *that* record.
+2. **A named non-combatant the mod ships with wrong numbers** — `PCLevelMult`, inflated skills, a
+   power-fantasy stat block. Requiem's own precedent (Belethor, Sven, Faendal) is a **stat-only
+   pass**: fixed low level, `SkillValues` pulled down to civilian range (5–20), DNAM base
+   attributes set — and **no** perks, no `ActorEffect` kit, no combat class swap. Apply the same:
+   normalize the numbers, add no kit.
 
 When an actor is **both** (a guard who trades, a mercenary follower), treat the combat role as
 primary but **don't touch its non-combat factions/AI** — patch only its combat balance.
