@@ -76,6 +76,9 @@ Confirm houseCARL's authority is fresh, then identify what you are patching.
      (the staff *item* is `requiem-weapon-patching`).
    - **Elemental projectile hit** (an arrow/bolt's explosion effect) → the projectile section.
    - **Alchemy effect** (potion/poison MGEF) → the alchemy section.
+   - **Resistance/defensive magic** (grants Resist X, waterbreathing — spell, ability, enchant, or
+     potion effect) → check every effect against `references/resistance-map.md` first: the vanilla
+     resist MGEFs are all `REQ_NULL`ed, and the live analogue differs by lane.
    - **Scroll / shout** → the `## Notes` sub-cases (scrolls mirror their spell; shouts are niche).
 
 ## Bulk pass protocol (whole-plugin jobs)
@@ -114,6 +117,14 @@ only through the spells that reference it. A spell's effects are records in thei
 single most common coverage failure here is a spell whose cost + `HalfCostPerk` you patched while its
 modded MGEF's magnitude/keywords/flags never got rebalanced. Filter the `Book` sweep to **tomes** — the
 ones with `Teaches` present; a non-tome BOOK (a readable, a recipe) is out of scope.
+
+**Two more sweeps ride the pass.** (1) The **NULL scan**: re-run the Spell/ObjectEffect/Ingestible
+sweeps with `fields=["Effects"] resolve_names=true` — every `BaseEffect` resolving to `REQ_NULL_*`
+or `REQ_DEPRECATED_*` is a silent no-op (modded resistance magic is the classic case) and gets
+re-pointed same-lane, same-element per `references/resistance-map.md`. (2) **Hand pairs**: MR
+mirrors ~a third of spells as `_LeftHand`/`_RightHand`; a modded spell pack with hand variants
+must have the pair dispositioned together — patching one hand ships a spell that behaves
+differently per hand.
 
 **Every record gets a disposition.** Walk each type's full enumeration: each record is **patched** (note
 which workflow) or **skipped** (name the reason — a pure-FX or art-carrier MGEF that carries no balance,
@@ -193,16 +204,28 @@ shape to mirror.
 
 ### 4 — Derive cost, charge, and magnitude
 
-- **Cost is explicit.** SPEL carries `Flags = ManualCostCalc`, so `BaseCost` is read and set directly
-  — there is **no cost formula**. Take the comparable's `BaseCost`. Cost ladders live in
-  `references/cost-and-magnitude.md`, but they are per-school-per-delivery (Destruction T1 conc 40 /
-  T2 FaF 90 / T3 240 / T4 495; Conjuration is far higher; Alteration/Illusion utility far lower).
-- **ChargeTime ladder** (clean across schools): T1 conc 0 / T1 FaF 0.25 / T2 0.5 / T3 0.75 / T4 1.0;
-  rituals 3+. Requiem gives master nukes a long charge as the anti-spam lever — set it.
-- **Magnitude/area/duration** — copy the comparable's `Effects` shape. Requiem spells are usually
-  **multi-effect**: a primary damage/heal effect + a secondary (slow, lingering taper) + sometimes a
-  perk-gated grandmaster effect. Each effect's magnitude scales with skill at runtime via the MGEF's
-  `PowerAffectsMagnitude` flag — set the *base* magnitude from the comparable's tier.
+- **Cost is explicit — and on a modded spell the flag is a WRITE.** 99.3% of MR's castable spells
+  carry `ManualCostCalc`; mods ship auto-calc. **Tick `Flags += ManualCostCalc` (as a union) or
+  the `BaseCost` you set is ignored** and the engine re-derives cost from magnitudes. There is
+  **no cost formula** — take the comparable's `BaseCost`. Ladders + the delivery multipliers
+  (Rune ≈2×, AoE ≈2×, ritual 1800 at T5; Conjuration prices by what's summoned) in
+  `references/cost-and-magnitude.md`.
+- **ChargeTime is rebalanced, not inherited**: Concentration = 0 always; FaF single = 0.25 × tier
+  (T2 0.5 … T5 1.25); Touch = half the tier's aimed; master rituals = 3.0. Requiem uses charge as
+  the anti-spam lever — a modded master nuke that charges instantly is unpatched.
+- **Magnitude/area/duration** — copy the comparable's `Effects` shape. Requiem spells are
+  **multi-effect**, and **patching means ADDING the riders the comparable carries, not just
+  re-costing the mod's single effect**: the element's signature rider (Fire→Cremation burn,
+  Frost→Slow+DeepFreeze, Shock→Electrostatic magicka burn, Venom→DoT), the near-universal Impact
+  Stagger on FaF Destruction, Healing→Respite, Ward→Ward_Shield, perk-gated `_Improved`/`_Potent`
+  upgrades, Illusion Break1/Break2 caps — the full rider table with FormIDs is in
+  `references/cost-and-magnitude.md`. Each effect's magnitude scales with skill at runtime via the
+  MGEF's `PowerAffectsMagnitude` flag — set the *base* magnitude from the comparable's tier.
+- **Any effect that resolves to `REQ_NULL_*` / `REQ_DEPRECATED_*` is a silent no-op to fix now.**
+  Modded **resistance** spells are the classic case — all 8 vanilla resist MGEFs are NULLed, and
+  the live analogue differs by lane (ability / enchant / potion / castable spell). Re-point each
+  dead effect same-lane, same-element via `references/resistance-map.md`; read every effect with
+  `resolve_names=true` so the NULLs are visible.
 
 ### 5 — Set keywords and flags (load-bearing)
 
@@ -213,9 +236,16 @@ Read them off the comparable's MGEF and replicate (full vocab + FormIDs in `refe
   perks. Set `ResistValue` to match (`ResistFire`/`ResistFrost`/`ResistShock`/`Poison`/`MagicResist`).
 - **Requiem markers:** `REQ_SpellConcentration 2FFEAD` (concentration effects), `REQ_NoDurationScaling
   412EDF` (opt out of duration scaling) — copy from the comparable.
-- **MGEF `Flags`** are meaningful: `Hostile`, `Detrimental`, `FXPersist`, `NoDeathDispel`,
-  `PowerAffectsMagnitude` (the skill-scaling switch), `NoArea`; self-buffs/heals/summons add
-  `IgnoreResistance`, `NoAbsorbOrReflect`. Mirror the comparable exactly.
+- **MGEF `Flags`** are meaningful and archetype-shaped: damage → `PowerAffectsMagnitude`; timed
+  buffs/debuffs → `PowerAffectsDuration`; binary states (invisibility/paralyze/summon) →
+  `NoMagnitude`; instant heals → `NoDuration`; plus `Hostile`/`Detrimental`/`FXPersist`/
+  `NoDeathDispel`/`NoArea` and the self-buff pair `IgnoreResistance, NoAbsorbOrReflect`. The
+  per-archetype table is in `references/keywords.md` — mirror the comparable exactly.
+- **`MinimumSkillLevel` on the MGEF is the tier marker** (0/25/50/75/100 = tiers 1–5) — set it to
+  the spell's tier; perk-gated GM effects sit at 0 and gate via the perk + `HideInUI`.
+- **Conditions**: a plain effect carries none; add them only when the comparable does — creature-
+  type gates, perk gates, immunity/resistance checks on riders. Copy the exact rows per
+  `references/mgef-conditions.md`; never hand-author a function/parameter combo.
 - **Do NOT add the `RFTI_All_*` rescaling perks** (absorb `962799`, poison `962798`, ward `682FB5`,
   NPC-persistent `AD3977`). The Reqtificator assigns those at build — see `## Judgment`.
 
@@ -244,8 +274,10 @@ author new perk trees** (`references/perks-and-tomes.md`).
 the spell half-patched.** The tome value is part of the spell's balance, not an optional extra: a patched
 SPEL whose BOOK still carries the mod's original price is not done. Find the BOOK that `Teaches` the
 spell, keep `Type = BookOrTome` and `Teaches` → the spell, set `Weight = 1`, and set **`Value` to
-Requiem's tier ladder** — Novice 100 / Apprentice ~300–400 / Adept 600 / Expert 800 (≤1000) / Master
-2000 (verified identical across every MR-patch addon). The tome has no learn-gate field; learning is
+Requiem's tier ladder** — Novice 100 / Apprentice ~300–400 / Adept 600 / Expert 800 / Master 2000,
+where each tier is a **band, not a flat number**: summons and utility price above damage at the
+same tier (Flames 100 but Bound Sword 200; Flame Atronach 700, Storm Atronach 900) — match a
+same-tier same-*role* tome (`references/perks-and-tomes.md`). The tome has no learn-gate field; learning is
 gated by the spell's `HalfCostPerk` tier. **Placement of the tome in a vendor/loot list →
 `requiem-leveled-list-patching`.** A **scroll** (SCRL) is a one-shot cast of the spell at its tier:
 `Weight 0.5`, a modest tier-scaled `Value`, charge mirroring the spell.
@@ -255,8 +287,11 @@ gated by the spell's `HalfCostPerk` tier. **Placement of the tome in a vendor/lo
 See `references/enchantments.md` for the full models:
 
 - **Weapon enchant** (`EnchantType=Enchantment`, `CastType=FireAndForget`, `TargetType=Touch`):
-  per-cast `EnchantmentCost` by tier (≈10/20/25/35/40/50); the charge **pool** is the WEAP's
-  `EnchantmentAmount` (≈500×tier) set by the weapon skill. Magnitude on the effect.
+  on the ENCH, `EnchantmentCost = EnchantmentAmount = effect Magnitude`, one knob, 1:1
+  (10/20/25/35/40/50 by tier); the charge **pool** is the WEAP's own `EnchantmentAmount`
+  (≈500×tier) set by the weapon skill. **The enchantment adds zero gold value** — Requiem hand-sets
+  every pre-enchanted item's `Value` to the base item's value (all ENCH are `NoAutoCalc`); put the
+  tier into magnitude/cost/pool, never into gold (`references/enchantments.md`).
 - **Apparel enchant** (`CastType=ConstantEffect`, `TargetType=Self`): no charge pool; magnitude on the
   MGEF; passive while worn.
 - **Staff:** the WEAP carries `EnchantmentAmount` + `Nox_KW_Staff_<School><Tier>`; the staff's
@@ -321,6 +356,16 @@ checked — rather than inventing a number.
 
 - **Inventing a magicka cost.** Cost is explicit (`ManualCostCalc`); read it from the same-school,
   same-delivery, same-tier comparable. Don't compute it — there is no formula.
+- **Setting `BaseCost` without ticking `ManualCostCalc`.** Mods ship auto-calc spells; without the
+  flag the engine ignores your cost entirely. Cost-only patching is the field failure this skill
+  exists to kill — cost, flag, charge, magnitudes, riders, and the tome are one pass.
+- **Leaving a patched spell single-effect.** MR's comparable is multi-effect; a modded fireball
+  without the Cremation burn and Impact Stagger is under-built, not "already fine."
+- **Leaving a resistance spell pointing at a NULLed vanilla MGEF.** All 8 vanilla resist MGEFs are
+  `REQ_NULL_*` — the spell casts and protects against nothing. Re-point per
+  `references/resistance-map.md`, same lane, same element.
+- **Repricing enchanted gear by enchant tier.** Requiem's pre-enchanted items keep the base item's
+  gold value; the tier lives in magnitude/cost/pool.
 - **Wrong or missing `HalfCostPerk`.** This mis-classifies the spell's school/tier and breaks learning
   and cost. It is the single most important field.
 - **Hand-stamping an `RFTI_All_*` rescaling perk.** It is a Reqtificator output, not source data.
@@ -344,15 +389,25 @@ Before finishing a magic override, confirm:
       dispositioned); no rank-chain / element-variant / enchant-tier extrapolation.
 - [ ] **School** set on the MGEF `MagicSkill` (the school ActorValue); `ResistValue` matches the element.
 - [ ] **CastType + TargetType** match the delivery; SPEL and MGEF agree.
-- [ ] **BaseCost** taken from the comparable (explicit, `ManualCostCalc`); **ChargeTime** on the tier ladder.
-- [ ] **Effect list** mirrors the comparable's shape (primary + secondary/taper), each with `Data`
-      magnitude/area/duration and any `Conditions`.
+- [ ] **`ManualCostCalc` ticked on the modded spell** (as a flag union) and **BaseCost** taken from
+      the comparable; **ChargeTime** on the tier ladder (conc 0 / FaF 0.25×tier / touch half /
+      ritual 3.0) — rebalanced, not inherited.
+- [ ] **Effect list** mirrors the comparable's **full shape — the comparable's riders ADDED**
+      (element rider, Impact Stagger, Respite/Ward_Shield, perk-gated `_Improved`/`_Potent`,
+      Break1/Break2), each with `Data` magnitude/area/duration and any `Conditions` copied per
+      `references/mgef-conditions.md`.
+- [ ] **`MinimumSkillLevel`** on each patched MGEF = the tier marker (0/25/50/75/100).
+- [ ] **No effect resolves to `REQ_NULL_*`/`REQ_DEPRECATED_*`** — every dead BaseEffect (resistance
+      magic is the classic) re-pointed same-lane, same-element per `references/resistance-map.md`.
+- [ ] **Hand pairs** (`_LeftHand`/`_RightHand`) dispositioned together.
 - [ ] **Element + Requiem-marker keywords** present; **MGEF `Flags`** (incl. `PowerAffectsMagnitude`) mirrored.
 - [ ] **Flags written as unions** — every SPEL/MGEF `Flags` write carries the winner's original bits
       plus your change; `ManualCostCalc` never silently dropped.
 - [ ] **`HalfCostPerk`** = the correct `REQ_<School>_Mastery_<tier>` perk; specialization keyword if needed.
 - [ ] **No `RFTI_All_*` rescaling perk** hand-added; **special-mechanic `Nox_*` script routed to the `requiem-script-patching` skill.**
-- [ ] **Enchantment:** weapon = per-cast `EnchantmentCost` by tier (pool on the WEAP); apparel = constant, no pool.
+- [ ] **Enchantment:** weapon = `Cost = Amount = Magnitude` 1:1 by tier (pool on the WEAP); apparel
+      = constant, no pool, cost = tier×100; **pre-enchanted item `Value` = the base item's value**
+      (the enchant adds no gold).
 - [ ] **Spell tome (per patched spell):** every SPEL you patched has its teaching BOOK reverse-resolved
       and `Value` priced to the tier ladder (Weight 1); an un-priced tome leaves the spell half-patched.
       **Placement → `requiem-leveled-list-patching` skill.**

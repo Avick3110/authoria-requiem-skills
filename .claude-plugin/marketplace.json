@@ -3,7 +3,9 @@
   "owner": {
     "name": "DrHeisen"
   },
-  "description": "Requiem-patching skills for houseCARL — make newly-added mods Requiem-consistent by deriving stats, keywords, recipes, and placement live against Requiem's own records.",
+  "metadata": {
+    "description": "Requiem-patching skills for houseCARL — make newly-added mods Requiem-consistent by deriving stats, keywords, recipes, and placement live against Requiem's own records."
+  },
   "plugins": [
     {
       "name": "authoria-requiem",

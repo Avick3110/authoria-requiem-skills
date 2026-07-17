@@ -3,9 +3,24 @@
 The five schools are deep: each holds many **effect archetypes** (the `_<Type>_` token in the
 EditorID `REQ_<School><Tier>_<Type>_<Delivery>`). To patch a modded spell, classify it to the closest
 archetype here and read **that archetype's** same-tier comparable — not just "a destruction spell."
-All editorids/FormIDs are live MR winners (2026-06-09); representative comparables are given to seed a
-query. `[Nox]` marks an archetype whose behavior is partly a `Nox_*` runtime script → its record-side
-marker is authored here, the runtime in `requiem-script-patching`.
+All editorids/FormIDs are live MR winners (2026-06-09; census re-verified 2026-07-17); representative
+comparables are given to seed a query. `[Nox]` marks an archetype whose behavior is partly a `Nox_*`
+runtime script → its record-side marker is authored here, the runtime in `requiem-script-patching`.
+
+**Census (833 `Type=Spell` records in MR, parsed exhaustively 2026-07-17):** Destruction 213,
+Conjuration 166, Restoration 143, Alteration 140, Illusion 114 scheme-conforming (+57 non-scheme,
+below). **The tier band is 0–5** — tier 0 is the free/utility rung (`Alteration0_Equilibrium`,
+`Illusion0_VisionOfTheTenthEye`, `Destruction0_Arcane` volleys), not a naming error. Roughly **37%
+of Destruction is MR-new subclasses** (Arcane 28, Entropic 27, Absorb 24, Venom 5) — a modded spell
+very often has an MR-new archetype as its true comparable, not an element.
+
+**Naming tails that break the scheme (57 records — they still ride your coverage denominator):**
+`REQ_IllusionGM_*` (37 — GM variants, the tier is a *trailing digit*: `REQ_IllusionGM_Calm4`),
+`REQ_ConjurationGM_Bound_Shield_*` / `REQ_AlterationGM_*`, `REQ_Creature_*` (innate creature
+spells), `REQ_Ench_*_Explosion` (enchant drivers), `REQ_Ability_Staff_*`, and vanilla
+`DLC2Ignite`/`DLC2Freeze`. Also: `_LeftHand`/`_RightHand` mirrors duplicate about a third of all
+spells (dual-cast hands) — **patch the pair together, never one hand**; `_NPC` variants are the
+NPC-cast copies of player spells.
 
 ## Destruction — direct damage & damage-over-time
 

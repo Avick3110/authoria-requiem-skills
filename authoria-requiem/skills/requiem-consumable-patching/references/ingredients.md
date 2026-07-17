@@ -55,8 +55,10 @@ by arithmetic.
 ## Keywords (by commercial role)
 
 - Default: `VendorItemIngredient 08CDEB:Skyrim.esm` (175/183).
-- **Edibles** get `VendorItemFood 0A0E55` / `VendorItemFoodRaw 0A0E56` **instead of** (not in
-  addition to) the ingredient tag (Wheat, Snowberry, Salt).
+- **Edibles** get `VendorItemFood 08CDEA:Skyrim.esm` / `VendorItemFoodRaw 0A0E56` **instead of**
+  (not in addition to) the ingredient tag (Wheat, Snowberry, Salt). (Verified live 2026-07-17:
+  Wheat `04B0BA` carries only the raw tag `0A0E56`; `0A0E55` is `GiftUniversallyValuable`, a
+  different keyword — don't stamp it.)
 - Contraband: `REQ_VendorItem_BlackMarket` only (precedent: MoonSugar).
 - Gore/forbidden (HumanHeart, HumanFlesh): **no keyword** — not vendored.
 - Additive flavor where apt: `REQ_ArgonianTreat AE3727:Requiem.esp` (fish/meat treats),

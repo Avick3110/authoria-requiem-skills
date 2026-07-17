@@ -2,6 +2,79 @@
 
 All notable changes to the Authoria Requiem Patching Skills plugin. Versioning is [semantic](https://semver.org); the `version` in `authoria-requiem/.claude-plugin/plugin.json` is bumped on each release.
 
+## 1.3.0 — 2026-07-17
+
+Field-report round 2 (Heisen, 2026-07-17): per-record *derivation* depth across NPC, magic, and
+consumables, every new rule backed by a live-mined reference (evidence trail:
+`dev/corpus-2026-07-17-field-report-round2/`). Body + references only — no descriptions changed,
+no §6.5 re-measure owed.
+
+- **`requiem-npc-patching` — the DNAM block is now first-class.** The NPC record's base attributes
+  (`PlayerSkills.Health/Magicka/Stamina` — distinct from the ACBS offsets), the 18 `SkillValues`,
+  and `SkillOffsets` were absent from the field standard, so patched NPCs shipped with vanilla
+  DNAM (the report's "base stats and skill offsets never patched"). Mined live: Requiem hand-sets
+  all three on every archetype, escalating with tier, **even on AutoCalc-ON actors**; SkillOffsets
+  are the per-level scaling knob on named actors (11 verified). New doctrine + recipes + a third
+  coverage sweep (the stat/kit matrix) + checklist items; the wrong "AutoCalc ON for humanoids /
+  don't hand-stamp PlayerSkills" claims corrected (bandit `_Base` and warlocks are OFF — read the
+  analogue's flag).
+- **`requiem-npc-patching` — empty kits are not a skip signal.** Requiem's own low-tier sources
+  ship zero perks *and* zero `ActorEffect` (bandit `_Base`, `EncWolf`); a modded combatant with no
+  perks/spells still gets the analogue's full kit — the analogue, never the patched record, is the
+  derivation source. Stated in SKILL.md, `perks.md`, and the recipes; enemy perk lists identified
+  as Requiem's player perk tree (vanilla FormIDs, `REQ_*` EditorIDs — tier = tree depth).
+- **`requiem-npc-patching` — classification: a skip needs positive evidence.** The recurring field
+  failure is combatants misclassified as civilians. Any combat signal now overrides a
+  civilian-looking class; skip requires all skip signals agreeing on *that* record; ambiguity →
+  patch the combat-consistent minimum. Non-combatants split into two mined lanes: generic
+  civilians (Requiem ships no override — skip) vs named civilians with wrong numbers (Requiem's
+  Belethor/Sven/Faendal precedent: a stat-only pass — fixed low level, skills 5–20, DNAM — no kit).
+- **`requiem-npc-patching` — new `references/npc-authority.md`.** The authority enumerated live:
+  all seven Requiem-lane plugins touching NPC_ records with counts and per-lane analogue guidance
+  (vampires → VampireCollection, forsworn → Minor Arcana, summons → Magic Redone, named forwards →
+  USMP-Requiem), plus the tool-output warning for the Reqtificator-lane winners.
+- **`requiem-magic-patching` — spells: cost-only patching killed.** `ManualCostCalc` measured
+  99.3% universal and named a WRITE (tick it as a union or the authored cost is ignored);
+  ChargeTime rebalance ladder (conc 0 / FaF 0.25×tier / touch half / rituals 3.0) and delivery
+  cost multipliers (Rune ≈2×, AoE ≈2×, ritual ceiling; Conjuration prices by summon) mined and
+  documented; **the rider doctrine** — patching means ADDING the comparable's complementary
+  secondary effects (Fire→Cremation, Frost→Slow+DeepFreeze, Shock→Electrostatic, Venom DoT,
+  Impact Stagger, Respite, Ward_Shield, perk-gated `_Improved`/`_Potent`, Illusion Break1/Break2)
+  — full FormID table in `cost-and-magnitude.md`; the 833-spell subclass census (tier band 0–5,
+  MR-new archetypes flagged) and the `_LeftHand`/`_RightHand` pair rule in `spell-archetypes.md`;
+  tome values corrected to per-role bands within each tier.
+- **`requiem-magic-patching` — new `references/resistance-map.md`.** All 8 vanilla resist MGEFs
+  are `REQ_NULL`ed — a modded resistance spell/enchant/potion pointing at them is a silent no-op
+  (the report's "resistance spells completely skipped"). The live replacement map per element per
+  lane (ability `REQ_AbHide_Fortify*` / enchant `REQ_Ench_Resist*` / potion `REQ_Alch_Resist*` /
+  castable spells / physical natural-armor traits), the AbShow display-only trap, the
+  `REQ_DEPRECATED_*` no-prefix batch, and the resolve_names NULL sweep now in the bulk pass,
+  workflow, checklist, and recipes.
+- **`requiem-magic-patching` — MGEF: tier + conditions doctrine.** `MinimumSkillLevel` identified
+  as the tier marker on effects (0/25/50/75/100); MGEF `BaseCost` semantics corrected (autocalc
+  weight, not spell cost); per-archetype flags table (`PowerAffectsDuration` on timed buffs,
+  `NoMagnitude` binary states, `DispelWithKeywords`) and the Association-doubling rule in
+  `keywords.md`; new `references/mgef-conditions.md` with the four mined condition patterns
+  (creature-type gate, OR-undead triad, perk-gate + `== 0` exclusions, resistance-threshold rider).
+- **`requiem-magic-patching` — ENCH: the gear-value coupling corrected.** Requiem's pre-enchanted
+  items keep the **base item's** gold value (enchant adds zero — all ENCH `NoAutoCalc`); the tier
+  lives in magnitude / `EnchantmentCost` (= Amount = Magnitude, 1:1 on weapon enchants) / the
+  WEAP charge pool (≈ tier×500). Staff per-tier cost/charge/amplified-magnitude ladder and scroll
+  conventions (`VendorItemScroll`, Weight 0.5, tier value bands) documented.
+- **Manifests brought back to `claude plugin validate` clean** — the current CLI rejects
+  `$schema`/`displayName` in plugin.json and a root `description` in marketplace.json (all
+  pre-existing); dropped the first two, moved the marketplace description under `metadata`.
+  Both manifests validate again.
+- **Val Serano follow-ups closed en route** (`dev/BACKLOG.md` F-VS2/F-VS3): the forwarded-`REQ_NULL`
+  scan added to the npc bulk pass (sweep 4) and the magic NULL sweep (above); the router's First
+  step now states per-plugin `group_by=type` counts overlap across compat patches — the lane's own
+  enumeration is the reconciliation denominator.
+- **`requiem-consumable-patching` — live re-verify (29/30 claims confirmed byte-exact).** Fixed the
+  one wrong FormID (`VendorItemFood` is `08CDEA`, not `0A0E55` = GiftUniversallyValuable); added
+  the missed conventions: FLOR harvest-link sweep in the bulk pass (FaB overrides 52 Flora), thrown
+  powders as AR SCRL delivery (routes to magic), FaB's own race-side cuisine records noted, the
+  COBJ racial-OR gate demoted to potion-class-only (read the comparable's conditions).
+
 ## 1.2.3 — 2026-07-16
 
 - **`requiem-script-patching` — VMAD sweep (a) collapsed to one call.** houseCARL's `where=`

@@ -38,9 +38,21 @@ combat perks + one `REQ_*` perk; a guard ~17; a dragon priest 14 vanilla + `REQ_
 ## Source-carried: vanilla combat perks
 
 These are the bulk of an NPC's combat kit. Don't memorize the list — **read the comparable Requiem
-actor of the same role/tier and copy its `Perks`** (the perk FormIDs are mostly `Skyrim.esm`). The
-count escalates with tier (bandit tiers sampled at 5 → 9 → 12; guard ~17). They cover the actor's
-weapon skill (one-handed/two-handed/archery), armor (heavy/light), and block.
+actor of the same role/tier and copy its `Perks`** (the perk FormIDs are mostly `Skyrim.esm`, but
+their EditorIDs resolve to `REQ_*` names — Requiem overhauls the vanilla perk records in place, so
+**enemies wear the same perk tree the player earns**: bandit tier-2 carries
+`REQ_OneHanded_WeaponMastery1/2`, `REQ_Block_ImprovedBlocking`, `REQ_HeavyArmor_Conditioning`…,
+and a higher tier just sits deeper in the tree). The count escalates with tier (bandit tiers
+sampled at 5 → 9 → 12; guard ~17). They cover the actor's weapon skill
+(one-handed/two-handed/archery), armor (heavy/light), and block.
+
+**The modded NPC's own empty lists are not a skip signal.** The derivation source for perks and
+spells is the **analogue**, never the record you're patching: Requiem's own low-tier sources ship
+empty (bandit `_Base` and `EncWolf` carry zero perks *and* zero `ActorEffect`; `Warlock01` has no
+perks; `Draugr01` has no spells — verified live 2026-07-17), and a modded combatant with no
+perks/spells "to begin with" is in exactly that state. It still **gets the analogue's full kit for
+its role and tier** — perks *and* castable spells *and* the tempering trait. "It had none, so
+there was nothing to patch" is the field failure this paragraph exists to kill.
 
 ## Source-carried: Requiem skill-tree perks
 

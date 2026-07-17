@@ -21,14 +21,32 @@ ladder (`REQ_Ench_Weapon_Fire0..6`, MGEF `04605A`):
 | Cost = Magnitude | 10 | 10 | 20 | 25 | 35 | 40 | 50 |
 | FormID (`:Skyrim.esm`) | 10FB95 | 049BB7 | 045C2A | 045C2C | 045C2D | 045C30 | 045C35 |
 
-This `10/(10)/20/25/35/40/50` ladder repeats per element. **Fire is a single ValueModifier(Health);
-Frost and Shock are DualValueModifier** (element + a secondary: frost slows via `0B72A0`, shock has the
-dwemer-shock interaction `19DC31`). The full weapon-enchant set: Fire/Frost/Shock, Magicka/Stamina
-Drain, Soul Trap, Fear, Turn Undead, Absorb Health/Magicka/Stamina, Banish, Paralysis, plus MR-new
-**Toxicity** (`03D4EB`, cost 15), **Arcane** (`184F06`, cost 15), Fireburst/Frostburst/Shockburst,
-Annihilation, Spellbreaking; triple-effect **Chaos** (Dragonborn) and **Force**. Derive from the
-same-element same-tier comparable: copy `EnchantType`/`CastType`/`TargetType`, take the tier's
-`EnchantmentCost`, set the magnitude from the comparable, and let the weapon skill set the WEAP pool.
+This `10/(10)/20/25/35/40/50` ladder repeats per element, and on the ENCH the three numbers are
+**one knob: `EnchantmentCost = EnchantmentAmount = effect Magnitude`, 1:1** (verified live
+2026-07-17 across the Fire run). The **charge pool** is separate — it lives on the WEAP as *its*
+`EnchantmentAmount`, ≈ tier × 500 (Fire1 sword pool 500, Fire3 pool 1500). **Fire is a single
+ValueModifier(Health); Frost and Shock are DualValueModifier** (element + a secondary: frost slows
+via `0B72A0`, shock has the dwemer-shock interaction `19DC31`). The full weapon-enchant set:
+Fire/Frost/Shock, Magicka/Stamina Drain, Soul Trap, Fear, Turn Undead, Absorb
+Health/Magicka/Stamina, Banish, Paralysis, plus MR-new **Toxicity** (`03D4EB`, cost 15), **Arcane**
+(`184F06`, cost 15), Fireburst/Frostburst/Shockburst, Annihilation, Spellbreaking; triple-effect
+**Chaos** (Dragonborn) and **Force**; and the weapon **spell-infusion** family
+(`REQ_Ench_Spell_<School><Tier>_<Elem>_Ench` — Enchantment/Touch, Cost 0 / Amount 0, `NoAutoCalc`,
+pool on the WEAP). Derive from the same-element same-tier comparable: copy
+`EnchantType`/`CastType`/`TargetType`, take the tier's `EnchantmentCost`, set the magnitude from
+the comparable, and let the weapon skill set the WEAP pool.
+
+## Enchanted-item gold value — the coupling that ISN'T (Requiem-specific)
+
+In vanilla, autocalc reprices an enchanted item from its enchantment. **Requiem turns that off
+(`NoAutoCalc` on all 1029 MR ENCH) and hand-sets every pre-enchanted item's `Value` to the base
+unenchanted item's value — the enchantment adds zero gold.** Verified live (2026-07-17): Iron Sword
+base `012EB7` Value 25 → *of Embers* (Fire1, `049BB8`) 25 → *of Scorching* (Fire3, `046017`) 25;
+Iron Gauntlets base `012E46` Value 37 → Fortify One-Handed tiers 1/2/3 (`07A12E`/`0AD57D`/`0AD57E`)
+all 37. What scales with tier instead: the effect **Magnitude**, the ENCH **`EnchantmentCost`**,
+and (weapons only) the WEAP **charge pool**. So when you patch a mod's pre-enchanted item: set the
+item's `Value` to its **base item's** Requiem value (the weapon/armor skill derives that), and put
+the tier's power into magnitude/cost/pool — never into gold.
 
 ## Apparel enchantments (constant effect)
 
@@ -57,9 +75,12 @@ The staff is the largest ENCH family (**576**). The staff **WEAP** (the `requiem
 carries `EnchantmentAmount` (the charge pool, ≈ 500–1000) and the `Nox_KW_Staff_<School><Tier>` keyword
 (`0076E1`–`0076F9:MR`, see `keywords.md`). The staff's `ObjectEffect` is `EnchantType = StaffEnchantment`
 (distinct from the plain `Enchantment` of weapon/apparel) and is a **wrapper around the equivalent
-spell** — it references the **same MGEF(s) at the spell's own magnitude/duration**, with `TargetType`
-following the spell (Aimed projectile / TargetActor / TargetLocation summon) and `EnchantmentCost`
-tracking spell power (≈100–300). EditorID `REQ_Ench_Staff_<School><Tier>_<Spell>_<Delivery>`. Summon
+spell** — it references the **same MGEF(s) the school spell casts, at an AMPLIFIED magnitude**
+(the staff is a force multiplier: fire T1 staff m20 vs the hand spell's 16; T3 m80; T5 m240 —
+verified 2026-07-17), with `TargetType` following the spell (Aimed projectile / TargetActor /
+TargetLocation summon). Per-cast `EnchantmentCost` and `ChargeTime` scale with tier — T1 25/0.25,
+T3 160/0.75, T5 600/1.25 — drawing from the WEAP's pool (a T1 staff: 500/25 = 20 casts); the staff
+WEAP's own `Value` is a flat 100. EditorID `REQ_Ench_Staff_<School><Tier>_<Spell>_<Delivery>`. Summon
 staves carry per-effect placement `Conditions`. Examples: `REQ_Staff_Destruction1_Fire_ConcAimed 04DEE0`
 "Staff of Flames"; `REQ_Ench_Staff_Alteration4_Paralyze_Aimed 029B4A` (Paralysis dur 3 + cost rider);
 `REQ_Ench_Staff_Conjuration4_Daedra_FrostAtronach 029B52` (cost 300, location conditions). A staff is

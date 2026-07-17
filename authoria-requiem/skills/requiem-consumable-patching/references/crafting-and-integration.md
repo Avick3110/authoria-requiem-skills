@@ -61,9 +61,12 @@ powders, fortify-enchanting potions):
 - Station: **`WorkbenchKeyword = 0A5CB3:Skyrim.esm` (CraftingCookpot) on every one** — not the
   alchemy lab.
 - Gate: `HasPerk REQ_Alchemy_AlchemicalLore1 0BE127:Skyrim.esm` / `Lore2 0C07CA:Skyrim.esm`
-  (the tier picks the perk) — **OR**-flagged with `HasKeyword
+  (the tier picks the perk) — on potion-class recipes **OR**-flagged with `HasKeyword
   REQ_RacialSkills_CreatePotionsUnperked AD3A3B:Requiem.esp` — plus an Alchemy skill band
-  (`GetActorValue`/`GetBaseActorValue Alchemy >= a`, `< b`).
+  (`GetActorValue`/`GetBaseActorValue Alchemy >= a`, `< b`). The OR-with-unperked pattern is
+  **not universal**: the sampled oil recipe (`REQ_Smelting_Oil_Fire2 000830:AR`, re-verified
+  2026-07-17) gates on the perk + skill band alone, no racial OR. Read the comparable recipe's
+  own conditions; don't assume the OR.
 - Tiering raises **`CreatedObjectCount`** (yield), not potency: e.g. `REQ_Smelting_Oil_Fire2`
   `000830:Requiem - Alchemy Redone.esp` = FireSalts `03AD5E` ×1 + DwarvenOil `0F11C0` ×3 →
   `REQ_Oil_Fire 000807:…AR.esp` ×9 (tier 1 yields ×6), gated Lore2 + Alchemy 50–100.
