@@ -21,6 +21,16 @@ here (one home per fact). The current version lives in exactly one place:
 
 ## Read in this order
 
+0. **`git pull`, then sync-check the live install** — not just `plugin.json` versions (the 1.4.0
+   collision proved identical version strings can hide divergent content); run the dry-run byte
+   compare and act on any drift:
+
+   ```powershell
+   robocopy authoria-requiem "$env:USERPROFILE\.claude\skills\authoria-requiem" /MIR /L
+   ```
+
+   Both maintainers' agents work from installs, and a stale install invalidates every live
+   conclusion after it (the 1.3.0 "consumables completely skipped" false alarm was exactly this).
 1. **This file** — how we operate.
 2. **The latest handoff** in `dev/session-handoffs/` — what the last session did and what to pick up.
    Start here for "where are we."
@@ -118,8 +128,9 @@ dev/   (SHARED dev lane — tracked since 2026-07-15 so both maintainers + their
   temp-bump `plugin.json` to `<next>-dev` (e.g. `1.0.3-dev`), **uncommitted** — CI rejects a
   committed `-dev`; the real bump happens at release. Same convention as houseCARL. **This cuts both
   ways in a two-maintainer repo:** after `git pull` lands the *other* maintainer's plugin changes,
-  your live install is stale until you re-run the sync + restart — check `plugin.json` against your
-  installed copy's when picking up work.
+  your live install is stale until you re-run the sync + restart — run the step-0 sync check
+  ([Read in this order](#read-in-this-order)) when picking up work; a version-equal but
+  byte-different install is still stale.
 - **A report is a lead, not a fact — re-derive every claim from the live record before acting on it.**
   This applies to field reports, issues, handoffs, and *our own* audit findings. Every one checked so
   far has been **partly wrong, in both directions, across both maintainers' lanes**: 1.3.0 corrected
