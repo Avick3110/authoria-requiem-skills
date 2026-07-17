@@ -120,6 +120,24 @@ dev/   (SHARED dev lane — tracked since 2026-07-15 so both maintainers + their
   ways in a two-maintainer repo:** after `git pull` lands the *other* maintainer's plugin changes,
   your live install is stale until you re-run the sync + restart — check `plugin.json` against your
   installed copy's when picking up work.
+- **A report is a lead, not a fact — re-derive every claim from the live record before acting on it.**
+  This applies to field reports, issues, handoffs, and *our own* audit findings. Every one checked so
+  far has been **partly wrong, in both directions, across both maintainers' lanes**: 1.3.0 corrected
+  its own report's ENCH premise rather than encoding it (it was vanilla-autocalc thinking) and traced
+  "consumables completely skipped" to a **stale live install**, not a skill gap; the 1.4.0 empirical
+  close withdrew its own filed issue ([#19](https://github.com/Avick3110/authoria-requiem-skills/issues/19)
+  — the blanket DNAM rule turned out deliberate), caught a wrong disambiguator in
+  [#21](https://github.com/Avick3110/authoria-requiem-skills/issues/21) *before* it shipped (`_NPC`
+  spells follow the **player** ladder, so "no tome teaches it" would have misrouted every one), and
+  found [#15](https://github.com/Avick3110/authoria-requiem-skills/issues/15)'s cause understated
+  (extending the shared bridge needs a **recompile**, not one more alias). The inverse holds just as
+  hard: **a patch that *reads* wrong and a patch that *is* wrong are nearly disjoint sets** — ten
+  alarming findings against a shipped patch dissolved once `Configuration.TemplateFlags` was read and
+  the records proved correctly Stats-templated. So: **verify before you file *and* before you fix**,
+  expect the real fix to differ from the ask, and treat "the report says X" as the start of the
+  derivation, never the end. This is the same live-analogy discipline the pack applies to records,
+  turned on our own prose. Worked cases:
+  `dev/session-handoffs/SESSION_HANDOFF_2026-07-17_empirical-close-valserano-1.4.0.md`.
 - **Candor + no silent workarounds.** Hit a block that pressures a standard, the authority model, or a
   shipped behavior? Surface it with a recommendation; don't quietly work around it.
 
