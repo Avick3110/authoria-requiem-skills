@@ -12,9 +12,10 @@
 {"topic": "enchanting/scroll-craft furniture scripts", "file": "nox-runtime-map.md", "section": "Enchanting / tomes / scrolls"}
 {"topic": "live worked example — Nox_Conjuration_Teleport VMAD 02CBCE", "file": "nox-runtime-map.md", "section": "Live worked example"}
 {"topic": "staff scaling is NOT scripted; no Nox_KW_Staff consumer", "file": "nox-runtime-map.md", "section": "What is NOT scripted"}
+{"topic": "ask first consent gate — a follower with its own controller framework is a user decision not a default registration, factions can cross the mod's recruit flow", "file": "follower-registration.md", "section": "Ask first"}
 {"topic": "REQ_FollowerRegistration API — RegisterFollowerAlias, 30 slots, playerFollowerFaction", "file": "follower-registration.md", "section": "The API"}
-{"topic": "Authoria bridge quest reference implementation + inactive ESP state", "file": "follower-registration.md", "section": "The reference implementation"}
-{"topic": "patch recipe — add a follower to the registration quest", "file": "follower-registration.md", "section": "The patch recipe"}
+{"topic": "Authoria bridge — ten FIXED named properties, no alias loop, adding an alias is a no-op, extending means editing + recompiling a third-party script; inactive ESP state", "file": "follower-registration.md", "section": "The reference implementation"}
+{"topic": "patch recipe — ship a STANDALONE bridge quest: own quest + alias + compiled script + .seq, verify factions and 30-slot storage", "file": "follower-registration.md", "section": "The patch recipe"}
 {"topic": "load-bearing REQ_* control scripts — what not to break", "file": "req-core-scripts.md", "section": "load-bearing control scripts"}
 {"topic": "how new content registers with a Requiem system (markers not edits)", "file": "req-core-scripts.md", "section": "How new content participates"}
 {"topic": "disease script pattern — staged MGEF under a Touch ability spell", "file": "req-core-scripts.md", "section": "Diseases"}

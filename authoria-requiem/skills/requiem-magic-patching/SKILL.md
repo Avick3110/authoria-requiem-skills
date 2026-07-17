@@ -64,11 +64,17 @@ Confirm houseCARL's authority is fresh, then identify what you are patching.
    `Requiem - Magic Redone.esp`).
 
 2. **Classify what you are patching** — the branch decides the comparable:
-   - **Spell** (SPEL the player/NPC casts, or a spell tome teaches) → the `## Workflow`. An
+   - **Spell** (a school spell on the `REQ_<School><Tier>_*` scheme — cast by the player *or* an NPC,
+     tome-taught or not) → the `## Workflow`. An
      **ability SPEL granting standing-stone-like passive boons** (a birthsign/doomstone blessing, a
      "Stone" power) additionally co-routes the `requiem-patching` skill's
      `references/standing-stones.md` constraints — its magnitudes follow that model, not a combat
      spell's tier ladder.
+   - **Creature-innate magic** (a bite, breath, cloak, or innate elemental attack that *is* the
+     creature — not a spell anyone learns) → compare against **`REQ_Creature_*`**, never the tier
+     ladder (`references/spell-archetypes.md` → *Creature innates*). They are hand-tuned per
+     creature: no cost ladder, **no rider convention**, `ManualCostCalc` inconsistent — so running one
+     down the spell lane *over-builds* it. An `_NPC`-suffixed spell is **not** this (see that section).
    - **Weapon enchantment** (charge-based ENCH) → workflow + the weapon section of
      `references/enchantments.md`.
    - **Apparel enchantment** (constant-effect ENCH) → the apparel section.

@@ -95,6 +95,13 @@ collapse a multi-effect spell into one effect.
 with one effect is under-built, not "already fine." The signature riders per archetype (all
 verified live 2026-07-17; magnitudes `m`, durations `d` at the sampled tier):
 
+> **Riders are a *scheme-spell* convention — `REQ_Creature_*` innates don't carry them.** "One effect
+> is under-built" is true of a player (or `_NPC`-copy) fireball and **false** of a creature's breath:
+> Requiem's own creature innates run 1–4 effects with no rider set and no cost ladder. Classify first
+> (`SKILL.md` step 2); if it's creature-innate magic, mirror the `REQ_Creature_*` family comparable
+> and add nothing (`spell-archetypes.md` → *Creature innates*). Adding riders to an innate is not a
+> harmless over-write — it hands the creature a magicka drain and an extra stagger by mistake.
+
 | Archetype | Rider(s) the comparable adds | Example FormIDs |
 |---|---|---|
 | Fire | **Cremation** lingering burn DoT (m3/d4 at T3) | `REQ_Effect_DestructionGM_Cremation3 005AAA:MR` |
