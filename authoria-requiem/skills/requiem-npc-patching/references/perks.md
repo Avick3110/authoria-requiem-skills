@@ -46,13 +46,21 @@ and a higher tier just sits deeper in the tree). The count escalates with tier (
 sampled at 5 → 9 → 12; guard ~17). They cover the actor's weapon skill
 (one-handed/two-handed/archery), armor (heavy/light), and block.
 
-**The modded NPC's own empty lists are not a skip signal.** The derivation source for perks and
-spells is the **analogue**, never the record you're patching: Requiem's own low-tier sources ship
-empty (bandit `_Base` and `EncWolf` carry zero perks *and* zero `ActorEffect`; `Warlock01` has no
-perks; `Draugr01` has no spells — verified live 2026-07-17), and a modded combatant with no
-perks/spells "to begin with" is in exactly that state. It still **gets the analogue's full kit for
-its role and tier** — perks *and* castable spells *and* the tempering trait. "It had none, so
-there was nothing to patch" is the field failure this paragraph exists to kill.
+**The modded NPC's own lists — empty *or* populated — are not the verdict.** The derivation source
+for perks and spells is the **analogue**, never the record you're patching. Two field failures, same
+root:
+
+- **Empty kit read as "nothing to patch."** Requiem's own low-tier sources ship empty (bandit `_Base`
+  and `EncWolf` carry zero perks *and* zero `ActorEffect`; `Warlock01` has no perks; `Draugr01` has
+  no spells — verified live 2026-07-17), and a modded combatant with no perks/spells "to begin with"
+  is in exactly that state. It still gets the analogue's full kit for its role and tier — perks *and*
+  castable spells *and* the tempering trait.
+- **Sparse kit read as "already has perks."** A source record carrying a handful of mediocre vanilla
+  perks (2, 3, 9 entries, none of them null) is not done — the analogue's kit escalates with tier
+  (bandit 5/9/12, guard ~17, vampire tier-2 30), and the verdict on every combatant is the
+  **comparison against that kit**: vanilla source perks are replaced by it (§ the modded-vs-vanilla
+  rule below), modded ones kept and augmented. Leaving a 3-perk kit standing because it wasn't empty
+  is the same failure as the empty-kit skip, one notch up.
 
 ## Source-carried: Requiem skill-tree perks
 
@@ -78,8 +86,13 @@ From `ActorAssignmentRules_Requiem.esp.conf`. These are assigned at build by con
   seeker `AE3592`, … plus the Resist-and-Regen-Tweak **physique** taxonomy (fur `000805`, metal
   `000807`, chitin `000802`, stone `00080A`, zombie `00080D`, supernatural-undead `00080B`/dragon
   `000804`) in `Requiem - Resist and Regen Tweak.esp`. See `trait-bridge.md`.
-- **`feature_stateTraits` (by KEYWORD):** ghost `031284` (kw `ghost 0D205E`), spirit `AD385B`
-  (kw `spirit 10EAD7`), vampire `AD3A44` (kw `vampire 0A82BB`).
+- **`feature_stateTraits` (by KEYWORD):** ghost `RFTI_Trait_Ghost 031284` (kw
+  `ActorTypeGhost 0D205E:Skyrim.esm` — a vanilla keyword carried on the **NPC record**; 236 vanilla
+  carriers verified live, e.g. the MG07 ghosts and Soul Cairn souls), spirit `AD385B`
+  (kw `spirit 10EAD7`), vampire `AD3A44` (kw `vampire 0A82BB`). A modded ghost/spectral actor
+  missing the keyword gets the **keyword** added to its `Keywords` — that is the input the pass
+  reads; hand-stamping the trait perk instead fights the auto-pass like any other
+  Reqtificator-assigned perk.
 - **`feature_playerExclusive` / `feature_npcExclusive`:** player-only skill perks + utility spells;
   NPC persistent-spell rescaling. Not your concern for a generic NPC.
 

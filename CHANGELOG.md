@@ -2,6 +2,43 @@
 
 All notable changes to the Authoria Requiem Patching Skills plugin. Versioning is [semantic](https://semver.org); the `version` in `authoria-requiem/.claude-plugin/plugin.json` is bumped on each release.
 
+## 1.5.0 — 2026-07-17
+
+Field-report round 3 (Heisen, 2026-07-17): the live Val Serano NPC/race patch re-run surfaced
+five loopholes that survive 1.3.0's doctrine — each traced on the reported records and closed with
+a live-mined rule (evidence: `dev/corpus-2026-07-17-field-report-round3/`). Most of the report's
+other items (DNAM never patched, empty-kit skips, civilian misclassification) were already fixed in
+1.3.0; the failing session ran on a pre-1.3.0 live install (synced only at 1.3.0's landing minute).
+Body + references only — no descriptions changed, no §6.5 re-measure owed.
+
+- **`requiem-npc-patching` — a populated source kit is not adequacy.** The 1.3.0 empty-kit rule
+  generalized: the source kit — empty *or* populated — never caps the derivation; the perk/spell
+  verdict on every combatant is a comparison against the analogue's kit (bandit 5/9/12, guard ~17,
+  vampire tier-2 30), vanilla source perks replaced by it, modded ones augmented. (The report's
+  "skips adjusting perks on NPCs that already have a handful of mediocre perks when none are null.")
+- **`requiem-npc-patching` — template-skip requires walking the chain.** Workflow A's
+  already-templated skip is valid only when the chain ends in a Requiem-balanced or this-pass-patched
+  base — a soul/simulacrum copy templating its own mod's `PCLevelMult` original inherits unpatched
+  balance (the report's wholly-skipped `…Soul` actor). Drain-check keepers now name the
+  `Stats`-templated case explicitly (inert own `LevelMult`, chain walked, never flags alone).
+- **`requiem-npc-patching` — mounts/pets/livestock lane.** A mount never enters the combat/boss
+  ladder regardless of `Unique`/`Summonable`/name: ordinary saddled horse = fixed level 4, H 289,
+  AutoCalc ON (mined live); `Shadowmere` (50, H 1637, `REQ_Trait_Healing_*`) is the only
+  supernatural-steed precedent. (The report's level-50 riding horse.)
+- **`requiem-npc-patching` — alternate-state copies + the ghost state input.** Soul / simulacrum /
+  ghost / flashback duplicates of a named actor: patch the primary, template the copy onto it
+  (`Stats, SpellList` — vanilla's own Soul Cairn pattern); a spectral actor carries
+  `ActorTypeGhost 0D205E:Skyrim.esm` on the NPC record (236 vanilla carriers verified) so the
+  Reqtificator's state-trait pass assigns `RFTI_Trait_Ghost 031284` at build — the stale
+  `perks.md` keyword citation fixed, hand-stamping named as the anti-pattern. Recognized-race
+  creatures clarified: "almost nothing" is still a pass (fixed level + offsets — the report's
+  skipped chaurus hatchling); mod-theme (a pirate crew) named as a combat classification signal.
+- **`requiem-race-patching` — state-variant races.** A ghostly/spectral/skeletal reskin race
+  classifies to its base creature's analogue; the spectral state is delivered at the NPC layer via
+  `ActorTypeGhost` (named in the Layer-B handoff), not on the RACE record. A field-identical variant
+  may skip on the field comparison, but the disposition still names the analogue and routes the
+  state keyword. (The report's skipped "Ghostly Fox" race.)
+
 ## 1.4.0 — 2026-07-17
 
 Two doctrine fixes found by the **1.3.0 empirical close** — the first live re-run of the pack's own

@@ -10,6 +10,8 @@ so use a layered read rather than any single field.
 - [Step 3 — recognizing a boss](#step-3--recognizing-a-boss)
 - [Step 4 — numbered NPCs](#step-4--numbered-npcs)
 - [Step 5 — mapping to a Requiem analogue](#step-5--mapping-to-a-requiem-analogue)
+- [Mounts, pets, and livestock](#mounts-pets-and-livestock)
+- [Alternate-state copies and spectral actors](#alternate-state-copies-and-spectral-actors)
 - [When to ask](#when-to-ask)
 
 ## Step 1 — combatant or skip?
@@ -32,7 +34,10 @@ its outfit, a combat style, a hostile faction, combat perks/spells, or a dungeon
 is a **combatant that a lazy or reused class is mislabeling** — patch it. Guards, soldiers,
 mercenaries, hostile "villagers", quest attackers, and arena/duel actors are all combatants even
 when their class or day-job says otherwise. A quest-giver who is scripted to fight in any scene is
-a combatant. If, after reading class + AI + factions + outfit + perks/spells, the verdict is still
+a combatant. **The mod's own theme is a signal too:** a pirate/warband/cult roster's named crew are
+fighters by construction — a crew member with a combat class (`CombatWarrior1H`) and `Unaggressive`
+dockside AI is still a combatant (verified field case: exactly that pirate shipped as a skip with
+only her level touched). If, after reading class + AI + factions + outfit + perks/spells, the verdict is still
 genuinely ambiguous — **patch the combat-consistent minimum** (fixed level + role class, per the
 analogue) and say so, rather than skipping; an over-levelled shopkeeper is a mild bug, an
 unpatched enemy is the failure class this skill exists to kill.
@@ -64,13 +69,19 @@ Four ways a combatant is patched (see SKILL.md Workflow):
 | Patch-class | What it is | How |
 |---|---|---|
 | **Generic combatant** | bandit, forsworn, marauder, mage, cultist, mercenary mob | template onto `REQ_<Role>_Template_*`, or replicate balance fields |
-| **Creature** | animal / undead / daedra / automaton | recognized race → near-nothing; new race → trait bridge |
+| **Creature** | animal / undead / daedra / automaton | recognized race → near-nothing (still a pass: fixed level + offsets); new race → trait bridge |
 | **Follower** | recruitable companion | record-side follower factions; **keep PCLevelMult** (`followers.md`) |
-| **Boss** | unique, heavily buffed | set fields directly, buff hard (Step 3) |
+| **Boss** | unique, heavily buffed, *and combat-capable* | set fields directly, buff hard (Step 3) |
+| **Mount / pet / livestock** | horse, dog, pack animal — even unique/summonable | its own lane, never the combat ladder (below) |
+| **Alternate-state copy** | soul / simulacrum / ghost / flashback duplicate of a named actor | patch the primary, template the copy onto it (below) |
 
 ## Step 3 — recognizing a boss
 
-A boss is a **unique, named** actor Requiem makes much stronger than the generic ladder. Signals:
+A boss is a **unique, named** actor Requiem makes much stronger than the generic ladder — and it must
+be a **combat archetype first**. `Unique`, `Summonable`, `Essential`, or a grand name on a mount, pet,
+or ambient critter does not open the buff path: a summonable named horse is patched in the mounts lane
+(below), not Workflow D (verified field case: a "Bronze Equus" riding horse shipped at level 50 off
+exactly this misread). Signals:
 
 - **`Unique` flag** set (named, single instance) — the strongest signal.
 - **Named editorID**, not a generic `Enc*`/`…Template…`/numbered look-template.
@@ -126,6 +137,46 @@ Order of reliability:
 
 For creatures specifically, the analogue choice also picks the trait classification — keep it in sync
 with whatever `requiem-race-patching` chose for that race (`trait-bridge.md`).
+
+## Mounts, pets, and livestock
+
+A ride-able or companion animal is patched **against the live winner of its own kind, never the
+combatant/boss ladder** — the horse lane on a modded setup is often owned by a horse overhaul rather
+than Requiem, and per the authority model the live winner is still what you derive from. Mined live
+(2026-07-17):
+
+- **Ordinary saddled horse** (`EncHorseSaddledBrown 023AB2` and kin): **fixed level 4**, AutoCalc ON,
+  DNAM H 289 / S 106, `Respawn` + `BleedoutOverride`, `EncClassHorse` + `csHorse`, no perks, no
+  `ActorEffect`. This is the tier a modded riding horse maps to.
+- **Named supernatural steed** (`Shadowmere 09CCD7`): level 50, H 1637, `Aggressive`, and a
+  `REQ_Trait_Healing_Shadowmere` ability — the *only* boss-tier mount precedent. A modded horse earns
+  this tier only by being that kind of named supernatural steed, with the analogue read live.
+
+The patch is the usual de-level pass — fixed level, `PCLevelMult` removed, DNAM from the analogue —
+plus nothing from the combat kit (no combat perks, no tempering trait). A mount that is *also* a
+summon keeps `Summonable`/`DoesNotBleed` as authored; the summon spell routes to the
+`requiem-magic-patching` skill as usual.
+
+## Alternate-state copies and spectral actors
+
+Mods duplicate a named actor for quest states — a "soul"/afterlife version, a simulacrum, a ghost, a
+marooned/flashback double. These are **combatants that should not drift from their primary**:
+
+1. **Patch the primary once**, fully (level, DNAM, kit — per its role).
+2. **Template each copy onto the primary** — `Template` → the primary record, `TemplateFlags`
+   `Stats, SpellList` (plus `Traits`/`Inventory` where the state allows) — instead of re-deriving the
+   copy. This is the engine pattern vanilla itself uses (the Soul Cairn "soul" NPCs; a mod's own
+   `…Soul` record templating its living original). A copy that already templates the primary is
+   dispositioned via the Workflow A chain-walk: valid only once the primary is patched, with its own
+   non-inherited perks/spells still reconciled.
+3. **A spectral copy carries `ActorTypeGhost 0D205E:Skyrim.esm` in its NPC `Keywords`.** The
+   Reqtificator's state-trait pass keys on that keyword (236 vanilla carriers — the MG07 ghosts, the
+   Soul Cairn souls) and assigns the ghost `incomingDamageModifier` trait at build. Carry the keyword
+   — the input — never the trait perk itself (`perks.md`).
+
+A **spectral ambient critter** (a ghost fox quest guide) still gets the minimum pass: fixed level from
+its mundane analogue's tier, `PCLevelMult` removed, the `ActorTypeGhost` keyword — and its race routes
+to the `requiem-race-patching` skill for the base-creature classification.
 
 ## When to ask
 

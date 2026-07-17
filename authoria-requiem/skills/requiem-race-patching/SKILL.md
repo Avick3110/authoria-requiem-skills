@@ -209,6 +209,17 @@ undead) — never leave a creature unpatched.
    Fallback when genuinely unclear: **Elite Draugr** (`DraugrRace 000D53` + `REQ_Trait_Armor_Draugr_Elite
    03280F`). The full race → trait-category → perk table is in `references/creature-traits.md`.
 
+   **A state-variant race — a ghostly/spectral/skeletal reskin of a base creature** (a "Ghostly Fox"
+   cloning `FoxRace`'s stat block) — classifies to its **base creature's** analogue; the spectral
+   state is *not* delivered on the RACE record. It rides the `ActorTypeGhost 0D205E:Skyrim.esm`
+   keyword on each actor's **NPC_** record, which the Reqtificator's state-trait pass matches to
+   assign the ghost trait at build — so name that keyword in the Layer-B handoff to the
+   `requiem-npc-patching` skill (step 5), exactly like the trait perk. A variant whose
+   balance-bearing fields already mirror the analogue may then skip on that field comparison
+   (a ghost doesn't get `REQ_DropsBloodKeyword`), but the disposition still names the base analogue
+   and routes the state keyword — "it's just a visual ghost" alone is the label-skip the bulk pass
+   forbids.
+
 2. **Read the analogue's full record and copy it** — `Starting` (Health/Magicka/Stamina), `Regen`,
    `UnarmedDamage`, the `SkillBoost` slots (constructs/atronachs carry `Illusion 95` = fear/illusion
    immunity; draugr `Destruction 5`/`Illusion 35`; gargoyle `Sneak 10`), and the analogue's Requiem
@@ -261,7 +272,9 @@ undead) — never leave a creature unpatched.
    - **Template the creature's NPCs onto a known Requiem race** (they then inherit everything), or
    - **Hand-add the named perk to the creature's NPCs** — this is the bridge into the
      **`requiem-npc-patching` skill**. The race skill *names* the classification + perk; the
-     `requiem-npc-patching` skill *applies* it per-actor.
+     `requiem-npc-patching` skill *applies* it per-actor. For a **state-variant** race the handoff
+     also names the state keyword its actors must carry (`ActorTypeGhost` for spectral — Workflow B
+     step 1), which the Reqtificator matches instead of a hand-stamped trait.
 
 ## Judgment
 

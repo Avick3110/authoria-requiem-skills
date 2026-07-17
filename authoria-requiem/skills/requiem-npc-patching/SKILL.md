@@ -145,7 +145,9 @@ actor and the record's own balance are both this lane's job; neither may be wave
 
 **Every FormID gets a disposition, and "patched" is a field verdict — not a record-touch.** Walk the
 full enumeration: each record is **patched** (note which workflow) or **skipped** (note the reason —
-civilian / vendor / child / already-templated / quest or scene actor; the fuller skip taxonomy
+civilian / vendor / child / already-templated *with the chain walked to a patched or Requiem base*
+(Workflow A); a "quest or scene actor" is a skip only when it never fights — a summoned copy, duel
+double, or scene attacker is a combatant; the fuller skip taxonomy
 is in `references/identification.md`), and a skip is verified on *that* record, never inherited from a
 neighbour. **Flags fields are unions, not scalars:** a `Configuration.Flags` write replaces the whole
 bitfield, so read the winner's flags first and write original-bits + your change — a literal Set that
@@ -159,8 +161,10 @@ patched, it's half-done**, and the count must never close green over it.
 Close the pass with a **reconciliation count — patched (field checklist passed) + skipped =
 enumerated.** If the two sides don't add up, a record fell through; find it before you call the type
 done. Then **re-run query 1 as a drain check**: it must come back empty, or return only intended keepers
-(followers, which keep `PCLevelMult`). A non-empty result carrying any non-follower means a `LevelMult`
-was never removed on that actor — find it and de-level it before you close. (This is the per-record
+— followers (which keep `PCLevelMult`), and `Stats`-templated actors whose verified chain ends in a
+patched base (their own `LevelMult` is inert — the template's `Stats` flag overrides it — but only a
+walked chain earns the keeper label, never the flags alone). A non-empty result carrying anything else
+means a `LevelMult` was never removed on that actor — find it and de-level it before you close. (This is the per-record
 coverage the `requiem-patching` skill's integration checklist gates on for high-count types.)
 
 ## Workflow
@@ -180,6 +184,14 @@ If the NPC's `Configuration.TemplateFlags` already include `Stats` + `SpellList`
 editorID, or it templates onto a Requiem base), it already inherits Requiem's balance. Confirm the
 `Template` points at a representative base and the NPC carries **no modded spells/perks** of its own,
 then leave it. Don't re-derive what the template already delivers.
+
+**Walk the template chain to its end before crediting it.** Inheritance is only as good as the base
+it lands on: a chain ending in another of the *mod's own* actors — a soul/simulacrum copy templating
+its living original, itself still on `PCLevelMult` — delivers unpatched balance, not Requiem's
+(verified field case: a "soul" duplicate skipped wholesale because its flags looked inherited). Such
+a record is dispositioned "inherits via template from `<base>`" only once the base itself is patched
+this pass, and any own-list residue the flags don't cover (its own perks/spells when only
+`Stats`+`SpellList` are inherited) still gets the kit comparison.
 
 ### B — Has a template, no modded spells/perks → tick the flags
 
@@ -229,10 +241,14 @@ housecarl_bulk_apply into="Requiem NPC patching" operations=[
 ]
 ```
 
-**The modded NPC's own empty lists are never the reason to skip perks or spells.** The analogue is
-the derivation source: Requiem's own low-tier records ship with zero perks and zero `ActorEffect`
-(bandit `_Base`, `EncWolf` — verified live), and a modded combatant in that state still gets the
-analogue's full kit for its role and tier. See `references/perks.md`.
+**The modded NPC's own kit — empty *or* populated — is never the derivation source, and never the
+adequacy bar.** Requiem's own low-tier records ship with zero perks and zero `ActorEffect` (bandit
+`_Base`, `EncWolf` — verified live), so an empty list is no reason to skip; and a *populated* list
+is no reason to stop — a handful of source perks reads as "already has perks" only until you compare
+it against the analogue's kit (bandit tiers carry 5/9/12, a guard ~17, a vampire tier-2 30 — the
+field failure is leaving a 2–3-perk source kit standing because none of its entries were null). The
+perk/spell verdict on every combatant is a **comparison against the analogue's kit**: vanilla source
+perks are replaced by it, modded ones augmented. See `references/perks.md`.
 
 **Class is the balance spine** — Requiem's `REQ_Class_*` set has `StatWeights` that distribute
 AutoCalc stats by role (Bandit Health 4/Stamina 6, Guard 5/5, **Slighted 1/0/0** = the weak tier).
@@ -277,7 +293,10 @@ Reqtificator adds the `incomingDamageModifier` perk by race-FormID match at buil
 that perk, and don't replicate traits onto the NPC. (Requiem's own `EncWolf` is *identical to
 vanilla* for exactly this reason.) Set only what the comparable creature sets — usually a fixed level,
 explicit `HealthOffset`/`StaminaOffset` (creatures use offsets, **not** AutoCalcStats), and at most
-one combat perk.
+one combat perk. **"Almost nothing" is still a patch, not a skip:** the de-level pass (fixed level,
+`PCLevelMult` removed) runs on every creature, and a hatchling or ambient critter left untouched
+because "the race handles it" is exactly what the drain check exists to catch (verified field case:
+a chaurus hatchling shipped on `PCLevelMult` under that reasoning).
 
 If it's a creature of a **new/unrecognized race**, the Reqtificator can't perk it. Resolve it the
 two ways the race skill names (`requiem-race-patching` references §G + `references/trait-bridge.md`):
@@ -312,9 +331,26 @@ The mechanics are easy; the judgment is **identification** — what the NPC is, 
   balance; a non-follower must get a flat level and lose the multiplier. A **follower** keeps
   `PCLevelMult` (with its `CalcMinLevel`/`CalcMaxLevel`) so it scales with the player.
 
-- **Bosses get buffed, not normalized.** Recognize the unique heavily-buffed actor and make it
-  strong (high level, strong class/style, rich perks, a `REQ_Trait_*` for signature toughness —
-  reuse Requiem's or author one). Don't flatten it to a generic tier.
+- **Bosses get buffed, not normalized — but the buff path needs a combat archetype first.**
+  Recognize the unique heavily-buffed actor and make it strong (high level, strong class/style, rich
+  perks, a `REQ_Trait_*` for signature toughness — reuse Requiem's or author one). Don't flatten it
+  to a generic tier. `Unique`/`Summonable`/a grand name on a **mount, pet, or ambient critter** does
+  *not* qualify — those route to the mounts lane below.
+
+- **Mounts, pets, and livestock are their own lane — never the combat ladder.** A horse, dog, or
+  pack animal derives from the live winner of its own kind: an ordinary saddled horse is fixed
+  level 4 (H 289, AutoCalc on — verified live), and only the named supernatural steed tier
+  (Shadowmere: 50, H 1637, a `REQ_Trait_Healing_*`) sits higher. De-level it like everything else;
+  a level-50 riding horse is the field failure this lane exists to kill. Details + mined numbers:
+  `references/identification.md`.
+
+- **Alternate-state copies of a named actor inherit from their primary.** A "soul", "simulacrum",
+  ghost, marooned, or flashback duplicate is a combatant, not a quest-actor skip: patch the primary
+  once, then template the copy onto it (`Template` → the primary; `TemplateFlags` `Stats, SpellList`
+  as the state allows — the pattern vanilla itself uses for Soul Cairn copies) instead of
+  re-deriving each copy. A **spectral** actor also carries `ActorTypeGhost 0D205E:Skyrim.esm` on its
+  NPC record — the Reqtificator's state-trait pass keys on that keyword to add the ghost trait at
+  build; carry the keyword, never hand-stamp the trait perk (`references/perks.md`).
 
 - **Modded vs vanilla spells & perks — the precise rule.** A **modded** spell/perk/item (new, not in
   the base game, carrying the mod's own mechanic) is **never removed — augment or patch it**, and
@@ -382,8 +418,8 @@ Before finishing an NPC override, confirm:
       creatures/casters/bosses — they stack on the DNAM base attributes.
 - [ ] **Class** = the role-correct `REQ_Class_*`; **CombatStyle** matches the role.
 - [ ] **Perks** = the analogue's combat perks (Requiem's player perk tree on vanilla FormIDs);
-      **an empty source list still gets the analogue's kit** — the modded record is never the
-      derivation source; **no** Reqtificator-assigned perks hand-added.
+      **the source kit — empty or populated — never caps the derivation**: the verdict is the
+      comparison against the analogue's kit, per record; **no** Reqtificator-assigned perks hand-added.
 - [ ] **Named non-combatant with wrong numbers:** got the stat-only civilian pass (fixed low level,
       skills 5–20, DNAM set, no kit) — not skipped outright, not given a combat kit.
 - [ ] **Trait bridge:** recognized-race creature → nothing (Reqtificator handles it); new-race
@@ -394,7 +430,12 @@ Before finishing an NPC override, confirm:
       trait.
 - [ ] **Spells/perks:** modded ones augmented (not removed); vanilla ones replaced with the analogue.
 - [ ] **DefaultOutfit / DeathItem** links set to the Requiem analogue's (contents → the `requiem-leveled-list-patching` skill).
-- [ ] **Template + TemplateFlags** set when templating onto a Requiem base.
+- [ ] **Template + TemplateFlags** set when templating onto a Requiem base — and every
+      inherited-template skip has its **chain walked to a patched or Requiem-balanced end**.
+- [ ] **Mount/pet/livestock:** patched in its own lane (ordinary mount fixed ~L4; the supernatural
+      steed tier only with live precedent) — never the combat ladder, never Workflow D.
+- [ ] **Alternate-state copies** templated onto their patched primary; spectral actors carry
+      `ActorTypeGhost` (the Reqtificator adds the ghost trait — not hand-stamped).
 - [ ] **Appearance fields untouched**; `Factions`/`AIData`/mod traits untouched.
 - [ ] **Flags written as unions** — every `Configuration.Flags` write carries the winner's original
       bits plus your change; no `Female`/`Essential`/`Unique`/`IsGhost`/`Invulnerable` bit silently
