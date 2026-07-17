@@ -169,6 +169,8 @@ does). Everything Requiem-balanced then flows from the base.
 | Follower | **PcLevelMult kept** | on | — | small (Lydia H+50) | ~7 + 2 REQ perks | — | follower factions (see followers.md) |
 | Named civilian (Belethor, Sven, Faendal) | fixed low | on | pushed UP | 0 | **0** | **0** | **stat-only pass**: SkillValues pulled down to 5–20, DNAM up — no perks, no kit |
 | Generic civilian / child / beggar | — | — | — | — | — | — | Requiem doesn't override them at all — skip, with the reason verified on the record |
+| Ordinary mount (`EncHorseSaddled*` `023AB2`) | **4** | on | 289/-/106 | 0 | **0** | **0** | mounts lane — never the combat ladder; the live horse winner may be a horse overhaul: derive from it |
+| Supernatural steed (`Shadowmere 09CCD7`) | 50 | on | 1637/-/198 | 0 | 0 | `REQ_Trait_Healing_Shadowmere` | the only boss-tier mount precedent — earned by kind, not by `Unique`/`Summonable` |
 
 Perk lists on enemies resolve to **Requiem's own player perk tree** (vanilla `Skyrim.esm` FormIDs
 carrying `REQ_*` EditorIDs — `REQ_OneHanded_WeaponMastery1/2`, `REQ_Block_ImprovedBlocking`,

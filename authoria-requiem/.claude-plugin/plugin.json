@@ -1,6 +1,6 @@
 {
   "name": "authoria-requiem",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Patch newly-added mods to be Requiem-consistent — derive stats, keywords, recipes, and leveled-list placement by comparing new content live against Requiem's own records via houseCARL, then emit a direct ESP override the Reqtificator integrates at build time. Requires houseCARL.",
   "author": { "name": "DrHeisen" },
   "keywords": ["skyrim", "requiem", "modding", "patching", "authoria", "housecarl"]
