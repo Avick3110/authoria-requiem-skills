@@ -53,6 +53,17 @@ conversation); prune when done — delete or move under *Done* with the resolvin
   coverage audit, `resolve_names` over Perks/ActorEffect/Keywords) and magic (the NULL scan over
   Spell/ObjectEffect/Ingestible `Effects`). Still open for the remaining list-forwarding lanes
   (armor/weapon/ammo keywords + leveled-list entries) if a live run shows NULLs riding those.
+
+- **Check `gh pr list` before choosing a version number — the "re-check both files" rule doesn't
+  catch an *open* parallel PR.** Two 1.4.0s were authored on the same day from the same `cd5b2cf`
+  base (Heisen's #20 at 11:32, then #22 merged ~14:40 without checking for open PRs); #20 had to be
+  rebased to 1.5.0 after the fact. The sharp edge: on rebase `plugin.json` did **not** conflict —
+  both sides wrote the identical string `1.4.0`, so git auto-merged it silently. `CHANGELOG.md`
+  conflicts (different surrounding text) but the version field can slip through clean, so "rebase
+  and re-check both" isn't enough on its own. Cheap fix, no doc-rule change needed: run
+  `gh pr list --state open` and read the top of each open PR's `CHANGELOG` before picking your
+  number. Worth a line in the PR template's "Before merging" block if it recurs.
+  `(2026-07-17, 1.4.0/1.5.0 version collision, Aaron)`
 ## Done
 
 - ~~Router caveat: patch-plugin enumeration counts ≠ distinct-record counts (F-VS3)~~ — **fixed
