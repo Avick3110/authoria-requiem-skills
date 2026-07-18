@@ -134,6 +134,16 @@ housecarl_create_record record_type="ConstructibleObject" \
 
 The tempering recipe is the same with `WorkbenchKeyword` = `088108:Skyrim.esm` and a single ingot.
 
+### Disable an existing recipe
+
+```
+housecarl_set_field formid="<recipe>" field_path="WorkbenchKeyword" \
+  value="AD3B01:Requiem.esp" into="Authoria_Weapons"  # REQ_DisableRecipe
+```
+
+Use this instead of `Remove` or a null value. Requiem's disabled-recipe convention is an explicit
+workbench keyword; the write read-back must resolve it as `REQ_DisableRecipe`.
+
 ## Verify the write
 
 **Before the patch is enabled in MO2**, the write call itself is the verification: the per-op

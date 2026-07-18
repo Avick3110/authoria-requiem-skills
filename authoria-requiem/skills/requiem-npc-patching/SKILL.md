@@ -86,6 +86,13 @@ Confirm authority is fresh, then identify what you're holding before you change 
    cross-check combat style, gear, and perks (some modders slap a generic/Dremora class on
    everything). Mapping heuristic in `references/identification.md`.
 
+5. **Choose one stat-authority mode with the user for this plugin, before the first write.** Apply
+   that choice to every non-templated NPC that enters the stat pass; never mix modes record by
+   record. **AutoCalc mode:** ensure `AutoCalcStats` is on and let class + level own the calculation; do not
+   write `PlayerSkills` or ACBS Health/Magicka/Stamina offsets. **Manual mode:** remove
+   `AutoCalcStats`, then derive and write the complete DNAM `PlayerSkills` block plus the ACBS stat
+   offsets from the analogue. Templated actors remain Workflow A skips in either mode.
+
 ## Bulk pass protocol (whole-plugin jobs)
 
 When you're patching a whole plugin — routed here from the `requiem-patching` skill, or any job with
@@ -106,8 +113,9 @@ Open with the four coverage queries — one call each, the whole plugin at once,
 (the third is the stat/kit matrix — DNAM base attributes, ACBS offsets, perk/spell counts — the
 per-record baseline the field checklist reconciles against; the fourth is the **forwarded-NULL
 scan**: a `resolve_names=true` read of `Perks`/`ActorEffect`/`Keywords`, because `REQ_NULL_*`
-stubs ride in on the mod's own list fields even when you author none — strip them during each
-record's patch, don't leave them for the integration gate. Shapes in
+stubs ride in on the mod's own list fields even when you author none. Treat it as a candidate scan,
+not an instruction to touch every hit: an inherited/template NPC remains a no-write skip, including
+its inert local NULL list entries. Strip NULLs only from fields the actor actually owns. Shapes in
 `references/housecarl-recipes.md`):
 
 1. **The de-levelling work list** — every NPC still on a player-level multiplier. A scalar comparison on
@@ -153,10 +161,10 @@ neighbour. **Flags fields are unions, not scalars:** a `Configuration.Flags` wri
 bitfield, so read the winner's flags first and write original-bits + your change — a literal Set that
 only names the bits you thought about silently strips `Female`, `Essential`, `Unique`, `IsGhost`,
 `Invulnerable` from the actors that carried them. A record counts **patched only when the per-record field checklist (`## Checklist`) passes
-for it** — level *and* flags *and* class *and* perks *and* spells *and* stat offsets, as its archetype
-requires. In a bulk job that checklist runs **for every enumerated record, not once for the job**: a
-record that got a fixed level but never got its perks, spells, `PlayerSkills`, or stat offsets is **not
-patched, it's half-done**, and the count must never close green over it.
+for it** — level, intended flag delta, class, perks, spells, and the plugin-wide stat mode. In a bulk
+job that checklist runs **for every enumerated record, not once for the job**: a manual-mode record
+missing its `PlayerSkills`/offset block, or an AutoCalc-mode record carrying newly stamped manual
+stats, is **not patched, it's half-done**, and the count must never close green over it.
 
 Close the pass with a **reconciliation count — patched (field checklist passed) + skipped =
 enumerated.** If the two sides don't add up, a record fell through; find it before you call the type
@@ -182,16 +190,18 @@ so they scale with the player.
 
 If the NPC's `Configuration.TemplateFlags` already include `Stats` + `SpellList` (often a `…lvl…`
 editorID, or it templates onto a Requiem base), it already inherits Requiem's balance. Confirm the
-`Template` points at a representative base and the NPC carries **no modded spells/perks** of its own,
-then leave it. Don't re-derive what the template already delivers.
+`Template` points at a representative base, then leave the NPC **entirely untouched**. Don't
+re-derive what the template already delivers, and don't clean inert local `REQ_NULL_*` perks/spells:
+creating an override for data the template masks only wastes work and can serialize stray count
+subrecords.
 
 **Walk the template chain to its end before crediting it.** Inheritance is only as good as the base
 it lands on: a chain ending in another of the *mod's own* actors — a soul/simulacrum copy templating
 its living original, itself still on `PCLevelMult` — delivers unpatched balance, not Requiem's
 (verified field case: a "soul" duplicate skipped wholesale because its flags looked inherited). Such
 a record is dispositioned "inherits via template from `<base>`" only once the base itself is patched
-this pass, and any own-list residue the flags don't cover (its own perks/spells when only
-`Stats`+`SpellList` are inherited) still gets the kit comparison.
+this pass. Reconcile only fields the template flags do **not** inherit; inherited local residue is
+inert and does not justify an override.
 
 ### B — Has a template, no modded spells/perks → tick the flags
 
@@ -224,13 +234,16 @@ balance fields** instead — set them from the live analogue, never from guessed
 ```
 housecarl_bulk_apply into="Requiem NPC patching" operations=[
   {formid:"<npc>", field_path:"Configuration.Level.Level", value:"12"},              # fixed; read the analogue
-  {formid:"<npc>", field_path:"Configuration.Flags", value:"Respawn, AutoCalcStats"},# UNION: winner's bits minus PCLevelMult, plus AutoCalcStats — never just the bits named here
+  {formid:"<npc>", field_path:"Configuration.Flags", value:"Respawn"},               # manual-mode example; full winner union, AutoCalcStats removed
   {formid:"<npc>", field_path:"Class",        value:"85BCE3:Requiem.esp"},           # REQ_Class_Bandit_SwordShield
   {formid:"<npc>", field_path:"CombatStyle",  value:"03BE1B:Skyrim.esm"},            # role combat style (often vanilla)
   {formid:"<npc>", field_path:"DefaultOutfit",value:"<REQ outfit>:Requiem.esp"},     # gear drives much of the difficulty
   {formid:"<npc>", field_path:"Perks", verb:"ReplaceAll", values:["<combat perks from the analogue>"]},
-  {formid:"<npc>", field_path:"ActorEffect", verb:"Add", value:"93369F:Requiem.esp"}, # REQ_Trait_Tempering_* (tempers its gear)
-  # The DNAM block — ALWAYS carry the analogue's, whatever AutoCalcStats says (npc-fields.md):
+  {formid:"<npc>", field_path:"ActorEffect", verb:"Add", value:"93369F:Requiem.esp"} # REQ_Trait_Tempering_* (tempers its gear)
+]
+
+# Continue this same manual-mode example — AutoCalcStats is OFF for the whole plugin stat pass:
+housecarl_bulk_apply into="Requiem NPC patching" operations=[
   {formid:"<npc>", field_path:"PlayerSkills.Health",  value:"112"},   # base attributes (NOT the ACBS offsets)
   {formid:"<npc>", field_path:"PlayerSkills.Magicka", value:"100"},
   {formid:"<npc>", field_path:"PlayerSkills.Stamina", value:"118"},
@@ -253,10 +266,9 @@ perks are replaced by it, modded ones augmented. See `references/perks.md`.
 **Class is the balance spine** — Requiem's `REQ_Class_*` set has `StatWeights` that distribute
 AutoCalc stats by role (Bandit Health 4/Stamina 6, Guard 5/5, **Slighted 1/0/0** = the weak tier).
 Pick the class whose role + weapon + strength matches; the rest of the difficulty follows from class,
-level, perks, and gear. With `AutoCalcStats` on, the actor's **`PlayerSkills`** (its per-skill
-one-handed / block / destruction values) derive from class + level — verify them, don't hand-stamp. A
-creature or boss with AutoCalc **off** carries explicit `PlayerSkills` instead: copy the analogue's
-per-skill values, because they decide how hard a de-levelled enemy actually hits, blocks, and casts.
+level, perks, and gear. Then obey the plugin's stat-authority choice: AutoCalc mode leaves all
+`PlayerSkills` and ACBS stat offsets alone; manual mode removes `AutoCalcStats` and copies the
+analogue's complete explicit block. Never stamp manual values while leaving AutoCalc enabled.
 Combat perks are **vanilla `Skyrim.esm` skill perks** the analogue carries
 (escalating with tier) plus, on stronger actors, Requiem skill-tree perks (`REQ_OneHanded_*`,
 `REQ_Conjuration_Empower_*`); copy the analogue's set — and when no clean analogue exists (a custom
@@ -268,6 +280,15 @@ because the tempering/resist trait alone is not the magic kit, and a caster with
 stands there. **Do not hand-add the armor-penetration / armor-weight / arrow-recovery perks or the
 racial trait perk — those are Reqtificator-assigned** (see `## Common mistakes` and
 `references/perks.md`).
+
+**Apply the sparse-write gate before emitting any standalone override.** Never `Set` an optional
+FormLink to null: omit the operation when the field should stay absent, or use `verb="Remove"` when
+clearing a real link (`CombatStyle`, `AttackRace`, and other nullable links). Never author an empty
+`ReplaceAll`: if the target `Perks`/`ActorEffect` list is already empty, don't write it; if an existing
+list must become empty, remove its entries and verify xEdit shows both the list and its count subrecord
+absent — no `PRKZ = 0` and no `SPCT = 0`. Finally diff `Configuration.Flags` before/after: only the
+intended role bits and plugin-wide AutoCalc choice may change; `LoopedScript`/`LoopedAudio` and every
+other unrelated bit must remain exactly as authored.
 
 ### D — Boss (unique, heavily buffed) → set fields directly, buff hard
 
@@ -382,6 +403,10 @@ The mechanics are easy; the judgment is **identification** — what the NPC is, 
   14 *vanilla* combat perks, none of them the trait perk.)
 - **Leaving `PCLevelMult` on a non-follower**, or **stripping it from a follower.** Fixed level for
   combatants; keep the multiplier for followers.
+- **Mixing AutoCalc and explicit stats in one plugin.** Ask once: AutoCalc mode leaves manual stats
+  alone; manual mode removes `AutoCalcStats` before writing the full DNAM/ACBS block.
+- **Writing null links or empty lists.** Remove an optional link instead of setting it null; never
+  leave `PRKZ = 0` / `SPCT = 0` after clearing perks or actor effects.
 - **Under-buffing a boss** to a generic tier — recognize it and buff it (see Workflow D).
 - **Removing or replacing a *modded* spell/perk/item** (augment instead) — and the inverse, **leaving
   a *vanilla* spell/perk** in place instead of swapping in the Requiem analogue.
@@ -390,9 +415,10 @@ The mechanics are easy; the judgment is **identification** — what the NPC is, 
   role-correct `REQ_Class_*`.
 - **Replicating traits onto a recognized-race creature's NPC.** The race carries them; the NPC needs
   almost nothing. Over-patching it duplicates or fights the race layer.
-- **Leaving a `REQ_NULL_*` reference in the record.** These are inert stubs Requiem retired; houseCARL
+- **Leaving a live `REQ_NULL_*` reference in the record.** These are inert stubs Requiem retired; houseCARL
   resolves their EditorIDs live (Requiem is a master of the read), so scan `Perks`/`ActorEffect`/
-  `Keywords`/inventory/`Template` and **strip every one** — never carry or add a `REQ_NULL_*`. See
+  `Keywords`/inventory/`Template` and strip every one from fields the NPC owns. An already-templated
+  Workflow A skip remains untouched even if its masked local lists contain NULLs. See
   `references/housecarl-recipes.md` and the masters/`REQ_NULL` rule carried by the `requiem-patching`
   skill.
 - **Designing a spell here.** Link the Requiem spell; route MGEF/effect design to the `requiem-magic-patching` skill.
@@ -405,18 +431,18 @@ Before finishing an NPC override, confirm:
       that record**, or skipped with a reason; counts reconcile (patched + skipped = enumerated); query 1
       re-run drains to empty/followers-only; no same-prefix / shared-`Template` / shared-`Class`
       extrapolation; the mod's own `CLAS`/`CSTY`/`OTFT`/`FACT` records dispositioned too.
+- [ ] **One stat mode recorded for the plugin:** AutoCalc (`AutoCalcStats` on, no manual stat writes)
+      or manual (remove it, write the full derived block); no record-by-record mixing.
 - [ ] **Role identified** and it's a combatant (not a civilian/helper) — a summoned actor counts as a
       combatant (fixed level + stats here; the summon spell routed to the `requiem-magic-patching` skill).
 - [ ] **Level** fixed + `PCLevelMult` removed (followers: kept).
 - [ ] **Flags** correct (Respawn for generic spawns; Unique/Protected/Essential by role;
-      `AutoCalcStats` **as the analogue carries it** — never assumed by archetype: bandit `_Base`
-      and warlocks are OFF).
-- [ ] **The DNAM block carried from the analogue on every combatant** — `PlayerSkills.Health/
-      Magicka/Stamina` (the base attributes, distinct from the ACBS offsets), the elevated
-      `SkillValues`, and — on named/scaling actors — the analogue's `SkillOffsets` (generic mobs: 0).
-- [ ] **ACBS stat offsets** (`Configuration.<Stat>Offset`) set from the analogue on
-      creatures/casters/bosses — they stack on the DNAM base attributes.
-- [ ] **Class** = the role-correct `REQ_Class_*`; **CombatStyle** matches the role.
+      `AutoCalcStats` matches the plugin-wide choice, not a per-record impulse).
+- [ ] **Stat authority:** AutoCalc mode made no `PlayerSkills` or ACBS stat-offset writes. Manual mode
+      removed `AutoCalcStats` and carried the analogue's complete DNAM base attributes, `SkillValues`,
+      `SkillOffsets`, and ACBS Health/Magicka/Stamina offsets.
+- [ ] **Class** = the role-correct `REQ_Class_*`; **CombatStyle** matches the role, or is absent via
+      `Remove` — never an explicit null link. The same rule holds for `AttackRace` and optional links.
 - [ ] **Perks** = the analogue's combat perks (Requiem's player perk tree on vanilla FormIDs);
       **the source kit — empty or populated — never caps the derivation**: the verdict is the
       comparison against the analogue's kit, per record; **no** Reqtificator-assigned perks hand-added.
@@ -431,7 +457,8 @@ Before finishing an NPC override, confirm:
 - [ ] **Spells/perks:** modded ones augmented (not removed); vanilla ones replaced with the analogue.
 - [ ] **DefaultOutfit / DeathItem** links set to the Requiem analogue's (contents → the `requiem-leveled-list-patching` skill).
 - [ ] **Template + TemplateFlags** set when templating onto a Requiem base — and every
-      inherited-template skip has its **chain walked to a patched or Requiem-balanced end**.
+      inherited-template skip has its **chain walked to a patched or Requiem-balanced end** and
+      received no cleanup override for masked perks/spells/NULLs.
 - [ ] **Mount/pet/livestock:** patched in its own lane (ordinary mount fixed ~L4; the supernatural
       steed tier only with live precedent) — never the combat ladder, never Workflow D.
 - [ ] **Alternate-state copies** templated onto their patched primary; spectral actors carry
@@ -439,15 +466,17 @@ Before finishing an NPC override, confirm:
 - [ ] **Appearance fields untouched**; `Factions`/`AIData`/mod traits untouched.
 - [ ] **Flags written as unions** — every `Configuration.Flags` write carries the winner's original
       bits plus your change; no `Female`/`Essential`/`Unique`/`IsGhost`/`Invulnerable` bit silently
-      dropped.
+      dropped, and no unrelated `LoopedScript`/`LoopedAudio` bit added.
+- [ ] **Sparse serialization:** an empty `Perks`/`ActorEffect` result has no list and no count
+      subrecord (`PRKZ`/`SPCT` absent); no nullable FormLink was written as null.
 - [ ] **Every carried FormID resolve-verified** — `housecarl_resolve` each derived FormID (perk,
       class, outfit, spell) before the write; the classic slip is the right FormID under the wrong
       master suffix, which reads fine until the record dangles.
 - [ ] **Masters correct** — houseCARL Add+Sorts them from referenced forms the xEdit way; verify the
       `masters:` read-back. `Requiem.esp` auto-masters when a Requiem class/perk/spell is referenced
       (force it in by referencing a real Requiem form when you specifically need it).
-- [ ] **No `REQ_NULL_*` remains** in any field (`Perks`/`ActorEffect`/`Keywords`/inventory/`Template`)
-      — houseCARL resolves their EditorIDs live; strip or replace each. See `references/housecarl-recipes.md`.
+- [ ] **No live `REQ_NULL_*` remains** in fields a patched NPC owns; strip or replace each. Masked
+      local lists on a Workflow A template skip are inert and remain untouched.
 - [ ] Routed onward: loot/leveled-list contents → the `requiem-leveled-list-patching` skill; spell *design* → the `requiem-magic-patching` skill;
       script-based follower registration → the `requiem-script-patching` skill.
 

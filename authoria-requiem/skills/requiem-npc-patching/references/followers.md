@@ -13,7 +13,9 @@ live balance winner is `USMP - Requiem.esp` carrying Requiem's values). The foll
   `Configuration.Level` is a `PcLevelMult` with `CalcMinLevel`/`CalcMaxLevel` (Lydia 6 / 50). **Do not
   de-level a follower or strip the multiplier.**
 - **Flags** — `Unique` + `Protected` (a follower shouldn't die permanently to a stray hit, but isn't
-  immortal like `Essential`), `AutoCalcStats` on. Add `Female`/`OppositeGenderAnims` as the actor is.
+  immortal like `Essential`). Add `Female`/`OppositeGenderAnims` as the actor is. For
+  `AutoCalcStats`, obey the one plugin-wide stat-authority choice: ensure it is on in AutoCalc mode; remove
+  it and write the complete derived DNAM + ACBS block in manual mode.
 - **Factions (the registration record-side):**
 
   | Faction | FormID | Rank | Meaning |
@@ -32,7 +34,7 @@ live balance winner is `USMP - Requiem.esp` carrying Requiem's values). The foll
 
 ```
 housecarl_bulk_apply into="Requiem NPC patching" operations=[
-  {formid:"<follower>", field_path:"Configuration.Flags", value:"AutoCalcStats, Unique, Protected"},  # keep PcLevelMult level
+  {formid:"<follower>", field_path:"Configuration.Flags", value:"AutoCalcStats, Unique, Protected"},  # AutoCalc-mode example; preserve all other winner bits
   {formid:"<follower>", field_path:"Factions", verb:"Add", compose:{type:"RankPlacement",
      sets:[{path:"Faction", value:"05C84E:Skyrim.esm"},{path:"Rank", value:"-1"}]}},                  # PotentialFollower
   {formid:"<follower>", field_path:"Factions", verb:"Add", compose:{type:"RankPlacement",
@@ -42,7 +44,9 @@ housecarl_bulk_apply into="Requiem NPC patching" operations=[
 ]
 ```
 
-Do **not** set `PCLevelMult`→fixed here. The de-level rule is for non-followers.
+Do **not** set `PCLevelMult`→fixed here. The de-level rule is for non-followers. In manual mode,
+omit `AutoCalcStats` from the complete flags union and add the full `PlayerSkills` + ACBS stat-offset
+writes derived from the analogue; never apply only half of that switch.
 
 ## Runtime registration is script-side → the `requiem-script-patching` skill
 

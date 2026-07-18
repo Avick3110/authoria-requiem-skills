@@ -32,8 +32,8 @@ housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="NPC_" \
 
 # 4 — the forwarded-NULL scan: list fields you forward (Perks/ActorEffect/Items/Keywords) can
 #     carry REQ_NULL_* stubs IN on the mod's own records even when you author none — the Val
-#     Serano live run forwarded 7 this way. resolve_names makes them visible per row; every hit
-#     is stripped/replaced during that record's patch, not left for the integration gate.
+#     Serano live run forwarded 7 this way. resolve_names makes candidates visible per row.
+#     Strip only from fields the NPC owns; an inherited/template skip remains entirely untouched.
 housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="NPC_" \
   fields=["Perks","ActorEffect","Keywords"] resolve_names=true
 ```
@@ -47,6 +47,10 @@ that the record was touched. Close with a reconciliation count: patched + skippe
 (followers keep `PCLevelMult`); a non-follower still on it means a `LevelMult` was never removed, so
 find and de-level it before closing.
 
+Before the first write, ask the user to choose one stat mode for the whole plugin: **AutoCalc** ensures
+`AutoCalcStats` and writes no `PlayerSkills`/ACBS stat offsets; **manual** removes the flag and writes
+the complete derived DNAM + ACBS block. Apply the same mode to every non-templated NPC in the pass.
+
 ## A — Re-balance a standalone combatant (replicate the analogue's fields)
 
 `Configuration` sub-fields are addressed by path; `Configuration.Level.Level` is the fixed level.
@@ -55,13 +59,16 @@ Bring a modded bandit onto a Requiem tier:
 ```
 housecarl_bulk_apply into="Requiem NPC patching" operations=[
   {formid:"<npc>:ModBandits.esp", field_path:"Configuration.Level.Level", value:"12"},     # fixed; read the analogue
-  {formid:"<npc>:ModBandits.esp", field_path:"Configuration.Flags", value:"Respawn, AutoCalcStats"}, # remove PCLevelMult
+  {formid:"<npc>:ModBandits.esp", field_path:"Configuration.Flags", value:"Respawn"},      # manual-mode example; full winner union, AutoCalcStats removed
   {formid:"<npc>:ModBandits.esp", field_path:"Class",        value:"85BCE3:Requiem.esp"},  # REQ_Class_Bandit_SwordShield
   {formid:"<npc>:ModBandits.esp", field_path:"CombatStyle",  value:"03BE1B:Skyrim.esm"},
   {formid:"<npc>:ModBandits.esp", field_path:"DefaultOutfit",value:"9336AF:Requiem.esp"},  # tier outfit (gear = difficulty)
   {formid:"<npc>:ModBandits.esp", field_path:"Perks", verb:"ReplaceAll", values:[/* analogue's combat perks */]},
-  {formid:"<npc>:ModBandits.esp", field_path:"ActorEffect", verb:"Add", value:"93369F:Requiem.esp"},  # REQ_Trait_Tempering_Bandit_Heavy_Rank4
-  # The DNAM block — carry the analogue's, even on AutoCalc-ON actors (npc-fields.md):
+  {formid:"<npc>:ModBandits.esp", field_path:"ActorEffect", verb:"Add", value:"93369F:Requiem.esp"}  # REQ_Trait_Tempering_Bandit_Heavy_Rank4
+]
+
+# Continue this same manual-mode example — AutoCalcStats has been removed for the plugin stat pass:
+housecarl_bulk_apply into="Requiem NPC patching" operations=[
   {formid:"<npc>:ModBandits.esp", field_path:"PlayerSkills.Health",  value:"112"},        # DNAM base attrs, NOT the ACBS offsets
   {formid:"<npc>:ModBandits.esp", field_path:"PlayerSkills.Magicka", value:"100"},
   {formid:"<npc>:ModBandits.esp", field_path:"PlayerSkills.Stamina", value:"118"},
@@ -77,9 +84,9 @@ An NPC whose own `Perks`/`ActorEffect` are **empty** still gets the analogue's f
 the analogue is the derivation source, not the record you're patching (`perks.md`). For a caster,
 `ActorEffect` also carries the analogue's **castable spells**, not just traits.
 
-Removing `PCLevelMult`: set `Configuration.Flags` to the full flag string **without** `PCLevelMult`
-and set a flat `Configuration.Level.Level` (read the analogue's flags first so you don't drop a flag
-the actor needs, e.g. `Female`).
+`PcLevelMult` is the `Configuration.Level` union arm, not a flag bit. Replace it by setting a flat
+`Configuration.Level.Level`. Separately write the complete flags union, changing only intended role
+bits plus the plugin-wide AutoCalc choice. `LoopedScript`/`LoopedAudio` must not appear as collateral.
 
 ## B — Template onto a Requiem base (the clean integration)
 
@@ -137,7 +144,7 @@ Keep `PcLevelMult`; add the two follower factions:
 
 ```
 housecarl_bulk_apply into="Requiem NPC patching" operations=[
-  {formid:"<follower>", field_path:"Configuration.Flags", value:"AutoCalcStats, Unique, Protected"},   # do NOT remove PcLevelMult
+  {formid:"<follower>", field_path:"Configuration.Flags", value:"AutoCalcStats, Unique, Protected"},   # AutoCalc-mode example; preserve every other winner bit
   {formid:"<follower>", field_path:"Factions", verb:"Add", compose:{type:"RankPlacement",
      sets:[{path:"Faction", value:"05C84E:Skyrim.esm"},{path:"Rank", value:"-1"}]}},                   # PotentialFollower
   {formid:"<follower>", field_path:"Factions", verb:"Add", compose:{type:"RankPlacement",
@@ -145,6 +152,9 @@ housecarl_bulk_apply into="Requiem NPC patching" operations=[
   {formid:"<follower>", field_path:"DefaultOutfit", value:"<REQ follower outfit>:Requiem.esp"}
 ]
 ```
+
+Manual mode keeps `PcLevelMult` too, but removes `AutoCalcStats` from the full flags union and writes
+the complete derived DNAM + ACBS block. The plugin-wide stat choice still applies to followers.
 
 Runtime registration (affinity/dialogue) is script-side → route to the `requiem-script-patching` skill.
 
@@ -172,7 +182,8 @@ project-wide rule = the masters/`REQ_NULL` rule carried by the `requiem-patching
 **REQ_NULL — strip every one; none may remain.** `REQ_NULL_*` are inert stubs Requiem retired
 (NULLed perks/spells/keywords/look-templates). houseCARL reads live (Requiem active) so it **resolves
 and shows their EditorIDs** — scan the NPC's `Perks`, `ActorEffect`, `Keywords`, inventory, and
-`Template` for the `REQ_NULL` prefix and remove or replace each:
+`Template` for the `REQ_NULL` prefix and remove or replace each **only when the NPC owns that field**.
+An already-templated Workflow A NPC is a no-write skip even when a masked local list contains NULLs.
 
 ```
 {formid:"<npc>", field_path:"ActorEffect", verb:"Remove", value:"<REQ_NULL_* FormID>"}   # strip a retired stub
@@ -181,11 +192,22 @@ and shows their EditorIDs** — scan the NPC's `Perks`, `ActorEffect`, `Keywords
 
 Re-read the record after writing and confirm no `REQ_NULL_*` is left in any field.
 
+## Sparse-write rules
+
+- Omit an optional FormLink operation when the target should remain absent. To clear a real
+  `CombatStyle`, `AttackRace`, or other nullable link, use `verb="Remove"`; never `Set` it to null.
+- Do not use `ReplaceAll` with an empty `Perks` or `ActorEffect` list. Leave an already-empty list
+  unwritten; when clearing a populated list, remove its entries and verify xEdit shows no list and no
+  count subrecord (`PRKZ`/`SPCT` absent, not zero). A serialized zero count is an incomplete write:
+  report the houseCARL bug and do not ship it as a successful patch.
+- Diff `Configuration.Flags` before/after. Only intended role bits and the plugin-wide AutoCalc mode
+  may change; every unrelated bit stays source-authored.
+
 ## Verify the write
 
 ```
 housecarl_read_record formid="<npc>" conflict_tree=true \
-  fields=["Configuration","Class","CombatStyle","Perks","ActorEffect","Template"]
+  fields=["Configuration","Class","CombatStyle","AttackRace","Perks","ActorEffect","Template"]
 ```
 
 Your patch should appear last as the winner with your balance values — and the **appearance** winner
@@ -193,4 +215,6 @@ should still own the face/body fields (confirm you didn't displace it). This win
 the patch once it's enabled + sorted in MO2; before that, the write call is the verification (per-op
 read-back, or `full_readback=true` on houseCARL 1.2.3+ for the entire written record). A `read_record
 plugin="<patch>.esp"` on a not-yet-enabled patch fails with a named "not in the load order" error —
-if the write reported success the edits landed; never re-issue them.
+if the write reported success the edits landed; never re-issue them. For a list cleared to empty or
+an optional link removed, finish with an xEdit shape check: no zero-count PRKZ/SPCT and no explicit
+null-link subrecord.
