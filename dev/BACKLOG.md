@@ -54,6 +54,17 @@ conversation); prune when done — delete or move under *Done* with the resolvin
   Spell/ObjectEffect/Ingestible `Effects`). Still open for the remaining list-forwarding lanes
   (armor/weapon/ammo keywords + leveled-list entries) if a live run shows NULLs riding those.
 
+- **Staff-frame routing hardening for whole-mod bulk passes.** The 1.5.0 Apocalypse build's
+  weapon-lane defects (staff ENCH missing `NoAutoCalc`, NonPlayable bows missing `NPCsUseAmmo`,
+  crit=damage, off-ladder conjured-weapon damage, staff Value left at base) were all rules ALREADY
+  in the skill text — execution failures at the cross-skill seam where a magic-dominated job
+  routes staff WEAPON frames past `requiem-weapon-patching`. 1.6.0/1.7.0 hardened the magic lanes;
+  no equivalent hardening exists for this seam. Candidate fix: a routing/checklist line in the
+  router (`requiem-patching`) and/or the magic skill's bulk-pass reference making the staff-frame
+  handoff to the weapon skill an explicit enumerated lane. Full defect ledger:
+  `session-handoffs/SESSION_HANDOFF_2026-07-18_apocalypse-corrected-patch-verified.md`.
+  `(2026-07-18, Apocalypse verification session, Aaron)`
+
 - **Check `gh pr list` before choosing a version number — the "re-check both files" rule doesn't
   catch an *open* parallel PR.** Two 1.4.0s were authored on the same day from the same `cd5b2cf`
   base (Heisen's #20 at 11:32, then #22 merged ~14:40 without checking for open PRs); #20 had to be
