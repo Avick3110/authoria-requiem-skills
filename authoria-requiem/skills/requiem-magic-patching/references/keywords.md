@@ -49,19 +49,84 @@ Pair the element keyword with the matching MGEF `ResistValue`: `ResistFire` / `R
 `ResistShock` (and `Poison` for poison MGEF, `MagicResist` for raw magic). `MagicSkill` is the school
 ActorValue (`Destruction` / `Restoration` / `Alteration` / `Conjuration` / `Illusion`).
 
-## Requiem effect markers (Requiem.esp)
+## Requiem effect markers — the behavioral keywords
 
-| Keyword | FormID | Meaning |
+**Write the master suffix every time.** These live in `Requiem.esp` (and one in MR), *not* in
+`Skyrim.esm` — the element keywords they sit next to are `Skyrim.esm`, and a bare `2FFEAD` copied out
+of a mixed list gets guessed as `:Skyrim.esm`, which fails the write. FormIDs re-verified live
+2026-07-18.
+
+| Keyword | FormID (with master) | Meaning |
 |---|---|---|
-| `REQ_SpellConcentration` | `2FFEAD` | tags a concentration effect |
-| `REQ_NoDurationScaling` | `412EDF` | duration fixed — opts out of duration scaling (damage/DoT/rune) |
-| `REQ_NoMagnitudeScaling` | `3FCA4C` | magnitude fixed (invisibility, paralyze, shadow-summons, cloaks) |
-| `REQ_Absorb` | `ADDDF7` | absorb-archetype marker |
-| `REQ_NoLifeDrainAllowed` | `2EA062` | immunity key life-drain effects test via conditions (`mgef-conditions.md`) |
+| `REQ_SpellConcentration` | `2FFEAD:Requiem.esp` | tags a concentration/channelled effect |
+| `REQ_NoDurationScaling` | `412EDF:Requiem.esp` | duration fixed — opts out of duration scaling |
+| `REQ_NoMagnitudeScaling` | `3FCA4C:Requiem.esp` | magnitude fixed (invisibility, paralyze, shadow-summons, cloaks) |
+| `REQ_Absorb` | `ADDDF7:Requiem.esp` | absorb-archetype marker |
+| `REQ_NoLifeDrainAllowed` | `2EA062:Requiem.esp` | immunity key life-drain effects test via conditions (`mgef-conditions.md`) |
+| `Nox_KW_CloakDamage` | `007609:Requiem - Magic Redone.esp` | marks a cloak's per-tick damage effect |
 
-A tier-1 fire effect carries `[MagicDamageFire 01CEAD, REQ_SpellConcentration 2FFEAD,
-REQ_NoDurationScaling 412EDF]`. Copy the exact set off the comparable; the frost/shock analogues swap
-only the element keyword. Vanilla effect-class tags MR keeps on the matching archetypes:
+## The MGEF signature is BEHAVIORAL, not elemental or tier-keyed
+
+This is the rule that decides whether a modded MGEF is patched. **The keyword+flag set is determined by
+what the effect *does* — its delivery behavior — not by its element and not by its tier.** Two fire
+effects at the same tier carry *different* signatures if one is a burst bolt and the other a cloak tick.
+The element keyword only swaps `MagicDamageFire`↔`Frost`↔`Shock`; everything else follows the behavior.
+
+So **a modded MGEF that has `MagicSkill` + the vanilla element keyword + a `MinimumSkillLevel` tier
+marker is NOT thereby Requiem-correct.** That trio is what a competent vanilla-style mod ships on its
+own; it is *necessary but not sufficient*. Requiem-correct means it additionally carries the **REQ
+behavioral keywords its archetype's MR comparable carries**. Missing those, the effect is **unpatched** —
+Requiem's scaling rules never match it, so it scales as vanilla inside Requiem's economy.
+
+**Method — classify, then read that archetype's exemplar:**
+
+1. Decide what the effect *does*: burst FaF bolt · concentration stream · aimed DoT · lingering taper
+   rider · self-buff · magicka-burn / discharge rider · cloak tick · hazard tick.
+2. Query MR for the exemplar of **that archetype** (`editorid_contains` on the shape — `_Aimed`,
+   `_ConcAimed`, `_AimedDoT`, `_Taper`, `_Cloak_Damage`, `_Hazard_Damage`, `…Discharge…_Magicka`).
+3. Read its `Keywords` at `depth=2` and its `Flags`, and copy that exact set (swapping only the element).
+
+**Do not apply a flat "damage → `REQ_NoDurationScaling`, concentration → `REQ_SpellConcentration`"
+rule.** The live data contradicts it in both directions: a lingering **taper** rider carries
+`REQ_NoDurationScaling` *and* `REQ_SpellConcentration` even though it is neither a plain damage hit nor
+a channelled spell, while a **magicka-burn rider** carries **no REQ keyword at all**.
+
+**Verified shock ladder (live, 2026-07-18)** — the element keyword below is `MagicDamageShock
+01CEAF:Skyrim.esm`; **mirror the shape per element but re-derive live**, because the flag sets do *not*
+mirror cleanly (see the caveats under the table):
+
+| Archetype | Exemplar | Keywords (beyond the element kw) | Flags |
+|---|---|---|---|
+| Burst bolt (single-target) | `REQ_Effect_Destruction2_Shock_Aimed` `01CEA8:Skyrim.esm` | `REQ_NoDurationScaling` | `Hostile, Detrimental, NoArea, PowerAffectsMagnitude, NoDeathDispel` |
+| Concentration stream | `REQ_Effect_Destruction1_Shock_ConcAimed` `013CAB:Skyrim.esm` | `+ REQ_SpellConcentration` | *above* `+ FXPersist` |
+| Aimed DoT | `REQ_Effect_Destruction2_Shock_AimedDoT` `029AFE:Requiem.esp` | `REQ_NoDurationScaling` only | `Hostile, Detrimental, NoArea, FXPersist, PowerAffectsMagnitude, NoDeathDispel` |
+| Lingering taper rider | `REQ_Effect_DestructionGM_Shock_Taper` `005FAE:Requiem - Magic Redone.esp` | `REQ_SpellConcentration + REQ_NoDurationScaling` | *DoT* `+ Recover, + HideInUI` |
+| Magicka-burn / discharge rider | `REQ_Effect_DestructionGM_ElectrostaticDischarge1_Magicka` `005AAD:Requiem - Magic Redone.esp` | **none** — element kw only | `Hostile, Detrimental, FXPersist, HideInUI, PowerAffectsMagnitude, NoDeathDispel` (**no** `NoArea`) |
+| Cloak tick | `REQ_Effect_DestructionGM_Shock_Cloak_Damage` `10CBDF:Skyrim.esm` | `REQ_NoMagnitudeScaling + REQ_NoDurationScaling + Nox_KW_CloakDamage` | `Hostile, Detrimental, NoArea, FXPersist, PowerAffectsMagnitude, NoDeathDispel` |
+| Hazard tick | `REQ_Effect_DestructionGM_Shock_Hazard_Damage` `045D5A:Skyrim.esm` | **none** — element kw only | `Hostile, Detrimental, NoArea, FXPersist, HideInUI, PowerAffectsMagnitude` (**no** `NoDeathDispel`) |
+
+**Three live-verified caveats that make re-deriving mandatory:**
+
+- **DoT and taper are two archetypes, not one.** The aimed DoT (the spell's own damage-over-time
+  primary) carries *only* `REQ_NoDurationScaling`; the GM taper *rider* adds `REQ_SpellConcentration`
+  plus `Recover`/`HideInUI`. Reading one and writing the other under-builds or over-builds the effect.
+- **Flags do not mirror across elements.** The *shock* hazard tick omits `NoDeathDispel`; the *fire*
+  hazard tick (`REQ_Effect_DestructionGM_Fire_Hazard_Damage 08F3F2:Skyrim.esm`) carries **both**
+  `NoDeathDispel` **and** `NoRecast`. Keywords mirrored across elements in every pair checked; flags
+  did not.
+- **Flags vary within an archetype by tier.** `REQ_Effect_Destruction2_Shock_Aimed` has no `FXPersist`;
+  the tier-4 `REQ_Effect_Destruction4_Shock_Aimed 10F7EF:Skyrim.esm` does, on identical keywords.
+
+**Worked negative (the failure this section exists to prevent).** Apocalypse's Bolide, a tier-3 fire
+burst: `WB_Des_Fire3_Effect_Bolide 028F67:Apocalypse - Magic of Skyrim.esp` carries
+`MagicSkill = Destruction`, `MinimumSkillLevel = 50`, `ResistValue = ResistFire`, and keywords
+`[MagicDamageFire 01CEAD:Skyrim.esm, WISpellDangerous 0A9B1F:Skyrim.esm, WB_Destruction_Fire, WB_Destruction]`
+— school, element, and tier all present, flags nearly identical to the comparable. Its archetype
+comparable `REQ_Effect_Destruction3_Fire_AimedExp 01CEA1:Skyrim.esm` (same `MinimumSkillLevel = 50`)
+carries `[MagicDamageFire, REQ_NoDurationScaling 412EDF:Requiem.esp]`. Bolide has **no REQ keyword**.
+It is unpatched, and it reads as "already Requiem-correct" to anyone checking school + element + tier.
+
+Vanilla effect-class tags MR keeps on the matching archetypes:
 `MagicRestoreHealth 01CEB0`, `MagicInvisibility 01EA6F`, `MagicParalysis 01EA70`,
 `MagicInfluenceFear 0424E0`, `MagicInfluence 078098`, `MagicCloak 0B62E4` (+ `MagicFlameCloak
 002EDA:Update.esm`), `MagicRune 109D79` (all `:Skyrim.esm` unless noted).
@@ -84,6 +149,10 @@ a family, carry the family keyword in **both** places, exactly as the comparable
   Copy the comparable's; never invent it (it feeds enchanting/potion pricing math).
 
 ## The `Nox_KW_*` marker vocabulary (Magic Redone — 107 keywords)
+
+**Every FormID in this section is `:Requiem - Magic Redone.esp`** — the bare six digits below all take
+that master (verified live 2026-07-18), unlike the `REQ_*` markers above (`:Requiem.esp`) and the
+element keywords (`:Skyrim.esm`). Carry the suffix when you write one.
 
 MR's entire KYWD contribution is the `Nox_KW_*` namespace (+ `CraftingScrollCraftingTool 006105`).
 Split into **record-side** markers (you place these in a record's `Keywords` to classify it statically)
@@ -112,7 +181,9 @@ casting spell): Dest Pyromancy `006015`/Cryomancy `006016`/Electromancy `006017`
 EntropicFocus `006019`/BloodMagic `006012`; Resto Venomancy `00601A`/Heliomancy `00601B`; Alt Kinetomancy
 `006013`/WeatherMagic `006014`; Conj Daedric `005F57`/Spirit `006006`/Necromancy `00732C`/SoulMagic `00732D`.
 
-**Nox-runtime — delivery/shape markers:** `Nox_KW_Touch 006081`, `Nox_KW_Nova 006086`, `Nox_KW_CloakDamage 007609`.
+**Delivery/shape markers:** `Nox_KW_Touch 006081`, `Nox_KW_Nova 006086`. **`Nox_KW_CloakDamage 007609`
+is record-side, not runtime** — it is part of the cloak-tick behavioral signature above, so a modded
+cloak's damage effect must carry it alongside `REQ_NoMagnitudeScaling` + `REQ_NoDurationScaling`.
 
 ## Damage-type markers used by MR (defined in `Requiem.esp`, not MR)
 

@@ -2,6 +2,53 @@
 
 All notable changes to the Authoria Requiem Patching Skills plugin. Versioning is [semantic](https://semver.org); the `version` in `authoria-requiem/.claude-plugin/plugin.json` is bumped on each release.
 
+## 1.6.0 — 2026-07-18
+
+Field report (Heisen, 2026-07-18): the shipped Apocalypse patch left modded MGEFs unpatched because
+agents dispositioned them as **"already Requiem-correct"** on the strength of `MagicSkill` + a vanilla
+element keyword + a `MinimumSkillLevel` tier marker — while the effects lacked Requiem's own behavioral
+keywords. Traced live on ARR and closed with a re-derived rule. Body + references only — no descriptions
+changed, so no §6.5 fan-out re-measure owed.
+
+- **`requiem-magic-patching` — the MGEF keyword+flag signature is BEHAVIORAL, not elemental or
+  tier-keyed.** New `references/keywords.md` section: classify each effect by what it *does* (burst FaF
+  bolt / concentration stream / aimed DoT / lingering taper rider / self-buff / magicka-burn or
+  discharge rider / cloak tick / hazard tick), then read MR's exemplar for *that archetype* and copy its
+  exact keyword+flag set. Same element and same tier, different behavior = different signature. Includes
+  a live-verified shock archetype table with the derivation caveats found while deriving it.
+- **`requiem-magic-patching` — "school + element keyword + tier marker" named as necessary but NOT
+  sufficient.** That trio is what a competent vanilla-style mod ships anyway; an MGEF carrying it while
+  lacking the REQ behavioral keywords its archetype comparable carries is **unpatched**, not "already
+  correct". Worked negative mined live: Apocalypse's `WB_Des_Fire3_Effect_Bolide
+  028F67:Apocalypse - Magic of Skyrim.esp` carries `MagicDamageFire` + `MinimumSkillLevel 50` and **no**
+  REQ keyword, where its archetype comparable `REQ_Effect_Destruction3_Fire_AimedExp 01CEA1:Skyrim.esm`
+  (same tier) carries `REQ_NoDurationScaling`.
+- **`requiem-magic-patching` — the flat rule is explicitly refuted.** "Damage → `REQ_NoDurationScaling`,
+  concentration → `REQ_SpellConcentration`" fails in both directions live: a lingering **taper** rider
+  carries *both* keywords, while a **magicka-burn/discharge rider** and a **hazard tick** carry **none**.
+- **`requiem-magic-patching` — three caveats that make re-deriving per record mandatory** (all mined
+  while verifying the table, none of them assumable): **DoT and taper are two archetypes** (aimed DoT
+  carries only `REQ_NoDurationScaling`; the GM taper rider adds `REQ_SpellConcentration` + `Recover` +
+  `HideInUI`); **flags do not mirror across elements** (the *shock* hazard tick omits `NoDeathDispel`,
+  the *fire* one carries it **plus** `NoRecast`); **flags vary within an archetype by tier**
+  (`Destruction2_Shock_Aimed` has no `FXPersist`, `Destruction4_Shock_Aimed` does, on identical keywords).
+- **`requiem-magic-patching` — behavioral derivation promoted into SKILL.md step 5** ("Set keywords and
+  flags") as a three-step classify → read-archetype-exemplar → diff procedure, rather than the previous
+  flat list of markers to copy.
+- **`requiem-magic-patching` — bulk-pass anti-pattern + Checklist tightened.** "Already correct" is now
+  a disposition that requires a diff, not an eyeball: skipping a modded MGEF means naming its archetype
+  comparable and showing the keyword sets match; an effect missing a REQ behavioral keyword belongs on
+  the *patched* side of the reconciliation count, never the skipped side. Also flags the `depth=1` trap
+  — `Keywords` prints as `[list: N item(s)]`, so the count looks like data while hiding the gap.
+- **`requiem-magic-patching` — explicit master suffixes on the behavioral keywords.** All four re-verified
+  live and now written with their masters everywhere they appear: `REQ_SpellConcentration
+  2FFEAD:Requiem.esp`, `REQ_NoDurationScaling 412EDF:Requiem.esp`, `REQ_NoMagnitudeScaling
+  3FCA4C:Requiem.esp`, `Nox_KW_CloakDamage 007609:Requiem - Magic Redone.esp`. These sat as bare FormIDs
+  beside `Skyrim.esm` element keywords, which is how a run guessed `:Skyrim.esm` and failed the write.
+  A full resolve-audit of every other FormID in `keywords.md` found **no wrong master suffixes** — the
+  defect was bare FormIDs in mixed-master company, not incorrect ones. `Nox_KW_CloakDamage` also
+  reclassified from "Nox-runtime" to **record-side** (it is part of the cloak-tick signature).
+
 ## 1.5.0 — 2026-07-17
 
 Field-report round 3 (Heisen, 2026-07-17): the live Val Serano NPC/race patch re-run surfaced
