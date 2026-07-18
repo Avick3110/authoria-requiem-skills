@@ -224,6 +224,12 @@ tier. Read the comparable's condition (houseCARL 1.2.2+ renders the perk paramet
 FormID) and compose the same gate onto the new recipe — the condition grammar is in
 `references/housecarl-recipes.md` § E. Recipe shapes in `references/crafting.md`.
 
+When an existing recipe must be disabled, keep it structurally valid and set
+`WorkbenchKeyword = REQ_DisableRecipe AD3B01:Requiem.esp`. Never clear the workbench link or set it
+to null: Requiem disables recipes through this explicit station keyword, and a null link is not the
+same record shape. Verify the Bruma-style case (`CYRTemperWeaponAyleidBattleAxe`) reads back with
+`REQ_DisableRecipe`, not `(null link)`.
+
 ### 7 — Emit the override
 
 Author with houseCARL into a patch plugin (originals are never touched). Copy-ready
@@ -300,6 +306,8 @@ assumed — rather than emitting a confident guess.
 - **Defaulting a recipe to the Steel ingot + Craftsmanship gate.** The temper/forge inputs and the
   `HasPerk` gate track the weapon's own material keyword — read the same-material comparable's
   recipe, don't reuse the first (steel) shape for the whole plugin.
+- **Disabling a recipe with a null workbench.** Set `WorkbenchKeyword` to
+  `REQ_DisableRecipe AD3B01:Requiem.esp`; never clear/null the station link.
 - **Skipping a `NonPlayable` NPC-hand weapon as cosmetic.** The player takes its damage; tier it
   like its playable twin (it only skips recipes/value).
 - **Giving an enchanted weapon a value bump.** In Requiem the enchanted variant keeps the base
@@ -329,7 +337,8 @@ Before finishing a weapon override, confirm:
 - [ ] **Name** encodes the material/class ("Steel Greatsword", "Ebony Dagger").
 - [ ] **Sound + ImpactDataSet** links copied from the comparable.
 - [ ] **Crafting recipe** (forge) + **tempering recipe** with the ingot and perk gate matching the
-      weapon's own material keyword (never a defaulted Steel/Craftsmanship gate).
+      weapon's own material keyword (never a defaulted Steel/Craftsmanship gate); any intentionally
+      disabled existing recipe uses `REQ_DisableRecipe AD3B01:Requiem.esp`, never a null workbench.
 - [ ] **Flags written as unions** — any `Data.Flags` write carries the winner's original bits plus
       your change; no bit silently dropped.
 - [ ] **Enchanted weapons**: `Template` → plain base variant; `ObjectEffect` set;

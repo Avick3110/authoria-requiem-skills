@@ -37,13 +37,12 @@ it, USMP-Requiem is just forwarding Requiem's values.
   priest 50). **When you patch a combatant, set a fixed level and remove `PCLevelMult`.** A
   `PcLevelMult` level (with `CalcMinLevel`/`CalcMaxLevel`) is the player-scaling form — **followers
   keep it** (Lydia is `PcLevelMult`, CalcMin 6 / CalcMax 50); everyone else loses it.
-- **`AutoCalcStats`** — **read the analogue's flag; never assume it by archetype.** Verified live
-  (2026-07-17): ON on the generic templated humanoid tiers (bandit 01–03, guards, followers) but
-  **OFF** on creatures, bosses, casters — *and even some Base-tier humanoid templates* (bandit
-  `_Base` and the warlock line are OFF). The ACBS `HealthOffset` / `MagickaOffset` /
-  `StaminaOffset` stack **on top of** the DNAM base attributes (below) and carry the big
-  archetype numbers: troll H+350/S+175, warlock M+400–450, dragon priest M+1300, vampire tier-2
-  270/270/135; Magicka offset stays 0 on non-casters.
+- **`AutoCalcStats`** — choose its authority **once with the user for the plugin**, before any stat
+  write. AutoCalc mode ensures the flag is on and leaves `PlayerSkills` plus all three ACBS stat offsets
+  untouched; class + level remain authoritative. Manual mode removes the flag everywhere that
+  enters the stat pass, then writes the complete DNAM + ACBS block from the analogue. Do not mix
+  modes record by record. The analogue's own flag is evidence about how Requiem built that actor,
+  not permission to contradict the user's plugin-wide choice.
 - **Flags by role:** `Respawn` on generic spawns and creatures; `Unique` on named actors/bosses;
   `Protected` (and rarely `Essential`) on followers and quest-critical actors; `BleedoutOverride` on
   bosses that should bleed out rather than die. Read the comparable — don't invent flags.
@@ -75,13 +74,10 @@ exactly this omission. All values below verified live 2026-07-17.
   `housecarl_cross_plugin_query plugins=["<plugin>"] type="NPC_"
   where=["PlayerSkills.SkillOffsets[OneHanded] > 0"]` (bracket paths work in `where=`).
 
-**The patch rule is uniform regardless of `AutoCalcStats`: carry the analogue's DNAM block.**
-Requiem writes explicit DNAM values even on AutoCalc-ON actors (the bandit 01–03 tiers carry
-hand-escalating values with the flag on). On an AutoCalc-ON actor the class + level still drive
-the runtime derivation — but matching the analogue's on-record values keeps the record consistent
-with the class/level you set and costs one batched write. On an AutoCalc-OFF actor (creatures,
-bosses, casters, Base tiers) the DNAM block + ACBS offsets **are** the stats — there is no
-derivation behind them.
+**Apply these fields only in manual mode.** Copy the analogue's full DNAM and ACBS payload after
+removing `AutoCalcStats`; a partial explicit block is not a balance model. In AutoCalc mode, do not
+"keep the record consistent" by stamping the analogue's visible DNAM values — those writes create a
+second, contradictory stat authority and were the source of plugin-wide inconsistency.
 
 ## Class — the balance spine
 
@@ -154,6 +150,9 @@ and `Configuration.TemplateFlags` to inherit `Stats` + `SpellList` (+ Factions/A
 does). Everything Requiem-balanced then flows from the base.
 
 ## Archetype quick-reference (sampled live 2026-07-17)
+
+These rows describe the live analogue shapes used for classification and manual-mode derivation.
+They do not override the plugin-wide AutoCalc/manual choice.
 
 | Archetype | Level | AutoCalc | DNAM H/M/S | ACBS offsets H/M/S | Perks | ActorEffect | Notes |
 |---|---|---|---|---|---|---|---|

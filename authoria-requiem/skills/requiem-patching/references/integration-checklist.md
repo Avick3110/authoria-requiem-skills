@@ -32,7 +32,9 @@ single domain skill owns.
 5. **No `REQ_NULL_*`.** Scan every patched record's reference fields (Perks, Spells/ActorEffect,
    Keywords, inventory, Template, list Entries, COBJ conditions, VMAD properties). houseCARL resolves
    `REQ_NULL_*` EditorIDs live — strip or replace every one; **none may remain**, and never add one.
-6. **Run it through the Reqtificator.** The patch is an input to the auto-balance pass. State that
+6. **Disabled recipes use Requiem's station keyword.** Any COBJ intentionally made unavailable has
+   `WorkbenchKeyword = REQ_DisableRecipe AD3B01:Requiem.esp`; never clear or null the workbench link.
+7. **Run it through the Reqtificator.** The patch is an input to the auto-balance pass. State that
    explicitly as the last step; the player runs the Reqtificator after installing the patch.
 
 ## The Reqtificator-handles-this vs needs-manual matrix

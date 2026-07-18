@@ -10,6 +10,10 @@ sharing `Class REQ_Class_Bandit_SwordShield 85BCE3`, `CombatStyle 03BE1B`, `Race
 `DeathItem 0C3C9B`, flags `Respawn, AutoCalcStats, LoopedScript, LoopedAudio`, and one
 `REQ_Trait_Tempering_*` ActorEffect. Only level, perk count, gear, and template-base escalate:
 
+Those flags report the live analogue; they are not a bundle to transplant. Preserve the target's
+unrelated bits, apply the plugin-wide AutoCalc choice, and never add `LoopedScript`/`LoopedAudio`
+merely because a comparable carries them.
+
 | Tier | Level | Perks | Outfit | Template base |
 |---|---|---|---|---|
 | 01 | 3 | 5 | 9336AC | 039CFD (vanilla) |
@@ -66,5 +70,6 @@ Requiem's `HousecarlWhiterun 0A2C8E` (live winner `USMP - Requiem.esp`): **`Leve
 KEPT** (CalcMin 6 / CalcMax 50 — followers scale with the player), flags `Unique, Protected,
 AutoCalcStats`, follower factions `PotentialFollowerFaction 05C84E` (rank -1) + `CurrentFollowerFaction
 05C84D` (rank 0), Requiem outfit `99B7FF`, 7 combat perks (5 vanilla + 2 Requiem follower perks). A
-modded follower gets this record-side shape; its runtime registration (affinity/dialogue) is
+modded follower keeps the scaling level and role shape, while its `AutoCalcStats` bit follows the
+one plugin-wide stat-authority choice. Its runtime registration (affinity/dialogue) is
 **script-side** → route to the `requiem-script-patching` skill (`followers.md`).

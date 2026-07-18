@@ -144,4 +144,10 @@ add the trait-bridge perk:
 ```
 
 When you template onto a Requiem base (Workflow C), the base already carries the perks — don't also
-hand-copy them.
+hand-copy them. An already-templated Workflow A actor is a complete no-write skip: do not remove
+masked local `REQ_NULL_*` perks or normalize its local list.
+
+If the derived standalone result has zero perks, do not author `ReplaceAll` with an empty list. Leave
+an already-empty `Perks` field unwritten; when a populated list genuinely must become empty, remove
+its entries and verify xEdit shows the `Perks` list **and** `PRKZ - Perk Count` subrecord absent, not
+`PRKZ = 0`. Treat a serialized zero count as an incomplete tool write, not a successful clear.

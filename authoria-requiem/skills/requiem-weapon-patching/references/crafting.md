@@ -20,6 +20,18 @@ Distinguished by `WorkbenchKeyword`:
 | Temper | grindstone | 088108:Skyrim.esm | improve the weapon (1 ingot) |
 | Smelter | (smelter) | 0A5CCE:Skyrim.esm | melt the weapon back to ingots |
 
+## Disabling an existing recipe
+
+Disable a recipe by setting `WorkbenchKeyword = AD3B01:Requiem.esp`
+(`REQ_DisableRecipe`). Do not clear the nullable `WorkbenchKeyword` link and do not set it to null;
+Requiem's own disabled COBJ records use the explicit keyword, which keeps the recipe deliberately
+unavailable instead of leaving an ambiguous station field.
+
+```
+housecarl_set_field formid="<recipe>" field_path="WorkbenchKeyword" \
+  value="AD3B01:Requiem.esp" into="<patch>"
+```
+
 ## Worked recipe — Steel Sword (`REQ_Forge_Weapon_Steel_Sword`, 0DB5D7:Skyrim.esm)
 
 ```

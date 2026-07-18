@@ -2,6 +2,33 @@
 
 All notable changes to the Authoria Requiem Patching Skills plugin. Versioning is [semantic](https://semver.org); the `version` in `authoria-requiem/.claude-plugin/plugin.json` is bumped on each release.
 
+## 1.8.0 — 2026-07-18
+
+Bruma whole-mod pass follow-up (Heisen, 2026-07-18): manually corrected NPC/COBJ overrides exposed
+write-shape and authority gaps in the skills. Closed [#38](https://github.com/Avick3110/authoria-requiem-skills/issues/38)
+and [#39](https://github.com/Avick3110/authoria-requiem-skills/issues/39) in the skill layer only; no
+existing load-order patch was regenerated or edited. Body + references only — no descriptions
+changed, so no §6.5 fan-out re-measure is owed.
+
+- **`requiem-npc-patching` — inherited balance templates are no-write skips (#38).** NPCs whose
+  resolved template chain inherits the relevant stats/spell-list balance stay entirely untouched,
+  including masked local `REQ_NULL_*` perks or spells. The forwarded-NULL sweep is now explicitly a
+  candidate scan, not permission to create cleanup overrides. The existing positive-evidence initial
+  triage rule was audited and already prevents the earlier "assume Requiem-shaped" skip.
+- **`requiem-npc-patching` — one user-selected stat authority per plugin (#38).** Before the first
+  write the user chooses AutoCalc mode (`AutoCalcStats` on; class + level authoritative; no DNAM or
+  ACBS stat-offset writes) or manual mode (flag off; complete derived DNAM + ACBS block). The choice
+  applies to every non-templated NPC entering the plugin's stat pass, including followers without
+  changing their `PcLevelMult` exception.
+- **`requiem-npc-patching` — sparse writes and exact flag deltas (#38).** Optional `CombatStyle`,
+  `AttackRace`, and other nullable links are removed rather than set to null. Empty `Perks` and
+  `ActorEffect` results are never emitted via empty `ReplaceAll`; verification now requires the list
+  and its count subrecord to be absent (`PRKZ`/`SPCT`, not serialized zero). Flag writes preserve all
+  unrelated winner bits and may not acquire `LoopedScript`/`LoopedAudio` from a comparable.
+- **`requiem-weapon-patching` + whole-mod integration — disabled COBJ convention (#39).** An existing
+  recipe is disabled with `WorkbenchKeyword = REQ_DisableRecipe AD3B01:Requiem.esp`, never a removed
+  or null workbench link. Copy-ready houseCARL calls and the final integration gate now enforce it.
+
 ## 1.7.0 — 2026-07-18
 
 Field report round 2 (Heisen, 2026-07-18) on the same Apocalypse patch: spells received only

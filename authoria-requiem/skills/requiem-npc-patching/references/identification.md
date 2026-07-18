@@ -145,7 +145,8 @@ combatant/boss ladder** — the horse lane on a modded setup is often owned by a
 than Requiem, and per the authority model the live winner is still what you derive from. Mined live
 (2026-07-17):
 
-- **Ordinary saddled horse** (`EncHorseSaddledBrown 023AB2` and kin): **fixed level 4**, AutoCalc ON,
+- **Ordinary saddled horse** (`EncHorseSaddledBrown 023AB2` and kin): **fixed level 4**, AutoCalc ON
+  in the live analogue (evidence only; the plugin-wide stat-authority choice still controls writes),
   DNAM H 289 / S 106, `Respawn` + `BleedoutOverride`, `EncClassHorse` + `csHorse`, no perks, no
   `ActorEffect`. This is the tier a modded riding horse maps to.
 - **Named supernatural steed** (`Shadowmere 09CCD7`): level 50, H 1637, `Aggressive`, and a
