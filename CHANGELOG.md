@@ -2,6 +2,69 @@
 
 All notable changes to the Authoria Requiem Patching Skills plugin. Versioning is [semantic](https://semver.org); the `version` in `authoria-requiem/.claude-plugin/plugin.json` is bumped on each release.
 
+## 1.7.0 — 2026-07-18
+
+Field report round 2 (Heisen, 2026-07-18) on the same Apocalypse patch: spells received only
+cost/charge/flags/`HalfCostPerk` while the **balance-bearing** work was skipped, and the skill's own
+checklist let that reconcile as "patched". Closed by defining "patched", making magnitude derivation
+mandatory, and deriving the real subtype/rider vocabulary live across all five schools (five parallel
+read-only agent lanes + maintainer spot-verification of every load-bearing claim). Body + references
+only — no descriptions changed, so no §6.5 fan-out re-measure owed.
+
+- **`requiem-magic-patching` — magnitudes are mandatory, and "patched" now has a definition.** A SPEL
+  counts as patched only with **all** of: cost + `ManualCostCalc` union, tier `ChargeTime`, correct
+  `HalfCostPerk`, **`Effects[i].Data` magnitudes derived from the comparable**, the comparable's
+  **subtype keyword(s)** on the MGEF, its **mechanical tier-resolved riders**, the primary MGEF's
+  **behavioral keyword/flag signature**, no `REQ_NULL_*`, and its tome priced. Items 1–3 are the
+  *economy*, 4–6 the *balance*; a spell with the economy and none of the balance is **cost-normalized,
+  not patched — it deals the mod's damage at Requiem's price**. Named as the #1 field failure in
+  Common mistakes and gated in both the Checklist and the bulk-pass reconciliation.
+- **`requiem-magic-patching` — subtype keywords: premise corrected, table derived.** The report asked
+  for a SPEL-side subtype keyword table; **MR Spell records carry no keywords at all** (915 scanned,
+  `Keywords` unset on every one), so the classification lives on the **MGEF** and the checklist line is
+  written against the MGEF. Full per-school table added to `references/keywords.md` with verified
+  masters. Also corrected: **`Nox_KW_<School>_Perk_*` keywords do NOT belong on plain damage effects** —
+  MR's own Fire/Frost/Shock damage MGEFs carry none; Pyromancy/Cryomancy/Electromancy
+  (`006015`/`006016`/`006017`) sit on **cloak/enchant/hazard** forms only. The prior SKILL.md advice to
+  "carry that school's specialization keyword" was wrong for damage spells and is now a Common mistake.
+  Many subtypes have **no** subtype keyword (Calm/Fear/Frenzy, Healing, Ward, TurnUndead, mage armor).
+- **`requiem-magic-patching` — rider doctrine rebuilt: mechanical vs cosmetic, delivery, tier.**
+  A cosmetic rider does **not** satisfy the requirement, and two distinct cosmetic shapes are now
+  named: Illusion `_Desc_` tooltip stubs (`_Desc` + no `Keywords` + `MinimumSkillLevel 0`) and
+  Destruction `_Taper` FX carriers (`ActorValue = Fame`, magnitude 0). **`Archetype.Type = Script` is
+  explicitly refuted as the discriminator** — it fails both ways (Destruction `Slow_Aimed 0B729F` is
+  Script *and* mechanical; Conjuration's cosmetic `Bound_Weapon_<Element>` are Script with no VMAD).
+  Riders are **delivery-gated** (Impact Stagger on projectiles only; Taper on concentration only) and
+  magnitudes are **copied, never guessed** — the shipped bug's `Slow` 50 (real: **5**) and
+  `Impact_Stagger` 25 (real: **0.25**) are now called out by value.
+- **`requiem-magic-patching` — "tier-matched riders" corrected: the rule is school-dependent.** The
+  report asked for a flat tier-match rule; live data shows two families. Destruction riders are
+  **tier-indexed records** (`Cremation2/3/5`, `ElectrostaticDischarge1–5`), but Illusion `_Improved`
+  riders are **shared tier-2 stubs** — `REQ_IllusionGM_Pain4` *and* `Pain5` both point at
+  `GM_Pain2_Improved 00594C`, with the tier carried in the spell's per-effect `Data.Magnitude` and the
+  rider's own `MinimumSkillLevel` frozen at 25. So **never infer a spell's tier from its rider's tier
+  marker**; copy both the rider FormID and its Data from the comparable.
+- **`requiem-magic-patching` — magnitude anchors added** (the cross-check, not a substitute for
+  reading): Destruction base damage is **identical across fire/frost/shock at a tier** (T2 30, T3 32,
+  T5 64); Healing's Respite rider is **exactly 50%** of the heal; Ward's `Ward_Shield` is **1:1**;
+  mage-armor riders are **50% and 20%** of base at Duration 60; summons are **Magnitude 0, Area 0,
+  Duration 15** (thralls 300, a subtype property not a tier one).
+- **`requiem-magic-patching` — the Association doubling rule corrected.** Re-verified 14/14, but the
+  doubled form is **not necessarily a `Nox_KW_*`**: mage armor doubles vanilla `MagicArmorSpell
+  01EA72:Skyrim.esm`, TransmuteMuscles doubles `REQ_TransmuteMuscles 682FB1:Requiem.esp`. A prior
+  revision attributed `Nox_KW_Alteration_Shield 000813` to mage armor; it belongs to the **elemental
+  shields**. Two live exceptions recorded (Waterwalking, `Wind_Cloak_Speed`), plus *why* the doubling
+  exists — MR's `Script`-archetype dispel effects match on the Association.
+- **`requiem-magic-patching` — 1.6.0's blanket master note fixed (regression).** 1.6.0 asserted every
+  FormID in the `Nox_KW_*` section takes `:Requiem - Magic Redone.esp`. A full 106-keyword census shows
+  **three are `:Requiem.esp`** — `Nox_KW_Illusion_Pain 482636`, `Nox_KW_Illusion_Sleep 484DDB`,
+  `Nox_KW_Illusion_Weakness2 3C130A`. Replaced with an exception table plus the shape tell (MR's own are
+  `00xxxx`; the exceptions are high six-digit). Section header count corrected 107 → 106 + 1.
+- **`requiem-magic-patching` — bulk-pass detail moved to `references/bulk-pass.md`** (new) to hold
+  SKILL.md under the 500-line cap per authoring standard §4.1; SKILL.md keeps a pointer and the
+  load-bearing summary. Also records that the sweep's `Keywords`/`Flags`/`Effects` columns return
+  `[list: N item(s)]` — a count that reads like data — so contents need `depth=2`/`depth=4` follow-ups.
+
 ## 1.6.0 — 2026-07-18
 
 Field report (Heisen, 2026-07-18): the shipped Apocalypse patch left modded MGEFs unpatched because

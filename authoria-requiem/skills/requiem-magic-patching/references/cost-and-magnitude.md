@@ -87,9 +87,27 @@ cost 40):
 Frostbite (tier-1 frost) mirrors it: `013CAA` main (mag 16) + `0B729D` slow/stamina (mag 5, dur 1) +
 `00607E:MR` frost taper (dur 3). **Key technique:** MR **reuses the vanilla MGEF FormID** for the
 primary effect (overriding it to set school/resist/keywords/flags) and **adds MR-defined secondary
-effects** for the taper / grandmaster mechanic. The MR-defined mechanic-only effects use a **dummy
-ActorValue** (`Fame`) + the `HideInUI` flag so they don't clutter the UI. Copy this structure: don't
-collapse a multi-effect spell into one effect.
+effects** for the taper / grandmaster mechanic. Copy this structure: don't collapse a multi-effect
+spell into one effect.
+
+**`HideInUI` and a `Fame` ActorValue are two different things** — don't read them as one idiom.
+`HideInUI` hides a **mechanical** rider from the magic menu (`Impact_Stagger`, `Armor_Improved`,
+`ElectrostaticDischarge`) and says nothing about whether it works. `ActorValue = Fame` at magnitude 0
+means the entry modifies a dead value — an FX/tooltip carrier (see *Mechanical vs cosmetic* below).
+
+## Magnitude anchors (verified live 2026-07-18 — re-derive, these are the cross-check)
+
+Read the comparable's own `Effects[i].Data` at `depth=4`; these are what a correct read looks like:
+
+| Family | Anchor |
+|---|---|
+| Destruction base damage | **identical across fire/frost/shock at a tier** — T2 **30**, T3 **32**, T5 **64**; Area 0, Duration 0 |
+| Healing | heal m30 (T2) / 40 (T3) / 60 (T4), **Respite rider = exactly 50%** |
+| Ward | 25 / 50 / 75 / 100 / 200 by tier, **`Ward_Shield` rider 1:1**, Area 0, Duration 0 |
+| Mage armor | base **100/150/200/250/300** (T1–T5), Duration **60**; `_Improved` riders at **50%** and **20%** |
+| Elemental shield | base 6 (T2) / 8 (T3), same **50% / 20%** rider split, Duration 60 |
+| Summons | Magnitude **0**, Area **0**, Duration **15** at every tier — **thralls are 300** (a subtype property, not a tier one) |
+| Illusion mind | Break1/Break2 carry the **same** magnitude as each other (e.g. Pain T2 54/54 dur 12; T4 90/90 dur 10) |
 
 **When you patch a modded spell, ADD the riders its MR comparable carries** — a modded fireball
 with one effect is under-built, not "already fine." The signature riders per archetype (all
@@ -104,17 +122,73 @@ verified live 2026-07-17; magnitudes `m`, durations `d` at the sampled tier):
 
 | Archetype | Rider(s) the comparable adds | Example FormIDs |
 |---|---|---|
-| Fire | **Cremation** lingering burn DoT (m3/d4 at T3) | `REQ_Effect_DestructionGM_Cremation3 005AAA:MR` |
-| Frost | **Slow** (m5/d4) + DeepFreeze pair | `…GM_Slow_Aimed 0B729F:Skyrim.esm`, `…GM_DeepFreeze4 005AA6:MR` + `…_Weakness 00607E:MR` |
-| Shock | **Electrostatic Discharge** magicka damage (m20) + stagger | `…GM_ElectrostaticDischarge3_Magicka 005AAF:MR` |
-| Venom | **Venom DoT** (m6/d5) | `…GM_Venom_DoT 005B0B:MR` |
-| Any FaF Destruction | **Impact Stagger** (m0.25) — near-universal | `REQ_Effect_DestructionGM_Impact_Stagger 0153D3:Skyrim.esm` |
-| Healing | **Respite** stamina restore (m8 alongside m16 heal) | `REQ_Effect_RestorationGM_Respite_ConcSelf 04250D:Skyrim.esm` |
-| Ward | secondary **Ward_Shield** (m50) | `REQ_Effect_RestorationGM_Ward_Shield 0FCC62:Skyrim.esm` |
+| Fire | **Cremation** burn (m3; duration scales by tier 3/4/8) | `…GM_Cremation2/3/5 005AA9/005AAA/005AAC:MR` |
+| Frost | **Slow** (m**5**, dur 2/3/5) + **DeepFreeze** pair | `…GM_Slow_Aimed 0B729F:Skyrim.esm`, `…GM_DeepFreeze2 005AA4:MR` + `…_Weakness 00607E:MR` |
+| Shock | **ElectrostaticDischarge magicka** burn (m15/16/32 by tier) + a **stagger** twin on projectiles | `…GM_ElectrostaticDischarge2_Magicka 005AAE:MR`, `…2_Stagger 005AB3:MR` |
+| Venom | **Venom DoT** | `…GM_Venom_DoT 005B0B:MR` |
+| FaF / projectile Destruction | **Impact Stagger** (m**0.25**) | `REQ_Effect_DestructionGM_Impact_Stagger 0153D3:Skyrim.esm` |
+| Healing | **Respite** stamina restore — **exactly 50%** of the heal (30→15) | `…GM_Respite_Self 04250E:Skyrim.esm`, `…_ConcSelf 04250D`, `…_Target 04E93F` |
+| Ward | **Ward_Shield** — **1:1** with the ward magnitude (25/50/75/100/200) | `REQ_Effect_RestorationGM_Ward_Shield 0FCC62:Skyrim.esm` |
 | Restoration Poison | **ParalyzingPoison** pair (perk rider) | `…GM_ParalyzingPoison3 005D80:MR` + `…_Weakness 0060D3:MR` |
-| Alteration flesh | perk-gated **Armor_Improved**, split by cuirass | `REQ_Effect_AlterationGM_Armor_Improved 104AB5:Skyrim.esm` (see below) |
-| Conjuration summon | perk-gated **_Potent** upgrade summon | `…Daedra_FrostAtronach_Potent 04E946:Skyrim.esm` |
-| Illusion mind | **Break1/Break2** level caps (single vs dual-cast) + `_Desc_Improved` riders | `Frenzy Break1 3FF1EE:Requiem.esp`, `Break2 401989:Requiem.esp` |
+| Alteration flesh / shields | **`_Improved` rider TWICE** — m**50%** and m**20%** of base, split by cuirass | `REQ_Effect_AlterationGM_Armor_Improved 104AB5:Skyrim.esm` (see below) |
+| Conjuration summon | perk-gated **_Potent** / **_Ancient** upgrade summon | `…Daedra_FlameAtronach_Potent 04E945:Skyrim.esm` |
+| Illusion mind | **Break1/Break2** level caps + the **mechanical `_Improved`** rider on GM spells | `Frenzy Break1 3FF1EE:Requiem.esp`, `Break2 401989:Requiem.esp`, `GM_Pain2_Improved 00594C:MR` |
+
+### Rider delivery-matching (verified live 2026-07-18)
+
+Two riders are **delivery-gated, not universal** — copying the wrong one is a real bug shape:
+
+- **Impact Stagger rides projectile/Aimed spells only.** Present on every T2 Aimed fire/frost/shock;
+  **absent from every ConcAimed** spell read.
+- **The elemental Taper rides concentration spells only** — present on T3/T5 ConcAimed, absent from
+  T2 Aimed. Likewise the **stagger twin** of ElectrostaticDischarge and the paralysis component
+  `DeepFreeze<N>` appear on the **projectile** tier but not on the concentration tiers.
+
+### Tier resolution: read it, don't infer it — the two families differ
+
+**How a rider carries its tier is school-dependent**, so you cannot apply one rule:
+
+- **Destruction riders are tier-indexed RECORDS.** `Cremation2` / `Cremation3` / `Cremation5`,
+  `ElectrostaticDischarge1…5`, `DeepFreeze2` — a different FormID per tier. Pick the record matching
+  the spell's tier.
+- **Illusion `_Improved` riders are SHARED tier-2 stubs.** `REQ_IllusionGM_Pain4` (tier 4) and
+  `REQ_IllusionGM_Pain5` (tier 5) **both** point at `GM_Pain2_Improved 00594C:MR` and
+  `GM_Pain2_Effect2 005ED4:MR`. There is no `Pain4_Improved` record. **The tier lives in the spell's
+  per-effect `Data.Magnitude`** (same rider: 18/39.6 at T4, 24/52.8 at T5), and the rider's own
+  `MinimumSkillLevel` stays 25 — so **never infer a spell's tier from its rider's tier marker.**
+
+Copy **both** the rider's `BaseEffect` FormID **and** its `Data` from the comparable. Guessing either
+half is how a shipped patch got `Slow` at 50 instead of **5** and `Impact_Stagger` at 25 instead of
+**0.25**.
+
+### Mechanical vs cosmetic riders — a cosmetic rider does NOT satisfy the requirement
+
+Some MR effects are display carriers: they occupy an `Effects` slot, show a tooltip, and change
+nothing. **Attaching one where a mechanical rider belongs produces a spell that looks improved and
+applies nothing** — silent, and near-indistinguishable by name. Two distinct shapes, both verified:
+
+| Shape | Tell | Verified example |
+|---|---|---|
+| Illusion `_Desc_` tooltip stub | `_Desc` in EditorID **and** `Keywords` absent **and** `MinimumSkillLevel = 0` (`Archetype.Type = Script`) | `REQ_Effect_IllusionGM_Pain2_Desc_Improved 005EA5:MR` — vs the mechanical `…Pain2_Improved 00594C:MR` (`ValueModifier`, ActorValue `Health`, kw `Nox_KW_Illusion_Pain`, MinSkill 25) |
+| Destruction `_Taper` FX carrier | `Archetype.ActorValue = Fame` (a dead AV) at **magnitude 0** | `…GM_Fire_Taper 005AF5:MR`, `…Frost_Taper 005FAD`, `…Shock_Taper 005FAE` — vs mechanical `…Cremation2 005AA9` (`ValueModifier`, ActorValue `Health`, m3) |
+
+**`Archetype.Type = Script` alone is NOT the discriminator** — it fails in both directions.
+Destruction's `Slow_Aimed 0B729F:Skyrim.esm` is `Script` **and** mechanical (Papyrus
+`Nox_Destruction_Weakness`), as are Restoration's Dispel/Purify effects and Illusion's
+`Noise1_Improved 005A51`. Conversely Conjuration's cosmetic `Bound_Weapon_Fire/Frost/Shock
+005DE7/005DE8/005DE9:MR` are `Script` with **no VMAD**, paired with mechanical `…_Damage` siblings
+`005DED/005DEE/005DEF`. **Read `Archetype` at `depth=3` and judge on ActorValue + keywords + VMAD**,
+not on `Type` alone.
+
+Two consequences worth stating plainly:
+
+- **The `_Desc_` convention is Illusion-only** — all 10 `_Desc_` effects in MR are
+  `REQ_Effect_IllusionGM_*`. Don't go looking for it in the other four schools.
+- **Correct keywords do not make an effect mechanical.** The Tapers carry a full, correct behavioral
+  keyword set (element + `REQ_SpellConcentration` + `REQ_NoDurationScaling`) and still do nothing —
+  they are magnitude-0 on a dead ActorValue. The lingering burn they *depict* is configured by the
+  **primary** effect's `TaperCurve`/`TaperDuration`/`TaperWeight` fields, not by this entry. So don't
+  count a Taper as the DoT, and don't "fix" it by giving it a magnitude.
 
 The flesh-spell rider is the **perk-gate exemplar**: `Armor_Improved` appears TWICE on Stoneflesh —
 once m75 with `WornHasKeyword(ArmorCuirass) == 0` (unarmored bonus) and once m30 with `== 1` —
