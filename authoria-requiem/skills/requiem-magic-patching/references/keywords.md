@@ -65,6 +65,105 @@ of a mixed list gets guessed as `:Skyrim.esm`, which fails the write. FormIDs re
 | `REQ_NoLifeDrainAllowed` | `2EA062:Requiem.esp` | immunity key life-drain effects test via conditions (`mgef-conditions.md`) |
 | `Nox_KW_CloakDamage` | `007609:Requiem - Magic Redone.esp` | marks a cloak's per-tick damage effect |
 
+## Subtype keywords — where MR classifies a spell's sub-archetype
+
+**Two structural facts to get right before using this table** (both verified live 2026-07-18):
+
+1. **Subtype keywords live on the MGEF, never on the SPEL.** MR's Spell records carry **no keywords at
+   all** — 915 scanned, `Keywords` unset on every one. Do not try to write one onto a Spell.
+2. **`Nox_KW_<School>_Perk_*` keywords do NOT go on plain damage effects.** MR's own Fire/Frost/Shock
+   damage MGEFs carry only the element keyword + `REQ_NoDurationScaling`. The Pyromancy/Cryomancy/
+   Electromancy keywords (`006015`/`006016`/`006017`) appear on **cloak, enchant and hazard** delivery
+   forms only — e.g. `REQ_Effect_Destruction3_Shock_CloakSelf 03AEA1:Skyrim.esm` and
+   `…Destruction5_Shock_CloakSelf 00751A:Requiem - Magic Redone.esp` both carry `006017`, while
+   `…Destruction2/4_Shock_Aimed` carry none. Adding one to a damage spell mis-files it.
+
+**Not every subtype has a keyword.** Where the table says *none*, the subtype is classified by a vanilla
+class keyword and inventing a `Nox_KW_` name for it is a fabrication. Take the comparable's set as-is.
+
+**Destruction** — element keyword carries the classification; `REQ_NoDurationScaling 412EDF:Requiem.esp`
+is on all seven; concentration adds `REQ_SpellConcentration 2FFEAD:Requiem.esp`, Touch adds
+`Nox_KW_Touch 006081`:
+
+| Subtype | Classifying keyword |
+|---|---|
+| Fire / Frost / Shock | `MagicDamageFire 01CEAD` / `Frost 01CEAE` / `Shock 01CEAF` (`:Skyrim.esm`) |
+| Venom | `REQ_PoisonSpell AD3904:Requiem.esp` |
+| Arcane | `Nox_KW_Destruction_Arcane 005B00` |
+| Entropic | `Nox_KW_Destruction_Entropic 005B01` |
+| Absorb | `REQ_Absorb ADDDF7:Requiem.esp` — **replaces** the element slot, no element keyword |
+
+**Restoration** — most lines have no subtype keyword:
+
+| Subtype | Classifying keyword |
+|---|---|
+| Healing | *none* — `MagicRestoreHealth 01CEB0:Skyrim.esm` |
+| Ward | *none* — `MagicWard 01EA69:Skyrim.esm`; **tier-graded** additions: `REQ_ProtectionFromParalysis 357085:Requiem.esp` from T3, `REQ_NoLifeDrainAllowed 2EA062:Requiem.esp` from T4 |
+| TurnUndead | *none* — `MagicTurnUndead 0BD83F:Skyrim.esm` |
+| Sun | *none* — `REQ_SunDamage ADDDF6:Requiem.esp` |
+| Poison (offensive) | `Nox_KW_Restoration_Poison 005C22` + `REQ_PoisonSpell AD3904:Requiem.esp` |
+| Cure (poison + disease) | `Nox_KW_Restoration_Cure 005FBF` |
+| WeaknessMagic | `Nox_KW_Restoration_WeaknessMagic 005C67` |
+| ResistMagic | `Nox_KW_Restoration_ResistMagic 006204` |
+| FortifyAttributes | `Nox_KW_Restoration_FortifyAttributes 005D05` |
+
+**Conjuration** — summons are classified by vanilla `MagicSummon*`, not by a Nox keyword:
+
+| Subtype | Classifying keyword |
+|---|---|
+| Bound weapon (incl. shield) | `Nox_KW_Conjuration_BoundWeapon 005DE4` |
+| Bound armor | `Nox_KW_Conjuration_BoundArmor 005E72` |
+| Daedra summon | `MagicSummonFire 024823` / `MagicSummonShock 02482A` (`:Skyrim.esm`) |
+| Undead summon | `MagicSummonUndead 02482B:Skyrim.esm` |
+| Reanimate | `MagicSummonUndead` + `REQ_Reanimate 068391:Requiem.esp` (the discriminator vs a plain undead summon) |
+| Spirit summon | `MagicSummonSpirit 1091CF:Skyrim.esm` — alone |
+| Banish | `REQ_NoDurationScaling` + branch perk kw (`Perk_Daedric 005F57` / `Perk_Necromancy 00732C`) |
+| SoulTrap | `Nox_KW_Conjuration_Perk_SoulMagic 00732D` |
+| Oblivion | element kw + `REQ_NoMagnitudeScaling 3FCA4C:Requiem.esp` + `Perk_Daedric 005F57` |
+| Necrotic | `Nox_KW_Conjuration_Necrotic 005F21` |
+| Teleport / Blink | `REQ_NoDurationScaling` + `REQ_NoMagnitudeScaling` + `Perk_Daedric 005F57` |
+
+**No summon MGEF carries a `Nox_KW_Conjuration_Perk_*` keyword** — the four Perk keywords appear only on
+Banish/Command, SoulTrap, Oblivion, Teleport/Blink, Swarm and Necrotic riders.
+
+**Illusion** — the richest namespace, and the one with the `:Requiem.esp` exceptions:
+
+| Subtype | Classifying keyword |
+|---|---|
+| Calm / Fear / Frenzy | ***none*** — vanilla `MagicInfluenceCharm 0424EE` / `MagicInfluenceFear 0424E0` / `MagicInfluenceFrenzy 0C44B6` + `MagicInfluence 078098` (all `:Skyrim.esm`) |
+| Pain | **`Nox_KW_Illusion_Pain 482636:Requiem.esp`** |
+| Sleep | **`Nox_KW_Illusion_Sleep 484DDB:Requiem.esp`** (the Rune adds `Nox_KW_Illusion_Sleeping 00619D`) |
+| Nightmare | `Nox_KW_Illusion_Nightmare 005F4A` + `Weakness1 00598C` **or** `Weakness2 3C130A:Requiem.esp` |
+| Rally | `Nox_KW_Illusion_Rally 005A39` |
+| Charm | `Nox_KW_Illusion_Charm 007332`; CharmingAura `005983` |
+| Command / Control | `Nox_KW_Illusion_Command 005EC9` (both share it) |
+| Death | `Nox_KW_Illusion_Death 005F02` |
+| Shadow family | Drain `005F03` · Summon `005F04` · Stride `005F5A` · Step `007333` · Blade `0078C5` |
+| Sound / Noise | `Sound 005F58` / `Noise 005EAD` — **separate keywords** |
+| Silence / Blind / Muffle / Chameleon | `005EBC` / `005EA9` / `005ED1` / `005ED3` |
+| Invisibility | *none* — `MagicInvisibility 01EA6F:Skyrim.esm` |
+| Sanctuary | `005EB4` (T3/T4); T5 uses `SanctuaryEtherealize 007328` instead |
+| Hallucination / Dampen | `007331` / `007334` |
+
+**Alteration** — mage armor uses a vanilla keyword; the elemental shields use a shared family keyword:
+
+| Subtype | Classifying keyword |
+|---|---|
+| Flesh / mage armor | *none* — `MagicArmorSpell 01EA72:Skyrim.esm` + `REQ_NoMagnitudeScaling 3FCA4C:Requiem.esp` |
+| Mage-armor GM rider | `MagicArmor30Perk 104AB6:Skyrim.esm` |
+| Elemental shields (Fire/Frost/Shock) | `Nox_KW_Alteration_Shield 000813` — one keyword for all three |
+| Shield GM "improved" riders | `Nox_KW_Alteration_Shield_Improved 00081F` |
+| Telekinesis (grab) | `MagicTelekinesis 07F404:Skyrim.esm` |
+| Telekinetic (damage) | `Nox_KW_Alteration_Telekinetic 005C64` — **never co-occurs with `MagicTelekinesis`** |
+| Paralyze | `MagicParalysis 01EA70:Skyrim.esm` + `REQ_NoMagnitudeScaling` — **no `Nox_KW_Alteration_Paralyze` exists** |
+| Physical force | `Nox_KW_Alteration_Physical 00732B` + a `Nox_KW_Physical_<NN>` tier kw + `REQ_DamageType_Blunt AD3957:Requiem.esp` |
+| Elemental Weakness | `Nox_KW_Alteration_Weakness 005B3F` |
+| Transmute / Ash | `Nox_KW_Alteration_Transmutation 005DAB` (Ash also carries `MagicParalysis`; **no `_Ash` keyword exists**) |
+| Wind (aimed) | `Nox_KW_Alteration_Wind 005F3B`; the **cloak** form instead carries `MagicCloak 0B62E4:Skyrim.esm` + `Perk_WeatherMagic 006014` |
+| Size / Speed / Jump / Weight | `000851` / `005B32` / `006090` / `005B44` |
+| ReflectDamage / Disintegrate | `005B54` / `005B3E` |
+| Etherealize / Waterwalking | *none* — Waterwalking carries **no keywords at all** |
+
 ## The MGEF signature is BEHAVIORAL, not elemental or tier-keyed
 
 This is the rule that decides whether a modded MGEF is patched. **The keyword+flag set is determined by
@@ -131,12 +230,26 @@ Vanilla effect-class tags MR keeps on the matching archetypes:
 `MagicInfluenceFear 0424E0`, `MagicInfluence 078098`, `MagicCloak 0B62E4` (+ `MagicFlameCloak
 002EDA:Update.esm`), `MagicRune 109D79` (all `:Skyrim.esm` unless noted).
 
-**The Association doubling rule (verified live 2026-07-17):** on a `PeakValueModifier` buff
-(shield/mage-armor, fortify, resist, fear) the family's `Nox_KW_*` keyword is **also the MGEF's
-`Archetype.Association`** — e.g. `Nox_KW_Alteration_Shield 000813` sits in `Keywords` *and* as the
-Association on the mage-armor effects, and the GM "improved" variants dispel-by-keyword against it
-(`DispelWithKeywords` + `Nox_KW_Alteration_Shield_Improved 00081F`). When you patch a buff MGEF into
-a family, carry the family keyword in **both** places, exactly as the comparable does.
+**The Association doubling rule (re-verified live 2026-07-18, 14/14 records — with two corrections):**
+on a `PeakValueModifier` buff (shield, mage-armor, fortify, resist, weakness, speed) the **family
+keyword** sits in `Keywords` **and** as the MGEF's `Archetype.Association`/`AssociationKey`. Carry it in
+both places, exactly as the comparable does.
+
+- **It is not necessarily a `Nox_KW_*`.** The elemental shields double `Nox_KW_Alteration_Shield 000813`
+  (GM variants `Nox_KW_Alteration_Shield_Improved 00081F`), but **mage armor doubles a vanilla keyword**
+  — `MagicArmorSpell 01EA72:Skyrim.esm`, GM rider `MagicArmor30Perk 104AB6:Skyrim.esm` — and
+  TransmuteMuscles doubles `REQ_TransmuteMuscles 682FB1:Requiem.esp`. The rule is "the family keyword,
+  whatever its origin". (An earlier revision of this file attributed `000813` to mage armor; it belongs
+  to the elemental shields.)
+- **Two live exceptions:** `REQ_Effect_Alteration3_Waterwalking_Self 000821` (no keywords at all) and
+  `REQ_Effect_AlterationGM_Wind_Cloak_Speed 005B59` (keyworded, Association null). A bare utility PVM
+  can skip the doubling — so read, don't assume.
+- **Why the doubling exists:** MR ships dedicated `Script`-archetype **dispel effects** whose `Keywords`
+  list is the dispel target set — `AlterationGM_Dispel_Shield 000814` carries **both** `000813` and
+  `00081F` with `DispelWithKeywords`. Same shape for `Dispel_Weakness 000820`, `Dispel_Size 000852`,
+  `Dispel_Jump 006091`. The Association is what those effects match on.
+- `DispelWithKeywords` is on every `_Improved` GM variant (plus `HideInUI`), but is **not exclusive to
+  them** — `REQ_Effect_Alteration3_Speed_Self 000869` carries it on a plain tier.
 
 ## Tier and cost markers on the MGEF itself
 
@@ -148,11 +261,20 @@ a family, carry the family keyword in **both** places, exactly as the comparable
   3.55), large on binary/utility (Invisibility 25, Paralyze 450), 0 on hidden worker effects.
   Copy the comparable's; never invent it (it feeds enchanting/potion pricing math).
 
-## The `Nox_KW_*` marker vocabulary (Magic Redone — 107 keywords)
+## The `Nox_KW_*` marker vocabulary (106 keywords + `CraftingScrollCraftingTool`)
 
-**Every FormID in this section is `:Requiem - Magic Redone.esp`** — the bare six digits below all take
-that master (verified live 2026-07-18), unlike the `REQ_*` markers above (`:Requiem.esp`) and the
-element keywords (`:Skyrim.esm`). Carry the suffix when you write one.
+**Masters in this section are MIXED — check before you write.** A full census (106 `Nox_KW_*` keywords,
+2026-07-18) shows **103 are `:Requiem - Magic Redone.esp`** and **exactly three are `:Requiem.esp`**:
+
+| Exception | FormID | Winner |
+|---|---|---|
+| `Nox_KW_Illusion_Pain` | `482636:Requiem.esp` | MR (override) |
+| `Nox_KW_Illusion_Sleep` | `484DDB:Requiem.esp` | MR (override) |
+| `Nox_KW_Illusion_Weakness2` | `3C130A:Requiem.esp` | MR (override) |
+
+Every other bare six-digit ID below takes `:Requiem - Magic Redone.esp`. Note the shape of the
+exceptions — they are the **six-digit-high** FormIDs (`4xxxxx`, `3Cxxxx`); MR's own are `00xxxx`. When
+an ID in this namespace doesn't start `00`, resolve it before writing.
 
 MR's entire KYWD contribution is the `Nox_KW_*` namespace (+ `CraftingScrollCraftingTool 006105`).
 Split into **record-side** markers (you place these in a record's `Keywords` to classify it statically)
@@ -172,7 +294,7 @@ patching`). Use record-side ones when authoring; carry a runtime marker only if 
 - Alteration: `Shield 000813`, `Telekinetic 005C64`, `Transmutation 005DAB`, `Wind 005F3B`, `Physical 00732B`,
   `Disintegrate 005B3E`, `Weakness 005B3F`, `ReflectDamage 005B54`, `Size 000851`, `Speed 005B32`, `Jump 006090`
 - Conjuration: `BoundWeapon 005DE4`, `BoundArmor 005E72`, `Necrotic 005F21`, `DaedricAura 00739B`, `NecromanticAura 00739C`
-- Illusion: `Charm 007332`, `Command 005EC9`, `Pain 482636`, `Sleep 484DDB`, `Death 005F02`, `Silence 005EBC`,
+- Illusion: `Charm 007332`, `Command 005EC9`, **`Pain 482636:Requiem.esp`**, **`Sleep 484DDB:Requiem.esp`**, `Death 005F02`, `Silence 005EBC`,
   `Blind 005EA9`, `Muffle 005ED1`, `Chameleon 005ED3`, `ShadowDrain 005F03`, `ShadowSummon 005F04`,
   `ShadowStride 005F5A`, `Nightmare 005F4A`, `Sound 005F58`, `Sanctuary 005EB4`, `Dampen 007334`, … (26 total)
 

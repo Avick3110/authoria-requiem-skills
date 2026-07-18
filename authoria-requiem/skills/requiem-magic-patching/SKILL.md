@@ -89,85 +89,30 @@ Confirm houseCARL's authority is fresh, then identify what you are patching.
 
 ## Bulk pass protocol (whole-plugin jobs)
 
-When you're patching a whole plugin — routed here from the `requiem-patching` skill, or any job with
-more than a handful of magic records — the enumeration **is the work queue**, not a sample of it. Magic
-is the most uniform-*looking* domain in Requiem, and that surface uniformity is the trap. Its records
-come in **family shapes**: rank chains (Novice→Master of one spell line), element triples (the
-Fire/Frost/Shock variants of one spell), enchant tiers 01–06 of one effect, and tome values on a fixed
-ladder. A modder hand-tunes individuals inside those families, so the fastest way to ship a spell
-unbalanced is to read one member of a family and extrapolate the numbers to the rest.
+**Load `references/bulk-pass.md` before starting one** — it carries the per-type sweep calls, the
+reconciliation procedure, and the full definition of "patched". The load-bearing points:
 
-**Never extrapolate across a family — read each member's own record before you patch it.** A rank chain,
-an element triple, an enchant-tier run, and a tome-value ladder each *look* mechanical, but the tier-4
-frost variant may carry its own cost, or one tome in the ladder its own price. Reading the member costs
-one query; extrapolating ships the T3 shock bolt with the fire bolt's magnitude, or an un-priced tome.
-
-Sweep **each record type as its own coverage denominator** — one call per type, the whole plugin at
-once, and none of these writes:
-
-```
-housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="Spell" \
-  fields=["EditorID","HalfCostPerk","BaseCost","Effects"]
-housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="MagicEffect" \
-  fields=["EditorID","MagicSkill","ResistValue","Keywords","Flags"]
-housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="ObjectEffect" \
-  fields=["EditorID","EnchantType","CastType","EnchantmentCost","Effects"]
-housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="Scroll" \
-  fields=["EditorID","Value","Effects"]
-housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="Book" \
-  fields=["EditorID","Teaches","Value","Weight"]
-```
-
-**Enumerate MGEF first-class.** The `MagicEffect` sweep is its own denominator — never reach an MGEF
-only through the spells that reference it. A spell's effects are records in their own right, and the
-single most common coverage failure here is a spell whose cost + `HalfCostPerk` you patched while its
-modded MGEF's magnitude/keywords/flags never got rebalanced. Filter the `Book` sweep to **tomes** — the
-ones with `Teaches` present; a non-tome BOOK (a readable, a recipe) is out of scope.
-
-**Two more sweeps ride the pass.** (1) The **NULL scan**: re-run the Spell/ObjectEffect/Ingestible
-sweeps with `fields=["Effects"] resolve_names=true` — every `BaseEffect` resolving to `REQ_NULL_*`
-or `REQ_DEPRECATED_*` is a silent no-op (modded resistance magic is the classic case) and gets
-re-pointed same-lane, same-element per `references/resistance-map.md`. (2) **Hand pairs**: MR
-mirrors ~a third of spells as `_LeftHand`/`_RightHand`; a modded spell pack with hand variants
-must have the pair dispositioned together — patching one hand ships a spell that behaves
-differently per hand.
-
-**Every record gets a disposition.** Walk each type's full enumeration: each record is **patched** (note
-which workflow) or **skipped** (name the reason — a pure-FX or art-carrier MGEF that carries no balance,
-a non-tome BOOK, a cosmetic-only effect), and a skip is verified on *that* record, never inherited from a
-neighbour. **"Patched" counts only when that record's field Checklist (`## Checklist`) passes for it** —
-patched means field-complete (school, cost, `HalfCostPerk`, keywords, effect shape all set from the
-comparable), not merely touched. A record you set a cost on but never gave its `HalfCostPerk` is not
-patched; it's half-done, and it belongs on the still-open side of the count.
-
-Close each type with a **reconciliation count — patched + skipped = enumerated** — for Spell,
-MagicEffect, ObjectEffect, Scroll, and tome-BOOK each. If a type's two sides don't add up, a record fell
-through; find it before you call the type done. **Flags fields are unions, not scalars:** a SPEL or
-MGEF `Flags` write replaces the whole bitfield, so read the winner's flags first and write
-original-bits + your change — a literal Set that only names the bits you thought about silently strips
-`ManualCostCalc` (re-enabling auto-cost on every authored-cost spell), `PowerAffectsMagnitude`, and
-their kin.
-
-**MGEF cross-check** (closes "spell patched but its effects never rebalanced"). After the per-type
-counts, reconcile the set of MGEFs **referenced by the spells you patched** against the enumerated
-`MagicEffect` set: every modded effect a patched spell casts must itself be dispositioned. A spell is
-not done while any of its own modded effects is undispositioned. (This is the per-record coverage the
-`requiem-patching` skill's integration checklist gates on for high-count types.)
-
-**The "already Requiem-correct" anti-pattern — the one that ships a whole plugin unpatched.** On a bulk
-pass the tempting shortcut is to scan the MGEF sweep, see `MagicSkill` set, an element keyword present,
-and a `MinimumSkillLevel` tier marker, and disposition the record as **skipped — already correct**. That
-trio is **necessary but not sufficient**: it is exactly what a competent vanilla-style mod ships on its
-own, and it says nothing about whether Requiem's rules will match the effect. Every such skip is a
-false negative until the keywords are diffed.
-
-**"Already correct" is a disposition that requires a diff, not an eyeball.** To skip a modded MGEF as
-already-correct, name its **archetype comparable** in MR and show its keyword set **equals** the
-comparable's (element swapped). Lacking a REQ behavioral keyword the comparable carries, it is
-**unpatched** — it belongs on the *patched* side with those keywords added, never the skipped side.
-The sweep's `Keywords` column only returns `[list: N item(s)]`, so re-read candidates with
-`housecarl_batch_record_detail ... fields=["EditorID","Keywords","Flags"] depth=2` and compare actual
-FormIDs. Method + verified archetype table: `references/keywords.md`.
+- **The enumeration is the work queue, not a sample.** Sweep each record type (Spell, MagicEffect,
+  ObjectEffect, Scroll, tome-BOOK) as its own coverage denominator, and **enumerate MGEF first-class** —
+  never reach an effect only through the spells that reference it.
+- **Never extrapolate across a family.** Rank chains, element triples, enchant-tier runs and tome
+  ladders *look* mechanical; members are hand-tuned. Read each member's own record.
+- **"Patched" has a definition, and scalars do not meet it.** A SPEL is patched only with **all** of:
+  cost + `ManualCostCalc` union, tier `ChargeTime`, correct `HalfCostPerk`, **magnitudes derived from
+  the comparable**, **subtype keyword(s)** on the MGEF, **mechanical tier-resolved riders**, the
+  primary MGEF's **behavioral keyword/flag signature**, no `REQ_NULL_*`, and its tome priced. Cost +
+  charge + flags + perk with the mod's original magnitudes is *cost-normalized*, **not patched** — the
+  spell deals the mod's damage at Requiem's price. Anything less goes on the still-open side.
+- **"Already Requiem-correct" requires a diff, not an eyeball.** `MagicSkill` + element keyword +
+  tier marker is what a vanilla-style mod ships anyway — necessary, not sufficient. Name the archetype
+  comparable and show the keyword sets match, or the record is unpatched.
+- **The sweep can't answer the questions that matter.** `Keywords`/`Flags`/`Effects` return
+  `[list: N item(s)]` — a count that reads like data. Follow up with `housecarl_batch_record_detail`
+  at `depth=2` (keywords/flags) or `depth=4` (per-effect magnitudes).
+- **Flags writes are unions.** Read the winner's flags and write original-bits + your change, or you
+  silently strip `ManualCostCalc` and `PowerAffectsMagnitude`.
+- Close every type with **patched + skipped = enumerated**, then the **MGEF cross-check**: every modded
+  effect a patched spell casts must itself be dispositioned.
 
 ## Workflow
 
@@ -234,14 +179,30 @@ shape to mirror.
 - **ChargeTime is rebalanced, not inherited**: Concentration = 0 always; FaF single = 0.25 × tier
   (T2 0.5 … T5 1.25); Touch = half the tier's aimed; master rituals = 3.0. Requiem uses charge as
   the anti-spam lever — a modded master nuke that charges instantly is unpatched.
-- **Magnitude/area/duration** — copy the comparable's `Effects` shape. Requiem spells are
-  **multi-effect**, and **patching means ADDING the riders the comparable carries, not just
-  re-costing the mod's single effect**: the element's signature rider (Fire→Cremation burn,
-  Frost→Slow+DeepFreeze, Shock→Electrostatic magicka burn, Venom→DoT), the near-universal Impact
-  Stagger on FaF Destruction, Healing→Respite, Ward→Ward_Shield, perk-gated `_Improved`/`_Potent`
-  upgrades, Illusion Break1/Break2 caps — the full rider table with FormIDs is in
-  `references/cost-and-magnitude.md`. Each effect's magnitude scales with skill at runtime via the
-  MGEF's `PowerAffectsMagnitude` flag — set the *base* magnitude from the comparable's tier.
+- **Magnitude is MANDATORY, and it is the balance.** Cost/charge/flags/`HalfCostPerk` are the
+  *economy*; `Effects[i].Data.Magnitude` is what the spell actually does. **A spell still carrying the
+  mod's original magnitudes is UNPATCHED, not "cost-normalized" — scalars-only patching is the #1
+  field failure this skill exists to kill.** Read the comparable's per-effect Data and set from it:
+
+  ```
+  housecarl_batch_record_detail formids=["<comparable SPEL>"] fields=["EditorID","Effects"] depth=4
+  ```
+
+  `depth=4` is what expands `Effects[i].Data.Magnitude/Area/Duration`; at lower depth you get
+  `[EffectData]` and cannot see the numbers. Verified live anchors — Destruction base damage is
+  **identical across fire/frost/shock at a tier** (T2 30, T3 32, T5 64); Healing's Respite rider is
+  **exactly 50%** of the heal (30→15); Ward's `Ward_Shield` rider is **1:1** with the ward magnitude;
+  mage-armor riders are **50% and 20%** of the base at `Duration 60`; summon effects are
+  **Magnitude 0, Area 0, Duration 15** (thralls 300). Ladders: `references/cost-and-magnitude.md`.
+- **Riders are part of the magnitude work, not decoration.** Requiem spells are **multi-effect**, and
+  patching means **ADDING the riders the comparable carries** with **their** magnitudes copied, never
+  guessed: Fire→Cremation, Frost→Slow+DeepFreeze, Shock→ElectrostaticDischarge magicka (+stagger on
+  projectiles), Venom→DoT, FaF Destruction→Impact Stagger, Healing→Respite, Ward→Ward_Shield,
+  perk-gated `_Improved`/`_Potent`, Illusion Break1/Break2. Rider magnitudes are small and easy to
+  get wrong by orders of magnitude — `Impact_Stagger` is **0.25**, not 25; `Slow` is **5**, not 50.
+  Full per-subtype rider doctrine (incl. the mechanical-vs-cosmetic trap):
+  `references/cost-and-magnitude.md`. Each magnitude scales at runtime via the MGEF's
+  `PowerAffectsMagnitude` flag — set the *base*, not the scaled number.
 - **Any effect that resolves to `REQ_NULL_*` / `REQ_DEPRECATED_*` is a silent no-op to fix now.**
   Modded **resistance** spells are the classic case — all 8 vanilla resist MGEFs are NULLed, and
   the live analogue differs by lane (ability / enchant / potion / castable spell). Re-point each
@@ -275,6 +236,13 @@ tick** carry **none**.
   01CEAE:Skyrim.esm` / `MagicDamageShock 01CEAF:Skyrim.esm` — drives resistance and the
   Pyromancy/Cryomancy/Electromancy perks. Set `ResistValue` to match (`ResistFire`/`ResistFrost`/
   `ResistShock`/`Poison`/`MagicResist`).
+- **Subtype keyword — on the MGEF, and only where the comparable has one.** MR classifies a spell's
+  sub-archetype with a `Nox_KW_<School>_<Subtype>` keyword that its perk routes match on; omit it and
+  the perks silently never apply (no error, no log). **These live on the MGEF — MR's SPEL records
+  carry no keywords at all** (915 scanned, `Keywords` unset on every one), so never try to write one
+  onto a Spell. **Not every subtype has one** (Calm/Fear/Frenzy, Healing, Ward, TurnUndead and mage
+  armor use vanilla class keywords instead), so take the comparable's set as-is rather than
+  synthesising a name. Per-school table with verified masters: `references/keywords.md`.
 - **Requiem behavioral markers — write the master, it is not `Skyrim.esm`:**
   `REQ_SpellConcentration 2FFEAD:Requiem.esp`, `REQ_NoDurationScaling 412EDF:Requiem.esp`,
   `REQ_NoMagnitudeScaling 3FCA4C:Requiem.esp`, `Nox_KW_CloakDamage 007609:Requiem - Magic Redone.esp`.
@@ -298,18 +266,14 @@ tick** carry **none**.
 This is the one field that matters most. A spell's `HalfCostPerk` names a `REQ_<School>_Mastery_<NNN>`
 perk that simultaneously sets the spell's **school and tier**, gates **learning** (Requiem's
 perk-gated learn system), and grants half-cost at mastery. Get it right and Requiem treats the spell
-correctly; get it wrong and the spell is mis-classified. The matrix (all `:Skyrim.esm`):
+correctly; get it wrong and the spell is mis-classified. The full 5×5 matrix of
+`REQ_<School>_Mastery_<NNN>` FormIDs (all `:Skyrim.esm`) is in `references/perks-and-tomes.md` — read
+it there rather than recalling one.
 
-| School | Novice | Apprentice | Adept | Expert | Master |
-|---|---|---|---|---|---|
-| Destruction | 0F2CA8 | 0C44BF | 0C44C0 | 0C44C1 | 0C44C2 |
-| Restoration | 0F2CAA | 0C44C7 | 0C44C8 | 0C44C9 | 0C44CA |
-| Conjuration | 0F2CA7 | 0C44BB | 0C44BC | 0C44BD | 0C44BE |
-| Alteration  | 0F2CA6 | 0C44B7 | 0C44B8 | 0C44B9 | 0C44BA |
-| Illusion    | 0F2CA9 | 0C44C3 | 0C44C4 | 0C44C5 | 0C44C6 |
-
-For a spell that wants a school's specialization scaling (Pyromancy, Necromancy, …), also carry that
-school's specialization keyword so the perk applies — but **hook into Requiem's existing perks; do not
+**Do not hand a plain damage spell a `Nox_KW_<School>_Perk_*` specialization keyword.** Verified live:
+MR's own Fire/Frost/Shock damage effects carry **no** Pyromancy/Cryomancy/Electromancy keyword — those
+sit on **cloak / enchant / hazard** delivery forms only, where the perk cannot otherwise find the
+effect. Copy whichever the archetype comparable carries; **hook into Requiem's existing perks, never
 author new perk trees** (`references/perks-and-tomes.md`).
 
 ### 7 — The spell tome (BOOK) and scrolls
@@ -328,31 +292,20 @@ gated by the spell's `HalfCostPerk` tier. **Placement of the tome in a vendor/lo
 
 ### 8 — Enchantments and staves
 
-See `references/enchantments.md` for the full models:
+Full models in `references/enchantments.md`; the delivery/FX and pre-enchanted-gear chains in
+`references/mr-content-survey.md` §5–§7. The load-bearing points:
 
-- **Weapon enchant** (`EnchantType=Enchantment`, `CastType=FireAndForget`, `TargetType=Touch`):
-  on the ENCH, `EnchantmentCost = EnchantmentAmount = effect Magnitude`, one knob, 1:1
-  (10/20/25/35/40/50 by tier); the charge **pool** is the WEAP's own `EnchantmentAmount`
-  (≈500×tier) set by the weapon skill. **The enchantment adds zero gold value** — Requiem hand-sets
-  every pre-enchanted item's `Value` to the base item's value (all ENCH are `NoAutoCalc`); put the
-  tier into magnitude/cost/pool, never into gold (`references/enchantments.md`).
-- **Apparel enchant** (`CastType=ConstantEffect`, `TargetType=Self`): no charge pool; magnitude on the
-  MGEF; passive while worn.
-- **Staff:** the WEAP carries `EnchantmentAmount` + `Nox_KW_Staff_<School><Tier>`; the staff's
-  `ObjectEffect` casts the school's spell effect at that tier's power.
-- **Elemental projectile hit:** the element lives on the **explosion**, not on weapon/ammo damage —
-  arrow `AMMO` → `PROJ` (`Explosion`) → `EXPL` (Force/Radius) → `ObjectEffect`/MGEF. You design the
-  EXPL→MGEF; `requiem-ammo-patching` links the AMMO/PROJ.
-- **Delivery/FX records** (`references/mr-content-survey.md` §7): a damage spell's MGEF wires
-  `Projectile`/`Explosion`/`Hazard`. An **AoE** spell links an `EXPL` on its MGEF (the EXPL is a
-  force+visual shell — `Damage = 0`; the area damage comes from the MGEF). A **wall/rune/circle** links a
-  `HAZD` whose `Spell` re-applies the damage MGEF on a tick. Reuse a tier-matched Requiem PROJ/EXPL/HAZD
-  or clone its profile; don't invent physics.
-- **Pre-enchanted gear & crafting** (`mr-content-survey.md` §5–§6): MR factors enchanted items as
-  {base item} × {ENCH} × {magnitude tier} — to add one, point the item's `ObjectEffect` at an ENCH
-  (armor: no charge; staff: ~1000). If it should be **craftable**, add a `COBJ` (forge / DLC2 staff
-  enchanter / scroll tool) gated `HasSpell` (± `HasPerk`); the COBJ assembles the finished item, it
-  never embeds the effect. Placement of the item into vendor/loot lists → `requiem-leveled-list-patching`.
+- **Weapon enchant** (`EnchantType=Enchantment`, FaF, Touch): `EnchantmentCost = EnchantmentAmount =
+  effect Magnitude`, 1:1 by tier (10/20/25/35/40/50); the charge **pool** is the WEAP's own
+  `EnchantmentAmount` (≈500×tier). **Apparel enchant** is `ConstantEffect`/`Self` — no pool.
+- **The enchantment adds zero gold value.** Requiem hand-sets every pre-enchanted item's `Value` to
+  the base item's value (all ENCH are `NoAutoCalc`); the tier goes into magnitude/cost/pool, never gold.
+- **Staff:** the WEAP carries `EnchantmentAmount` + `Nox_KW_Staff_<School><Tier>`; its `ObjectEffect`
+  casts the school's effect at that tier. **Elemental projectile hit:** the element lives on the
+  **explosion** — `AMMO` → `PROJ` → `EXPL` → `ObjectEffect`/MGEF; you design EXPL→MGEF,
+  `requiem-ammo-patching` links AMMO/PROJ. Reuse a tier-matched Requiem PROJ/EXPL/HAZD; don't invent
+  physics. **Craftable** items get a `COBJ` gated `HasSpell` (± `HasPerk`), which assembles the
+  finished item and never embeds the effect.
 
 ### 9 — Emit the override
 
@@ -366,35 +319,32 @@ that no `REQ_NULL_*` reference remains.
 ### `HalfCostPerk` is the classifier — set it deliberately
 
 The MR-patch addons (real "new magic patched for Requiem" cases) all do the same thing: they re-point
-`HalfCostPerk` to the Requiem Mastery perk for the spell's intended school and tier, even **reclassifying
-the school** (sonic magic → Alteration, star magic → Restoration). When you patch a modded spell, decide
-its Requiem school + tier and set `HalfCostPerk` accordingly — that, the cost, and the charge time are
-the core of the patch. See `references/worked-examples.md`.
+`HalfCostPerk` to the Mastery perk for the spell's intended school and tier, even **reclassifying the
+school** (sonic magic → Alteration, star magic → Restoration). Decide the modded spell's Requiem school
++ tier and set it accordingly (`references/worked-examples.md`).
 
 ### The three-layer split — don't hand-stamp Layer 2, route Layer 3
 
 - **Never add an `RFTI_All_*` rescaling perk** to a spell or MGEF. They are Reqtificator outputs (the
-  `RFTI_` prefix marks the whole assigned family, including `RFTI_Trait_*` creature traits). Adding one
-  fights the build pass — the analog of hand-stamping the weapon damage-type keyword.
+  `RFTI_` prefix marks the whole assigned family, including `RFTI_Trait_*`); adding one fights the
+  build pass — the analog of hand-stamping the weapon damage-type keyword.
 - **A plain damage/heal/buff spell needs no script.** Only a special mechanic (bound item, teleport,
-  mind-control, weather, scroll-craft, multi-spell tome, weakness/rune debuff) carries a `Nox_*` script.
-  If the modded spell does one of those, carry the record-side marker and **route the runtime to
-  `requiem-script-patching`** — do not try to author the Papyrus here.
+  mind-control, weather, scroll-craft, multi-spell tome, weakness/rune debuff) carries a `Nox_*`
+  script — carry the record-side marker and **route the runtime to `requiem-script-patching`**.
 
 ### REQ_NULL — strip on items, replace on creatures
 
-`REQ_NULL_*` effects are retired vanilla abilities/powers/perk-effects (e.g. `REQ_NULL_AbResistFire`,
-`REQ_NULL_RaceOrcBerserkEffect`). On a **player-side spell or an item enchantment**, strip a NULL
-reference. But when a modded **creature or NPC** carries a now-NULLed vanilla resistance/power, Requiem
-**replaced** it with a race trait spell or perk — route the replacement (`requiem-race-patching`),
-don't just delete the protection. Never carry a `REQ_NULL_*` forward; never add one.
+`REQ_NULL_*` effects are retired vanilla abilities/powers/perk-effects. On a **player-side spell or an
+item enchantment**, strip a NULL reference. But when a modded **creature or NPC** carries a now-NULLed
+vanilla resistance/power, Requiem **replaced** it with a race trait spell or perk — route the
+replacement (`requiem-race-patching`), don't delete the protection. Never carry a `REQ_NULL_*` forward.
 
 ### Uniques and novel mechanics
 
-A bespoke artifact enchantment or a spell with no Requiem analog keeps its custom effect — derive the
-*structure* (cost/charge/keywords/flags) from the nearest comparable, set the tier perk to the closest
-school/tier, and state the assumption. When you cannot find a clean comparable, say so — name what you
-checked — rather than inventing a number.
+A spell with no Requiem analog keeps its custom effect — derive the *structure*
+(cost/charge/magnitude/keywords/flags) from the nearest comparable, set the tier perk to the closest
+school/tier, and state the assumption. When you cannot find a clean comparable, say so and name what
+you checked rather than inventing a number.
 
 ## Common mistakes
 
@@ -403,6 +353,21 @@ checked — rather than inventing a number.
 - **Setting `BaseCost` without ticking `ManualCostCalc`.** Mods ship auto-calc spells; without the
   flag the engine ignores your cost entirely. Cost-only patching is the field failure this skill
   exists to kill — cost, flag, charge, magnitudes, riders, and the tome are one pass.
+- **Scalars-only patching — the #1 field failure.** Setting `BaseCost` + `ManualCostCalc` +
+  `ChargeTime` + `HalfCostPerk` and leaving every `Effects[i].Data.Magnitude` at the mod's original
+  value. That is *cost-normalized*, not patched: the spell deals the mod's damage at Requiem's price.
+  Magnitudes come from the comparable, read at `depth=4`.
+- **Attaching a cosmetic rider instead of the mechanical one.** Illusion's `_Desc_Improved` effects
+  are `Archetype.Type = Script`, keyword-less tooltip carriers — attaching one where the `_Improved`
+  effect belongs displays an improved effect and applies nothing. The Destruction `_Taper` riders are
+  the other shape of this trap: `ActorValue = Fame` at magnitude 0. Verify the rider's `Archetype`
+  before counting it (`references/cost-and-magnitude.md`).
+- **Guessing a rider's magnitude.** They are small and unforgiving — `Impact_Stagger` is **0.25**
+  (not 25) and `Slow` is **5** (not 50). Copy the number from the comparable's effect entry.
+- **Giving a plain damage spell a `Nox_KW_<School>_Perk_*` keyword.** MR's own damage effects carry
+  none; those keywords tag cloak/enchant/hazard delivery forms. Adding one mis-files the spell.
+- **Trying to write a subtype keyword onto the SPEL.** MR spells carry no keywords at all — the
+  subtype classification lives on the MGEF.
 - **Leaving a patched spell single-effect.** MR's comparable is multi-effect; a modded fireball
   without the Cremation burn and Impact Stagger is under-built, not "already fine."
 - **Calling an MGEF "already Requiem-correct" because it has `MagicSkill` + an element keyword + a
@@ -448,10 +413,20 @@ Before finishing a magic override, confirm:
 - [ ] **`ManualCostCalc` ticked on the modded spell** (as a flag union) and **BaseCost** taken from
       the comparable; **ChargeTime** on the tier ladder (conc 0 / FaF 0.25×tier / touch half /
       ritual 3.0) — rebalanced, not inherited.
+- [ ] **Magnitudes DERIVED, not inherited** — every `Effects[i].Data.Magnitude/Area/Duration` read off
+      the comparable at `depth=4` and set from it. **A spell still carrying the mod's original
+      magnitudes is UNPATCHED**, however correct its cost and `HalfCostPerk` are.
 - [ ] **Effect list** mirrors the comparable's **full shape — the comparable's riders ADDED**
       (element rider, Impact Stagger, Respite/Ward_Shield, perk-gated `_Improved`/`_Potent`,
       Break1/Break2), each with `Data` magnitude/area/duration and any `Conditions` copied per
-      `references/mgef-conditions.md`.
+      `references/mgef-conditions.md`. Rider magnitudes **copied, never guessed**
+      (`Impact_Stagger` 0.25, `Slow` 5).
+- [ ] **Riders are the MECHANICAL ones, tier-resolved as the comparable does it.** No cosmetic
+      stand-in (Illusion `_Desc_Improved`, a `Fame`-ActorValue magnitude-0 entry) counted as the
+      mechanical rider; rider records taken from the comparable rather than tier-guessed
+      (`references/cost-and-magnitude.md`).
+- [ ] **Subtype keyword(s)** carried on the **MGEF** exactly as the comparable does — and none
+      invented where the comparable has none (SPEL records take no keywords).
 - [ ] **`MinimumSkillLevel`** on each patched MGEF = the tier marker (0/25/50/75/100).
 - [ ] **No effect resolves to `REQ_NULL_*`/`REQ_DEPRECATED_*`** — every dead BaseEffect (resistance
       magic is the classic) re-pointed same-lane, same-element per `references/resistance-map.md`.
@@ -478,23 +453,20 @@ Before finishing a magic override, confirm:
 - **Authority** = houseCARL's live conflict winner. Magic winners come from `Requiem - Magic Redone.esp`
   (MR; spells, effects, enchantments, staves, perks, scrolls), base `Requiem.esp` (shouts + base), and
   `Requiem - Alchemy Redone.esp` (potions/poisons), plus MR cross-patches and the **MR-patch addons**
-  (`Requiem - Constellation/Obscure/Dark Hierophant/Holy Templar/Sonic Mage Magic - Magic Redone
-  Patch.esp`, `Wildwaker Magic - Requiem Magic Redone Patch.esp`, Apocalypse compat) — the best worked
-  examples of new magic patched for Requiem. Some spell perks resolve to `Requiem - MR Special Feats
-  Patch.esp` / `Requiem - MR WAR Resist and Regen Tweak Patch.esp`. On a live profile
+  (Constellation / Obscure / Dark Hierophant / Holy Templar / Sonic Mage / Wildwaker / Apocalypse
+  compat) — the best worked examples of new magic patched for Requiem. Some spell perks resolve to
+  `Requiem - MR Special Feats Patch.esp` / `…WAR Resist and Regen Tweak Patch.esp`. On a live profile
   `Requiem for the Indifferent.esp` folds the build pass over them and is the winner to derive from.
+  **A third-party plugin often wins an MR record** (an MGEF-merge or visual-tweak patch); derive from
+  the winner, and note it when its values are the ones you copied.
 - **Scrolls** (`REQ_Scroll_<School><Tier>_<Type>_<Delivery>`, Weight 0.5, tier-scaled value, charge =
-  the spell's): a single-use cast of the spell at its tier; design the same MGEF, route value/placement
-  to the `requiem-leveled-list-patching` skill.
-- **Shouts** (SHOU, owned by `Requiem.esp`) are a niche sub-case: a SHOU links three Words of Power to
-  three SPEL (whose effects you design here) plus a recovery time; word-unlock and placement are
-  out of scope.
-- **Alchemy** (potion/poison MGEF, `Requiem - Alchemy Redone.esp`): `PeakValueModifier` archetype,
+  the spell's): a single-use cast at its tier; design the same MGEF, route value/placement to
+  `requiem-leveled-list-patching`. **Shouts** (SHOU, `Requiem.esp`) are niche: three Words → three
+  SPEL (effects designed here) + a recovery time; word-unlock and placement are out of scope.
+- **Alchemy** (potion/poison MGEF, `Requiem - Alchemy Redone.esp`): `PeakValueModifier`,
   `FireAndForget`/`Self`, `Flags = PowerAffectsMagnitude, Recover`, `MagicAlch*` keywords
   (`MagicAlchHarmful` = poison); potency scales with Alchemy skill and `RFTI_All_PoisonRescaling`
-  (Layer 2). See `references/enchantments.md`. This skill owns designing a genuinely **new**
-  alchemy/food MGEF; the ALCH/INGR **records** that carry effects (potions, poisons, oils, food,
-  drink, ingredients — their value/weight/flags/keywords/recipes) belong to
-  `requiem-consumable-patching`, which routes new-effect design back here.
+  (Layer 2). This skill owns designing a genuinely **new** alchemy/food MGEF; the ALCH/INGR **records**
+  carrying effects belong to `requiem-consumable-patching`, which routes new-effect design back here.
 - houseCARL writes go to a new patch plugin; the live load order is never modified. The patch is later
   run through the Reqtificator.
