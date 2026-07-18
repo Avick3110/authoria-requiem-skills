@@ -154,6 +154,21 @@ counts, reconcile the set of MGEFs **referenced by the spells you patched** agai
 not done while any of its own modded effects is undispositioned. (This is the per-record coverage the
 `requiem-patching` skill's integration checklist gates on for high-count types.)
 
+**The "already Requiem-correct" anti-pattern — the one that ships a whole plugin unpatched.** On a bulk
+pass the tempting shortcut is to scan the MGEF sweep, see `MagicSkill` set, an element keyword present,
+and a `MinimumSkillLevel` tier marker, and disposition the record as **skipped — already correct**. That
+trio is **necessary but not sufficient**: it is exactly what a competent vanilla-style mod ships on its
+own, and it says nothing about whether Requiem's rules will match the effect. Every such skip is a
+false negative until the keywords are diffed.
+
+**"Already correct" is a disposition that requires a diff, not an eyeball.** To skip a modded MGEF as
+already-correct, name its **archetype comparable** in MR and show its keyword set **equals** the
+comparable's (element swapped). Lacking a REQ behavioral keyword the comparable carries, it is
+**unpatched** — it belongs on the *patched* side with those keywords added, never the skipped side.
+The sweep's `Keywords` column only returns `[list: N item(s)]`, so re-read candidates with
+`housecarl_batch_record_detail ... fields=["EditorID","Keywords","Flags"] depth=2` and compare actual
+FormIDs. Method + verified archetype table: `references/keywords.md`.
+
 ## Workflow
 
 ### 1 — Identify school, tier, and delivery
@@ -235,13 +250,36 @@ shape to mirror.
 
 ### 5 — Set keywords and flags (load-bearing)
 
-Read them off the comparable's MGEF and replicate (full vocab + FormIDs in `references/keywords.md`):
+**The keyword+flag signature is BEHAVIORAL — derived from what the effect *does*, not from its element
+or its tier.** Same element and same tier, different behavior = different signature. So the derivation
+is a three-step diff, not a lookup (full archetype table + FormIDs in `references/keywords.md`):
 
-- **Element keyword** on a damage MGEF: `MagicDamageFire 01CEAD` / `MagicDamageFrost 01CEAE` /
-  `MagicDamageShock 01CEAF` (Skyrim.esm) — drives resistance and the Pyromancy/Cryomancy/Electromancy
-  perks. Set `ResistValue` to match (`ResistFire`/`ResistFrost`/`ResistShock`/`Poison`/`MagicResist`).
-- **Requiem markers:** `REQ_SpellConcentration 2FFEAD` (concentration effects), `REQ_NoDurationScaling
-  412EDF` (opt out of duration scaling) — copy from the comparable.
+1. **Classify the effect's behavior:** burst FaF bolt · concentration stream · aimed DoT · lingering
+   taper rider · self-buff · magicka-burn / discharge rider · cloak tick · hazard tick.
+2. **Read MR's exemplar for *that archetype*** at `depth=2` so `Keywords` actually expands — at
+   `depth=1` it prints `[list: N item(s)]`, which is how a missing keyword goes unnoticed.
+3. **Diff the modded MGEF against it and add what's absent.** The element keyword swaps per element;
+   everything else comes from the archetype.
+
+**`MagicSkill` + element keyword + `MinimumSkillLevel` tier marker is *necessary but not sufficient*.**
+That trio is what a competent vanilla-style mod already ships. An MGEF carrying it but lacking the **REQ
+behavioral keywords its archetype comparable carries** is **unpatched**, not "already Requiem-correct" —
+Requiem's scaling rules key off those keywords, so without them the effect scales as vanilla inside
+Requiem's economy. Diff before you conclude anything is already correct.
+
+**Resist the flat rule.** "Damage → `REQ_NoDurationScaling`, concentration → `REQ_SpellConcentration`"
+is wrong both ways live: a **taper** rider carries *both*, a **magicka-burn rider** and a **hazard
+tick** carry **none**.
+
+- **Element keyword** on a damage MGEF: `MagicDamageFire 01CEAD:Skyrim.esm` / `MagicDamageFrost
+  01CEAE:Skyrim.esm` / `MagicDamageShock 01CEAF:Skyrim.esm` — drives resistance and the
+  Pyromancy/Cryomancy/Electromancy perks. Set `ResistValue` to match (`ResistFire`/`ResistFrost`/
+  `ResistShock`/`Poison`/`MagicResist`).
+- **Requiem behavioral markers — write the master, it is not `Skyrim.esm`:**
+  `REQ_SpellConcentration 2FFEAD:Requiem.esp`, `REQ_NoDurationScaling 412EDF:Requiem.esp`,
+  `REQ_NoMagnitudeScaling 3FCA4C:Requiem.esp`, `Nox_KW_CloakDamage 007609:Requiem - Magic Redone.esp`.
+  These sit next to `Skyrim.esm` element keywords in every effect's list, so a bare FormID gets guessed
+  as `:Skyrim.esm` and the write fails. Copy the set from the archetype comparable.
 - **MGEF `Flags`** are meaningful and archetype-shaped: damage → `PowerAffectsMagnitude`; timed
   buffs/debuffs → `PowerAffectsDuration`; binary states (invisibility/paralyze/summon) →
   `NoMagnitude`; instant heals → `NoDuration`; plus `Hostile`/`Detrimental`/`FXPersist`/
@@ -367,6 +405,18 @@ checked — rather than inventing a number.
   exists to kill — cost, flag, charge, magnitudes, riders, and the tome are one pass.
 - **Leaving a patched spell single-effect.** MR's comparable is multi-effect; a modded fireball
   without the Cremation burn and Impact Stagger is under-built, not "already fine."
+- **Calling an MGEF "already Requiem-correct" because it has `MagicSkill` + an element keyword + a
+  tier marker.** That trio is what a vanilla-style mod ships anyway — necessary, not sufficient. If the
+  effect lacks the REQ behavioral keywords its archetype comparable carries, it is unpatched and
+  Requiem's scaling never matches it. Diff at `depth=2` before you skip anything (worked negative:
+  `references/keywords.md`).
+- **Deriving the keyword set from element or tier instead of behavior.** The signature tracks what the
+  effect *does*. A flat "damage → `REQ_NoDurationScaling`, concentration → `REQ_SpellConcentration`"
+  rule is wrong both ways: a DoT **taper** rider carries both keywords, while a magicka-burn rider and
+  a hazard tick carry none.
+- **Writing a `REQ_*` behavioral keyword with the `:Skyrim.esm` master.** They are `:Requiem.esp`
+  (`Nox_KW_CloakDamage` is `:Requiem - Magic Redone.esp`). They sit beside `Skyrim.esm` element
+  keywords in every effect list, so the wrong master is the easy guess — and the write fails.
 - **Leaving a resistance spell pointing at a NULLed vanilla MGEF.** All 8 vanilla resist MGEFs are
   `REQ_NULL_*` — the spell casts and protects against nothing. Re-point per
   `references/resistance-map.md`, same lane, same element.
@@ -406,7 +456,11 @@ Before finishing a magic override, confirm:
 - [ ] **No effect resolves to `REQ_NULL_*`/`REQ_DEPRECATED_*`** — every dead BaseEffect (resistance
       magic is the classic) re-pointed same-lane, same-element per `references/resistance-map.md`.
 - [ ] **Hand pairs** (`_LeftHand`/`_RightHand`) dispositioned together.
-- [ ] **Element + Requiem-marker keywords** present; **MGEF `Flags`** (incl. `PowerAffectsMagnitude`) mirrored.
+- [ ] **MGEF keyword+flag signature diffed against the ARCHETYPE comparable** at `depth=2` — not assumed
+      from element or tier: element keyword present, **every REQ behavioral keyword the comparable
+      carries added** with correct masters (`2FFEAD`/`412EDF`/`3FCA4C` = `:Requiem.esp`; `007609` =
+      `:Requiem - Magic Redone.esp`), **`Flags`** mirrored, and any "already correct" skip names its
+      comparable and shows the sets match.
 - [ ] **Flags written as unions** — every SPEL/MGEF `Flags` write carries the winner's original bits
       plus your change; `ManualCostCalc` never silently dropped.
 - [ ] **`HalfCostPerk`** = the correct `REQ_<School>_Mastery_<tier>` perk; specialization keyword if needed.
