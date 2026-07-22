@@ -26,14 +26,18 @@ protocol*). None of these writes:
 
 ```
 housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="Spell" \
-  fields=["EditorID","HalfCostPerk","BaseCost","Effects"]
+  fields=["EditorID","HalfCostPerk","BaseCost","Effects"] format="dense"
 housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="MagicEffect" \
-  fields=["EditorID","MagicSkill","ResistValue","Keywords","Flags"]     # MGEF first-class, never reached only via spells
+  fields=["EditorID","MagicSkill","ResistValue","Keywords","Flags"] format="dense"   # MGEF first-class, never reached only via spells
 housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="ObjectEffect" \
-  fields=["EditorID","EnchantType","CastType","EnchantmentCost","Effects"]
-housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="Scroll" fields=["EditorID","Value","Effects"]
-housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="Book"   fields=["EditorID","Teaches","Value","Weight"]   # tomes = Teaches present
+  fields=["EditorID","EnchantType","CastType","EnchantmentCost","Effects"] format="dense"
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="Scroll" fields=["EditorID","Value","Effects"] format="dense"
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="Book"   fields=["EditorID","Teaches","Value","Weight"] format="dense"   # tomes = Teaches present
 ```
+
+`format="dense"` returns one positional row per record under a single column header instead of a
+labelled envelope per field — the compact form when a denominator runs to hundreds. Page with
+`limit=` + `offset=`.
 
 Give every FormID from each enumeration a disposition (patched → which workflow below, or skipped → the
 reason), verified per record — never extrapolated across a rank chain, element triple, enchant-tier run,
@@ -135,7 +139,8 @@ housecarl_bulk_apply into="Requiem magic patching" operations=[
 ```
 
 A per-effect perk gate is a `Conditions` entry on the effect (a `HasPerk` condition) — read the
-comparable's condition (houseCARL 1.2.2+ renders the perk parameter as a readable FormID) and compose
+comparable's condition at `depth=4 resolve_names=true` — the depth at which
+`Conditions[0].Data.Perk` renders as its named perk rather than an opaque `[ConditionFloat]` — and compose
 the same gate: add the `ConditionFloat` shell, then Set its polymorphic `Data` arm via compose (order
 matters; a direct leaf set like `Conditions[0].Data.Perk` is refused by design):
 

@@ -38,6 +38,11 @@ descriptions changed, so no §6.5 fan-out re-measure is owed, and no derivation 
   is the point.
 - **Whole-plugin passes now point at houseCARL's `bulk-record-jobs`** when the product is a
   deliverable (catalogue, audit, conflict survey) rather than a set of edits.
+- **`requiem-magic-patching` folded in (references only).** It carried the same stale perk-read note,
+  now corrected to `depth=4 resolve_names=true`, and its five per-type coverage denominators gained
+  `format="dense"` + paging. Its body was left untouched: at 472 lines it is near the §4.1 cap, and
+  its `depth=2`/`3`/`4` guidance was already correct — this skill was never part of the frozen set,
+  it just shared the one note.
 
 ## 1.8.0 — 2026-07-18
 

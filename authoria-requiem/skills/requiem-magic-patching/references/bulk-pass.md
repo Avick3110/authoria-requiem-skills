@@ -23,16 +23,21 @@ none of these writes:
 
 ```
 housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="Spell" \
-  fields=["EditorID","HalfCostPerk","BaseCost","Effects"]
+  fields=["EditorID","HalfCostPerk","BaseCost","Effects"] format="dense"
 housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="MagicEffect" \
-  fields=["EditorID","MagicSkill","ResistValue","Keywords","Flags"]
+  fields=["EditorID","MagicSkill","ResistValue","Keywords","Flags"] format="dense"
 housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="ObjectEffect" \
-  fields=["EditorID","EnchantType","CastType","EnchantmentCost","Effects"]
+  fields=["EditorID","EnchantType","CastType","EnchantmentCost","Effects"] format="dense"
 housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="Scroll" \
-  fields=["EditorID","Value","Effects"]
+  fields=["EditorID","Value","Effects"] format="dense"
 housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="Book" \
-  fields=["EditorID","Teaches","Value","Weight"]
+  fields=["EditorID","Teaches","Value","Weight"] format="dense"
 ```
+
+`format="dense"` returns one positional row per record under a single column header rather than a
+labelled envelope per field — worth it on a spell-heavy mod, where each of these denominators can run
+to hundreds. Page a big one with `limit=` + `offset=`; the windows tile exactly while the load order
+is unchanged.
 
 **Enumerate MGEF first-class.** The `MagicEffect` sweep is its own denominator — never reach an MGEF
 only through the spells that reference it. A spell's effects are records in their own right, and the
