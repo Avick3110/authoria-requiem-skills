@@ -13,7 +13,7 @@
 {"topic":"clothing and jewelry frames AR 0, ArmorClothing ArmorJewelry VendorItemClothing/Jewelry ClothingBody Ring, value tracks material","file":"keywords.md","section":"Clothing & jewelry frames"}
 {"topic":"armor sounds, shield BashImpactDataSet AlternateBlockMaterial, jewelry clothing ISC pickup putdown","file":"keywords.md","section":"Sounds"}
 {"topic":"crafting recipe COBJ forge temper smelter, armor workbench 0ADB78 not grindstone, WorkbenchKeyword FormIDs","file":"crafting.md","section":"The three recipe kinds"}
-{"topic":"perk gate HasPerk condition readable FormID 1.2.2, compose ConditionFloat Data arm, clone comparable perk, tempering perk map","file":"crafting.md","section":"The perk gate is a HasPerk condition"}
+{"topic":"perk gate HasPerk condition readable perk name at depth=4, compose ConditionFloat Data arm, clone comparable perk, tempering perk map","file":"crafting.md","section":"The perk gate is a HasPerk condition"}
 {"topic":"houseCARL bulk_apply rebalance existing modded armor, set AR value weight keywords, write gotchas pre-enable verification full_readback","file":"housecarl-recipes.md","section":"A — Re-balance an existing modded armor"}
 {"topic":"houseCARL create_record net-new armor, BodyTemplate ArmorType keywords","file":"housecarl-recipes.md","section":"B — Author a net-new armor record"}
 {"topic":"houseCARL heavy gauntlet PerkFists keyword set","file":"housecarl-recipes.md","section":"C — Heavy gauntlet (fist perk)"}

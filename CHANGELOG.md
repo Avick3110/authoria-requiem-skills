@@ -2,6 +2,43 @@
 
 All notable changes to the Authoria Requiem Patching Skills plugin. Versioning is [semantic](https://semver.org); the `version` in `authoria-requiem/.claude-plugin/plugin.json` is bumped on each release.
 
+## 1.9.0 — 2026-07-22
+
+Tool-surface refresh (Aaron, 2026-07-22): a user reported `requiem-armor-patching` burning a lot of
+tokens. Investigation cleared the live-analogy doctrine and traced the cost to skills written against
+an older houseCARL query surface. Closes
+[#41](https://github.com/Avick3110/authoria-requiem-skills/issues/41). Bodies + references only — no
+descriptions changed, so no §6.5 fan-out re-measure is owed, and no derivation rule moved.
+
+- **Doctrine verified, not changed.** Diffed `Requiem.esp` → `Requiem for the Indifferent.esp` across
+  six armor comparables (steel/ebony heavy cuirass, glass/elven/fur light cuirass, ebony shield): the
+  only delta is `Keywords` — `ArmorRating`/`Value`/`Weight` are identical. The build pass adds exactly
+  `REQ_Armor_Resistance_Ranged_Tier*` and `REQ_Tempering_*`, the two families the skills already say
+  never to hand-stamp, and the shield took tempering but no resist tier, confirming that ranged
+  resistance gates on the cuirass part keyword. "Derive from the live winner" is sound; there is no
+  numeric pass to double-apply.
+- **List-valued `references=` across `requiem-{armor,weapon,ammo,leveled-list,race}-patching`.** Every
+  reverse-lookup (recipe COBJ, leveled-list placement, artifact acquisition trace, race→NPC) took one
+  FormID per call; they now take the whole set at once, with the `matches` column naming which record
+  each hit belongs to. A five-piece set's recipes went from five calls to one.
+- **The recipe read is now a verified two-call shape.** `cross_plugin_query` has no `depth=`, so
+  `Items`/`Conditions` return as `[list: N item(s)]`; they are expanded via
+  `batch_record_detail ... depth=4 resolve_names=true`. **`depth=4` is documented as the working
+  depth** — `depth=2` yields only element types and `depth=3` stops short of the values. This replaces
+  the old "houseCARL 1.2.2+ renders the perk parameter as a readable FormID" note, which promised
+  readability without saying what makes it readable, leaving agents to probe for the depth.
+- **`format="dense"` and `resolve_names=true` on the whole-plugin triage sweeps.** Columnar rows
+  instead of a labelled envelope per field, and link fields annotated with what they point at, so
+  triage reads from identities. Paging via `limit=`/`offset=` is named. Coverage scope is deliberately
+  unchanged: the sweeps still enumerate every record the plugin *touches*, with `defined_in=true`
+  called out as a narrowing that would drop overridden vanilla records the reconciliation count
+  expects.
+- **`conflict_tree=true` dropped where only winner values are consumed** (comparable reads in armor,
+  weapon, ammo). It is retained on the freshness probe and post-enable verification, where the chain
+  is the point.
+- **Whole-plugin passes now point at houseCARL's `bulk-record-jobs`** when the product is a
+  deliverable (catalogue, audit, conflict survey) rather than a set of edits.
+
 ## 1.8.0 — 2026-07-18
 
 Bruma whole-mod pass follow-up (Heisen, 2026-07-18): manually corrected NPC/COBJ overrides exposed

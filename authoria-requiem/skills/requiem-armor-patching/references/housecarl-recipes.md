@@ -23,8 +23,15 @@ becomes your work queue (full doctrine: the skill body's *Bulk pass protocol*). 
 ```
 # The triage matrix: the disposition fields for every ARMO of the plugin in one table.
 housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="ARMO" \
-  fields=["Name","ArmorRating","BodyTemplate.ArmorType","BodyTemplate.FirstPersonFlags","Keywords","ObjectEffect"]
+  fields=["Name","ArmorRating","BodyTemplate.ArmorType","BodyTemplate.FirstPersonFlags","Keywords","ObjectEffect"] \
+  resolve_names=true format="dense"
 ```
+
+`format="dense"` gives one positional row per record under a single column header (no repeated field
+keys — the compact form for a several-hundred-record sweep); `resolve_names` names what `Keywords`
+and `ObjectEffect` point at. Page with `limit=` + `offset=`. Keep the scope as written — it covers
+every `ARMO` the plugin touches, which is what the reconciliation count checks against;
+`defined_in=true` would drop the vanilla armors the mod overrides.
 
 Per row: `BodyTemplate.ArmorType` (armored vs `Clothing` vs none → armored workflow / clothing frame /
 skin-or-template skip), `ArmorRating` (>0 armored vs 0 cosmetic), `FirstPersonFlags` + part keyword
@@ -114,8 +121,9 @@ housecarl_bulk_apply into="Authoria_Armor" operations=[
 ## E — Crafting + tempering recipes (COBJ)
 
 Create the forge recipe with its perk gate composed in the same call. Read the comparable recipe's
-`Conditions` first (houseCARL 1.2.2+ renders the perk parameter as a readable FormID) and reuse its
-perk. The condition grammar: add the `ConditionFloat` shell, then Set its polymorphic `Data` arm via
+`Conditions` first with `depth=4 resolve_names=true` — that is the depth at which the perk renders
+as a name (`→ REQ_Smithing_Craftsmanship "Craftsmanship"`) rather than an opaque `[ConditionFloat]` —
+and reuse its perk. The condition grammar: add the `ConditionFloat` shell, then Set its polymorphic `Data` arm via
 compose — order matters, and a direct leaf set like `Conditions[0].Data.Perk` is refused by design
 (the whole `Data` arm must be composed):
 

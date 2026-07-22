@@ -9,8 +9,8 @@ shape — read live off `REQ_Forge_Arrow_Steel` (00B650) and `REQ_Forge_Bolt_Iro
 - **`Items`** = exactly two: **one metal ingot ×1** + **one firewood (`06F993:Skyrim.esm`) ×1**.
 - **`CreatedObjectCount = 30`** — one ingot + one log yields 30 arrows (or 30 bolts).
 - **`Conditions`** = one `HasPerk` condition (`ComparisonValue 1`, `EqualTo`) — the smithing-perk
-  gate. houseCARL 1.2.2+ renders the perk parameter as a readable FormID (older builds showed
-  `floi: form mode but no readable FormKey`) — **read the comparable recipe's perk and compose the
+  gate. Read it at `depth=4 resolve_names=true` and the perk renders as a name; a shallower read
+  returns only `[ConditionFloat]`. **Read the comparable recipe's perk and compose the
   same gate** (grammar in `housecarl-recipes.md` § D) rather than picking a perk by hand.
 
 Common ingot FormIDs: Iron `05ACE4`, Steel `05ACE5`, Dwarven `0DB8A2`, Elven (refined moonstone)
@@ -21,13 +21,23 @@ Common ingot FormIDs: Iron `05ACE4`, Steel `05ACE5`, Dwarven `0DB8A2`, Elven (re
 There is **no separate temper or smelter recipe** for ammo (unlike weapons/armor) — just the one
 forge recipe.
 
-Find a comparable's recipe by reverse-lookup on the ammo FormID:
+Find a comparable's recipe by reverse-lookup on the ammo FormID — `references=` takes a **list**, so
+look up every comparable at once rather than one per arrow:
 
 ```
-housecarl_cross_plugin_query type="ConstructibleObject" references="01397F:Skyrim.esm"
+housecarl_cross_plugin_query type="ConstructibleObject" \
+  references=["01397D:Skyrim.esm","01397F:Skyrim.esm","0139BF:Skyrim.esm"] \
+  fields=["CreatedObject","CreatedObjectCount","WorkbenchKeyword"] resolve_names=true format="dense"
 ```
 
-(Filter out the `REQ_Forge_Ench_*` results — those are the elemental-ammo recipes.)
+The `matches` column names which arrow each recipe belongs to. (Filter out the `REQ_Forge_Ench_*`
+results — those are the elemental-ammo recipes.)
+
+`cross_plugin_query` has no `depth=`, so `Items` and `Conditions` come back as `[list: N item(s)]`;
+expand them over the recipe FormIDs with `housecarl_batch_record_detail ... depth=4
+resolve_names=true`. **`depth=4` is the working depth** — it yields `Items[i].Item.Item` (the named
+ingot), `Items[i].Item.Count`, and `Conditions[0].Data.Perk` resolved to its perk name; shallower
+reads stop at element types.
 
 Bespoke/quest/creature ammo (Bloodcursed, Soulcairn, Dwarven Sphere Bolt) has **no** forge recipe;
 don't add one.

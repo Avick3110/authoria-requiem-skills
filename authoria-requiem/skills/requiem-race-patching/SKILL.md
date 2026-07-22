@@ -74,7 +74,8 @@ Confirm authority is fresh, note the race-domain authority, then classify what y
 3. **Classify — humanoid vs creature.** Read the modded race and decide from, in order of reliability:
    - **Keywords** — `ActorTypeNPC 013794` → humanoid; `ActorTypeCreature 013795` /
      `ActorTypeAnimal 013798` / `ActorTypeTroll`, `ActorTypeUndead`, `ActorTypeDaedra`, … → creature.
-   - **Which NPCs use the race** (`cross_plugin_query type="NPC_" references="<race>"`) — a follower
+   - **Which NPCs use the race** (`cross_plugin_query type="NPC_" references=["<race FormIDs>"]` —
+     a list, so ask about every race in the plugin at once; `matches` names which race each NPC uses) — a follower
      mod's race used by humanoid NPCs is humanoid.
    - **Name** and the **`SkeletalModel`** path (a skeleton under `actors\troll\…` or `actors\draugr\…`
      is the strongest creature hint). The skeleton/model path can be a *red herring* — a Khajiit
@@ -99,8 +100,13 @@ the triage matrix that drives the humanoid-vs-creature classification (First ste
 
 ```
 housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="RACE" \
-  fields=["Keywords","Flags","Starting","ActorEffect"]
+  fields=["Keywords","Flags","Starting","ActorEffect"] resolve_names=true format="dense"
 ```
+
+`resolve_names` renders the `Keywords` and `ActorEffect` links as identities — so the
+`ActorTypeNPC` / `ActorTypeCreature` classification below reads straight off the row instead of
+requiring a FormID match — and `format="dense"` returns one positional row per race under a single
+column header.
 
 Read `Keywords` per row to classify (`ActorTypeNPC 013794` → humanoid → Workflow A;
 `ActorTypeCreature`/`ActorTypeAnimal`/`ActorTypeTroll`… → creature → Workflow B), and read

@@ -74,8 +74,21 @@ Open with the triage matrix — one call, the whole plugin at once, and it doesn
 
 ```
 housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="ARMO" \
-  fields=["Name","ArmorRating","BodyTemplate.ArmorType","BodyTemplate.FirstPersonFlags","Keywords","ObjectEffect"]
+  fields=["Name","ArmorRating","BodyTemplate.ArmorType","BodyTemplate.FirstPersonFlags","Keywords","ObjectEffect"] \
+  resolve_names=true format="dense"
 ```
+
+`format="dense"` returns one positional row per record under a single column header rather than a
+labelled envelope per field — on a big armor mod that is the difference between a readable table and
+a wall of repeated keys. `resolve_names` annotates the `Keywords` and `ObjectEffect` links with what
+they point at, so you triage from names instead of FormIDs. Page a large plugin with `limit=` +
+`offset=`; the windows tile exactly while the load order is unchanged.
+
+Scope deliberately: this enumerates every `ARMO` the plugin **touches**, overrides included, which is
+what the coverage count below reconciles against. `defined_in=true` narrows to only the records the
+plugin *defines* — useful when you want its new content alone, but it drops the vanilla armors the
+mod overrides, so don't reach for it on a coverage pass. Under a `plugins=` scope the fields are that
+plugin's own values; add `winner_fields=true` when you need what currently wins instead.
 
 Read each row to disposition the piece before any per-record work:
 
@@ -119,6 +132,11 @@ Close the pass with a **reconciliation count — patched + skipped = enumerated.
 don't add up, a record fell through; find it before you call the type done. (This is the per-record
 coverage the `requiem-patching` skill's integration checklist gates on for high-count jobs.)
 
+When the sweep's product is a **deliverable** — a catalogue, audit table, or conflict survey rather
+than a set of edits — load houseCARL's `bulk-record-jobs` skill before the first query. It maps
+many-records-to-one-deliverable jobs onto the bulk primitives and pins a canonical output schema,
+which is what stops a fan-out inventing a different shape per worker.
+
 **Never extrapolate across a set, a light/heavy pair, a material tier, or an enchanted variant.** A
 full set (cuirass + boots + gauntlets + helmet + shield), a material's light-and-heavy pair, a run of
 same-material tiers, and the enchanted variants of one base piece all *look* uniform — but modders
@@ -135,7 +153,8 @@ Requiem names armor `REQ_<Weight>_<Material>_<Part>` (`REQ_Heavy_Steel_Body`,
 `REQ_Light_Glass_Shield`), so a substring scan finds them fast:
 
 ```
-housecarl_cross_plugin_query type="ARMO" editorid_contains="REQ_Heavy_Steel" plugins=["Requiem.esp"] limit=200
+housecarl_cross_plugin_query type="ARMO" editorid_contains="REQ_Heavy_Steel" \
+  plugins=["Requiem.esp"] limit=200 format="dense"
 ```
 
 Parts are `Body` (cuirass), `Head` (helmet), `Hands` (gauntlets), `Feet` (boots), `Shield`,
@@ -147,10 +166,23 @@ the per-part ratio in step 3.
 
 ### 2 — Read the comparable's winner
 
+Read every comparable the job needs in **one** call — the whole set's parts, not one piece at a
+time. `batch_record_detail` resolves each FormID to its winner, so a five-piece set is one read
+(below: Requiem's heavy steel feet, body, hands, head, shield):
+
 ```
-housecarl_batch_record_detail formids=["013952:Skyrim.esm"] conflict_tree=true \
-  fields=["Name","ArmorRating","Value","Weight","Keywords","BodyTemplate","BashImpactDataSet","AlternateBlockMaterial"]
+housecarl_batch_record_detail \
+  formids=["013951:Skyrim.esm","013952:Skyrim.esm","013953:Skyrim.esm","013954:Skyrim.esm","013955:Skyrim.esm"] \
+  fields=["Name","ArmorRating","Value","Weight","Keywords","BodyTemplate","BashImpactDataSet","AlternateBlockMaterial"] \
+  resolve_names=true
 ```
+
+`resolve_names` renders each keyword as its EditorID, which is how you tell an `armorSet` keyword
+from a Reqtificator-assigned `REQ_Tempering_*` at a glance — the distinction step 4 turns on.
+
+No `conflict_tree` here: the fields returned are the winner's either way, and the chain was already
+established by the freshness probe. Reach for `conflict_tree=true` when you specifically need to see
+*which* layer contributed a value — not to read the winner, which is the default.
 
 Read the **winner**, which already folds in WAR (`Requiem - Weapons and Armor Redone.esp`, which
 owns shields/bucklers + cross-patches) over base `Requiem.esp`, plus USSEP fixes Requiem inherits.
@@ -219,9 +251,29 @@ the record-level winner) — reading the comparable's winner already folds that 
 Each Requiem armor has up to three `ConstructibleObject` recipes. Find the comparable's via
 reverse-lookup on the armor FormID:
 
+`references=` takes a **list** — look up the whole set's recipes in one call, not one per piece:
+
 ```
-housecarl_cross_plugin_query type="COBJ" references="013952:Skyrim.esm" conflict_tree=true
+housecarl_cross_plugin_query type="COBJ" \
+  references=["013951:Skyrim.esm","013952:Skyrim.esm","013953:Skyrim.esm","013954:Skyrim.esm","013955:Skyrim.esm"] \
+  fields=["CreatedObject","WorkbenchKeyword"] resolve_names=true format="dense"
 ```
+
+The `matches` column names which armor each recipe belongs to, and `resolve_names` renders the
+workbench as `→ CraftingSmithingForge` / `CraftingSmithingArmorTable` / `CraftingSmelter`, so the
+recipe kind reads straight off the row. Then expand the ingredient and condition lists over the
+recipe FormIDs you just found — `cross_plugin_query` has no `depth=`, so they arrive as
+`[list: N item(s)]` until you do:
+
+```
+housecarl_batch_record_detail formids=["<the recipe FormIDs>"] \
+  fields=["Items","Conditions"] depth=4 resolve_names=true
+```
+
+**`depth=4`** is the working depth: it yields `Items[i].Item.Item` (→ `IngotSteel "Steel Ingot"`),
+`Items[i].Item.Count`, and `Conditions[0].Data.Perk` resolved to its perk name. `depth=2` shows only
+`[ContainerEntry]` / `[ConditionFloat]` element types and `depth=3` stops short of the values — both
+leave you guessing at exactly the quantities and perk gate you are supposed to clone.
 
 - **Forge** (`WorkbenchKeyword` = `CraftingSmithingForge 088105`): a `HasPerk` condition (the
   smithing-perk gate) + material `Items` (ingots + leather strips).
@@ -231,8 +283,8 @@ housecarl_cross_plugin_query type="COBJ" references="013952:Skyrim.esm" conflict
   (optional).
 
 Author the new recipes by cloning the comparable's `Conditions` and `Items` and swapping
-`CreatedObject` to your armor. Read the comparable's condition (houseCARL 1.2.2+ renders the perk
-parameter as a readable FormID) and compose the same gate onto the new recipe — the condition
+`CreatedObject` to your armor. Read the comparable's condition at `depth=4 resolve_names=true` (the
+depth at which the perk renders as a name) and compose the same gate onto the new recipe — the condition
 grammar is in `references/housecarl-recipes.md` § E. Recipe shapes in `references/crafting.md`.
 
 ### 7 — Emit the override
@@ -262,9 +314,13 @@ strongest signal first (same method as weapons):
 2. **Trace how it is obtained — the decisive signal.** Reverse-reference the armor's FormID:
 
    ```
-   housecarl_cross_plugin_query type="ConstructibleObject" references="<armor FormID>"
-   housecarl_cross_plugin_query type="LeveledItem"          references="<armor FormID>"
+   housecarl_cross_plugin_query type="ConstructibleObject" references=["<armor FormIDs>"] format="dense"
+   housecarl_cross_plugin_query type="LeveledItem"         references=["<armor FormIDs>"] format="dense"
    ```
+
+   Pass every candidate at once — `references=` is a list, and the `matches` column tells you which
+   piece each hit belongs to, so one pair of calls dispositions a whole set's craftability and loot
+   presence rather than two calls per piece.
 
    A genuine artifact is **not craftable** (no forge COBJ), **not in leveled lists**, and reaches
    the player as a **single fixed reward**. If it has a forge recipe or sits in loot lists, it is

@@ -26,8 +26,14 @@ nothing.
 #   Damage/Value/Weight → the ladder read; Keywords → what's already stamped;
 #   Projectile → the linked PROJ, which rides this sweep (no separate PROJ enumeration).
 housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="AMMO" \
-  fields=["Flags","Damage","Value","Weight","Keywords","Projectile"]
+  fields=["Flags","Damage","Value","Weight","Keywords","Projectile"] \
+  resolve_names=true format="dense"
 ```
+
+`format="dense"` returns one positional row per record under a single column header (no repeated
+field keys); `resolve_names` names the `Projectile` and `Keywords` targets. Page with `limit=` +
+`offset=`. Keep the scope as written — `defined_in=true` would drop the vanilla ammo the mod
+overrides, which the reconciliation count expects to see.
 
 Give every FormID a disposition — **patched** (normal-tiered → the skill's Workflow; elemental /
 quest-unique → tiered frame with the effect on the PROJ; creature/trap `NonPlayable` → no recipe;
@@ -100,8 +106,8 @@ housecarl_bulk_apply into="Authoria_Ammo" operations=[
 ## D — Forge recipe (COBJ)
 
 One ingot + one firewood → 30 ammo, gated by a perk condition cloned from the comparable. Read the
-comparable recipe's `Conditions` first (houseCARL 1.2.2+ renders the perk parameter as a readable
-FormID) and reuse its perk. The condition grammar: add the `ConditionFloat` shell, then Set its
+comparable recipe's `Conditions` first at `depth=4 resolve_names=true` — the depth at which the perk
+renders as a name rather than an opaque `[ConditionFloat]` — and reuse its perk. The condition grammar: add the `ConditionFloat` shell, then Set its
 polymorphic `Data` arm via compose — order matters, and a direct leaf set like
 `Conditions[0].Data.Perk` is refused by design (the whole `Data` arm must be composed):
 

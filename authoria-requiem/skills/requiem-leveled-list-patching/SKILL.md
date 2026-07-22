@@ -69,8 +69,13 @@ Confirm authority is fresh, then identify what you are placing and where.
    which Requiem lists already contain the closest comparable item/NPC, then add yours to the same ones.
 
    ```
-   housecarl_cross_plugin_query type="LeveledItem" references="<comparable item FormID>" plugins=["Requiem.esp"]
+   housecarl_cross_plugin_query type="LeveledItem" references=["<comparable item FormIDs>"] \
+     plugins=["Requiem.esp"] format="dense"
    ```
+
+   `references=` takes a **list**, so ask about every comparable in the job at once — a whole armour
+   set or weapon family in one call — and the `matches` column tells you which comparable each list
+   contains, which is exactly the per-item placement plan.
 
    A steel sword, for example, resolves into `REQ_LI_Loot_Weapon_Sword`, `REQ_LI_Town_Weapon_Sword`,
    `REQ_LI_Blacksmith_Weapon_Sword`, the faction pools (`LItemBanditSword`, `LItemVampireSword`), and
@@ -88,10 +93,14 @@ de-levelled.
 Open with one sweep per type against the **mod's own** records — one call each, none of them writes:
 
 ```
-housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="LeveledItem"
-housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="LeveledNpc"
-housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="LeveledSpell"
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="LeveledItem"  format="dense"
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="LeveledNpc"   format="dense"
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="LeveledSpell" format="dense"
 ```
+
+One call per type (`type=` takes a single signature). `format="dense"` returns one positional row per
+record under a single column header instead of a labelled envelope per field — worth it here because
+a list-heavy mod enumerates in the hundreds; page those with `limit=` + `offset=`.
 
 Every FormID each returns is a record you must disposition. (LVSP has no merge toggle of its own — only
 LVLI and LVLN are merged — so an LVSP list resolves by plain conflict winner, which makes hand
@@ -105,7 +114,8 @@ one — so an interior cell the mod shipped with **no** EncounterZone sits outsi
 entirely (no zone-level floor, no boundary behaviour) and no build pass will ever fix it:
 
 ```
-housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="Cell" fields=["Name","EncounterZone"]
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="Cell" \
+  fields=["Name","EncounterZone"] resolve_names=true format="dense"
 ```
 
 Disposition every interior/dungeon cell: **already zoned** (an `EncounterZone` link present — the
@@ -166,6 +176,11 @@ Close each type with a **reconciliation count — de-levelled + placed-into + sk
 list fell through; find it before you call the type done. **Flags fields are unions, not scalars:**
 when a list or zone write touches a `Flags` field, read the winner's bits first and write
 original-bits + your change — a literal Set silently strips the bits you didn't name.
+
+When the sweep's product is a **deliverable** — a catalogue, audit table, or conflict survey rather
+than a set of edits — load houseCARL's `bulk-record-jobs` skill before the first query. It maps
+many-records-to-one-deliverable jobs onto the bulk primitives and pins a canonical output schema,
+which is what stops a fan-out inventing a different shape per worker.
 
 ### Never extrapolate across a list family
 
