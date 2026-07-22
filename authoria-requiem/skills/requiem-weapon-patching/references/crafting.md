@@ -1,14 +1,32 @@
 # Crafting & Tempering Recipes
 
-A Requiem weapon has up to three `ConstructibleObject` (COBJ) recipes. Find a comparable's
-recipes by reverse-lookup on the weapon FormID:
+A Requiem weapon has up to three `ConstructibleObject` (COBJ) recipes. Find them by reverse-lookup
+on the weapon FormID — and `references=` takes a **list**, so look up every comparable at once
+rather than one per weapon:
 
 ```
-housecarl_cross_plugin_query type="COBJ" references="013989:Skyrim.esm" conflict_tree=true
+housecarl_cross_plugin_query type="COBJ" \
+  references=["013986:Skyrim.esm","013989:Skyrim.esm","013987:Skyrim.esm"] \
+  fields=["CreatedObject","WorkbenchKeyword"] resolve_names=true format="dense"
 ```
 
-This returns every COBJ whose `CreatedObject` (or input) is that weapon. Ignore non-Requiem
-recipes (e.g. `Starting Choices`) unless they are explicitly in scope.
+This returns every COBJ whose `CreatedObject` (or input) is any of those weapons. `resolve_names`
+makes each `WorkbenchKeyword` self-identifying (`→ CraftingSmithingSharpeningWheel`), so the recipe
+kind reads off the row, and the `matches` column names which weapon each recipe belongs to. Ignore
+non-Requiem recipes (e.g. `Starting Choices`) unless in scope.
+
+`cross_plugin_query` has no `depth=`, so `Items` and `Conditions` come back as `[list: N item(s)]`.
+Expand them in a second call over the recipe FormIDs you just found:
+
+```
+housecarl_batch_record_detail formids=["<the recipe FormIDs>"] \
+  fields=["Items","Conditions"] depth=4 resolve_names=true
+```
+
+**`depth=4` is the working depth** — `depth=2` shows only element *types* (`[ContainerEntry]`,
+`[ConditionFloat]`) and `depth=3` stops before the values. At 4 you get `Items[i].Item.Item`
+(→ `IngotSteel "Steel Ingot"`), `Items[i].Item.Count`, and `Conditions[0].Data.Perk` resolved to its
+perk name. Two calls cover every comparable in the job.
 
 ## The three recipe kinds
 
@@ -59,8 +77,9 @@ Items:
 
 Both forge and temper recipes carry a single condition: `Function = HasPerk`,
 `CompareOperator = EqualTo`, `ComparisonValue = 1`, `RunOnType = Subject`. The perk lives in
-`Conditions[0].Data.Perk`; houseCARL 1.2.2+ renders it as a readable FormID (older builds showed
-`(floi: form mode but no readable FormKey)`).
+`Conditions[0].Data.Perk` — read it with `depth=4 resolve_names=true` (above) and it renders as the
+named perk. A shallower read returns only `Conditions[0] = [ConditionFloat]`, which tells you
+nothing about the gate.
 
 **Author by cloning, not guessing.** Read the comparable recipe's `Conditions` to get its perk,
 then compose the same gate onto the new recipe (the two-op compose grammar — `ConditionFloat`

@@ -1,14 +1,32 @@
 # Crafting & Tempering Recipes
 
-A Requiem armor has up to three `ConstructibleObject` (COBJ) recipes. Find a comparable's recipes
-by reverse-lookup on the armor FormID:
+A Requiem armor has up to three `ConstructibleObject` (COBJ) recipes. Find them by reverse-lookup
+on the armor FormID — and `references=` takes a **list**, so look up the whole set at once rather
+than once per piece:
 
 ```
-housecarl_cross_plugin_query type="COBJ" references="013952:Skyrim.esm" conflict_tree=true
+housecarl_cross_plugin_query type="COBJ" \
+  references=["013952:Skyrim.esm","013961:Skyrim.esm","013964:Skyrim.esm"] \
+  fields=["CreatedObject","WorkbenchKeyword"] resolve_names=true format="dense"
 ```
 
-This returns every COBJ whose `CreatedObject` (or input) is that armor. Ignore non-Requiem recipes
-(e.g. `Starting Choices`) unless they are explicitly in scope.
+This returns every COBJ whose `CreatedObject` (or input) is any of those armors. `resolve_names`
+makes each `WorkbenchKeyword` self-identifying (`→ CraftingSmithingForge`), so you read the recipe
+kind off the row instead of matching FormIDs by hand, and the `matches` column names which armor
+each recipe belongs to. Ignore non-Requiem recipes (e.g. `Starting Choices`) unless in scope.
+
+`cross_plugin_query` has no `depth=`, so `Items` and `Conditions` come back as
+`[list: N item(s)]`. Expand them in a second call over the recipe FormIDs you just found:
+
+```
+housecarl_batch_record_detail formids=["0DD975:Skyrim.esm","0EB853:Skyrim.esm"] \
+  fields=["Items","Conditions"] depth=4 resolve_names=true
+```
+
+**`depth=4` is the working depth** — `depth=2` shows only element *types* (`[ContainerEntry]`,
+`[ConditionFloat]`) and `depth=3` stops before the values you need. At 4 you get
+`Items[i].Item.Item` (→ `IngotSteel "Steel Ingot"`), `Items[i].Item.Count`, and
+`Conditions[0].Data.Perk` resolved to its perk name. Two calls cover an entire set.
 
 ## The three recipe kinds
 
@@ -51,8 +69,10 @@ Smelter (`REQ_Smelter_Heavy_Steel_Body`, 3CB768:Requiem.esp): `WorkbenchKeyword 
 
 Both forge and temper recipes carry a single condition: `Function = HasPerk`,
 `CompareOperator = EqualTo`, `ComparisonValue = 1`, `RunOnType = Subject`. The perk lives in
-`Conditions[0].Data.Perk`; houseCARL 1.2.2+ renders it as a readable FormID (older builds showed
-`(floi: form mode but no readable FormKey)`).
+`Conditions[0].Data.Perk` — read it with `depth=4 resolve_names=true` (above) and it renders as
+the named perk, e.g. `0CB40D:Skyrim.esm (→ REQ_Smithing_Craftsmanship "Craftsmanship")`. A
+shallower read returns only `Conditions[0] = [ConditionFloat]`, which tells you nothing about the
+gate.
 
 **Author by cloning, not guessing.** Read the comparable recipe's `Conditions` to get its perk,
 then compose the same gate onto the new recipe (the two-op compose grammar — `ConditionFloat`

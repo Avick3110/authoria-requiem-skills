@@ -79,8 +79,16 @@ Open with one triage query — the whole type at once, no writes:
 
 ```
 housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="AMMO" \
-  fields=["Flags","Damage","Value","Weight","Keywords","Projectile"]
+  fields=["Flags","Damage","Value","Weight","Keywords","Projectile"] \
+  resolve_names=true format="dense"
 ```
+
+`format="dense"` returns one positional row per record under a single column header rather than a
+labelled envelope per field, and `resolve_names` names what `Keywords` and `Projectile` point at —
+so the PROJ link and the material tags read as identities, not FormIDs. Page a large plugin with
+`limit=` + `offset=`. Keep the scope as written: it covers every `AMMO` the plugin touches, which is
+what the reconciliation count checks against — `defined_in=true` would drop the vanilla ammo it
+overrides.
 
 That one table carries every disposition signal: `Flags` (arrow `NonBolt` vs bolt `0` vs the
 `NonPlayable` of creature/trap ammo), `Damage`/`Value`/`Weight` for the ladder read, `Keywords` for
@@ -126,6 +134,11 @@ Close the pass with a **reconciliation count — patched + skipped = enumerated.
 don't add up, a record fell through; find it before you call the type done. (This is the per-record
 coverage the `requiem-patching` skill's integration checklist gates on for high-count types.)
 
+When the sweep's product is a **deliverable** — a catalogue, audit table, or conflict survey rather
+than a set of edits — load houseCARL's `bulk-record-jobs` skill before the first query. It maps
+many-records-to-one-deliverable jobs onto the bulk primitives and pins a canonical output schema,
+which is what stops a fan-out inventing a different shape per worker.
+
 ## Workflow
 
 ### 1 — Find Requiem's comparable
@@ -134,7 +147,8 @@ Requiem names ammo `REQ_Arrow_<Material>` and `REQ_Bolt_<Material>`, so a substr
 them fast:
 
 ```
-housecarl_cross_plugin_query type="AMMO" editorid_contains="REQ_Arrow_" plugins=["Requiem.esp","Requiem - Weapons and Armor Redone.esp"] limit=200
+housecarl_cross_plugin_query type="AMMO" editorid_contains="REQ_Arrow_" \
+  plugins=["Requiem.esp","Requiem - Weapons and Armor Redone.esp"] limit=200 format="dense"
 ```
 
 Pick the canonical record — **not** a `REQ_NULL_*` stub (a NULLed/disabled duplicate) or a
@@ -145,10 +159,23 @@ arrow→bolt rule in step 3.
 
 ### 2 — Read the comparable's winner
 
+Read every comparable the job needs in **one** call rather than one arrow at a time —
+`batch_record_detail` resolves each FormID to its winner (below: Requiem's iron, steel, elven,
+glass, ebony and daedric arrows, the material spine):
+
 ```
-housecarl_batch_record_detail formids=["01397F:Skyrim.esm"] conflict_tree=true \
-  fields=["Name","Damage","Value","Weight","Keywords","Projectile","Flags"]
+housecarl_batch_record_detail \
+  formids=["01397D:Skyrim.esm","01397F:Skyrim.esm","0139BD:Skyrim.esm","0139BE:Skyrim.esm","0139BF:Skyrim.esm","0139C0:Skyrim.esm"] \
+  fields=["Name","Damage","Value","Weight","Keywords","Projectile","Flags"] \
+  resolve_names=true
 ```
+
+`resolve_names` names the `Projectile` link and each keyword, so the material / armor-piercing /
+weight tags read directly instead of as FormIDs.
+
+No `conflict_tree` here: the fields returned are the winner's either way, and the chain was already
+established by the freshness probe. Reach for `conflict_tree=true` only when you need to see *which*
+layer contributed a value.
 
 The hand-authored owner is `Requiem - Weapons and Armor Redone.esp` (WAR) for essentially all
 ammo — it owns the whole ammo set over base `Requiem.esp`. Read the **winner**: on a live profile
@@ -217,14 +244,30 @@ which reads wrong against Requiem's ammo. See `references/crafting.md` § Projec
 
 Each craftable ammo has one forge `ConstructibleObject`. Find the comparable's via reverse-lookup:
 
+`references=` takes a **list** — look up every comparable's recipe in one call:
+
 ```
-housecarl_cross_plugin_query type="ConstructibleObject" references="01397F:Skyrim.esm"
+housecarl_cross_plugin_query type="ConstructibleObject" \
+  references=["01397D:Skyrim.esm","01397F:Skyrim.esm","0139BF:Skyrim.esm"] \
+  fields=["CreatedObject","CreatedObjectCount","WorkbenchKeyword"] resolve_names=true format="dense"
 ```
+
+The `matches` column names which arrow each recipe belongs to. `cross_plugin_query` has no `depth=`,
+so expand the ingredient and condition lists over the recipe FormIDs you just found:
+
+```
+housecarl_batch_record_detail formids=["<the recipe FormIDs>"] \
+  fields=["Items","Conditions"] depth=4 resolve_names=true
+```
+
+**`depth=4`** is the working depth — it yields `Items[i].Item.Item` (resolved to the named ingot),
+`Items[i].Item.Count`, and `Conditions[0].Data.Perk` resolved to its perk name. `depth=2` shows only
+element types and `depth=3` stops short of the values.
 
 The pattern is uniform: **`WorkbenchKeyword = CraftingSmithingForge 088105`, one metal ingot + one
 firewood (`06F993`), `CreatedObjectCount = 30`**, gated by a `HasPerk` condition. Read the
-comparable's condition (houseCARL 1.2.2+ renders the perk parameter as a readable FormID) and
-compose the same gate — the grammar is in `references/housecarl-recipes.md` § D. Recipe shapes in
+comparable's condition at `depth=4 resolve_names=true` (the depth at which the perk renders as a
+name) and compose the same gate — the grammar is in `references/housecarl-recipes.md` § D. Recipe shapes in
 `references/crafting.md`.
 
 ### 7 — Emit the override
@@ -245,8 +288,8 @@ Trace how the ammo is obtained, exactly as for weapons and armor — reverse-ref
 recipe and for leveled lists:
 
 ```
-housecarl_cross_plugin_query type="ConstructibleObject" references="<ammo FormID>"
-housecarl_cross_plugin_query type="LeveledItem"          references="<ammo FormID>"
+housecarl_cross_plugin_query type="ConstructibleObject" references=["<ammo FormIDs>"] format="dense"
+housecarl_cross_plugin_query type="LeveledItem"         references=["<ammo FormIDs>"] format="dense"
 ```
 
 Craftable or in loot ⇒ treat as normal tiered ammo. Non-craftable + fixed reward + a special

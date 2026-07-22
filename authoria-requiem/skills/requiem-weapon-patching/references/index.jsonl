@@ -8,7 +8,7 @@
 {"topic":"standard keyword sets melee/bow/staff/artifact, RFTI exclusions, NPCsUseAmmo","file":"keywords.md","section":"Standard keyword sets by class"}
 {"topic":"crafting recipe COBJ forge/temper/smelter, WorkbenchKeyword, perk gate HasPerk, ingot inputs","file":"crafting.md","section":"The three recipe kinds"}
 {"topic":"disable existing COBJ recipe, REQ_DisableRecipe AD3B01 Requiem.esp, never null WorkbenchKeyword","file":"crafting.md","section":"Disabling an existing recipe"}
-{"topic":"perk gate HasPerk readable FormID 1.2.2, compose ConditionFloat Data arm, clone comparable perk, smithing perk tree","file":"crafting.md","section":"The perk gate is a HasPerk condition"}
+{"topic":"perk gate HasPerk readable perk name at depth=4, compose ConditionFloat Data arm, clone comparable perk, smithing perk tree","file":"crafting.md","section":"The perk gate is a HasPerk condition"}
 {"topic":"enchanted weapon Template/CNAM base variant, ObjectEffect, EnchantmentAmount charge pool 500xtier","file":"enchanted-and-staves.md","section":"Enchanted weapons"}
 {"topic":"enchantment charge rule, EnchantmentAmount vs ENCH EnchantmentCost, casts","file":"enchanted-and-staves.md","section":"The charge-pool rule"}
 {"topic":"staff keywords enchantment-driven, WeapTypeStaff VendorItemStaff Nox_KW_Staff school tier, damage 1","file":"enchanted-and-staves.md","section":"Staves"}

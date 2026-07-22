@@ -12,7 +12,8 @@ load order (`:Skyrim.esm` unless noted) — re-read before relying on them.
 (`013989`) returns the placement footprint:
 
 ```
-housecarl_cross_plugin_query type="LeveledItem" references="013989:Skyrim.esm" plugins=["Requiem.esp"]
+housecarl_cross_plugin_query type="LeveledItem" references=["013989:Skyrim.esm"] \
+  plugins=["Requiem.esp"] format="dense"
 → REQ_LI_Loot_Weapon_Sword 016578, REQ_LI_Town_Weapon_Sword 0165BC,
   REQ_LI_Blacksmith_Weapon_Sword 09BC43, REQ_LI_Special_Weapon_Sword 1031B0,
   LItemBanditSword 037C19, LItemBanditBossSword 03DF1D, LItemVampireSword 02DF97,

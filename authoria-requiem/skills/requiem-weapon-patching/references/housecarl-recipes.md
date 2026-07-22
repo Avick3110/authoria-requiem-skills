@@ -109,8 +109,9 @@ housecarl_bulk_apply into="Authoria_Weapons" operations=[
 ## E — Crafting recipe (COBJ)
 
 Create the forge recipe with its perk gate composed in the same call. Read the comparable recipe's
-`Conditions` first (houseCARL 1.2.2+ renders the perk parameter as a readable FormID) and reuse its
-perk. The condition grammar: add the `ConditionFloat` shell, then Set its polymorphic `Data` arm via
+`Conditions` first at `depth=4 resolve_names=true` — the depth at which the perk renders as a name
+(`→ REQ_Smithing_Craftsmanship "Craftsmanship"`) rather than an opaque `[ConditionFloat]` — and
+reuse its perk. The condition grammar: add the `ConditionFloat` shell, then Set its polymorphic `Data` arm via
 compose — order matters, and a direct leaf set like `Conditions[0].Data.Perk` is refused by design
 (the whole `Data` arm must be composed):
 

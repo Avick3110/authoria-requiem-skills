@@ -25,10 +25,14 @@ these three calls writes.
 
 ```
 # One sweep per leveled-list type — the mod's own records ARE the work queue.
-housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="LeveledItem"
-housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="LeveledNpc"
-housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="LeveledSpell"
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="LeveledItem"  format="dense"
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="LeveledNpc"   format="dense"
+housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="LeveledSpell" format="dense"
 ```
+
+`format="dense"` returns one positional row per record under a single column header rather than a
+labelled envelope per field — the compact form when a list-heavy mod enumerates in the hundreds.
+Page those with `limit=` + `offset=`; the windows tile exactly while the load order is unchanged.
 
 For each enumerated list, read its entries and check the `Level` field — any entry `> 1` is a
 vanilla-style level gate to flatten (Requiem's model is `Level = 1` everywhere; see `list-structure.md`):
@@ -59,9 +63,15 @@ variant. Close each type with a reconciliation count: de-levelled + placed + ski
 
 The placement plan = the set of lists the closest comparable already lives in.
 
+`references=` takes a **list** — pass every comparable in the job at once (a whole set or family)
+rather than one call per item; the `matches` column names which comparable each list contains, so one
+call yields the per-item placement plan:
+
 ```
-housecarl_cross_plugin_query type="LeveledItem" references="<comparable item FormID>" plugins=["Requiem.esp"] limit=40
-housecarl_cross_plugin_query type="LeveledNpc"  references="<comparable NPC  FormID>" plugins=["Requiem.esp"] limit=40
+housecarl_cross_plugin_query type="LeveledItem" references=["<comparable item FormIDs>"] \
+  plugins=["Requiem.esp"] limit=40 format="dense"
+housecarl_cross_plugin_query type="LeveledNpc"  references=["<comparable NPC FormIDs>"] \
+  plugins=["Requiem.esp"] limit=40 format="dense"
 ```
 
 Ignore `REQ_NULL_*` and `*_Quality<N>_<size>_<dist>` results (retired lists / Reqtificator output seeds).

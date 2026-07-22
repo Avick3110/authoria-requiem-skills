@@ -83,9 +83,9 @@ record heuristics can't be trusted and the acquisition trace decides.
 Run the acquisition trace before deciding:
 
 ```
-housecarl_cross_plugin_query type="ConstructibleObject" references="000807:Moonblade - Johnskyrim.esp"
+housecarl_cross_plugin_query type="ConstructibleObject" references=["000807:Moonblade - Johnskyrim.esp"] format="dense"
   -> JS_Moonblade1HRecipe, JS_Moonblade1HTemper        # craftable + temperable
-housecarl_cross_plugin_query type="LeveledItem"          references="000807:Moonblade - Johnskyrim.esp"
+housecarl_cross_plugin_query type="LeveledItem"         references=["000807:Moonblade - Johnskyrim.esp"] format="dense"
   -> 0 matches                                          # not in loot lists
 ```
 

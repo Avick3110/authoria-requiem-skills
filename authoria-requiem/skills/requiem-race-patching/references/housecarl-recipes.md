@@ -20,8 +20,11 @@ write. Its fields are the triage matrix that drives the humanoid-vs-creature cla
 
 ```
 housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="RACE" \
-  fields=["Keywords","Flags","Starting","ActorEffect"]
+  fields=["Keywords","Flags","Starting","ActorEffect"] resolve_names=true format="dense"
 ```
+
+`resolve_names` renders the link fields as identities (so the `ActorType*` classification reads off
+the row), and `format="dense"` returns one positional row per race under a single column header.
 
 `Keywords` classifies each row (`ActorTypeNPC 013794` → humanoid → Workflow A;
 `ActorType{Creature,Animal,Troll,Undead,Daedra}` → creature → Workflow B); `Starting`/`ActorEffect`/

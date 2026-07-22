@@ -75,8 +75,16 @@ table:
 
 ```
 housecarl_cross_plugin_query plugins=["<NewMod>.esp"] type="WEAP" \
-  fields=["Name","Data.AnimationType","Data.Flags","Keywords","BasicStats.Damage","ObjectEffect","Template"]
+  fields=["Name","Data.AnimationType","Data.Flags","Keywords","BasicStats.Damage","ObjectEffect","Template"] \
+  resolve_names=true format="dense"
 ```
+
+`format="dense"` returns one positional row per record under a single column header instead of a
+labelled envelope per field — the compact form for a whole-plugin sweep; `resolve_names` names what
+`Keywords`, `ObjectEffect`, and `Template` point at, so you triage from identities rather than
+FormIDs. Page a large plugin with `limit=` + `offset=`. Keep the scope as written — it covers every
+`WEAP` the plugin touches, which is what the coverage count reconciles against; `defined_in=true`
+would narrow to the plugin's own new records and drop the vanilla weapons it overrides.
 
 Read each row's `Data.AnimationType` (which workflow branch), `ObjectEffect` (enchanted vs plain),
 `Template` (variant vs base), and `Data.Flags` (playable loot vs not) to disposition every record.
@@ -111,6 +119,11 @@ Close the pass with a **reconciliation count — patched + skipped = enumerated.
 don't add up, a record fell through; find it before you call the type done. (This is the per-record
 coverage the `requiem-patching` skill's integration checklist gates on for high-count types.)
 
+When the sweep's product is a **deliverable** — a catalogue, audit table, or conflict survey rather
+than a set of edits — load houseCARL's `bulk-record-jobs` skill before the first query. It maps
+many-records-to-one-deliverable jobs onto the bulk primitives and pins a canonical output schema,
+which is what stops a fan-out inventing a different shape per worker.
+
 **Don't extrapolate across a uniform-looking family.** Four weapon-family shapes *look* uniform and
 tempt one read applied to the whole group:
 
@@ -134,7 +147,8 @@ Query Requiem's own weapon of the **same type and nearest material tier**. Requi
 `REQ_Weapon_<Material>_<Type>`, so a substring scan finds them fast:
 
 ```
-housecarl_cross_plugin_query type="WEAP" editorid_contains="REQ_Weapon_" plugins=["Requiem.esp"] limit=500
+housecarl_cross_plugin_query type="WEAP" editorid_contains="REQ_Weapon_" \
+  plugins=["Requiem.esp"] limit=500 format="dense"
 ```
 
 Narrow with the material or type (`editorid_contains="Steel_Sword"`). Pick the canonical
@@ -145,10 +159,23 @@ derive from that tier's comparable.
 
 ### 2 — Read the comparable's winner
 
+Read every comparable the job needs in **one** call rather than one weapon at a time —
+`batch_record_detail` resolves each FormID to its winner (below: Requiem's steel war axe, battleaxe,
+bow, dagger, greatsword, mace, sword, warhammer):
+
 ```
-housecarl_batch_record_detail formids=["013989:Skyrim.esm"] conflict_tree=true \
-  fields=["Name","BasicStats","Data","Critical","Keywords","ImpactDataSet","EquipSound","Template","ObjectEffect","EnchantmentAmount"]
+housecarl_batch_record_detail \
+  formids=["013983:Skyrim.esm","013984:Skyrim.esm","013985:Skyrim.esm","013986:Skyrim.esm","013987:Skyrim.esm","013988:Skyrim.esm","013989:Skyrim.esm","01398A:Skyrim.esm"] \
+  fields=["Name","BasicStats","Data","Critical","Keywords","ImpactDataSet","EquipSound","Template","ObjectEffect","EnchantmentAmount"] \
+  resolve_names=true
 ```
+
+`resolve_names` renders each keyword as its EditorID, which is how you tell a source-carried material
+keyword from a Reqtificator-assigned one at a glance.
+
+No `conflict_tree` here: the fields returned are the winner's either way, and the chain was already
+established by the freshness probe. Reach for `conflict_tree=true` only when you need to see *which*
+layer contributed a value — not to read the winner, which is the default.
 
 Read the **winner**, which already folds in WAR (`Requiem - Weapons and Armor Redone.esp`), MR
 (`Requiem - Magic Redone.esp` for staves/bound/artifacts), the ISC sound patch, and the USSEP
@@ -205,9 +232,28 @@ reuses the right links sounds correct without any further work. Details in
 
 Each Requiem weapon has up to three `ConstructibleObject` recipes. Find the comparable's via:
 
+`references=` takes a **list** — look up every comparable's recipes in one call, not one per weapon:
+
 ```
-housecarl_cross_plugin_query type="COBJ" references="013989:Skyrim.esm" conflict_tree=true
+housecarl_cross_plugin_query type="COBJ" \
+  references=["013986:Skyrim.esm","013989:Skyrim.esm","013987:Skyrim.esm"] \
+  fields=["CreatedObject","WorkbenchKeyword"] resolve_names=true format="dense"
 ```
+
+The `matches` column names which weapon each recipe belongs to, and `resolve_names` renders the
+workbench as `→ CraftingSmithingForge` / `CraftingSmithingSharpeningWheel` / `CraftingSmelter`, so
+the recipe kind reads off the row. `cross_plugin_query` has no `depth=`, so `Items` and `Conditions`
+arrive as `[list: N item(s)]` — expand them over the recipe FormIDs you just found:
+
+```
+housecarl_batch_record_detail formids=["<the recipe FormIDs>"] \
+  fields=["Items","Conditions"] depth=4 resolve_names=true
+```
+
+**`depth=4`** is the working depth: it yields `Items[i].Item.Item` (→ `IngotSteel "Steel Ingot"`),
+`Items[i].Item.Count`, and `Conditions[0].Data.Perk` resolved to its perk name. `depth=2` shows only
+`[ContainerEntry]` / `[ConditionFloat]` element types and `depth=3` stops short of the values — both
+leave you guessing at the exact quantities and perk gate you are supposed to clone.
 
 - **Forge** (`WorkbenchKeyword` = `CraftingSmithingForge 088105`): a `HasPerk` condition (the
   smithing-perk gate) + material `Items`.
@@ -220,8 +266,8 @@ material keyword** — a moonstone blade tempers on Refined Moonstone behind the
 an ebony one on an Ebony Ingot behind Ebony Smithing. Never default the inputs or the perk gate to
 the Steel/Craftsmanship shape because it's the first recipe you saw: the ingot and the `HasPerk`
 gate both track the material, and a wrong gate makes the recipe available at the wrong smithing
-tier. Read the comparable's condition (houseCARL 1.2.2+ renders the perk parameter as a readable
-FormID) and compose the same gate onto the new recipe — the condition grammar is in
+tier. Read the comparable's condition at `depth=4 resolve_names=true` (the depth at which the perk
+renders as a name) and compose the same gate onto the new recipe — the condition grammar is in
 `references/housecarl-recipes.md` § E. Recipe shapes in `references/crafting.md`.
 
 When an existing recipe must be disabled, keep it structurally valid and set
@@ -253,8 +299,8 @@ you infer authorial intent from a priority ladder, strongest signal first:
 2. **Trace how it is obtained — the decisive signal.** Reverse-reference the weapon's FormID:
 
    ```
-   housecarl_cross_plugin_query type="ConstructibleObject" references="<weapon FormID>"
-   housecarl_cross_plugin_query type="LeveledItem"          references="<weapon FormID>"
+   housecarl_cross_plugin_query type="ConstructibleObject" references=["<weapon FormIDs>"] format="dense"
+   housecarl_cross_plugin_query type="LeveledItem"         references=["<weapon FormIDs>"] format="dense"
    ```
 
    A genuine artifact is **not craftable** (no COBJ recipe), **not in leveled lists**, and reaches
