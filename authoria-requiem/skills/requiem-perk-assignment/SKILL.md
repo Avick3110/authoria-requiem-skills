@@ -1,6 +1,6 @@
 ---
 name: requiem-perk-assignment
-description: Assign the right Requiem perks to a new or modded NPC via houseCARL — derive the source-carried perk set (weapon mastery, block, heavy armor, evasion, magic-school nodes) from the actor's equipment, spell kit, and tier against Requiem's own template ladders, write it as rank-chain PerkPlacements, and disposition a mod's own PERK records. Use when the user wants to give an NPC or follower Requiem perks, fix a boss or enemy whose perks are missing or wrong, build a perk loadout for a custom warrior, archer, mage, or spellsword from its gear and spells, ask which perks an NPC should carry in Requiem, or handle a mod's custom perk records. Never hand-place Reqtificator-stamped perks — load this before writing any Perks list, not after the build pass double-stamps the actor.
+description: Assign Requiem perks to an NPC via houseCARL — derive the source-carried perk set from the actor's gear, spell kit, and tier against Requiem's template ladders, write it as rank-chain PerkPlacements, and disposition a mod's own PERK records, including custom perks that clash with a Requiem crafting or perk gate. Never hand-place Reqtificator-stamped perks — load before writing any Perks list.
 ---
 
 # Requiem Perk Assignment

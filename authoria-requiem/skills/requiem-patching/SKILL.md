@@ -1,6 +1,6 @@
 ---
 name: requiem-patching
-description: Plan and produce a complete patch that makes an entire mod play flawlessly with Requiem via houseCARL — enumerate every new record in the plugin, route each to the right Requiem domain skill, handle the gameplay systems no single domain owns, and finish with the masters/REQ_NULL/Reqtificator checklist. Use when the user wants to patch a whole mod for Requiem, make a new plugin Requiem-consistent, ask what a mod needs to work with Requiem, integrate a follower, quest, or creature mod, or handle Requiem's vampire, werewolf and lycanthropy, disease, exhaustion, stealth, alchemy, food, shout, standing-stone, or economy systems for new content. Load this first when starting any "patch mod X for Requiem" job, before diving into individual records, so nothing the plugin touches gets missed.
+description: Plan a complete Requiem patch for a whole mod via houseCARL — enumerate every new record in the plugin, route each to the right Requiem domain skill, cover the systems no domain owns (vampirism, lycanthropy, disease, stealth, economy), and finish with the masters/REQ_NULL/Reqtificator checklist. Load FIRST for any "patch mod X for Requiem" job, before individual records, so nothing gets missed.
 ---
 
 # Requiem Patching

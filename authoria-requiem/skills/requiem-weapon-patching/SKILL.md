@@ -1,6 +1,6 @@
 ---
 name: requiem-weapon-patching
-description: Patch a new or modded weapon for Requiem via houseCARL — derive damage, keywords, tempering/crafting recipe, gold value, and enchantment charge from Requiem's own comparable weapon (same type + material tier) and emit a direct ESP override the Reqtificator can then rebalance. Use when the user wants to patch a weapon for Requiem, balance a modded sword, bow, mace, dagger, or staff, set Requiem weapon keywords, fix weapon damage that is too high or too low for Requiem, add a craftable or enchanted weapon, or make a new weapon fit Requiem's material tiers. Load this before touching a weapon record, not after the Reqtificator rebalances it wrong.
+description: Patch a new or modded weapon for Requiem via houseCARL — damage, keywords, value, and recipe derived from Requiem's comparable at the same material tier, emitted as an ESP override. Use for any WEAP record: a modded sword, bow, dagger, or staff that hits too hard or too soft for Requiem. Load before the weapon record is touched, not after the Reqtificator rebalances it wrong.
 ---
 
 # Requiem Weapon Patching

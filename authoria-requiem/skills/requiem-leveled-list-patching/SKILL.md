@@ -1,6 +1,6 @@
 ---
 name: requiem-leveled-list-patching
-description: Place a new or modded item or NPC into Requiem's world via houseCARL — add it to the right leveled list, container, or encounter zone at the correct tier, leaning on the Reqtificator's leveled-list merge so your entry joins Requiem's curated distribution instead of overwriting it. Use when the user wants to add an item to a Requiem leveled list, make modded loot or gear actually appear in the world, distribute a new enemy or creature spawn, fill or curate a container for Requiem, de-level a dungeon or encounter zone, or fix new gear that never shows up in game. Load this before editing any leveled list or container, not after the loot spawns at the wrong level or never drops at all.
+description: Place new items or NPCs into Requiem's world via houseCARL — enter them in the right leveled list, container, or encounter zone at the correct tier, riding the Reqtificator's leveled-list merge instead of overwriting Requiem's curated distribution. Use when modded loot, gear, or spawns never appear in game, or a dungeon needs de-leveling. Load before editing any list or container.
 ---
 
 # Requiem Leveled List Patching

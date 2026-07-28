@@ -1,6 +1,6 @@
 ---
 name: requiem-race-patching
-description: Patch a new or modded playable or creature race for Requiem via houseCARL — derive racial stats (health/magicka/stamina, regeneration, carry weight, unarmed damage), skill bonuses, racial ability spells, keywords, and the creature trait classification from Requiem's own comparable race, and emit a direct ESP override the Reqtificator can then rebalance. Use when the user wants to patch a race for Requiem, balance a custom playable or follower race, fix a modded creature or beast race that takes the wrong damage or has no Requiem traits, set racial abilities, resistances, or skill bonuses, give a creature natural armor or combat healing, or handle a new race the Reqtificator does not recognize. Load this before touching a RACE record, not after the Reqtificator skips the race it can't see.
+description: Patch a playable or creature race for Requiem via houseCARL — racial stats, skill bonuses, ability spells, and creature-trait keywords derived from Requiem's comparable race, emitted as an ESP override. Use for any RACE record: a follower race, or a modded creature taking the wrong damage or missing Requiem traits. Load before the RACE write — the Reqtificator skips races it can't classify.
 ---
 
 # Requiem Race Patching
