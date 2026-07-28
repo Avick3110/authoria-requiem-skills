@@ -1,6 +1,6 @@
 ---
 name: requiem-script-patching
-description: Patch the Papyrus/script layer of a mod for Requiem via houseCARL — decide whether new content even needs a script, reuse Requiem's existing Nox_* or REQ_* runtime by attaching it to a record's VirtualMachineAdapter and filling its properties, register a modded follower into Requiem's follower system, or compile a new .psc only when truly required. Use when the user wants to make a bound-weapon, teleport, mind-control, weather, or multi-spell-tome spell actually work in Requiem, register a custom follower like Inigo or Kaidan for Requiem, attach or set a script property on a magic effect, ask whether a spell needs Papyrus at all, fix a modded spell whose special mechanic does nothing in game, or compile a script into a Requiem patch. Load this before wiring a script onto a record, not after the spell casts but does nothing.
+description: Patch the Papyrus layer of a mod for Requiem via houseCARL — decide whether content needs a script at all, attach Requiem's existing Nox_*/REQ_* runtime through VirtualMachineAdapter properties, register a modded follower into Requiem's follower system, or compile a new .psc only when truly required. Use when a spell's special mechanic does nothing in game. Load before wiring any script.
 ---
 
 # Requiem Script Patching

@@ -1,6 +1,6 @@
 ---
 name: requiem-armor-patching
-description: Patch a new or modded armor piece for Requiem via houseCARL — derive armor rating, set/material and part keywords, gold value, weight, and a tempering/crafting recipe from Requiem's own comparable armor (same part + material + light/heavy class) and emit a direct ESP override the Reqtificator can then rebalance. Use when the user wants to patch armor for Requiem, balance a modded cuirass, shield, helmet, gauntlets, or boots, set Requiem armor keywords, fix an armor rating that is too high or too low for Requiem, add craftable light or heavy armor, or make a new armor set fit Requiem's material tiers. Load this before touching an armor record, not after the Reqtificator caps it wrong.
+description: Patch armor for Requiem via houseCARL — armor rating, set/part keywords, value, and tempering recipe derived from Requiem's comparable piece (part + material + light/heavy), emitted as an ESP override. Use for any ARMO record: a modded cuirass, shield, helmet, or whole set that doesn't fit Requiem's tiers. Load before the ARMO write, not after the Reqtificator caps it wrong.
 ---
 
 # Requiem Armor Patching

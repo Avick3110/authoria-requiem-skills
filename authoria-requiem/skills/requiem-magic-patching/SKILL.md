@@ -1,6 +1,6 @@
 ---
 name: requiem-magic-patching
-description: Patch a new or modded spell, magic effect, or enchantment for Requiem (Magic Redone) via houseCARL — derive the school, tier, cast type, magicka cost, effect magnitude and duration, keywords, the tier-classifier perk, and the enchant/staff/scroll effect from Requiem's own comparable magic, then emit a direct ESP override the Reqtificator can rebalance. Use when the user wants to patch a spell for Requiem, balance a modded spell, enchantment, staff, or scroll, set Magic Redone cost or magnitude, fix a spell that costs too little or too much magicka, set a spell tome's value, design an enchanted-weapon, apparel, or elemental-arrow effect, or fit new magic into Requiem's schools and perk tiers. Load this before touching an MGEF, SPEL, or ENCH record, not after the spell breaks Requiem's magic economy.
+description: Patch spells, magic effects, enchantments, staves, and scrolls for Requiem's Magic Redone via houseCARL — school, tier, magicka cost, magnitude, and the tier-classifier perk derived from Requiem's comparable magic, emitted as an ESP override. Use for any MGEF, SPEL, or ENCH record whose cost, power, or tome value breaks Requiem's magic economy. Load before the record is touched.
 ---
 
 # Requiem Magic Patching

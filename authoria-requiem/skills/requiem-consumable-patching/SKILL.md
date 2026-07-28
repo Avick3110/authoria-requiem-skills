@@ -1,6 +1,6 @@
 ---
 name: requiem-consumable-patching
-description: Patch a new or modded consumable for Requiem via houseCARL — potions, poisons, oils, food, drink, alcohol, and ingredients (ALCH + INGR). Derive effects, magnitude/duration, gold value, weight, flags, keywords, and the cookpot crafting recipe from Requiem's own comparable in Alchemy Redone and Food and Beverages Redone, and emit a direct ESP override that IS the final balance — the Reqtificator never rebalances consumables. Use when the user wants to patch a potion, poison, food, drink, mead, ale, wine, skooma, or ingredient for Requiem, balance a modded consumable, set Requiem food effects or nutrition, fix a potion whose healing or price is off, map an ingredient's four alchemy effects, make a consumable craftable at the cookpot, or integrate a mod's food and drink. Load this before touching an ALCH or INGR record — consumables have no build-time safety net, so a wrong override ships wrong.
+description: Patch consumables for Requiem via houseCARL — potions, poisons, oils, food, drink, mead, skooma, and ingredients (ALCH + INGR), with effects, value, flags, and cookpot recipe derived from Requiem's comparables in Alchemy Redone / Food and Beverages Redone. The override IS the final balance — the Reqtificator never rebalances consumables — so load before any ALCH or INGR write.
 ---
 
 # Requiem Consumable Patching
