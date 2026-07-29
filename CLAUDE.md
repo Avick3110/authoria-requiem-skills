@@ -172,12 +172,6 @@ the rules are exact and a reviewer renders a binary conforms / doesn't-conform v
 
 - **§8 item 19 (the `$Skills` array in `scripts/build-plugin.ps1`) is N/A here** — this plugin has no
   build script; Claude Code auto-discovers each `SKILL.md` by directory. (It *does* apply in houseCARL.)
-- **§8 item 4 is read as "≥3 concrete trigger nouns anywhere in the description", pending the
-  upstream amendment.** The #294 amendment updated items 5/7 for the compressed §3.5 format but not
-  item 4, which still demands the nouns inside a "Use when..." clause — four compressed descriptions
-  carry no such clause and score 10/10 recall regardless. The item-4/§3.2 amendment text is drafted
-  in the 1.10.0 handoff — open it as a houseCARL PR from a session in that repo, then re-sync
-  `standards/` when it lands (BACKLOG entry tracks it).
 - All 11 shipped descriptions are validated under the current §6.5 fan-out (since 1.10.0, the #43
   compression: menu variant per houseCARL PR #295, all skills measured in one shared-menu run, results
   in each skill's `evals/results-2026-07-29.json`; the older per-skill archives and the original
