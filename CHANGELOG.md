@@ -2,6 +2,36 @@
 
 All notable changes to the Authoria Requiem Patching Skills plugin. Versioning is [semantic](https://semver.org); the `version` in `authoria-requiem/.claude-plugin/plugin.json` is bumped on each release.
 
+## 1.10.0 — 2026-07-29
+
+Description compression + full §6.5 revalidation (Aaron, 2026-07-29). Closes
+[#43](https://github.com/Avick3110/authoria-requiem-skills/issues/43): the 11 skill descriptions cost
+~8,320 chars (~2,080 est. tokens) of always-resident context — alone consuming Claude Code's ~2,000-token
+budget for the *entire* skill listing, causing entry truncation that degrades routing. Mirrors houseCARL
+[PR #295](https://github.com/Avick3110/houseCARL/pull/295) (issue #294), which did the same job there and
+amended the standard upstream. Charter: `dev/plans/2026-07-29-description-compression-43.md`.
+
+- **`standards/HOUSECARL_SKILL_AUTHORING.md` re-synced** from houseCARL HEAD (the #294 amendment):
+  §3.5 soft target is now 200–400 characters, reframed around the listing budget; §3.3's pushy tail is
+  a compact clause required only where a genuine early-load hazard exists; §8 items 5/7 updated.
+  `HOUSECARL_NAMING.md` and `HOUSECARL_DOC_HYGIENE.md` verified identical upstream.
+- **All 11 descriptions rewritten to the amended §3.5**: 8,320 → 4,266 chars (~1,066 est. tokens; avg
+  388/skill). Action-first leads and distinctive record-type vocabulary (WEAP, ARMO, AMMO, RACE, NPC_,
+  LVLI, MGEF/SPEL/ENCH, ALCH+INGR, PERK) kept; synonym chains, capability inventories, and spelled-out
+  load-before codas cut. The standing BACKLOG perk-assignment trigger gap (custom perk clashing with a
+  Requiem crafting/perk gate — its 2026-07-15 fan-out Q8 miss) is folded into that skill's rewrite.
+- **Full §6.5 fan-out revalidation of all 11** — the first empirical trigger measurement for the
+  original nine (closing that standing BACKLOG entry). Menu variant per houseCARL PR #295: one
+  fresh-context Opus (high effort, no tools) judge per query, shown the anonymized lettered menu of all
+  11 new descriptions + NONE; one Opus adjudicator per skill scored from the judges' reasoning (§6.5
+  step 4); the live install was moved aside for the fan-out window as a contamination guard. 265 judge
+  queries across three rounds; **all 11 pass** (recall ≥ 80%, specificity ≥ 50%; 8 of 11 at 100%
+  recall). `requiem-npc-patching` took a 3-round fix loop to a whole-actor framing (final 437 chars,
+  over-band justified per §8 item 7 — the excess is the NPC/RACE and NPC/perk boundary clauses); the
+  residual NPC/RACE coin-flip on race-caused creature symptoms is recorded as a carry-forward. Results:
+  `evals/results-2026-07-29.json` per skill (eval query sets untouched; the two `results-2026-07-15.json`
+  archives superseded by note, retained as ARCHIVE).
+
 ## 1.9.0 — 2026-07-22
 
 Tool-surface refresh (Aaron, 2026-07-22): a user reported `requiem-armor-patching` burning a lot of
