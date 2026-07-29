@@ -67,6 +67,10 @@ framing; candidate hardening is a defer-to-RACE clause in npc or a pointer in ra
   Windows Python writes CRLF into files the Workflow tool then rejects (control-character guard) —
   both bitten and fixed this session; keep `newline='\n'` on generated workflow scripts.
 - `EnterWorktree` names branches `worktree-<name>`; rename to `claude/<name>` after creation.
+- A `: ` inside an unquoted single-line YAML description ("Use for any WEAP record: a modded sword")
+  silently kills the whole frontmatter at load ("all frontmatter fields silently dropped") — only
+  `claude plugin validate --strict` caught it. Five descriptions now carry YAML double quotes; the
+  quoted scalar parses back to exactly the fan-out-measured text (verified).
 
 ## Open / next
 

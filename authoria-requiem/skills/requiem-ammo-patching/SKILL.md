@@ -1,6 +1,6 @@
 ---
 name: requiem-ammo-patching
-description: Patch arrows and crossbow bolts for Requiem via houseCARL — damage, material and armor-piercing keywords, projectile link, and forge recipe derived from Requiem's comparable ammo, emitted as an ESP override. Use for any AMMO record: modded arrows or bolts that are overpowered, weightless, overpriced, or uncraftable in Requiem. Load before the AMMO write.
+description: "Patch arrows and crossbow bolts for Requiem via houseCARL — damage, material and armor-piercing keywords, projectile link, and forge recipe derived from Requiem's comparable ammo, emitted as an ESP override. Use for any AMMO record: modded arrows or bolts that are overpowered, weightless, overpriced, or uncraftable in Requiem. Load before the AMMO write."
 ---
 
 # Requiem Ammo Patching
