@@ -9,7 +9,7 @@ there and amended the standard upstream.*
 
 ## Charter
 
-The 11 skill descriptions total ~8,290 chars (~2,070 est. tokens) of always-resident context —
+The 11 skill descriptions total 8,292 chars (~2,073 est. tokens) of always-resident context —
 alone consuming Claude Code's ~2,000-token budget for the *entire* skill listing, which causes
 entry truncation and degraded routing (#43). Compress all 11 to the amended
 `HOUSECARL_SKILL_AUTHORING.md` §3.5 target (200–400 chars; action-first lead, distinctive
@@ -33,9 +33,10 @@ standing BACKLOG entry). Decisions settled with Aaron up front:
   spawned judges don't carry the OLD descriptions in their own available-skills listing;
   restored afterwards via the standard robocopy sync (the live copy is disposable by design).
 - **Eval sets**: queries kept verbatim; heterogeneous schemas deliberately NOT restructured
-  (PR #295 precedent). Results land as a uniform `revalidation_2026-07-29_43` block in each
-  skill's `eval_set.json`; the two `results-2026-07-15.json` archives stay in place, superseded
-  by note.
+  (PR #295 precedent). Results land as a sibling `results-2026-07-29.json` per skill (this repo's
+  own archive precedent — two eval-set schemas here are bare arrays that can't take a top-level
+  block without restructuring); the two `results-2026-07-15.json` archives stay in place,
+  superseded by note.
 - **Folded in**: the standing BACKLOG description-tweak for `requiem-perk-assignment` (its
   2026-07-15 fan-out Q8 miss — the "custom perk clashes with a Requiem crafting gate" framing)
   rides the rewrite, so its re-measure comes for free.
@@ -49,5 +50,5 @@ current standard), BACKLOG pruned of exactly the two entries this closes, sessio
 Post-merge: live-install sync, then a fresh-session `/doctor` measurement posted to #43.
 
 *(Filled at close:)* final per-skill lengths, fan-out scores, and any fix-loop iterations are
-recorded in each skill's `evals/eval_set.json` revalidation block; the session handoff carries
-the narrative.
+recorded in each skill's `evals/results-2026-07-29.json`; the session handoff carries the
+narrative. Baseline measured 8,292 chars; shipped total 4,266.

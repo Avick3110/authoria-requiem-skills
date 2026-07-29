@@ -6,15 +6,18 @@
 
 ## What shipped
 
-**1.10.0** — closes [#43](https://github.com/Avick3110/authoria-requiem-skills/issues/43). The 11
-descriptions cost ~8,320 chars (~2,080 est. tokens), alone consuming Claude Code's ~2,000-token budget
+**1.10.0** — addresses [#43](https://github.com/Avick3110/authoria-requiem-skills/issues/43) (held
+open pending the post-merge `/doctor` measurement — review issue 1: with houseCARL and the other
+sources counted, the combined listing plausibly stays over budget even after this PR; a second ~25%
+compression round on both packs is the named lever if the number comes back over). The 11
+descriptions cost 8,292 chars (~2,073 est. tokens), alone consuming Claude Code's ~2,000-token budget
 for the entire skill listing. Mirrors houseCARL [PR #295](https://github.com/Avick3110/houseCARL/pull/295)
 (issue #294), which Aaron ran the day before and which amended the standard upstream.
 
 1. **Standards re-sync** — `HOUSECARL_SKILL_AUTHORING.md` from houseCARL HEAD (the #294 amendment:
    §3.5 → 200–400 chars keyed to the listing budget; §3.3 → compact tail only for early-load hazards;
    §8 items 5/7). NAMING and DOC_HYGIENE verified byte-identical upstream (EOL aside).
-2. **All 11 descriptions rewritten**: 8,320 → 4,266 chars (~1,066 est. tokens, avg 388). Distinctive
+2. **All 11 descriptions rewritten**: 8,292 → 4,266 chars (~1,066 est. tokens, avg 388). Distinctive
    record-type vocabulary kept; synonym chains and capability inventories cut. The BACKLOG
    perk-assignment gate-clash trigger folded in.
 3. **Full §6.5 fan-out, all 11 pass** (details below) — the first empirical measurement ever for the
@@ -71,6 +74,25 @@ framing; candidate hardening is a defer-to-RACE clause in npc or a pointer in ra
   silently kills the whole frontmatter at load ("all frontmatter fields silently dropped") — only
   `claude plugin validate --strict` caught it. Five descriptions now carry YAML double quotes; the
   quoted scalar parses back to exactly the fan-out-measured text (verified).
+
+## Drafted for houseCARL: the §8 item 4 / §3.2 amendment (review issue 2)
+
+Four compressed descriptions (consumable, perk-assignment, router, script) carry no "Use when..."
+clause yet score 10/10 recall — item 4 (unamended by #294) fails them on the letter. Open this as a
+houseCARL PR (a `[Docs]` issue + `Fixes #N`; cross-repo writes are blocked from this repo's
+sessions — a stray empty branch `claude/checklist-item4-compressed-format` already exists there from
+the blocked attempt, reusable or deletable):
+
+- **§3.2 operational rule**, append: *"(Amended 2026-07-29, authoria-requiem #43: under the
+  compressed § 3.5 format the three trigger nouns may sit anywhere in the description — the
+  action-first lead often carries them — and a separate 'Use when…' clause is optional; where one
+  exists, this rule applies to it as written. Evidence: the #43 fan-out measured four descriptions
+  with no 'Use when…' clause at 10/10 recall.)"*
+- **§8 item 4**, replace with: *"Description contains ≥ 3 concrete user-utterance trigger nouns —
+  in the action-first lead or a 'Use…' clause (§ 3.2 as amended 2026-07-29)."*
+
+Then re-sync `standards/` here (BACKLOG tracks it) and drop the interim deviation note from
+CLAUDE.md.
 
 ## Open / next
 

@@ -62,6 +62,30 @@ conversation); prune when done — delete or move under *Done* with the resolvin
   `gh pr list --state open` and read the top of each open PR's `CHANGELOG` before picking your
   number. Worth a line in the PR template's "Before merging" block if it recurs.
   `(2026-07-17, 1.4.0/1.5.0 version collision, Aaron)`
+- **NPC↔RACE routing coin-flip on race-caused creature symptoms (1.10.0 carry-forward).** The #43
+  fan-out left one boundary coin-flippy: an unclassified creature race causing actor-level symptoms
+  splits between `requiem-npc-patching` and `requiem-race-patching` on target-vs-symptom framing
+  (npc archive q4 vs q9 — same collision, opposite verdicts; both descriptions claim "missing
+  Requiem traits"). Candidate hardening: a defer-to-RACE clause in npc or a pointer in race — a
+  description edit, so it re-triggers the §6.5 fan-out; deliberate follow-up if a live session hits
+  the boundary. Full detail: `requiem-npc-patching/evals/results-2026-07-29.json` `carry_forward`.
+  `(2026-07-29, 1.10.0 review, Aaron)`
+
+- **`evals/` schemas remain heterogeneous** (canonical `_meta`+`evals` objects, bare arrays,
+  router-style objects) — deliberate per houseCARL PR #295 precedent (#43 kept query sets untouched),
+  but it means no scripted check can gate these archives. If a validation script ever wants to walk
+  them, normalize first. `(2026-07-29, 1.10.0 review, Aaron)`
+
+- **Re-sync `standards/HOUSECARL_SKILL_AUTHORING.md` once the §8-item-4 amendment lands upstream.**
+  The #294 amendment updated items 5/7 for the compressed format but left item 4 demanding a
+  "Use when..." clause with ≥3 trigger nouns — four compressed descriptions (consumable,
+  perk-assignment, router, script) carry no such clause yet score 10/10 recall, so the empirical
+  answer argues for amending item 4 (and §3.2's operational rule) upstream rather than padding
+  descriptions back out. Amendment text drafted in the 1.10.0 handoff — open the PR from a houseCARL
+  session (cross-repo writes are blocked from this repo's sessions); until it merges and re-syncs,
+  the local deviation note in `CLAUDE.md` covers the §8 verdict.
+  `(2026-07-29, 1.10.0 review, Aaron)`
+
 ## Done
 
 - ~~`requiem-perk-assignment` description tweak candidate (PR #6 review + eval Q8 miss)~~ — **done

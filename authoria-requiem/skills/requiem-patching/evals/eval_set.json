@@ -1,6 +1,6 @@
 {
   "skill_name": "requiem-patching",
-  "validation": "Trigger predictions recorded per query (manual prediction); empirical re-validation and an independent peer check remain a follow-up.",
+  "validation": "Original 1.0.0 trigger predictions recorded per query (manual prediction). Empirically superseded 2026-07-29: the full §6.5 fan-out measured the current (compressed) description against these same queries - see results-2026-07-29.json.",
   "thresholds": {"recall_min": 0.80, "specificity_min": 0.50},
   "predicted": {"recall": 1.0, "specificity": 0.8},
   "note": "should_not_trigger here are mostly SINGLE-record-type jobs that should go straight to a DOMAIN skill, not the router. The router is for whole-mod integration and the gap mechanics.",
