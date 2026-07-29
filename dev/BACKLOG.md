@@ -23,25 +23,12 @@ conversation); prune when done — delete or move under *Done* with the resolvin
   candidates: `dev/s4-graycowl-validation/FINDINGS.md`. Body-only edits expected (no §6.5
   re-measure unless a description changes). `(2026-07-15, S4 session)`
 
-- **`requiem-perk-assignment` description tweak candidate (from the PR #6 review + eval Q8 miss).**
-  The trigger list covers "handle a mod's custom perk records" but not the *clash/overlap-with-a-
-  Requiem-gate* framing that `mod-perk-disposition.md` case 2 turns on — the Q8 eval query ("custom
-  perk giving 30% more smithing yield — does that clash with Requiem's crafting gates?") missed for
-  exactly that reason. If tightened, add that phrase — and note any description edit re-triggers the
-  full §6.5 fan-out re-measure, so it's a deliberate follow-up, not a quick tweak.
-  `(2026-07-15, S3 session; Aaron's review observation)`
-
 - **Root README "Authority model" section looks stale vs the 1.0.1 doctrine.** It still says the
   Authoria overlay (`Requiem for the Indifferent.esp`, `Authoria - Reqtificated/*`) is "disabled …
   excluded" — the authoring-era scope. Since 1.0.1 the shipped doctrine is mode-aware: the live
   winner (RftI included) is the authority. Surface to Aaron and rewrite the paragraph to match
   `scope-and-authority.md`; deliberately NOT folded into the 1.1.0 consumables PR (a public
   doctrine statement needs his eyes). `(2026-07-15, S2 consumables session)`
-
-- **Empirical trigger re-validation of all 9 skill descriptions.** Descriptions shipped validated via
-  the §6.5 manual-prediction fallback + independent peer-prediction (empirical `run_loop` eval is
-  blocked on Windows, §6.4) and are flagged for empirical re-validation when a non-Windows host is
-  available. `(CLAUDE.md §Repo-specific deviations · standing since 1.0.0)`
 
 - **Add an explicit "scan forwarded lists for `REQ_NULL_*`" step to domain-skill bulk passes**
   (npc first; any lane that forwards ActorEffect/Perks/list fields). Val Serano live run: lanes
@@ -76,6 +63,18 @@ conversation); prune when done — delete or move under *Done* with the resolvin
   number. Worth a line in the PR template's "Before merging" block if it recurs.
   `(2026-07-17, 1.4.0/1.5.0 version collision, Aaron)`
 ## Done
+
+- ~~`requiem-perk-assignment` description tweak candidate (PR #6 review + eval Q8 miss)~~ — **done
+  2026-07-29** in the 1.10.0 description compression (#43): the rewritten description carries
+  "including custom perks that clash with a Requiem crafting or perk gate", and the §6.5 re-measure
+  came with the release's full fan-out (20/20, the old Q8 framing now hits).
+  `(1.10.0, Aaron)`
+
+- ~~Empirical trigger re-validation of all 9 skill descriptions~~ — **done 2026-07-29** in the 1.10.0
+  release (#43): all 11 descriptions (the compressed rewrites, not the 1.0.0 texts) measured by the
+  full §6.5 fan-out, menu variant per houseCARL PR #295 — the fan-out runs natively on Windows, so
+  the old "blocked on Windows" premise is retired. All pass; archives in each skill's
+  `evals/results-2026-07-29.json`. `(1.10.0, Aaron)`
 
 - ~~Router caveat: patch-plugin enumeration counts ≠ distinct-record counts (F-VS3)~~ — **fixed
   2026-07-17** in the 1.3.0 batch: `requiem-patching` First step 2 now states per-plugin

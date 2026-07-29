@@ -172,12 +172,11 @@ the rules are exact and a reviewer renders a binary conforms / doesn't-conform v
 
 - **§8 item 19 (the `$Skills` array in `scripts/build-plugin.ps1`) is N/A here** — this plugin has no
   build script; Claude Code auto-discovers each `SKILL.md` by directory. (It *does* apply in houseCARL.)
-- The original nine shipped descriptions were validated under the pre-2026-06-23 standard
-  (manual-prediction fallback + independent peer-prediction; the then-prescribed empirical loop was
-  Windows-blocked and has since been retired upstream); skills added since (`requiem-consumable-patching`
-  onward) are validated by the current §6.5 fan-out, results archived in their `evals/`. Under the
-  current standard, any description change triggers the §6.5 fan-out re-measure — which runs natively
-  here.
+- All 11 shipped descriptions are validated under the current §6.5 fan-out (since 1.10.0, the #43
+  compression: menu variant per houseCARL PR #295, all skills measured in one shared-menu run, results
+  in each skill's `evals/results-2026-07-29.json`; the older per-skill archives and the original
+  nine's manual-prediction-era validation are historical). Any description change triggers the §6.5
+  fan-out re-measure — it runs natively here.
 
 ## Adding or reviewing a skill submission
 
