@@ -1,0 +1,138 @@
+{
+ "skill": "requiem-patching",
+ "date": "2026-07-29",
+ "driver": "issue #43 (description compression to the amended §3.5 listing-budget target)",
+ "method": "HOUSECARL_SKILL_AUTHORING §6.5 fan-out, menu variant per houseCARL PR #295: one fresh-context judge per eval query (Opus, HIGH reasoning effort, no tools), each shown ONLY its single query plus the full lettered menu of all 11 NEW descriptions (anonymized, under-test skill unflagged) plus NONE, forced single pick, reasoning before verdict; one Opus adjudicator per skill scored recall/specificity from the judges' reasoning per §6.5 step 4. Judge model deliberately upgraded from PR #295's sonnet-low (maintainer decision). Contamination guard: the live install was moved aside for the fan-out window so fresh judges carried no stale skill listing. Gates: recall >= 80%, specificity >= 50%.",
+ "description_measured": "Plan a complete Requiem patch for a whole mod via houseCARL — enumerate every new record in the plugin, route each to the right Requiem domain skill, cover the systems no domain owns (vampirism, lycanthropy, disease, stealth, economy), and finish with the masters/REQ_NULL/Reqtificator checklist. Load FIRST for any \"patch mod X for Requiem\" job, before individual records, so nothing gets missed.",
+ "description_chars": 397,
+ "scores": {
+  "recall": "10/10",
+  "specificity": "10/10",
+  "recall_pass": true,
+  "spec_pass": true
+ },
+ "adjudicator_notes": "No reasoning-vs-token discrepancies. All 10 expect=true rows (q1-q10) chose G with reasoning that explicitly routes on whole-mod scope / enumerate-and-route planning / cross-cutting unowned systems (vampirism, disease, economy) plus the masters-REQ_NULL-Reqtificator closing checklist — token and reasoning agree. All 10 expect=false rows routed elsewhere (K, B, E, A, J, D, NONE, NONE, NONE, F); several explicitly considered G and rejected it as \"whole-mod router, too broad for one record\" (q11, q13, q16, q14), which is the desired specificity behavior rather than a near-miss. Three NONE verdicts (q17 SkyPatcher INI, q18 Papyrus perf, q19 bare reference lookup) each reasoned that no menu entry — G included — covers the task; correctly counted as specificity hits. Perfect 20/20; no scoring judgment calls required.",
+ "failures": [],
+ "per_query": [
+  {
+   "q": 1,
+   "expect": true,
+   "choice": "G",
+   "basis": "The request is a whole-mod scope job (\"fully compatible\", \"what does it all need?\"), not a single record edit. Candidates: F (NPC/follower patching) and J (script/follower-system registration) cover pieces a follower mod needs, and I/B/K/H..."
+  },
+  {
+   "q": 2,
+   "expect": true,
+   "choice": "G",
+   "basis": "Request is a whole-mod job (\"patch this whole mod\", ~40 records of different types), not a single record. B (armor) and K (weapon) each cover only one record type and would miss the rest of the mixed record set. G explicitly covers..."
+  },
+  {
+   "q": 3,
+   "expect": true,
+   "choice": "G",
+   "basis": "The request spans an entire mod with multiple record types at once — NPCs, a creature (race), loot placement, and spells — so no single domain entry (F for NPCs, I for the creature race, D for loot placement, E for spells) covers it. The..."
+  },
+  {
+   "q": 4,
+   "expect": true,
+   "choice": "G",
+   "basis": "The request names a whole plugin (MyNewMod.esp) and asks what it needs to be Requiem-consistent, going record by record — a full-mod patch planning job, not a single record type. Domain entries (A, B, C, D, E, F, H, I, J, K) each cover one..."
+  },
+  {
+   "q": 5,
+   "expect": true,
+   "choice": "G",
+   "basis": "The request spans multiple record types (a follower NPC, plus vampiric powers/spells) and explicitly asks about integrating \"the vampirism side\" — a cross-cutting system rather than a single record. F would cover only the follower NPC_, E..."
+  },
+  {
+   "q": 6,
+   "expect": true,
+   "choice": "G",
+   "basis": "Two distinct systems in one request: a disease and an INGR ingredient. C owns ingredients (ALCH + INGR, alchemy comparables) but says nothing about disease. No entry owns disease at all except G, which explicitly names disease among the..."
+  },
+  {
+   "q": 7,
+   "expect": true,
+   "choice": "G",
+   "basis": "Candidates are F (NPC_ patching), D (world placement / containers / leveled lists), and G (whole-mod planner). F only covers an actor's combat-balance fields — level, class, combat style, factions, racial traits — not vendor mechanics or..."
+  },
+  {
+   "q": 8,
+   "expect": true,
+   "choice": "G",
+   "basis": "The user is asking where to begin patching an entire mod, and explicitly says they don't know which records matter — that's a scoping/enumeration/routing need, not a single-record fix. Candidates: I (creature races) and F (NPCs/enemies)..."
+  },
+  {
+   "q": 9,
+   "expect": true,
+   "choice": "G",
+   "basis": "The request is mod-wide and cross-cutting, not tied to any single record type, so all the domain entries (A, B, C, E, F, H, I, K) and the placement/script entries (D, J) are out — none of them own masters, Reqtificator prerequisites, or..."
+  },
+  {
+   "q": 10,
+   "expect": true,
+   "choice": "G",
+   "basis": "Two distinct additions are named — a standing stone and a shout — so this is a multi-record integration question, not a single-record patch. E is the closest domain candidate since both ultimately resolve to SPEL/MGEF plumbing, but E's..."
+  },
+  {
+   "q": 11,
+   "expect": false,
+   "choice": "K",
+   "basis": "Request is a single WEAP record — a modded sword — needing damage and keywords set for Requiem. K explicitly covers weapon patching (damage, keywords, value, recipe, \"a modded sword, bow, dagger\") and says to load before the weapon record..."
+  },
+  {
+   "q": 12,
+   "expect": false,
+   "choice": "B",
+   "basis": "The request concerns a cuirass — an ARMO record — and its armor rating relative to Requiem's heavy armor tiers. Entry B explicitly covers armor rating, part/material/light-heavy comparables, and names cuirass as an example, warning to load..."
+  },
+  {
+   "q": 13,
+   "expect": false,
+   "choice": "E",
+   "basis": "The request concerns a single spell record — a firebolt variant — and specifically its magicka cost, which is a magic-economy balance field. Entry E is the only one covering SPEL/MGEF/ENCH records and names magicka cost, tier, and school..."
+  },
+  {
+   "q": 14,
+   "expect": false,
+   "choice": "A",
+   "basis": "Arrows are AMMO records, not WEAP. Entry A explicitly covers arrows and crossbow bolts — damage, material and armor-piercing keywords, projectile link, forge recipe — which matches both stated needs (damage, armor-piercing tier). K is the..."
+  },
+  {
+   "q": 15,
+   "expect": false,
+   "choice": "J",
+   "basis": "Two candidates: E (spells/magic effects for Magic Redone) and J (Papyrus layer). E covers balance fields — school, tier, magicka cost, magnitude, tier-classifier perk — none of which is at issue; the spell isn't mispriced, its mechanic..."
+  },
+  {
+   "q": 16,
+   "expect": false,
+   "choice": "D",
+   "basis": "The request is about distribution, not balance: getting an already-existing item to appear in bandit leveled lists / dungeon loot. K is the weapon-record candidate, but it covers the WEAP record's own damage, keywords, value, and recipe —..."
+  },
+  {
+   "q": 17,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is about authoring a SkyPatcher INI — a runtime, no-ESP record-edit file — to buff iron weapons. The only near-candidate is K (weapon patching), but it is scoped to Requiem balance derivation emitted as an ESP override via..."
+  },
+  {
+   "q": 18,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is a performance diagnosis of a Papyrus cloak script — script lag / framerate cost, a runtime scripting concern with no Requiem balance dimension. The only Papyrus-adjacent menu entry is J, but its scope is Requiem integration:..."
+  },
+  {
+   "q": 19,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "Only B is topically adjacent — it owns armor rating, tiers, and light/heavy comparables. But every menu entry is an action capability scoped to patching a record and gated on \"load before the write\"; B's use clause is explicitly \"for any..."
+  },
+  {
+   "q": 20,
+   "expect": false,
+   "choice": "F",
+   "basis": "Only F and H are plausible: F owns NPC_ balance patching (fixed level, class, combat style, factions, racial traits) and explicitly names a modded boss; H owns perk assignment for an NPC (rank-chain PerkPlacements, PERK dispositioning)...."
+  }
+ ]
+}

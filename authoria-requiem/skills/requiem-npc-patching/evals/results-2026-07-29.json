@@ -1,0 +1,157 @@
+{
+ "skill": "requiem-npc-patching",
+ "date": "2026-07-29",
+ "driver": "issue #43 (description compression to the amended §3.5 listing-budget target)",
+ "method": "HOUSECARL_SKILL_AUTHORING §6.5 fan-out, menu variant per houseCARL PR #295: one fresh-context judge per eval query (Opus, HIGH reasoning effort, no tools), each shown ONLY its single query plus the full lettered menu of all 11 NEW descriptions (anonymized, under-test skill unflagged) plus NONE, forced single pick, reasoning before verdict; one Opus adjudicator per skill scored recall/specificity from the judges' reasoning per §6.5 step 4. Judge model deliberately upgraded from PR #295's sonnet-low (maintainer decision). Contamination guard: the live install was moved aside for the fan-out window so fresh judges carried no stale skill listing. Gates: recall >= 80%, specificity >= 50%.",
+ "description_measured": "Patch an NPC, enemy, follower, or boss for Requiem via houseCARL — the whole actor: fixed level, class, combat style, factions, perks, and racial trait inheritance derived from Requiem's comparable actor into an ESP override. Use for any NPC_ record: a boss dying to one arrow, an enemy too strong or weak, a follower to integrate, creature actors whose unrecognized race leaves them missing Requiem's traits. Load before the NPC_ write.",
+ "description_chars": 437,
+ "scores": {
+  "recall": "8/9",
+  "specificity": "9/9",
+  "recall_pass": true,
+  "spec_pass": true
+ },
+ "adjudicator_notes": "No overrides applied — every judge's reasoning matched its verdict token, including q4 (reasoning explicitly argues for I and picks I). Note the F/I boundary is the only contested surface: q4 (miss) and q9 (hit) are the same collision — unclassified creature race vs. the actors on it — decided only by whether the user names the actors as the target (\"fix the NPCs\" → F) or names race-level symptoms (\"takes wrong damage, missing traits\" → I). Both descriptions claim the phrase \"missing Requiem traits\", so the split is coin-flippy rather than principled; a disambiguating clause in F (e.g. defer to RACE when the only symptoms are racial damage/traits and no actor field is wrong) or a matching pointer in I would harden it. No specificity pressure at all — F was named as a considered-and-rejected near neighbour in 6 of 9 expect=false rows (q10, q11, q12, q14, q15, q17, q18) and correctly rejected each time, so the description is not over-broad; the only cost is recall on the race boundary.",
+ "failures": [
+  {
+   "q": 4,
+   "kind": "recall-miss",
+   "gist": "Judge routed the custom-draugr-race case to I (RACE) — every stated symptom was race-level (wrong incoming damage, missing Requiem creature traits, unclassified race), no actor-level level/class/combat-style/faction/perk complaint, so F's whole-actor derivation read as not-needed; F's own 'creature actors whose unrecognized race leaves them missing Requiem's traits' clause lost to I's near-verbatim symptom match."
+  }
+ ],
+ "per_query": [
+  {
+   "q": 1,
+   "expect": true,
+   "choice": "F",
+   "basis": "Request targets a single actor — a dungeon mod's boss whose durability/power is wrong for Requiem. Candidates: F (whole NPC_ actor: level, class, combat style, factions, perks, racial traits), H (perks only — too narrow, the complaint is..."
+  },
+  {
+   "q": 2,
+   "expect": true,
+   "choice": "F",
+   "basis": "Request is about modded NPC actors (bandits) with wrong difficulty — explicitly level, class, and perks. Candidates: F (whole-actor NPC_ patching: fixed level, class, combat style, factions, perks, derived from a Requiem comparable actor),..."
+  },
+  {
+   "q": 3,
+   "expect": true,
+   "choice": "F",
+   "basis": "Candidates: F (whole-actor NPC_ patch), J (Papyrus layer, which explicitly mentions registering a modded follower into Requiem's follower system), and H (perks only). The user's enumerated asks — factions, class, combat style, level — are..."
+  },
+  {
+   "q": 4,
+   "expect": true,
+   "choice": "I",
+   "basis": "Two candidates overlap here by design: F (whole-actor NPC_ patching, which explicitly mentions \"creature actors whose unrecognized race leaves them missing Requiem's traits\") and I (RACE patching, \"a modded creature taking the wrong damage..."
+  },
+  {
+   "q": 5,
+   "expect": true,
+   "choice": "F",
+   "basis": "Two candidates: F (NPC/actor patching, which explicitly lists \"fixed level\" as the first thing it derives for any NPC_ record — enemy, boss, follower) and D (world placement — leveled lists, containers, encounter zones, and it does mention..."
+  },
+  {
+   "q": 6,
+   "expect": true,
+   "choice": "F",
+   "basis": "The request is about a single custom NPC actor — setting his Requiem class, combat style, and factions. Candidates are F (whole-actor NPC patching) and H (perk assignment on an NPC); G is only for whole-mod planning, not one record. H is..."
+  },
+  {
+   "q": 7,
+   "expect": true,
+   "choice": "F",
+   "basis": "Candidates are F (NPC_ actor patching), D (leveled-list placement), and G (whole-mod patch planning). The records in question are five NPC_ actors (BanditA01–A05) and the ask is to make them \"Requiem-consistent\" — i.e. fixed level, class,..."
+  },
+  {
+   "q": 8,
+   "expect": true,
+   "choice": "F",
+   "basis": "The subject is a modded NPC actor (a Forsworn mage) that is underpowered in Requiem, and the ask spans both perks and overall balance for his level. Candidates are F (whole-actor NPC_ patch: level, class, combat style, factions, perks,..."
+  },
+  {
+   "q": 9,
+   "expect": true,
+   "choice": "F",
+   "basis": "Candidates are F (NPC_/actor patching), I (RACE patching), and possibly H (perk assignment) or G (whole-mod router). The request is scoped to one symptom, not a whole-mod plan, so G is out; H covers deriving a perk set from gear/tier, not..."
+  },
+  {
+   "q": 10,
+   "expect": false,
+   "choice": "I",
+   "basis": "The request is about a single record type — a custom playable race (RACE) — and specifically its starting health/magicka/stamina and skill bonuses. Entry I explicitly covers racial stats, skill bonuses, and ability spells for playable or..."
+  },
+  {
+   "q": 11,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is a visual/asset problem — the dark-face bug and neck seam from a facegen mismatch after installing an appearance mod, plus head parts (HDPT). The menu entries are all Requiem *balance* patching capabilities: F is the closest..."
+  },
+  {
+   "q": 12,
+   "expect": false,
+   "choice": "D",
+   "basis": "Candidates are F (whole-actor NPC patching) and D (leveled lists / containers / distribution). The subject is an enemy actor, but the requested fix is explicitly the contents of its death-item leveled list — a..."
+  },
+  {
+   "q": 13,
+   "expect": false,
+   "choice": "E",
+   "basis": "Request targets a single spell — a fireball's damage — asking to retune magnitude and its magic effect for Requiem. Candidates: E (spells, magic effects, enchantments — school, tier, cost, magnitude) and, peripherally, F/H (the caster is..."
+  },
+  {
+   "q": 14,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The failure described is a base-game follower-framework problem: the follower quest/alias wiring and the recruitment dialogue INFO conditions never fire. Candidates are F (whole-actor NPC_ patching — level, class, factions, perks, \"a..."
+  },
+  {
+   "q": 15,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is about installing a combat AI overhaul mod — mod discovery/installation plus engine-level combat behavior (fleeing at low health, flanking, potion use), which lives in combat styles, game settings, and AI packages. No menu..."
+  },
+  {
+   "q": 16,
+   "expect": false,
+   "choice": "K",
+   "basis": "The subject is a steel greatsword — a WEAP record — with damage and value out of line for Requiem. Candidates: K (weapons: damage, keywords, value, recipe derived from Requiem's comparable at the same material tier) and possibly G..."
+  },
+  {
+   "q": 17,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request asks for a SkyPatcher INI — a runtime, no-ESP record patch — with no mention of Requiem. The only near-candidate is F (NPC patching), since bandits are NPC_ records, but F describes deriving a whole actor from Requiem's..."
+  },
+  {
+   "q": 18,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is gameplay/strategy advice — which enemy type gives the best combat XP early in a Requiem playthrough. Every menu entry is a record-patching capability (AMMO, ARMO, ALCH/INGR, leveled lists, MGEF/SPEL, NPC_, whole-mod..."
+  }
+ ],
+ "iterations": [
+  {
+   "round": 1,
+   "description_chars": 396,
+   "recall": "7/9",
+   "specificity": "9/9",
+   "result": "FAIL recall 7/9 - race-caused creature symptoms (q4, q9) routed to RACE; the compression had ceded the old description creature-actor claim to the race skill"
+  },
+  {
+   "round": 2,
+   "description_chars": 435,
+   "recall": "7/9",
+   "specificity": "9/9",
+   "result": "FAIL recall 7/9 - the added creature-race disambiguator won q4 but q9 still went to RACE, and q8 flipped to perk-assignment because \"set only the balance fields\" read as disclaiming the Perks list"
+  },
+  {
+   "round": 3,
+   "description_chars": 437,
+   "recall": "8/9",
+   "specificity": "9/9",
+   "result": "PASS 8/9 + 9/9 - whole-actor framing (perks as one lane, matching the perk-assignment eval set boundary note) won q8 and q9; q4 flipped to the other side of the same NPC/RACE coin-flip (see carry_forward)"
+  }
+ ],
+ "fix_loop_reruns": "Rounds 2-3 re-ran the touched boundaries, not just this skill: race (18/18 clean both rounds) and perk-assignment (20/20 clean, NPC/perk boundary reads as intended with perks added to the NPC entry).",
+ "carry_forward": "Passed at 8/9 recall after a 3-round fix loop (see iterations). The NPC/RACE boundary remains coin-flippy where a creature's unclassified race causes actor-level symptoms: q4 and q9 are the same collision and split on whether the user targets the actors or names race-level symptoms; both descriptions claim 'missing Requiem traits'. Candidate hardening (adjudicator suggestion): a defer-to-RACE clause here or a matching pointer in the race skill. Not chased further this release - specificity showed no pressure (9/9, this entry correctly rejected in 6 of 9 negatives)."
+}

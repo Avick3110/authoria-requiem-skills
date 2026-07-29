@@ -1,0 +1,140 @@
+{
+ "skill": "requiem-perk-assignment",
+ "date": "2026-07-29",
+ "driver": "issue #43 (description compression to the amended §3.5 listing-budget target)",
+ "method": "HOUSECARL_SKILL_AUTHORING §6.5 fan-out, menu variant per houseCARL PR #295: one fresh-context judge per eval query (Opus, HIGH reasoning effort, no tools), each shown ONLY its single query plus the full lettered menu of all 11 NEW descriptions (anonymized, under-test skill unflagged) plus NONE, forced single pick, reasoning before verdict; one Opus adjudicator per skill scored recall/specificity from the judges' reasoning per §6.5 step 4. Judge model deliberately upgraded from PR #295's sonnet-low (maintainer decision). Contamination guard: the live install was moved aside for the fan-out window so fresh judges carried no stale skill listing. Gates: recall >= 80%, specificity >= 50%.",
+ "description_measured": "Assign Requiem perks to an NPC via houseCARL — derive the source-carried perk set from the actor's gear, spell kit, and tier against Requiem's template ladders, write it as rank-chain PerkPlacements, and disposition a mod's own PERK records, including custom perks that clash with a Requiem crafting or perk gate. Never hand-place Reqtificator-stamped perks — load before writing any Perks list.",
+ "description_chars": 395,
+ "scores": {
+  "recall": "10/10",
+  "specificity": "10/10",
+  "recall_pass": true,
+  "spec_pass": true
+ },
+ "adjudicator_notes": "No reasoning-vs-token discrepancies; every judge's reasoning matched its verdict token, so no overrides applied. All 10 expect=true rows explicitly weigh H against F (whole-actor NPC) and pick H on a narrow-scope-to-perks argument — the F/H boundary reads as intended. All 10 expect=false rows route away cleanly, and H is named as a near-miss distractor in 9 of them yet rejected each time on a correct distinction: H is an NPC-record PerkPlacements write, not runtime distributor authoring (q13 SPID, q18 SkyPatcher), not new perk design (q12), not player build advice (q14), not a spell-record field (q15), not actor combat-style behavior (q19), not PERK description strings (q20); q11 rejects H as too narrow vs F. 20/20 — no description change indicated.",
+ "failures": [],
+ "per_query": [
+  {
+   "q": 1,
+   "expect": true,
+   "choice": "H",
+   "basis": "Candidates are F (whole-actor NPC patching, which lists perks among many fields and mentions \"a follower to integrate\") and H (dedicated perk assignment for an NPC). The request is narrowly scoped to one question — the actor has no perks,..."
+  },
+  {
+   "q": 2,
+   "expect": true,
+   "choice": "H",
+   "basis": "Two candidates: F (whole-actor NPC patch — level, class, combat style, factions, perks, racial traits; explicitly names \"a boss dying to one arrow\") and H (perk assignment specifically — derive the source-carried perk set against Requiem's..."
+  },
+  {
+   "q": 3,
+   "expect": true,
+   "choice": "H",
+   "basis": "The request asks which perks a modded NPC (a warlock, defined by its spell kit — fireball, frost cloak) should carry in Requiem. Candidates are H (assign Requiem perks to an NPC, deriving the source-carried perk set from the actor's gear,..."
+  },
+  {
+   "q": 4,
+   "expect": true,
+   "choice": "H",
+   "basis": "Candidates are G (whole-mod planning/routing of every record in a plugin) and H (perk-related work). The request is scoped to one record type — the PERK records Vigilant.esp ships — and asks what to do with each, which is exactly the..."
+  },
+  {
+   "q": 5,
+   "expect": true,
+   "choice": "H",
+   "basis": "Candidates: F (whole-actor NPC patch), H (perk assignment), G (whole-mod plan). The request is narrowly scoped to one facet of the actors — perk loadouts — and explicitly says they should be derived from gear. H is the entry that names..."
+  },
+  {
+   "q": 6,
+   "expect": true,
+   "choice": "H",
+   "basis": "Candidates are F (whole-NPC patching, which includes perks among many other actor fields) and H (perk assignment specifically). The question is narrow: it is not about levels, class, combat style, or factions, but purely about which perks..."
+  },
+  {
+   "q": 7,
+   "expect": true,
+   "choice": "H",
+   "basis": "Two candidates: F (whole-actor NPC patching, which lists perks among many fields) and H (dedicated perk assignment). The request is narrow — not level, class, combat style, or factions, but specifically which perks a follower should carry..."
+  },
+  {
+   "q": 8,
+   "expect": true,
+   "choice": "H",
+   "basis": "The request is about a single custom PERK record from a mod and whether it conflicts with Requiem's crafting/perk gating. Candidates are H (perk assignment + dispositioning a mod's own PERK records) and G (whole-mod patch planning), with a..."
+  },
+  {
+   "q": 9,
+   "expect": true,
+   "choice": "H",
+   "basis": "The request is narrowly scoped: assign the correct Requiem perks to a set of NPC actors (draugr variants). Candidates are H (perk assignment to NPCs — deriving the source-carried perk set against Requiem's template ladders and writing..."
+  },
+  {
+   "q": 10,
+   "expect": true,
+   "choice": "H",
+   "basis": "Two candidates: F (whole-actor NPC patch — level, class, combat style, factions, perks) and H (perk assignment specifically). The gear details (greatsword, heavy armor, shield) are given as inputs for deriving the perk set, and the..."
+  },
+  {
+   "q": 11,
+   "expect": false,
+   "choice": "F",
+   "basis": "Candidates are F (single actor patch), G (whole-mod router), and H (perks only). The request names one record type — the follower mod's NPC — and enumerates exactly the actor-level fields F claims: fixed level, class, factions,..."
+  },
+  {
+   "q": 12,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "Every menu entry is a *patching* capability: take existing records from an already-authored mod and derive Requiem-conformant values by live-analogy, then emit an ESP override. The request is upstream of that — original design of a new..."
+  },
+  {
+   "q": 13,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "Only two entries plausibly touch perks on actors: H (assign Requiem perks to an NPC, written as rank-chain PerkPlacements in an ESP override) and F (whole-actor NPC_ patch including perks). But the request names SPID — a runtime, no-ESP..."
+  },
+  {
+   "q": 14,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is player build advice — which perks to pick while playing a Requiem character — not a data-layer patching job. The nearest-looking entries are H (assign Requiem perks) and G (whole-mod plan, which name-drops \"stealth\"), but H..."
+  },
+  {
+   "q": 15,
+   "expect": false,
+   "choice": "E",
+   "basis": "The request concerns a SPEL/MGEF record field (HalfCostPerk) that Requiem's Magic Redone uses to mark a spell's school tier. Candidates are E (spells/magic effects, explicitly including \"the tier-classifier perk derived from Requiem's..."
+  },
+  {
+   "q": 16,
+   "expect": false,
+   "choice": "E",
+   "basis": "The request names a spell and two specific numeric fields — magicka cost and magnitude — to rebalance for Requiem. Entry E is the only one covering SPEL/MGEF records, and it names magicka cost and magnitude verbatim as the values it..."
+  },
+  {
+   "q": 17,
+   "expect": false,
+   "choice": "I",
+   "basis": "Request names a RACE record explicitly (\"custom race\") and asks for racial abilities plus damage resistances — ability spells and trait/resistance keywords on the race. Candidates: I (race patching, covers racial stats, skill bonuses,..."
+  },
+  {
+   "q": 18,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is to author a SkyPatcher `.ini` — a runtime, no-ESP record-edit file — targeting guards with a perk. Nothing in the menu covers INI/runtime distributor authoring; every entry is a Requiem live-analogy patcher that emits an ESP..."
+  },
+  {
+   "q": 19,
+   "expect": false,
+   "choice": "F",
+   "basis": "The symptom is an actor-level behavior: an enemy NPC that never raises its shield. In Skyrim that is driven primarily by the actor's CombatStyle (block-related multipliers), and secondarily by its class/AI weighting and Block-tree perks...."
+  },
+  {
+   "q": 20,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is a text-rendering bug: PERK description strings show broken inline tags (e.g. <mag>/<dur>-style formatting or malformed markup) in the skill menu UI. The only entry that touches PERK records at all is H, but its scope is..."
+  }
+ ],
+ "fix_loop_reruns": "Re-measured in NPC fix-loop round 3 (the NPC entry gained \"perks\" in its whole-actor list): 10/10 + 10/10, this entry named and correctly rejected as a near-miss in 9 of 10 negatives. Scores above are round 3.",
+ "supersedes": "results-2026-07-15.json - that archive measured the previous, longer description text (pre-#43) and is retained as ARCHIVE; this file is the current measurement."
+}

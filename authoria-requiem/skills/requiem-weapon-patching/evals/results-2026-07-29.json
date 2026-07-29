@@ -1,0 +1,145 @@
+{
+ "skill": "requiem-weapon-patching",
+ "date": "2026-07-29",
+ "driver": "issue #43 (description compression to the amended §3.5 listing-budget target)",
+ "method": "HOUSECARL_SKILL_AUTHORING §6.5 fan-out, menu variant per houseCARL PR #295: one fresh-context judge per eval query (Opus, HIGH reasoning effort, no tools), each shown ONLY its single query plus the full lettered menu of all 11 NEW descriptions (anonymized, under-test skill unflagged) plus NONE, forced single pick, reasoning before verdict; one Opus adjudicator per skill scored recall/specificity from the judges' reasoning per §6.5 step 4. Judge model deliberately upgraded from PR #295's sonnet-low (maintainer decision). Contamination guard: the live install was moved aside for the fan-out window so fresh judges carried no stale skill listing. Gates: recall >= 80%, specificity >= 50%.",
+ "description_measured": "Patch a new or modded weapon for Requiem via houseCARL — damage, keywords, value, and recipe derived from Requiem's comparable at the same material tier, emitted as an ESP override. Use for any WEAP record: a modded sword, bow, dagger, or staff that hits too hard or too soft for Requiem. Load before the weapon record is touched, not after the Reqtificator rebalances it wrong.",
+ "description_chars": 378,
+ "scores": {
+  "recall": "9/10",
+  "specificity": "10/10",
+  "recall_pass": true,
+  "spec_pass": true
+ },
+ "adjudicator_notes": "No reasoning-vs-token discrepancies; every judge's stated routing matched its choice token, so no overrides applied. Worth flagging for the description: q6 is a genuine K/E boundary contest caused by K's description naming \"staff\" as an example WEAP while E claims staves outright — the judge resolved it on field type (charge/value = E) rather than record type. q7 (enchanted mace charge + value) landed on K by the mirror-image reasoning, so the K/E line is being drawn at \"is the ENCH itself the problem\" — consistent, but fragile. Specificity is clean: three near-miss expect=false rows (q14 NIF transform, q19 SkyPatcher INI, q20 ESL flagging) all explicitly considered K, named it the only weapon-adjacent entry, and rejected it on deliverable/scope — K's \"emit an ESP override, derive from Requiem comparable\" phrasing is doing the discriminating work.",
+ "failures": [
+  {
+   "q": 6,
+   "kind": "recall-miss",
+   "gist": "Staff of firebolt value/charge routed to E (magic: staves, ENCH, charge/tier economy) over K — judge read the ask as enchantment/charge economy, not weapon damage/material tier/recipe; noted K's own description lists 'staff' as an example WEAP but scoped it to the weapon-side fields only."
+  }
+ ],
+ "per_query": [
+  {
+   "q": 1,
+   "expect": true,
+   "choice": "K",
+   "basis": "Request is a single-record balance problem: a modded WEAP (steel longsword) doing 60 damage, far above Requiem's tier. Candidate entries are K (weapon patching — damage, keywords, value, recipe from Requiem's comparable at the same..."
+  },
+  {
+   "q": 2,
+   "expect": true,
+   "choice": "K",
+   "basis": "Request targets a single item — an ebony dagger — which is a WEAP record. K explicitly covers modded weapons (naming \"dagger\") with damage, keywords, value, and recipe derived from Requiem's comparable at the same material tier, exactly..."
+  },
+  {
+   "q": 3,
+   "expect": true,
+   "choice": "K",
+   "basis": "The item is a crossbow — a WEAP record, not the bolts it fires. Entry A is tempting because it mentions crossbow bolts, but it explicitly scopes to AMMO records (arrows/bolts), not the launcher. Entry K covers any WEAP record whose damage,..."
+  },
+  {
+   "q": 4,
+   "expect": true,
+   "choice": "K",
+   "basis": "Request is a single custom katana — a WEAP record — needing craftability (forge recipe), the crafting perk gate, and Requiem-appropriate damage. K explicitly covers damage, keywords, value, and recipe for any WEAP record (modded sword,..."
+  },
+  {
+   "q": 5,
+   "expect": true,
+   "choice": "K",
+   "basis": "The request concerns a glass war axe — a WEAP record — and specifically asks which keywords it needs for Requiem/Reqtificator to process it. Candidates: K (weapons: damage, keywords, value, recipe derived from Requiem's comparable at the..."
+  },
+  {
+   "q": 6,
+   "expect": true,
+   "choice": "E",
+   "basis": "Two candidates name staves: E (spells, magic effects, enchantments, staves, scrolls — Magic Redone) and K (weapons, whose examples include \"a modded sword, bow, dagger, or staff\"). The deciding factor is what's being asked: value and..."
+  },
+  {
+   "q": 7,
+   "expect": true,
+   "choice": "K",
+   "basis": "The object is a mace — a WEAP record — and both complaints (enchantment charge amount and gold value) are fields living on that weapon record. Candidates are K (weapons: damage, keywords, value, recipe for any WEAP) and E (magic:..."
+  },
+  {
+   "q": 8,
+   "expect": true,
+   "choice": "K",
+   "basis": "The request is about a single modded weapon — a greatsword — needing balance for a Requiem-based playthrough. Candidates: K (weapon patching: WEAP damage, keywords, value, recipe derived from Requiem's comparable at the same material tier,..."
+  },
+  {
+   "q": 9,
+   "expect": true,
+   "choice": "K",
+   "basis": "The subject is a single new bow — a WEAP record — with two symptoms: wrong damage for Requiem's tiers and NPCs failing to use it, which in practice traces to missing/incorrect weapon keywords and animation-type data on that same record. K..."
+  },
+  {
+   "q": 10,
+   "expect": true,
+   "choice": "K",
+   "basis": "The request is a single new WEAP record — a daedric warhammer — needing Requiem-tier stats plus a crafting/tempering recipe. K explicitly covers WEAP records with damage, keywords, value, and recipe derived from Requiem's comparable at the..."
+  },
+  {
+   "q": 11,
+   "expect": false,
+   "choice": "B",
+   "basis": "The request targets a single item — a modded steel cuirass — and specifically its armor rating fitting Requiem's tiers. That is an ARMO record balance job. Candidates: B (armor patching: armor rating, keywords, value, tempering recipe..."
+  },
+  {
+   "q": 12,
+   "expect": false,
+   "choice": "A",
+   "basis": "Request targets modded steel arrows doing too much damage in Requiem. Arrows are AMMO records, and entry A explicitly owns AMMO — arrows and bolts, damage/material/armor-piercing keywords, projectile link, recipe, derived from Requiem..."
+  },
+  {
+   "q": 13,
+   "expect": false,
+   "choice": "E",
+   "basis": "The request concerns a destruction spell's magic effect magnitude and magicka cost under Requiem. Entry E is the only one covering MGEF/SPEL records — school, tier, magicka cost, magnitude — for Requiem's Magic Redone. Entry J (Papyrus)..."
+  },
+  {
+   "q": 14,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is about a first-person mesh (NIF) sitting wrong in the hand — a 3D asset / node-transform problem, not a record-balance one. K is the only near-candidate because it mentions swords, but it patches the WEAP record's damage,..."
+  },
+  {
+   "q": 15,
+   "expect": false,
+   "choice": "E",
+   "basis": "The request concerns creating an enchantment/magic effect (absorb health) and tuning its magnitude for Requiem balance. Candidate entries are E (magic: MGEF/SPEL/ENCH, magnitude, magicka cost, tier) and possibly K (weapons) since..."
+  },
+  {
+   "q": 16,
+   "expect": false,
+   "choice": "F",
+   "basis": "The request targets a single NPC_ record (a follower) with three facets: combat stats, perks, and outfit. Candidates are F (NPC/follower patching — fixed level, class, combat style, factions, explicitly \"a follower to integrate\"), H (perk..."
+  },
+  {
+   "q": 17,
+   "expect": false,
+   "choice": "D",
+   "basis": "The request is about distribution, not balance: getting new weapons to actually show up in Requiem's loot via leveled lists. K covers weapon stats/keywords/recipes — the balance of the WEAP records — not their appearance in loot tables. G..."
+  },
+  {
+   "q": 18,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The only entry touching weapons is K, but K is scoped to authoring an ESP override for a new or modded WEAP record — deriving damage, keywords, value, and recipe from a Requiem comparable before a write. This request asks for no write, no..."
+  },
+  {
+   "q": 19,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request asks for a SkyPatcher INI — a runtime, no-ESP record-edit file — to buff iron weapon damage. The only near-candidate is K (weapon patching), since the subject matter is WEAP damage, but K describes deriving values from..."
+  },
+  {
+   "q": 20,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is a plugin-header / load-order housekeeping task: set the ESL flag (or compact FormIDs) on a mod's ESP so it takes a light slot instead of a full load-order slot. Nothing in it involves Requiem balance derivation. K mentions..."
+  }
+ ],
+ "carry_forward": "9/10 recall: q6 (staff of firebolt value/charge) routed to magic on enchantment/charge-economy grounds - a defensible sibling ownership call (staff enchant economy is Magic Redone's). No change made."
+}

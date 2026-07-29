@@ -1,0 +1,126 @@
+{
+ "skill": "requiem-leveled-list-patching",
+ "date": "2026-07-29",
+ "driver": "issue #43 (description compression to the amended §3.5 listing-budget target)",
+ "method": "HOUSECARL_SKILL_AUTHORING §6.5 fan-out, menu variant per houseCARL PR #295: one fresh-context judge per eval query (Opus, HIGH reasoning effort, no tools), each shown ONLY its single query plus the full lettered menu of all 11 NEW descriptions (anonymized, under-test skill unflagged) plus NONE, forced single pick, reasoning before verdict; one Opus adjudicator per skill scored recall/specificity from the judges' reasoning per §6.5 step 4. Judge model deliberately upgraded from PR #295's sonnet-low (maintainer decision). Contamination guard: the live install was moved aside for the fan-out window so fresh judges carried no stale skill listing. Gates: recall >= 80%, specificity >= 50%.",
+ "description_measured": "Place new items or NPCs into Requiem's world via houseCARL — enter them in the right leveled list, container, or encounter zone at the correct tier, riding the Reqtificator's leveled-list merge instead of overwriting Requiem's curated distribution. Use when modded loot, gear, or spawns never appear in game, or a dungeon needs de-leveling. Load before editing any list or container.",
+ "description_chars": 383,
+ "scores": {
+  "recall": "9/9",
+  "specificity": "9/9",
+  "recall_pass": true,
+  "spec_pass": true
+ },
+ "adjudicator_notes": "No overrides needed — every judge's reasoning matched its verdict token. Recall (q1-q9): all nine routed to D, each explicitly separating distribution/placement (leveled lists, containers, encounter zones, Reqtificator merge) from record stat-balance neighbours (K weapons, B armor, F NPC, I race), citing D's named triggers (\"modded loot/gear/spawns never appear in game\", \"de-leveling a dungeon\"). Specificity (q10-q18): D was considered and explicitly rejected as a near-miss in q12 (SPID ini = runtime distributor, not record-level list edit), q14 (\"hand-placed\" quest reward bypasses distribution entirely — no list to enter), q15 (containers ≠ merchant gold/barter economy → G), q16 (Requiem-curated list entry ≠ reconciling two non-Requiem loot mods), and q18 (ESP-side placement ≠ in-game \"where's good loot\" advice). q10/q11/q13/q17 didn't reach D at all. Boundary language in D (\"riding the Reqtificator's leveled-list merge\", ESP override) is doing the discriminating work on the runtime-distributor (SPID/KID) and gameplay-advice distractors.",
+ "failures": [],
+ "per_query": [
+  {
+   "q": 1,
+   "expect": true,
+   "choice": "D",
+   "basis": "The user has already patched the weapon's stats for Requiem, so K (weapon stat patching) is the completed step, not the ask. The actual problem is distribution — the item never appears in dungeons or on enemies — which is a..."
+  },
+  {
+   "q": 2,
+   "expect": true,
+   "choice": "D",
+   "basis": "The request is purely about distribution: getting an already-existing modded greatsword into Requiem's leveled lists so it drops as loot and shows in blacksmith vendor stock at a fitting tier. Candidates are K (weapon record patching) and..."
+  },
+  {
+   "q": 3,
+   "expect": true,
+   "choice": "D",
+   "basis": "The balance work is explicitly done — the remaining problem is purely distribution: the creature exists but never appears in the world. Candidates were F (NPC balance) and I (creature race traits), but both cover stat/trait patching, which..."
+  },
+  {
+   "q": 4,
+   "expect": true,
+   "choice": "D",
+   "basis": "The request is about a container's contents — a boss chest holding vanilla gold and random gear — needing to match Requiem's boss-container fill conventions. That is loot distribution/placement, not a record's own stats. D is the only..."
+  },
+  {
+   "q": 5,
+   "expect": true,
+   "choice": "D",
+   "basis": "The user's armor already exists; the ask is purely about getting it to appear in bandit loot and vendor inventories at an appropriate rarity — i.e. leveled-list and container distribution, not stat balancing. B covers ARMO..."
+  },
+  {
+   "q": 6,
+   "expect": true,
+   "choice": "D",
+   "basis": "Two candidates: K (weapon record patching — damage, keywords, value, recipe) and D (world placement — leveled lists, containers, encounter zones, tiering). The user's complaint isn't that the weapon's stats are wrong; it's that it appears..."
+  },
+  {
+   "q": 7,
+   "expect": true,
+   "choice": "D",
+   "basis": "The request is specifically about adding an item to a Requiem leveled list and having the entry vanish or the rest of the list get wiped when the Reqtificator runs — a leveled-list merge/overwrite problem, not a stat-balance problem. Entry..."
+  },
+  {
+   "q": 8,
+   "expect": true,
+   "choice": "D",
+   "basis": "The request is about a dungeon's encounter zone (ECZN) min-level causing everything to scale, and whether/how to de-level it for Requiem. Candidates: D (world placement / leveled lists / containers / encounter zones) and F (NPC balance) —..."
+  },
+  {
+   "q": 9,
+   "expect": true,
+   "choice": "D",
+   "basis": "The ask is about getting an existing modded enemy to show up in the bandit spawn rotation at a specific tier — that is leveled-list/encounter distribution, not stat balancing. F covers patching the NPC record itself (level, class, combat..."
+  },
+  {
+   "q": 10,
+   "expect": false,
+   "choice": "K",
+   "basis": "Request is a modded steel greatsword with damage, crit, and gold value out of line for Requiem — that is a WEAP record balance job. Entry K explicitly covers weapons: damage, keywords, value, recipe derived from Requiem's comparable at the..."
+  },
+  {
+   "q": 11,
+   "expect": false,
+   "choice": "F",
+   "basis": "Candidates are F (NPC balance patch: fixed level, class, combat style, factions, racial traits) and H (perk assignment to an NPC). The request spans level, class, perks, and toughness — a whole-actor rebalance of a single NPC_ record, not..."
+  },
+  {
+   "q": 12,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is to author a SPID `_DISTR.ini` — a runtime, no-ESP distributor file handing an item to NPCs matching a filter (bandit chiefs). The only plausible candidate on the menu is D (placing items/NPCs into Requiem's world), but D is..."
+  },
+  {
+   "q": 13,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is about authoring a KID (Keyword Item Distributor) `_KID.ini` — a runtime, no-ESP distribution of a keyword onto items matching a filter (iron weapons) across the whole load order. Every menu entry describes a Requiem..."
+  },
+  {
+   "q": 14,
+   "expect": false,
+   "choice": "K",
+   "basis": "Candidates are K (weapon patching), D (world placement/distribution), and J (Papyrus layer). The deliverable object is a unique blade — a WEAP record whose damage, keywords, value, and recipe must be derived from Requiem's comparable at..."
+  },
+  {
+   "q": 15,
+   "expect": false,
+   "choice": "G",
+   "basis": "The request targets vendor gold and barter rates — merchant/faction economy tuning, not a record class any domain entry owns. D is the closest domain candidate (containers, leveled lists) but covers item placement/distribution, not..."
+  },
+  {
+   "q": 16,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is about installing a mod and resolving record conflicts between it and other loot mods — a generic load-order/conflict-resolution task with no mention of Requiem. Every menu entry is scoped to deriving Requiem-balanced values..."
+  },
+  {
+   "q": 17,
+   "expect": false,
+   "choice": "E",
+   "basis": "Candidates are K (weapons — the object is a modded sword) and E (spells/magic effects/enchantments — the thing being retuned is an enchantment's magnitude). The request explicitly targets the fire enchantment's magnitude, not the sword's..."
+  },
+  {
+   "q": 18,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is a gameplay/strategy question — where to find good loot early in a Requiem playthrough — not a request to author or patch any record. The only entry that even mentions dungeons and loot is D, but it covers writing modded..."
+  }
+ ]
+}

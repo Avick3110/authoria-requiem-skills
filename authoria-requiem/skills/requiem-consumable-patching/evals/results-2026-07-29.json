@@ -1,0 +1,146 @@
+{
+ "skill": "requiem-consumable-patching",
+ "date": "2026-07-29",
+ "driver": "issue #43 (description compression to the amended §3.5 listing-budget target)",
+ "method": "HOUSECARL_SKILL_AUTHORING §6.5 fan-out, menu variant per houseCARL PR #295: one fresh-context judge per eval query (Opus, HIGH reasoning effort, no tools), each shown ONLY its single query plus the full lettered menu of all 11 NEW descriptions (anonymized, under-test skill unflagged) plus NONE, forced single pick, reasoning before verdict; one Opus adjudicator per skill scored recall/specificity from the judges' reasoning per §6.5 step 4. Judge model deliberately upgraded from PR #295's sonnet-low (maintainer decision). Contamination guard: the live install was moved aside for the fan-out window so fresh judges carried no stale skill listing. Gates: recall >= 80%, specificity >= 50%.",
+ "description_measured": "Patch consumables for Requiem via houseCARL — potions, poisons, oils, food, drink, mead, skooma, and ingredients (ALCH + INGR), with effects, value, flags, and cookpot recipe derived from Requiem's comparables in Alchemy Redone / Food and Beverages Redone. The override IS the final balance — the Reqtificator never rebalances consumables — so load before any ALCH or INGR write.",
+ "description_chars": 379,
+ "scores": {
+  "recall": "10/10",
+  "specificity": "9/10",
+  "recall_pass": true,
+  "spec_pass": true
+ },
+ "adjudicator_notes": "No reasoning-vs-token discrepancies. All 20 judges' reasoning matched their choice token — each explicitly weighed C against the named alternative and the stated conclusion agreed with the emitted entry, so no overrides were applied. Note the near-misses that resolved correctly: q14/q15/q18 all named C as the sole lexical candidate (potions, food, soup) and rejected it on mechanism/deliverable grounds (SkyPatcher INI, KID ini, OAR config), and q6 correctly held a plugin-wide \"everything in KvSweets.esp\" phrasing at C rather than escalating to G because the content was single-domain.",
+ "failures": [
+  {
+   "q": 12,
+   "kind": "specificity-hit",
+   "gist": "Judge read the alchemy-effect MGEF as belonging to C's owned 'effects' surface (Alchemy Redone magnitudes/durations, Reqtificator never rebalances consumables) and rejected E because no spell/tome/magicka-cost lever applies — so C fired on a pure MGEF request."
+  }
+ ],
+ "per_query": [
+  {
+   "q": 1,
+   "expect": true,
+   "choice": "C",
+   "basis": "The record in question is a healing potion — an ALCH record — that needs rebalancing for Requiem. Candidates: C (consumables: potions, effects, value, flags via Requiem's Alchemy Redone comparables), E (magic/MGEF-SPEL-ENCH — the potion's..."
+  },
+  {
+   "q": 2,
+   "expect": true,
+   "choice": "C",
+   "basis": "The request targets food items — an ALCH/consumable domain — and asks for integration with Requiem's food/drink handling. Entry C explicitly owns potions, poisons, food, drink, mead, and ingredients (ALCH + INGR), deriving effects, value,..."
+  },
+  {
+   "q": 3,
+   "expect": true,
+   "choice": "C",
+   "basis": "The request is about a custom mead — a drinkable consumable (ALCH record) — and asks what effects and value it should have in Requiem. Entry C explicitly names mead, drink, food, and potions, and covers exactly the two things asked about:..."
+  },
+  {
+   "q": 4,
+   "expect": true,
+   "choice": "C",
+   "basis": "The request targets a single record type: a modded skooma variant — skooma is an ALCH consumable, and the complaints (vanilla-like price, no drawbacks/negative effects) are exactly value + effects balance. Entry C names skooma explicitly..."
+  },
+  {
+   "q": 5,
+   "expect": true,
+   "choice": "C",
+   "basis": "Request is a single new INGR record (an ingredient) needing its four alchemy effects set to Requiem's expectations. Entry C explicitly names ingredients (ALCH + INGR) with effects derived from Requiem's Alchemy Redone comparables, and..."
+  },
+  {
+   "q": 6,
+   "expect": true,
+   "choice": "C",
+   "basis": "Two candidates: G (whole-mod planner, triggered by \"everything in <plugin>\") and C (consumables). The phrasing \"go through everything in KvSweets.esp\" reads like a whole-mod job, but the content is stated and single-domain — sweets are..."
+  },
+  {
+   "q": 7,
+   "expect": true,
+   "choice": "C",
+   "basis": "A stew is food — an ALCH record — and the ask is specifically for a cooking-pot (cookpot) recipe balanced to Requiem. Entry C is the only one covering ALCH/INGR consumables (food, drink, potions) and it names the cookpot recipe explicitly,..."
+  },
+  {
+   "q": 8,
+   "expect": true,
+   "choice": "C",
+   "basis": "The request concerns poisons from a hunter mod — poisons are ALCH records, whose in-game effects are magnitude/duration on attached effect entries plus a gold value. Candidate entries are C (consumables: potions, poisons, oils, food,..."
+  },
+  {
+   "q": 9,
+   "expect": true,
+   "choice": "C",
+   "basis": "The item is a cheese wheel — a food record (ALCH), and the complaint is about its restore-health effect being instant rather than Requiem-appropriate. Candidates are C (consumables: food/drink, effects, value, flags, cookpot recipe,..."
+  },
+  {
+   "q": 10,
+   "expect": true,
+   "choice": "C",
+   "basis": "Request is about a custom wine — a drinkable item, i.e. an ALCH record — needing Requiem keywords and the inebriation/drunk debuff effect. Entry C explicitly covers potions, food, drink, and mead (ALCH + INGR) with effects, value, flags,..."
+  },
+  {
+   "q": 11,
+   "expect": false,
+   "choice": "K",
+   "basis": "The request targets a single item — a modded steel greatsword — and asks for damage to fit Requiem's tiers. A greatsword is a WEAP record. K explicitly covers weapon records (sword, bow, dagger, staff) with damage, keywords, value, and..."
+  },
+  {
+   "q": 12,
+   "expect": false,
+   "choice": "C",
+   "basis": "Two entries compete: E claims MGEF/SPEL/ENCH records generally, and C claims consumables (ALCH + INGR) including their *effects*, derived from Requiem's Alchemy Redone comparables. The request is explicitly an *alchemy* effect — a magic..."
+  },
+  {
+   "q": 13,
+   "expect": false,
+   "choice": "D",
+   "basis": "Candidates are C (consumables — potions are ALCH records) and D (world placement/distribution). The user's complaint is not about balance, effects, value, or recipes — it's that the items never appear in dungeon loot or vendor inventories,..."
+  },
+  {
+   "q": 14,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request asks for a SkyPatcher runtime INI — a no-ESP, filter-and-set text patch — targeting vanilla potions' gold value, with no mention of Requiem. The only near-miss candidate is C (consumables/ALCH), since potions and value are its..."
+  },
+  {
+   "q": 15,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "Every menu entry is a Requiem balance-patching capability that derives values by live-analogy against Requiem's records and emits an ESP override. The only lexical candidate is C (consumables — explicitly covers food), but the request has..."
+  },
+  {
+   "q": 16,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is gameplay advice — which potions to carry on a legendary-difficulty playthrough — not a data-layer patching job. The only entry that touches potions is C, but it is scoped to patching ALCH/INGR records via houseCARL so modded..."
+  },
+  {
+   "q": 17,
+   "expect": false,
+   "choice": "F",
+   "basis": "The request is a single NPC_ record from a follower mod needing two things: Requiem perks and factions. Candidates are F (NPC patching — explicitly names factions, follower integration, class, level, combat style), H (perk assignment to an..."
+  },
+  {
+   "q": 18,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is about an Open Animation Replacer config — a runtime animation-condition/asset issue where an eating animation visually clips through a bowl mesh. Every menu entry patches Requiem game *records* (AMMO, ARMO, ALCH/INGR,..."
+  },
+  {
+   "q": 19,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is authoring new content — an ACTI (activator) record plus its trigger and a restore-stamina effect — and placing it inside a player-home cell. No menu entry owns ACTI records or static in-cell placement. D is the closest..."
+  },
+  {
+   "q": 20,
+   "expect": false,
+   "choice": "J",
+   "basis": "Two candidates: C (consumables — the record is an ALCH potion) and J (the Papyrus layer). The user's stated failure is not balance, value, effects, or a cookpot recipe — it's a broken script property on a scripted item, i.e. the..."
+  }
+ ],
+ "carry_forward": "9/10 specificity: q12 (a pure alchemy-effect MGEF retune) fired here instead of magic - the judge read alchemy-effect magnitudes as this skill's owned surface, which matches doctrine (Alchemy Redone comparables; the Reqtificator never rebalances consumables). Defensible; no change made.",
+ "supersedes": "results-2026-07-15.json - that archive measured the previous, longer description text (pre-#43) and is retained as ARCHIVE; this file is the current measurement."
+}

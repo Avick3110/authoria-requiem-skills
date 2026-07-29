@@ -1,0 +1,126 @@
+{
+ "skill": "requiem-armor-patching",
+ "date": "2026-07-29",
+ "driver": "issue #43 (description compression to the amended §3.5 listing-budget target)",
+ "method": "HOUSECARL_SKILL_AUTHORING §6.5 fan-out, menu variant per houseCARL PR #295: one fresh-context judge per eval query (Opus, HIGH reasoning effort, no tools), each shown ONLY its single query plus the full lettered menu of all 11 NEW descriptions (anonymized, under-test skill unflagged) plus NONE, forced single pick, reasoning before verdict; one Opus adjudicator per skill scored recall/specificity from the judges' reasoning per §6.5 step 4. Judge model deliberately upgraded from PR #295's sonnet-low (maintainer decision). Contamination guard: the live install was moved aside for the fan-out window so fresh judges carried no stale skill listing. Gates: recall >= 80%, specificity >= 50%.",
+ "description_measured": "Patch armor for Requiem via houseCARL — armor rating, set/part keywords, value, and tempering recipe derived from Requiem's comparable piece (part + material + light/heavy), emitted as an ESP override. Use for any ARMO record: a modded cuirass, shield, helmet, or whole set that doesn't fit Requiem's tiers. Load before the ARMO write, not after the Reqtificator caps it wrong.",
+ "description_chars": 377,
+ "scores": {
+  "recall": "9/9",
+  "specificity": "9/9",
+  "recall_pass": true,
+  "spec_pass": true
+ },
+ "adjudicator_notes": "No reasoning-vs-token discrepancies; every judge's prose matched its verdict token, so no overrides applied. Recall 9/9: q1-q9 all routed to B, each explicitly identifying an ARMO record and citing B's part+material+light/heavy derivation, with G (whole-mod router) correctly rejected as over-scoped for single-record asks. Specificity 9/9: no misfires to B. Near-misses handled cleanly — q12 (fortify heavy armor ENCH/MGEF) went to E on the \"B owns the ARMO record, not effect magnitude\" distinction; q13/q14 (mesh weighting, beast-race ARMA coverage) went NONE on record-data-vs-asset grounds; q16 (SkyPatcher INI) and q17 (MO2 install/load order) went NONE on wrong-output-artifact and wrong-domain grounds; q18 (gameplay build advice) went NONE despite the \"heavy armor\" lexical lure. Description's scoping language (\"modded ARMO that doesn't fit Requiem's tiers\", emit ESP override) is doing the specificity work — judges cited it verbatim in four of the five NONE rows.",
+ "failures": [],
+ "per_query": [
+  {
+   "q": 1,
+   "expect": true,
+   "choice": "B",
+   "basis": "The request is about a single modded ARMO record — a steel cuirass with an out-of-tier armor rating — that needs to be brought in line with Requiem's armor tiers. Entry B is explicitly the armor domain: armor rating, set/part keywords,..."
+  },
+  {
+   "q": 2,
+   "expect": true,
+   "choice": "B",
+   "basis": "The request targets a single item — a glass shield — not a whole mod. Shields are ARMO records, so the armor entry (B) is the direct match; it explicitly names shields and covers armor rating, keywords, value, and tempering recipe derived..."
+  },
+  {
+   "q": 3,
+   "expect": true,
+   "choice": "B",
+   "basis": "The record in question is a pair of gauntlets — an ARMO record — and the asked-for fixes are armor rating and keywords, plus fitting Requiem's tiers. B is the armor entry: it names armor rating, set/part keywords, value, and tempering..."
+  },
+  {
+   "q": 4,
+   "expect": true,
+   "choice": "B",
+   "basis": "Request is a single ARMO record — a custom ebony helmet — needing an armor rating, a forge/crafting recipe with the correct perk gate, and Requiem-appropriate tiering. B is the armor entry: it explicitly covers armor rating, set/part..."
+  },
+  {
+   "q": 5,
+   "expect": true,
+   "choice": "B",
+   "basis": "The request concerns a cuirass — an ARMO record — and asks which keywords it needs for correct Requiem/Reqtificator handling of ranged (armor-piercing/projectile) resistance and tempering recipe. Candidates: B (armor: armor rating,..."
+  },
+  {
+   "q": 6,
+   "expect": true,
+   "choice": "B",
+   "basis": "The request names a specific record class — a light leather armor set — and asks for it to be balanced for Requiem. Candidates are B (armor patching: rating, keywords, value, tempering recipe derived from Requiem's comparable piece by part..."
+  },
+  {
+   "q": 7,
+   "expect": true,
+   "choice": "B",
+   "basis": "\"Heavy gauntlets\" is an ARMO record — a body-part armor piece at a material/weight tier. Candidates: B (armor patching, explicitly covering parts, keywords, and tempering recipes derived from Requiem's comparable piece by part + material +..."
+  },
+  {
+   "q": 8,
+   "expect": true,
+   "choice": "B",
+   "basis": "The request concerns two specific wearable pieces (boots, helmet) at a material tier (orcish), needing armor rating alignment to Requiem's heavy tier plus tempering recipes. Entry B is the only one covering ARMO records — it explicitly..."
+  },
+  {
+   "q": 9,
+   "expect": true,
+   "choice": "B",
+   "basis": "The record in question is a cuirass — an ARMO record — with off-tier armor rating and value that the user wants normalized to Requiem's balance. Entry B is the only one covering ARMO: armor rating, set/part keywords, value, and tempering..."
+  },
+  {
+   "q": 10,
+   "expect": false,
+   "choice": "K",
+   "basis": "The request targets a single modded weapon record (a steel longsword) and specifically its damage balance under Requiem. Candidates: K (weapon patching — damage, keywords, value, recipe derived from Requiem's comparable at the same..."
+  },
+  {
+   "q": 11,
+   "expect": false,
+   "choice": "A",
+   "basis": "The request concerns modded steel arrows doing too much damage — arrows are AMMO records, not WEAP. Candidates are A (ammo: arrows/bolts, damage, material keywords, recipe) and K (weapons: sword, bow, dagger, staff — WEAP records). K..."
+  },
+  {
+   "q": 12,
+   "expect": false,
+   "choice": "E",
+   "basis": "The request is to author a new enchantment effect (ENCH/MGEF) and tune its magnitude for Requiem. Candidates are E (spells, magic effects, enchantments — magnitude, cost, tier) and B (armor patching), since \"fortify heavy armor\" names an..."
+  },
+  {
+   "q": 13,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is about a NIF mesh problem — skin weighting causing clipping at the shoulders — which is a 3D asset/geometry issue, not a record-data balance issue. B is the only superficially close entry because it mentions a modded cuirass,..."
+  },
+  {
+   "q": 14,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is about an armor not rendering on Argonians/Khajiit — a mesh/ARMA coverage problem (armor addon race list, beast-race meshes/tails), not a balance issue. B is the only armor entry, but it is scoped strictly to Requiem balance..."
+  },
+  {
+   "q": 15,
+   "expect": false,
+   "choice": "F",
+   "basis": "The request targets a single NPC_ record (a follower) needing combat stats, perks, and outfit. Candidates: F (NPC patching — fixed level, class, combat style, factions, explicitly \"a follower to integrate\"), H (perk assignment to an NPC),..."
+  },
+  {
+   "q": 16,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is to author a SkyPatcher INI — a runtime, no-ESP record-edit config — that sets armor rating on iron armor. The only near-candidate is B (armor patching), but every entry in this menu is explicitly Requiem-specific: it derives..."
+  },
+  {
+   "q": 17,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is about mod-manager mechanics — installing an archive in Mod Organizer 2 and positioning it after Requiem in the load order — not about deriving or writing any record data. B (armor patching) is the surface-level lure because..."
+  },
+  {
+   "q": 18,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is in-game gameplay advice — which existing heavy armor set to equip for dragon fights in a Requiem playthrough. Every menu entry describes a data-layer patching workflow via houseCARL: deriving stats and emitting ESP overrides..."
+  }
+ ]
+}

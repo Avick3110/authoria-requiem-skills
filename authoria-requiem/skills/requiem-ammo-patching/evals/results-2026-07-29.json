@@ -1,0 +1,126 @@
+{
+ "skill": "requiem-ammo-patching",
+ "date": "2026-07-29",
+ "driver": "issue #43 (description compression to the amended §3.5 listing-budget target)",
+ "method": "HOUSECARL_SKILL_AUTHORING §6.5 fan-out, menu variant per houseCARL PR #295: one fresh-context judge per eval query (Opus, HIGH reasoning effort, no tools), each shown ONLY its single query plus the full lettered menu of all 11 NEW descriptions (anonymized, under-test skill unflagged) plus NONE, forced single pick, reasoning before verdict; one Opus adjudicator per skill scored recall/specificity from the judges' reasoning per §6.5 step 4. Judge model deliberately upgraded from PR #295's sonnet-low (maintainer decision). Contamination guard: the live install was moved aside for the fan-out window so fresh judges carried no stale skill listing. Gates: recall >= 80%, specificity >= 50%.",
+ "description_measured": "Patch arrows and crossbow bolts for Requiem via houseCARL — damage, material and armor-piercing keywords, projectile link, and forge recipe derived from Requiem's comparable ammo, emitted as an ESP override. Use for any AMMO record: modded arrows or bolts that are overpowered, weightless, overpriced, or uncraftable in Requiem. Load before the AMMO write.",
+ "description_chars": 356,
+ "scores": {
+  "recall": "9/9",
+  "specificity": "9/9",
+  "recall_pass": true,
+  "spec_pass": true
+ },
+ "adjudicator_notes": "No reasoning-vs-token discrepancies. All 18 judges' reasoning matched their emitted choice, so no §6.5 step-4 overrides applied. Recall rows q1-q9 all routed to A with explicit AMMO-vs-WEAP discrimination (K named as the near-miss in 8 of 9 and correctly rejected). Specificity rows q10-q18 all routed away from A: q10/q11/q18 to K (crossbow, throwing knife, bow = WEAP), q12 to E (magnitude is an MGEF concept), q14 to B (ARMO), and q13/q15/q16/q17 to NONE (NIF mesh, texture repack, SkyPatcher INI, in-game gameplay question) — each explicitly considered A on lexical \"arrow\" pull and rejected it on scope. Clean 18/18; description's AMMO carve-out from WEAP is doing the discriminating work.",
+ "failures": [],
+ "per_query": [
+  {
+   "q": 1,
+   "expect": true,
+   "choice": "A",
+   "basis": "The request concerns modded arrows (\"dragon arrows\") whose damage is far below Requiem's arrows — an AMMO record balance job. Entry A explicitly covers arrows and bolts, damage, material keywords, and forge recipes derived from Requiem's..."
+  },
+  {
+   "q": 2,
+   "expect": true,
+   "choice": "A",
+   "basis": "Crossbow bolts are AMMO records. Entry A explicitly names arrows and crossbow bolts, AMMO records, and covers damage/material keywords/projectile/recipe — an exact match. Entry K covers weapons (WEAP: swords, bows, daggers, staves) but..."
+  },
+  {
+   "q": 3,
+   "expect": true,
+   "choice": "A",
+   "basis": "Request concerns \"glass arrows\" — an AMMO record — needing damage, value, and keywords aligned to Requiem's tiers. Entry A is explicitly scoped to AMMO records (arrows and bolts) and names damage, material/armor-piercing keywords, value,..."
+  },
+  {
+   "q": 4,
+   "expect": true,
+   "choice": "A",
+   "basis": "Request is about arrows — an AMMO record — needing forge craftability, a crafting perk gate, and Requiem-appropriate damage. A explicitly owns AMMO: damage, material/armor-piercing keywords, projectile link, and the forge recipe derived..."
+  },
+  {
+   "q": 5,
+   "expect": true,
+   "choice": "A",
+   "basis": "The request asks which keywords a daedric arrow needs in Requiem for correct armor penetration and weight class. A daedric arrow is an AMMO record, not a WEAP record, so K (weapons) is a near-miss rather than the owner. Entry A explicitly..."
+  },
+  {
+   "q": 6,
+   "expect": true,
+   "choice": "A",
+   "basis": "The request is about balancing arrows — orcish and elven — for a Requiem playthrough. Arrows are AMMO records, and entry A explicitly owns AMMO: damage, material and armor-piercing keywords, projectile link, and forge recipe. K (weapons)..."
+  },
+  {
+   "q": 7,
+   "expect": true,
+   "choice": "A",
+   "basis": "The records in question are arrows — AMMO records — with off-spec weight and gold value for Requiem. Entry A is the only one scoped to AMMO, and it explicitly names modded arrows/bolts that are weightless or overpriced. K (weapons/WEAP) is..."
+  },
+  {
+   "q": 8,
+   "expect": true,
+   "choice": "A",
+   "basis": "The record in question is AMMO — modded fire arrows. Two symptoms: excessive projectile speed (\"supersonic\") and fire damage folded into the base arrow damage rather than handled Requiem's way. Entry A is the only one scoped to AMMO..."
+  },
+  {
+   "q": 9,
+   "expect": true,
+   "choice": "A",
+   "basis": "Bolts are AMMO records, and the ask is a new tier of stalhrim bolts balanced to Requiem plus a craftable forge recipe. Entry A is explicitly the ammo domain — arrows and crossbow bolts, with damage, material/armor-piercing keywords,..."
+  },
+  {
+   "q": 10,
+   "expect": false,
+   "choice": "K",
+   "basis": "Candidates: K (weapons), A (ammo), G (whole-mod plan). A crossbow is a WEAP record, not AMMO — A covers only arrows/bolts, the projectiles the crossbow fires, not the crossbow itself. G is for enumerating and routing every record in a..."
+  },
+  {
+   "q": 11,
+   "expect": false,
+   "choice": "K",
+   "basis": "Candidates are K (weapons) and A (ammo), since throwing knives can be implemented either as a WEAP or as thrown AMMO. A's scope is stated as arrows and crossbow bolts — projectile ammo fired from a bow or crossbow — and nothing in the..."
+  },
+  {
+   "q": 12,
+   "expect": false,
+   "choice": "E",
+   "basis": "Two entries are plausible: A (ammo — because the carrier is poison arrows) and E (spells/magic effects/enchantments — because the thing being designed and tuned is an effect with a magnitude). A's scope is explicitly the AMMO record's own..."
+  },
+  {
+   "q": 13,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is about a 3D mesh (NIF) rendering wrong in first person — an asset/geometry problem, not a record-balance problem. A is the only entry touching arrows, but it covers AMMO record fields (damage, keywords, projectile link,..."
+  },
+  {
+   "q": 14,
+   "expect": false,
+   "choice": "B",
+   "basis": "The request names two specific wearable ARMO pieces (cuirass, gauntlets) from a modded set and asks that they fit Requiem's armor tiers. Candidates: B (armor rating, set/part keywords, value, tempering recipe derived from Requiem's..."
+  },
+  {
+   "q": 15,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The only lexical pull is A (arrows/bolts), but A covers patching AMMO *records* for Requiem balance — damage, keywords, projectile link, forge recipe. This request touches no records at all: it's a texture-only mod (diffuse map) that needs..."
+  },
+  {
+   "q": 16,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request asks for a SkyPatcher INI — a runtime, no-ESP record patch — with no mention of Requiem, live-analogy derivation, or an ESP override. Entry A is the only near-candidate because it covers arrows/AMMO, but it is scoped to Requiem..."
+  },
+  {
+   "q": 17,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is a gameplay/how-to-play question — which crafting station and which perk the player needs to fletch arrows in Requiem in-game. It asks for no record change, no mod, no ESP override. The only surface-level candidate is A..."
+  },
+  {
+   "q": 18,
+   "expect": false,
+   "choice": "K",
+   "basis": "The record being fixed is a bow — a WEAP record — and the user explicitly asks for weapon flags. Candidates: K (weapons), A (ammo/arrows), F (NPC/follower). A is wrong because the arrows themselves aren't the broken record; the bow is. F..."
+  }
+ ]
+}

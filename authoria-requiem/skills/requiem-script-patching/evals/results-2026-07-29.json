@@ -1,0 +1,138 @@
+{
+ "skill": "requiem-script-patching",
+ "date": "2026-07-29",
+ "driver": "issue #43 (description compression to the amended §3.5 listing-budget target)",
+ "method": "HOUSECARL_SKILL_AUTHORING §6.5 fan-out, menu variant per houseCARL PR #295: one fresh-context judge per eval query (Opus, HIGH reasoning effort, no tools), each shown ONLY its single query plus the full lettered menu of all 11 NEW descriptions (anonymized, under-test skill unflagged) plus NONE, forced single pick, reasoning before verdict; one Opus adjudicator per skill scored recall/specificity from the judges' reasoning per §6.5 step 4. Judge model deliberately upgraded from PR #295's sonnet-low (maintainer decision). Contamination guard: the live install was moved aside for the fan-out window so fresh judges carried no stale skill listing. Gates: recall >= 80%, specificity >= 50%.",
+ "description_measured": "Patch the Papyrus layer of a mod for Requiem via houseCARL — decide whether content needs a script at all, attach Requiem's existing Nox_*/REQ_* runtime through VirtualMachineAdapter properties, register a modded follower into Requiem's follower system, or compile a new .psc only when truly required. Use when a spell's special mechanic does nothing in game. Load before wiring any script.",
+ "description_chars": 390,
+ "scores": {
+  "recall": "10/10",
+  "specificity": "10/10",
+  "recall_pass": true,
+  "spec_pass": true
+ },
+ "adjudicator_notes": "No reasoning-vs-token discrepancies; every judge's reasoning matched its verdict token, so no overrides. Recall (q1-q10): all ten reasoned explicitly to J, consistently distinguishing the runtime/script-wiring layer from E (magic balance) and F (NPC balance) — the E/J and F/J boundaries are the load-bearing ones and both held. Specificity (q11-q20): zero misfires to J. Three near-misses were correctly declined — q15 (cloak-script stack dumps) and q16 (SKSE Papyrus signature lookup) both named J as the only Papyrus-adjacent entry but rejected it as Requiem-integration-scoped rather than script-performance/reference, and q19 (SkyPatcher INI) rejected the whole ESP-override menu on artifact-format grounds. J's description is drawing the right line on both axes.",
+ "failures": [],
+ "per_query": [
+  {
+   "q": 1,
+   "expect": true,
+   "choice": "J",
+   "basis": "Candidates are E (spells/MGEF/ENCH balance patching) and J (Papyrus/runtime layer). The user has already done the E-shaped work — magicka cost patched for Requiem's economy — and E's scope is explicitly balance fields: school, tier, cost,..."
+  },
+  {
+   "q": 2,
+   "expect": true,
+   "choice": "J",
+   "basis": "Candidates are E (spells/magic effects for Magic Redone) and J (Papyrus layer). E covers balance-side fields — school, tier, magicka cost, magnitude, classifier perk — but the user's spell isn't mispriced; a damage effect works fine while..."
+  },
+  {
+   "q": 3,
+   "expect": true,
+   "choice": "J",
+   "basis": "The ask is mechanism, not balance: a vanilla BOOK record has a single Teaches field, so \"one tome, three spells\" is only achievable the way Requiem does it — by attaching Requiem's own tome script through the record's VirtualMachineAdapter..."
+  },
+  {
+   "q": 4,
+   "expect": true,
+   "choice": "J",
+   "basis": "Two candidates: F (NPC_ patching — factions, level, class, \"a follower to integrate\") and J (Papyrus layer — explicitly lists \"register a modded follower into Requiem's follower system\"). The user has already handled the faction side, and..."
+  },
+  {
+   "q": 5,
+   "expect": true,
+   "choice": "J",
+   "basis": "Two candidates: E owns spell/MGEF/SPEL balance (school, tier, cost, magnitude) and J owns the Papyrus layer. The user's actual question is a script-necessity decision — \"does this need a Papyrus script, or does it work without one?\" —..."
+  },
+  {
+   "q": 6,
+   "expect": true,
+   "choice": "J",
+   "basis": "The request is about attaching a named Requiem runtime script (Nox_Conjuration_Teleport) to a magic effect and filling its script properties — a script-wiring task, not a balance-derivation task. Candidates are E (magic records) and J..."
+  },
+  {
+   "q": 7,
+   "expect": true,
+   "choice": "J",
+   "basis": "The request is about a Papyrus source script (.psc), compiling it to .pex, and attaching it to a record for a Requiem patch. Only one menu entry addresses the script layer at all: J, which covers deciding whether a script is needed,..."
+  },
+  {
+   "q": 8,
+   "expect": true,
+   "choice": "J",
+   "basis": "Candidates are F (NPC patching, \"a follower to integrate\") and J (Papyrus layer). The user's problem isn't balance fields — level, class, combat style, factions — it's that Requiem's follower *system* doesn't recognize the actor, and the..."
+  },
+  {
+   "q": 9,
+   "expect": true,
+   "choice": "J",
+   "basis": "Two candidates: E (spells/magic effects — school, tier, cost, magnitude, tier-classifier perk) and J (the Papyrus/runtime layer — attaching Requiem's existing Nox_*/REQ_* runtime via VirtualMachineAdapter properties, \"use when a spell's..."
+  },
+  {
+   "q": 10,
+   "expect": true,
+   "choice": "J",
+   "basis": "Candidates are E (spells/magic effects for Magic Redone) and J (Papyrus layer). The user isn't asking about school, tier, magicka cost, or tome value — the balance surface E owns. They're asking which Requiem script backs the weather menu..."
+  },
+  {
+   "q": 11,
+   "expect": false,
+   "choice": "K",
+   "basis": "The request concerns a single modded greatsword — a WEAP record — needing damage and value balanced against Requiem's material tiers. Entry K explicitly covers weapon damage, keywords, value, and recipe derived from Requiem's comparable at..."
+  },
+  {
+   "q": 12,
+   "expect": false,
+   "choice": "E",
+   "basis": "The request concerns a SPEL record — magicka cost and magnitude for a destruction spell, matched to a Requiem tier. Candidates are E (spells/magic effects/enchantments, explicitly listing school, tier, magicka cost, magnitude) and,..."
+  },
+  {
+   "q": 13,
+   "expect": false,
+   "choice": "F",
+   "basis": "Request is about an NPC_ record (a follower) being underpowered in Requiem, asking for class, level, and perks. Candidates: F (NPC/follower patching — fixed level, class, combat style, factions, racial traits) and H (perk assignment to an..."
+  },
+  {
+   "q": 14,
+   "expect": false,
+   "choice": "E",
+   "basis": "Candidates are E and K, since a staff is a WEAP record but functionally a magic item. K covers weapons generically and names \"staff\" only as an example of something that \"hits too hard or too soft\" — i.e. damage/material-tier/recipe..."
+  },
+  {
+   "q": 15,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is a pure Papyrus performance question — cloak-script stack dumps, script lag, and optimization — with no mention of Requiem or of patching any record. The only Papyrus-adjacent entry is J, but it covers the Requiem..."
+  },
+  {
+   "q": 16,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is a pure API-reference lookup: the return value and parameter list of an SKSE Papyrus function. The only vaguely adjacent entry is J, but that one is about wiring Requiem's existing Nox_*/REQ_* runtime into a mod's records and..."
+  },
+  {
+   "q": 17,
+   "expect": false,
+   "choice": "D",
+   "basis": "Candidates are D (placement/distribution into leveled lists, containers, encounter zones) and K (weapon stat/keyword/recipe patching), with E a distant third because the dagger is \"enchanted.\" But the request isn't about balance — no..."
+  },
+  {
+   "q": 18,
+   "expect": false,
+   "choice": "I",
+   "basis": "The request names a custom race and creature traits, both explicit RACE-record concerns. Candidates are I (race patching: racial stats, skill bonuses, ability spells, creature-trait keywords, and it explicitly notes the Reqtificator skips..."
+  },
+  {
+   "q": 19,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is to author a SkyPatcher INI — a runtime, no-ESP record-edit file — to distribute a keyword across all iron weapons. Every menu entry is a Requiem-balance patching capability that derives values by live-analogy against Requiem..."
+  },
+  {
+   "q": 20,
+   "expect": false,
+   "choice": "B",
+   "basis": "The request names a cuirass (an ARMO record), armor rating, and the heavy-armor tier/cap — squarely an armor-balance problem. Only two entries are plausible candidates: B (armor rating, part/material/light-heavy comparable, tempering..."
+  }
+ ]
+}
