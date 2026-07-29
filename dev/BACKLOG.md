@@ -76,17 +76,14 @@ conversation); prune when done — delete or move under *Done* with the resolvin
   but it means no scripted check can gate these archives. If a validation script ever wants to walk
   them, normalize first. `(2026-07-29, 1.10.0 review, Aaron)`
 
-- **Re-sync `standards/HOUSECARL_SKILL_AUTHORING.md` once the §8-item-4 amendment lands upstream.**
-  The #294 amendment updated items 5/7 for the compressed format but left item 4 demanding a
-  "Use when..." clause with ≥3 trigger nouns — four compressed descriptions (consumable,
-  perk-assignment, router, script) carry no such clause yet score 10/10 recall, so the empirical
-  answer argues for amending item 4 (and §3.2's operational rule) upstream rather than padding
-  descriptions back out. Amendment text drafted in the 1.10.0 handoff — open the PR from a houseCARL
-  session (cross-repo writes are blocked from this repo's sessions); until it merges and re-syncs,
-  the local deviation note in `CLAUDE.md` covers the §8 verdict.
-  `(2026-07-29, 1.10.0 review, Aaron)`
-
 ## Done
+
+- ~~Re-sync `standards/HOUSECARL_SKILL_AUTHORING.md` once the §8-item-4 amendment lands upstream~~ —
+  **done 2026-07-29**: the amendment landed in houseCARL
+  ([#297](https://github.com/Avick3110/houseCARL/issues/297) /
+  [PR #298](https://github.com/Avick3110/houseCARL/pull/298), applied verbatim from the 1.10.0
+  handoff draft); `standards/` re-synced and the interim CLAUDE.md deviation note dropped in the
+  same PR. `(2026-07-29, Aaron)`
 
 - ~~`requiem-perk-assignment` description tweak candidate (PR #6 review + eval Q8 miss)~~ — **done
   2026-07-29** in the 1.10.0 description compression (#43): the rewritten description carries
