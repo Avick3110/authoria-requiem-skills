@@ -1,0 +1,127 @@
+{
+ "skill": "requiem-race-patching",
+ "date": "2026-07-29",
+ "driver": "issue #43 (description compression to the amended §3.5 listing-budget target)",
+ "method": "HOUSECARL_SKILL_AUTHORING §6.5 fan-out, menu variant per houseCARL PR #295: one fresh-context judge per eval query (Opus, HIGH reasoning effort, no tools), each shown ONLY its single query plus the full lettered menu of all 11 NEW descriptions (anonymized, under-test skill unflagged) plus NONE, forced single pick, reasoning before verdict; one Opus adjudicator per skill scored recall/specificity from the judges' reasoning per §6.5 step 4. Judge model deliberately upgraded from PR #295's sonnet-low (maintainer decision). Contamination guard: the live install was moved aside for the fan-out window so fresh judges carried no stale skill listing. Gates: recall >= 80%, specificity >= 50%.",
+ "description_measured": "Patch a playable or creature race for Requiem via houseCARL — racial stats, skill bonuses, ability spells, and creature-trait keywords derived from Requiem's comparable race, emitted as an ESP override. Use for any RACE record: a follower race, or a modded creature taking the wrong damage or missing Requiem traits. Load before the RACE write — the Reqtificator skips races it can't classify.",
+ "description_chars": 393,
+ "scores": {
+  "recall": "9/9",
+  "specificity": "9/9",
+  "recall_pass": true,
+  "spec_pass": true
+ },
+ "adjudicator_notes": "No reasoning-vs-token discrepancies; no overrides applied. All nine expect=true rows (q1-q9) reason explicitly to I, naming RACE-record ownership and rejecting F (NPC_ actor), G (whole-mod plan), and E (spells) as near-misses; tokens match. All nine expect=false rows route elsewhere: q10 F, q11 D, q13 E, q14 G, q17 B, and q12/q15/q16/q18 NONE. The four NONE rows plus q13/q14 each considered I by name and rejected it on correct grounds (mesh/BodySlide asset work, cosmetic chargen preset, SkyPatcher INI delivery format, player build advice, spell-flavor \"racial\" vs the race record, cross-record lycanthropy needing the router). q14 is the only borderline call - the judge flagged G's \"patch mod X\" framing as a slight stretch but still chose G over I, so it stands as a specificity hit. Clean 9/9 + 9/9.",
+ "failures": [],
+ "per_query": [
+  {
+   "q": 1,
+   "expect": true,
+   "choice": "I",
+   "basis": "Request concerns a custom playable race whose starting attributes (health/magicka/stamina) and skill bonuses are misbalanced for Requiem — that is squarely a RACE record patch. Candidates: I (race stats, skill bonuses, ability spells,..."
+  },
+  {
+   "q": 2,
+   "expect": true,
+   "choice": "I",
+   "basis": "Two candidates overlap: F (whole-actor NPC_ patching, which mentions creature actors missing Requiem traits due to an unrecognized race) and I (RACE patching). The symptoms named are purely racial-layer ones — damage taken and natural..."
+  },
+  {
+   "q": 3,
+   "expect": true,
+   "choice": "I",
+   "basis": "Request names a single record type explicitly — the Wendigo RACE — and asks that it inherit Requiem creature behavior derived from a comparable (troll). I covers exactly that: creature-race stats, trait keywords, ability spells derived..."
+  },
+  {
+   "q": 4,
+   "expect": true,
+   "choice": "I",
+   "basis": "Request is scoped to one record type: a new playable-ish race added by a follower mod, missing Requiem's racial abilities and resistances. Candidates are I (race patching — racial stats, skill bonuses, ability spells, creature-trait..."
+  },
+  {
+   "q": 5,
+   "expect": true,
+   "choice": "I",
+   "basis": "Request targets a single custom playable race — carry weight and unarmed damage are RACE record stats, and \"heritage powers\" are racial ability spells. Entry I explicitly covers playable/creature RACE records: racial stats, skill bonuses,..."
+  },
+  {
+   "q": 6,
+   "expect": true,
+   "choice": "I",
+   "basis": "Two candidates overlap: F (whole-actor NPC_ patching, which mentions \"a boss dying to one arrow\" and \"creature actors whose unrecognized race leaves them missing Requiem's traits\") and I (RACE patching, \"racial stats, skill bonuses,..."
+  },
+  {
+   "q": 7,
+   "expect": true,
+   "choice": "I",
+   "basis": "The request targets a new playable race (RACE record) needing racial skill bonuses and starting attributes matched to Requiem's Khajiit — an explicit live-analogy comparison against a Requiem race. Entry I is the only one that names RACE..."
+  },
+  {
+   "q": 8,
+   "expect": true,
+   "choice": "I",
+   "basis": "The request is about a RACE-level trait: a modded beast race lacking the in-combat health regeneration that Requiem's trolls have. Candidates are I (race patching), F (NPC patching), and E (spells/magic effects). F is scoped to NPC_..."
+  },
+  {
+   "q": 9,
+   "expect": true,
+   "choice": "I",
+   "basis": "The request centers on a single custom playable race (a vampire-elf) whose racial resistances and inherent ability spells are absent under Requiem. Candidates: I (RACE record patching — racial stats, resistances, ability spells, trait..."
+  },
+  {
+   "q": 10,
+   "expect": false,
+   "choice": "F",
+   "basis": "The request targets a single NPC_ record (a follower) and spans several actor sub-domains: combat stats, perks, factions, outfit. F explicitly covers the whole actor — fixed level, class, combat style, factions, perks — and names \"a..."
+  },
+  {
+   "q": 11,
+   "expect": false,
+   "choice": "D",
+   "basis": "Candidates are D (leveled lists, containers, loot distribution) and F (whole NPC_ actor record). F covers actor combat identity — level, class, combat style, factions, perks, racial traits — none of which is at issue; the creature's stats..."
+  },
+  {
+   "q": 12,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is a mesh/asset problem: NIF vertex weighting, body-armor clipping, and a broken BodySlide preset. The only entry the word \"race\" pulls toward is I, but I patches the RACE *record* — racial stats, skill bonuses, ability spells,..."
+  },
+  {
+   "q": 13,
+   "expect": false,
+   "choice": "E",
+   "basis": "Two candidates: E (spells, magic effects, enchantments — magnitude, cost, tier derived from Requiem's Magic Redone comparables) and I (race records, which explicitly include ability spells). The deliverable here is a new SPEL/MGEF with a..."
+  },
+  {
+   "q": 14,
+   "expect": false,
+   "choice": "G",
+   "basis": "The request spans two record types at once: beast form's unarmed damage lives on the werewolf RACE record (candidate I), while the Beast Form power's duration lives on a SPEL/MGEF (candidate E). Neither single domain entry covers both..."
+  },
+  {
+   "q": 15,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is to build a RaceMenu character appearance preset (a .jslot/head-part cosmetic preset) recreating a past playthrough's Nord. Every menu entry is a Requiem *balance/integration* patcher scoped to a specific record class — AMMO,..."
+  },
+  {
+   "q": 16,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request asks for a SkyPatcher INI — a runtime, no-ESP record patch — with no mention of Requiem. Every menu entry is a Requiem-specific patching capability that derives values by live-analogy against Requiem's records and emits an ESP..."
+  },
+  {
+   "q": 17,
+   "expect": false,
+   "choice": "B",
+   "basis": "The request concerns a single modded steel cuirass whose armor rating is too high for Requiem — an ARMO record rebalance. Candidates are B (armor: armor rating, keywords, value, tempering recipe from Requiem's comparable piece by part +..."
+  },
+  {
+   "q": 18,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is player-facing gameplay advice — which race to choose for a stealth archer character in Requiem — not a data-layer patching task. The only entries touching adjacent nouns are I (RACE records) and G (whole-mod patch planning,..."
+  }
+ ],
+ "fix_loop_reruns": "Re-measured in the NPC fix-loop rounds 2 and 3 against the evolving menu: 9/9 + 9/9 clean every round. Scores above are round 3 (final menu)."
+}

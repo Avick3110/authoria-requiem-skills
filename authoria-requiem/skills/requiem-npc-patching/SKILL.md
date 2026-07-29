@@ -1,6 +1,6 @@
 ---
 name: requiem-npc-patching
-description: Patch an NPC, enemy, follower, or boss for Requiem via houseCARL — fixed level, class, combat style, factions, and racial trait inheritance derived from Requiem's comparable actor, emitted as an ESP override. Use for any NPC_ record: a modded boss dying to one arrow, an enemy spawning too strong or too weak, a follower to integrate. Load before the NPC_ write — set only the balance fields.
+description: Patch an NPC, enemy, follower, or boss for Requiem via houseCARL — the whole actor: fixed level, class, combat style, factions, perks, and racial trait inheritance derived from Requiem's comparable actor into an ESP override. Use for any NPC_ record: a boss dying to one arrow, an enemy too strong or weak, a follower to integrate, creature actors whose unrecognized race leaves them missing Requiem's traits. Load before the NPC_ write.
 ---
 
 # Requiem NPC Patching

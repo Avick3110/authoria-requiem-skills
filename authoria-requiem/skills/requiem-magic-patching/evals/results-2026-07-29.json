@@ -1,0 +1,144 @@
+{
+ "skill": "requiem-magic-patching",
+ "date": "2026-07-29",
+ "driver": "issue #43 (description compression to the amended §3.5 listing-budget target)",
+ "method": "HOUSECARL_SKILL_AUTHORING §6.5 fan-out, menu variant per houseCARL PR #295: one fresh-context judge per eval query (Opus, HIGH reasoning effort, no tools), each shown ONLY its single query plus the full lettered menu of all 11 NEW descriptions (anonymized, under-test skill unflagged) plus NONE, forced single pick, reasoning before verdict; one Opus adjudicator per skill scored recall/specificity from the judges' reasoning per §6.5 step 4. Judge model deliberately upgraded from PR #295's sonnet-low (maintainer decision). Contamination guard: the live install was moved aside for the fan-out window so fresh judges carried no stale skill listing. Gates: recall >= 80%, specificity >= 50%.",
+ "description_measured": "Patch spells, magic effects, enchantments, staves, and scrolls for Requiem's Magic Redone via houseCARL — school, tier, magicka cost, magnitude, and the tier-classifier perk derived from Requiem's comparable magic, emitted as an ESP override. Use for any MGEF, SPEL, or ENCH record whose cost, power, or tome value breaks Requiem's magic economy. Load before the record is touched.",
+ "description_chars": 381,
+ "scores": {
+  "recall": "8/10",
+  "specificity": "9/9",
+  "recall_pass": true,
+  "spec_pass": true
+ },
+ "adjudicator_notes": "No reasoning-vs-token discrepancies; every judge's reasoning ended on the same entry as its choice token, so no §6.5 step-4 overrides were applied. Both recall misses are substantive routing decisions, not token slips: q8 and q10 each explicitly considered E, named E's magic-economy scope, and deliberately routed elsewhere because the underlying record was AMMO / ALCH. Pattern worth noting for description tuning: E's specificity is strong (9/9, including three NONE routes on cosmetic-asset, SkyPatcher-INI, and gameplay-advice queries, plus a clean K/E split on the staff-as-WEAP case at q11), and the recall losses both come from queries where magic-effect language sits on a non-magic record type — E's derivation surface (\"comparable magic\", school/tier/cost/tome value) is reading as a hard record-class fence.",
+ "failures": [
+  {
+   "q": 8,
+   "kind": "recall-miss",
+   "gist": "Judge read the record class as AMMO (\"modded fire arrow\", wrong damage) and said E's comparable basis is magic (school/tier/cost/tome value), not elemental ammo, so A owns arrow damage plus the projectile link and E would derive from the wrong reference class."
+  },
+  {
+   "q": 10,
+   "kind": "recall-miss",
+   "gist": "Judge treated the poison as an ALCH record: magnitude/duration live on the potion's effect entries, so C (Alchemy Redone comparables, override is final balance) beat E, which it scoped to the spell/enchantment economy rather than alchemy consumables."
+  }
+ ],
+ "per_query": [
+  {
+   "q": 1,
+   "expect": true,
+   "choice": "E",
+   "basis": "Candidates are E (spells/magic effects for Magic Redone) and G (whole-mod patch planning). The request names a single concrete record — a fireball spell whose magicka cost (30) and damage (one-shots dragons) break the magic economy — and..."
+  },
+  {
+   "q": 2,
+   "expect": true,
+   "choice": "E",
+   "basis": "The request concerns a SPEL record — a custom Destruction spell whose tier and magicka cost need to fit Requiem's magic economy, currently left on auto-calc. Entry E is the only one covering spells/magic effects, and it names exactly the..."
+  },
+  {
+   "q": 3,
+   "expect": true,
+   "choice": "E",
+   "basis": "Candidates are E (spells/magic effects patched against Requiem's Magic Redone) and G (whole-mod patch planner). The request names a specific record class — spells — and specific magic fields (magicka cost, charge time, school), which is..."
+  },
+  {
+   "q": 4,
+   "expect": true,
+   "choice": "E",
+   "basis": "Two candidates: K (weapon patching — damage, keywords, value, recipe for a WEAP record) and E (spells, magic effects, enchantments, staves, scrolls — cost, magnitude, tier for MGEF/SPEL/ENCH). The item is a sword, but the stated problem is..."
+  },
+  {
+   "q": 5,
+   "expect": true,
+   "choice": "E",
+   "basis": "The item is a ring, so B (armor) is a surface-level candidate, but the stated defect is not armor rating, keywords, value, or tempering — it's the magnitude of a constant-effect enchantment. E explicitly owns ENCH/MGEF records and names..."
+  },
+  {
+   "q": 6,
+   "expect": true,
+   "choice": "E",
+   "basis": "Only two entries mention staves: E (spells, magic effects, enchantments, staves, scrolls — school, tier, magicka cost, magnitude, tier-classifier perk) and K (WEAP records including staves — damage, keywords, value, recipe). The request is..."
+  },
+  {
+   "q": 7,
+   "expect": true,
+   "choice": "E",
+   "basis": "The request is about a spell tome's gold value for a new conjuration spell — a magic-economy question tied to a SPEL record and its book. Candidates: E (spells/magic effects/enchantments/staves/scrolls, explicitly covering tier and \"tome..."
+  },
+  {
+   "q": 8,
+   "expect": true,
+   "choice": "A",
+   "basis": "Candidates are A (AMMO), E (magic/MGEF/SPEL/ENCH), and marginally K (weapons — excluded, an arrow is AMMO not WEAP). The surface phrase \"elemental hit effect\" points at E, but E frames its derivation around Requiem's comparable *magic* —..."
+  },
+  {
+   "q": 9,
+   "expect": true,
+   "choice": "E",
+   "basis": "Request is a single SPEL record from a spell mod, with two symptoms: wrong/absent tier classification against Requiem's magic perk ladder, and a magicka cost that breaks the economy. E is the only entry covering SPEL/MGEF/ENCH with school,..."
+  },
+  {
+   "q": 10,
+   "expect": true,
+   "choice": "C",
+   "basis": "The record in question is a poison from an alchemy mod — an ALCH record. Two candidates: C (consumables: potions, poisons, oils, food, ingredients, with effects and value derived from Alchemy Redone comparables) and E (spells, magic..."
+  },
+  {
+   "q": 11,
+   "expect": false,
+   "choice": "K",
+   "basis": "Two candidates mention staves: E (spells/magic effects/enchantments/staves/scrolls — school, tier, magicka cost, magnitude) and K (WEAP records — damage, keywords, value, recipe, explicitly naming \"a modded sword, bow, dagger, or staff\")...."
+  },
+  {
+   "q": 12,
+   "expect": false,
+   "choice": "D",
+   "basis": "The complaint is purely distributional: the tome records exist but are absent from vendor inventories, and the fix requested is entry into Requiem's merchant leveled lists. E covers the magic domain but scopes to record balance (school,..."
+  },
+  {
+   "q": 13,
+   "expect": false,
+   "choice": "F",
+   "basis": "Candidates are F (NPC_ record patching), H (perk assignment to an NPC), and E (spell/MGEF/ENCH records). E is out: it patches the balance of spell records themselves, not what kit an actor carries. H owns only the Perks list — it takes the..."
+  },
+  {
+   "q": 14,
+   "expect": false,
+   "choice": "J",
+   "basis": "Candidates are E (Magic Redone spells/magic effects) and J (Papyrus layer). The mention of Magic Redone and a bound-sword spell pulls toward E, but E's scope is explicitly balance-derived fields — school, tier, magicka cost, magnitude,..."
+  },
+  {
+   "q": 15,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is purely cosmetic art work — authoring new texture assets and a particle/VFX look for the Flames spell so the fire renders more orange. The only remotely adjacent entry is E (spells, magic effects, enchantments), but its scope..."
+  },
+  {
+   "q": 16,
+   "expect": false,
+   "choice": "K",
+   "basis": "The item is a battleaxe — a WEAP record — with damage and value out of Requiem's range. Candidates: K (weapons: damage, keywords, value, recipe derived from Requiem's comparable at the same material tier) and G (whole-mod patch planning),..."
+  },
+  {
+   "q": 17,
+   "expect": false,
+   "choice": "I",
+   "basis": "Candidates are F (NPC_ patching, mentions \"racial trait inheritance\"), I (RACE patching), and E (magic effects/spells, since a resist effect was nulled). The surface words \"enemy\" and \"I patched it\" pull toward F, but in Skyrim/Requiem an..."
+  },
+  {
+   "q": 18,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The only plausible candidate is E, since it owns spells, magic effects, and magicka cost — but every entry in this menu is a Requiem live-analogy patcher that emits an ESP override derived from Requiem's comparable records, and E is..."
+  },
+  {
+   "q": 19,
+   "expect": false,
+   "choice": "NONE",
+   "basis": "The request is a gameplay/strategy question — which existing Requiem destruction spell is most magicka-efficient for leveling — not a request to modify, balance, or patch any record. E is the only superficially adjacent entry..."
+  }
+ ],
+ "carry_forward": "Passed exactly at the 80% recall gate (8/10). Both misses are record-class fence decisions, arguably correct routings: q8 (modded fire arrow damage) went to AMMO, q10 (poison magnitude on an ALCH record) went to consumables. The compressed description's derivation surface ('comparable magic', school/tier/cost/tome value) reads as a hard record-class fence - by design. Watch on next eval-set refresh."
+}
