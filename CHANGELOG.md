@@ -4,9 +4,11 @@ All notable changes to the Authoria Requiem Patching Skills plugin. Versioning i
 
 ## 1.10.0 — 2026-07-29
 
-Description compression + full §6.5 revalidation (Aaron, 2026-07-29). Closes
-[#43](https://github.com/Avick3110/authoria-requiem-skills/issues/43): the 11 skill descriptions cost
-~8,320 chars (~2,080 est. tokens) of always-resident context — alone consuming Claude Code's ~2,000-token
+Description compression + full §6.5 revalidation (Aaron, 2026-07-29). Addresses
+[#43](https://github.com/Avick3110/authoria-requiem-skills/issues/43) — held open pending the
+post-merge `/doctor` measurement, since the combined listing (houseCARL + this pack + other sources)
+plausibly stays over budget even after this release: the 11 skill descriptions cost
+8,292 chars (~2,073 est. tokens) of always-resident context — alone consuming Claude Code's ~2,000-token
 budget for the *entire* skill listing, causing entry truncation that degrades routing. Mirrors houseCARL
 [PR #295](https://github.com/Avick3110/houseCARL/pull/295) (issue #294), which did the same job there and
 amended the standard upstream. Charter: `dev/plans/2026-07-29-description-compression-43.md`.
@@ -15,7 +17,7 @@ amended the standard upstream. Charter: `dev/plans/2026-07-29-description-compre
   §3.5 soft target is now 200–400 characters, reframed around the listing budget; §3.3's pushy tail is
   a compact clause required only where a genuine early-load hazard exists; §8 items 5/7 updated.
   `HOUSECARL_NAMING.md` and `HOUSECARL_DOC_HYGIENE.md` verified identical upstream.
-- **All 11 descriptions rewritten to the amended §3.5**: 8,320 → 4,266 chars (~1,066 est. tokens; avg
+- **All 11 descriptions rewritten to the amended §3.5**: 8,292 → 4,266 chars (~1,066 est. tokens; avg
   388/skill). Action-first leads and distinctive record-type vocabulary (WEAP, ARMO, AMMO, RACE, NPC_,
   LVLI, MGEF/SPEL/ENCH, ALCH+INGR, PERK) kept; synonym chains, capability inventories, and spelled-out
   load-before codas cut. The standing BACKLOG perk-assignment trigger gap (custom perk clashing with a
