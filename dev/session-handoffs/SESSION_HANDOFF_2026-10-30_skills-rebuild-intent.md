@@ -6,9 +6,9 @@
 
 ## Where we are
 
-- **The control eval is finished and re-mined.** The public summary is PR #48 on branch
-  `claude/control-eval-results`: results, drill summary and per-skill distillation. It is **not
-  merged** and is waiting on Aaron's go.
+- **The control eval is finished and re-mined.** The public summary (results, drill summary,
+  per-skill distillation) is on `main` in `dev/control-eval-2026-10/`. PR #48 was merged on
+  2026-10-30.
 - **The rebuild project has started** under the AI-native SDLC method (Aaron's `new-project`
   skill: intent → recon → spec → plan → build, with Aaron agreeing each stage).
   - **Gate 1 (intent) was agreed on 2026-10-30.** The stage is now **Recon pass 2**.
@@ -22,8 +22,7 @@
 1. `dev/plans/2026-10-30-requiem-skills-rebuild/INDEX.md`
 2. `intent.md` (agreed) and `decisions.md`
 3. `recon.md`: the pass 1 reading order, and the proposed pass 2 targets
-4. `dev/control-eval-2026-10/distillation/DISTILLATION.md`. It is on the PR #48 branch until
-   that merges: read it there, or merge #48 first.
+4. `dev/control-eval-2026-10/distillation/DISTILLATION.md` (on `main`).
 
 ## Next steps
 
@@ -39,8 +38,8 @@
 ## Don't redo / don't be misled
 
 - **The first synthesis's "the router drove most gains" is wrong.** The wins are joint: router
-  coverage + the Reqtificator boundary fact + domain comparable methods. PR #48 now carries the
-  correction.
+  coverage + the Reqtificator boundary fact + domain comparable methods. The merged summary
+  carries the correction.
 - **Five skill facts are false, plus several smaller ones.** The corrected fact sheet is §6 of
   DISTILLATION.md.
 - **Clothing AR 0 is not false to reverse.** ARR's own patch does it; it is a house convention to
