@@ -15,7 +15,7 @@ Yes, but only part of the set is worth keeping, and the set as written costs too
 - **Verdicts:** the skill arm won 5 of 6 tasks and lost 1 (favor-quests).
 - **Quality:** on the tasks it won, the median judge quality was about 66 for the skill arm against about 30 for the control.
 - **Cost:** about 4.2× the money and 2.2× the time (sum of per-task medians).
-- **What drove the wins:** mostly the router's enumerate → triage → route → reconcile procedure, plus a short list of Requiem-specific facts the model doesn't know unaided.
+- **What drove the wins (corrected after re-mining, see [`drill-summary.md`](drill-summary.md)):** joint effects. The router's coverage plan, one corrective fact about where the Reqtificator stops, and a domain skill naming which live comparable to read. Values come from the load order. The first synthesis credited the router alone, which was wrong.
 - **What added nothing:** generic patching craft (weapon/armor ladders, keywords, COBJ, masters, live-winner authority). The control did it just as well.
 - **What caused the skill arm's own wrong calls:** absolute, unscoped rules.
 
@@ -28,7 +28,7 @@ Recommended action per skill:
 | Keep as short fact sheets | ammo, armor, consumable |
 | Fold into npc | perk-assignment |
 
-The full argument is in [`synthesis.md`](synthesis.md).
+The full argument is in [`synthesis.md`](synthesis.md). It was later corrected by three rounds of re-mining ([`drill-summary.md`](drill-summary.md)) and a per-skill distillation of what helped, what hurt and what was unnecessary ([`distillation/DISTILLATION.md`](distillation/DISTILLATION.md)). Where they disagree, the later documents win.
 
 | Task | Source mod | Verdict | Judge median control → skill |
 |---|---|---|---|
@@ -45,6 +45,8 @@ The full argument is in [`synthesis.md`](synthesis.md).
 |---|---|
 | [`synthesis.md`](synthesis.md) | Cross-task answer, per-skill recommendations, the cross-cutting findings with evidence, every skill section labelled helped / noise / harmed / mixed / unused with an action, missing knowledge, costs, caveats |
 | [`tasks/<task>.md`](tasks/) | Per-task analysis: right and wrong per arm (major first), verdict, per-section labels with evidence, missing knowledge, costs |
+| [`drill-summary.md`](drill-summary.md) | The three re-mining rounds and the corrections they made to the first synthesis |
+| [`distillation/`](distillation/DISTILLATION.md) | What helped, what hurt and what was unnecessary, per skill, with rewrite briefs and the corrected fact sheet |
 | [`runs-table.md`](runs-table.md), [`runs.csv`](runs.csv) | One row per run: diff checklist against the handmade patch, judge scores, cost, wall time, houseCARL calls, subagents, skills loaded, stop-to-ask |
 
 The following stay local because they hold machine paths or raw content: transcripts, mining output, the 42 per-run judgements, the field-level diffs and the harness itself. Trace references in the docs (`L1064`, `R3588`, `G29`, `D71`) point into them.

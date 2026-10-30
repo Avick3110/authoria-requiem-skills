@@ -1,5 +1,8 @@
 # authoria-requiem skills — final synthesis
 
+> [!warning] Superseded in part (2026-10-30)
+> Three later re-mining rounds corrected this synthesis. The wins are joint (router coverage, the Reqtificator boundary fact and domain comparable methods), not mostly the router's. The skill-text share of decisions was understated. "More major wrong calls" is unsupported. favor-quests is a tie plus one failed run. Cost is 3.87×. Read [`drill-summary.md`](drill-summary.md) and [`distillation/DISTILLATION.md`](distillation/DISTILLATION.md) first.
+
 Six real patching jobs, each run 3× without the skills (control) and 3× with them (skill), all on Opus 5.5. Sources: the per-task analyses in `tasks/` and the 11 skills as tested (1.10.0, `main` at 74a30e9). Run, judgement-group and trace references (`skill-2 G29`, `L1064`, `R3588`, `D71`) point into the judgements and raw transcripts, which stay local.
 
 > [!abstract] The answer
