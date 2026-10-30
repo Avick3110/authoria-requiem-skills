@@ -1,0 +1,312 @@
+[
+ {
+  "id": "LOCKS-1",
+  "types": [
+   "Container",
+   "Door"
+  ],
+  "convention": "Every overridden CONT/DOOR carries REQ_LockpickControl (Local; dataStorage=AD3B22:Requiem.esp, FollowerControl=82F3AF:Requiem.esp)",
+  "class": "baked",
+  "layer": "baked",
+  "support_rows": 9654,
+  "support_plugins": 104,
+  "spread": "1,996 records / 9,654 script rows; 101/104 plugins at 100%; top LOTD 360, Glenmoril 238, Bruma 203; misses LOTD 23, Miahil Hawk 1; ksws03 6 unreadable",
+  "held_out": "6/6 held-out CONT/DOOR sets at 100% (104 records)",
+  "confidence": "high",
+  "evidence": "CustomLockpicking.cs L19-48; fact 12; ledger 1,996 of 2,026 overridden records; RFTI loads after all Authoria patches in the ARR profile; RFTI output carries the script on 02064F and 0774BF, which the LOTD patch omits",
+  "aaron_call": "Carry it on upstream patches too, or leave to the build?"
+ },
+ {
+  "id": "LOCKS-2",
+  "types": [
+   "Container",
+   "Door"
+  ],
+  "convention": "Keep Requiem's own VMAD (AA000XarrianLockBreakScriptNormal) when overriding a vanilla container",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 5,
+  "support_plugins": 1,
+  "spread": "LOTD 5/5 keep it; Container Merge (outside corpus) 3/4",
+  "held_out": "none",
+  "confidence": "med",
+  "evidence": "Live: 76 Requiem.esp CONT/DOOR carry it (1 property); tree reads 020662/020665/020670/03AC21/05418E: LOTD identical to Requiem",
+  "aaron_call": null
+ },
+ {
+  "id": "LOCKS-3",
+  "types": [
+   "Container"
+  ],
+  "convention": "Add the Xarrian lock-break script to mod-added treasure chests/safes by analogy with Requiem",
+  "class": "house-convention",
+  "layer": "input",
+  "support_rows": 28,
+  "support_plugins": 1,
+  "spread": "Bruma master patch only; 0 Xarrian rows elsewhere",
+  "held_out": "none",
+  "confidence": "med",
+  "evidence": "ledger: 28 VMAD.Scripts added on BSHeartland CYRTreas*/Safe containers",
+  "aaron_call": "Teach it for other mods' treasure chests?"
+ },
+ {
+  "id": "LOCKS-4",
+  "types": [
+   "PlacedObject"
+  ],
+  "convention": "REFR lock level = Requiem.esp's override of that REFR",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 31,
+  "support_plugins": 14,
+  "spread": "29 rows over 14 plugins; 2 exceptions (Vigilant 026E87 deliberate, 087901 suspected bug)",
+  "held_out": "no held-out rows",
+  "confidence": "high",
+  "evidence": "Stage-2 family verifier batch read: 29/29 equal Requiem (016607, 09DA64, 093F97, 0DDC47 ...); build writes no REFR locks",
+  "aaron_call": null
+ },
+ {
+  "id": "LOCKS-5",
+  "types": [
+   "PlacedObject"
+  ],
+  "convention": "LockData presence follows Requiem: Key=Null struct added where Requiem adds a lock; Flags bit 2 cleared to 0 as in Requiem",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 26,
+  "support_plugins": 14,
+  "spread": "Flags rows EEKs Whiterun, JK Palace, Snazzy Markarth",
+  "held_out": "no held-out rows",
+  "confidence": "med",
+  "evidence": "Verifier reads 09DAE2, 0F3AF6, 0E7BCE, 093F97, 108D38, 0EA736",
+  "aaron_call": null
+ },
+ {
+  "id": "LOCKS-6",
+  "types": [
+   "PlacedObject"
+  ],
+  "convention": "Keep Requiem's lock level and add the source/third-party key (Locked Chests Have Keys, Snazzy)",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 7,
+  "support_plugins": 5,
+  "spread": "16 further rows are null-link noise",
+  "held_out": "no held-out rows",
+  "confidence": "med",
+  "evidence": "0EA736 Requiem Key Null, patch Key 0009B1:Locked Chests Have Keys.esp; 04E11B, 0D9B47",
+  "aaron_call": null
+ },
+ {
+  "id": "LOCKS-7",
+  "types": [
+   "PlacedObject",
+   "PlacedNpc"
+  ],
+  "convention": "Disable a placed ref or actor: Z=-30000 + EnableParent PlayerRef 000014 + SetEnableStateToOppositeOfParent",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 97,
+  "support_plugins": 25,
+  "spread": "REFR EnableParent 90 rows/19 plugins (82 player-opposite disables, rest Kaidan real parents), Position 111/25; ACHR 7/6; no dominant plugin",
+  "held_out": "no held-out rows",
+  "confidence": "high",
+  "evidence": "Requiem.esp: 70 REFRs at Z -30000, 69 with the player-opposite parent; ACHR 101004/101005/0CA587",
+  "aaron_call": null
+ },
+ {
+  "id": "LOCKS-8",
+  "types": [
+   "Container"
+  ],
+  "convention": "Merge-forward a vanilla container: Requiem's entry set plus the source's added entries",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 64,
+  "support_plugins": 1,
+  "spread": "LOTD only",
+  "held_out": "none",
+  "confidence": "med",
+  "evidence": "02064F: patch = Requiem 14 entries + 5 LOTD; fact 22 (CONT not merged)",
+  "aaron_call": null
+ },
+ {
+  "id": "LOCKS-9",
+  "types": [
+   "Container"
+  ],
+  "convention": "Strip vanilla loot lists (lockpicks, soul gems, potions, gold change, REQ_NULL_ lists) from a mod's own treasure containers",
+  "class": "house-convention",
+  "layer": "input",
+  "support_rows": 827,
+  "support_plugins": 3,
+  "spread": "Glenmoril 512, Vigilant 197, Unslaad 118; not cross-patch",
+  "held_out": "Rot Below 8 removed rows (not split)",
+  "confidence": "low",
+  "evidence": "Verifier reads 2768D0, 051E73, 00E4DC; PatchContainers never edits Items",
+  "aaron_call": "ARR economy rule or per-patch choice?"
+ },
+ {
+  "id": "LOCKS-10",
+  "types": [
+   "Container"
+  ],
+  "convention": "Vendor-chest quantity rebalance (entry removed and re-added at lower Count)",
+  "class": "house-convention",
+  "layer": "input",
+  "support_rows": 222,
+  "support_plugins": 2,
+  "spread": "Bruma ~147, Dac0da ~75",
+  "held_out": "none",
+  "confidence": "low",
+  "evidence": "Verifier reads 003A0C, 0047FD",
+  "aaron_call": "Intended?"
+ },
+ {
+  "id": "LOCKS-11",
+  "types": [
+   "Container"
+  ],
+  "convention": "Empty test/debug/start-room containers",
+  "class": "house-convention",
+  "layer": "input",
+  "support_rows": 89,
+  "support_plugins": 4,
+  "spread": "Alternate Perspective 78 + 11",
+  "held_out": "none",
+  "confidence": "low",
+  "evidence": "Container|Items|changed variants; AP removed rows",
+  "aaron_call": null
+ },
+ {
+  "id": "LOCKS-12",
+  "types": [
+   "Container"
+  ],
+  "convention": "Respawns flag: no rule",
+  "class": "noise",
+  "layer": "input",
+  "support_rows": 7,
+  "support_plugins": 2,
+  "spread": "S&S cleared 6, LOTD added 1; Requiem keeps Respawns on 222/279",
+  "held_out": "none",
+  "confidence": "low",
+  "evidence": "Verifier 0617E3, DBM_RainsKnapsack",
+  "aaron_call": "Is 'no respawning containers' wanted?"
+ },
+ {
+  "id": "LOCKS-13",
+  "types": [
+   "EncounterZone",
+   "Cell"
+  ],
+  "convention": "Hand-banded NeverResets encounter zones with MaxLevel caps replacing NoResetZone",
+  "class": "house-convention",
+  "layer": "input",
+  "support_rows": 26,
+  "support_plugins": 1,
+  "spread": "Gray Cowl only (8 ECZN + 18 CELL rows)",
+  "held_out": "none",
+  "confidence": "med",
+  "evidence": "Requiem.esp 8 ECZN all MaxLevel 0; OpenCombatBoundaries.cs never writes Min/Max",
+  "aaron_call": "Want caps when Requiem zones are min-only?"
+ },
+ {
+  "id": "LOCKS-14",
+  "types": [
+   "PlacedObject"
+  ],
+  "convention": "Re-point placed food/pelt/drink refs onto REQ_ bases",
+  "class": "mixed",
+  "layer": "input",
+  "support_rows": 225,
+  "support_plugins": 11,
+  "spread": "Bruma bulk",
+  "held_out": "none",
+  "confidence": "low",
+  "evidence": "verified cannot-tell; 3 reader reads",
+  "aaron_call": "Template for other patches?"
+ },
+ {
+  "id": "LOCKS-15",
+  "types": [
+   "Cell",
+   "Worldspace"
+  ],
+  "convention": "Cell/worldspace geometry, lighting, location, regions, flags carry no Requiem convention",
+  "class": "noise",
+  "layer": "input",
+  "support_rows": 76352,
+  "support_plugins": 59,
+  "spread": "rule-labelled",
+  "held_out": "held-out rows geometry only",
+  "confidence": "high",
+  "evidence": "script rules + agree verdicts",
+  "aaron_call": null
+ },
+ {
+  "id": "LOCKS-16",
+  "types": [
+   "Container",
+   "Door"
+  ],
+  "convention": "Lockpick-control property order/case variants",
+  "class": "noise",
+  "layer": "baked",
+  "support_rows": 46,
+  "support_plugins": 3,
+  "spread": "Kaidan 32 reversed order; Become a Bard 11, EEKs 3 lowercase datastorage",
+  "held_out": "n/a",
+  "confidence": "med",
+  "evidence": "ledger property parse",
+  "aaron_call": null
+ },
+ {
+  "id": "LOCKS-B1",
+  "types": [
+   "PlacedObject"
+  ],
+  "convention": "087901:Skyrim.esm (FFRiften08BrandSheiChest REFR) gains a Master lock in Authoria - Reqtificated - Armours of Velothi.esp; vanilla has none, no Requiem override, source mod does not touch it",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 1,
+  "support_plugins": 1,
+  "spread": "single record",
+  "held_out": "n/a",
+  "confidence": "med",
+  "evidence": "tree read: only Skyrim.esm + the patch; verifier different-convention flag",
+  "aaron_call": "Revert the lock?"
+ },
+ {
+  "id": "LOCKS-B2",
+  "types": [
+   "Container"
+  ],
+  "convention": "AD3AFC:Requiem.esp REQ_Chest_GlassShield_Dawnstar: Authoria - Master Patch - Container Merge.esp drops Requiem/WAR's AA000XarrianLockBreakScriptNormal VMAD",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 1,
+  "support_plugins": 1,
+  "spread": "outside the census corpus",
+  "held_out": "n/a",
+  "confidence": "high",
+  "evidence": "tree read: Requiem.esp and WAR carry the script; Container Merge winner has VMAD absent; RFTI output for AD3AFC carries only REQ_LockpickControl, Xarrian lost in the final build",
+  "aaron_call": "Restore the script?"
+ },
+ {
+  "id": "LOCKS-B3",
+  "types": [
+   "Container"
+  ],
+  "convention": "LOTD 22 vanilla containers + 14CF41 DBM_JARBarrel and Miahil Hawk and Tern 105821 lack REQ_LockpickControl while the plugin's other records carry it",
+  "class": "outlier-bug",
+  "layer": "baked",
+  "support_rows": 24,
+  "support_plugins": 2,
+  "spread": "LOTD 23 of 335, Miahil 1 of 4",
+  "held_out": "n/a",
+  "confidence": "high",
+  "evidence": "ledger 0 script rows; 02064F/105821 VMAD reads; harmless while RFTI loads after",
+  "aaron_call": null
+ }
+]

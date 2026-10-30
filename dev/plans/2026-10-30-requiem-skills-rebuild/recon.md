@@ -49,6 +49,8 @@ boundary facts.
 | A3 | Hooks in plugins: can the authoria-requiem plugin ship a PreToolUse hook that gates houseCARL writes on an "understood the mod" artefact (intent open question 2)? What are the mechanics and limits? | Claude Code hooks and plugin docs; the AI-native SDLC playbook, lesson 11 |
 | A4 | Has `standards/` (synced from houseCARL) drifted from houseCARL HEAD or from Anthropic's guidance? | houseCARL `standards/` vs this repo; A1–A3 |
 | A5 | Current eval and trigger-measurement guidance (skill-creator evals, description optimisation) vs this repo's §6.5 fan-out | skill-creator skill, Anthropic docs |
+| A6 | **Root-cause the tool traps T1–T5** (DISTILLATION §3e) instead of trusting their "HC" fix column. Per trap: (a) what the agent was trying to do and which rule, fact or goal drove it; (b) was the goal needed (e.g. is PRKZ=0 a real defect for the engine or the Reqtificator?); (c) does a houseCARL 2.x route exist (another tool, composition or ordering); (d) verdict: skill-induced → delete the rule / wrong route → at most 1 line naming the right one / real houseCARL gap → houseCARL issue / non-problem → nothing. Added by Aaron 2026-10-30. **Not** a tool-name substitution: the rebuild ships no tool recipes or call blocks (HU-T6: 0 refused calls on 1.x names) | Harness transcripts (`runs/`) at the cited row refs; `drill/process/`, `drill/absolutes/` ledgers; houseCARL 2.x docs; live check on the test profile where needed |
+| A7 | **Install path vs plugin hooks.** The live install is a folder copy into the user skills directory, not a plugin install. Do plugin-shipped hooks (A3) load at all on that path? What install path does a hook-gated rebuild need? Added 2026-10-30, agreed by Aaron | Claude Code plugin, hooks and skills docs; this repo's README install section |
 
 ### B. Aaron's own patching sessions (intent open question 5)
 
@@ -68,6 +70,8 @@ the session runs. Each entry holds:
 | B2 | Where did the agent lack knowledge Aaron had to supply? This finds the missing-skill content the eval couldn't see. | Decision logs, transcripts |
 | B3 | Does the dissection (whole mod, scripts included) catch what matters on an armour pack and a quest mod? What did it miss? | Transcripts, Aaron's review |
 | B4 | Which house conventions came up, and what did Aaron decide (intent open question 1)? | Decision logs |
+| B5 | **Which domains does ARR actually patch?** Survey ARR's existing Reqtificated / Requiem patches by domain, to settle which untested domains keep a short version (intent open question 3). Added 2026-10-30, agreed by Aaron | The live ARR instance (modlist, patch mods, record types via houseCARL), read-only |
+| B6 | **Which open house conventions will the armour and quest sessions not touch?** Those need Aaron's direct call at spec time. Added 2026-10-30, agreed by Aaron | intent open question 1; DISTILLATION §7 |
 
 ### C. Pre-spec checks (no agents needed)
 
@@ -75,6 +79,27 @@ the session runs. Each entry holds:
 |---|---|---|
 | C1 | Which of the 12 checklist fixes are needed before freezing it as the re-run's primary metric (intent open question 7)? | `drill/r3/R10-checklist/SYNTHESIS.md` in the harness |
 | C2 | Is the plan + boundary-fact arm worth running before the rebuild (intent open question 4)? | `drill/r3/INTEGRATED.md` §5 in the harness |
+
+### D. Census of ARR's handmade Requiem patches (added by Aaron, 2026-10-30)
+
+Aaron's method, as used in `arr-ube-projects` for the UBE armour conventions:
+- count what the authors did across the whole corpus, per class and per dimension;
+- state the consensus with numbers and name the exceptions;
+- where patches disagree, propose why;
+- check that the candidate rules reproduce held-out patches.
+
+In nearly every case a consensus is eventually found. The census is the evidence base for the
+domain methods, the house conventions (intent open question 1) and the decision-list catalogue
+(B1), and it covers the domains the eval never tested. **Method and brief to be agreed before it
+runs.**
+
+| ID | Question | Where to look |
+|---|---|---|
+| D1 | Per domain and per field: what do ARR's handmade patches change against the source mod, with what consensus and which exceptions? | The 250 plugins in "Authoria - Requiem Patches" (+ Aaron's other handmade patches: corpus to confirm), read-only via houseCARL |
+| D2 | Where patches disagree, why? Candidates: patch age or Requiem version, author, the mod's tier, upstream v baked, a reference bug | D1 output; patch dates; the U3 reference-bug clusters |
+| D3 | Which "conventions" are really baked Reqtificator output? They should be separated from the input layer the skills teach. | D1 output against the boundary facts (R6 / U6 / R12) |
+| D4 | **Locks (CONT/DOOR)**: 136 patches, no owning skill (B5). The conventions for lock levels, REQ_ scripts and keys | D1, locks class |
+| D5 | Do the candidate rules reproduce held-out patches (the 6 eval references held out from rule-making, as in the UBE battery)? | The census rules v the 6 references |
 
 ## For Aaron to add
 
@@ -84,3 +109,13 @@ the session runs. Each entry holds:
 ## Findings index (pass 2)
 
 *(Dated, sourced notes go in a `recon/` subfolder as they land.)*
+
+| Target | Note |
+|---|---|
+| A7 | [`recon/2026-10-30-A7-install-path-and-plugin-hooks.md`](recon/2026-10-30-A7-install-path-and-plugin-hooks.md) |
+| B5 | [`recon/2026-10-30-B5-arr-patch-domains.md`](recon/2026-10-30-B5-arr-patch-domains.md) |
+| B6 | [`recon/2026-10-30-B6-conventions-not-covered.md`](recon/2026-10-30-B6-conventions-not-covered.md) |
+| D (method) | [`recon/D-census-method.md`](recon/D-census-method.md) |
+| D (pilot) | [`recon/2026-10-30-D-census-pilot-report.md`](recon/2026-10-30-D-census-pilot-report.md); per-type pilot docs in `recon/census/pilot/` |
+| D (stage 1: NPC_, ARMO, WEAP, COBJ) | [`recon/2026-10-30-D-census-stage1-report.md`](recon/2026-10-30-D-census-stage1-report.md); per-type docs + conventions.json in `recon/census/stage1/` |
+| D (stage 2: locks, lists, magic, races, perks/AI, consumables, quests, gear/NPC addendum, untouched) | [`recon/2026-10-30-D-census-stage2-report.md`](recon/2026-10-30-D-census-stage2-report.md); domain docs + conventions.json in `recon/census/stage2/` |

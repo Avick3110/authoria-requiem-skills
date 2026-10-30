@@ -1,0 +1,264 @@
+[
+ {
+  "id": "QUEST-MISC-1",
+  "types": [
+   "Projectile"
+  ],
+  "convention": "Bolt-class projectile Speed 5600 (arrows 3600)",
+  "class": "Requiem-aligned",
+  "layer": "input",
+  "support_rows": 6,
+  "support_plugins": 3,
+  "spread": "Glenmoril 4 (5400->5600), Remiel 1 (237ED9 8100->5600), Unslaad 1 (17854E 3600->5400, not aligned); 5 of 6 on 5600",
+  "held_out": "none held out",
+  "confidence": "med",
+  "evidence": "Requiem bolts 000BB4:Dawnguard, 00D09A:Dawnguard = 5600; arrows 3600 (live)",
+  "aaron_call": null
+ },
+ {
+  "id": "QUEST-MISC-2",
+  "types": [
+   "Projectile"
+  ],
+  "convention": "Mod projectile CollisionRadius 0.5",
+  "class": "Requiem-aligned",
+  "layer": "input",
+  "support_rows": 5,
+  "support_plugins": 1,
+  "spread": "Glenmoril only",
+  "held_out": "none held out",
+  "confidence": "med",
+  "evidence": "REQ_Projectile_Arrow_Iron 03BE11 (Skyrim.esm-defined) and Bolt_Steel 000BB4 0.5 (live)",
+  "aaron_call": null
+ },
+ {
+  "id": "QUEST-MISC-3",
+  "types": [
+   "Projectile"
+  ],
+  "convention": "Arrow projectile SoundLevel 1",
+  "class": "Requiem-aligned",
+  "layer": "input",
+  "support_rows": 2,
+  "support_plugins": 1,
+  "spread": "Vigilant only",
+  "held_out": "none held out",
+  "confidence": "med",
+  "evidence": "CWArrowProjectile 020DDE and REQ_Projectile_Arrow_* SoundLevel 1; verifier unsampled; Unslaad arrow left at 2; Requiem bolt SL 1 live",
+  "aaron_call": null
+ },
+ {
+  "id": "QUEST-MISC-4",
+  "types": [
+   "Projectile"
+  ],
+  "convention": "Gravity mapped to Requiem tiers 0.2 elven / 0.35 steel and bolts / 0.5 orcish-dwarven; 1.0 heavy",
+  "class": "Requiem-aligned",
+  "layer": "input",
+  "support_rows": 15,
+  "support_plugins": 3,
+  "spread": "Glenmoril, Vigilant (1.25 outlier), Remiel (bolt 1.0, off 0.35 bolt tier); no Unslaad gravity row",
+  "held_out": "none held out",
+  "confidence": "low",
+  "evidence": "Requiem tiers 0.35/0.5/0.2/0.65; 1.0 precedent REQ_NULL elven blood arrow, DLC2 riekling spear",
+  "aaron_call": "Keep 1.0 / 1.25 heavy-projectile exceptions?"
+ },
+ {
+  "id": "QUEST-MISC-5",
+  "types": [
+   "DialogResponses"
+  ],
+  "convention": "Mod dialogue conditions hand-edited as deliberate input (price thresholds, quest-stage gates); not a revert to source",
+  "class": "house convention",
+  "layer": "input",
+  "support_rows": 34,
+  "support_plugins": 6,
+  "spread": "Become a Bard 13, Val Serano 10, Inn Baths 4, Rot Below 4, Kaidan 2, Simply Order Summons 1 (Riften 0)",
+  "held_out": "Rot Below has 2 add + 2 rem condition rows, unverified",
+  "confidence": "low",
+  "evidence": "Inn Baths 000809/00080B 10->35, 9->34; Become a Bard 0534F2 stage 053511->042868; Val Serano C20E5F differs from its source",
+  "aaron_call": null
+ },
+ {
+  "id": "QUEST-MISC-6",
+  "types": [
+   "GlobalShort",
+   "DialogResponses"
+  ],
+  "convention": "Mod economy/difficulty globals retuned together with dialogue thresholds",
+  "class": "house convention",
+  "layer": "input",
+  "support_rows": 2,
+  "support_plugins": 2,
+  "spread": "Inn Baths 1, Dac0da 1",
+  "held_out": "none held out",
+  "confidence": "low",
+  "evidence": "0BathCost 10->35 matches dialogue thresholds; zDcdgDifficulty 0->15",
+  "aaron_call": null
+ },
+ {
+  "id": "QUEST-MISC-7",
+  "types": [
+   "StoryManagerQuestNode"
+  ],
+  "convention": "Mod quest level gate raised (GetLevel >=10 -> >=15 on Subject)",
+  "class": "house convention",
+  "layer": "input",
+  "support_rows": 2,
+  "support_plugins": 1,
+  "spread": "Gray Cowl of Nocturnal only",
+  "held_out": "none held out",
+  "confidence": "low",
+  "evidence": "Tree: 2 providers; Requiem-scale reason plausible but unproven",
+  "aaron_call": "General rule or one-off?"
+ },
+ {
+  "id": "QUEST-MISC-8",
+  "types": [
+   "Quest"
+  ],
+  "convention": "Authoria_REQ_MajorFollowerBridge: script quest, 8 UniqueActor aliases, REQ_FollowerControl -> 82F3AF:Requiem.esp",
+  "class": "house convention",
+  "layer": "input",
+  "support_rows": 1,
+  "support_plugins": 1,
+  "spread": "Authoria - Master Patch - Requiem Follower Registration.esp only",
+  "held_out": "none held out",
+  "confidence": "med",
+  "evidence": "Live read of quest and script property; script not decompiled; build also sets 82F3AF as a script property (StaticReferences.cs, CustomLockpicking.cs), bridge may be redundant",
+  "aaron_call": "Is this the supported follower registration route?"
+ },
+ {
+  "id": "QUEST-MISC-9",
+  "types": [
+   "Quest"
+  ],
+  "convention": "VMAD / alias / objective / stage add+remove pairs are re-saved elements",
+  "class": "noise",
+  "layer": "input",
+  "support_rows": 109,
+  "support_plugins": 9,
+  "spread": "Vigilant 39, Alternate Perspective 34, Bruma 9, Moonpath 7, Werewolf Fix 7, Wyrmstooth 5",
+  "held_out": "n/a",
+  "confidence": "med",
+  "evidence": "Wyrmstooth 028F01 Reqtificated equals source; verifiers agreed on VMAD scripts only",
+  "aaron_call": null
+ },
+ {
+  "id": "QUEST-MISC-10",
+  "types": [
+   "Furniture"
+  ],
+  "convention": "Restore mod's own crafting keyword over compat-patch vanilla forge keyword 088105 (Zenithar anvil 0B1CCE:Vigilant.esm)",
+  "class": "house convention",
+  "layer": "input",
+  "support_rows": 2,
+  "support_plugins": 1,
+  "spread": "Vigilant only",
+  "held_out": "none held out",
+  "confidence": "med",
+  "evidence": "Vigilant.esm keyword set equals ARR patch; Immersion Tweaks AIO had 088105. Source restore, not a Requiem rule; 0B1CCD is the new keyword",
+  "aaron_call": null
+ },
+ {
+  "id": "QUEST-MISC-11",
+  "types": [
+   "Activator",
+   "Explosion",
+   "Impact",
+   "DialogTopic"
+  ],
+  "convention": "Presentation and serialisation edits (text, decals, light/sound, Timestamp/Subtype). Excludes 64 Kaidan whole-INFO Responses rows (60 removed, 4 added): cannot-tell",
+  "class": "noise (DialogTopic INFO blocks: unclear)",
+  "layer": "input",
+  "support_rows": 125,
+  "support_plugins": 8,
+  "spread": "Kaidan 35 serialisation + 64 INFO (unclear), Dragon Tweaks 15, LOTD 9, Troll MCO 5, Dawnguard Arsenal 3",
+  "held_out": "n/a",
+  "confidence": "med (low for DialogTopic Responses)",
+  "evidence": "Script-labelled presentation plus verifier agreement; Dawnguard Arsenal Light nulled (03C5A5), sounds swapped",
+  "aaron_call": null
+ },
+ {
+  "id": "QUEST-MISC-12",
+  "types": [
+   "Weather",
+   "ShaderParticleGeometry",
+   "ImpactDataSet"
+  ],
+  "convention": "Dragon Tweaks master patch defines own weathers and shaders, repoints impact set to DeadlySpellImpacts",
+  "class": "house convention",
+  "layer": "input",
+  "support_rows": 17,
+  "support_plugins": 1,
+  "spread": "Dragon Tweaks master only",
+  "held_out": "none held out",
+  "confidence": "med",
+  "evidence": "8 weathers, 5 shaders; 000D68:DeadlySpellImpacts replaces 020DE2:Skyrim / 00097E:DeadlyDragons; verifier prefers noise for the set repoint",
+  "aaron_call": null
+ },
+ {
+  "id": "QUEST-MISC-B1",
+  "types": [
+   "Projectile"
+  ],
+  "convention": "Vigilant great/log arrows 0BAB16/0BD35A/0C7E3A/0C7E3B/0D1013 Gravity 1.25 at speed 2600-2800",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 5,
+  "support_plugins": 1,
+  "spread": "Vigilant",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "No Requiem arrow exceeds 1.0 (live)",
+  "aaron_call": "Deliberate heavy-arrow feel?"
+ },
+ {
+  "id": "QUEST-MISC-B2",
+  "types": [
+   "Projectile"
+  ],
+  "convention": "Unslaad frost arrow 17854E Speed 3600->5400 (Requiem arrows 3600)",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 1,
+  "support_plugins": 1,
+  "spread": "Unslaad",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "Verifier: arrow at 5400, not aligned",
+  "aaron_call": "Intended?"
+ },
+ {
+  "id": "QUEST-MISC-B3",
+  "types": [
+   "Explosion"
+  ],
+  "convention": "Troll MCO slam explosions 00080B/00080E SpawnProjectile nulled",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 2,
+  "support_plugins": 1,
+  "spread": "Troll MCO",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "cannot-tell; verifier did not read",
+  "aaron_call": "Intentional visual cleanup?"
+ },
+ {
+  "id": "QUEST-MISC-B4",
+  "types": [
+   "Projectile"
+  ],
+  "convention": "Remiel bolt 237ED9 Gravity 0.2->1.0 (Requiem bolt 000BB4 = 0.35)",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 1,
+  "support_plugins": 1,
+  "spread": "Remiel",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "Bolt at 1.0 is off Requiem bolt tier 0.35 (live); Remiel speed row 8100->5600 conforms",
+  "aaron_call": "Intended?"
+ }
+]
