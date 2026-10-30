@@ -1,0 +1,61 @@
+# Per-run numbers
+
+*Author: Aaron (+ Claude session) · 2026-10-30*
+
+One row per run. `-nothink` rows are the early runs re-run with thinking summaries on; they are
+excluded from the medians.
+
+- **Records (ref), Shared, Recall, Precision:** the record/field diff against the handmade
+  patch. This is a checklist, not a score: the reference is often wrong or incomplete, so a correct
+  patch can score 0 (favor-quests).
+- **Judge Q (ref):** the arm-blind judge's quality score, 0-100, for the run's plugin and, in
+  brackets, for the handmade reference under the same judge. Compare within a row; reference
+  scores vary 50-82 across judges.
+- **$ / Min:** the final result line's cost and wall time, both sessions for runs that stopped to
+  ask.
+- **Skills loaded:** distinct authoria-requiem skills loaded, main thread plus subagents.
+
+| Task | Arm | Run | Records (ref) | Shared | Recall | Precision | Judge Q (ref) | Does the job | Works in game | $ | Min | houseCARL calls | Subagents | Skills loaded | Stopped |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| animated-carriages | control | 1 | 8 (229) | 8 | 0.011 | 0.03 | 22 (80) | partly | with issues | 3.25 | 7.6 | 39 | 0 |  |  |
+| animated-carriages | control | 1-nothink | 127 (229) | 119 | 0.447 | 0.876 | 55 (78) | partly | with issues | 3.45 | 8.0 | 37 | 0 |  |  |
+| animated-carriages | control | 2 | 12 (229) | 12 | 0.011 | 0.02 | 28 (76) | partly | with issues | 3.18 | 5.2 | 24 | 0 |  |  |
+| animated-carriages | control | 3 | 8 (229) | 8 | 0.011 | 0.027 | 28 (82) | partly | with issues | 2.58 | 5.4 | 29 | 0 |  |  |
+| animated-carriages | skill | 1 | 139 (229) | 125 | 0.269 | 0.119 | 68 (60) | partly | yes | 11.38 | 22.4 | 59 | 0 | 2 | yes |
+| animated-carriages | skill | 2 | 142 (229) | 127 | 0.283 | 0.133 | 66 (52) | partly | with issues | 9.89 | 21.1 | 56 | 0 | 2 | yes |
+| animated-carriages | skill | 3 | 139 (229) | 128 | 0.19 | 0.186 | 42 (72) | partly | with issues | 9.73 | 22.9 | 82 | 0 | 2 | yes |
+| falkreath-shades | control | 1 | 15 (100) | 15 | 0.008 | 0.359 | 30 (74) | partly | yes | 2.74 | 6.4 | 37 | 0 |  |  |
+| falkreath-shades | control | 1-nothink | 22 (100) | 13 | 0.007 | 0.12 | 38 (74) | partly | with issues | 3.87 | 6.9 | 43 | 0 |  |  |
+| falkreath-shades | control | 2 | 19 (100) | 14 | 0.014 | 0.228 | 33 (78) | partly | with issues | 5.00 | 9.9 | 54 | 0 |  |  |
+| falkreath-shades | control | 3 | 10 (100) | 9 | 0.008 | 0.619 | 14 (76) | no | with issues | 2.61 | 7.2 | 44 | 0 |  |  |
+| falkreath-shades | skill | 1 | 106 (100) | 73 | 0.057 | 0.192 | 60 (64) | partly | with issues | 18.68 | 18.0 | 150 | 5 | 11 |  |
+| falkreath-shades | skill | 1-nothink | 123 (100) | 78 | 0.065 | 0.178 | 48 (72) | partly | with issues | 19.52 | 18.5 | 132 | 4 | 11 |  |
+| falkreath-shades | skill | 2 | 114 (100) | 75 | 0.109 | 0.17 | 70 (55) | partly | with issues | 20.82 | 14.4 | 158 | 8 | 11 |  |
+| falkreath-shades | skill | 3 | 111 (100) | 76 | 0.111 | 0.182 | 68 (70) | partly | with issues | 20.22 | 19.4 | 174 | 5 | 10 |  |
+| favor-quests | control | 1 | 27 (13) | 0 | 0.0 | 0.0 | 90 (10) | yes | yes | 1.79 | 5.4 | 26 | 0 |  |  |
+| favor-quests | control | 1-nothink | 27 (13) | 0 | 0.0 | 0.0 | 88 (15) | yes | yes | 3.67 | 6.7 | 36 | 0 |  |  |
+| favor-quests | control | 2 | 27 (13) | 0 | 0.0 | 0.0 | 90 (15) | yes | yes | 2.76 | 6.0 | 31 | 0 |  |  |
+| favor-quests | control | 3 | 36 (13) | 0 | 0.0 | 0.0 | 86 (15) | yes | yes | 2.67 | 7.1 | 38 | 0 |  |  |
+| favor-quests | skill | 1 | 27 (13) | 0 | 0.0 | 0.0 | 90 (10) | yes | yes | 2.34 | 5.6 | 37 | 0 | 1 |  |
+| favor-quests | skill | 2 | 27 (13) | 0 | 0.0 | 0.0 | 90 (15) | yes | yes | 2.41 | 5.8 | 42 | 0 | 1 |  |
+| favor-quests | skill | 3 | 13 (13) | 13 | 0.962 | 0.962 | 45 (60) | partly | with issues | 1.68 | 3.7 | 27 | 0 | 2 |  |
+| mage-core | control | 1 | 43 (176) | 43 | 0.0 | 0.0 | 55 (58) | partly | yes | 2.16 | 6.4 | 27 | 0 |  |  |
+| mage-core | control | 2 | 13 (176) | 13 | 0.015 | 0.429 | 25 (58) | no | yes | 1.71 | 3.9 | 22 | 0 |  |  |
+| mage-core | control | 3 | 12 (176) | 12 | 0.015 | 0.5 | 35 (68) | partly | yes | 1.65 | 4.2 | 29 | 0 |  |  |
+| mage-core | skill | 1 | 32 (176) | 32 | 0.324 | 0.589 | 58 (50) | partly | yes | 2.14 | 4.7 | 19 | 0 | 3 |  |
+| mage-core | skill | 1-nothink | 37 (176) | 37 | 0.485 | 0.868 | 62 (60) | partly | with issues | 2.56 | 5.2 | 23 | 0 | 3 |  |
+| mage-core | skill | 2 | 66 (176) | 64 | 0.353 | 0.507 | 66 (50) | partly | with issues | 2.80 | 5.8 | 24 | 0 | 3 |  |
+| mage-core | skill | 3 | 65 (176) | 64 | 0.353 | 0.529 | 62 (55) | partly | yes | 3.02 | 6.0 | 21 | 0 | 3 |  |
+| rot-below | control | 1 | 76 (202) | 76 | 0.031 | 0.481 | 18 (80) | no | with issues | 3.85 | 10.2 | 46 | 0 |  |  |
+| rot-below | control | 2 | 85 (202) | 83 | 0.054 | 0.363 | 38 (82) | partly | with issues | 7.03 | 13.7 | 71 | 0 |  |  |
+| rot-below | control | 3 | 49 (202) | 48 | 0.025 | 0.696 | 30 (80) | partly | with issues | 3.52 | 8.3 | 36 | 0 |  |  |
+| rot-below | skill | 1 | 182 (202) | 132 | 0.102 | 0.316 | 42 (78) | partly | with issues | 21.68 | 15.8 | 147 | 7 | 10 |  |
+| rot-below | skill | 2 | 191 (202) | 135 | 0.094 | 0.303 | 42 (72) | partly | with issues | 24.65 | 19.5 | 177 | 6 | 10 |  |
+| rot-below | skill | 3 | 167 (202) | 131 | 0.093 | 0.395 | 64 (70) | partly | with issues | 24.23 | 18.4 | 157 | 6 | 11 |  |
+| triumvirate | control | 1 | 5 (78) | 0 | 0.0 | 0.0 | 38 (64) | partly | with issues | 2.15 | 5.0 | 25 | 0 |  |  |
+| triumvirate | control | 2 | 29 (78) | 24 | 0.011 | 0.535 | 66 (70) | partly | yes | 2.99 | 6.8 | 35 | 0 |  |  |
+| triumvirate | control | 3 | 3 (78) | 0 | 0.0 | 0.0 | 15 (75) | no | yes | 1.71 | 3.8 | 22 | 0 |  |  |
+| triumvirate | skill | 1 | 120 (78) | 65 | 0.034 | 0.129 | 72 (50) | yes | with issues | 18.51 | 19.6 | 155 | 5 | 9 |  |
+| triumvirate | skill | 1-nothink | 88 (78) | 40 | 0.0 | 0.0 | 72 (50) | partly | yes | 16.41 | 18.3 | 123 | 4 | 7 |  |
+| triumvirate | skill | 2 | 90 (78) | 64 | 0.034 | 0.142 | 72 (55) | partly | with issues | 9.67 | 9.6 | 86 | 5 | 9 |  |
+| triumvirate | skill | 3 | 68 (78) | 59 | 0.023 | 0.032 | 62 (55) | partly | with issues | 8.09 | 12.2 | 56 | 0 | 5 | yes |
