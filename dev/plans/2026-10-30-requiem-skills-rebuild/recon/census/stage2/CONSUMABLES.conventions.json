@@ -1,0 +1,292 @@
+[
+ {
+  "id": "CONSUMABLES-1",
+  "types": [
+   "Ammunition"
+  ],
+  "convention": "Ammo carries Requiem ammo keyword kit: AD3B2D NoDamageRescale + AmmoWeight_* + ArmorPiercingArrow_Tier* + material (+REQ_NoArrowRecovery on enchanted)",
+  "class": "Requiem-aligned",
+  "layer": "input",
+  "support_rows": 221,
+  "support_plugins": 20,
+  "spread": "Glenmoril 172 and Vigilant 61 of 415 ammo rows; holds in 18 other plugins",
+  "held_out": "Falkreath + Rot Below carry the same kit patterns: follows",
+  "confidence": "high",
+  "evidence": "Live: Requiem arrows and ARR zzzCHLogArrow / zzzCHKyneArrow carry the kit; per-record tier is judgement; 221 keyword rows cover 56 records",
+  "aaron_call": null
+ },
+ {
+  "id": "CONSUMABLES-2",
+  "types": [
+   "Ammunition"
+  ],
+  "convention": "Ammo Weight := 0; weight comes from REQ_AmmoWeight_* keywords",
+  "class": "Requiem-aligned",
+  "layer": "input",
+  "support_rows": 58,
+  "support_plugins": 20,
+  "spread": "even",
+  "held_out": "follows (2 rows)",
+  "confidence": "high",
+  "evidence": "Live: Requiem arrows Weight 0 (6 read), ARR arrows 0 (5 read)",
+  "aaron_call": null
+ },
+ {
+  "id": "CONSUMABLES-3",
+  "types": [
+   "Ammunition"
+  ],
+  "convention": "Ammo Damage hand-set to tier values (mostly 4-5x vanilla; ratios 2.6-10x) together with AD3B2D",
+  "class": "baked",
+  "layer": "baked",
+  "support_rows": 55,
+  "support_plugins": 19,
+  "spread": "spread over 19 plugins",
+  "held_out": "follows (2 rows)",
+  "confidence": "high",
+  "evidence": "AmmunitionTransformer.cs: Damage x4 unless AlreadyReqtified / NoDamageRescaling / Damage<=0; all 55 damage records carry AD3B2D; Requiem WAR arrows Iron 40 .. Daedric 120 carry AD3B2D; ratios 5x:23, 4x:14, 3x:7, 6x:6, 10x:3",
+  "aaron_call": null
+ },
+ {
+  "id": "CONSUMABLES-4",
+  "types": [
+   "Ammunition"
+  ],
+  "convention": "Ammo Flags drop IgnoresNormalWeaponResistance, keep NonBolt",
+  "class": "Requiem-aligned (unsampled)",
+  "layer": "input",
+  "support_rows": 6,
+  "support_plugins": 2,
+  "spread": "2 plugins",
+  "held_out": "none",
+  "confidence": "low",
+  "evidence": "Requiem ammo flags NonBolt only; verifier did not sample",
+  "aaron_call": null
+ },
+ {
+  "id": "CONSUMABLES-5",
+  "types": [
+   "Ingredient"
+  ],
+  "convention": "Effects rewritten onto REQ_Alch_* MGEFs (same FormIDs) with hand-converted dur/magnitude; restore dur 20, weakness 30; other durations vary, no single rule",
+  "class": "mixed (Requiem-aligned for restore, house otherwise)",
+  "layer": "input",
+  "support_rows": 525,
+  "support_plugins": 10,
+  "spread": "Bruma MP 1,260 of 1,433 Ingredient rows; Moonpath keeps dur 0 and scales magnitude; Glenmoril FortifyDestruction dur 20 vs Requiem 60",
+  "held_out": "Falkreath rewrote GRVEShadeGoo effects: follows; no tier rule to test",
+  "confidence": "high (varies), low (single rule)",
+  "evidence": "Live: BSKChokeweed source dur 0 -> Bruma MP 30/20/0/30 NoAutoCalc; Requiem fortify 60/120/180, resist 30-300; verifier fixed reader's 'fortify 30'",
+  "aaron_call": null
+ },
+ {
+  "id": "CONSUMABLES-6",
+  "types": [
+   "Ingredient"
+  ],
+  "convention": "Hand-valued ingredients set NoAutoCalculation",
+  "class": "Requiem-aligned",
+  "layer": "input",
+  "support_rows": 155,
+  "support_plugins": 13,
+  "spread": "Bruma MP + Glenmoril + Ashe + Falkreath; holds outside Bruma",
+  "held_out": "Falkreath 1 row: follows",
+  "confidence": "high",
+  "evidence": "Live: Requiem BirdEgg02, ElvesEar, DaedraHeart, FireSalts, Taproot set it; Ectoplasm Flags 0",
+  "aaron_call": null
+ },
+ {
+  "id": "CONSUMABLES-7",
+  "types": [
+   "Ingredient"
+  ],
+  "convention": "IngredientValue == Value on NoAutoCalc ingredients",
+  "class": "Requiem-aligned (unsampled)",
+  "layer": "input",
+  "support_rows": 148,
+  "support_plugins": 10,
+  "spread": "not sampled",
+  "held_out": "none",
+  "confidence": "med",
+  "evidence": "Reader annotation only",
+  "aaron_call": null
+ },
+ {
+  "id": "CONSUMABLES-8",
+  "types": [
+   "Ingestible"
+  ],
+  "convention": "Restore potions follow Requiem shape (dur 20, per-second magnitude, NoAutoCalc); non-restore potions are multi-effect hand designs",
+  "class": "mixed",
+  "layer": "input",
+  "support_rows": 73,
+  "support_plugins": 6,
+  "spread": "Remiel 74 of 105 rows; Falkreath same restore shape",
+  "held_out": "Falkreath restore follows; Rot Below sets dur 3600 on one potion (source tuning)",
+  "confidence": "med",
+  "evidence": "Live: REQ_Potion_RestoreHealth1-5 dur 20 mag 3/5/8/10/12; Requiem Fortify Sneak dur 60, Invisibility 20-50 autocalc; ARR adds side effects",
+  "aaron_call": null
+ },
+ {
+  "id": "CONSUMABLES-9",
+  "types": [
+   "Ingestible"
+  ],
+  "convention": "Potions set NoAutoCalc (Medicine/Poison flags preserved)",
+  "class": "Requiem-aligned (unsampled)",
+  "layer": "input",
+  "support_rows": 14,
+  "support_plugins": 4,
+  "spread": "4 plugins",
+  "held_out": "Falkreath 2 rows: follows",
+  "confidence": "med",
+  "evidence": "Reader annotation; Requiem restore potions are NoAutoCalc",
+  "aaron_call": null
+ },
+ {
+  "id": "CONSUMABLES-10",
+  "types": [
+   "Flora"
+  ],
+  "convention": "Mushroom flora Ingredient -> Requiem REQ_LI_Mushroom01..06 of the matching vanilla mushroom (01=2500D3, 02=2500DA, 03=2500DD, 04=2500E0, 05=2500E3, 06=2500E6)",
+  "class": "Requiem-aligned",
+  "layer": "input",
+  "support_rows": 24,
+  "support_plugins": 1,
+  "spread": "single plugin (Blended Shrooms): 23 follow, 1 outlier 000807; holds-outside untestable; other 3 Flora Ingredient rows are not mushroom lists",
+  "held_out": "none",
+  "confidence": "high",
+  "evidence": "Live: Requiem FloraMushroom01 04D9FF -> 2500D3, 02 04DA04 -> 2500DA; mapping confirmed in Requiem.esp",
+  "aaron_call": null
+ },
+ {
+  "id": "CONSUMABLES-11",
+  "types": [
+   "Tree"
+  ],
+  "convention": "Source-mod harvest flora repointed at vanilla/Requiem ingredient (Falkreath Red Nightshade (editorid; name unchecked) tree -> vanilla Nightshade 02F44C)",
+  "class": "Requiem-aligned (single case)",
+  "layer": "input",
+  "support_rows": 2,
+  "support_plugins": 1,
+  "spread": "one held-out plugin",
+  "held_out": "Falkreath is the case",
+  "confidence": "low",
+  "evidence": "GRVEFloraRedNightshade01 -> 02F44C; source GRVEScarletNightshade 2CCB82 dropped",
+  "aaron_call": null
+ },
+ {
+  "id": "CONSUMABLES-12",
+  "types": [
+   "HeadPart"
+  ],
+  "convention": "Bruma MP strips Playable from all 219 BSAssets head parts; sex and extra-part flags kept",
+  "class": "house convention",
+  "layer": "input",
+  "support_rows": 219,
+  "support_plugins": 1,
+  "spread": "Bruma only",
+  "held_out": "none",
+  "confidence": "med",
+  "evidence": "Requiem.esp touches 0 HDPT; BSAssets.esm 276 HDPT, 219 Playable stripped; intent (hide from chargen) is inference",
+  "aaron_call": "Confirm: hide BSAssets hairs and mouths from character creation while NPCs keep them?"
+ },
+ {
+  "id": "CONSUMABLES-13",
+  "types": [
+   "Flora"
+  ],
+  "convention": "Food and Drink MP replaces flora Harvest text with Iconographia glyphs",
+  "class": "noise (house UI)",
+  "layer": "input",
+  "support_rows": 51,
+  "support_plugins": 1,
+  "spread": "Food and Drink only",
+  "held_out": "none",
+  "confidence": "high",
+  "evidence": "Requiem FloraMushroom ActivateTextOverride = Harvest; UI font only",
+  "aaron_call": null
+ },
+ {
+  "id": "CONSUMABLES-14",
+  "types": [
+   "MiscItem"
+  ],
+  "convention": "MiscItem Value / Weight rebalanced per item, no single rule",
+  "class": "unclear",
+  "layer": "input",
+  "support_rows": 32,
+  "support_plugins": 7,
+  "spread": "Bruma MP 23 of 50 MiscItem rows",
+  "held_out": "none",
+  "confidence": "low",
+  "evidence": "Family numerics only; TOK_MISC_AyleidGold live Value 0",
+  "aaron_call": null
+ },
+ {
+  "id": "CONSUMABLES-15",
+  "types": [
+   "Static",
+   "SoulGem"
+  ],
+  "convention": "No gameplay convention: Praedy staff first-person duplicate statics; LOTD quest soul gem Value/Weight tuning",
+  "class": "noise",
+  "layer": "input",
+  "support_rows": 42,
+  "support_plugins": 3,
+  "spread": "single source each",
+  "held_out": "none",
+  "confidence": "med",
+  "evidence": "36 new Static records; DA01SoulGemAzurasStar live Value 115000 Weight 1",
+  "aaron_call": null
+ },
+ {
+  "id": "CONSUMABLES-BUG-1",
+  "types": [
+   "Flora"
+  ],
+  "convention": "Blended Shrooms 000807 FloraMushroom02Small_c (Bleeding Crown) Ingredient = 2500DD REQ_LI_Mushroom03 (White Cap); expected 2500DA REQ_LI_Mushroom02",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 1,
+  "support_plugins": 1,
+  "spread": "single plugin",
+  "held_out": "none",
+  "confidence": "high",
+  "evidence": "Siblings 000804/5/6 -> 2500DA; Requiem FloraMushroom02Small 04DA05 -> 2500DA; verifier confirmed",
+  "aaron_call": "Fix?"
+ },
+ {
+  "id": "CONSUMABLES-BUG-2",
+  "types": [
+   "Tree",
+   "Flora"
+  ],
+  "convention": "Glenmoril nulls Ingredient on zzzLrhTreeFloraWhiteShade01 (+1 tree), maggot egg nest, kin cluster flora; zzzLrhWhiteFlower 007289 exists",
+  "class": "suspected-bug",
+  "layer": "input",
+  "support_rows": 4,
+  "support_plugins": 1,
+  "spread": "single plugin",
+  "held_out": "none",
+  "confidence": "low",
+  "evidence": "Yields nothing; deliberate vs leftover cannot be told",
+  "aaron_call": "Deliberate harvest disable or leftover?"
+ },
+ {
+  "id": "CONSUMABLES-BUG-3",
+  "types": [
+   "Ingestible"
+  ],
+  "convention": "Ryn's Farms brandy loses effect 00082F:Requiem - Foods and Ingestibles, gains 10C645 + 03EAEB",
+  "class": "suspected-bug",
+  "layer": "input",
+  "support_rows": 1,
+  "support_plugins": 1,
+  "spread": "single plugin",
+  "held_out": "none",
+  "confidence": "low",
+  "evidence": "Unresolved, not read live",
+  "aaron_call": null
+ }
+]

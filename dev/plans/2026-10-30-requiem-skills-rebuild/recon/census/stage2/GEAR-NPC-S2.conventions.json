@@ -1,0 +1,690 @@
+[
+ {
+  "id": "GEAR-NPC-S2-1",
+  "types": [
+   "Npc"
+  ],
+  "convention": "No NPC carries AlreadyReqtified AE3B83 (0/1052); all left to the build (upstream stance)",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 23294,
+  "support_plugins": 5,
+  "spread": "holds in all 5 plugins; Bruma 995 of 1052 NPCs",
+  "held_out": "n/a (0 held-out rows); contradicts stage-1 NPC_ #1 (59% marked)",
+  "confidence": "high",
+  "evidence": "subject scan of 5 plugins; FACTS D; RFTI 001D77 9->54 perks",
+  "aaron_call": "Default stance per patch: upstream (Bruma) or downstream (stage-1 Reqtificated)?"
+ },
+ {
+  "id": "GEAR-NPC-S2-2",
+  "types": [
+   "Npc"
+  ],
+  "convention": "On non-SpellList NPCs hand-carry only the Requiem tier skill perk kit; rule perks left to the build; source perks swapped for the tier kit",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 3548,
+  "support_plugins": 2,
+  "spread": "Bruma ~4181 perks; Moonpath 43 perk rows on 11 NPCs; IDE / Dragon Tweaks / A New Debt 0",
+  "held_out": "n/a; contradicts stage-1 NPC_ #2 bake",
+  "confidence": "med",
+  "evidence": "verifier fixed: disjoint sets, FormKey dedupe; 06DA75 -> 039CFD kit",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-3",
+  "types": [
+   "Npc"
+  ],
+  "convention": "PcLevelMult -> fixed NpcLevel; AutoCalc kept on most (removed in 236 Flags rows; 755 / 995 Bruma NPCs keep it; 30 Bruma NPCs still carry LevelMult)",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 1215,
+  "support_plugins": 2,
+  "spread": "Bruma + Moonpath",
+  "held_out": "n/a; confirms NPC_ #5, contradicts #6",
+  "confidence": "high",
+  "evidence": "live: of 2,702 Requiem-touched NPCs, 2,636 fixed and 1,256 AutoCalc + fixed; strict Requiem.esp winners 1,968 / 1,953 / 935",
+  "aaron_call": "Keep or drop AutoCalc on fixed-level NPCs?"
+ },
+ {
+  "id": "GEAR-NPC-S2-4",
+  "types": [
+   "Npc"
+  ],
+  "convention": "Skill block 5 floor + tier combat skills",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 8712,
+  "support_plugins": 2,
+  "spread": "Bruma dominant; only 2439 rows effective (rest masked by AutoCalc/Stats)",
+  "held_out": "n/a; confirms NPC_ #8",
+  "confidence": "med",
+  "evidence": "live 016EF0 shape; EncOgre01 6026C0",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-5",
+  "types": [
+   "Npc"
+  ],
+  "convention": "Health/Magicka/Stamina and offsets hand-set (mostly inert under AutoCalc/Stats)",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 1961,
+  "support_plugins": 2,
+  "spread": "Bruma dominant",
+  "held_out": "n/a; confirms NPC_ #7",
+  "confidence": "low",
+  "evidence": "unsampled except MagickaOffset agree",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-6",
+  "types": [
+   "Npc"
+  ],
+  "convention": "Class -> REQ_Class_* or role vanilla combat class; CombatStyle -> Requiem/vanilla human styles by role",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 347,
+  "support_plugins": 2,
+  "spread": "Bruma only",
+  "held_out": "n/a; extends stage 1",
+  "confidence": "med",
+  "evidence": "verified agree: 85BCE3, 7F6492, 03BE1B, 91AA67",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-7",
+  "types": [
+   "Npc"
+  ],
+  "convention": "ActorEffect: REQ_Trait_Tempering_* per armoured fighter, REQ spell kits for mages, REQ_Trait_Vampire_NPC; no hand RFTI_All_*",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 488,
+  "support_plugins": 1,
+  "spread": "Bruma only",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "unsampled; RFTI 1->5 spells",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-8",
+  "types": [
+   "Npc"
+  ],
+  "convention": "Workflow A: null Template -> Stats+SpellList; creature -> Requiem-winning vanilla species encounter NPC, townsfolk -> named vanilla civilian (Ri'saad, Zaynabi), Thalmor -> EncThalmor",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 81,
+  "support_plugins": 4,
+  "spread": "Template rows 30 (Moonpath 29, IDE 1); TemplateFlags rows 51 (Moonpath 41, Bruma 6, IDE 3, A New Debt 1); null -> Template is Moonpath only",
+  "held_out": "n/a; confirms NPC_ #10",
+  "confidence": "med",
+  "evidence": "live read of 18 templates",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-9",
+  "types": [
+   "Npc"
+  ],
+  "convention": "Drop SpellList (or Stats+SpellList) from a source template so own kit applies",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 5,
+  "support_plugins": 1,
+  "spread": "Bruma only",
+  "held_out": "n/a; confirms NPC_ #11",
+  "confidence": "med",
+  "evidence": "verified 08B5EF, 061731",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-10",
+  "types": [
+   "Npc"
+  ],
+  "convention": "CalcMin/CalcMax reset with fixed level",
+  "class": "noise",
+  "layer": "input",
+  "support_rows": 267,
+  "support_plugins": 1,
+  "spread": "Bruma",
+  "held_out": "n/a; confirms NPC_ #9",
+  "confidence": "med",
+  "evidence": "Requiem 039CFD 0/0; inert",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-11",
+  "types": [
+   "Weapon"
+  ],
+  "convention": "Base weapons at source scale: Damage = Requiem comparable raw, class reach unscaled, no skip keywords; build applies x6 / x0.7",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 164,
+  "support_plugins": 1,
+  "spread": "Bruma only; 164 damage rows total (122 rule + 42 family), 28 on base weapons without skip keywords",
+  "held_out": "n/a; contradicts WEAP #1-4 (bake)",
+  "confidence": "high",
+  "evidence": "subject scan; FACTS D; verifier ratios ~1.06",
+  "aaron_call": "Teach upstream (input) or bake for weapons?"
+ },
+ {
+  "id": "GEAR-NPC-S2-12",
+  "types": [
+   "Weapon"
+  ],
+  "convention": "Enchanted variants (Template) carry the base's raw damage",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 126,
+  "support_plugins": 1,
+  "spread": "Bruma only; 322 of 337 variants checked, all equal base; 15 have templates outside the patch (unchecked)",
+  "held_out": "n/a; extends WEAP",
+  "confidence": "high",
+  "evidence": "UNTOUCHED benchmark 089716 dmg 7 = base",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-13",
+  "types": [
+   "Weapon"
+  ],
+  "convention": "Bake kept for special cases: bows AD3B2D+AD3B2F with hand damage/speed, DBM replicas triple+damage 1, LunarGuard_Battleaxe full bake",
+  "class": "baked",
+  "layer": "baked",
+  "support_rows": 19,
+  "support_plugins": 2,
+  "spread": "Bruma 18, Lunar Guard 1",
+  "held_out": "n/a; confirms WEAP #1 as minority",
+  "confidence": "high",
+  "evidence": "StaticReferences.cs; verifier",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-14",
+  "types": [
+   "Weapon"
+  ],
+  "convention": "Hand Critical.Damage, inconsistent",
+  "class": "noise",
+  "layer": "baked",
+  "support_rows": 155,
+  "support_plugins": 2,
+  "spread": "Bruma",
+  "held_out": "n/a; confirms WEAP #3 redundant",
+  "confidence": "high",
+  "evidence": "build sets crit := damage",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-15",
+  "types": [
+   "Weapon"
+  ],
+  "convention": "Melee Speed to Requiem class values",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 70,
+  "support_plugins": 1,
+  "spread": "Bruma only",
+  "held_out": "n/a; confirms WEAP #8",
+  "confidence": "med",
+  "evidence": "verifier fixed",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-16",
+  "types": [
+   "Weapon"
+  ],
+  "convention": "Value/Weight re-tiered to comparable of the item's new tier",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 212,
+  "support_plugins": 1,
+  "spread": "Bruma only",
+  "held_out": "n/a; confirms WEAP #6-7",
+  "confidence": "med",
+  "evidence": "live 01399B Elven War Axe 165/10",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-17",
+  "types": [
+   "Weapon"
+  ],
+  "convention": "Staff charge ladder 500/1000/1500/2000/3000",
+  "class": "house-convention?",
+  "layer": "input",
+  "support_rows": 119,
+  "support_plugins": 1,
+  "spread": "Bruma only",
+  "held_out": "n/a; contradicts WEAP #16 3000 normalisation",
+  "confidence": "low",
+  "evidence": "1500 off MR ladder (fact 30)",
+  "aaron_call": "Which staff charge ladder?"
+ },
+ {
+  "id": "GEAR-NPC-S2-18",
+  "types": [
+   "Weapon"
+  ],
+  "convention": "Requiem bow tier keywords, REQ_BowBreakable, MR Nox_KW_Staff_*, material keyword swaps",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 47,
+  "support_plugins": 2,
+  "spread": "Bruma dominant",
+  "held_out": "n/a; confirms WEAP #9, #11",
+  "confidence": "med",
+  "evidence": "live 9F9914/9F9915/2E232E, 0076EB",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-19",
+  "types": [
+   "Weapon"
+  ],
+  "convention": "NPCsUseAmmo hand-set on bows",
+  "class": "noise",
+  "layer": "baked",
+  "support_rows": 12,
+  "support_plugins": 1,
+  "spread": "Bruma",
+  "held_out": "n/a; confirms WEAP #14",
+  "confidence": "high",
+  "evidence": "WeaponNpcAmmunitionUsage.cs adds it on playable bows",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-20",
+  "types": [
+   "Armor"
+  ],
+  "convention": "AR = Requiem comparable, tiered",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 607,
+  "support_plugins": 4,
+  "spread": "Moonpath, Lunar Guard, Dwemer outside Bruma",
+  "held_out": "n/a; confirms ARMO C1",
+  "confidence": "high",
+  "evidence": "485 rule rows",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-21",
+  "types": [
+   "Armor"
+  ],
+  "convention": "Enchanted variants AR = base AR",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 383,
+  "support_plugins": 1,
+  "spread": "Bruma only; 361/383 equal",
+  "held_out": "n/a; extends ARMO",
+  "confidence": "high",
+  "evidence": "Requiem 10DFBE = template 012EB6",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-22",
+  "types": [
+   "Armor"
+  ],
+  "convention": "AD3B2B on every base light/heavy piece, never on a TemplateArmor variant",
+  "class": "house-convention",
+  "layer": "input",
+  "support_rows": 246,
+  "support_plugins": 5,
+  "spread": "Bruma 131/131 base, 0/406 variants; Lunar Guard omits on 4 base heavy (harmless); Wet and Cold adds on 75 clothing (inert)",
+  "held_out": "n/a; refines ARMO C3 (gated, not blanket)",
+  "confidence": "high",
+  "evidence": "subject scan; ArmorRatingScaling.cs TemplateArmor skip",
+  "aaron_call": "Blanket or gated AD3B2B?"
+ },
+ {
+  "id": "GEAR-NPC-S2-23",
+  "types": [
+   "Armor"
+  ],
+  "convention": "Build's formula AR hand-written",
+  "class": "baked",
+  "layer": "baked",
+  "support_rows": 26,
+  "support_plugins": 2,
+  "spread": "Moonpath, Bruma",
+  "held_out": "n/a",
+  "confidence": "med",
+  "evidence": "Moonpath 26 -> 151.8 = 26x3.3+66",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-24",
+  "types": [
+   "Armor"
+  ],
+  "convention": "AR -> 0 on wigs, earrings, scarves, glasses",
+  "class": "house-convention",
+  "layer": "input",
+  "support_rows": 60,
+  "support_plugins": 4,
+  "spread": "mostly outside Bruma (Lions Mane 30, Blanket Scarf 21)",
+  "held_out": "n/a; confirms ARMO C2",
+  "confidence": "high",
+  "evidence": "ledger",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-25",
+  "types": [
+   "Armor"
+  ],
+  "convention": "Wigs: 10 -> Clothing + clothing keywords; 20 stay LightArmor AR 0 + AD3B2B + AE35A8",
+  "class": "house-convention",
+  "layer": "input",
+  "support_rows": 30,
+  "support_plugins": 1,
+  "spread": "Lions Mane only",
+  "held_out": "n/a; confirms ARMO C6/C9",
+  "confidence": "med",
+  "evidence": "ledger",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-26",
+  "types": [
+   "Armor"
+  ],
+  "convention": "Vanilla-set keyword swapped for the specific Requiem set keyword (Hide -> Fur AD3ADE, Steel -> Chainmail ADDD5E)",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 284,
+  "support_plugins": 3,
+  "spread": "Bruma dominant",
+  "held_out": "n/a; extends ARMO C7/C12",
+  "confidence": "med",
+  "evidence": "verifier fixed (material): every record gains a replacement",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-27",
+  "types": [
+   "Armor"
+  ],
+  "convention": "0C27BD MagicDisallowEnchanting on extra-slot accessories",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 84,
+  "support_plugins": 4,
+  "spread": "Glasses 24, Scarf 21, Wet and Cold 82 carry it",
+  "held_out": "n/a; confirms ARMO C8",
+  "confidence": "high",
+  "evidence": "fact 26",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-28",
+  "types": [
+   "Armor"
+  ],
+  "convention": "Survival warmth keywords (002ED9, CC0E1B, CC0E28, Frostfall)",
+  "class": "different-convention",
+  "layer": "input",
+  "support_rows": 169,
+  "support_plugins": 3,
+  "spread": "Blanket Scarf 21, Bruma 148",
+  "held_out": "n/a; extends ARMO call 5",
+  "confidence": "med",
+  "evidence": "survival-mod input",
+  "aaron_call": "Survival keywords: curation intent?"
+ },
+ {
+  "id": "GEAR-NPC-S2-29",
+  "types": [
+   "Armor"
+  ],
+  "convention": "Build-stamped and keywords_assign keywords written in",
+  "class": "baked",
+  "layer": "baked",
+  "support_rows": 252,
+  "support_plugins": 5,
+  "spread": "yes",
+  "held_out": "n/a; confirms ARMO C10-11",
+  "confidence": "high",
+  "evidence": "RFTI / config",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-30",
+  "types": [
+   "ConstructibleObject"
+  ],
+  "convention": "Temper: drop EPTempering OR + 05218E, one material HasPerk, one ingot",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 370,
+  "support_plugins": 3,
+  "spread": "Lunar Guard, Moonpath",
+  "held_out": "n/a; confirms COBJ #1-3",
+  "confidence": "high",
+  "evidence": "verified; live 0ADB77, 085DC5",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-31",
+  "types": [
+   "ConstructibleObject"
+  ],
+  "convention": "Daedric temper copies Requiem's night gate GetCurrentTime() > 23 AND 0CB413",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 2,
+  "support_plugins": 1,
+  "spread": "Bruma only",
+  "held_out": "n/a; contradicts COBJ lead L3",
+  "confidence": "med",
+  "evidence": "live 601A61; fact 31",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-32",
+  "types": [
+   "ConstructibleObject"
+  ],
+  "convention": "Retire = AD3B01 only (no GetLevel()==0); Bruma renames most retired recipes AUTH_NULL_* (129 / 139)",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 207,
+  "support_plugins": 3,
+  "spread": "Lions Mane 60, Dwemer 8",
+  "held_out": "n/a; confirms COBJ #6",
+  "confidence": "high",
+  "evidence": "rule rows; subject scan 115/139 Bruma target NULL items",
+  "aaron_call": "One retire idiom: AD3B01?"
+ },
+ {
+  "id": "GEAR-NPC-S2-33",
+  "types": [
+   "ConstructibleObject"
+  ],
+  "convention": "Dead cruft on disabled recipes (HasPerk 05218E, x2 counts)",
+  "class": "noise",
+  "layer": "input",
+  "support_rows": 30,
+  "support_plugins": 1,
+  "spread": "Bruma",
+  "held_out": "n/a",
+  "confidence": "high",
+  "evidence": "live 602411/602419",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-34",
+  "types": [
+   "ArmorAddon"
+  ],
+  "convention": "Cloak/cape addons to slot 46, hats gain Hair, Rogue Stalker ring/band swap",
+  "class": "unclear",
+  "layer": "input",
+  "support_rows": 44,
+  "support_plugins": 13,
+  "spread": "spread over 13 stage-1 plugins",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "cannot-tell",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-35",
+  "types": [
+   "ArmorAddon"
+  ],
+  "convention": "WeightSlider, WeaponAdjust, list order, presentation",
+  "class": "noise",
+  "layer": "input",
+  "support_rows": 93,
+  "support_plugins": 12,
+  "spread": "spread",
+  "held_out": "n/a",
+  "confidence": "high",
+  "evidence": "presentation",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-36",
+  "types": [
+   "Npc"
+  ],
+  "convention": "anvil_Aleyt 01EE1B:moonpath.esp (citizen) templated Stats+SpellList onto 09A54D REQ_LookTemplate_EncBandit03MissileKhajiitM (Authoria - Reqtificated - Moonpath.esp)",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 2,
+  "support_plugins": 1,
+  "spread": "Moonpath",
+  "held_out": "n/a",
+  "confidence": "med",
+  "evidence": "live read; same shape as Grand Solitude 039CFD",
+  "aaron_call": "Confirm bug"
+ },
+ {
+  "id": "GEAR-NPC-S2-37",
+  "types": [
+   "ConstructibleObject"
+  ],
+  "convention": "1Dwemer tempers 000805-000808:1Dwemer.esl and crafts 000A02-000A05 all on AD3B01; armour only placed in world, so it can't be tempered (Authoria - Reqtificated - Dwemer Armor.esp)",
+  "class": "suspected-bug",
+  "layer": "input",
+  "support_rows": 8,
+  "support_plugins": 1,
+  "spread": "Dwemer Armor",
+  "held_out": "n/a",
+  "confidence": "med",
+  "evidence": "live: no other COBJ/LVLI/CONT/OTFT makes 000800-803; 22 PlacedObjects in 1Dwemer.esl",
+  "aaron_call": "Is the temper disable intended?"
+ },
+ {
+  "id": "GEAR-NPC-S2-38",
+  "types": [
+   "ConstructibleObject"
+  ],
+  "convention": "AUTH_NULL ring recipes 602920/602921:BSAssets.esm disabled; live rings 60291F/60291E uncraftable (Bruma)",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 2,
+  "support_plugins": 1,
+  "spread": "Bruma",
+  "held_out": "n/a",
+  "confidence": "med",
+  "evidence": "verifier live scan",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-39",
+  "types": [
+   "Armor"
+  ],
+  "convention": "21 CYREnchArmorIronCuirass* variants AR 250 v base CYRArmorIronHeavyCuirass 0D51D1:BSHeartland.esm AR 275; CYRArmorFurHelmet 300014 variant 60 v base 50 (Bruma)",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 22,
+  "support_plugins": 1,
+  "spread": "Bruma",
+  "held_out": "n/a",
+  "confidence": "med",
+  "evidence": "subject scan; Requiem 012E49 = 250",
+  "aaron_call": "Which AR is meant?"
+ },
+ {
+  "id": "GEAR-NPC-S2-40",
+  "types": [
+   "ConstructibleObject"
+  ],
+  "convention": "Lunar Guard tempers require HasPerk 00088C:Kad_MoonMonkRobes.esp AND a Requiem perk (double gate)",
+  "class": "suspected-bug",
+  "layer": "input",
+  "support_rows": 10,
+  "support_plugins": 1,
+  "spread": "Lunar Guard",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "ledger",
+  "aaron_call": "Is the mod perk obtainable?"
+ },
+ {
+  "id": "GEAR-NPC-S2-41",
+  "types": [
+   "Armor"
+  ],
+  "convention": "Moonpath clothing-typed pieces with AR > 0 (Alfiq clothes 000804 5, hoods 000805/00080C 1; skins 047C94/055276/06369A probably NonPlayable)",
+  "class": "suspected-bug",
+  "layer": "input",
+  "support_rows": 6,
+  "support_plugins": 1,
+  "spread": "Moonpath",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "subject scan; ARMO C2",
+  "aaron_call": null
+ },
+ {
+  "id": "GEAR-NPC-S2-42",
+  "types": [
+   "Weapon"
+  ],
+  "convention": "Bruma bows 05BC3A/05BC44/300064:BSHeartland.esm speed 0.5/0.4 and hand damage 25/80/30 behind AD3B2D+AD3B2F, not build values",
+  "class": "suspected-bug",
+  "layer": "baked",
+  "support_rows": 12,
+  "support_plugins": 1,
+  "spread": "Bruma",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "verifier family",
+  "aaron_call": "Match build bow values?"
+ },
+ {
+  "id": "GEAR-NPC-S2-43",
+  "types": [
+   "ConstructibleObject"
+  ],
+  "convention": "Bruma hide -> leather recipes disabled with AD3B01; not compared to Requiem's leather path",
+  "class": "suspected-bug",
+  "layer": "input",
+  "support_rows": 5,
+  "support_plugins": 1,
+  "spread": "Bruma",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "subject scan",
+  "aaron_call": null
+ }
+]

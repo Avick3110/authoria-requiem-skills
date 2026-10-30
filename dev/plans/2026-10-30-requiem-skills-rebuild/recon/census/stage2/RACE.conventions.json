@@ -1,0 +1,386 @@
+[
+ {
+  "id": "RACE-1",
+  "types": [
+   "Race"
+  ],
+  "convention": "Creature races: add REQ_Trait_Armor_<closest Requiem creature>, +Healing_<X> for regenerators, keep source ability, omit FX traits; resistances delivered through the patch-edited source ability (REQ_AbHide resists) rather than REQ_Trait_Resist_<X> (house variant)",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 881,
+  "support_plugins": 25,
+  "spread": "Glenmoril 210, Vigilant 118, Dac0da 103, Bruma 78, TOK 57; holds in 20+ plugins. Armor w/o Resist: Glenmoril 140/10, Vigilant 84/4, Dac0da 68/2",
+  "held_out": "follows on Armor; held-out uses Resist_<X> more: Rot Below 8/12 armoured races, Shades 1/4",
+  "confidence": "high",
+  "evidence": "Requiem GiantRace/TrollRace/ChaurusRace/BearBlackRace reads; doc verifier: zzzGHAbMudSpawn 012E07 Fire 50/Poison 100/drain Shock 50/Frost 25; 107 Glenmoril-patch spells carry *Resistance effects; per-race parity unverified (lead)",
+  "aaron_call": "Teach either resist route (Resist_<X> or source ability) with a parity check?"
+ },
+ {
+  "id": "RACE-2",
+  "types": [
+   "Race"
+  ],
+  "convention": "Humanoid clones get the full ActorEffect set of the closest vanilla race (609AF0 NoHealthRegen, 82CC14 MassEffect, Blood/Heritage/Physique/Cuisine)",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 65,
+  "support_plugins": 7,
+  "spread": "TOK, Bruma, Kaidan, Penitus Occulatus, Frozen Heart, Auri, Snow Elven Arsenal",
+  "held_out": "follows (Rot Below: 10 races get the Nord set)",
+  "confidence": "high",
+  "evidence": "Requiem Nord/HighElf/Khajiit reads; CustomRacePatching gate (Playable and Starting sum<=200) never fires: live, 6/590 patched races Playable, all sum 300",
+  "aaron_call": null
+ },
+ {
+  "id": "RACE-3",
+  "types": [
+   "Race"
+  ],
+  "convention": "Strip inherited REQ_NULL_/REQ_LEGACY_/REQ_DEPRECATED_ race abilities and swap in REQ_Trait_*",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 78,
+  "support_plugins": 12,
+  "spread": "TOK 19, Glenmoril 13, Lucien 8, Bruma 7, Races Merge 7",
+  "held_out": "follows (Rot Below 7)",
+  "confidence": "med",
+  "evidence": "76/78 removals paired with adds; Requiem NordRace holds only REQ_Trait_*; 090357 replaced by Resist_Dwarven* with identical effects",
+  "aaron_call": null
+ },
+ {
+  "id": "RACE-4",
+  "types": [
+   "Race"
+  ],
+  "convention": "Starting Health/Magicka/Stamina at Requiem scale, copied from a clone's comparable where one exists, else judged (creature Health 100-1000, Stamina up to 10000, Magicka 0 for non-casters)",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 690,
+  "support_plugins": 21,
+  "spread": "Glenmoril 276/690; Dac0da, Vigilant, Bruma, AFDI 30-100 each",
+  "held_out": "follows (Rot Below 27, Shades 3)",
+  "confidence": "med",
+  "evidence": "GiantRace 250/0/800 = MudGiant; TOK Khajiit = KhajiitRace; DraugrRace Stamina 10000",
+  "aaron_call": null
+ },
+ {
+  "id": "RACE-5",
+  "types": [
+   "Race"
+  ],
+  "convention": "Requiem race keywords: REQ_DropsBloodKeyword 586728, REQ_MinorKnockdownImmunity 5F367F, REQ_SneakAttackImmunity 4F6D1E, REQ_ActorTypeDaedraNoFlesh 44BE5E, ActorType*/immunity keywords as the comparable",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 651,
+  "support_plugins": 19,
+  "spread": "Glenmoril 190, Dac0da 131, Vigilant 130, Bruma 60",
+  "held_out": "follows (Rot Below 37, Shades 4)",
+  "confidence": "med",
+  "evidence": "Requiem Draugr/Giant/Troll/Bear/HighElf reads; live FrostbiteSpiderRaceGiant has 5F367F",
+  "aaron_call": null
+ },
+ {
+  "id": "RACE-6",
+  "types": [
+   "Race"
+  ],
+  "convention": "Narrow EquipmentFlags from source catch-all to the weapon types the race uses",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 438,
+  "support_plugins": 15,
+  "spread": "Glenmoril 181, Vigilant 105, Dac0da 85",
+  "held_out": "follows (Rot Below 29, Shades 5)",
+  "confidence": "med",
+  "evidence": "Requiem Troll/Bear/SabreCat HandToHand, Giant TwoHandSword; no code touches it",
+  "aaron_call": null
+ },
+ {
+  "id": "RACE-7",
+  "types": [
+   "Race"
+  ],
+  "convention": "UnarmedDamage at Requiem scale (beasts/giants 50-90, undead 20, automata 300+, humanoids 5-8); values per-race judgement",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 360,
+  "support_plugins": 16,
+  "spread": "Glenmoril 138, Dac0da 70, Vigilant 68",
+  "held_out": "follows (Rot Below 9, Shades 4)",
+  "confidence": "med",
+  "evidence": "Requiem GiantRace/TrollRace 60, DraugrRace 20, DwarvenCenturion 300; MudGiant 90 = judgement",
+  "aaron_call": null
+ },
+ {
+  "id": "RACE-8",
+  "types": [
+   "Race"
+  ],
+  "convention": "UnarmedReach 96/64 default -> 73",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 89,
+  "support_plugins": 5,
+  "spread": "Glenmoril 50, Bruma 20; only 5 plugins",
+  "held_out": "not seen",
+  "confidence": "med",
+  "evidence": "Requiem writes 96->73 on 24 races; 73 its commonest value",
+  "aaron_call": null
+ },
+ {
+  "id": "RACE-9",
+  "types": [
+   "Race"
+  ],
+  "convention": "Regen: creatures 0/0/10; magical beings Stamina regen 1000 with Starting Stamina 10000; non-caster Magicka regen 0",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 164,
+  "support_plugins": 14,
+  "spread": "Vigilant, Dac0da, AFDI lead",
+  "held_out": "little (Rot Below 4)",
+  "confidence": "low",
+  "evidence": "verifier: AtronachFlame/Storm, Ash Guardian 0/15/1000; 23 Requiem winners",
+  "aaron_call": null
+ },
+ {
+  "id": "RACE-10",
+  "types": [
+   "Race"
+  ],
+  "convention": "BaseMass at Requiem values (Giant 10, Dragon 20, Draugr 1.5, wisp 2.2)",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 132,
+  "support_plugins": 16,
+  "spread": "Dac0da 44, Vigilant 27",
+  "held_out": "follows (Rot Below 14, Shades 2)",
+  "confidence": "med",
+  "evidence": "fact 19; C# never sets mass; family unsampled by verifier",
+  "aaron_call": null
+ },
+ {
+  "id": "RACE-11",
+  "types": [
+   "Race"
+  ],
+  "convention": "Creature skill boosts: one lead proficiency ~35 (+5-20 minor); slot position cosmetic (re-slots = noise)",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 500,
+  "support_plugins": 12,
+  "spread": "genuine adds Vigilant/Dac0da/Glenmoril; Bruma re-slots only",
+  "held_out": "follows (Shades 13, Rot Below 16 rows)",
+  "confidence": "med",
+  "evidence": "DraugrMagicRace Illusion 35, MG07DogRace Sneak 35, DwarvenSphere Illusion 95; slots are independent pairs",
+  "aaron_call": null
+ },
+ {
+  "id": "RACE-12",
+  "types": [
+   "Race"
+  ],
+  "convention": "BaseCarryWeight: playable-race clones 300 -> matching Requiem race value (85-125); creatures 200, Giant-like 9999, werewolf-like 2000",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 39,
+  "support_plugins": 9,
+  "spread": "TOK 10; Rot Below 11 (held-out)",
+  "held_out": "follows",
+  "confidence": "med",
+  "evidence": "TOK Khajiit 90 = KhajiitRace; Requiem GiantRace 9999, WerewolfBeast 2000; build's 110 never reached",
+  "aaron_call": null
+ },
+ {
+  "id": "RACE-13",
+  "types": [
+   "Race"
+  ],
+  "convention": "RegenHpInCombat flag on regenerating monsters; Glenmoril also adds to wolves/bears",
+  "class": "house-convention",
+  "layer": "input",
+  "support_rows": 48,
+  "support_plugins": 8,
+  "spread": "mostly Glenmoril and Races Merge; 31 single-use patterns",
+  "held_out": "Rot Below 7 Flags rows",
+  "confidence": "low",
+  "evidence": "trolls Requiem-aligned; Requiem Wolf/Bear/SabreCat lack it; fact 15",
+  "aaron_call": "Are the wolf/bear RegenHpInCombat adds deliberate?"
+ },
+ {
+  "id": "RACE-14",
+  "types": [
+   "Race"
+  ],
+  "convention": "AttackRace set on modded creatures to the vanilla analogue",
+  "class": "house-convention",
+  "layer": "input",
+  "support_rows": 34,
+  "support_plugins": 2,
+  "spread": "Bruma master patch and Moonpath only",
+  "held_out": "not seen",
+  "confidence": "low",
+  "evidence": "no Requiem or code source; family unsampled",
+  "aaron_call": "Is the AttackRace mapping right per race?"
+ },
+ {
+  "id": "RACE-15",
+  "types": [
+   "Race"
+  ],
+  "convention": "Races Merge master patch carries source-mod values over Requiem (TNT trolls height/weight, skeletons, biped slots, TDM boar BPTD, Races Redone playable stats)",
+  "class": "house-convention",
+  "layer": "input",
+  "support_rows": 23,
+  "support_plugins": 2,
+  "spread": "Races Merge only (Dac0da 1 row)",
+  "held_out": "n/a",
+  "confidence": "med",
+  "evidence": "TrollRace tree: Races Merge Weight 1.5 = TNT-BiggerTrolls, Requiem 1; Starting Health 300 vs Requiem 150",
+  "aaron_call": "Is TrollRace Starting Health 300 intended?"
+ },
+ {
+  "id": "RACE-16",
+  "types": [
+   "Race"
+  ],
+  "convention": "Reorders (attacks, movement names, equipment slots), HeadData re-serialisation, equal attack re-lists, presentation fields",
+  "class": "noise",
+  "layer": "input",
+  "support_rows": 1400,
+  "support_plugins": 25,
+  "spread": "all",
+  "held_out": "same",
+  "confidence": "high",
+  "evidence": "script rules 1091 reorder rows; HeadData tree identical; 39/44 attack multisets equal",
+  "aaron_call": null
+ },
+ {
+  "id": "RACE-17",
+  "types": [
+   "Race"
+  ],
+  "convention": "No downstream bake for races: nothing a race patch writes is build output",
+  "class": "code-fact",
+  "layer": "input",
+  "support_rows": 0,
+  "support_plugins": 0,
+  "spread": "n/a",
+  "held_out": "n/a",
+  "confidence": "high",
+  "evidence": "RFTI output 0 RACE; CustomRacePatching gate needs Playable and Starting sum<=200; live: 6 Playable patched races, all sum 300 -> bake package empty; gate evaluated on the winner record (Races Merge for the 6 vanilla Playable races)",
+  "aaron_call": null
+ },
+ {
+  "id": "RACE-18",
+  "types": [
+   "Race"
+  ],
+  "convention": "Waterwalking 0173C2:Dragonborn.esm on spirit/wraith races",
+  "class": "house-convention",
+  "layer": "input",
+  "support_rows": 22,
+  "support_plugins": 2,
+  "spread": "Vigilant, Glenmoril",
+  "held_out": "follows (Rot Below 4)",
+  "confidence": "low",
+  "evidence": "no Requiem race read for it; unverified",
+  "aaron_call": "Is waterwalking on spirits a house idiom?"
+ },
+ {
+  "id": "RACE-19",
+  "types": [
+   "Race"
+  ],
+  "convention": "zzzCHShoggothRace 080D5D:Vigilant.esm (Reqtificated - Vigilant): Starting[Health] = -150 (source 125), also Stamina 100 -> 1000; expected positive Requiem-scale base",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 1,
+  "support_plugins": 1,
+  "spread": "see convention",
+  "held_out": "n/a",
+  "confidence": "high",
+  "evidence": "live winner read: Health -150 / Magicka 0 / Stamina 1000",
+  "aaron_call": null
+ },
+ {
+  "id": "RACE-20",
+  "types": [
+   "Race"
+  ],
+  "convention": "zzzChScorpionGiantRace 534133:Vigilant.esm (also 534134 ScorpionLarge, 080D5E ShoggothMother): BaseMass 0.25 (source 4/3.5/5); expected ~4 like FrostbiteSpiderRaceGiant whose traits it copies",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 3,
+  "support_plugins": 1,
+  "spread": "see convention",
+  "held_out": "n/a",
+  "confidence": "med",
+  "evidence": "live: FrostbiteSpiderRaceGiant BaseMass 4, FrostbiteSpiderRace 0.25",
+  "aaron_call": null
+ },
+ {
+  "id": "RACE-21",
+  "types": [
+   "Race"
+  ],
+  "convention": "Not a bug: ~140 Glenmoril creature races carry REQ_Trait_Armor_<X> without REQ_Trait_Resist_<X>; resists come through the patched source ability. Lead: per-race resist parity vs the comparable (e.g. zzzGHMudWormRace 012EAE ability unread)",
+  "class": "lead",
+  "layer": "input",
+  "support_rows": 140,
+  "support_plugins": 3,
+  "spread": "see convention",
+  "held_out": "Rot Below 8/12 and Shades 1/4 armoured races use Resist_<X>",
+  "confidence": "med",
+  "evidence": "doc verifier: zzzGHAbMudSpawn Fire 50/Poison 100; 107 Glenmoril-patch spells with *Resistance effects",
+  "aaron_call": null
+ },
+ {
+  "id": "RACE-22",
+  "types": [
+   "Race"
+  ],
+  "convention": "60+ patched races whose winner carries no REQ_Trait_* (measured in 5 plugins: Glenmoril 23, Vigilant 13, Dac0da 10, Bruma 9, Races Merge 5; other 22 unmeasured), e.g. zzzRevAUFalmerRace 2E0322:Glenmoril.esm lacks Resist_Falmer AE3AE5 + Falmer_TheBetrayed; zzzCHMagicBroomRace 0E04DF:Vigilant.esm has no ActorEffect",
+  "class": "suspected-bug",
+  "layer": "input",
+  "support_rows": 60,
+  "support_plugins": 5,
+  "spread": "see convention",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "live: Requiem FalmerRace vs patched race; some legit (Requiem DogRace has none)",
+  "aaron_call": null
+ },
+ {
+  "id": "RACE-23",
+  "types": [
+   "Race"
+  ],
+  "convention": "CJ03 Test races in The Rot Below patched with flags; CJ03DwarvenBallistaRaceTest keeps LEGACY 090357",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 3,
+  "support_plugins": 1,
+  "spread": "see convention",
+  "held_out": "in held-out plugin",
+  "confidence": "low",
+  "evidence": "family flags; verifier references scan",
+  "aaron_call": null
+ },
+ {
+  "id": "RACE-24",
+  "types": [
+   "Race"
+  ],
+  "convention": "zzzGHDweGearRace (Glenmoril) keeps REQ_LEGACY_AbDwarvenAutomatons 090357 where siblings got Resist_Dwarven*",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 1,
+  "support_plugins": 1,
+  "spread": "see convention",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "verifier; harmless (legacy spell still live)",
+  "aaron_call": null
+ }
+]

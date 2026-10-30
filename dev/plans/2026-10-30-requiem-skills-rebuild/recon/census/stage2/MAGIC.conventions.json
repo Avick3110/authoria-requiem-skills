@@ -1,0 +1,533 @@
+[
+ {
+  "id": "MAGIC-1",
+  "types": [
+   "Spell"
+  ],
+  "convention": "Creature-ability spells swap REQ_NULL_Ab* (Skyrim.esm resist/weakness/waterbreathing/blind) for REQ_AbHide_* (Requiem.esp 0008CC-D1, 0008DD/DE, 0008F8, 000A15-18) at the same magnitude",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 1000,
+  "support_plugins": 14,
+  "spread": "Glenmoril 362, Vigilant 236, Dac0da 172, Unslaad 112, AFDI 58, Lucien 17",
+  "held_out": "follows (RB Adabelle/FungalDraugr, FS PyromancerGhost/ScarletSurge; magnitude kept)",
+  "confidence": "high",
+  "evidence": "Requiem.esp 212 spells use AbHide, 8 REQ_NULL; fact 3; verifier magnitude-preserved pairs",
+  "aaron_call": null
+ },
+ {
+  "id": "MAGIC-2",
+  "types": [
+   "Spell"
+  ],
+  "convention": "Resist Damage 0CAB90 converted to REQ_AbHide_FortifyArmorRating 0008CB, re-valued x2-x6 to Requiem armour-trait scale: a minority variant (the majority drops it, the Requiem-consistent reading; see S3)",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 24,
+  "support_plugins": 5,
+  "spread": "Dac0da 16; other plugins drop 0CAB90 (199 spells / 201 rows)",
+  "held_out": "FS Putridman 500 -> 800 follows the convert variant",
+  "confidence": "med",
+  "evidence": "REQ_Trait_Armor_* use 0008CB (03280E 360, AD39D9 1020)",
+  "aaron_call": "Drop or convert Resist Damage? Drop is the majority and fits Requiem"
+ },
+ {
+  "id": "MAGIC-3",
+  "types": [
+   "Spell"
+  ],
+  "convention": "NPC/creature attack spells: mod-owned damage magnitudes raised (ARR median ~x2, per spell); Requiem rescales vanilla creature spells to tier values, x2 to ~x6, no fixed factor",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 580,
+  "support_plugins": 12,
+  "spread": "median ratio Glenmoril 2.14, Dac0da 2.0, Unslaad 2.0, AFDI 2.0, Vigilant 1.5",
+  "held_out": "follows (RB 1.82 over 26 pairs, FS 2.0 over 7)",
+  "confidence": "med",
+  "evidence": "Requiem.esp winners v Skyrim.esm: StormAtronach bolt -> 50, chain -> 60, DwarvenSpider spit 15/25 -> 85 (x3.4-5.7), Centurion steam 75 -> 150, Falmer poison 5-12 -> 33 (>= x3)",
+  "aaron_call": null
+ },
+ {
+  "id": "MAGIC-4",
+  "types": [
+   "Spell",
+   "Scroll"
+  ],
+  "convention": "Player-tome spells and scrolls rescaled down to MR scale",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 200,
+  "support_plugins": 4,
+  "spread": "Apocalypse 0.53 (99 spell + 69 scroll pairs), Become a Bard 0.5, LOTD 0.37",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "ledger paired magnitude ratios; MR tier tables",
+  "aaron_call": null
+ },
+ {
+  "id": "MAGIC-5",
+  "types": [
+   "Spell",
+   "ObjectEffect",
+   "Scroll"
+  ],
+  "convention": "Destruction projectiles/staves gain MR impact effects (0153D3 stagger, 005AAx slow/burn/cremation, 00760A)",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 710,
+  "support_plugins": 15,
+  "spread": "Vigilant 226, Apocalypse 196, Glenmoril 146, Dac0da 47, Bruma 16, Unslaad 14",
+  "held_out": "follows (RB 14, FS 13)",
+  "confidence": "high",
+  "evidence": "0153D3 = MR REQ_Effect_DestructionGM_Impact_Stagger on a Skyrim.esm FormID; MR staves 005AB0/005AAB",
+  "aaron_call": null
+ },
+ {
+  "id": "MAGIC-6",
+  "types": [
+   "Spell"
+  ],
+  "convention": "Vanilla perk-proc effects copied into NPC spells dropped (0F3930 REQ_Destruction3_Fireball_Fear, 0F3F0C/0F3F0D PerkDisintegrate*)",
+  "class": "house-convention",
+  "layer": "input",
+  "support_rows": 17,
+  "support_plugins": 6,
+  "spread": "Apocalypse 6, FS 4, Vigilant 3, RB 2, Unslaad 1",
+  "held_out": "follows (RB, FS)",
+  "confidence": "low",
+  "evidence": "ledger; MGEF identities read live",
+  "aaron_call": "Confirm as a rule?"
+ },
+ {
+  "id": "MAGIC-7",
+  "types": [
+   "Spell"
+  ],
+  "convention": "Spell BaseCost hand-set on MR school/tier table with ManualCostCalc",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 663,
+  "support_plugins": 13,
+  "spread": "BaseCost rows: Apocalypse 173, Vigilant 83, Bruma 29, Glenmoril 18, Dac0da 13, Unslaad 9; 94 cost rows already MCC in source (2 exceptions)",
+  "held_out": "follows (FS 6 MCC / 4 costs, RB 9 MCC / 2 costs)",
+  "confidence": "high",
+  "evidence": "MR 540/571 SPEL MCC; Requiem.esp 216",
+  "aaron_call": null
+ },
+ {
+  "id": "MAGIC-8",
+  "types": [
+   "Spell"
+  ],
+  "convention": "Spell ChargeTime by tier 0.25/0.5/0.75/1/1.25 summons/3 Master BothHands rituals",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 233,
+  "support_plugins": 12,
+  "spread": "Apocalypse 142 (61%); Bruma 22 on-ladder; Vigilant 43 mostly 0.5; 13 off-ladder",
+  "held_out": "follows (FS 0.75 x3)",
+  "confidence": "med",
+  "evidence": "MR ChargeTime distribution over 571 spells",
+  "aaron_call": null
+ },
+ {
+  "id": "MAGIC-9",
+  "types": [
+   "Spell"
+  ],
+  "convention": "NPC/creature attack spells gain NoAbsorbOrReflect and/or IgnoreResistance",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 92,
+  "support_plugins": 10,
+  "spread": "Apocalypse 18/22, Vigilant 7, Dac0da 5/3, Bruma 6/6, Remiel 5",
+  "held_out": "follows (RB 7/3, FS 1/1)",
+  "confidence": "med",
+  "evidence": "MR summons NoAbsorbOrReflect; bound/necro IgnoreResistance; creature-attack half unverified",
+  "aaron_call": null
+ },
+ {
+  "id": "MAGIC-10",
+  "types": [
+   "Spell"
+  ],
+  "convention": "HalfCostPerk = REQ_<School>_Mastery_* matching school, loose tier fit",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 80,
+  "support_plugins": 7,
+  "spread": "Vigilant 48 (60%), Glenmoril 11",
+  "held_out": "not exercised",
+  "confidence": "low",
+  "evidence": "MR/Requiem conjure perk/cost overlap (142 read)",
+  "aaron_call": "Rough tier fit OK, school-match mandatory?"
+ },
+ {
+  "id": "MAGIC-11",
+  "types": [
+   "Spell"
+  ],
+  "convention": "Spell Range summons 20, area 30, bound/reanimate 0; Master ritual summons BothHands 013F45",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 7,
+  "support_plugins": 3,
+  "spread": "CC S&S 3, Vigilant 2",
+  "held_out": "FS SparkofLife 0->30 follows",
+  "confidence": "low",
+  "evidence": "MR Range 0x356/30x98/20x28; 013F45 only on Master spells",
+  "aaron_call": null
+ },
+ {
+  "id": "MAGIC-12",
+  "types": [
+   "Spell"
+  ],
+  "convention": "New ability spells copy REQ_Trait_* shape (UnarmedDamage 0008C7, Boss)",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 11,
+  "support_plugins": 4,
+  "spread": "Dragon Tweaks 8 are Authoria_DragonWeatherMarker_* (no precedent)",
+  "held_out": "not exercised",
+  "confidence": "low",
+  "evidence": "REQ_Trait_Boss_* x6 in Requiem.esp",
+  "aaron_call": null
+ },
+ {
+  "id": "MAGIC-13",
+  "types": [
+   "MagicEffect"
+  ],
+  "convention": "MGEF PowerMod keywords: NoDurationScaling 412EDF on PAM, NoMagnitudeScaling 3FCA4C on PAD/cloak/summon, SpellConcentration 2FFEAD, PoisonSpell AD3904, Absorb ADDDF7, Nox_KW_*",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 767,
+  "support_plugins": 9,
+  "spread": "Apocalypse 88% (636/719); Bruma 46, Dac0da 16, others <=5",
+  "held_out": "not followed: neither held-out patch tags its MGEFs",
+  "confidence": "med",
+  "evidence": "Requiem 6.0.2 changelog; 0 Reqtificator hits; stricter than Requiem (NoMag 140/148 PAD v 19/226)",
+  "aaron_call": "Required on every new MGEF?"
+ },
+ {
+  "id": "MAGIC-14",
+  "types": [
+   "MagicEffect"
+  ],
+  "convention": "NoDurationScaling on instant (NoDuration) effects",
+  "class": "noise",
+  "layer": "input",
+  "support_rows": 75,
+  "support_plugins": 1,
+  "spread": "Apocalypse only",
+  "held_out": "not followed",
+  "confidence": "med",
+  "evidence": "Requiem 0/164 carriers have NoDuration flag",
+  "aaron_call": null
+ },
+ {
+  "id": "MAGIC-15",
+  "types": [
+   "MagicEffect"
+  ],
+  "convention": "Absorb/drain MGEFs gated HasKeyword ActorTypeDwarven 01397A==0 + HasMagicEffectKeyword REQ_NoLifeDrainAllowed 2EA062==0",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 13,
+  "support_plugins": 4,
+  "spread": "Vigilant 8, Dac0da 3, LOTD 1",
+  "held_out": "follows (FS GRVEScarletFFAimed)",
+  "confidence": "med",
+  "evidence": "Requiem 027F96 conditions",
+  "aaron_call": null
+ },
+ {
+  "id": "MAGIC-16",
+  "types": [
+   "MagicEffect"
+  ],
+  "convention": "Destruction damage MGEFs get NoDeathDispel; cloak MGEFs PowerAffectsDuration + NoMag keyword, no DispelWithKeywords",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 29,
+  "support_plugins": 3,
+  "spread": "NoDeathDispel Apocalypse only; cloak Vigilant/Dac0da",
+  "held_out": "not exercised",
+  "confidence": "low",
+  "evidence": "Requiem Destruction 69/76; Requiem cloaks 0/20 DispelWithKeywords",
+  "aaron_call": null
+ },
+ {
+  "id": "MAGIC-17",
+  "types": [
+   "MagicEffect"
+  ],
+  "convention": "Identical condition re-saves, MinimumSkillLevel zeroed, FX/sound swaps",
+  "class": "noise",
+  "layer": "input",
+  "support_rows": 110,
+  "support_plugins": 6,
+  "spread": "Apocalypse dominant",
+  "held_out": "n/a",
+  "confidence": "med",
+  "evidence": "EvilTwin 020FD4 identical; Requiem MinSkill tracks tier",
+  "aaron_call": null
+ },
+ {
+  "id": "MAGIC-18",
+  "types": [
+   "ObjectEffect"
+  ],
+  "convention": "ENCH hand-valued: Amount == Cost and NoAutoCalc",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 448,
+  "support_plugins": 12,
+  "spread": "Glenmoril 161, Apocalypse 72, Vigilant 28, LOTD 22, Bruma 11; 302 equal pairs, 0 unequal; 15 ENCH change one field only",
+  "held_out": "follows (FS 175/175, RB 150/150; RB 9A39CC Amount 21 -> 115 only; all NoAutoCalc)",
+  "confidence": "high",
+  "evidence": "MR 10FCF6 165/165 NoAutoCalc; Requiem 07217D, 072180",
+  "aaron_call": null
+ },
+ {
+  "id": "MAGIC-19",
+  "types": [
+   "ObjectEffect"
+  ],
+  "convention": "Staff/weapon ENCH effects retuned per item to MR staff comparables; no uniform factor",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 1850,
+  "support_plugins": 23,
+  "spread": "Glenmoril x1.83, Vigilant x2.4 up; LOTD 0.6, Unslaad 0.56, Dac0da 0.68, Apocalypse 0.67 down",
+  "held_out": "RB x0.65, FS x1.1 (per item)",
+  "confidence": "low",
+  "evidence": "MR IcySpear 60->150, slow 50->12.5",
+  "aaron_call": "Is doubling enchant magnitudes a rule?"
+ },
+ {
+  "id": "MAGIC-20",
+  "types": [
+   "ObjectEffect"
+  ],
+  "convention": "ENCH flat Amount 100 on gun/staff enchants",
+  "class": "house-convention",
+  "layer": "input",
+  "support_rows": 156,
+  "support_plugins": 2,
+  "spread": "Glenmoril 152, Bruma 4",
+  "held_out": "not followed (FS 175, RB 150)",
+  "confidence": "low",
+  "evidence": "Requiem staves 25-965 per tier",
+  "aaron_call": "Flat 100 intended?"
+ },
+ {
+  "id": "MAGIC-21",
+  "types": [
+   "ObjectEffect"
+  ],
+  "convention": "ENCH ChargeTime set per staff (0.5 default, 1 tier-4/undead)",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 155,
+  "support_plugins": 5,
+  "spread": "Glenmoril 97, Apocalypse 52",
+  "held_out": "not exercised",
+  "confidence": "low",
+  "evidence": "Requiem 0/0.5/1/3; MR 0.5->1 on tier-4",
+  "aaron_call": null
+ },
+ {
+  "id": "MAGIC-22",
+  "types": [
+   "ObjectEffect"
+  ],
+  "convention": "ENCH BaseEnchantment nulled or re-pointed when effects replaced",
+  "class": "house-convention",
+  "layer": "input",
+  "support_rows": 21,
+  "support_plugins": 3,
+  "spread": "LOTD 15",
+  "held_out": "not exercised",
+  "confidence": "low",
+  "evidence": "Requiem Banish0/Fear0 null base",
+  "aaron_call": "Null base intended on LOTD rings?"
+ },
+ {
+  "id": "MAGIC-23",
+  "types": [
+   "Scroll"
+  ],
+  "convention": "Scroll Value == BaseCost, ManualCostCalc, tier ChargeTime, Weight 0.5",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 355,
+  "support_plugins": 4,
+  "spread": "Apocalypse 87-90%; Unslaad 2 equal; Glenmoril 3 unequal; others ChargeTime 0.5",
+  "held_out": "n/a",
+  "confidence": "med",
+  "evidence": "MR 40/40 SCRL Value==BaseCost with MCC",
+  "aaron_call": null
+ },
+ {
+  "id": "MAGIC-24",
+  "types": [
+   "Book"
+  ],
+  "convention": "Spell tomes priced on MR ladder 100/300-400/500-700/800-900/2000",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 359,
+  "support_plugins": 15,
+  "spread": "Apocalypse 175, Bruma 47, ToK 10, Glenmoril flat 500, Bard flat 100; Vigilant 1000-4000, Unslaad to 5000, DGA 2500 above",
+  "held_out": "follows (FS 345->500 x3, 645->700)",
+  "confidence": "med",
+  "evidence": "40 MR REQ_Tome_* winners",
+  "aaron_call": "Tomes above 2000 and Glenmoril flat 500 deliberate?"
+ },
+ {
+  "id": "MAGIC-25",
+  "types": [
+   "Book"
+  ],
+  "convention": "LOTD display support: VendorItem* keywords, dbm_treasmapscript, inventory art",
+  "class": "house-convention",
+  "layer": "input",
+  "support_rows": 190,
+  "support_plugins": 2,
+  "spread": "LOTD only",
+  "held_out": "n/a",
+  "confidence": "med",
+  "evidence": "LOTD compat, not Requiem",
+  "aaron_call": null
+ },
+ {
+  "id": "MAGIC-26",
+  "types": [
+   "Shout"
+  ],
+  "convention": "Custom shouts flat RecoveryTime per word; Dac0da force shouts re-pointed to Unrelenting Force 013F39/013F3A",
+  "class": "requiem-aligned",
+  "layer": "input",
+  "support_rows": 27,
+  "support_plugins": 2,
+  "spread": "Vigilant 21, Dac0da 6",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "Requiem.esp custom SHOU flat (UnrelentingForceStrong 30/30/30)",
+  "aaron_call": "Flat or escalate?"
+ },
+ {
+  "id": "MAGIC-27",
+  "types": [
+   "Spell"
+  ],
+  "convention": "S1: 10F6B4:Vigilant.esm zzzCHConjureVernaccus (Authoria - Reqtificated - Vigilant.esp): BaseCost 350 without ManualCostCalc; written cost ignored",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 1,
+  "support_plugins": 1,
+  "spread": "n/a",
+  "held_out": "n/a",
+  "confidence": "high",
+  "evidence": "verifier live read; Bourlor 13BAAF has MCC",
+  "aaron_call": "Confirm and fix?"
+ },
+ {
+  "id": "MAGIC-28",
+  "types": [
+   "Spell"
+  ],
+  "convention": "S2: 10F6B4 Vernaccus / 13BAAF Bourlor (Vigilant): CastDuration 3 (inert on FireAndForget), ChargeTime 0/0.5; expected ChargeTime 3 Master BothHands",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 2,
+  "support_plugins": 1,
+  "spread": "n/a",
+  "held_out": "n/a",
+  "confidence": "med",
+  "evidence": "MR 571/571 CastDuration 0",
+  "aaron_call": "Deliberate 3 s cast + BothHands?"
+ },
+ {
+  "id": "MAGIC-29",
+  "types": [
+   "Spell"
+  ],
+  "convention": "S3: Resist Damage 0CAB90 removed without replacement on 199 creature abilities / 201 rows (e.g. 00795F:Glenmoril.esm zzzLrhAbGhoul; Mite 60, Gulakhan 50, Flyman 30). Weak: drop is the Requiem-consistent reading (0CAB90 is REQ_NULL_AbResistDamage; Requiem leaves it only on 7 REQ_NULL_* spells); converting to 0008CB (Dac0da/FS) is the alternative",
+  "class": "suspected-bug",
+  "layer": "input",
+  "support_rows": 199,
+  "support_plugins": 5,
+  "spread": "n/a",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "removed Glenmoril 86, Vigilant 53, Dac0da 35, Unslaad 22 v 24 0008CB adds; live 00795F source has no armour effect, winner keeps its 5 AbHide-able effects and drops Resist Damage 30",
+  "aaron_call": "Drop (Requiem-consistent, majority) or convert to 0008CB?"
+ },
+ {
+  "id": "MAGIC-30",
+  "types": [
+   "Spell"
+  ],
+  "convention": "S4: 372295/372298:Glenmoril.esm throwing knives: HalfCostPerk 0C44BC Adept Conjuration on Destruction spells",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 2,
+  "support_plugins": 1,
+  "spread": "n/a",
+  "held_out": "n/a",
+  "confidence": "high",
+  "evidence": "verifier live read",
+  "aaron_call": "Confirm and fix?"
+ },
+ {
+  "id": "MAGIC-31",
+  "types": [
+   "Scroll"
+  ],
+  "convention": "S5: 03AF3B/03AF41/1A7926/083FAB:Apocalypse - Magic of Skyrim.esp scrolls (MysticWind, CircleOfTheMoons, Willpower, Transcendence): BaseCost 98/131/120/1264 -> 0 with Value 45/120/200/500, no ManualCostCalc (engine autocalcs); expected BaseCost == Value with MCC",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 4,
+  "support_plugins": 1,
+  "spread": "n/a",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "ledger; 66/66 other Apocalypse pairs equal; live flags 0 / NoAbsorbOrReflect",
+  "aaron_call": "Confirm and fix? (low impact)"
+ },
+ {
+  "id": "MAGIC-32",
+  "types": [
+   "Spell"
+  ],
+  "convention": "S6: Glenmoril Blazing Cow ability lost 064459 (mag 10) with no replacement",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 1,
+  "support_plugins": 1,
+  "spread": "n/a",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "verifier note; spell FormID not recorded",
+  "aaron_call": "Confirm and fix?"
+ },
+ {
+  "id": "MAGIC-33",
+  "types": [
+   "Spell"
+  ],
+  "convention": "S7: 13 spells with off-ladder ChargeTime (Glenmoril knives 0.2, Vigilant Firefly 0.3, Dac0da HealthDrain 0.3, ToK Shapeshift 1.5, GCoN Recall 2, Apocalypse FingerOfDeath 0.375); noise or outlier",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 13,
+  "support_plugins": 1,
+  "spread": "n/a",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "ledger",
+  "aaron_call": "Ladder value or deliberate?"
+ }
+]

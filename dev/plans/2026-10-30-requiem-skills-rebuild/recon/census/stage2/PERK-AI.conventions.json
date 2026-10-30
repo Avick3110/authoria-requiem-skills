@@ -1,0 +1,276 @@
+[
+ {
+  "id": "PERK-AI-1",
+  "types": [
+   "Perk"
+  ],
+  "convention": "Glenmoril armour-pierce perks (6: AP75/50/55/60/65/70): AP75->0.5, AP50->0.75, AP55->0.7 match Requiem steps (not a uniform halving); AP60/65/70 off-scale",
+  "class": "Requiem-aligned",
+  "layer": "input",
+  "support_rows": 12,
+  "support_plugins": 1,
+  "spread": "Glenmoril only for the AP ladder (6 perks, both halves)",
+  "held_out": "no held-out rows in this type; not testable",
+  "confidence": "med",
+  "evidence": "Live: Glenmoril orig 0.25/0.5/0.45/0.4/0.35/0.3 -> 0.5/0.75/0.7/0.65/0.4/0.5; Requiem 0FAB0A AP25=0.75, 0FAB0B AP50=0.5, 033869 AP30=0.7, 03DFD0 AP75=0.25 (verifier: fixed, reader's 'uniform halving' overturned)",
+  "aaron_call": "Fix Glenmoril AP60/65/70 to a monotonic ladder?"
+ },
+ {
+  "id": "PERK-AI-2",
+  "types": [
+   "Perk"
+  ],
+  "convention": "Source-mod damage-type multipliers (ModAttackDamage/CalculateWeaponDamage/ModSpellMagnitude/ModBashing) always shrink (46/46 paired rows) toward ~1.1-1.3; only 24/46 land on Requiem-like 1.1/1.2/1.5; 1.15 commonest off-step; none on 1.4",
+  "class": "Requiem-aligned (partial)",
+  "layer": "input",
+  "support_rows": 46,
+  "support_plugins": 8,
+  "spread": "8 plugins (LOTD, Fishing, Unslaad, Vigilant, Remiel, Dibella, UEGD + one); landing values 1.1 x14, 1.15 x12, 1.2 x8, 1.25 x3, 1.3 x3, 1.5 x2, 1.0 x2",
+  "held_out": "no held-out rows; not testable",
+  "confidence": "med",
+  "evidence": "Live: 03FFFA=1.1, 079343=1.5, 079349=1.5, 0BABE4=1.25 (REQ_OneHanded_WeaponMastery1) so 1.25 is a Requiem step; 03FFFA/0BABE4/079343 won by Requiem - Weapons and Armor Redone, not Requiem.esp; 1.2/1.4 steps not shown. LOTD 1.25->1.15, Fishing 1.25->1.1, Unslaad 1.5->1.2, Vigilant 1.5->1.3, Remiel 1.5+2->1.2",
+  "aaron_call": null
+ },
+ {
+  "id": "PERK-AI-3",
+  "types": [
+   "Perk"
+  ],
+  "convention": "Source-mod NPC extra-damage perks neutralised to x1 (Vigilant 0D2F45 2.5->1, Molag 09D82F 3->1); patch defines VIG_REQ_ perks instead",
+  "class": "house-convention",
+  "layer": "input",
+  "support_rows": 2,
+  "support_plugins": 1,
+  "spread": "Vigilant only",
+  "held_out": "no held-out rows",
+  "confidence": "med",
+  "evidence": "Pattern 10413 (added half only); verifier read Reqtificated - Vigilant.esp live",
+  "aaron_call": "Is the Vigilant NPC extra-damage perk meant to be a no-op (x2.5 -> x1)?"
+ },
+ {
+  "id": "PERK-AI-4",
+  "types": [
+   "Perk"
+  ],
+  "convention": "Patches define their own REQ_ boss-resist (x0.9 weapon damage + x0.7 incoming) and ExtraDamage (x4/x6/x2.5) perks to hand-carry what the build would stamp on AlreadyReqtified NPCs",
+  "class": "house-convention",
+  "layer": "input",
+  "support_rows": 10,
+  "support_plugins": 3,
+  "spread": "Glenmoril, Unslaad, Vigilant",
+  "held_out": "no held-out rows",
+  "confidence": "med",
+  "evidence": "GLEN_REQ_Perk_Boss_ResistMelee 000800, GLEN_REQ_ExtraDamage06 000801; Requiem ModAttackDamage perks >=2 are only Damage300 (3), NetchHunter (3), MS02ForswornEscape (10), PowerOrcBerserk (2); Reqtificator conf grep inconclusive",
+  "aaron_call": "Are stacked ExtraDamage values 4/6/2.5 intended against Requiem's 1.1-1.5 scale?"
+ },
+ {
+  "id": "PERK-AI-5",
+  "types": [
+   "CombatStyle"
+  ],
+  "convention": "Dragon combat retune (CircleMult/FallbackMult/DefensiveMult to 0, flight/hover/ground chances up, EquipmentScoreMult shout/magic/ranged 4-10) across csDragon 048C83, MQ305Alduin, MQ206 Alduin/Paarthurnax, Durnehviir",
+  "class": "house-convention",
+  "layer": "input",
+  "support_rows": 88,
+  "support_plugins": 1,
+  "spread": "Dragon Tweaks master patch only",
+  "held_out": "no held-out rows",
+  "confidence": "med",
+  "evidence": "19 families all verified agree; Requiem.esp touches 9 CSTY, none dragon; providers Skyrim/DLC + patch only; no code proof",
+  "aaron_call": "Dragon Tweaks: ported from a standalone mod or own tuning?"
+ },
+ {
+  "id": "PERK-AI-6",
+  "types": [
+   "MovementType"
+  ],
+  "convention": "Dragon_Default_MT 01BCF9: run/walk 384->650 all directions (sides from 0), rotate-in-place 33.75->55",
+  "class": "house-convention",
+  "layer": "input",
+  "support_rows": 10,
+  "support_plugins": 1,
+  "spread": "Dragon Tweaks only",
+  "held_out": "no held-out rows",
+  "confidence": "med",
+  "evidence": "Requiem touches 3 MOVT, all Horse_* (01CF24, 04408D, 078722); providers Skyrim.esm + patch",
+  "aaron_call": null
+ },
+ {
+  "id": "PERK-AI-7",
+  "types": [
+   "IdleAnimation"
+  ],
+  "convention": "KillMove idles: race-gate conditions from Dragonborn, BSAssets, BSHeartland, VioLens merged onto vanilla idles with OR flags (conflict-resolution union)",
+  "class": "conflict-resolution-merge",
+  "layer": "input",
+  "support_rows": 13,
+  "support_plugins": 1,
+  "spread": "Bruma master patch only",
+  "held_out": "no held-out rows",
+  "confidence": "med",
+  "evidence": "100E95 KillMoveDraugrRoot00: 7 providers, 7 conditions in patch; Requiem touches 024CD4, 0C1F1F, 0E8458, 100E8B, 100F16 only; verifier suggests labelling 'conflict-resolution merge' rather than house convention",
+  "aaron_call": null
+ },
+ {
+  "id": "PERK-AI-8",
+  "types": [
+   "Perk"
+  ],
+  "convention": "LOTD Visage perk conditions and artificer fragment script re-emitted unchanged",
+  "class": "noise",
+  "layer": "input",
+  "support_rows": 36,
+  "support_plugins": 1,
+  "spread": "LOTD only",
+  "held_out": "no held-out rows",
+  "confidence": "high",
+  "evidence": "17/17 condition strings identical across halves; same ScriptEntry both halves",
+  "aaron_call": null
+ },
+ {
+  "id": "PERK-AI-9",
+  "types": [
+   "Class"
+  ],
+  "convention": "Class skill weights changed on two mod NPC classes (InigoCombatThief HeavyArmor 2->0; zDcdEncClassArcanist Sneak 0->3)",
+  "class": "noise",
+  "layer": "input",
+  "support_rows": 2,
+  "support_plugins": 2,
+  "spread": "Inigo 1, Dac0da 1",
+  "held_out": "no held-out rows",
+  "confidence": "low",
+  "evidence": "No Requiem Class analog; weights only drive auto-calc and AlreadyReqtified NPCs hand-carry stats; effect probably nil",
+  "aaron_call": "Deliberate or incidental?"
+ },
+ {
+  "types": [
+   "Perk",
+   "CombatStyle",
+   "IdleAnimation"
+  ],
+  "layer": "input",
+  "held_out": "no held-out rows",
+  "aaron_call": null,
+  "id": "PERK-AI-10",
+  "convention": "Presentation (16 Perk rows) and bookkeeping (30 CSTY + 4 IDLE rows) deltas",
+  "class": "noise",
+  "support_rows": 50,
+  "support_plugins": 5,
+  "spread": "script-labelled",
+  "confidence": "high",
+  "evidence": "Stage-2 script rules"
+ },
+ {
+  "types": [
+   "Perk"
+  ],
+  "layer": "input",
+  "held_out": "no held-out rows",
+  "aaron_call": null,
+  "id": "PERK-AI-11",
+  "convention": "ModTargetDamageResistance perks weakened toward 0.65-0.9 (0.8/0.9 common), not Requiem steps: Vigilant 0.6->0.8, 0.5->0.9, 0.75->0.9; Remiel 0.4->0.8; Dac0da 0.5/0.25->0.75; Unslaad 0.01->0.65; Glenmoril Moonlight/Lb66Dark/Chaplain 0.01->0.75, 0.5/0.6->0.8",
+  "class": "house-convention",
+  "support_rows": null,
+  "support_plugins": 5,
+  "spread": "Vigilant, Remiel, Dac0da, Unslaad, Glenmoril (non-AP perks)",
+  "confidence": "med",
+  "evidence": "Doc verifier live read"
+ },
+ {
+  "types": [
+   "Perk"
+  ],
+  "layer": "input",
+  "held_out": "no held-out rows",
+  "aaron_call": "Intended that flat Add damage rises while multipliers shrink?",
+  "id": "PERK-AI-12",
+  "convention": "Flat CalculateWeaponDamage Add values raised: Glenmoril 20->40/45/50, Dac0da 15->80, Unslaad 20->45",
+  "class": "house-convention",
+  "support_rows": 18,
+  "support_plugins": 3,
+  "spread": "Glenmoril, Dac0da, Unslaad",
+  "confidence": "low",
+  "evidence": "Doc verifier; no Requiem comparison"
+ },
+ {
+  "id": "PERK-AI-BUG-1",
+  "types": [
+   "Perk"
+  ],
+  "convention": "zzzRevPerkArmorPiercing65 012015:Glenmoril.esm in Reqtificated - Glenmoril.esp: AP value 0.4 (orig 0.35); stronger than AP70 (0.5)",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 2,
+  "support_plugins": 1,
+  "spread": "Glenmoril only",
+  "held_out": "n/a",
+  "confidence": "med",
+  "evidence": "Patterns 17594/17595; ladder non-monotonic after patch; note AP70 (0.5) also equals AP75 (0.5) and AP65 is a jump from 0.65 to 0.4, so 65 is the odd one and 70 the regression",
+  "aaron_call": "Fix to a monotonic ladder?"
+ },
+ {
+  "id": "PERK-AI-BUG-2",
+  "types": [
+   "Perk"
+  ],
+  "convention": "zzzRevPerkArmorPiercing70 012017:Glenmoril.esm in Reqtificated - Glenmoril.esp: AP value 0.5 (orig 0.3); expected <= AP65 value",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 2,
+  "support_plugins": 1,
+  "spread": "Glenmoril only",
+  "held_out": "n/a",
+  "confidence": "med",
+  "evidence": "Patterns 17596/17597; verifier live read",
+  "aaron_call": "Fix to a monotonic ladder?"
+ },
+ {
+  "id": "PERK-AI-BUG-3",
+  "types": [
+   "Perk"
+  ],
+  "convention": "zzzRevPerkArmorPiercing60 Glenmoril.esm: AP value 0.65 (orig 0.4); no Requiem step at 0.65",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 2,
+  "support_plugins": 1,
+  "spread": "Glenmoril only",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "Off-scale versus Requiem 0.7/0.5; may be an intended in-between",
+  "aaron_call": null
+ },
+ {
+  "id": "PERK-AI-BUG-4",
+  "types": [
+   "Perk"
+  ],
+  "convention": "zzzCHcrExtraDamageNPCs 0D2F45 and zzzCHcrMolagExtraDamageNPCs 09D82F in Reqtificated - Vigilant.esp: ModAttackDamage x1 (orig 2.5 / 3)",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 2,
+  "support_plugins": 1,
+  "spread": "Vigilant only",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "Neutralised, VIG_REQ_ perks replace; unconfirmed whether the replacements reach the NPCs",
+  "aaron_call": "Intended no-op?"
+ },
+ {
+  "id": "PERK-AI-BUG-5",
+  "types": [
+   "Perk"
+  ],
+  "convention": "GLEN_REQ_ExtraDamage06 000801 in Reqtificated - Glenmoril.esp: ModAttackDamage 4/6/2.5, above every Requiem damage-perk step (1.1-1.5)",
+  "class": "outlier-bug",
+  "layer": "input",
+  "support_rows": 1,
+  "support_plugins": 1,
+  "spread": "Glenmoril only",
+  "held_out": "n/a",
+  "confidence": "low",
+  "evidence": "Entries each conditioned; exclusivity not checked",
+  "aaron_call": "Intended on top of Requiem scale?"
+ }
+]
