@@ -31,6 +31,13 @@
     paths were scrubbed (52).
   - CLAUDE.md, the PR template and CHANGELOG now point at the new paths. CLAUDE.md also records that
     `standards/` is owned here now.
+- **`standards/` deleted** (Aaron): it was outdated and would confuse agents building the new skills.
+  CLAUDE.md now has "Authoring guidance": Anthropic's guidance plus the CI checks until the spec sets this
+  repo's rules. A "Doc classes" section replaces the doc-hygiene standard. Intent C2 and C3 are amended:
+  - triggering is measured by real invocation;
+  - value is measured by grading recorded transcripts of real use, in detail.
+  Archive docs still cite §-numbers from the deleted standards; that's history.
+- **No Heisen review:** he's out of action, so Aaron reviews and merges alone (in `decisions.md`).
 - **BACKLOG frozen** as `archive/BACKLOG-1.x.md`. Its 7 open items and the 7 open issues are in
   `rebuild/carried-forward.md` as spec inputs.
 - **Issues #27, #29–#33 and #46** are closed as not planned (superseded by the rebuild), each pointing at its

@@ -1,4 +1,4 @@
-<!-- What & why, briefly. Map each change to its driver (issue #N, BACKLOG entry, plan doc). -->
+<!-- What & why, briefly. Map each change to its driver (issue #N, carried-forward entry, plan doc). -->
 
 ## Lane
 
@@ -8,8 +8,9 @@
 ## Release checklist (skill/plugin changes — N/A for docs-only PRs)
 
 - [ ] `plugin.json` version bumped + `CHANGELOG.md` entry mapping each change to its driver
-- [ ] **No skill `description:` changed** — or the §6.5 fan-out was re-measured against the final
-      text and the results are archived in that skill's `evals/`
+- [ ] **No skill `description:` changed** — or triggering was re-measured by real invocation (does
+      Claude load the skill on the eval queries?) against the final text, with results archived in that
+      skill's `evals/`
 - [ ] `claude plugin validate --strict` passed locally (CI re-checks the mechanical parts only)
 - [ ] LIVING docs (CLAUDE.md, READMEs, rosters) updated **in this same PR** where the change
       touches what they describe

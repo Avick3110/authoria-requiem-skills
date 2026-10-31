@@ -31,11 +31,11 @@ lives. **The latest handoff in [`handoffs/`](handoffs/)** says where the last se
   is never published. The docs here cite it as `census/splits/…` or `runs/…`.
 - **ARR list bugs** found by the recon go to the ARR release hub's `BUGS.md` once they are re-verified.
   `rebuild/recon/suspected-bugs.md` is the candidate list.
-- **The skills themselves:** `../authoria-requiem/`. The binding authoring standards: `../standards/`.
+- **The skills themselves:** `../authoria-requiem/`. Authoring guidance: the root `CLAUDE.md`.
 
 ## Conventions
 
 - An authorship stamp goes directly under every title: `*Author: <Aaron|Heisen> (+ Claude session) · YYYY-MM-DD*`.
-- LIVING v ARCHIVE follows `../standards/HOUSECARL_DOC_HYGIENE.md`: supersede, don't edit.
+- LIVING v ARCHIVE is defined in the root `CLAUDE.md` (Doc classes). Supersede ARCHIVE docs; don't edit them.
 - Land `dev/` docs on `main` at every stage gate, through a docs PR, so work never sits unseen on a long
   branch.

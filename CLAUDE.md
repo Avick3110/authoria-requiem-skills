@@ -1,7 +1,7 @@
 # authoria-requiem-skills
 
 *Class: LIVING (the operating doc) — supersede, don't edit; keep it current, **updated in the same
-commit** as the change it describes. Per `standards/HOUSECARL_DOC_HYGIENE.md`.*
+commit** as the change it describes. Doc classes: see [Doc classes](#doc-classes).*
 
 Source repo for the **`authoria-requiem`** Claude Code skill plugin — eleven skills that patch
 newly-added Skyrim SE mods to play correctly with **Requiem** by *live-analogy*: derive every stat,
@@ -36,9 +36,9 @@ here (one home per fact). The current version lives in exactly one place:
    Start here for "where are we." [`dev/README.md`](dev/README.md) maps everything else in `dev/`.
 3. **The 2.0 rebuild is the live work** ([`dev/rebuild/INDEX.md`](dev/rebuild/INDEX.md)). Its
    `carried-forward.md` holds the small follow-ups: the 1.x backlog is frozen in `dev/archive/`.
-4. **Before you analyse, edit, review, or create any skill: load [`standards/`](standards/) fully** —
-   binding, exact, and they govern reviewing a submission as much as writing one (see
-   [Authoring standards](#authoring-standards)).
+4. **Before you analyse, edit, review, or create any skill:** read
+   [Authoring guidance](#authoring-guidance). The old `standards/` folder is gone (deleted
+   2026-10-31). Don't recreate its rules from memory or from the archive.
 
 **Deep corpus, on demand** (the "why" — read, don't edit): `dev/archive/1.x-build/phase-handoffs/`
 (per-domain build handoffs, the deepest 1.x rationale; ARCHIVE), `dev/reference/reqtificator-rules.md`
@@ -59,9 +59,6 @@ authoria-requiem/                  THE PLUGIN — the shipped artifact
   .claude-plugin/plugin.json       manifest; the `version` lives here (bump on release)
   skills/README.md                 skills index
   skills/<skill>/                  SKILL.md + references/ (+ index.jsonl) + evals/eval_set.json
-
-standards/                         binding skill-authoring standards (owned here since houseCARL
-                                   deleted its copies, 2026-09-04/05; see rebuild recon A4)
 
 dev/   (SHARED dev lane — tracked since 2026-07-15 so both maintainers + their agents see one state)
   README.md                        the front door: what's live and where everything is
@@ -155,39 +152,36 @@ dev/   (SHARED dev lane — tracked since 2026-07-15 so both maintainers + their
 - **Candor + no silent workarounds.** Hit a block that pressures a standard, the authority model, or a
   shipped behavior? Surface it with a recommendation; don't quietly work around it.
 
-## Authoring standards
+## Authoring guidance
 
-`standards/` holds the binding skill-authoring standards (authored by Aaron). This repo owns them now:
-houseCARL deleted its copies on 2026-09-04/05, so there is no upstream to re-sync from. The rebuild's
-recon A4 (`dev/rebuild/recon/anthropic/A1-A5-anthropic-skill-guidance.md`) lists where they conflict
-with Anthropic's current guidance; the rebuild spec settles which version binds. **Load them fully before you analyse,
-edit, or create a skill — including before reviewing a submission.** Don't paraphrase them from memory;
-the rules are exact and a reviewer renders a binary conforms / doesn't-conform verdict.
+The old `standards/` folder (the HOUSECARL_* authoring, naming and doc-hygiene standards) was
+**deleted on 2026-10-31**. It was outdated, and it conflicted with Anthropic's current guidance in 13
+places (recon A4). Archive docs still cite its sections (§3, §6.5, §8 …); treat those as history, not
+rules.
 
-- **`HOUSECARL_SKILL_AUTHORING.md`** — the load-bearing one: action-first description format (§3), body
-  structure and section order (§4), the tool-vs-skill archetypes (§5), eval-set rules with the
-  fresh-context **agent fan-out** as the primary validation (§6 — read agents' *reasoning*, not just
-  verdicts; re-measure whenever a description changes), and the **§8 19-item reviewer checklist** every
-  skill must pass.
-- **`HOUSECARL_NAMING.md`** — kebab-case skill folders, `name:` == folder name, no version or brand in names.
-- **`HOUSECARL_DOC_HYGIENE.md`** — LIVING vs ARCHIVE doc classes; supersede don't edit; update LIVING
-  docs in the same commit.
+Until the rebuild spec sets this repo's own rules, author to:
+- **Anthropic's published skill-authoring guidance.** The summary with sources is in
+  `dev/rebuild/recon/anthropic/A1-A5-anthropic-skill-guidance.md`; re-check the source when it matters.
+- **The mechanical checks CI enforces** (`.github/workflows/ci.yml`): the 500-line SKILL.md cap,
+  `name:` == folder name (kebab-case), the description cap, and the manifests.
+- **Measurement** (Aaron, 2026-10-31):
+  - Triggering is measured by real invocation: does Claude actually load the skill on the query
+    (recon A5)?
+  - Value is measured by recording transcripts of real use and grading the output, and how the
+    skill performed, in detail.
 
-**Repo-specific deviations** (note these when reviewing against the §8 checklist):
+## Doc classes
 
-- **§8 item 19 (the `$Skills` array in `scripts/build-plugin.ps1`) is N/A here** — this plugin has no
-  build script; Claude Code auto-discovers each `SKILL.md` by directory. (It *does* apply in houseCARL.)
-- All 11 shipped descriptions are validated under the current §6.5 fan-out (since 1.10.0, the #43
-  compression: menu variant per houseCARL PR #295, all skills measured in one shared-menu run, results
-  in each skill's `evals/results-2026-07-29.json`; the older per-skill archives and the original
-  nine's manual-prediction-era validation are historical). Any description change triggers the §6.5
-  fan-out re-measure — it runs natively here.
+**LIVING** docs (this file, READMEs, INDEX, the rebuild's open working docs) are kept current and
+updated in the same commit as the change they describe. **ARCHIVE** docs (handoffs, findings,
+executed plans, `dev/archive/`) are frozen: supersede them with a new doc, don't edit them. Moves
+may rewrite their links and paths only.
 
 ## Adding or reviewing a skill submission
 
 First confirm it belongs in *this* pack — a Requiem-patching skill. A general modding skill (e.g. OAR
-animation-config authoring) belongs in houseCARL, not here. Then walk it through the **§8 reviewer
-checklist** in `standards/HOUSECARL_SKILL_AUTHORING.md`, place it under
+animation-config authoring) belongs in houseCARL, not here. Then check it against
+[Authoring guidance](#authoring-guidance), place it under
 `authoria-requiem/skills/<kebab-name>/`, list it in `skills/README.md` + the README table, and bump
 `plugin.json` `version` + add a `CHANGELOG.md` entry. **Validate before release:**
 `claude plugin validate --strict` (plugin + marketplace must pass).

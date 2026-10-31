@@ -70,3 +70,6 @@ Append-only. Never edit a past entry; supersede it with a new one.
   hypothesise-first method. The questions doc grew to 50 and `recon/suspected-bugs.md` was started. (Aaron, who
   asked for all the splits in one session)
 - **Questions doc sent to the list authors.** Spec waits on the answers. (Aaron)
+- **`standards/` deleted.** It was outdated (houseCARL had deleted its own copies in 2026-09) and conflicted with Anthropic's current guidance in 13 places (recon A4), so it would confuse agents building the new skills. Intent C2 is amended: author to Anthropic's guidance plus the CI checks until the spec sets this repo's own rules. (Aaron)
+- **Measurement (intent C3 amended).** Triggering is measured by real invocation, as recon A5 recommended. Value is measured by recording transcripts of real use and grading the output, and how the skill performed, in detail. (Aaron)
+- **No second-maintainer review for now.** Heisen is out of action, so Aaron reviews and merges alone; PR #49 lands without his review. (Aaron)
