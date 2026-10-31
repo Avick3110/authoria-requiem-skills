@@ -63,3 +63,10 @@ Append-only. Never edit a past entry; supersede it with a new one.
   - **Result:** recon is complete enough for the spec.
 
   (Aaron)
+
+## 2026-10-31
+
+- **Split hunts 7-13 and the NPC stage-2 family check run** overnight as a subagent fan-out, all on the
+  hypothesise-first method. The questions doc grew to 50 and `recon/suspected-bugs.md` was started. (Aaron, who
+  asked for all the splits in one session)
+- **Questions doc sent to the list authors.** Spec waits on the answers. (Aaron)

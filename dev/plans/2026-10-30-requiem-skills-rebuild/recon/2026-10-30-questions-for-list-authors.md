@@ -4,6 +4,8 @@
 
 *Class: LIVING (append a section per split; record answers inline). For Heisen and Aaron.*
 
+**Status:** all 50 questions sent to the list authors on 2026-10-31. Waiting for answers.
+
 ## How these were produced
 
 We mined every handmade ARR Requiem patch and tested hypotheses against the records first. Each question below is
