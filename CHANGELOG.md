@@ -11,7 +11,7 @@ plausibly stays over budget even after this release: the 11 skill descriptions c
 8,292 chars (~2,073 est. tokens) of always-resident context — alone consuming Claude Code's ~2,000-token
 budget for the *entire* skill listing, causing entry truncation that degrades routing. Mirrors houseCARL
 [PR #295](https://github.com/Avick3110/houseCARL/pull/295) (issue #294), which did the same job there and
-amended the standard upstream. Charter: `dev/plans/2026-07-29-description-compression-43.md`.
+amended the standard upstream. Charter: `dev/archive/1.x-plans/2026-07-29-description-compression-43.md`.
 
 - **`standards/HOUSECARL_SKILL_AUTHORING.md` re-synced** from houseCARL HEAD (the #294 amendment):
   §3.5 soft target is now 200–400 characters, reframed around the listing budget; §3.3's pushy tail is
@@ -217,7 +217,7 @@ changed, so no §6.5 fan-out re-measure owed.
 
 Field-report round 3 (Heisen, 2026-07-17): the live Val Serano NPC/race patch re-run surfaced
 five loopholes that survive 1.3.0's doctrine — each traced on the reported records and closed with
-a live-mined rule (evidence: `dev/corpus-2026-07-17-field-report-round3/`). Most of the report's
+a live-mined rule (evidence: `dev/archive/1.x-build/corpus-2026-07-17-field-report-round3/`). Most of the report's
 other items (DNAM never patched, empty-kit skips, civilian misclassification) were already fixed in
 1.3.0; the failing session ran on a pre-1.3.0 live install (synced only at 1.3.0's landing minute).
 Body + references only — no descriptions changed, no §6.5 re-measure owed.
@@ -299,7 +299,7 @@ corrections are the interesting part.
 
 Field-report round 2 (Heisen, 2026-07-17): per-record *derivation* depth across NPC, magic, and
 consumables, every new rule backed by a live-mined reference (evidence trail:
-`dev/corpus-2026-07-17-field-report-round2/`). Body + references only — no descriptions changed,
+`dev/archive/1.x-build/corpus-2026-07-17-field-report-round2/`). Body + references only — no descriptions changed,
 no §6.5 re-measure owed.
 
 - **`requiem-npc-patching` — the DNAM block is now first-class.** The NPC record's base attributes
@@ -358,7 +358,7 @@ no §6.5 re-measure owed.
   `$schema`/`displayName` in plugin.json and a root `description` in marketplace.json (all
   pre-existing); dropped the first two, moved the marketplace description under `metadata`.
   Both manifests validate again.
-- **Val Serano follow-ups closed en route** (`dev/BACKLOG.md` F-VS2/F-VS3): the forwarded-`REQ_NULL`
+- **Val Serano follow-ups closed en route** (`dev/archive/BACKLOG-1.x.md` F-VS2/F-VS3): the forwarded-`REQ_NULL`
   scan added to the npc bulk pass (sweep 4) and the magic NULL sweep (above); the router's First
   step now states per-plugin `group_by=type` counts overlap across compat patches — the lane's own
   enumeration is the reconciliation denominator.
@@ -378,12 +378,12 @@ no §6.5 re-measure owed.
   residual gap the per-type list carried — a host type nobody thought to sweep could hide a
   script; the one-call sweep covers every record type by construction. Re-probed live before the
   edit (struct presence match + `plugins=`-scoped cross-type call both confirmed). Body-only —
-  no description changed, no §6.5 re-measure owed. Closes the standing `dev/BACKLOG.md` entry.
+  no description changed, no §6.5 re-measure owed. Closes the standing `dev/archive/BACKLOG-1.x.md` entry.
 
 ## 1.2.2 — 2026-07-15
 
 The S4 findings batch: all eight skill-body findings from the Gray Cowl empirical close
-(`dev/s4-graycowl-validation/FINDINGS.md`, F1–F8) fixed in one pass. Body-only — no descriptions
+(`dev/archive/1.x-build/s4-graycowl-validation/FINDINGS.md`, F1–F8) fixed in one pass. Body-only — no descriptions
 changed, no §6.5 re-measure owed.
 
 - **F1 — summoned actors get an owner (`requiem-npc-patching`).** Conjured/summoned actors were a
