@@ -25,5 +25,6 @@
 - [ ] Rebased on latest `main`; version bump and CHANGELOG position re-checked against what landed
       since this branch was cut (two maintainers land in parallel — collisions live here)
 
-**After merge:** sync the live install and restart Claude Code —
+**After merge:** no live install while the rebuild runs (CLAUDE.md step 0). Once installs come back:
+sync and restart Claude Code —
 `robocopy authoria-requiem "$env:USERPROFILE\.claude\skills\authoria-requiem" /MIR`
