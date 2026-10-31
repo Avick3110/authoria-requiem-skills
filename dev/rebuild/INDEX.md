@@ -13,7 +13,8 @@ of its split hunts are done (see `recon.md`'s findings index), and so is recon A
 the questions doc on 2026-10-31. His reference stance (Requiem and its addons first) and NPC doctrine are
 in `decisions.md`, and each split's fate is in `recon/splits/README.md`. Aaron settled D5, C1, C2, the
 trigger-eval setup and Q29 the same day (`decisions.md`): the new skills are graded against the spec,
-not against 1.x. Still open: A6, the spec-session topics in `carried-forward.md`, and the targets that
+not against 1.x. Codex support and an installable release were added as targets A8 / A9
+(desk pass done; live pass open). Still open: A6, A8 / A9 live, the spec-session topics in `carried-forward.md`, and the targets that
 need Aaron's own patching sessions. The latest handoff in `../handoffs/` says where to pick up.
 
 ## Where things live
@@ -26,7 +27,7 @@ need Aaron's own patching sessions. The latest handoff in `../handoffs/` says wh
 | `plan.md` | Stage 4: order of work citing requirements, risks, proof, rollback (created when the stage starts) |
 | `decisions.md` | Every gate and decision, dated, append-only |
 | `eval-2026-10/` | Recon pass 1: the control eval, public summary (plan, results, drill rounds, distillation) |
-| `recon/` | Recon pass 2: `anthropic/` (A1–A7), `arr-domains/` (B5, B6), `census/`, `splits/` (01–14), `questions-for-list-authors.md`, `suspected-bugs.md` |
+| `recon/` | Recon pass 2: `anthropic/` (A1–A7), `hosts/` (A8, A9), `arr-domains/` (B5, B6), `census/`, `splits/` (01–14), `questions-for-list-authors.md`, `suspected-bugs.md` |
 | `carried-forward.md` | Open 1.x issues and backlog items, kept as spec inputs |
 | `../handoffs/` | Session handoffs (this repo's lane) |
 

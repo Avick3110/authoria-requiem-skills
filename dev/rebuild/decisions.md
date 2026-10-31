@@ -126,3 +126,10 @@ Append-only. Never edit a past entry; supersede it with a new one.
   Bash sandbox on native Windows). (Aaron)
 - **Q29: every Ancient Falmer / snow-elf arrow is about 100** (Ebony level, above WAR glass 90). A house value: Requiem's
   own Dawnguard snow-elf arrows stay at Elven 60. (Aaron, from Heisen's proposal)
+- **The pack also targets OpenAI Codex (GPT models).** Intent C2 and C4 are amended: the skills load and work in Claude
+  Code and in Codex, and conform to both Anthropic's and OpenAI's published skill-authoring guidance. Recon A8 added.
+  (Aaron)
+- **The pack ships as an installable release.** Users install it by hand or through their agent on either host.
+  Recon A9 added. (Aaron)
+- **Review gate: every written skill gets a review pass against the Anthropic and OpenAI docs** before it lands. It
+  is a review per skill, not a sample, and it comes on top of the evals. (Aaron)
