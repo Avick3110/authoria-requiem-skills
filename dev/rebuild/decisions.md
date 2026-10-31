@@ -73,3 +73,36 @@ Append-only. Never edit a past entry; supersede it with a new one.
 - **`standards/` deleted.** It was outdated (houseCARL had deleted its own copies in 2026-09) and conflicted with Anthropic's current guidance in 13 places (recon A4), so it would confuse agents building the new skills. Intent C2 is amended: author to Anthropic's guidance plus the CI checks until the spec sets this repo's own rules. (Aaron)
 - **Measurement (intent C3 amended).** Triggering is measured by real invocation, as recon A5 recommended. Value is measured by recording transcripts of real use and grading the output, and how the skill performed, in detail. (Aaron)
 - **No second-maintainer review for now.** Heisen is out of action, so Aaron reviews and merges alone; PR #49 lands without his review. (Aaron)
+- **Heisen answered the questions doc** (same day). The answers and their dispositions are in
+  `recon/questions-for-list-authors.md`; the verbatim copy is `recon/answers-heisen-2026-10-31.md`. (Heisen)
+- **Reference stance.** Values and patterns come from **Requiem and its addons**, and an addon wins in its own area
+  (Magic Redone for magic, WAR for weapons, armour and ammo, Vampires Tweak for vampires, and so on). The handmade
+  patches are inconsistent by nature: the census keeps their **house layer** (retirement, the bridge, NonPlayable
+  handling, AR 0 by slot, loot stripping) and drops their exceptions. A record that lacks Requiem's keywords,
+  conditions and flags is not patched, however close its numbers look. (Heisen's answers, agreed by Aaron)
+- **NPC doctrine.** The skill gives NPCs role-appropriate perks, stats and spells the way Requiem does for vanilla
+  NPCs and encounters. It does **not** add `REQ_AlreadyReqtificated`: the user reruns the Reqtificator for the generic
+  perks, then may add the marker and move the record as housekeeping. Never skip an NPC for an empty perk list;
+  remove null perks and add the package in one pass; handle ActorEffect; never touch factions; flag modded spells
+  and perks and ask, never remove them. Template an NPC only when its role exactly matches a vanilla NPC.
+  (Heisen, agreed by Aaron)
+- **Other rules from the answers:**
+  - skip NonPlayable gear, because the build rescales it (a NonPlayable bow still needs NPCsUseAmmo);
+  - never attach scripts to doors or chests;
+  - encounter zones are out of scope (the world is de-levelled);
+  - retire with `AD3B01` and the `REQ_NULL_` prefix;
+  - only major followers with their own framework go in the bridge;
+  - paddings follow WAR's padding pieces.
+
+  (Heisen, agreed by Aaron)
+- **Design rule for the rebuild: a skill line must carry something the model can't get from the load order.**
+  - **Keep** what is hidden or non-obvious: boundary facts (what the Reqtificator does and doesn't do), house
+    conventions, which addon owns which area, coverage discipline, the "never" rules.
+  - **Cut** what exists only because the model "can't be trusted": value recipes, tool call shapes, restated
+    Requiem ladders, stop-to-ask gates.
+  - **Judgement calls** (paddings, uniques, boss resists) get the method and the comparable, not an answer. The
+    model decides and surfaces a decision list for the author.
+  - As models improve, lines get deleted, not added. The value eval (graded transcripts of real patching) shows
+    where a line is missed, and only that gets added back. Aaron's view: the older "models need hand-holding" stance
+    is already partly stale. (Aaron)
+- **Users are the patching authors** (Aaron, later Heisen), not end users of the list. This confirms intent. (Aaron)
