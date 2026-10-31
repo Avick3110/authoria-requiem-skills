@@ -21,16 +21,13 @@ here (one home per fact). The current version lives in exactly one place:
 
 ## Read in this order
 
-0. **`git pull`, then sync-check the live install** — not just `plugin.json` versions (the 1.4.0
-   collision proved identical version strings can hide divergent content); run the dry-run byte
-   compare and act on any drift:
-
-   ```powershell
-   robocopy authoria-requiem "$env:USERPROFILE\.claude\skills\authoria-requiem" /MIR /L
-   ```
-
-   Both maintainers' agents work from installs, and a stale install invalidates every live
-   conclusion after it (the 1.3.0 "consumables completely skipped" false alarm was exactly this).
+0. **`git pull`. Don't install or sync the pack while the rebuild runs** (Aaron, 2026-10-31). The
+   1.x skills load in every session once installed, which skews the B1–B4 patching logs and any
+   no-skills eval run. Testing a skill means loading it on purpose, in that session or harness. A
+   missing `~/.claude/skills/authoria-requiem` is intended, not drift. When installs come back,
+   compare bytes, not just `plugin.json` versions: identical versions can hide different content
+   (1.4.0), and a stale install invalidates every live conclusion drawn from it (the 1.3.0
+   "consumables completely skipped" false alarm).
 1. **This file** — how we operate.
 2. **The latest handoff** in `dev/handoffs/` — what the last session did and what to pick up.
    Start here for "where are we." [`dev/README.md`](dev/README.md) maps everything else in `dev/`.
@@ -117,8 +114,9 @@ dev/   (SHARED dev lane — tracked since 2026-07-15 so both maintainers + their
     the old main-checkout rule applied only while `dev/` was gitignored).
   - **Publish hygiene:** `dev/` is in a public repo — no local machine paths (use `<home>` or
     relative), no emails, no credentials. Scrub before commit.
-- **This repo is the source of truth; the live install is a copy.** After editing here, sync and
-  restart Claude Code to load changes:
+- **This repo is the source of truth; the live install is a copy.** *Paused while the rebuild runs:
+  there is no live install (step 0). The mechanics below apply once installs come back.* After
+  editing here, sync and restart Claude Code to load changes:
 
   ```powershell
   robocopy authoria-requiem "$env:USERPROFILE\.claude\skills\authoria-requiem" /MIR
@@ -128,9 +126,8 @@ dev/   (SHARED dev lane — tracked since 2026-07-15 so both maintainers + their
   temp-bump `plugin.json` to `<next>-dev` (e.g. `1.0.3-dev`), **uncommitted** — CI rejects a
   committed `-dev`; the real bump happens at release. Same convention as houseCARL. **This cuts both
   ways in a two-maintainer repo:** after `git pull` lands the *other* maintainer's plugin changes,
-  your live install is stale until you re-run the sync + restart — run the step-0 sync check
-  ([Read in this order](#read-in-this-order)) when picking up work; a version-equal but
-  byte-different install is still stale.
+  your live install is stale until you re-run the sync + restart. Dry-run the compare when picking
+  up work (`robocopy … /MIR /L`); a version-equal but byte-different install is still stale.
 - **A report is a lead, not a fact — re-derive every claim from the live record before acting on it.**
   This applies to field reports, issues, handoffs, and *our own* audit findings. Every one checked so
   far has been **partly wrong, in both directions, across both maintainers' lanes**: 1.3.0 corrected
