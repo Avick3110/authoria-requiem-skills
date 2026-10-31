@@ -32,16 +32,18 @@ here (one home per fact). The current version lives in exactly one place:
    Both maintainers' agents work from installs, and a stale install invalidates every live
    conclusion after it (the 1.3.0 "consumables completely skipped" false alarm was exactly this).
 1. **This file** — how we operate.
-2. **The latest handoff** in `dev/session-handoffs/` — what the last session did and what to pick up.
-   Start here for "where are we."
-3. **Skim `dev/BACKLOG.md`** — standing small follow-ups (append when you notice one, prune when done).
+2. **The latest handoff** in `dev/handoffs/` — what the last session did and what to pick up.
+   Start here for "where are we." [`dev/README.md`](dev/README.md) maps everything else in `dev/`.
+3. **The 2.0 rebuild is the live work** ([`dev/rebuild/INDEX.md`](dev/rebuild/INDEX.md)). Its
+   `carried-forward.md` holds the small follow-ups: the 1.x backlog is frozen in `dev/archive/`.
 4. **Before you analyse, edit, review, or create any skill: load [`standards/`](standards/) fully** —
    binding, exact, and they govern reviewing a submission as much as writing one (see
    [Authoring standards](#authoring-standards)).
 
-**Deep corpus, on demand** (the "why" — read, don't edit): `dev/handoffs/phase-*.md` (per-domain
-build handoffs, the deepest rationale + every derived rule; ARCHIVE), `dev/reqtificator-rules.md`
-(the Reqtificator rulebook; LIVING reference), `dev/STATE.md` (the frozen build-era ledger; ARCHIVE).
+**Deep corpus, on demand** (the "why" — read, don't edit): `dev/archive/1.x-build/phase-handoffs/`
+(per-domain build handoffs, the deepest 1.x rationale; ARCHIVE), `dev/reference/reqtificator-rules.md`
+(the Reqtificator rulebook; LIVING reference), `dev/archive/1.x-build/STATE.md` (the frozen build-era
+ledger; ARCHIVE).
 
 ## Repo map
 
@@ -58,19 +60,19 @@ authoria-requiem/                  THE PLUGIN — the shipped artifact
   skills/README.md                 skills index
   skills/<skill>/                  SKILL.md + references/ (+ index.jsonl) + evals/eval_set.json
 
-standards/                         binding skill-authoring standards (synced from houseCARL — upstream;
-                                   re-sync these copies if they change there)
+standards/                         binding skill-authoring standards (owned here since houseCARL
+                                   deleted its copies, 2026-09-04/05; see rebuild recon A4)
 
 dev/   (SHARED dev lane — tracked since 2026-07-15 so both maintainers + their agents see one state)
-  session-handoffs/                rolling per-session handoffs — the "where are we" lane
-  BACKLOG.md                       standing small follow-ups (the durable papercut ledger)
-  plans/                           chartered work (one plan doc per undertaking)
-  handoffs/phase-*.md              build-era phase handoffs (ARCHIVE — the deep "why" corpus)
-  corpus-*/                        mined derivation corpora (consumables, perks — ARCHIVE)
-  s4-graycowl-validation/          S4 empirical-close artifacts + FINDINGS ledger (ARCHIVE)
-  STATE.md                         build-era cross-session ledger (ARCHIVE, frozen at ship)
-  PUBLIC-RELEASE-PLAN.md           executed release plan (ARCHIVE)
-  reqtificator-rules.md            the Reqtificator rulebook (LIVING reference)
+  README.md                        the front door: what's live and where everything is
+  handoffs/                        rolling per-session handoffs, all eras — the "where are we" lane
+  rebuild/                         the 2.0 rebuild project (INDEX, intent, recon, decisions, spec, plan)
+    eval-2026-10/                  the control eval (recon pass 1)
+    recon/                         anthropic/, arr-domains/, census/, splits/, questions, suspected bugs
+    carried-forward.md             spec inputs from 1.x (frozen backlog items + closed issues)
+  reference/reqtificator-rules.md  the Reqtificator rulebook (LIVING reference)
+  archive/                         1.x material, frozen (ARCHIVE): build-era phase handoffs, STATE,
+                                   corpora, S4 validation, release plan, 1.x plans, BACKLOG-1.x.md
 ```
 
 ## Working discipline
@@ -95,8 +97,9 @@ dev/   (SHARED dev lane — tracked since 2026-07-15 so both maintainers + their
   reference `#N` in the CHANGELOG. houseCARL tool bugs/gaps → Issues on the houseCARL repo. (The old
   local HCBR store is retired — its live reports were migrated as houseCARL issues #195–#201 on
   2026-07-15; pre-existing `HCBR-<date>-<n>` ids in the CHANGELOG are historical.) Small dev-noticed
-  follow-ups → `dev/BACKLOG.md`. Chartered work → `dev/plans/`. Session state →
-  `dev/session-handoffs/` (write one at end of session).
+  follow-ups → `dev/rebuild/carried-forward.md` while the rebuild runs. Chartered work → its own
+  project folder under `dev/` (like `dev/rebuild/`). Session state → `dev/handoffs/` (write one at
+  end of session). Land `dev/` docs on `main` at every stage gate, so a long branch never hides them.
 - **External reports (an .md report handed over via Discord or similar) don't get pasted straight
   into an issue.** Triage first (valid? reproducible? duplicate of an open issue?), **scrub** —
   a third party's report carries *their* machine paths, usernames, and setup details they never
@@ -148,14 +151,16 @@ dev/   (SHARED dev lane — tracked since 2026-07-15 so both maintainers + their
   expect the real fix to differ from the ask, and treat "the report says X" as the start of the
   derivation, never the end. This is the same live-analogy discipline the pack applies to records,
   turned on our own prose. Worked cases:
-  `dev/session-handoffs/SESSION_HANDOFF_2026-07-17_empirical-close-valserano-1.4.0.md`.
+  `dev/handoffs/SESSION_HANDOFF_2026-07-17_empirical-close-valserano-1.4.0.md`.
 - **Candor + no silent workarounds.** Hit a block that pressures a standard, the authority model, or a
   shipped behavior? Surface it with a recommendation; don't quietly work around it.
 
 ## Authoring standards
 
-`standards/` holds the binding skill-authoring standards (authored by Aaron; the houseCARL standards
-repo is upstream — re-sync these copies if they change there). **Load them fully before you analyse,
+`standards/` holds the binding skill-authoring standards (authored by Aaron). This repo owns them now:
+houseCARL deleted its copies on 2026-09-04/05, so there is no upstream to re-sync from. The rebuild's
+recon A4 (`dev/rebuild/recon/anthropic/A1-A5-anthropic-skill-guidance.md`) lists where they conflict
+with Anthropic's current guidance; the rebuild spec settles which version binds. **Load them fully before you analyse,
 edit, or create a skill — including before reviewing a submission.** Don't paraphrase them from memory;
 the rules are exact and a reviewer renders a binary conforms / doesn't-conform verdict.
 

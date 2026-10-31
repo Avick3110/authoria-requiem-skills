@@ -2,8 +2,8 @@
 
 ## Lane
 
-- [ ] This PR names its driver: fixes issue #N / a `dev/BACKLOG.md` entry / a `dev/plans/` charter
-- [ ] Session handoff rides along in `dev/session-handoffs/` (work-session PRs) — authorship-stamped
+- [ ] This PR names its driver: fixes issue #N / a `dev/rebuild/carried-forward.md` entry / a `dev/` project charter
+- [ ] Session handoff rides along in `dev/handoffs/` (work-session PRs) — authorship-stamped
 
 ## Release checklist (skill/plugin changes — N/A for docs-only PRs)
 
