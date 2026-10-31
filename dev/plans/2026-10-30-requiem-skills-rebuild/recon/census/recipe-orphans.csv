@@ -1,0 +1,690 @@
+formid,editorid,name,source_mod,arr_patch,retired_by,temper_live,mod_in_cocks_exotic_list
+00080A:(SmolSaltLemon) Dark Apprentice.esp,000_DaAp_Belts,Dark Apprentice Belts,(SmolSaltLemon) Dark Apprentice.esp,Authoria - Reqtificated - Dark Apprentice.esp,GetLevel,False,True
+000D63:(SmolSaltLemon) Dark Apprentice.esp,000_DaAp_Robe,Dark Apprentice Cloth Robe,(SmolSaltLemon) Dark Apprentice.esp,Authoria - Reqtificated - Dark Apprentice.esp,GetLevel,True,True
+000806:(SmolSaltLemon) Dark Apprentice.esp,000_DaAp_Boots,Dark Apprentice Leather Boots,(SmolSaltLemon) Dark Apprentice.esp,Authoria - Reqtificated - Dark Apprentice.esp,GetLevel,True,True
+000808:(SmolSaltLemon) Dark Apprentice.esp,000_DaAp_Mantle,Dark Apprentice Leather Mantle,(SmolSaltLemon) Dark Apprentice.esp,Authoria - Reqtificated - Dark Apprentice.esp,GetLevel,False,True
+000809:(SmolSaltLemon) Dark Apprentice.esp,000_DaAp_Pants,Dark Apprentice Leather Pants,(SmolSaltLemon) Dark Apprentice.esp,Authoria - Reqtificated - Dark Apprentice.esp,GetLevel,True,True
+000807:(SmolSaltLemon) Dark Apprentice.esp,000_DaAp_Wraps,Dark Apprentice Leather Wraps,(SmolSaltLemon) Dark Apprentice.esp,Authoria - Reqtificated - Dark Apprentice.esp,GetLevel,False,True
+00080B:(SmolSaltLemon) Rogue Stalker.esp,NULL_RoSt_Band,Rogue Stalker - Band,(SmolSaltLemon) Rogue Stalker.esp,Authoria - Reqtificated - Rogue Stalker.esp,AD3B01,False,True
+000806:(SmolSaltLemon) Rogue Stalker.esp,_RoSt_Boots,Rogue Stalker - Boots,(SmolSaltLemon) Rogue Stalker.esp,Authoria - Reqtificated - Rogue Stalker.esp,AD3B01,False,True
+000D62:(SmolSaltLemon) Rogue Stalker.esp,_RoSt_Cuirass,Rogue Stalker - Cuirass,(SmolSaltLemon) Rogue Stalker.esp,Authoria - Reqtificated - Rogue Stalker.esp,AD3B01,False,True
+000807:(SmolSaltLemon) Rogue Stalker.esp,_RoSt_Gloves,Rogue Stalker - Gloves,(SmolSaltLemon) Rogue Stalker.esp,Authoria - Reqtificated - Rogue Stalker.esp,AD3B01,False,True
+000808:(SmolSaltLemon) Rogue Stalker.esp,_RoSt_Neck,Rogue Stalker - Neck armor,(SmolSaltLemon) Rogue Stalker.esp,Authoria - Reqtificated - Rogue Stalker.esp,AD3B01,False,True
+000809:(SmolSaltLemon) Rogue Stalker.esp,_RoSt_Skirt,Rogue Stalker - Skirt,(SmolSaltLemon) Rogue Stalker.esp,Authoria - Reqtificated - Rogue Stalker.esp,AD3B01,False,True
+000810:(SmolSaltLemon) Wine Duchess.esp,_000_WineDuchess_Nails,Wine Duchess - Nails,(SmolSaltLemon) Wine Duchess.esp,Authoria - Reqtificated - Wine Dutchess.esp,AD3B01,False,True
+00082B:(SmolSaltLemon) Wine Duchess.esp,_000_WineDuchess_BeltsOrig,Wine Duchess Belt,(SmolSaltLemon) Wine Duchess.esp,Authoria - Reqtificated - Wine Dutchess.esp,AD3B01,False,True
+00080F:(SmolSaltLemon) Wine Duchess.esp,_000_WineDuchess_Heels,Wine Duchess Heels,(SmolSaltLemon) Wine Duchess.esp,Authoria - Reqtificated - Wine Dutchess.esp,AD3B01,True,True
+00080A:(SmolSaltLemon) Wine Duchess.esp,_000_WineDuchess_Belts,Wine Duchess Leather Belt,(SmolSaltLemon) Wine Duchess.esp,Authoria - Reqtificated - Wine Dutchess.esp,AD3B01,False,True
+00080B:(SmolSaltLemon) Wine Duchess.esp,_000_WineDuchess_Cloak,Wine Duchess Leather Cloak,(SmolSaltLemon) Wine Duchess.esp,Authoria - Reqtificated - Wine Dutchess.esp,AD3B01,False,True
+00080C:(SmolSaltLemon) Wine Duchess.esp,_000_WineDuchess_Corset,Wine Duchess Leather Corset,(SmolSaltLemon) Wine Duchess.esp,Authoria - Reqtificated - Wine Dutchess.esp,AD3B01,True,True
+00080D:(SmolSaltLemon) Wine Duchess.esp,_000_WineDuchess_Gloves,Wine Duchess Leather Gloves,(SmolSaltLemon) Wine Duchess.esp,Authoria - Reqtificated - Wine Dutchess.esp,AD3B01,True,True
+00080E:(SmolSaltLemon) Wine Duchess.esp,_000_WineDuchess_GlovesForNails,Wine Duchess Leather Gloves,(SmolSaltLemon) Wine Duchess.esp,Authoria - Reqtificated - Wine Dutchess.esp,AD3B01,True,True
+000812:(SmolSaltLemon) Wine Duchess.esp,_000_WineDuchess_Pants,Wine Duchess Leather Pants,(SmolSaltLemon) Wine Duchess.esp,Authoria - Reqtificated - Wine Dutchess.esp,AD3B01,False,True
+000811:(SmolSaltLemon) Wine Duchess.esp,_000_WineDuchess_NeckCorset,Wine Duchess Neck Corset,(SmolSaltLemon) Wine Duchess.esp,Authoria - Reqtificated - Wine Dutchess.esp,AD3B01,True,True
+000813:(SmolSaltLemon) Wine Duchess.esp,_000_WineDuchess_Skirt,Wine Duchess Skirt,(SmolSaltLemon) Wine Duchess.esp,Authoria - Reqtificated - Wine Dutchess.esp,AD3B01,False,True
+0008C0:Apex_Khajiit.esp,KhajiitiApexBootsHeavy,Khajiiti Steel Boots,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008BF:Apex_Khajiit.esp,KhajiitiApexBootsBloodmoonHeavy,Khajiiti Steel Boots - Bloodmoon,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008CE:Apex_Khajiit.esp,KhajiitiApexBootsDroziraHeavy,Khajiiti Steel Boots - Dro'Zira,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008BE:Apex_Khajiit.esp,KhajiitiApexBootsManeHeavy,Khajiiti Steel Boots - Mane,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008BD:Apex_Khajiit.esp,KhajiitiApexBootsSilverHeavy,Khajiiti Steel Boots - Silver,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008BA:Apex_Khajiit.esp,KhajiitiApexCuirassBloodmoonHeavy,Khajiiti Steel Cuirass - Bloodmoon,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008BB:Apex_Khajiit.esp,KhajiitiApexCuirassHeavy,Khajiiti Steel Cuirass - Cherim's Heart,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008CD:Apex_Khajiit.esp,KhajiitiApexCuirassDroZiraHeavy,Khajiiti Steel Cuirass - Dro'Zira,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008B9:Apex_Khajiit.esp,KhajiitiApexCuirassFirefrostHeavy,Khajiiti Steel Cuirass - Firefrost,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008BC:Apex_Khajiit.esp,KhajiitiApexCuirassManeHeavy,Khajiiti Steel Cuirass - Mane,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008C1:Apex_Khajiit.esp,KhajiitiApexCuirassRoyalHeavy,Khajiiti Steel Cuirass - Royal,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008CF:Apex_Khajiit.esp,KhajiitiApexCuirassSilverHeavy,Khajiiti Steel Cuirass - Silver,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008C2:Apex_Khajiit.esp,KhajiitiApexCuirassWarmSandsHeavy,Khajiiti Steel Cuirass - Warm Sands,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008C3:Apex_Khajiit.esp,KhajiitiApexGauntletsHeavy,Khajiiti Steel Gauntlets,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008C4:Apex_Khajiit.esp,KhajiitiApexGauntletsBloodmoonHeavy,Khajiiti Steel Gauntlets - Bloodmoon,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008CC:Apex_Khajiit.esp,KhajiitiApexGauntletsDroziraHeavy,Khajiiti Steel Gauntlets - Dro'Zira,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008C5:Apex_Khajiit.esp,KhajiitiApexGauntletsManeHeavy,Khajiiti Steel Gauntlets - Mane,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008C6:Apex_Khajiit.esp,KhajiitiApexGauntletsSilverHeavy,Khajiiti Steel Gauntlets - Silver,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008D0:Apex_Khajiit.esp,KhajiitiApexHelmetHeavy,Khajiiti Steel Helmet,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008C7:Apex_Khajiit.esp,KhajiitiApexHelmetBloodmoonHeavy,Khajiiti Steel Helmet - Bloodmoon,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008CB:Apex_Khajiit.esp,KhajiitiApexHelmetDroziraHeavy,Khajiiti Steel Helmet - Dro'Zira,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008C8:Apex_Khajiit.esp,KhajiitiApexHelmetManeHeavy,Khajiiti Steel Helmet - Mane,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008C9:Apex_Khajiit.esp,KhajiitiApexHelmetSilverHeavy,Khajiiti Steel Helmet - Silver,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+0008CA:Apex_Khajiit.esp,KhajiitiApexShieldHeavy,Khajiiti Steel Shield,Apex_Khajiit.esp,Authoria - Reqtificated - Apex Khajiit.esp,AD3B01,True,True
+00080D:DD  - Sigrin Silver Fox armor by Vergi.esp,aaa_SigrinAccessoriesOB,Sigrin Leather Belt,DD  - Sigrin Silver Fox armor by Vergi.esp,Authoria - Reqtificated - Sigrin Silver Fox Armor.esp,AD3B01,False,True
+000807:DD  - Sigrin Silver Fox armor by Vergi.esp,aaa_SigrinCape2,Sigrin Leather Cape,DD  - Sigrin Silver Fox armor by Vergi.esp,Authoria - Reqtificated - Sigrin Silver Fox Armor.esp,AD3B01,False,True
+00080F:DD  - Sigrin Silver Fox armor by Vergi.esp,aaa_SigrinHandsO,Sigrin Leather Gauntlets,DD  - Sigrin Silver Fox armor by Vergi.esp,Authoria - Reqtificated - Sigrin Silver Fox Armor.esp,AD3B01,False,True
+000811:DD  - Sigrin Silver Fox armor by Vergi.esp,aaa_SigrinTopO,Sigrin Leather Top,DD  - Sigrin Silver Fox armor by Vergi.esp,Authoria - Reqtificated - Sigrin Silver Fox Armor.esp,AD3B01,False,True
+000813:DD  - Sigrin Silver Fox armor by Vergi.esp,aaa_SigrinShoulder2,Sigrin Shoulder Padding,DD  - Sigrin Silver Fox armor by Vergi.esp,Authoria - Reqtificated - Sigrin Silver Fox Armor.esp,AD3B01,False,True
+000815:DD  - Sigrin Silver Fox armor by Vergi.esp,aaa_SigrinShoulder3,Sigrin Shoulder Padding,DD  - Sigrin Silver Fox armor by Vergi.esp,Authoria - Reqtificated - Sigrin Silver Fox Armor.esp,AD3B01,False,True
+000DA3:DD  - Sigrin Silver Fox armor by Vergi.esp,aaa_SigrinAccessories2,Sigrin Static Leather Belt,DD  - Sigrin Silver Fox armor by Vergi.esp,Authoria - Reqtificated - Sigrin Silver Fox Armor.esp,AD3B01,False,True
+00080B:DD  - Sigrin Silver Fox armor by Vergi.esp,aaa_SigrinAccessoriesNHDT,Sigrin's Static Accessories,DD  - Sigrin Silver Fox armor by Vergi.esp,Authoria - Reqtificated - Sigrin Silver Fox Armor.esp,AD3B01,False,True
+000809:DD  - Sigrin Silver Fox armor by Vergi.esp,aaa_SigrinAccessories2oB,Silver Fox Accessories,DD  - Sigrin Silver Fox armor by Vergi.esp,Authoria - Reqtificated - Sigrin Silver Fox Armor.esp,AD3B01,False,True
+000840:DD FVO Cloth.esp,aaa_FVOFURv2,FVO Fur Padding,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+000829:DD FVO Cloth.esp,aaa_FVOBootsV2,FVO Leather Boots,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+00082B:DD FVO Cloth.esp,aaa_FVOHandV2,FVO Leather Gloves,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+00082D:DD FVO Cloth.esp,aaa_FVOPanthoseOBJV2,FVO Leather Panthose,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+000816:DD FVO Cloth.esp,aaa_FVOSkirtSMP,FVO Leather Skirt,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+000818:DD FVO Cloth.esp,aaa_FVOSkirtSMP2,FVO Leather Skirt,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+000819:DD FVO Cloth.esp,aaa_FVOSkirtSMP3,FVO Leather Skirt,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+00081B:DD FVO Cloth.esp,aaa_FVOSkirtSMPonlyS1,FVO Leather Skirt,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+00081F:DD FVO Cloth.esp,aaa_FVOSkirtSMPonlyS3,FVO Leather Skirt,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+00082F:DD FVO Cloth.esp,aaa_FVOSkirtSMPV2,FVO Leather Skirt,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+000831:DD FVO Cloth.esp,aaa_FVOSkirtSMP2V2,FVO Leather Skirt,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+000833:DD FVO Cloth.esp,aaa_FVOSkirtSMP3V2,FVO Leather Skirt,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+000835:DD FVO Cloth.esp,aaa_FVOSkirtSMPonlyS1V2,FVO Leather Skirt,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+000837:DD FVO Cloth.esp,aaa_FVOSkirtSMPonlyS2V2,FVO Leather Skirt,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+000839:DD FVO Cloth.esp,aaa_FVOSkirtSMPonlyS3V2,FVO Leather Skirt,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+000845:DD FVO Cloth.esp,aaa_FVOSkirtnonSMP2,FVO Leather Skirt,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+000848:DD FVO Cloth.esp,aaa_FVOSkirtLightSMPv2,FVO Leather Skirt,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+00084A:DD FVO Cloth.esp,aaa_FVOSkirtnonSMP2v2,FVO Leather Skirt,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+00083B:DD FVO Cloth.esp,aaa_FVOSPantiesV2,FVO Panties,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+00081D:DD FVO Cloth.esp,aaa_FVOSkirtSMPonlyS2,FVO Skirt SMP only S2,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+00083D:DD FVO Cloth.esp,aaa_FVOTOPV2,FVO TOP V2,DD FVO Cloth.esp,Authoria - Reqtificated - FVO Armor.esp,AD3B01,False,True
+000855:DDV - Ruby flower armor.esp,aaa_RFHatOFF,DDV - Ruby Flower Hat OFF,DDV - Ruby flower armor.esp,Authoria - Reqtificated - Ruby Flower Armor.esp,AD3B01,False,True
+000823:DDV - Ruby flower armor.esp,aaa_RFGlovesNCGold,Ruby Flower Gloves Gold NoClaws,DDV - Ruby flower armor.esp,Authoria - Reqtificated - Ruby Flower Armor.esp,AD3B01,False,True
+000811:DDV - Ruby flower armor.esp,aaa_RFGlovesNC,Ruby Flower Gloves NoClaws,DDV - Ruby flower armor.esp,Authoria - Reqtificated - Ruby Flower Armor.esp,AD3B01,True,True
+000858:DDV - Ruby flower armor.esp,aaa_RFHatGoldoff,Ruby Flower Hat Gold OFF,DDV - Ruby flower armor.esp,Authoria - Reqtificated - Ruby Flower Armor.esp,AD3B01,False,True
+000D6F:Girl's Travel Outfit Recolors.esp,GTOCtorsoBlack,Black Travel Clothing,Girl's Travel Outfit Recolors.esp,Authoria - Reqtificated - Girl's Travel Outfit.esp,AD3B01,False,True
+000D6E:Girl's Travel Outfit Recolors.esp,GTOCtorsoBrown,Brown Travel Clothing,Girl's Travel Outfit Recolors.esp,Authoria - Reqtificated - Girl's Travel Outfit.esp,AD3B01,False,True
+000D6D:Girl's Travel Outfit Recolors.esp,GTOCtorsoGreen,Green Travel Clothing,Girl's Travel Outfit Recolors.esp,Authoria - Reqtificated - Girl's Travel Outfit.esp,AD3B01,False,True
+0008DB:Kad_MoonMonkRobes.esp,0K_KhajiitGauntletsWhite_Unenchanted,Moon Monk's Gauntlets - Jone's Light,Kad_MoonMonkRobes.esp,Authoria - Reqtificated - Moon Monk Robes.esp,AD3B01,False,True
+0008D9:Kad_MoonMonkRobes.esp,0K_KhajiitGauntletsJadarri_Unenchanted,Moon Monk's Gauntlets - Pride of Alkosh,Kad_MoonMonkRobes.esp,Authoria - Reqtificated - Moon Monk Robes.esp,AD3B01,False,True
+0008D8:Kad_MoonMonkRobes.esp,0K_KhajiitGauntletsBlack_Unenchanted,Moon Monk's Gauntlets - Rajhin's Shadow,Kad_MoonMonkRobes.esp,Authoria - Reqtificated - Moon Monk Robes.esp,AD3B01,False,True
+0008DA:Kad_MoonMonkRobes.esp,0K_KhajiitGauntletsWater_Unenchanted,Moon Monk's Gauntlets - Water Clan,Kad_MoonMonkRobes.esp,Authoria - Reqtificated - Moon Monk Robes.esp,AD3B01,False,True
+00081B:Kad_MoonMonkRobes.esp,0K_KhajiitMaskRakazra,Moon Monk's Mask - Ra'kazra's Might,Kad_MoonMonkRobes.esp,Authoria - Reqtificated - Moon Monk Robes.esp,AD3B01,True,True
+00081C:Kad_MoonMonkRobes.esp,0K_KhajiitRobesRakazra,Moon Monk's Robes - Ra'kazra's Might,Kad_MoonMonkRobes.esp,Authoria - Reqtificated - Moon Monk Robes.esp,AD3B01,True,True
+0008D7:Kad_MoonMonkRobes.esp,0K_KhajiitGauntlets_Unenchanted,Moon Monk's Scaled Gauntlets,Kad_MoonMonkRobes.esp,Authoria - Reqtificated - Moon Monk Robes.esp,AD3B01,False,True
+000814:NibeneanArmorsAndOutfit.esp,Xtudo_Nibenean_Leather_Outfit,Nibenean Leather Outfit Clothing,NibeneanArmorsAndOutfit.esp,Authoria - Reqtificated - Nibenean Armors.esp,AD3B01,False,True
+000DEA:NibeneanStriderbyXtudo.esp,Xtudo_NibeneanStrider_BootsLong,Nibenean Strider Long Boots,NibeneanStriderbyXtudo.esp,Authoria - Reqtificated - Nibenean Armors.esp,AD3B01,False,True
+00080A:Obi's Hedge Knight Armor.esp,1_ObiHedgeTopFull,Obi's Hedge Knight Armor Suit,Obi's Hedge Knight Armor.esp,Authoria - Reqtificated - Obi Hedge Knight.esp,AD3B01,True,True
+000D6A:Obi's Hedge Knight Armor.esp,1_ObisHedgeknighthelmet,Obi's Hedge Knight Helmet,Obi's Hedge Knight Armor.esp,Authoria - Reqtificated - Obi Hedge Knight.esp,AD3B01,True,True
+000925:RB's Sand Snake CBBE 3BA Bodyslide ESPFE.esp,RB's Sand Snake shoulder straps n2,Sand Snake Shoulder Straps,RB's Sand Snake CBBE 3BA Bodyslide ESPFE.esp,Authoria - Rectificated - Sandsnake Armor.esp,AD3B01,False,True
+000929:RB's Sand Snake CBBE 3BA Bodyslide ESPFE.esp,RB's Sand Snake shoulder straps n3,Sand Snake Shoulder Straps,RB's Sand Snake CBBE 3BA Bodyslide ESPFE.esp,Authoria - Rectificated - Sandsnake Armor.esp,AD3B01,False,True
+000919:RB's Sand Snake CBBE 3BA Bodyslide ESPFE.esp,RB's Sand Snake vambraces n2,Sand Snake Vambraces,RB's Sand Snake CBBE 3BA Bodyslide ESPFE.esp,Authoria - Rectificated - Sandsnake Armor.esp,AD3B01,False,True
+00091D:RB's Sand Snake CBBE 3BA Bodyslide ESPFE.esp,RB's Sand Snake vambraces n3,Sand Snake Vambraces,RB's Sand Snake CBBE 3BA Bodyslide ESPFE.esp,Authoria - Rectificated - Sandsnake Armor.esp,AD3B01,False,True
+000D73:Rogue Nord Armor.esp,RogueNordLoweredHood,Rogue Leather Lowered Hood,Rogue Nord Armor.esp,Authoria - Reqtificated - Rogue Nord Armor.esp,AD3B01,False,True
+000960:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cloak_SMP,Twilight Princess Billowing Cloak - Black,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000854:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cloak_SMP_Armored,Twilight Princess Billowing Cloak - Black - Armored,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000954:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Cloak_SMP_Red,Twilight Princess Billowing Cloak - Red,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000962:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cloak_SMP_Red,Twilight Princess Billowing Cloak - Red,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00084C:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Cloak_Armored_SMP_RED,Twilight Princess Billowing Cloak - Red - Armored,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000852:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cloak_SMP_Red_Armored,Twilight Princess Billowing Cloak - Red - Armored,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00095F:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Tasset_SMP,Twilight Princess Billowing Tasset - Black,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000953:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Tasset_SMP_Dirty,Twilight Princess Billowing Tasset - Dirty,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000961:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Tasset_SMP_Dirty,Twilight Princess Billowing Tasset - Dirty,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000926:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Boots_Riding,Twilight Princess Boots - Riding,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00094D:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Boots_SteelToe,Twilight Princess Boots - Steel Toe,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000928:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cloak,Twilight Princess Cloak - Black,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000806:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Cloak_Red,Twilight Princess Cloak - Red,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000939:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cloak_Red,Twilight Princess Cloak - Red,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00084B:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Cloak_Armored_RED,Twilight Princess Cloak - Red - Armored,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000851:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cloak_Red_Armored,Twilight Princess Cloak - Red - Armored,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000853:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cloak_Armored,Twilight Princess Cloak -Black- Armored,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000924:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cuirass,Twilight Princess Cuirass - Black,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00085A:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cuirass_Black_Armored,Twilight Princess Cuirass - Black - Armored,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00092A:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cuirass_City,Twilight Princess Cuirass - Black - City,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00092B:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cuirass_Home,Twilight Princess Cuirass - Black - Home,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000804:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Cuirass_Red,Twilight Princess Cuirass - Red,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+00093C:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cuirass_Red,Twilight Princess Cuirass - Red,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000847:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Cuirass_Armored_RED,Twilight Princess Cuirass - Red - Armored,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000856:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cuirass_Red_Armored,Twilight Princess Cuirass - Red - Armored,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+0009ED:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Cuirass_Red_Black_Belt,Twilight Princess Cuirass - Red - Black Belt,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+0009EE:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cuirass_Red_Black_Belt,Twilight Princess Cuirass - Red - Black Belt,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000848:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Cuirass_Armored_RED_Black_Belt,Twilight Princess Cuirass - Red - Black Belt - Armored,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000857:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cuirass_Red_Black_Belt_Armored,Twilight Princess Cuirass - Red - Black Belt - Armored,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+0009EF:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Cuirass_City_Red_Black_Belt,Twilight Princess Cuirass - Red - Black Belt - City,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+0009F0:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cuirass_City_Red_Black_Belt,Twilight Princess Cuirass - Red - Black Belt - City,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+0009F1:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Cuirass_Home_Red_Black_Belt,Twilight Princess Cuirass - Red - Black Belt - Home,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+0009F2:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cuirass_Home_Red_Black_Belt,Twilight Princess Cuirass - Red - Black Belt - Home,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+0009EB:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Cuirass_Red_Black_Belt_No_Bronze,Twilight Princess Cuirass - Red - Black Belt - No Bronze,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+0009EC:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cuirass_Red_Black_Belt_No_Bronze,Twilight Princess Cuirass - Red - Black Belt - No Bronze,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000849:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Cuirass_Armored_RED_Black_Belt_No_Bronze,Twilight Princess Cuirass - Red - Black Belt - No Bronze - Armored,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000858:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cuirass_Red_Black_Belt_No_Bronze_Armored,Twilight Princess Cuirass - Red - Black Belt - No Bronze - Armored,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00081A:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Cuirass_City_Red,Twilight Princess Cuirass - Red - City,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+00093A:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cuirass_City_Red,Twilight Princess Cuirass - Red - City,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00081B:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Cuirass_Home_Red,Twilight Princess Cuirass - Red - Home,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+00093B:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cuirass_Home_Red,Twilight Princess Cuirass - Red - Home,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00096F:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Cuirass_Red_No_Bronze,Twilight Princess Cuirass - Red - No Bronze,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000970:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cuirass_Red_No_Bronze,Twilight Princess Cuirass - Red - No Bronze,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00084A:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Cuirass_Armored_RED_No_Bronze,Twilight Princess Cuirass - Red - No Bronze - Armored,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000859:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Cuirass_Red_No_Bronze_Armored,Twilight Princess Cuirass - Red -No Bronze - Armored,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000925:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Gloves,Twilight Princess Gloves - Black,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000855:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Gloves_Armored,Twilight Princess Gloves - Black - Armored,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000929:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Gloves_City,Twilight Princess Gloves - Black - City,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000805:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Gloves_Red,Twilight Princess Gloves - Red,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+00093D:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Gloves_Red,Twilight Princess Gloves - Red,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00084D:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Gloves_Armored_RED,Twilight Princess Gloves - Red - Armored,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+00084F:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Gloves_Red_Armored,Twilight Princess Gloves - Red - Armored,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000971:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Gloves_Red_No_Bronze,Twilight Princess Gloves - Red - No Bronze,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000972:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Gloves_Red_No_Bronze,Twilight Princess Gloves - Red - No Bronze,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00084E:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Gloves_Armored_RED_No_Bronze,Twilight Princess Gloves - Red - No Bronze - Armored,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000850:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Gloves_Red_Armored_No_Bronze,Twilight Princess Gloves - Red - No Bronze - Armored,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000832:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Hood_Desirae,Twilight Princess Hood Desirae,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000831:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Hood_Desirae_RED,Twilight Princess Hood Desirae - Red,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00083B:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Hood_Desirae_RED,Twilight Princess Hood Desirae - Red,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000833:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Hood_Runaway,Twilight Princess Hood Runaway,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000827:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Hood_Runaway_RED,Twilight Princess Hood Runaway - Red,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000828:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Hood_Runaway_RED,Twilight Princess Hood Runaway - Red,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000834:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Hood_Soundwave,Twilight Princess Hood Soundwave,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000829:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Hood_Soundwave_RED,Twilight Princess Hood Soundwave - Red,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000830:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Hood_Soundwave_RED,Twilight Princess Hood Soundwave - Red,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000A06:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Katana_Red,Twilight Princess Katana - Red,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000A09:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Katana_Red_Sageo,Twilight Princess Katana - Red Sageo,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000A0C:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Katana_Red_Tsukaito,Twilight Princess Katana - Red Tsuka-ito,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000A07:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Nodachi_Red,Twilight Princess Nodachi - Red,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000A0A:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Nodachi_Red_Sageo,Twilight Princess Nodachi - Red Sageo,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000A0D:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Nodachi_Red_Tsukaito,Twilight Princess Nodachi - Red Tsuka-ito,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000A08:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Tanto_Red,Twilight Princess Tanto - Red,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000A0B:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Tanto_Red_Sageo,Twilight Princess Tanto - Red Sageo,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000A0E:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Tanto_Red_Tsukaito,Twilight Princess Tanto - Red Tsuka-ito,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000927:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Tasset,Twilight Princess Tasset - Black,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000807:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Armor_Tasset_Dirty,Twilight Princess Tasset - Dirty,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+00093E:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Cloth_Tasset_Dirty,Twilight Princess Tasset - Dirty,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000986:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Wakizashi_Red,Twilight Princess Wakizashi - Red,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+00098D:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Wakizashi_Red_Sageo,Twilight Princess Wakizashi - Red Sageo,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000991:Twilight Princess Armor - Alt Textures and Cloth Addon.esp,TwilightPrincess_Wakizashi_Red_Tsuka_ito,Twilight Princess Wakizashi - Red Tsuka-ito,Twilight Princess Armor - Alt Textures and Cloth Addon.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+00084B:Twilight Princess Armor.esp,TwilightPrincess_Armor_Cloak_SMP,Twilight Princess Billowing Cloak - Black,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+0008AE:Twilight Princess Armor.esp,TwilightPrincess_Armor_Cloak_Armored_SMP,Twilight Princess Billowing Cloak - Black - Armored,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+00084A:Twilight Princess Armor.esp,TwilightPrincess_Armor_Tasset_SMP,Twilight Princess Billowing Tasset - Black,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000822:Twilight Princess Armor.esp,TwilightPrincess_Book_Alteration_45,"Twilight Princess Book - Alteration, 45th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000858:Twilight Princess Armor.esp,TwilightPrincess_Book_Alteration_48,"Twilight Princess Book - Alteration, 48th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00085F:Twilight Princess Armor.esp,TwilightPrincess_Book_Alteration_54,"Twilight Princess Book - Alteration, 54th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000817:Twilight Princess Armor.esp,TwilightPrincess_Book_CollegeofWinterhold_45,"Twilight Princess Book - College of Winterhold, 45th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000853:Twilight Princess Armor.esp,TwilightPrincess_Book_CollegeofWinterhold_48,"Twilight Princess Book - College of Winterhold, 48th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00085A:Twilight Princess Armor.esp,TwilightPrincess_Book_CollegeofWinterhold_54,"Twilight Princess Book - College of Winterhold, 54th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00081E:Twilight Princess Armor.esp,TwilightPrincess_Book_Conjuration_45,"Twilight Princess Book - Conjuration, 45th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000854:Twilight Princess Armor.esp,TwilightPrincess_Book_Conjuration_48,"Twilight Princess Book - Conjuration, 48th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00085B:Twilight Princess Armor.esp,TwilightPrincess_Book_Conjuration_54,"Twilight Princess Book - Conjuration, 54th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000814:Twilight Princess Armor.esp,TwilightPrincess_Book_Cursed_45,"Twilight Princess Book - Cursed, 45th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000852:Twilight Princess Armor.esp,TwilightPrincess_Book_Cursed_48,"Twilight Princess Book - Cursed, 48th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000859:Twilight Princess Armor.esp,TwilightPrincess_Book_Cursed_54,"Twilight Princess Book - Cursed, 54th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00081F:Twilight Princess Armor.esp,TwilightPrincess_Book_Destruction_45,"Twilight Princess Book - Destruction, 45th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000855:Twilight Princess Armor.esp,TwilightPrincess_Book_Destruction_48,"Twilight Princess Book - Destruction, 48th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00085C:Twilight Princess Armor.esp,TwilightPrincess_Book_Destruction_54,"Twilight Princess Book - Destruction, 54th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000820:Twilight Princess Armor.esp,TwilightPrincess_Book_Illusion_45,"Twilight Princess Book - Illusion, 45th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000856:Twilight Princess Armor.esp,TwilightPrincess_Book_Illusion_48,"Twilight Princess Book - Illusion, 48th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00085D:Twilight Princess Armor.esp,TwilightPrincess_Book_Illusion_54,"Twilight Princess Book - Illusion, 54th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000821:Twilight Princess Armor.esp,TwilightPrincess_Book_Restoration_45,"Twilight Princess Book - Restoration, 45th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000857:Twilight Princess Armor.esp,TwilightPrincess_Book_Restoration_48,"Twilight Princess Book - Restoration, 48th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+00085E:Twilight Princess Armor.esp,TwilightPrincess_Book_Restoration_54,"Twilight Princess Book - Restoration, 54th Edition",Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,False,True
+000808:Twilight Princess Armor.esp,TwilightPrincess_Armor_Boots_Riding,Twilight Princess Boots - Riding,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000845:Twilight Princess Armor.esp,TwilightPrincess_Armor_Boots_SteelToe,Twilight Princess Boots - Steel Toe,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000810:Twilight Princess Armor.esp,TwilightPrincess_Armor_Cloak,Twilight Princess Cloak - Black,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+0008AD:Twilight Princess Armor.esp,TwilightPrincess_Armor_Cloak_Armored,Twilight Princess Cloak - Black - Armored,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000801:Twilight Princess Armor.esp,TwilightPrincess_Armor_Cuirass,Twilight Princess Cuirass - Black,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+0008AB:Twilight Princess Armor.esp,TwilightPrincess_Armor_Cuirass_Armored,Twilight Princess Cuirass - Black - Armored,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000837:Twilight Princess Armor.esp,TwilightPrincess_Armor_Cuirass_City,Twilight Princess Cuirass - Black - City,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+00083B:Twilight Princess Armor.esp,TwilightPrincess_Armor_Cuirass_Home,Twilight Princess Cuirass - Black - Home,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000807:Twilight Princess Armor.esp,TwilightPrincess_Armor_Gloves,Twilight Princess Gloves - Black,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+0008AC:Twilight Princess Armor.esp,TwilightPrincess_Armor_Gloves_Armored,Twilight Princess Gloves - Black - Armored,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000833:Twilight Princess Armor.esp,TwilightPrincess_Armor_Gloves_City,Twilight Princess Gloves - City,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+00089F:Twilight Princess Armor.esp,TwilightPrincess_Hood_Desirae,Twilight Princess Hood Desirae,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+00089E:Twilight Princess Armor.esp,TwilightPrincess_Hood_Runaway,Twilight Princess Hood Runaway,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+0008A0:Twilight Princess Armor.esp,TwilightPrincess_Hood_Soundwave,Twilight Princess Hood Soundwave,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000C68:Twilight Princess Armor.esp,TwilightPrincess_Katana,Twilight Princess Katana - Black,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000C6C:Twilight Princess Armor.esp,TwilightPrincess_Nodachi,Twilight Princess Nodachi - Black,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000C70:Twilight Princess Armor.esp,TwilightPrincess_Tanto,Twilight Princess Tanto - Black,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000809:Twilight Princess Armor.esp,TwilightPrincess_Armor_Tasset,Twilight Princess Tasset - Black,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+00088A:Twilight Princess Armor.esp,TwilightPrincess_Wakizashi,Twilight Princess Wakizashi - Black,Twilight Princess Armor.esp,Authoria - Reqtificated - Twilight Princess Armor.esp,GetLevel,True,True
+000801:[ELLE] Lastriem.esp,00EL_LastriemBoots,Lastriem Leather Boots,[ELLE] Lastriem.esp,Authoria - Reqtificated - Lastriem Armor.esp,GetLevel,True,True
+000802:[ELLE] Lastriem.esp,00EL_LastriemGloves,Lastriem Leather Gloves,[ELLE] Lastriem.esp,Authoria - Reqtificated - Lastriem Armor.esp,GetLevel,True,True
+000820:[FB] Arcane Mage Armor.esp,000_Arcane_Mage_Armor_Alteration,Arcane Mage Armor (Alteration),[FB] Arcane Mage Armor.esp,Authoria - Reqtificated - Arcane Mage Armor.esp,AD3B01,False,True
+000821:[FB] Arcane Mage Armor.esp,000_Arcane_Mage_Armor_Conjuration,Arcane Mage Armor (Conjuration),[FB] Arcane Mage Armor.esp,Authoria - Reqtificated - Arcane Mage Armor.esp,AD3B01,False,True
+000822:[FB] Arcane Mage Armor.esp,000_Arcane_Mage_Armor_Destruction,Arcane Mage Armor (Destruction),[FB] Arcane Mage Armor.esp,Authoria - Reqtificated - Arcane Mage Armor.esp,AD3B01,False,True
+000823:[FB] Arcane Mage Armor.esp,000_Arcane_Mage_Armor_Illusion,Arcane Mage Armor (Illusion),[FB] Arcane Mage Armor.esp,Authoria - Reqtificated - Arcane Mage Armor.esp,AD3B01,False,True
+000824:[FB] Arcane Mage Armor.esp,000_Arcane_Mage_Armor_Restoration,Arcane Mage Armor (Restoration),[FB] Arcane Mage Armor.esp,Authoria - Reqtificated - Arcane Mage Armor.esp,AD3B01,False,True
+000825:[FB] Arcane Mage Armor.esp,000_Arcane_Mage_Gloves_Alteration,Arcane Mage Gloves (Alteration),[FB] Arcane Mage Armor.esp,Authoria - Reqtificated - Arcane Mage Armor.esp,AD3B01,False,True
+000826:[FB] Arcane Mage Armor.esp,000_Arcane_Mage_Gloves_Conjuration,Arcane Mage Gloves (Conjuration),[FB] Arcane Mage Armor.esp,Authoria - Reqtificated - Arcane Mage Armor.esp,AD3B01,False,True
+000827:[FB] Arcane Mage Armor.esp,000_Arcane_Mage_Gloves_Destruction,Arcane Mage Gloves (Destruction),[FB] Arcane Mage Armor.esp,Authoria - Reqtificated - Arcane Mage Armor.esp,AD3B01,False,True
+000828:[FB] Arcane Mage Armor.esp,000_Arcane_Mage_Gloves_Illusion,Arcane Mage Gloves (Illusion),[FB] Arcane Mage Armor.esp,Authoria - Reqtificated - Arcane Mage Armor.esp,AD3B01,False,True
+000829:[FB] Arcane Mage Armor.esp,000_Arcane_Mage_Gloves_Restoration,Arcane Mage Gloves (Restoration),[FB] Arcane Mage Armor.esp,Authoria - Reqtificated - Arcane Mage Armor.esp,AD3B01,False,True
+00080D:_Fuse00_ArmorHelga.esp,_Fuse00_ChokerOutfitHelga,Helga Leather Choker,_Fuse00_ArmorHelga.esp,Authoria - Reqtificated - Helga Armor.esp,AD3B01,False,True
+00081E:_Fuse00_ArmorHelga.esp,_Fuse00_PantsOnlyOutfitHelgaClothing,Helga Unarmored Pants Only,_Fuse00_ArmorHelga.esp,Authoria - Reqtificated - Helga Armor.esp,AD3B01,False,True
+000811:_Fuse00_ArmorThalmor.esp,_Fuse00_ArmorOutfitThalmor_NoCoatNoSkirt,Thalmor Investigator Armor (no coat & skirt),_Fuse00_ArmorThalmor.esp,Authoria - Reqtificated - Thalmor Investigator.esp,AD3B01,False,True
+000810:_Fuse00_ArmorThalmor.esp,_Fuse00_ArmorOutfitThalmor_NoCoat,Thalmor Investigator Armor (no coat),_Fuse00_ArmorThalmor.esp,Authoria - Reqtificated - Thalmor Investigator.esp,AD3B01,False,True
+000817:_Fuse00_ArmorThalmor.esp,_Fuse00_HelmetOutfitThalmor_Nochain,Thalmor Investigator Helmet (no chain mail),_Fuse00_ArmorThalmor.esp,Authoria - Reqtificated - Thalmor Investigator.esp,AD3B01,False,True
+00080E:el_gildeddoubletsetcolor.esp,ElGildedDoubletLGray,Gilded Doublet - Ash,el_gildeddoubletsetcolor.esp,Authoria - Reqtificated - Gilded Doublet Set.esp,AD3B01,True,True
+000812:el_gildeddoubletsetcolor.esp,ElGildedDoubletBrown,Gilded Doublet - Brown,el_gildeddoubletsetcolor.esp,Authoria - Reqtificated - Gilded Doublet Set.esp,AD3B01,True,True
+000810:el_gildeddoubletsetcolor.esp,ElGildedDoubletDBlue,Gilded Doublet - Dark Blue,el_gildeddoubletsetcolor.esp,Authoria - Reqtificated - Gilded Doublet Set.esp,AD3B01,True,True
+00080F:el_gildeddoubletsetcolor.esp,ElGildedDoubletDGray,Gilded Doublet - Dark Grey,el_gildeddoubletsetcolor.esp,Authoria - Reqtificated - Gilded Doublet Set.esp,AD3B01,True,True
+00080D:el_gildeddoubletsetcolor.esp,ElGildedDoubletLGreen,Gilded Doublet - Sage,el_gildeddoubletsetcolor.esp,Authoria - Reqtificated - Gilded Doublet Set.esp,AD3B01,True,True
+000811:el_gildeddoubletsetcolor.esp,ElGildedDoubletBur,Gilded Doublet - Wine,el_gildeddoubletsetcolor.esp,Authoria - Reqtificated - Gilded Doublet Set.esp,AD3B01,True,True
+00086F:evgnnsmpaccessories.esp,evgsmpbasicpouchLarmor,Tied Linen Pouch (Left),evgnnsmpaccessories.esp,Authoria - Reqtificated - Nirn Necessities.esp,GetLevel,False,True
+000870:evgnnsmpaccessories.esp,evgsmpbasicpouchLDARKarmor,Tied Linen Pouch (Left),evgnnsmpaccessories.esp,Authoria - Reqtificated - Nirn Necessities.esp,GetLevel,False,True
+000DF5:evgnnsmpaccessories.esp,evgsmpbasicpouchRarmor,Tied Linen Pouch (Right),evgnnsmpaccessories.esp,Authoria - Reqtificated - Nirn Necessities.esp,GetLevel,False,True
+000DF6:evgnnsmpaccessories.esp,evgsmpbasicpouchRDARKarmor,Tied Linen Pouch (Right),evgnnsmpaccessories.esp,Authoria - Reqtificated - Nirn Necessities.esp,GetLevel,False,True
+6020C9:BSAssets.esm,AUTH_NULL_BSKJewelryRingBrassPearl,Brass Pearl Ring,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+6020C3:BSAssets.esm,AUTH_NULL_BSKJewelryRingBrass,Brass Ring,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+6020CA:BSAssets.esm,AUTH_NULL_BSKJewelryRingBrassTopaz,Brass Topaz Ring,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+6020D1:BSAssets.esm,AUTH_NULL_BSKJewelryNecklaceBronze,Bronze Necklace,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+6020CB:BSAssets.esm,AUTH_NULL_BSKJewelryRingCopperPearl,Copper Pearl Ring,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+6020C4:BSAssets.esm,AUTH_NULL_BSKJewelryRingCopper,Copper Ring,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+6020CD:BSAssets.esm,AUTH_NULL_BSKJewelryRingCopperTopaz,Copper Topaz Ring,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AC6:BSAssets.esm,AUTH_NULL_BSK74wKatanaDaedric,Daedric Katana,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AB9:BSAssets.esm,BSK74wNodachiDaedric,Daedric Nodachi,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,True,False
+601A9C:BSAssets.esm,AUTH_NULL_BSK74wTantoDaedric,Daedric Tanto,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601A98:BSAssets.esm,AUTH_NULL_BSK74wWakizashiDaedric,Daedric Wakizashi,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601ACF:BSAssets.esm,AUTH_NULL_BSK74wAxe1HDwemer,Eastern Dwemer Axe,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AC0:BSAssets.esm,AUTH_NULL_BSK74wLongswordEasternDwemer,Eastern Dwemer Longsword,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AA5:BSAssets.esm,AUTH_NULL_BSK74wSwordEasternDwemer,Eastern Dwemer Sword,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AAE:BSAssets.esm,AUTH_NULL_BSK74wStaffEbony,Ebony Battle Staff,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+6020C7:BSAssets.esm,AUTH_NULL_BSKJewelryRingEbonyDiamond,Ebony Diamond Ring,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+6020C8:BSAssets.esm,AUTH_NULL_BSKJewelryRingEbonyEmerald,Ebony Emerald Ring,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+6020C5:BSAssets.esm,AUTH_NULL_BSKJewelryRingEbony,Ebony Ring,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AB5:BSAssets.esm,AUTH_NULL_BSK74wScimitarEbony,Ebony Scimitar,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AA3:BSAssets.esm,AUTH_NULL_BSK74wSwordElven,Elven Steel Sword,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AAD:BSAssets.esm,AUTH_NULL_BSK74wStaffGlass,Glass Battle Staff,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AB4:BSAssets.esm,AUTH_NULL_BSK74wScimitarGlass,Glass Scimitar,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AA4:BSAssets.esm,AUTH_NULL_BSK74wSwordEbony,Imperial Ebony Sword,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601ACA:BSAssets.esm,AUTH_NULL_BSK74wClubIron,Iron Club,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AC5:BSAssets.esm,AUTH_NULL_BSK74wKatanaIron,Iron Katana,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AB8:BSAssets.esm,AUTH_NULL_BSK74wNodachiIron,Iron Nodachi,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AC7:BSAssets.esm,AUTH_NULL_BSK74wIronSaber,Iron Saber,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AB3:BSAssets.esm,AUTH_NULL_BSK74wScimitarIron,Iron Scimitar,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601A9B:BSAssets.esm,AUTH_NULL_BSK74wTantoIron,Iron Tanto,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601A97:BSAssets.esm,AUTH_NULL_BSK74wWakizashiIron,Iron Wakizashi,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+6020C6:BSAssets.esm,AUTH_NULL_BSKJewelryRingJade,Jade Ring,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+6020CE:BSAssets.esm,AUTH_NULL_BSKJewelryRingJadeRuby,Jade Ruby Ring,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+6020CF:BSAssets.esm,AUTH_NULL_BSKJewelryRingJadeSapphire,Jade Sapphire Ring,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+6020D0:BSAssets.esm,AUTH_NULL_BSKJewelryRingJadeTopaz,Jade Topaz Ring,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601ABE:BSAssets.esm,AUTH_NULL_BSK74wLongswordOrcish,Orcish Longsword,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AAC:BSAssets.esm,AUTH_NULL_BSK74wStaffSilver,Perfect Silver Battle Staff,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601ACC:BSAssets.esm,AUTH_NULL_BSK74wAxe2HSilver,Perfect Silver Battleaxe,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601ABD:BSAssets.esm,AUTH_NULL_BSK74wLongswordSilver,Perfect Silver Longsword,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AB2:BSAssets.esm,AUTH_NULL_BSK74wScimitarSilver,Perfect Silver Scimitar,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601ACE:BSAssets.esm,AUTH_NULL_BSK74wAxe1HSilver,Perfect Silver War Axe,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601A9F:BSAssets.esm,AUTH_NULL_BSK74wSwordSilver,Perfect Third Era Silver Sword,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AAA:BSAssets.esm,AUTH_NULL_BSK74wStaffSteel,Reinforced Battle Staff,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AAB:BSAssets.esm,AUTH_NULL_BSK74wStaffSilver_low,Silver Battle Staff,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601ACB:BSAssets.esm,AUTH_NULL_BSK74wAxe2HSilver_low,Silver Battleaxe,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+60291E:BSAssets.esm,BSKJewelryRingSilverEmerald,Silver Emerald Ring,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AC4:BSAssets.esm,AUTH_NULL_BSK74wKatanaSilver,Silver Katana,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601ABC:BSAssets.esm,AUTH_NULL_BSK74wLongswordSilver_low,Silver Longsword,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AB7:BSAssets.esm,AUTH_NULL_BSK74wNodachiSilver,Silver Nodachi,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+60291F:BSAssets.esm,BSKJewelryRingSilverSapphire,Silver Sapphire Ring,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AB1:BSAssets.esm,AUTH_NULL_BSK74wScimitarSilver_low,Silver Scimitar,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601A9A:BSAssets.esm,AUTH_NULL_BSK74wTantoSilver,Silver Tanto,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601A96:BSAssets.esm,AUTH_NULL_BSK74wWakizashiSilver,Silver Wakizashi,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601ACD:BSAssets.esm,AUTH_NULL_BSK74wAxe1HSilver_low,Silver War Axe,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AC9:BSAssets.esm,AUTH_NULL_BSK74wClubSteel,Steel Club,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AC3:BSAssets.esm,AUTH_NULL_BSK74wKatanaSteel,Steel Katana,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601ABB:BSAssets.esm,AUTH_NULL_BSK74wLongswordSteel,Steel Longsword,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AB6:BSAssets.esm,AUTH_NULL_BSK74wNodachiSteel,Steel Nodachi,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AA7:BSAssets.esm,AUTH_NULL_BSK74wSteelSaber,Steel Saber,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AB0:BSAssets.esm,AUTH_NULL_BSK74wScimitarSteel,Steel Scimitar,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601A99:BSAssets.esm,AUTH_NULL_BSK74wTantoSteel,Steel Tanto,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601A95:BSAssets.esm,AUTH_NULL_BSK74wWakizashiSteel,Steel Wakizashi,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AA9:BSAssets.esm,AUTH_NULL_BSK74wStaffTapered,Tapered Wooden Battle Staff,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AA6:BSAssets.esm,AUTH_NULL_BSK74wSwordDaedric,Third Era Daedric Sword,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AA2:BSAssets.esm,AUTH_NULL_BSK74wSwordGlass,Third Era Glass Sword,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AA1:BSAssets.esm,AUTH_NULL_BSK74wSwordIron,Third Era Iron Sword,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601A9E:BSAssets.esm,AUTH_NULL_BSK74wSwordSilver_low,Third Era Silver Sword,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601A9D:BSAssets.esm,AUTH_NULL_BSK74wSwordSteel,Third Era Steel Sword,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AA8:BSAssets.esm,AUTH_NULL_BSK74wStaffWooden,Wooden Battle Staff,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+601AC8:BSAssets.esm,AUTH_NULL_BSK74wClubWooden,Wooden Club,BSAssets.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+081DFC:BSHeartland.esm,NULL_CYRIronFalchion,Cyrodilic Iron Falchion,BSHeartland.esm,Authoria - Master Patch - Bruma.esp,AD3B01,False,False
+00080C:BlanketScarf.esp,A_BlanketScarf_1,BlanketScarf 1,BlanketScarf.esp,Authoria - Reqtificated - Blanket Scarf.esp,AD3B01,False,False
+00082E:BlanketScarf.esp,A_BlanketScarf_EX10,BlanketScarf 10,BlanketScarf.esp,Authoria - Reqtificated - Blanket Scarf.esp,AD3B01,False,False
+000831:BlanketScarf.esp,A_BlanketScarf_EX11,BlanketScarf 11,BlanketScarf.esp,Authoria - Reqtificated - Blanket Scarf.esp,AD3B01,False,False
+000834:BlanketScarf.esp,A_BlanketScarf_EX12,BlanketScarf 12,BlanketScarf.esp,Authoria - Reqtificated - Blanket Scarf.esp,AD3B01,False,False
+000837:BlanketScarf.esp,A_BlanketScarf_EX13,BlanketScarf 13,BlanketScarf.esp,Authoria - Reqtificated - Blanket Scarf.esp,AD3B01,False,False
+00083A:BlanketScarf.esp,A_BlanketScarf_EX14,BlanketScarf 14,BlanketScarf.esp,Authoria - Reqtificated - Blanket Scarf.esp,AD3B01,False,False
+00083C:BlanketScarf.esp,A_BlanketScarf_EX15,BlanketScarf 15,BlanketScarf.esp,Authoria - Reqtificated - Blanket Scarf.esp,AD3B01,False,False
+00083F:BlanketScarf.esp,A_BlanketScarf_EX16,BlanketScarf 16,BlanketScarf.esp,Authoria - Reqtificated - Blanket Scarf.esp,AD3B01,False,False
+000843:BlanketScarf.esp,A_BlanketScarf_EX17,BlanketScarf 17,BlanketScarf.esp,Authoria - Reqtificated - Blanket Scarf.esp,AD3B01,False,False
+000845:BlanketScarf.esp,A_BlanketScarf_EX18,BlanketScarf 18,BlanketScarf.esp,Authoria - Reqtificated - Blanket Scarf.esp,AD3B01,False,False
+000849:BlanketScarf.esp,A_BlanketScarf_EX19,BlanketScarf 19,BlanketScarf.esp,Authoria - Reqtificated - Blanket Scarf.esp,AD3B01,False,False
+000815:BlanketScarf.esp,A_BlanketScarf_2,BlanketScarf 2,BlanketScarf.esp,Authoria - Reqtificated - Blanket Scarf.esp,AD3B01,False,False
+00084C:BlanketScarf.esp,A_BlanketScarf_EX20,BlanketScarf 20,BlanketScarf.esp,Authoria - Reqtificated - Blanket Scarf.esp,AD3B01,False,False
+000816:BlanketScarf.esp,A_BlanketScarf_3,BlanketScarf 3,BlanketScarf.esp,Authoria - Reqtificated - Blanket Scarf.esp,AD3B01,False,False
+000817:BlanketScarf.esp,A_BlanketScarf_4,BlanketScarf 4,BlanketScarf.esp,Authoria - Reqtificated - Blanket Scarf.esp,AD3B01,False,False
+000818:BlanketScarf.esp,A_BlanketScarf_5,BlanketScarf 5,BlanketScarf.esp,Authoria - Reqtificated - Blanket Scarf.esp,AD3B01,False,False
+000819:BlanketScarf.esp,A_BlanketScarf_6,BlanketScarf 6,BlanketScarf.esp,Authoria - Reqtificated - Blanket Scarf.esp,AD3B01,False,False
+00081A:BlanketScarf.esp,A_BlanketScarf_7,BlanketScarf 7,BlanketScarf.esp,Authoria - Reqtificated - Blanket Scarf.esp,AD3B01,False,False
+0415C9:Campfire.esm,REQ_NULL__Camp_ArmorSonsGauntlets,Fur Gauntlets,Campfire.esm,Authoria - Reqtificated - Campfire.esp,AD3B01,False,False
+015E64:FurSet by keung.esp,REQ_NULL_AM_FurSet_Boots_Wolf_15x2,Boots of Geater Nocturnal's Major Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E63:FurSet by keung.esp,REQ_NULL_AM_FurSet_Boots_Wolf_10x2,Boots of Greater Nocturnal's Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E68:FurSet by keung.esp,REQ_NULL_AM_MageFur_Boots_Wolf_10x2,Boots of Greater Nocturnal's Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E65:FurSet by keung.esp,REQ_NULL_AM_FurSet_Boots_Wolf_20x2,Boots of Greater Nocturnal's Eminent Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E6A:FurSet by keung.esp,REQ_NULL_AM_MageFur_Boots_Wolf_20x2,Boots of Greater Nocturnal's Eminent Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E66:FurSet by keung.esp,REQ_NULL_AM_FurSet_Boots_Wolf_25x2,Boots of Greater Nocturnal's Extreme Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E6B:FurSet by keung.esp,REQ_NULL_AM_MageFur_Boots_Wolf_25x2,Boots of Greater Nocturnal's Extreme Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E69:FurSet by keung.esp,REQ_NULL_AM_MageFur_Boots_Wolf_15x2,Boots of Greater Nocturnal's Major Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E61:FurSet by keung.esp,REQ_NULL_AM_FurSet_Boots_Wolf_05x2,Boots of Greater Nocturnal's Minor Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E62:FurSet by keung.esp,REQ_NULL_AM_MageFur_Boots_Wolf_05x2,Boots of Greater Nocturnal's Minor Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E67:FurSet by keung.esp,REQ_NULL_AM_FurSet_Boots_Wolf_30x2,Boots of Greater Nocturnal's Peerless Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E6C:FurSet by keung.esp,REQ_NULL_AM_MageFur_Boots_Wolf_30x2,Boots of Greater Nocturnal's Peerless Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E08:FurSet by keung.esp,REQ_NULL_AM_FurSet_Boots_Wolf_10,Boots of Nocturnal's Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E0D:FurSet by keung.esp,REQ_NULL_AM_MageFur_Boots_Wolf_10,Boots of Nocturnal's Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E0A:FurSet by keung.esp,REQ_NULL_AM_FurSet_Boots_Wolf_20,Boots of Nocturnal's Eminent Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E0F:FurSet by keung.esp,REQ_NULL_AM_MageFur_Boots_Wolf_20,Boots of Nocturnal's Eminent Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E0B:FurSet by keung.esp,REQ_NULL_AM_FurSet_Boots_Wolf_25,Boots of Nocturnal's Extreme Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E10:FurSet by keung.esp,REQ_NULL_AM_MageFur_Boots_Wolf_25,Boots of Nocturnal's Extreme Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E09:FurSet by keung.esp,REQ_NULL_AM_FurSet_Boots_Wolf_15,Boots of Nocturnal's Major Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E0E:FurSet by keung.esp,REQ_NULL_AM_MageFur_Boots_Wolf_15,Boots of Nocturnal's Major Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015DF9:FurSet by keung.esp,REQ_NULL_AM_FurSet_Boots_Wolf_05,Boots of Nocturnal's Minor Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015DFA:FurSet by keung.esp,REQ_NULL_AM_MageFur_Boots_Wolf_05,Boots of Nocturnal's Minor Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E0C:FurSet by keung.esp,REQ_NULL_AM_FurSet_Boots_Wolf_30,Boots of Nocturnal's Peerless Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E11:FurSet by keung.esp,REQ_NULL_AM_MageFur_Boots_Wolf_30,Boots of Nocturnal's Peerless Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013805:FurSet by keung.esp,REQ_NULL_AM_Furset_Coat_SabreCatSnow,Coat Sabre Cat Snow (Blessing of the Nord),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+01380B:FurSet by keung.esp,REQ_NULL_AM_MageFur_Coat_SabreCatSnow,Coat Sabre Cat Snow (Blessing of the Nord) Mage,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013806:FurSet by keung.esp,REQ_NULL_AM_Furset_Coat_SnowBear,Coat Snow Bear (Blessing of the Nord),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+01380C:FurSet by keung.esp,REQ_NULL_AM_MageFur_Coat_SnowBear,Coat Snow Bear (Blessing of the Nord) Mage,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013812:FurSet by keung.esp,REQ_NULL_AM_MageFur_Coat_SabreCatTiger,Coat of Akatosh's Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013817:FurSet by keung.esp,REQ_NULL_AM_Furset_Coat_Bear,Coat of Arkay's Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013818:FurSet by keung.esp,REQ_NULL_AM_MageFur_Coat_Bear,Coat of Arkay's Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013226:FurSet by keung.esp,REQ_NULL_AM_MageFur_Coat_SabreCatLeopard,Coat of Julianos's Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015DEC:FurSet by keung.esp,REQ_NULL_AM_Furset_Coat_Werewolf,Coat of Kyne's Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015DEE:FurSet by keung.esp,REQ_NULL_AM_MageFur_Coat_Werewolf,Coat of Kyne's Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E49:FurSet by keung.esp,REQ_NULL_AM_MageFur_Coat_SabreCatTiger_45,Coat of Rose Dawn Mage,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E2D:FurSet by keung.esp,REQ_NULL_AM_Furset_Coat_SabreCatLeopard_15,Coat of the Golden Kobmand,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E2E:FurSet by keung.esp,REQ_NULL_AM_Furset_Coat_SabreCatTiger_22,Coat of the Golden Thane,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E31:FurSet by keung.esp,REQ_NULL_AM_Furset_Coat_SabreCatLeopard_25,Coat of the Imperial Kobmand,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E32:FurSet by keung.esp,REQ_NULL_AM_Furset_Coat_SabreCatTiger_37,Coat of the Imperial Thane,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+012C6C:FurSet by keung.esp,REQ_NULL_AM_Furset_Coat_SabreCatLeopard_05,Coat of the Kobmand,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E59:FurSet by keung.esp,REQ_NULL_AM_MageFur_Coat_Werewolf_Necro,Coat of the Necromancer,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E48:FurSet by keung.esp,REQ_NULL_AM_FurSet_Coat_SabreCatTiger_45,Coat of the Rose Thane,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E2F:FurSet by keung.esp,REQ_NULL_AM_Furset_Coat_SabreCatLeopard_20,Coat of the Royal Kobmand,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E30:FurSet by keung.esp,REQ_NULL_AM_Furset_Coat_SabreCatTiger_30,Coat of the Royal Thane,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E2B:FurSet by keung.esp,REQ_NULL_AM_Furset_Coat_SabreCatLeopard_10,Coat of the Silver Kobmand,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E2C:FurSet by keung.esp,REQ_NULL_AM_Furset_Coat_SabreCatTiger_15,Coat of the Silver Thane,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013811:FurSet by keung.esp,REQ_NULL_AM_FurSet_Coat_SabreCatTiger_07,Coat of the Thane,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E97:FurSet by keung.esp,REQ_NULL_AM_FurSet_GlovesOF_Wolf_15,Fingerless Gloves of Eminent Noctural's Hands,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E98:FurSet by keung.esp,REQ_NULL_AM_MageFur_GlovesOF_Wolf_15,Fingerless Gloves of Eminent Nocturnal's Hands (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E9D:FurSet by keung.esp,REQ_NULL_AM_FurSet_GlovesOF_Wolf_17,Fingerless Gloves of Extreme Noctural's Hands,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E9E:FurSet by keung.esp,REQ_NULL_AM_MageFur_GlovesOF_Wolf_17,Fingerless Gloves of Extreme Nocturnal's Hands (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E99:FurSet by keung.esp,REQ_NULL_AM_FurSet_GlovesOF_Wolf_12,Fingerless Gloves of Major Noctural's Hands,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E9A:FurSet by keung.esp,REQ_NULL_AM_MageFur_GlovesOF_Wolf_12,Fingerless Gloves of Major Nocturnal's Hands (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015DF4:FurSet by keung.esp,REQ_NULL_AM_FurSet_GlovesOF_SnowBear_05,Fingerless Gloves of Mara's Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015DF5:FurSet by keung.esp,REQ_NULL_AM_MageFur_GlovesOF_SnowBear_05,Fingerless Gloves of Mara's Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015EC2:FurSet by keung.esp,REQ_NULL_AM_FurSet_GlovesOF_SnowBear_10,Fingerless Gloves of Mara's Greater Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015EC1:FurSet by keung.esp,REQ_NULL_AM_MageFur_GlovesOF_SnowBear_10,Fingerless Gloves of Mara's Greater Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E91:FurSet by keung.esp,REQ_NULL_AM_FurSet_GlovesOF_Wolf_07,Fingerless Gloves of Minor Noctural's Hands,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E92:FurSet by keung.esp,REQ_NULL_AM_MageFur_GlovesOF_Wolf_07,Fingerless Gloves of Minor Nocturnal's Hands (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E93:FurSet by keung.esp,REQ_NULL_AM_FurSet_GlovesOF_Wolf_10,Fingerless Gloves of Noctural's Hands,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E94:FurSet by keung.esp,REQ_NULL_AM_MageFur_GlovesOF_Wolf_10,Fingerless Gloves of Nocturnal's Hands (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E9B:FurSet by keung.esp,REQ_NULL_AM_FurSet_GlovesOF_Wolf_20,Fingerless Gloves of Peerless Noctural's Hands,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E9C:FurSet by keung.esp,REQ_NULL_AM_MageFur_GlovesOF_Wolf_20,Fingerless Gloves of Peerless Nocturnal's Hands (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B82:FurSet by keung.esp,A_FurSet_Boots_Bear,FurSet Boots (Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B6E:FurSet by keung.esp,A_FurSet_Boots_SabreCatLeopard,FurSet Boots (Sabre Cat Leopard),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B7F:FurSet by keung.esp,A_FurSet_Boots_SabreCatSnow,FurSet Boots (Sabre Cat Snow),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B72:FurSet by keung.esp,A_FurSet_Boots_SabreCatTiger,FurSet Boots (Sabre Cat Tiger),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B81:FurSet by keung.esp,A_FurSet_Boots_SnowBear,FurSet Boots (Snow Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B92:FurSet by keung.esp,A_FurSet_Boots_WereWolf,FurSet Boots (Werewolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B80:FurSet by keung.esp,A_FurSet_Boots_Wolf,FurSet Boots (Wolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BD2:FurSet by keung.esp,A_Furset_Coat_Bear,FurSet Coat (Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BC6:FurSet by keung.esp,A_Furset_Coat_SabreCatLeopard,FurSet Coat (Sabre Cat Leopard),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BCE:FurSet by keung.esp,A_Furset_Coat_SabreCatSnow,FurSet Coat (Sabre Cat Snow),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BC8:FurSet by keung.esp,A_Furset_Coat_SabreCatTiger,FurSet Coat (Sabre Cat Tiger),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BD0:FurSet by keung.esp,A_Furset_Coat_SnowBear,FurSet Coat (Snow Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BD1:FurSet by keung.esp,A_Furset_Coat_Werewolf,FurSet Coat (Werewolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BCF:FurSet by keung.esp,A_Furset_Coat_Wolf,FurSet Coat (Wolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BB0:FurSet by keung.esp,A_FurSet_Earmuffs_Bear,FurSet Earmuffs (Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B9D:FurSet by keung.esp,A_FurSet_Earmuffs_SabreCatLeopard,FurSet Earmuffs (Sabre Cat Leopard),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BAD:FurSet by keung.esp,A_FurSet_Earmuffs_SabreCatSnow,FurSet Earmuffs (Sabre Cat Snow),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BA1:FurSet by keung.esp,A_FurSet_Earmuffs_SabreCatTiger,FurSet Earmuffs (Sabre Cat Tiger),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BAF:FurSet by keung.esp,A_FurSet_Earmuffs_SnowBear,FurSet Earmuffs (Snow Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BB1:FurSet by keung.esp,A_FurSet_Earmuffs_Werewolf,FurSet Earmuffs (Werewolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BAE:FurSet by keung.esp,A_FurSet_Earmuffs_Wolf,FurSet Earmuffs (Wolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B7E:FurSet by keung.esp,A_FurSet_Gloves_Bear,FurSet Gloves (Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B6D:FurSet by keung.esp,A_FurSet_Gloves_SabreCatLeopard,FurSet Gloves (Sabre Cat Leopard),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B7B:FurSet by keung.esp,A_FurSet_Gloves_SabreCatSnow,FurSet Gloves (Sabre Cat Snow),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B71:FurSet by keung.esp,A_FurSet_Gloves_SabreCatTiger,FurSet Gloves (Sabre Cat Tiger),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B7D:FurSet by keung.esp,A_FurSet_Gloves_SnowBear,FurSet Gloves (Snow Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B91:FurSet by keung.esp,A_FurSet_Gloves_Werewolf,FurSet Gloves (Werewolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B7C:FurSet by keung.esp,A_FurSet_Gloves_Wolf,FurSet Gloves (Wolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B8A:FurSet by keung.esp,A_FurSet_Hat_Bear,FurSet Hat (Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B5F:FurSet by keung.esp,A_FurSet_Hat_SabreCatLeopard,FurSet Hat (Sabre Cat Leopard),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B87:FurSet by keung.esp,A_FurSet_Hat_SabreCatSnow,FurSet Hat (Sabre Cat Snow),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B66:FurSet by keung.esp,A_FurSet_Hat_SabreCatTiger,FurSet Hat (Sabre Cat Tiger),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B89:FurSet by keung.esp,A_FurSet_Hat_SnowBear,FurSet Hat (Snow Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B93:FurSet by keung.esp,A_FurSet_Hat_Werewolf,FurSet Hat (Werewolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B88:FurSet by keung.esp,A_FurSet_Hat_Wolf,FurSet Hat (Wolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BB5:FurSet by keung.esp,A_FurSet_Muffler_Bear,FurSet Muffler (Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B9E:FurSet by keung.esp,A_FurSet_Muffler_SabreCatLeopard,FurSet Muffler (Sabre Cat Leopard),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BB2:FurSet by keung.esp,A_FurSet_Muffler_SabreCatSnow,FurSet Muffler (Sabre Cat Snow),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BA2:FurSet by keung.esp,A_FurSet_Muffler_SabreCatTiger,FurSet Muffler (Sabre Cat Tiger),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BB4:FurSet by keung.esp,A_FurSet_Muffler_SnowBear,FurSet Muffler (Snow Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BB6:FurSet by keung.esp,A_FurSet_Muffler_Werewolf,FurSet Muffler (Werewolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BB3:FurSet by keung.esp,A_FurSet_Muffler_Wolf,FurSet Muffler (Wolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BE1:FurSet by keung.esp,A_FurSet_GlovesOF_Bear,FurSet OpenFingerGloves (Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BDC:FurSet by keung.esp,A_FurSet_GlovesOF_SabreCatLeopard,FurSet OpenFingerGloves (Sabre Cat Leopard),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BDE:FurSet by keung.esp,A_FurSet_GlovesOF_SabreCatSnow,FurSet OpenFingerGloves (Sabre Cat Snow),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BDD:FurSet by keung.esp,A_FurSet_GlovesOF_SabreCatTiger,FurSet OpenFingerGloves (Sabre Cat Tiger),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BE0:FurSet by keung.esp,A_FurSet_GlovesOF_SnowBear,FurSet OpenFingerGloves (Snow Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BE2:FurSet by keung.esp,A_FurSet_GlovesOF_Werewolf,FurSet OpenFingerGloves (Werewolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BDF:FurSet by keung.esp,A_FurSet_GlovesOF_Wolf,FurSet OpenFingerGloves (Wolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B5D:FurSet by keung.esp,A_FurSet_Poncho_Bear,FurSet Poncho (Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B4D:FurSet by keung.esp,A_Furset_Poncho_SabreCatLeopard,FurSet Poncho (Sabre Cat Leopard),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B5A:FurSet by keung.esp,A_Furset_Poncho_SabreCatSnow,FurSet Poncho (Sabre Cat Snow),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B54:FurSet by keung.esp,A_Furset_Poncho_SabreCatTiger,FurSet Poncho (Sabre Cat Tiger),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B5C:FurSet by keung.esp,A_FurSet_Poncho_SnowBear,FurSet Poncho (Snow Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B90:FurSet by keung.esp,A_Furset_Poncho_Werewolf,FurSet Poncho (Werewolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011B5B:FurSet by keung.esp,A_FurSet_Poncho_Wolf,FurSet Poncho (Wolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BC3:FurSet by keung.esp,A_FurSet_ShoulderCape_Bear,FurSet ShoulderCape (Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BB8:FurSet by keung.esp,A_FurSet_ShoulderCape_SabreCatLeopard,FurSet ShoulderCape (Sabre Cat Leopard),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BC0:FurSet by keung.esp,A_FurSet_ShoulderCape_SabreCatSnow,FurSet ShoulderCape (Sabre Cat Snow),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BBA:FurSet by keung.esp,A_FurSet_ShoulderCape_SabreCatTiger,FurSet ShoulderCape (Sabre Cat Tiger),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BC2:FurSet by keung.esp,A_FurSet_ShoulderCape_SnowBear,FurSet ShoulderCape (Snow Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BC4:FurSet by keung.esp,A_FurSet_ShoulderCape_Werewolf,FurSet ShoulderCape (Werewolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+011BC1:FurSet by keung.esp,A_FurSet_ShoulderCape_Wolf,FurSet ShoulderCape (Wolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015EDD:FurSet by keung.esp,REQ_NULL_AM_FurSet_Gloves_Werewolf_Boe_W15,Gloves of Boethiah's Eminent Warrior's Blessing ,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015EDE:FurSet by keung.esp,REQ_NULL_AM_FurSet_Gloves_Werewolf_Boe_W17,Gloves of Boethiah's Extreme Warrior's Blessing ,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015EDC:FurSet by keung.esp,REQ_NULL_AM_FurSet_Gloves_Werewolf_Boe_W12,Gloves of Boethiah's Major Warrior's Blessing ,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015EDA:FurSet by keung.esp,REQ_NULL_AM_FurSet_Gloves_Werewolf_Boe_W07,Gloves of Boethiah's Minor Warrior's Blessing ,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015EDF:FurSet by keung.esp,REQ_NULL_AM_FurSet_Gloves_Werewolf_Boe_W20,Gloves of Boethiah's Peerless Warrior's Blessing ,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015EDB:FurSet by keung.esp,REQ_NULL_AM_FurSet_Gloves_Werewolf_Boe_W10,Gloves of Boethiah's Warrior's Blessing ,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015DFE:FurSet by keung.esp,REQ_NULL_AM_FurSet_Gloves_Werewolf_Sten_05,Gloves of Stendarr's Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015DFF:FurSet by keung.esp,REQ_NULL_AM_MageFur_Gloves_Werewolf_Sten_05,Gloves of Stendarr's Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015EBF:FurSet by keung.esp,REQ_NULL_AM_FurSet_Gloves_Werewolf_Sten_05x2,Gloves of Stendarr's Greater Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015EC0:FurSet by keung.esp,REQ_NULL_AM_MageFur_Gloves_Werewolf_Sten_05x2,Gloves of Stendarr's Greater Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015EB2:FurSet by keung.esp,REQ_NULL_AM_MageFur_Hat_SabreCatLeopard_30,Hat of Sheogorath's Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015EB4:FurSet by keung.esp,REQ_NULL_AM_MageFur_Hat_SabreCatLeopard_40,Hat of Sheogorath's Eminent Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015EB5:FurSet by keung.esp,REQ_NULL_AM_MageFur_Hat_SabreCatLeopard_45,Hat of Sheogorath's Extreme Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015EB3:FurSet by keung.esp,REQ_NULL_AM_MageFur_Hat_SabreCatLeopard_35,Hat of Sheogorath's Major Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015EB1:FurSet by keung.esp,REQ_NULL_AM_MageFur_Hat_SabreCatLeopard_25,Hat of Sheogorath's Minor Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015EB6:FurSet by keung.esp,REQ_NULL_AM_MageFur_Hat_SabreCatLeopard_50,Hat of Sheogorath's Peerless Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013200:FurSet by keung.esp,A_MageFur_Boots_Bear,MageFur Boots (Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131F7:FurSet by keung.esp,A_MageFur_Boots_SabreCatLeopard,MageFur Boots (Sabre Cat Leopard),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131FD:FurSet by keung.esp,A_MageFur_Boots_SabreCatSnow,MageFur Boots (Sabre Cat Snow),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131F9:FurSet by keung.esp,A_MageFur_Boots_SabreCatTiger,MageFur Boots (Sabre Cat Tiger),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131FF:FurSet by keung.esp,A_MageFur_Boots_SnowBear,MageFur Boots (Snow Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013206:FurSet by keung.esp,A_MageFur_Boots_WereWolf,MageFur Boots (Werewolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131CF:FurSet by keung.esp,A_MageFur_Boots_Wolf,MageFur Boots (Wolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+01321F:FurSet by keung.esp,A_MageFur_Coat_Bear,MageFur Coat (Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+01321A:FurSet by keung.esp,A_MageFur_Coat_SabreCatLeopard,MageFur Coat (Sabre Cat Leopard),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+01321C:FurSet by keung.esp,A_MageFur_Coat_SabreCatSnow,MageFur Coat (Sabre Cat Snow),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+01321B:FurSet by keung.esp,A_MageFur_Coat_SabreCatTiger,MageFur Coat (Sabre Cat Tiger),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+01321D:FurSet by keung.esp,A_MageFur_Coat_SnowBear,MageFur Coat (Snow Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+01321E:FurSet by keung.esp,A_MageFur_Coat_Werewolf,MageFur Coat (Werewolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131D1:FurSet by keung.esp,A_MageFur_Coat_Wolf,MageFur Coat (Wolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+01320E:FurSet by keung.esp,A_MageFur_Earmuffs_Bear,MageFur Earmuffs (Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013208:FurSet by keung.esp,A_MageFur_Earmuffs_SabreCatLeopard,MageFur Earmuffs (Sabre Cat Leopard),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+01320C:FurSet by keung.esp,A_MageFur_Earmuffs_SabreCatSnow,MageFur Earmuffs (Sabre Cat Snow),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+01320A:FurSet by keung.esp,A_MageFur_Earmuffs_SabreCatTiger,MageFur Earmuffs (Sabre Cat Tiger),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+01320D:FurSet by keung.esp,A_MageFur_Earmuffs_SnowBear,MageFur Earmuffs (Snow Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+01320F:FurSet by keung.esp,A_MageFur_Earmuffs_Werewolf,MageFur Earmuffs (Werewolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131D2:FurSet by keung.esp,A_MageFur_Earmuffs_Wolf,MageFur Earmuffs (Wolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131FC:FurSet by keung.esp,A_MageFur_Gloves_Bear,MageFur Gloves (Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131F6:FurSet by keung.esp,A_MageFur_Gloves_SabreCatLeopard,MageFur Gloves (Sabre Cat Leopard),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131FA:FurSet by keung.esp,A_MageFur_Gloves_SabreCatSnow,MageFur Gloves (Sabre Cat Snow),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131F8:FurSet by keung.esp,A_MageFur_Gloves_SabreCatTiger,MageFur Gloves (Sabre Cat Tiger),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131FB:FurSet by keung.esp,A_MageFur_Gloves_SnowBear,MageFur Gloves (Snow Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013205:FurSet by keung.esp,A_MageFur_Gloves_Werewolf,MageFur Gloves (Werewolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131D3:FurSet by keung.esp,A_MageFur_Gloves_Wolf,MageFur Gloves (Wolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013203:FurSet by keung.esp,A_MageFur_Hat_Bear,MageFur Hat (Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131F4:FurSet by keung.esp,A_MageFur_Hat_SabreCatLeopard,MageFur Hat (Sabre Cat Leopard),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013201:FurSet by keung.esp,A_MageFur_Hat_SabreCatSnow,MageFur Hat (Sabre Cat Snow),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131F5:FurSet by keung.esp,A_MageFur_Hat_SabreCatTiger,MageFur Hat (Sabre Cat Tiger),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013202:FurSet by keung.esp,A_MageFur_Hat_SnowBear,MageFur Hat (Snow Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013207:FurSet by keung.esp,A_MageFur_Hat_Werewolf,MageFur Hat (Werewolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131D5:FurSet by keung.esp,A_MageFur_Hat_Wolf,MageFur Hat (Wolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013212:FurSet by keung.esp,A_MageFur_Muffler_Bear,MageFur Muffler (Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013209:FurSet by keung.esp,A_MageFur_Muffler_SabreCatLeopard,MageFur Muffler (Sabre Cat Leopard),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013210:FurSet by keung.esp,A_MageFur_Muffler_SabreCatSnow,MageFur Muffler (Sabre Cat Snow),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+01320B:FurSet by keung.esp,A_MageFur_Muffler_SabreCatTiger,MageFur Muffler (Sabre Cat Tiger),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013211:FurSet by keung.esp,A_MageFur_Muffler_SnowBear,MageFur Muffler (Snow Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013213:FurSet by keung.esp,A_MageFur_Muffler_Werewolf,MageFur Muffler (Werewolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131D6:FurSet by keung.esp,A_MageFur_Muffler_Wolf,MageFur Muffler (Wolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013224:FurSet by keung.esp,A_MageFur_GlovesOF_Bear,MageFur OpenFingerGloves (Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013220:FurSet by keung.esp,A_MageFur_GlovesOF_SabreCatLeopard,MageFur OpenFingerGloves (Sabre Cat Leopard),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013222:FurSet by keung.esp,A_MageFur_GlovesOF_SabreCatSnow,MageFur OpenFingerGloves (Sabre Cat Snow),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013221:FurSet by keung.esp,A_MageFur_GlovesOF_SabreCatTiger,MageFur OpenFingerGloves (Sabre Cat Tiger),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013223:FurSet by keung.esp,A_MageFur_GlovesOF_SnowBear,MageFur OpenFingerGloves (Snow Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013225:FurSet by keung.esp,A_MageFur_GlovesOF_Werewolf,MageFur OpenFingerGloves (Werewolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131D4:FurSet by keung.esp,A_MageFur_GlovesOF_Wolf,MageFur OpenFingerGloves (Wolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131F3:FurSet by keung.esp,A_MageFur_Poncho_Bear,MageFur Poncho (Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131EC:FurSet by keung.esp,A_MageFur_Poncho_SabreCatLeopard,MageFur Poncho (Sabre Cat Leopard),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131F1:FurSet by keung.esp,A_MageFur_Poncho_SabreCatSnow,MageFur Poncho (Sabre Cat Snow),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131ED:FurSet by keung.esp,A_MageFur_Poncho_SabreCatTiger,MageFur Poncho (Sabre Cat Tiger),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131F2:FurSet by keung.esp,A_MageFur_Poncho_SnowBear,MageFur Poncho (Snow Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013204:FurSet by keung.esp,A_MageFur_Poncho_Werewolf,MageFur Poncho (Werewolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131D8:FurSet by keung.esp,A_MageFur_Poncho_Wolf,MageFur Poncho (Wolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013218:FurSet by keung.esp,A_MageFur_ShoulderCape_Bear,MageFur ShoulderCape (Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013214:FurSet by keung.esp,A_MageFur_ShoulderCape_SabreCatLeopard,MageFur ShoulderCape (Sabre Cat Leopard),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013216:FurSet by keung.esp,A_MageFur_ShoulderCape_SabreCatSnow,MageFur ShoulderCape (Sabre Cat Snow),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013215:FurSet by keung.esp,A_MageFur_ShoulderCape_SabreCatTiger,MageFur ShoulderCape (Sabre Cat Tiger),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013217:FurSet by keung.esp,A_MageFur_ShoulderCape_SnowBear,MageFur ShoulderCape (Snow Bear),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013219:FurSet by keung.esp,A_MageFur_ShoulderCape_Werewolf,MageFur ShoulderCape (Werewolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+0131D7:FurSet by keung.esp,A_MageFur_ShoulderCape_Wolf,MageFur ShoulderCape (Wolf),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013836:FurSet by keung.esp,REQ_NULL_AM_MageFur_Poncho_SabreCatSnow,Poncho Sabre Cat Snow of the Blessed Nord (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013831:FurSet by keung.esp,REQ_NULL_AM_Furset_Poncho_SabreCatSnow,Poncho Sabre Snow Cat of the Blessed Nord,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013833:FurSet by keung.esp,REQ_NULL_AM_FurSet_Poncho_SnowBear,Poncho Snow Bear of the Blessed Nord,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013838:FurSet by keung.esp,REQ_NULL_AM_MageFur_Poncho_SnowBear,Poncho Snow Bear of the Blessed Nord (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013837:FurSet by keung.esp,REQ_NULL_AM_MageFur_Poncho_SabreCatTiger,Poncho of Akatosh's Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+01382F:FurSet by keung.esp,REQ_NULL_AM_FurSet_Poncho_Bear,Poncho of Arkay's Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013834:FurSet by keung.esp,REQ_NULL_AM_MageFur_Poncho_Bear,Poncho of Arkey's Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013835:FurSet by keung.esp,REQ_NULL_AM_MageFur_Poncho_SabreCatLeopard,Poncho of Julianos's Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015DED:FurSet by keung.esp,REQ_NULL_AM_Furset_Poncho_Werewolf,Poncho of Kyne's Blessing,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015DEF:FurSet by keung.esp,REQ_NULL_AM_MageFur_Poncho_Werewolf,Poncho of Kyne's Blessing (Mage),FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E25:FurSet by keung.esp,REQ_NULL_AM_Furset_Poncho_SabreCatLeopard_15,Poncho of the Golden Kobmand,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E26:FurSet by keung.esp,REQ_NULL_AM_Furset_Poncho_SabreCatTiger_22,Poncho of the Golden Thane,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E29:FurSet by keung.esp,REQ_NULL_AM_Furset_Poncho_SabreCatLeopard_25,Poncho of the Imperial Kobmand,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E2A:FurSet by keung.esp,REQ_NULL_AM_Furset_Poncho_SabreCatTiger_37,Poncho of the Imperial Thane,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013830:FurSet by keung.esp,REQ_NULL_AM_Furset_Poncho_SabreCatLeopard_05,Poncho of the Kobmand,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E27:FurSet by keung.esp,REQ_NULL_AM_Furset_Poncho_SabreCatLeopard_20,Poncho of the Royal Kobmand,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E28:FurSet by keung.esp,REQ_NULL_AM_Furset_Poncho_SabreCatTiger_30,Poncho of the Royal Thane,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E23:FurSet by keung.esp,REQ_NULL_AM_Furset_Poncho_SabreCatLeopard_10,Poncho of the Silver Kobmand,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+015E24:FurSet by keung.esp,REQ_NULL_AM_Furset_Poncho_SabreCatTiger_15,Poncho of the Silver Thane,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+013832:FurSet by keung.esp,REQ_NULL_AM_Furset_Poncho_SabreCatTiger_07,Poncho of the Thane,FurSet by keung.esp,Authoria - Reqtificated - FurSet by Keung.esp,AD3B01,False,False
+2B7A0C:Glenmoril.esm,NULL_zzzRevArmorBlackWormCuirassSilver,Black Worm Armor (Silver),Glenmoril.esm,Authoria - Reqtificated - Glenmoril.esp,AD3B01,False,False
+2B7A0B:Glenmoril.esm,NULL_zzzRevArmorBlackWormBootSilver,Black Worm Boots (Silver),Glenmoril.esm,Authoria - Reqtificated - Glenmoril.esp,AD3B01,False,False
+2B7A0D:Glenmoril.esm,NULL_zzzRevArmorBlackWormGauntletsSilver,Black Worm Gauntlets (Silver),Glenmoril.esm,Authoria - Reqtificated - Glenmoril.esp,AD3B01,False,False
+2B7A0E:Glenmoril.esm,NULL_zzzRevArmorBlackWormHelmetSilver,Black Worm Helmet (Silver),Glenmoril.esm,Authoria - Reqtificated - Glenmoril.esp,AD3B01,False,False
+544190:Glenmoril.esm,zzzGHJhSword2H,Greatsword of the Rune God,Glenmoril.esm,Authoria - Reqtificated - Glenmoril.esp,GetLevel,True,False
+54ACB6:Glenmoril.esm,NULL_zzzRevArmorItheliaFaceShield,Icon of the White Star,Glenmoril.esm,Authoria - Reqtificated - Glenmoril.esp,AD3B01,False,False
+54418E:Glenmoril.esm,zzzGHJhSword1H,Sword of the Rune God,Glenmoril.esm,Authoria - Reqtificated - Glenmoril.esp,GetLevel,True,False
+000D63:JS Barenziah SE - Johnskyrim.esp,NULL_JSBarenziah,Replica Crown of Barenziah,JS Barenziah SE - Johnskyrim.esp,Authoria - Reqtificated - JS Barenziah.esp,AD3B01,False,False
+000800:JS Barenziah SE - Johnskyrim.esp,NULL_JSBarenziahHeavy,Replica Crown of Barenziah (H),JS Barenziah SE - Johnskyrim.esp,Authoria - Reqtificated - JS Barenziah.esp,AD3B01,False,False
+000801:JS Barenziah SE - Johnskyrim.esp,NULL_JSBarenziahLight,Replica Crown of Barenziah (L),JS Barenziah SE - Johnskyrim.esp,Authoria - Reqtificated - JS Barenziah.esp,AD3B01,False,False
+000D63:PigIronSet.esl,ArmorPigIronCuirass,Pig Iron Armor,PigIronSet.esl,Authoria - Reqtificated - Pig Iron Set.esp,AD3B01,True,False
+000D62:PigIronSet.esl,ArmorPigIronBoots,Pig Iron Boots,PigIronSet.esl,Authoria - Reqtificated - Pig Iron Set.esp,AD3B01,True,False
+000D64:PigIronSet.esl,ArmorPigIronGauntlets,Pig Iron Gauntlets,PigIronSet.esl,Authoria - Reqtificated - Pig Iron Set.esp,AD3B01,True,False
+000D65:PigIronSet.esl,ArmorPigIronHelmet,Pig Iron Helmet,PigIronSet.esl,Authoria - Reqtificated - Pig Iron Set.esp,AD3B01,True,False
+000801:PigIronSet.esl,PigIronMace,Pig Iron Mace,PigIronSet.esl,Authoria - Reqtificated - Pig Iron Set.esp,AD3B01,True,False
+000D70:PigIronSet.esl,PigIronMaul,Pig Iron Maul,PigIronSet.esl,Authoria - Reqtificated - Pig Iron Set.esp,AD3B01,True,False
+000D66:PigIronSet.esl,ArmorPigIronShield,Pig Iron Shield,PigIronSet.esl,Authoria - Reqtificated - Pig Iron Set.esp,AD3B01,True,False
+000D6F:PigIronSet.esl,ArmorPigIronShieldBIG,Pig Iron Targe Shield,PigIronSet.esl,Authoria - Reqtificated - Pig Iron Set.esp,AD3B01,True,False
+00082D:Ultra Enemy Good Death.esp,EnchTalismanOrcish_UE,Talisman of Cleaver,Ultra Enemy Good Death.esp,Authoria - Reqtificated - Ultra Enemy Good Death.esp,AD3B01,False,False
+2A471C:Unslaad.esm,zzzCrbAlcaireGreatlance2H,Alcaire Greatlance,Unslaad.esm,Authoria - Reqtificated - Unslaad.esp,GetLevel,True,False
+2A471B:Unslaad.esm,zzzCrbAlcaireGreatlance1H,Alcaire Lance,Unslaad.esm,Authoria - Reqtificated - Unslaad.esp,GetLevel,True,False
+23095F:Unslaad.esm,zzzCrbBellHelm,Bell Helm,Unslaad.esm,Authoria - Reqtificated - Unslaad.esp,GetLevel,True,False
+2331C4:Unslaad.esm,zzzCrbBellHelmPottery01,Bell Helm (Ceramic A),Unslaad.esm,Authoria - Reqtificated - Unslaad.esp,GetLevel,True,False
+2331C5:Unslaad.esm,zzzCrbBellHelmPottery02,Bell Helm (Ceramic B),Unslaad.esm,Authoria - Reqtificated - Unslaad.esp,GetLevel,True,False
+230971:Unslaad.esm,zzzCrbBellHelmGold,Bell Helm (Gold),Unslaad.esm,Authoria - Reqtificated - Unslaad.esp,GetLevel,True,False
+22B8D7:Unslaad.esm,zzzCrbArmorBladesNinjaArmor_Blue,Blades Spy Armor (Blue),Unslaad.esm,Authoria - Reqtificated - Unslaad.esp,GetLevel,True,False
+3A1E8D:Unslaad.esm,zzzCrbDdkSword,Cannibal Sword,Unslaad.esm,Authoria - Reqtificated - Unslaad.esp,GetLevel,True,False
+26D02F:Unslaad.esm,zzzCrbRingDovRock01,Dragonrock Ring +1,Unslaad.esm,Authoria - Reqtificated - Unslaad.esp,GetLevel,False,False
+26D031:Unslaad.esm,zzzCrbRingDovRock02,Dragonrock Ring +2,Unslaad.esm,Authoria - Reqtificated - Unslaad.esp,GetLevel,False,False
+26D036:Unslaad.esm,zzzCrbRingDovRock03,Dragonrock Ring +3,Unslaad.esm,Authoria - Reqtificated - Unslaad.esp,GetLevel,False,False
+3950E4:Unslaad.esm,zzzCrbStkCuirassNoCloak,Outcast Armor ,Unslaad.esm,Authoria - Reqtificated - Unslaad.esp,GetLevel,True,False
+3950D6:Unslaad.esm,zzzCrbShieldPpk,Shield of Kyne,Unslaad.esm,Authoria - Reqtificated - Unslaad.esp,GetLevel,True,False
+3F2758:Unslaad.esm,zzzCrbValkyrieSpearJillian,Thunder-Scale Spear,Unslaad.esm,Authoria - Reqtificated - Unslaad.esp,GetLevel,True,False
+5056AD:Vigilant.esm,NULL_zzVcgHrCuirassRust,Alessian Battlemage Armor,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+5056AE:Vigilant.esm,NULL_zzVcgHrGauntletsRust,Alessian Battlemage Gauntlets,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+5056AF:Vigilant.esm,NULL_zzVcgHrHoodRust,Alessian Battlemage Hood,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+5056B0:Vigilant.esm,NULL_zzVcgHrMaskRust,Alessian Battlemage Mask,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+53D2FB:Vigilant.esm,NULL_zzVcgEmpCuirass_Rust,Alessian Emperor Armor (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,True,False
+53D2FF:Vigilant.esm,NULL_zzVcgEmpCloak_Rust,Alessian Emperor Cloak (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+53D2FC:Vigilant.esm,NULL_zzVcgEmpGauntlets_Rust,Alessian Emperor Gauntlets (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,True,False
+53D2FD:Vigilant.esm,NULL_zzVcgEmpHelmet_Rust,Alessian Emperor Helmet (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,True,False
+158154:Vigilant.esm,NP_zzzCHClothesApprenticeRobe,Apprentice Robe,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+15A7AC:Vigilant.esm,NP_zzzCHClothesApprenticeRobe_Green,Apprentice Robe (Green),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+15A7AB:Vigilant.esm,NP_zzzCHClothesApprenticeRobe_Red,Apprentice Robe (Red),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+117C06:Vigilant.esm,zzzCHArmorSelectiveVMask,Arch-Selective Mask,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+537803:Vigilant.esm,NULL_zzVcgStaffHammerDmn_Blue,Coldflame Staff,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+0B8F43:Vigilant.esm,NULL_zzzCHArmorEbonyShield,Ebony Shield,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+0A5888:Vigilant.esm,NULL_zzzCHArmorvigilantCuirassV2,Elder Vigilant Armor,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+0A588A:Vigilant.esm,NULL_zzzCHArmorVigilantGauntletsV2,Elder Vigilant Gloves,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+0A588C:Vigilant.esm,NULL_zzzCHArmorVigilantHelmetv2,Elder Vigilant Hood,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+0A5887:Vigilant.esm,NULL_zzzCHArmorvigilantCuirassV1,Elite Vigilant Armor,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+0A5886:Vigilant.esm,NULL_zzzCHArmorVigilantBootsV1,Elite Vigilant Boots,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+0A5889:Vigilant.esm,NULL_zzzCHArmorVigilantGauntletsV1,Elite Vigilant Gloves,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+0A588B:Vigilant.esm,NULL_zzzCHArmorVigilantHelmetv1,Elite Vigilant Hood,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+537802:Vigilant.esm,NULL_zzVcgStaffHammerBlood_Gold,Hand of Marukh (Gold),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+537804:Vigilant.esm,NULL_zzVcgStaffHammerBlood_Silver,Hand of Marukh (Silver),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+15CE27:Vigilant.esm,NULL_zzzCHArmorAkatoshKnightCuirass_rust,Knight of Akatosh (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+15CE26:Vigilant.esm,NULL_zzzCHArmorAkatoshKnightBoots_rust,Knight of Akatosh Boots (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+15CE28:Vigilant.esm,NULL_zzzCHArmorAkatoshKnightGauntlets_rust,Knight of Akatosh Gauntlets (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+15CE29:Vigilant.esm,NULL_zzzCHArmorAkatoshKnightHelmet_rust,Knight of Akatosh Helmet (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+1B454E:Vigilant.esm,NULL_zzzCHArmorArkayKnightCuirassRust,Knight of Arkay Armor (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+1B454D:Vigilant.esm,NULL_zzzCHArmorArkayKnightBootsRust,Knight of Arkay Boots (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+1B454F:Vigilant.esm,NULL_zzzCHArmorArkayKnightGauntletsRust,Knight of Arkay Gauntlets (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+1B4550:Vigilant.esm,NULL_zzzCHArmorArkayKnightHelmetRust,Knight of Arkay Helmet (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+0D953F:Vigilant.esm,NULL_zzzCHArmorStendarrKnightCuirass,Knight of Stendarr Armor,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+102602:Vigilant.esm,NULL_zzzCHArmorStendarrKnightCuirassGold,Knight of Stendarr Armor (Gold),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+0D953E:Vigilant.esm,NULL_zzzCHArmorStendarrKnightBoots,Knight of Stendarr Boots,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+102601:Vigilant.esm,NULL_zzzCHArmorStendarrKnightBootsGold,Knight of Stendarr Boots (Gold),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+0D9540:Vigilant.esm,NULL_zzzCHArmorStendarrKnightGauntlets,Knight of Stendarr Gauntlets,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+102603:Vigilant.esm,NULL_zzzCHArmorStendarrKnightGauntletsGold,Knight of Stendarr Gauntlets (Gold),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+0D9541:Vigilant.esm,NULL_zzzCHArmorStendarrKnightHelmet,Knight of Stendarr Helmet,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+102604:Vigilant.esm,NULL_zzzCHArmorStendarrKnightHelmetGolden,Knight of Stendarr Helmet (Gold),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+102605:Vigilant.esm,NULL_zzzCHArmorStendarrKnightShieldGolden,Knight of Stendarr Shield (Gold),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+164164:Vigilant.esm,NULL_zzzCHArmorTalosKnightCuirass_Rust,Knight of Talos Armor (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+164165:Vigilant.esm,NULL_zzzCHArmorTalosKnightGauntlets_Rust,Knight of Talos Gauntlets (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+164166:Vigilant.esm,NULL_zzzCHArmorTalosKnightHelmet_Rust,Knight of Talos Helmet (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+4FD6C7:Vigilant.esm,NULL_zzVcgPDKnightCuirassRust,Knight-Errant Armor (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+4FD6C6:Vigilant.esm,NULL_zzVcgPDKnightBootsRust,Knight-Errant Boots (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+4FD6C8:Vigilant.esm,NULL_zzVcgPDKnightGauntletsRust,Knight-Errant Gauntlets (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+4FD6C9:Vigilant.esm,NULL_zzVcgPDKnightHelmetRust,Knight-Errant Helmet (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+044F49:Vigilant.esm,NULL_zzzCHArmorMolagCuirassRusty,Moalg Rusty Daedric Armor,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+048593:Vigilant.esm,NULL_zzzAoMMolagGreatMace,Molag Bal Greatmace,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+046513:Vigilant.esm,NULL_zzzAoMMolagGreatSpike,Molag Bal Greatspike,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+044BF7:Vigilant.esm,NULL_zzzAoMMolagGreatsword,Molag Bal Greatsword,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+048028:Vigilant.esm,NULL_zzzAoMMolagMace,Molag Bal Mace,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+047AB9:Vigilant.esm,NULL_zzzAoMMolagSpike,Molag Bal Spike,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+044BF9:Vigilant.esm,NULL_zzzAoMMolagSword,Molag Bal Sword,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+048025:Vigilant.esm,NULL_zzzAoMMolagWarhammer,Molag Bal Warhammer,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+044F48:Vigilant.esm,NULL_zzzCHArmorMolagBootsRusty,Molag Rusty Daedric Boots,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+044F4A:Vigilant.esm,NULL_zzzCHArmorMolagGauntletsRusty,Molag Rusty Daedric Gauntlets,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+044F4B:Vigilant.esm,NULL_zzzCHArmorMolagHelmetRusty,Molag Rusty Daedric Helmet,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+1A8558:Vigilant.esm,NULL_zzzCHArmorPaladinCuirassRust,Paladin Armor (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+1A8557:Vigilant.esm,NULL_zzzCHArmorPaladinBootsRust,Paladin Boots (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+1A8559:Vigilant.esm,NULL_zzzCHArmorPaladinGloveRust,Paladin Gauntlets (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+1A855A:Vigilant.esm,NULL_zzzCHArmorPaladinHelmetRust,Paladin Helmet (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+5365C1:Vigilant.esm,NULL_zzVcgGothBootsRust,Pelinal's Boots (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+5365C2:Vigilant.esm,NULL_zzVcgGothCuirassRust,Pelinal's Cuirass (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+5365C7:Vigilant.esm,NULL_zzVcgGothGauntletsRust,Pelinal's Gauntlets (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+5365C4:Vigilant.esm,NULL_zzVcgGothHelmetRust,Pelinal's Helmet (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+1547A5:Vigilant.esm,NP_zzzCHClothesPilgrimHood,Pilgrim Cloak,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+156E14:Vigilant.esm,NP_zzzCHClothesPilgrimHood_Black,Pilgrim Cloak (Black),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+156E13:Vigilant.esm,NP_zzzCHClothesPilgrimHood_Brown,Pilgrim Cloak (Brown),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+156E17:Vigilant.esm,NP_zzzCHClothesPilgrimRobe_Black,Pilgrim Robe (Black),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+50447D:Vigilant.esm,NULL_zzVCgSkShieldRust,Shield of Remembrance (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+5365FF:Vigilant.esm,NULL_zzVCgDragonShield,Shield of the One (Gold),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+50445B:Vigilant.esm,NULL_zzVcgRKCuirassRust,Sir Amiel's Armor (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+50445A:Vigilant.esm,NULL_zzVCgRKBootsRust,Sir Amiel's Boots (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+50445C:Vigilant.esm,NULL_zzVcgRKGauntletsRust,Sir Amiel's Gauntlets (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+50447A:Vigilant.esm,NULL_zzVcgSkCuirassRust,Sir Berich's Armor (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+504479:Vigilant.esm,NULL_zzVCgSkBootsRust,Sir Berich's Boots (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+50447B:Vigilant.esm,NULL_zzVcgSkGauntletsRust,Sir Berich's Gauntlets (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+50447C:Vigilant.esm,NULL_zzVcgSkHelmetRust,Sir Berich's Helmet (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+4FD710:Vigilant.esm,NULL_zzVcgArshpCuirassRust,Sir Torolf's Armor (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+4FD70F:Vigilant.esm,NULL_zzVCgArshpBootsRust,Sir Torolf's Boots (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+4FD711:Vigilant.esm,NULL_zzVcgArshpGauntletsRust,Sir Torolf's Gauntlets (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+4FD713:Vigilant.esm,NULL_zzVcgArshpHelmetRust,Sir Torolf's Helmet (Rusty),Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+537807:Vigilant.esm,NULL_zzVcgStaffHammerHLL_Green,Staff of Londa-Vera,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+537806:Vigilant.esm,NULL_zzVcgStaffHammerHLL_Blue,Staff of the Reclusive Princess,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+537805:Vigilant.esm,NULL_zzVcgStaffHammerDmn_Red,Stonefire Staff,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+0A5872:Vigilant.esm,NULL_zzzCHArmorvigilantCuirass,Vigilant Armor,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+0A5871:Vigilant.esm,NULL_zzzCHArmorVigilantBoots,Vigilant Boots,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+0A5873:Vigilant.esm,NULL_zzzCHArmorVigilantGauntlets,Vigilant Gloves,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+0A5874:Vigilant.esm,NULL_zzzCHArmorVigilantHelmet,Vigilant Hood,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+559830:Vigilant.esm,NULL_zzVcgStaffHammer1HHLL_Green,Wand of Londa-Vera,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
+55982F:Vigilant.esm,NULL_zzVcgStaffHammer1HHLL_Blue,Wand of the Reclusive Princess,Vigilant.esm,Authoria - Reqtificated - Vigilant.esp,AD3B01,False,False
