@@ -133,3 +133,16 @@ Append-only. Never edit a past entry; supersede it with a new one.
   Recon A9 added. (Aaron)
 - **Review gate: every written skill gets a review pass against the Anthropic and OpenAI docs** before it lands. It
   is a review per skill, not a sample, and it comes on top of the evals. (Aaron)
+- **The skills project waits for houseCARL's asset-layer project.** The 2.1.2 live test (N3–N5) led houseCARL to
+  redesign its asset and runtime side as one project (one asset door, one walk, one select, one runtime-layer
+  reader; about 10–13 PRs, runtime reader last). Our needs are an input; the correct design for the layer decides.
+  (Aaron, via the houseCARL advisor's note)
+- **N3–N5 ownership: houseCARL owns the readers.** The SPID / KID / BOS / FLM reader (houseCARL#934), the SkyPatcher
+  target filter (#1286), winning-copy batch decompile (#1287) and, later, a script call-site scan are houseCARL's.
+  We build none of them: a grep is a stopgap only (88% of KID's winning lines target by EditorID, and a grep ignores
+  which copy wins). The spec writes N3–N5's runtime-layer and script-discovery steps against the **capability**
+  ("houseCARL answers which lines target plugin X"), not today's tool calls. (houseCARL advisor, 2026-10-31)
+- **Hold graded and B1–B4 runs that measure asset or runtime calls** until the relevant houseCARL PRs land. Work
+  resting on record reads and `asset_status` selection (provider, `under=`, globs, `counts_only`) proceeds now; the
+  walk's parameters, `skse` config and `skypatcher_layer` filtering, `decompile_script` input and the `links=` render
+  will change shape, so don't hard-code them. (houseCARL advisor, 2026-10-31)

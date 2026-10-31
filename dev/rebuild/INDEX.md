@@ -27,7 +27,7 @@ need Aaron's own patching sessions. The latest handoff in `../handoffs/` says wh
 | `plan.md` | Stage 4: order of work citing requirements, risks, proof, rollback (created when the stage starts) |
 | `decisions.md` | Every gate and decision, dated, append-only |
 | `eval-2026-10/` | Recon pass 1: the control eval, public summary (plan, results, drill rounds, distillation) |
-| `recon/` | Recon pass 2: `anthropic/` (A1–A7), `hosts/` (A8, A9), `arr-domains/` (B5, B6), `census/`, `splits/` (01–14), `questions-for-list-authors.md`, `suspected-bugs.md` |
+| `recon/` | Recon pass 2: `anthropic/` (A1–A7), `hosts/` (A8, A9), `coverage/` (N3–N5 live probe), `arr-domains/` (B5, B6), `census/`, `splits/` (01–14), `questions-for-list-authors.md`, `suspected-bugs.md` |
 | `carried-forward.md` | Open 1.x issues and backlog items, kept as spec inputs |
 | `../handoffs/` | Session handoffs (this repo's lane) |
 
