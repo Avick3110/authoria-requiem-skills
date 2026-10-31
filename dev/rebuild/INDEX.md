@@ -11,9 +11,10 @@ build), opted into for a personal project. Aaron agrees each stage before the ne
 control eval and its re-mining) is done. In pass 2, the census of ARR's handmade patches and all
 of its split hunts are done (see `recon.md`'s findings index), and so is recon A1–A5. Heisen answered
 the questions doc on 2026-10-31. His reference stance (Requiem and its addons first) and NPC doctrine are
-in `decisions.md`, and each split's fate is in `recon/splits/README.md`. Still open: D5, A6, C1 / C2,
-the spec-session topics in `carried-forward.md`, and the targets that need Aaron's own patching
-sessions. The latest handoff in `../handoffs/` says where to pick up.
+in `decisions.md`, and each split's fate is in `recon/splits/README.md`. Aaron settled D5, C1, C2, the
+trigger-eval setup and Q29 the same day (`decisions.md`): the new skills are graded against the spec,
+not against 1.x. Still open: A6, the spec-session topics in `carried-forward.md`, and the targets that
+need Aaron's own patching sessions. The latest handoff in `../handoffs/` says where to pick up.
 
 ## Where things live
 

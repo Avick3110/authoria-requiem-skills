@@ -107,3 +107,22 @@ Append-only. Never edit a past entry; supersede it with a new one.
     where a line is missed, and only that gets added back. Aaron's view: the older "models need hand-holding" stance
     is already partly stale. (Aaron)
 - **Users are the patching authors** (Aaron, later Heisen), not end users of the list. This confirms intent. (Aaron)
+- **No live install of the pack while the rebuild runs.** The 1.x skills load in every session and would skew the
+  B1–B4 logs and the no-skill runs. CLAUDE.md step 0 is changed (PR #54). (Aaron)
+- **The new skills are graded against the spec, not against 1.x.** Beating the old scores is near-certain and tells
+  us little. Graded runs score each skill against the documented conventions (census + the authors' answers). Each
+  skill's dev loop always includes a fresh no-skill run, to find lines the model doesn't need. (Aaron)
+- **C1: no frozen checklist.** The R10 checklist isn't frozen as the re-run metric. Its checks get rewritten from the
+  spec. Reusable plumbing from its fix list: one scoring format and JSON schema, full subrecord dumps in the harness,
+  and no free credit for a do-nothing plugin (lift over the empty-plugin floor). (Aaron)
+- **D5 dropped.** No formal scored validation on the 6 held-out patches. The per-doc held-out checks stand. Running the
+  new skills on those 6 and diffing against the authors' patches checks the spec itself: a skill that matches the
+  spec but not the authors means the spec is wrong. (Aaron)
+- **C2: no separate plan + boundary-fact arm.** It moves into the build order: the router (coverage procedure +
+  boundary fact) is built first and graded against the spec, and domain content is added only where the router alone
+  misses. (Aaron)
+- **Trigger evals load the real houseCARL plugin** alongside ours, so its skills and server instructions compete as in
+  real use. Mocks, if any, are decided for full graded runs at spec time. `claude plugin eval` runs under WSL2 (no
+  Bash sandbox on native Windows). (Aaron)
+- **Q29: every Ancient Falmer / snow-elf arrow is about 100** (Ebony level, above WAR glass 90). A house value: Requiem's
+  own Dawnguard snow-elf arrows stay at Elven 60. (Aaron, from Heisen's proposal)

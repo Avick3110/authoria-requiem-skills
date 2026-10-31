@@ -38,7 +38,7 @@ Requiem's keywords, conditions and flags is not patched, however close its numbe
 | 26 | **WAR wins**: any addon that changes Requiem's values wins; off-table rows are oversights, NonPlayable, or exceptions | Split 8 confirmed, with addon precedence |
 | 27 | (Asked what "ARR moves them" meant: the per-mod handmade Requiem patches.) The WAR-wins rule applies | Special-ammo steps dropped as a rule |
 | 28 | Deliberate; Glenmoril's gun ladder is hand-made and subjective | House specific; not taught |
-| 29 | Stronger than glass: about 100 for all Ancient Falmer arrows, or follow what Requiem does to Dawnguard gear | **Aaron to decide** (a proposed value, not a derivation) |
+| 29 | Stronger than glass: about 100 for all Ancient Falmer arrows, or follow what Requiem does to Dawnguard gear | **Aaron: about 100** (2026-10-31). A house value, not a derivation: Requiem's own Dawnguard snow-elf arrows (Sunhallowed / Bloodcursed) stay at Elven 60 |
 | 30–32 (reach) | Use Requiem's reach by weapon type; anything else is an exclusion | Split 9 confirmed |
 | 33 | **Encounter zones don't matter: the world is de-levelled** | Dropped |
 | 34 | Intentional for now; modded dragon priest masks will get Requiem's variants later | Future work, not a rule now |
