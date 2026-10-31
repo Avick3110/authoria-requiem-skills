@@ -66,11 +66,12 @@ A rebuilt `authoria-requiem` skill set for the ARR list that:
 
 - **C1.** ARR only. ARR's conventions (baked "Authoria - Reqtificated" patches, merging off,
   per-patch stance, house conventions) are first-class. Other Requiem lists are not a target.
-- **C2.** It conforms to Anthropic's latest published skill-authoring guidance, and to this repo's
-  `standards/` (HOUSECARL_SKILL_AUTHORING §3–§8, the 500-line cap, name == folder, the description
-  cap, the §6.5 trigger fan-out).
-- **C3.** It must trigger on its own, measured with the §6.5 fan-out (fresh-context agents, menu
-  variant).
+- **C2.** It conforms to Anthropic's latest published skill-authoring guidance and to the mechanical
+  checks CI enforces (the 500-line cap, name == folder, the description cap). *(Amended 2026-10-31:
+  `standards/` was deleted as outdated; see `decisions.md`.)*
+- **C3.** It must trigger on its own, measured by real invocation: does Claude actually load the skill
+  on the eval queries (recon A5)? Its value is measured by recording transcripts of real use and grading
+  the output, and how the skill performed, in detail. *(Amended 2026-10-31; this was the §6.5 fan-out.)*
 - **C4.** It works on current Opus and Sonnet. No scaffolding for weaker models.
 - **C5.** houseCARL 2.x tool names and write shapes only. Every recipe kept is tested against 2.x.
 - **C6.** Every fact stated as fact is verified (Reqtificator code, live read, or 2+ judges) and

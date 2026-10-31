@@ -1,9 +1,9 @@
 # authoria-requiem-skills CI — a green/red gate on every push to main and every pull request.
-# What it does, in plain terms: checks the things the authoring standards make checkable without
-# a Claude runtime — the manifests parse and carry a real version, every SKILL.md respects the
-# 500-line cap / name==folder / description-length rules, and (on PRs) no newly-added line leaks
-# a local machine path or an email into this public repo. It is the mechanical half of the §8
-# reviewer checklist; the judgment half stays human.
+# What it does, in plain terms: checks what can be checked without a Claude runtime — the
+# manifests parse and carry a real version, every SKILL.md respects the 500-line cap (Anthropic's
+# guidance) / name==folder / description-length rules, and (on PRs) no newly-added line leaks a
+# local machine path or an email into this public repo. The judgment half (see CLAUDE.md,
+# "Authoring guidance") stays human.
 name: CI
 
 on:
@@ -48,7 +48,7 @@ jobs:
             dir=$(basename "$(dirname "$f")")
             lines=$(wc -l < "$f")
             if [ "$lines" -gt 500 ]; then
-              echo "::error file=$f::$lines lines — over the hard 500-line cap (HOUSECARL_SKILL_AUTHORING §4.1); move the tail to references/"
+              echo "::error file=$f::$lines lines — over the hard 500-line cap (Anthropic's skill guidance); move the tail to references/"
               fail=1
             fi
             name=$(sed -n 's/^name: *//p' "$f" | head -1)
