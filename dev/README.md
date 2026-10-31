@@ -19,7 +19,7 @@ lives. **The latest handoff in [`handoffs/`](handoffs/)** says where the last se
 | [`handoffs/`](handoffs/) | one handoff per session, all eras, newest by date. Check both authors | ARCHIVE each |
 | [`rebuild/`](rebuild/) | the 2.0 project: `INDEX`, `intent`, `recon`, `decisions`, then `spec` and `plan` | mixed |
 | [`rebuild/eval-2026-10/`](rebuild/eval-2026-10/) | the control eval of 1.10.0 against ARR's handmade patches (recon pass 1) | ARCHIVE |
-| [`rebuild/recon/`](rebuild/recon/) | recon pass 2: `anthropic/` (A1–A7), `arr-domains/` (B5, B6), `census/`, `splits/` (01–14), the questions doc, the suspected bugs | mixed |
+| [`rebuild/recon/`](rebuild/recon/) | recon pass 2: `anthropic/` (A1–A7), `hosts/` (A8, A9), `coverage/` (N3–N5), `arr-domains/` (B5, B6), `census/`, `splits/` (01–14), the questions doc, the suspected bugs | mixed |
 | [`rebuild/carried-forward.md`](rebuild/carried-forward.md) | open 1.x issues and backlog items, kept as spec inputs, plus new small follow-ups | LIVING |
 | [`reference/reqtificator-rules.md`](reference/reqtificator-rules.md) | the Reqtificator rulebook | LIVING |
 | [`archive/`](archive/) | 1.x build material, frozen (see its README) | ARCHIVE |
