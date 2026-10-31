@@ -39,3 +39,15 @@ rules the rebuild deletes outright.
 ## New during the rebuild
 
 *(append here: item, why, source, date, author)*
+
+### For the spec session: discuss first (Aaron, 2026-10-31)
+
+| # | Topic | Aaron's current thinking | Inputs |
+|---|---|---|---|
+| N1 | **Write-gate hook** | It may cause problems and be overkill. Discuss before adopting. | Recon A3 and A7: works mechanically, but must check something the agent can't write; Windows PowerShell hooks only fixed in 2.1.309–316 |
+| N2 | **Coverage script** | Probably the logical thing to do, depending on what houseCARL already returns. An agent can ignore parts of a tool response; a script can mechanically flag every record that isn't patched and has no reason against it. | Recon A1 ("bundle a script for critical validation"); the eval's main control failure (records dismissed unread); open question: how much of the diff houseCARL record reads already give |
+| N3 | **Scripts (.pex)**: discovery, understanding, accounting | Not discussed yet | 1.x `requiem-script-patching`; split 13 (follower bridge); houseCARL decompile |
+| N4 | **Assets** (meshes, textures, sounds, animations): discovery, understanding, accounting | Not discussed yet | houseCARL asset tools |
+| N5 | **Runtime layers** (SPID, KID, SkyPatcher, OAR, SKSE configs): discovery, understanding, accounting | Not discussed yet | houseCARL `skypatcher_layer` and the SPID / KID / SkyPatcher skills; census gotcha: runtime distribution is invisible to record references unless it goes through an outfit record |
+
+N3–N5 may belong in the coverage script's scope (N2): the record diff covers plugins only.
