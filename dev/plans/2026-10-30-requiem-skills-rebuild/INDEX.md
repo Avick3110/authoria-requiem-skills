@@ -7,9 +7,11 @@ build), opted into for a personal project. Aaron agrees each stage before the ne
 
 ## Status
 
-**Stage: Recon (pass 2).** Aaron agreed `intent.md` on 2026-10-30. Recon pass 1 (the control eval
-and its re-mining) is done. Recon pass 2 (Aaron's patching sessions, plus Anthropic's current
-skill-authoring docs) is next.
+**Stage: Recon (pass 2), 2026-10-31.** Aaron agreed `intent.md` on 2026-10-30. Recon pass 1 (the
+control eval and its re-mining) is done. In pass 2, the census of ARR's handmade patches and all
+of its split hunts are done (see `recon.md`'s findings index). Still open: Aaron's review, Heisen's
+answers to the questions doc, D5, and the targets that need Aaron's own patching sessions. The
+latest handoff in `../../session-handoffs/` says where to pick up.
 
 ## Where things live
 

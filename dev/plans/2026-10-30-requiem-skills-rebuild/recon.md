@@ -2,9 +2,11 @@
 
 *Author: Aaron (+ Claude session) · 2026-10-30*
 
-**Status:** pass 1 is done and accepted with the intent (2026-10-30). The pass 2 targets below are
-**proposed by Claude, for Aaron to review and add to**. Once agreed, they run as an agent fan-out.
-The pass 2 targets that need Aaron (his patching sessions) run as he does the work.
+**Status (2026-10-31):** pass 1 is done and accepted with the intent (2026-10-30). Pass 2's census (D)
+is done, and all of its split hunts are worked (1–6 on 2026-10-30, 7–13 plus the NPC stage-2 family
+verification on 2026-10-31; see the findings index). What's left before spec: Aaron's review of the
+hunts, Heisen's answers to the questions doc, the D5 decision, and the pass 2 targets that need
+Aaron's own patching sessions.
 
 ## Pass 1: what is already known (do not re-research)
 
@@ -125,4 +127,13 @@ runs.**
 | D (split hunt 4: enchant charge) | [`recon/2026-10-30-split-enchant-charge.md`](recon/2026-10-30-split-enchant-charge.md): 500 × enchant tier (generic), MR staff ladder 500–6000, uniques onto the ladder with a 3000 ceiling, removed / scripted enchants unlimited |
 | D (split hunt 5: recipe retirement) | [`recon/2026-10-30-split-recipe-retirement.md`](recon/2026-10-30-split-recipe-retirement.md): per-piece curation (degraded copies, colour variants, armour-only mods); 689 retired items obtainable nowhere, 250 of them in COCKS-listed mods ([`census/recipe-orphans.csv`](recon/census/recipe-orphans.csv)) |
 | D (split hunt 6: death-item loot) | [`recon/2026-10-30-split-death-item-loot.md`](recon/2026-10-30-split-death-item-loot.md): gold stays on humanoids, off creatures (Requiem's rule extended); generic gear off regular enemies, bosses keep rewards; species parts stay |
+| D (split hunt 7: NPC D1, template added) | [`recon/2026-10-31-split-npc-d1-templates.md`](recon/2026-10-31-split-npc-d1-templates.md): 360 NPCs; the source mod decides (98.3%), not the NPC; children never templated; 59 NPC- and mod-level hypotheses dead |
+| D (split hunt 8: ammo damage) | [`recon/2026-10-31-split-ammo-damage.md`](recon/2026-10-31-split-ammo-damage.md): not a ratio; final damage from a same-material Requiem comparable + AD3B2D always (55/55, no double ×4); WAR v Requiem.esp era follows the patch; gun rounds max(10, source ×5); 37/55 fit |
+| D (split hunt 9: weapon reach / speed) | [`recon/2026-10-31-split-weapon-reach.md`](recon/2026-10-31-split-weapon-reach.md): NonPlayable keeps own reach; playable gets class reach ×0.7 by animation; reach and speed move together, speed by type keyword |
+| D (split hunt 10: house conventions A) | [`recon/2026-10-31-split-house-conventions-a.md`](recon/2026-10-31-split-house-conventions-a.md): AD3B2B load-bearing only below the rescale threshold (285/288), habit elsewhere; zone caps are Gray Cowl only; Visage = LOTD's Septim set onto Ebony / Orcish |
+| D (split hunt 11: house conventions B) | [`recon/2026-10-31-split-house-conventions-b.md`](recon/2026-10-31-split-house-conventions-b.md): no Bruma +1000 offset (re-tiered by name; corrects hunt 4); Glenmoril gun charge is a shot count at cost 100; Bruma dominance measured across 14 habits |
+| D (split hunt 12: MAGIC / RACE open calls) | [`recon/2026-10-31-split-magic-race-calls.md`](recon/2026-10-31-split-magic-race-calls.md): one resist source per creature, the mod's own profile wins (363/404); Resist Damage dropped under an Armor trait; MGEF tags by archetype on player spells; tomes on the MR ladder |
+| D (split hunt 13: LOCKS / CONSUMABLES / QUEST-MISC calls) | [`recon/2026-10-31-split-locks-consumables-quest-calls.md`](recon/2026-10-31-split-locks-consumables-quest-calls.md): artifact-chest filler strip; Xarrian on wooden chests; potions NoAutoCalc; gravity on the material ladder; Respawns copies the modelled vanilla container |
+| D (NPC stage-2 family verification) | [`recon/2026-10-31-npc-stage2-family-verification.md`](recon/2026-10-31-npc-stage2-family-verification.md): Bruma copies a role-picked Requiem donor's whole stat block (467/541); Level WRONG as stated, skills / offsets / ActorEffect confirmed; families ≥98.8% Bruma |
+| Suspected bugs | [`recon/suspected-bugs.md`](recon/suspected-bugs.md): candidates from the census and all split hunts, to re-verify before filing in arr-release |
 | Questions for the list authors | [`recon/2026-10-30-questions-for-list-authors.md`](recon/2026-10-30-questions-for-list-authors.md): what the split hunts couldn't settle from records (shareable with Heisen) |
