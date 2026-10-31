@@ -4,7 +4,56 @@
 
 *Class: LIVING (append a section per split; record answers inline). For Heisen and Aaron.*
 
-**Status:** all 50 questions sent to the list authors on 2026-10-31. Waiting for answers.
+**Status:** sent 2026-10-31. **Heisen answered the same day.** His working answers stay private in the local eval
+harness; below, each answer is in short with its disposition. Questions with no answer of their own were covered
+by a section note. He deleted question 36 in his copy, so the numbers here are the sent doc's.
+
+## Answers and dispositions (Aaron + Claude, 2026-10-31)
+
+**The overriding answer:** Requiem and its addons are the reference, not the handmade patches. Addons win in their
+own area (Magic Redone for magic, WAR for weapons, armour and ammo, Vampires Tweak for vampires, …). The handmade
+patches are inconsistent by nature: take their general rules and drop their exceptions. A record that lacks
+Requiem's keywords, conditions and flags is not patched, however close its numbers look. See `../decisions.md`,
+2026-10-31.
+
+| Q | Answer in short | Disposition |
+|---|---|---|
+| 1, 22–25 (templates) | Template only when the NPC's role exactly matches a vanilla NPC (it also frees a master slot in the Reqtificator output). Tick Use Stats / Use Spell List on an existing template when the NPC has no unique spells | **New rule**, replaces split 7's source-mod finding as the rule to teach |
+| 2 | Oversight (Glenmoril update NPCs, Reqtificator output not cleaned) | Harmless; no rule |
+| 3 + NPC note | The skill **does not add `REQ_AlreadyReqtificated`**. It gives NPCs role-appropriate perks, stats and spells the way Requiem does for vanilla NPCs; the user reruns the Reqtificator for the generic perks and may then add the marker and move the record as housekeeping. Never skip an NPC for an empty perk list; remove null perks and add the package in one pass; handle ActorEffect; **never touch factions**; flag modded spells and perks and ask, never remove them | **New doctrine** (NPC). Supersedes split 1's marker half as a skill rule |
+| 4, 8 | Balanced by feel against Requiem-style buffs; the rule is "balance against Requiem", not "cut the upside" | Method: compare with a Requiem or addon buff. Split 2's halving formula is descriptive only |
+| 5 | Derive from Requiem and its addons | Method |
+| 6, 7 | Don't remember; skip | Dropped |
+| 9 | Twilight Princess cloak and Witch Hunter's Mask: exceptions. **Paddings** follow WAR's padding pieces: a non-traditional slot, the set's weight class, waist or shoulder, an add-on to its set | Split 3 confirmed; **padding rule added** |
+| 10 | **Skip NonPlayable weapons and armour**: the Reqtificator rescales them | Rule. Matches the code facts (RFTI rescales NonPlayable armour and weapons). Caveat kept from the eval: a NonPlayable bow still needs NPCsUseAmmo by hand |
+| 11, 12, 35 | Oversight, not in game, or exception | Dropped |
+| 13 | Swap a modded enchantment for its vanilla counterpart when the effect is similar; set charge from the enchantment's cost against Magic Redone | Method (MR-derived) |
+| 14 | Yes, a unique staff may sit a rung up, within reason | Split 4 confirmed as a soft rule |
+| 15 | Set-specific; derive from Requiem where possible | Dropped as a rule |
+| 16, 17 | Retired items stay retired (unwanted, or unnecessary variants) | Split 5 confirmed; nothing to restore |
+| 18, 37 | Retire with Requiem's workbench keyword (`AD3B01`); prefix `REQ_NULL_`. Also: condition and ingredient lists must support remove, add and add-from-empty in one pass | **Standardised** |
+| 19 | Not a rule; see Requiem for boss loot | Method |
+| 20 | Balance choice | Split 6 confirmed |
+| 21 | Not revisited, likely unnecessary | Dropped |
+| 26 | **WAR wins**: any addon that changes Requiem's values wins; off-table rows are oversights, NonPlayable, or exceptions | Split 8 confirmed, with addon precedence |
+| 27 | (Asked what "ARR moves them" meant: the per-mod handmade Requiem patches.) The WAR-wins rule applies | Special-ammo steps dropped as a rule |
+| 28 | Deliberate; Glenmoril's gun ladder is hand-made and subjective | House specific; not taught |
+| 29 | Stronger than glass: about 100 for all Ancient Falmer arrows, or follow what Requiem does to Dawnguard gear | **Aaron to decide** (a proposed value, not a derivation) |
+| 30–32 (reach) | Use Requiem's reach by weapon type; anything else is an exclusion | Split 9 confirmed |
+| 33 | **Encounter zones don't matter: the world is de-levelled** | Dropped |
+| 34 | Intentional for now; modded dragon priest masks will get Requiem's variants later | Future work, not a rule now |
+| 36 (Jillian lines; deleted in his copy) | Covered by the split 11 note: Glenmoril is subjective and deliberate | House specific; not taught |
+| 38 | No consistent method in the patches; Resist Damage is replaced by Fortify Armor Rating on the NPC or race. Use Requiem and its enemy addons for boss races and NPCs | Method |
+| 39 | Vigilant tomes mostly aren't in game; prices by feel | Dropped |
+| 40 | The blanket tags fixed a real high-skill scaling bug; follow how Magic Redone handles MGEFs | Method (MR) |
+| 41 | Copy Requiem's projectile data | Split 13 confirmed |
+| 42 | An artifact chest holds just the artifact; follow Requiem's loot handling | Split 13 confirmed |
+| 43 | **Don't attach scripts to doors or chests** (the lockpicking mod the script was for ignores it and is coming back) | **New rule** (never) |
+| 44 | Not intended | **List bug**: filed in the ARR release hub's `BUGS.md` |
+| 45, 46 | Intended (clutter; head parts not for player use) | Split 13 / 11 confirmed |
+| 47 | Intended, specific to this follower | Exception |
+| 48 | Yes: only major followers with their own framework go in the bridge | Split 13 confirmed |
+| 49–50 (NPC family check) | See what Requiem or its addons do | Consistent with split 14 (copy a Requiem donor's block) |
 
 ## How these were produced
 

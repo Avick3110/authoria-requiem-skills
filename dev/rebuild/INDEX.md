@@ -9,9 +9,11 @@ build), opted into for a personal project. Aaron agrees each stage before the ne
 
 **Stage: Recon (pass 2), 2026-10-31.** Aaron agreed `intent.md` on 2026-10-30. Recon pass 1 (the
 control eval and its re-mining) is done. In pass 2, the census of ARR's handmade patches and all
-of its split hunts are done (see `recon.md`'s findings index). Still open: Aaron's review, Heisen's
-answers to the questions doc, D5, and the targets that need Aaron's own patching sessions. The
-latest handoff in `../handoffs/` says where to pick up.
+of its split hunts are done (see `recon.md`'s findings index), and so is recon A1–A5. Heisen answered
+the questions doc on 2026-10-31. His reference stance (Requiem and its addons first) and NPC doctrine are
+in `decisions.md`, and each split's fate is in `recon/splits/README.md`. Still open: D5, A6, C1 / C2,
+the spec-session topics in `carried-forward.md`, and the targets that need Aaron's own patching
+sessions. The latest handoff in `../handoffs/` says where to pick up.
 
 ## Where things live
 
